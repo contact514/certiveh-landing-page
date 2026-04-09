@@ -26,8 +26,6 @@ import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
@@ -403,6 +401,7 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
     award:       <><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></>,
     percent:     <><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
     smartphone:  <><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></>,
+    battery:     <><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></>,
     menu:        <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>,
     x:           <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
   };
@@ -761,22 +760,31 @@ function ComoFunciona() {
 }
 
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
+// v2.0 - Con perfil tributario, tasa de renta y depreciación acelerada
 function Calculadora() {
   const [valor, setValor] = useState(120);
   const [tipo, setTipo] = useState("electrico");
+  const [perfil, setPerfil] = useState("natural");
+  const [tasaRenta, setTasaRenta] = useState(19);
   const [calc, setCalc] = useState<any>({});
   const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
+
   useEffect(() => {
     const v = valor * 1_000_000;
     const iva = tipo === "electrico" ? v * 0.05 : v * 0.025;
-    const renta = v * 0.50, arancel = v * 0.05;
-    const total = iva + renta + arancel, honorarios = v * 0.025;
-    setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
-  }, [valor, tipo]);
+    const renta = v * 0.50 * (tasaRenta / 100);
+    const arancel = v * 0.05;
+    const depreciacion = perfil === "empresa" ? v * 0.10 * (tasaRenta / 100) * 5 : 0;
+    const total = iva + renta + arancel + depreciacion;
+    const honorarios = v * 0.025;
+    setCalc({ iva, renta, arancel, depreciacion, total, honorarios, neto: total - honorarios });
+  }, [valor, tipo, perfil, tasaRenta]);
+
   const bars = [
     { label: "Exención IVA",    value: calc.iva,     color: "var(--emerald-600)", pct: calc.iva     / calc.total },
     { label: "Deducción renta", value: calc.renta,   color: "var(--teal-500)", pct: calc.renta   / calc.total },
     { label: "Ahorro arancel",  value: calc.arancel, color: "var(--amber-500)", pct: calc.arancel / calc.total },
+    ...(perfil === "empresa" ? [{ label: "Depreciación acelerada", value: calc.depreciacion, color: "var(--slate-700)", pct: calc.depreciacion / calc.total }] : []),
   ];
   return (
     <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--slate-50)", position: "relative", overflow: "hidden" }}>
@@ -790,7 +798,7 @@ function Calculadora() {
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0 }}>
           {/* Controls */}
           <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
-            <div style={{ marginBottom: 32 }}>
+            <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido", icon: "battery" }].map(opt => (
@@ -802,7 +810,18 @@ function Calculadora() {
               </div>
             </div>
 
-            <div style={{ marginBottom: 32 }}>
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Perfil tributario</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Independiente/Empresa" }].map(opt => (
+                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "11px 14px", borderRadius: 8, border: perfil === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-50)" : "var(--white)", color: perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3 }}>
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
                 <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Valor del vehículo</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
@@ -810,6 +829,17 @@ function Calculadora() {
               <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 6, borderRadius: 3, outline: "none", cursor: "pointer", background: `linear-gradient(to right,#059669 0%,#059669 ${((valor-40)/560)*100}%,#E2E8F0 ${((valor-40)/560)*100}%,#E2E8F0 100%)` }}/>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
                 <span>$40M</span><span>$600M</span>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Tu tasa de renta</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--teal-500)", letterSpacing: "-0.02em" }}>{tasaRenta}%</div>
+              </div>
+              <input type="range" min="19" max="39" step="1" value={tasaRenta} onChange={e => setTasaRenta(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 6, borderRadius: 3, outline: "none", cursor: "pointer", background: `linear-gradient(to right,#14B8A6 0%,#14B8A6 ${((tasaRenta-19)/20)*100}%,#E2E8F0 ${((tasaRenta-19)/20)*100}%,#E2E8F0 100%)` }}/>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
+                <span>19%</span><span>39%</span>
               </div>
             </div>
 
@@ -830,9 +860,12 @@ function Calculadora() {
             <div style={{ marginTop: 20, padding: "12px 16px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 8 }}>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "var(--slate-500)", marginBottom: 3, lineHeight: 1.5 }}>
                 <span>Honorarios CertiVeh (2.5%)</span>
-                <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "��"}</span>
+                <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
               </div>
-              <div style={{ fontSize: 11, color: "var(--slate-400)" }}>* Estimación referencial. Valor real depende del régimen tributario.</div>
+              <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
+                * Estimación referencial. Valor real depende del régimen tributario.
+                {perfil === "empresa" && <><br/>** Depreciación acelerada aplica solo para independientes y empresas.</>}
+              </div>
             </div>
           </div>
 

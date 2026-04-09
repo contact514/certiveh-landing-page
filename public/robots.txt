@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://certiveh.co/sitemap.xml
+Sitemap: https://certiveh.co/sitemap-index.xml
