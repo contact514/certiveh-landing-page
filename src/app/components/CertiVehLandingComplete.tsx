@@ -774,17 +774,15 @@ function Calculadora() {
     const iva = tipo === "electrico" ? v * 0.05 : v * 0.025;
     const renta = v * 0.50 * (tasaRenta / 100);
     const arancel = v * 0.05;
-    const depreciacion = perfil === "empresa" ? v * 0.10 * (tasaRenta / 100) * 5 : 0;
-    const total = iva + renta + arancel + depreciacion;
+    const total = iva + renta + arancel;
     const honorarios = v * 0.025;
-    setCalc({ iva, renta, arancel, depreciacion, total, honorarios, neto: total - honorarios });
+    setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
   }, [valor, tipo, perfil, tasaRenta]);
 
   const bars = [
     { label: "Exención IVA",    value: calc.iva,     color: "var(--emerald-600)", pct: calc.iva     / calc.total },
     { label: "Deducción renta", value: calc.renta,   color: "var(--teal-500)", pct: calc.renta   / calc.total },
     { label: "Ahorro arancel",  value: calc.arancel, color: "var(--amber-500)", pct: calc.arancel / calc.total },
-    ...(perfil === "empresa" ? [{ label: "Depreciación acelerada", value: calc.depreciacion, color: "var(--slate-700)", pct: calc.depreciacion / calc.total }] : []),
   ];
   return (
     <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--slate-50)", position: "relative", overflow: "hidden" }}>
@@ -864,8 +862,12 @@ function Calculadora() {
               </div>
               <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
                 * Estimación referencial. Valor real depende del régimen tributario.
-                {perfil === "empresa" && <><br/>** Depreciación acelerada aplica solo para independientes y empresas.</>}
               </div>
+              {perfil === "empresa" && (
+                <div style={{ marginTop: 10, padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 8, fontSize: 12, color: "var(--emerald-700)", lineHeight: 1.5 }}>
+                  Depreciación acelerada a 3 años — reduce tu base gravable más rápido y paga menos impuestos hoy.
+                </div>
+              )}
             </div>
           </div>
 
