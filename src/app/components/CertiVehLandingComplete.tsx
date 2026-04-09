@@ -853,6 +853,11 @@ function Calculadora() {
                   </div>
                 </div>
               ))}
+              {perfil === "empresa" && (
+                <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 8, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5 }}>
+                  Depreciación acelerada a 3 años — reduce tu base gravable más rápido y paga menos impuestos hoy.
+                </div>
+              )}
             </div>
 
             <div style={{ marginTop: 20, padding: "12px 16px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 8 }}>
@@ -863,11 +868,6 @@ function Calculadora() {
               <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
                 * Estimación referencial. Valor real depende del régimen tributario.
               </div>
-              {perfil === "empresa" && (
-                <div style={{ marginTop: 10, padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 8, fontSize: 12, color: "var(--emerald-700)", lineHeight: 1.5 }}>
-                  Depreciación acelerada a 3 años — reduce tu base gravable más rápido y paga menos impuestos hoy.
-                </div>
-              )}
             </div>
           </div>
 
