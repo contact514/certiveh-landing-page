@@ -1,0 +1,780 @@
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CertiVeh — Landing Page
+// Brand Manual v1.0 · Marzo 2026
+//
+// Colores:
+//   Primary   emerald-600  #059669
+//   Accent    teal-500     #14B8A6
+//   Neutral   slate-900    #0F172A
+//   Premium   amber-500    #F59E0B
+//   BG light  slate-50     #F8FAFC
+//   BG white  #FFFFFF
+//
+// Tipografía: Inter · 400 / 500 / 600 / 700
+// Iconos: Lucide (SVG inline — sin dependencias extra)
+// Border-radius: lg=8px, xl=12px, 2xl=16px, 3xl=24px
+// ─────────────────────────────────────────────────────────────────────────────
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --emerald-50:  #ECFDF5;
+    --emerald-100: #D1FAE5;
+    --emerald-200: #A7F3D0;
+    --emerald-500: #10B981;
+    --emerald-600: #059669;
+    --emerald-700: #047857;
+    --emerald-800: #065F46;
+    --teal-50:  #F0FDFA;
+    --teal-100: #CCFBF1;
+    --teal-500: #14B8A6;
+    --teal-600: #0D9488;
+    --slate-50:  #F8FAFC;
+    --slate-100: #F1F5F9;
+    --slate-200: #E2E8F0;
+    --slate-300: #CBD5E1;
+    --slate-400: #94A3B8;
+    --slate-500: #64748B;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-900: #0F172A;
+    --amber-100: #FEF3C7;
+    --amber-500: #F59E0B;
+    --amber-600: #D97706;
+    --white: #FFFFFF;
+    --grad-primary: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
+    --grad-subtle:  linear-gradient(135deg, #ECFDF5 0%, #F0FDFA 100%);
+    --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--slate-900);
+    font-family: var(--ff);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--slate-100); }
+  ::-webkit-scrollbar-thumb { background: var(--emerald-600); border-radius: 3px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--slate-200);
+    padding: 0 48px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: var(--slate-600); text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--emerald-600); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--emerald-600); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 12px 24px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: var(--ff);
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--emerald-700); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary-lg { padding: 16px 32px; font-size: 16px; box-shadow: none !important; }
+  .btn-primary-lg:hover { animation: none; box-shadow: none !important; }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); color: var(--slate-700);
+    border: 1.5px solid var(--slate-300); border-radius: 8px;
+    padding: 11px 24px; font-size: 15px; font-weight: 500;
+    cursor: pointer; font-family: var(--ff);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--slate-400); background: var(--slate-50); }
+
+  .section { padding: 96px 48px; max-width: 1200px; margin: 0 auto; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    padding: 4px 12px; border-radius: 9999px;
+    background: var(--emerald-50); color: var(--emerald-700);
+    border: 1px solid var(--emerald-200);
+  }
+
+  .card {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  .ticker-wrap { overflow: hidden; background: var(--grad-primary); padding: 12px 0; }
+  .ticker-inner { display: flex; animation: ticker 30s linear infinite; width: max-content; }
+  .ticker-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9);
+    padding: 0 36px; white-space: nowrap; letter-spacing: 0.02em;
+  }
+  .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
+
+  .faq-item { border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; transition: border-color 0.15s; }
+  .faq-item.open { border-color: var(--emerald-200); }
+  .faq-btn {
+    width: 100%; padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--white); border: none; cursor: pointer;
+    font-family: var(--ff); font-size: 15px; font-weight: 500;
+    color: var(--slate-900); text-align: left; gap: 16px; transition: background 0.15s;
+  }
+  .faq-btn:hover { background: var(--slate-50); }
+  .faq-icon {
+    width: 24px; height: 24px; border-radius: 9999px;
+    background: var(--emerald-50);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--emerald-600); font-size: 18px; flex-shrink: 0;
+    transition: transform 0.2s, background 0.15s;
+  }
+  .faq-item.open .faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
+  .faq-body {
+    padding: 0 24px 20px; font-size: 15px; line-height: 1.65;
+    color: var(--slate-600); background: var(--emerald-50);
+  }
+
+  .step-tab {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 10px; cursor: pointer;
+    border: 1.5px solid transparent; background: transparent;
+    text-align: left; font-family: var(--ff); transition: all 0.15s; width: 100%;
+  }
+  .step-tab.active { background: var(--emerald-50); border-color: var(--emerald-200); }
+  .step-tab:hover:not(.active) { background: var(--slate-50); }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    background: var(--slate-100); color: var(--slate-500); transition: all 0.15s;
+  }
+  .step-tab.active .step-num { background: var(--emerald-600); color: white; }
+`;
+
+// ── SVG Icons ─────────────────────────────────────────────────────────────────
+function Icon({ name, size = 20, color = "currentColor", style = {} }) {
+  const paths = {
+    shield:      <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+    zap:         <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>,
+    car:         <><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
+    fileText:    <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>,
+    checkCircle: <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></>,
+    upload:      <><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></>,
+    arrowRight:  <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
+    clock:       <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
+    bell:        <><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></>,
+    lock:        <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
+    calendar:    <><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></>,
+    award:       <><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></>,
+    percent:     <><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
+    smartphone:  <><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></>,
+  };
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+      {paths[name]}
+    </svg>
+  );
+}
+
+// ── Logo ──────────────────────────────────────────────────────────────────────
+function CertiVehLogo({ variant = "default", compact = false }) {
+  const textColor = variant === "light" ? "#FFFFFF" : "#0F172A";
+  const primary = "#059669", accent = "#14B8A6";
+  const w = compact ? 180 : 220, h = compact ? 44 : 56;
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none">
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={primary}/><stop offset="100%" stopColor={accent}/>
+        </linearGradient>
+      </defs>
+      <g transform={compact ? "translate(4,8) scale(0.48)" : "translate(4,4) scale(0.62)"}>
+        <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGrad)"/>
+        <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+      </g>
+      <g transform={compact ? "translate(60,28)" : "translate(70,24)"}>
+        <text x="0" y="0" fill={textColor} fontSize={compact ? "26" : "30"} fontWeight="700"
+          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5">
+          Certi<tspan fill={primary}>Veh</tspan>
+        </text>
+        {!compact && (
+          <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : "#64748B"}
+            fontSize="10" fontWeight="500" fontFamily="Inter, system-ui, sans-serif" letterSpacing="1.5">
+            CERTIFICACIÓN VEHICULAR
+          </text>
+        )}
+      </g>
+    </svg>
+  );
+}
+
+// ── FlipWords ─────────────────────────────────────────────────────────────────
+function FlipWords({ words, duration = 2800 }) {
+  const [current, setCurrent] = useState(words[0]);
+  const [animating, setAnimating] = useState(false);
+  const next = useCallback(() => {
+    setCurrent(words[(words.indexOf(current) + 1) % words.length]);
+    setAnimating(true);
+  }, [current, words]);
+  useEffect(() => {
+    if (!animating) { const t = setTimeout(next, duration); return () => clearTimeout(t); }
+  }, [animating, duration, next]);
+  return (
+    <AnimatePresence onExitComplete={() => setAnimating(false)}>
+      <motion.span key={current}
+        initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        exit={{ opacity: 0, y: -16, scale: 1.03, filter: "blur(6px)", position: "absolute" }}
+        transition={{ type: "spring", stiffness: 100, damping: 14 }}
+        style={{
+          display: "inline-block", position: "relative",
+          background: "var(--grad-primary)",
+          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+        }}
+      >
+        {current.split(" ").map((w, i) => (
+          <motion.span key={w + i}
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1, duration: 0.25 }}
+            style={{ display: "inline-block", marginRight: "0.25em" }}
+          >{w}</motion.span>
+        ))}
+      </motion.span>
+    </AnimatePresence>
+  );
+}
+
+// ── NAVBAR ────────────────────────────────────────────────────────────────────
+function Navbar() {
+  return (
+    <nav>
+      <CertiVehLogo compact />
+      <div className="nav-links">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#calculadora">Calculadora</a>
+        <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 14 }}>
+          Empezar ahora <Icon name="arrowRight" size={15} color="white" />
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+// ── TICKER ────────────────────────────────────────────────────────────────────
+function Ticker() {
+  const items = ["Ley 1964 de 2019","Exención de IVA · 19%","Deducción en renta · 20%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
+  return (
+    <div className="ticker-wrap">
+      <div className="ticker-inner">
+        {[...items,...items].map((item, i) => (
+          <div className="ticker-item" key={i}><div className="ticker-dot"/>{item}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── HERO ──────────────────────────────────────────────────────────────────────
+function Hero() {
+  const flipWords = ["exención de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
+  return (
+    <div style={{
+      minHeight: "100vh", display: "flex", flexDirection: "column",
+      justifyContent: "center", alignItems: "center", textAlign: "center",
+      padding: "120px 48px 80px", position: "relative",
+      background: "var(--white)", overflow: "hidden",
+    }}>
+      {/* Dot pattern */}
+      <div style={{
+        position: "absolute", inset: 0, opacity: 0.035, pointerEvents: "none",
+        backgroundImage: "radial-gradient(circle, #059669 1px, transparent 1px)",
+        backgroundSize: "28px 28px",
+      }}/>
+      {/* Top gradient */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 400,
+        background: "linear-gradient(180deg, #ECFDF5 0%, transparent 100%)", pointerEvents: "none",
+      }}/>
+
+      {/* Badge */}
+      <div style={{ animation: "fadeUp 0.5s ease both", marginBottom: 24 }}>
+        <span className="badge">
+          <Icon name="shield" size={12} color="#059669"/>
+          Ley 1964 de 2019 · Colombia · UPME
+        </span>
+      </div>
+
+      {/* H1 */}
+      <h1 style={{
+        fontSize: "clamp(36px, 5.5vw, 68px)", fontWeight: 700,
+        lineHeight: 1.08, letterSpacing: "-0.02em", color: "var(--slate-900)",
+        maxWidth: 860, marginBottom: 12, animation: "fadeUp 0.6s 0.08s ease both",
+      }}>
+        Tu vehículo eléctrico<br />tiene derecho a{" "}
+        <span style={{ position: "relative", display: "inline-block" }}>
+          <FlipWords words={flipWords} duration={2800}/>
+        </span>
+      </h1>
+
+      {/* Sub */}
+      <p style={{
+        fontSize: "clamp(16px, 1.8vw, 19px)", lineHeight: 1.65,
+        color: "var(--slate-500)", maxWidth: 560,
+        marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
+      }}>
+        CertiVeh automatiza el trámite ante la UPME de principio a fin.
+        Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
+      </p>
+
+      {/* CTAs */}
+      <div style={{
+        display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
+        marginBottom: 48, animation: "fadeUp 0.6s 0.24s ease both",
+      }}>
+        <button className="btn-primary btn-primary-lg">
+          Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
+        </button>
+        <button className="btn-secondary">¿Cómo funciona?</button>
+      </div>
+
+      {/* Trust strip */}
+      <div style={{
+        display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center",
+        marginBottom: 64, animation: "fadeUp 0.6s 0.32s ease both",
+      }}>
+        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único, sin sorpresas"],["smartphone","100% en línea"]].map(([ico,txt]) => (
+          <span key={txt} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "var(--slate-500)", fontWeight: 500 }}>
+            <Icon name={ico} size={14} color="#059669"/>{txt}
+          </span>
+        ))}
+      </div>
+
+      {/* Stat pills */}
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", animation: "fadeUp 0.6s 0.4s ease both" }}>
+        {[{ num: "19%", label: "Exención de IVA", color: "#059669" },{ num: "20%", label: "Deducción renta", color: "#14B8A6" },{ num: "5%", label: "Ahorro arancel", color: "#F59E0B" }].map(s => (
+          <div key={s.label} className="card" style={{ padding: "20px 28px", textAlign: "center", minWidth: 140 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
+            <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 4 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── BENEFICIOS ────────────────────────────────────────────────────────────────
+function Beneficios() {
+  const cards = [
+    { icon: "percent",  tag: "IVA",     title: "Exención de IVA",        pct: "19%", accentColor: "#059669", bgColor: "#ECFDF5", borderColor: "#A7F3D0", desc: "Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $22.8M que no pagas.", ejemplo: "$120M → ahorras $22.800.000" },
+    { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "20%", accentColor: "#14B8A6", bgColor: "#F0FDFA", borderColor: "#99F6E4", desc: "Personas naturales y jurídicas pueden deducir hasta el 20% del valor del vehículo en su declaración de renta del año de la compra.", ejemplo: "$150M → deduces $30.000.000" },
+    { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "#F59E0B", bgColor: "#FFFBEB", borderColor: "#FDE68A", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
+  ];
+  return (
+    <div style={{ background: "var(--slate-50)" }} id="beneficios">
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <span className="badge" style={{ marginBottom: 16, display: "inline-flex" }}>
+            <Icon name="award" size={12} color="#059669"/>Ley 1964 de 2019
+          </span>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.1, marginBottom: 16 }}>
+            Tres beneficios tributarios.<br/>
+            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
+          </h2>
+          <p style={{ fontSize: 17, color: "var(--slate-500)", lineHeight: 1.65, maxWidth: 520, margin: "0 auto" }}>
+            El Estado colombiano creó estos incentivos para promover la movilidad eléctrica. La mayoría de propietarios nunca los reclama — por la complejidad del proceso.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          {cards.map((c, i) => (
+            <div key={i} className="card" style={{ padding: 32, position: "relative", overflow: "hidden", background: c.bgColor, borderColor: c.borderColor, transition: "transform 0.2s, box-shadow 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+            >
+              <div style={{ position: "absolute", top: -8, right: 16, fontSize: 80, fontWeight: 700, color: c.accentColor, opacity: 0.08, lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "white", border: `1px solid ${c.borderColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+                <Icon name={c.icon} size={22} color={c.accentColor}/>
+              </div>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: c.accentColor, marginBottom: 8 }}>{c.tag}</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 4 }}>{c.title}</div>
+              <div style={{ fontSize: 40, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 14 }}>{c.pct}</div>
+              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.65, marginBottom: 16 }}>{c.desc}</p>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 8, background: "white", border: `1px solid ${c.borderColor}`, fontSize: 12, fontWeight: 600, color: c.accentColor }}>
+                <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 24, padding: "18px 24px", background: "var(--amber-100)", border: "1px solid #FDE68A", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 14 }}>
+          <Icon name="calendar" size={18} color="#D97706" style={{ flexShrink: 0, marginTop: 1 }}/>
+          <div style={{ fontSize: 14, lineHeight: 1.6 }}>
+            <span style={{ fontWeight: 600, color: "var(--slate-900)" }}>La UPME abre ventanas de radicación dos veces al año. </span>
+            <span style={{ color: "var(--slate-600)" }}>Si pierdes la ventana, esperas hasta el siguiente semestre. CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CÓMO FUNCIONA ─────────────────────────────────────────────────────────────
+function ComoFunciona() {
+  const [active, setActive] = useState(0);
+  const steps = [
+    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tres documentos: tu Cédula, la Tarjeta de Propiedad del vehículo y la Factura de Compra. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.", detail: "Sin formularios manuales. Sin errores de digitación." },
+    { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "La IA extrae +90% de los datos correctamente en el primer intento." },
+    { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.", detail: "Procesado con Wompi · Tarjeta, PSE o Nequi." },
+    { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud en la ventana correspondiente.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
+    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas directamente desde tu dashboard.", detail: "Seguimiento en tiempo real. Nunca te dejamos sin información." },
+  ];
+  return (
+    <div style={{ background: "var(--white)" }} id="como-funciona">
+      <div className="section">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+          <div>
+            <span className="badge" style={{ marginBottom: 20, display: "inline-flex" }}><Icon name="clock" size={12} color="#059669"/>El proceso</span>
+            <h2 style={{ fontSize: "clamp(26px, 3vw, 40px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.15, marginBottom: 12 }}>
+              Así de simple<br/><span style={{ color: "var(--slate-400)" }}>es el trámite.</span>
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--slate-500)", lineHeight: 1.65, marginBottom: 32 }}>
+              De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún portal gubernamental.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {steps.map((s, i) => (
+                <button key={i} className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)}>
+                  <div className="step-num">{s.num}</div>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: active === i ? "var(--slate-900)" : "var(--slate-600)" }}>{s.title}</div>
+                    <div style={{ fontSize: 12, fontWeight: 500, color: active === i ? "var(--emerald-600)" : "var(--slate-400)", marginTop: 1 }}>{s.subtitle}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: 40, minHeight: 340, display: "flex", flexDirection: "column", justifyContent: "center", background: "var(--grad-subtle)", borderColor: "var(--emerald-200)" }}>
+            <AnimatePresence mode="wait">
+              <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
+                <div style={{ width: 52, height: 52, borderRadius: 12, background: "var(--grad-primary)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, boxShadow: "0 4px 14px rgba(5,150,105,0.3)" }}>
+                  <Icon name={steps[active].icon} size={24} color="white"/>
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 8 }}>PASO {steps[active].num}</div>
+                <h3 style={{ fontSize: 24, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", lineHeight: 1.2, marginBottom: 12 }}>{steps[active].title}</h3>
+                <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.7, marginBottom: 20 }}>{steps[active].desc}</p>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, background: "white", border: "1px solid var(--emerald-200)", fontSize: 13, fontWeight: 500, color: "var(--emerald-700)" }}>
+                  <Icon name="checkCircle" size={14} color="#059669"/>{steps[active].detail}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            <div style={{ display: "flex", gap: 6, marginTop: 28 }}>
+              {steps.map((_, i) => (
+                <button key={i} onClick={() => setActive(i)} style={{ height: 6, width: i === active ? 24 : 6, borderRadius: 3, background: i === active ? "var(--emerald-600)" : "var(--slate-300)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.25s" }}/>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CALCULADORA ───────────────────────────────────────────────────────────────
+function Calculadora() {
+  const [valor, setValor] = useState(120);
+  const [tipo, setTipo] = useState("electrico");
+  const [calc, setCalc] = useState({});
+  const fmt = n => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
+  useEffect(() => {
+    const v = valor * 1_000_000;
+    const iva = tipo === "electrico" ? v * 0.19 : v * 0.095;
+    const renta = v * 0.20, arancel = v * 0.05;
+    const total = iva + renta + arancel, honorarios = v * 0.05;
+    setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
+  }, [valor, tipo]);
+  const bars = [
+    { label: "Exención IVA",    value: calc.iva,     color: "#059669", pct: calc.iva     / calc.total },
+    { label: "Deducción renta", value: calc.renta,   color: "#14B8A6", pct: calc.renta   / calc.total },
+    { label: "Ahorro arancel",  value: calc.arancel, color: "#F59E0B", pct: calc.arancel / calc.total },
+  ];
+  return (
+    <div style={{ background: "var(--slate-50)" }} id="calculadora">
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <span className="badge" style={{ marginBottom: 16, display: "inline-flex" }}><Icon name="percent" size={12} color="#059669"/>Calculadora de ahorro</span>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.1, marginBottom: 14 }}>¿Cuánto puedes recuperar?</h2>
+          <p style={{ fontSize: 17, color: "var(--slate-500)", lineHeight: 1.65 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
+        </div>
+
+        <div className="card" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0 }}>
+          {/* Controls */}
+          <div style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
+            <div style={{ marginBottom: 32 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                {[{ value: "electrico", label: "⚡ Eléctrico puro" },{ value: "hibrido", label: "🔋 Híbrido" }].map(opt => (
+                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "11px 16px", borderRadius: 8, border: tipo === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-50)" : "var(--white)", color: tipo === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: 14, fontWeight: tipo === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s" }}>{opt.label}</button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 32 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Valor del vehículo</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
+              </div>
+              <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 6, borderRadius: 3, outline: "none", cursor: "pointer", background: `linear-gradient(to right,#059669 0%,#059669 ${((valor-40)/560)*100}%,#E2E8F0 ${((valor-40)/560)*100}%,#E2E8F0 100%)` }}/>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
+                <span>$40M</span><span>$600M</span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {bars.map((b, i) => (
+                <div key={i}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                    <span style={{ fontSize: 13, color: "var(--slate-600)", fontWeight: 500 }}>{b.label}</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: b.color }}>{b.value ? fmt(b.value) : "—"}</span>
+                  </div>
+                  <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
+                    <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct||0)*100}%`, transition: "width 0.4s ease" }}/>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: 20, padding: "12px 16px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--slate-500)", marginBottom: 3 }}>
+                <span>Honorarios CertiVeh (5%)</span>
+                <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
+              </div>
+              <div style={{ fontSize: 11, color: "var(--slate-400)" }}>* Estimación referencial. Valor real depende del régimen tributario.</div>
+            </div>
+          </div>
+
+          {/* Result */}
+          <div style={{ padding: 48, background: "var(--grad-subtle)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 12, textTransform: "uppercase" }}>Beneficio total estimado</div>
+            <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 6, transition: "all 0.3s" }}>
+              {calc.total ? fmt(calc.total) : "—"}
+            </div>
+            <div style={{ fontSize: 13, color: "var(--slate-500)", marginBottom: 28 }}>en incentivos tributarios recuperables</div>
+
+            <div className="card" style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "white", borderColor: "var(--emerald-200)", textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos honorarios)</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
+            </div>
+
+            {calc.honorarios && calc.total && (
+              <div style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 28 }}>
+                Por cada <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>$1 invertido</span> en CertiVeh, recibes{" "}
+                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${Math.round(calc.total / calc.honorarios * 10) / 10}</span> en beneficios.
+              </div>
+            )}
+
+            <button className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: "14px 24px" }}>
+              Empezar ahora <Icon name="arrowRight" size={18} color="white"/>
+            </button>
+            <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 12 }}>Sin riesgo · Si la UPME rechaza, revisamos tu caso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CONFIANZA ─────────────────────────────────────────────────────────────────
+function Confianza() {
+  const puntos = [
+    { icon: "zap",         title: "Agente automatizado",          desc: "Nuestra tecnología navega el portal UPME por ti, llena todos los formularios y radica la solicitud sin que tengas que hacer nada." },
+    { icon: "smartphone",  title: "Actualización en tiempo real", desc: "Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está tu trámite, en todo momento." },
+    { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
+    { icon: "calendar",    title: "No pierdas la ventana",        desc: "Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre." },
+    { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo incluido desde el primer día." },
+  ];
+  return (
+    <div style={{ background: "var(--white)" }}>
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <span className="badge" style={{ marginBottom: 16, display: "inline-flex" }}><Icon name="shield" size={12} color="#059669"/>¿Por qué CertiVeh?</span>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.1 }}>
+            Hecho para que no<br/><span style={{ color: "var(--slate-400)" }}>tengas que preocuparte.</span>
+          </h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {puntos.map((p, i) => (
+            <div key={i} className="card" style={{ padding: 28, transition: "transform 0.2s, box-shadow 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+            >
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+                <Icon name={p.icon} size={20} color="#059669"/>
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em" }}>{p.title}</div>
+              <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.65 }}>{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function FAQ() {
+  const [open, setOpen] = useState(null);
+  const items = [
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos de la Ley 1964 de 2019. El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación." },
+    { q: "¿Qué documentos necesito?",               a: "Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
+    { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
+    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. Nuestra política de garantía está detallada en los términos del servicio." },
+    { q: "¿Funciona para personas jurídicas?",      a: "Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026." },
+  ];
+  return (
+    <div style={{ background: "var(--slate-50)" }}>
+      <div className="section">
+        <div style={{ maxWidth: 680, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <span className="badge" style={{ marginBottom: 16, display: "inline-flex" }}><Icon name="fileText" size={12} color="#059669"/>Preguntas frecuentes</span>
+            <h2 style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)" }}>Todo lo que necesitas saber</h2>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {items.map((item, i) => (
+              <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
+                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)}>
+                  <span>{item.q}</span><div className="faq-icon">+</div>
+                </button>
+                {open === i && (
+                  <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
+                    {item.a}
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CTA FINAL ─────────────────────────────────────────────────────────────────
+function CTAFinal() {
+  return (
+    <div style={{ background: "var(--grad-primary)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, opacity: 0.07, pointerEvents: "none", backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }}/>
+      <div style={{ position: "relative" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, fontWeight: 600, letterSpacing: "0.05em", padding: "4px 12px", borderRadius: 9999, background: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.9)", marginBottom: 24, border: "1px solid rgba(255,255,255,0.25)" }}>
+          <Icon name="zap" size={12} color="rgba(255,255,255,0.9)"/>¿LISTO PARA EMPEZAR?
+        </div>
+        <h2 style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.08, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
+          Tu certificado UPME<br/>te está esperando.
+        </h2>
+        <p style={{ fontSize: 18, color: "rgba(255,255,255,0.8)", lineHeight: 1.65, maxWidth: 460, margin: "0 auto 36px" }}>
+          Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
+        </p>
+        <button style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "white", color: "var(--emerald-700)", border: "none", borderRadius: 8, padding: "16px 36px", fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "var(--ff)", transition: "transform 0.15s, box-shadow 0.15s", boxShadow: "0 4px 16px rgba(0,0,0,0.15)" }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.2)"; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)"; }}
+        >
+          Empezar ahora <Icon name="arrowRight" size={18} color="#047857"/>
+        </button>
+        <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
+          {["Pago único · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
+            <span key={t} style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6 }}>
+              <Icon name="checkCircle" size={13} color="rgba(255,255,255,0.75)"/>{t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── FOOTER ───────────────────────────────────────────────────────────────────
+function Footer() {
+  return (
+    <footer style={{ background: "var(--slate-900)", color: "var(--slate-400)", padding: "48px 48px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 40 }}>
+          <div>
+            <CertiVehLogo variant="light" compact/>
+            <p style={{ fontSize: 13, color: "var(--slate-500)", marginTop: 10, maxWidth: 260, lineHeight: 1.6 }}>
+              Automatización del trámite UPME para certificados de beneficio tributario en Colombia.
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
+            {[{ label: "Plataforma", links: ["Beneficios","Cómo funciona","Calculadora"] },{ label: "Legal", links: ["Términos","Privacidad","Ley 1964"] }].map(col => (
+              <div key={col.label}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>{col.label}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {col.links.map(l => (
+                    <a key={l} href="#" style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
+                      onMouseEnter={e => e.currentTarget.style.color = "white"}
+                      onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}
+                    >{l}</a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+          <span style={{ fontSize: 13 }}>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
+          <span style={{ fontSize: 13 }}>brand@certiveh.co</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ── MAIN ──────────────────────────────────────────────────────────────────────
+export default function CertiVehLanding() {
+  return (
+    <>
+      <style>{CSS}</style>
+      <Navbar/>
+      <Hero/>
+      <Ticker/>
+      <Beneficios/>
+      <ComoFunciona/>
+      <Calculadora/>
+      <Confianza/>
+      <FAQ/>
+      <CTAFinal/>
+      <Footer/>
+    </>
+  );
+}
