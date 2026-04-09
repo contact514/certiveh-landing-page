@@ -1048,7 +1048,7 @@ function Footer() {
         </div>
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <span style={{ fontSize: 12, lineHeight: 1.4 }}>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-          <span style={{ fontSize: 12, lineHeight: 1.4 }}>certiveh.contacto@gmail.com</span>
+          <span style={{ fontSize: 12, lineHeight: 1.4 }}>contacto@certiveh.co</span>
         </div>
       </div>
     </footer>
@@ -1195,7 +1195,7 @@ export default function CertiVehLandingComplete() {
       "@type": "Organization",
       "name": "CertiVeh",
       "url": "https://certiveh.co",
-      "email": "certiveh.contacto@gmail.com",
+      "email": "contacto@certiveh.co",
       "areaServed": "CO",
       "description": "Automatización del trámite UPME para certificados de beneficio tributario en Colombia"
     }
