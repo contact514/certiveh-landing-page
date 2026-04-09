@@ -855,7 +855,7 @@ function Calculadora() {
               ))}
               {perfil === "empresa" && (
                 <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 8, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5 }}>
-                  Depreciación acelerada a 3 años — reduce tu base gravable más rápido y paga menos impuestos hoy.
+                  Depreciación acelerada a 3 años, reduce tu base gravable más rápido y paga menos impuestos hoy.
                 </div>
               )}
             </div>
