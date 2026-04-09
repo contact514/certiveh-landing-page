@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'CertiVeh — Certificado UPME para Vehículos Eléctricos en Colombia',
+  description = 'CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Exención de IVA, deducción en renta y reducción arancelaria bajo la Ley 1964 de 2019. 100% en línea.',
+} = Astro.props;
+---
+
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -7,33 +19,31 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Primary Meta Tags -->
-    <title>CertiVeh — Certificado UPME para Vehículos Eléctricos en Colombia</title>
-    <meta name="description" content="CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Exención de IVA, deducción en renta y reducción arancelaria bajo la Ley 1964 de 2019. 100% en línea." />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="keywords" content="certificado UPME, vehículos eléctricos Colombia, beneficios tributarios vehículo eléctrico, exención IVA vehículo eléctrico, deducción renta vehículo eléctrico, Ley 1964 2019, trámite UPME, certificado beneficio tributario Colombia" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="CertiVeh" />
     <link rel="canonical" href="https://certiveh.co" />
-    
+
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://certiveh.co" />
-    <meta property="og:title" content="CertiVeh — Certificado UPME para Vehículos Eléctricos en Colombia" />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content="Automatizamos el trámite del certificado UPME de principio a fin. Tú subes tres documentos. Nosotros nos encargamos de todo lo demás." />
     <meta property="og:image" content="https://certiveh.co/og-image.png" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="CertiVeh" />
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CertiVeh — Certificado UPME para Vehículos Eléctricos en Colombia" />
+    <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content="Automatizamos el trámite del certificado UPME de principio a fin. Tú subes tres documentos. Nosotros nos encargamos de todo lo demás." />
     <meta name="twitter:image" content="https://certiveh.co/og-image.png" />
-    
-    <!-- Sitemap -->
+
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <slot />
   </body>
 </html>

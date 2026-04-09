@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CertiVehLandingComplete from '../app/components/CertiVehLandingComplete';
+import '../styles/index.css';
+---
+
+<BaseLayout>
+  <CertiVehLandingComplete client:only="react" />
+</BaseLayout>
