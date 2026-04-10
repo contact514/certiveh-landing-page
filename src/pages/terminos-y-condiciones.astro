@@ -41,27 +41,7 @@ import '../styles/index.css';
     .tc-nav-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
-    }
-    .tc-nav-logo-mark {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, #059669, #14B8A6);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -0.5px;
-    }
-    .tc-nav-logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: white;
-      letter-spacing: -0.02em;
     }
     .tc-nav-back {
       font-size: 14px;
@@ -283,8 +263,20 @@ import '../styles/index.css';
   <!-- NAV -->
   <nav class="tc-nav">
     <a href="/" class="tc-nav-logo" aria-label="Ir al inicio CertiVeh">
-      <div class="tc-nav-logo-mark">CV</div>
-      <span class="tc-nav-logo-text">CertiVeh</span>
+      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(4,8) scale(0.48)">
+          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGrad)"/>
+          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+        </g>
+        <g transform="translate(60,28)">
+          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
+        </g>
+      </svg>
     </a>
     <a href="/" class="tc-nav-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -720,9 +712,21 @@ import '../styles/index.css';
     <div class="tc-footer-inner">
       <div class="tc-footer-top">
         <div>
-          <a href="/" class="tc-nav-logo" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:10px;">
-            <div class="tc-nav-logo-mark">CV</div>
-            <span class="tc-nav-logo-text">CertiVeh</span>
+          <a href="/" aria-label="Ir al inicio CertiVeh" style="display:inline-block;text-decoration:none;margin-bottom:10px;">
+            <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+              <defs>
+                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+                </linearGradient>
+              </defs>
+              <g transform="translate(4,8) scale(0.48)">
+                <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGradFooter)"/>
+                <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+              </g>
+              <g transform="translate(60,28)">
+                <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
+              </g>
+            </svg>
           </a>
           <p class="tc-footer-logo-desc">Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
         </div>
