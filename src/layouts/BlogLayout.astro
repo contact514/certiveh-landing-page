@@ -5,13 +5,43 @@ interface Props {
   title?: string;
   description?: string;
   keywords?: string;
-  canonical?: string;
+  datePublished?: string;
+  isArticle?: boolean;
 }
 
-const { title, description, keywords, canonical } = Astro.props;
+const {
+  title,
+  description,
+  keywords,
+  datePublished = '2026-04-01',
+  isArticle = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const jsonLd = isArticle ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: datePublished,
+  dateModified: datePublished,
+  author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'CertiVeh',
+    url: 'https://certiveh.co',
+    logo: { '@type': 'ImageObject', url: 'https://certiveh.co/favicon.svg' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+  inLanguage: 'es-CO',
+}) : null;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} keywords={keywords} ogType={isArticle ? 'article' : 'website'}>
+  {jsonLd && (
+    <script slot="head" type="application/ld+json" set:html={jsonLd} />
+  )}
   <style is:global>
     /* ── RESET & BASE ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
