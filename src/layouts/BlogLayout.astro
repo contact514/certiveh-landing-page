@@ -12,7 +12,7 @@ const { title, description, keywords, canonical } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <style>
+  <style is:global>
     /* ── RESET & BASE ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
