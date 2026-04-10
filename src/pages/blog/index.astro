@@ -1,0 +1,184 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import '../../styles/index.css';
+
+const articles = [
+  {
+    num: '01',
+    slug: 'beneficios-tributarios-vehiculos-electricos-colombia',
+    bannerClass: 'b-green',
+    tag: 'Ley 1715/2014 · Ley 2099/2021 · Beneficios Tributarios',
+    title: 'Los beneficios tributarios reales que tienen los vehículos eléctricos e híbridos en Colombia: qué dice exactamente la ley',
+    subtitle: 'Una guía rigurosa sobre la deducción en renta, la exclusión de IVA y la exención arancelaria — con las fuentes normativas que los soportan.',
+    date: 'Abril 2026',
+    readTime: '15 min',
+    audience: 'Personas naturales y jurídicas',
+  },
+  {
+    num: '02',
+    slug: 'certificacion-upme-proceso-documentos-plazos',
+    bannerClass: 'b-navy',
+    tag: 'UPME · Resolución 00135/2025 · Resolución 0070/2026',
+    title: 'El proceso de certificación UPME explicado: ventanas de radicación, documentos requeridos y plazos oficiales',
+    subtitle: 'Todo lo que necesitas saber sobre el trámite ante la Unidad de Planeación Minero Energética, basado en las resoluciones vigentes de 2025 y 2026.',
+    date: 'Abril 2026',
+    readTime: '18 min',
+    audience: 'Trámite UPME · SUU',
+  },
+  {
+    num: '03',
+    slug: 'flotas-electricas-hibridas-beneficios-tributarios-empresas',
+    bannerClass: 'b-amber',
+    tag: 'Empresas · Flotas Eléctricas · Planeación Tributaria',
+    title: 'Flotas eléctricas e híbridas en Colombia: cómo estructurar correctamente los beneficios tributarios para personas jurídicas',
+    subtitle: 'Una guía de planeación fiscal para gerentes financieros y directores de operaciones que gestionan flotas con tecnología EV, HEV o PHEV.',
+    date: 'Abril 2026',
+    readTime: '20 min',
+    audience: 'Personas jurídicas · Flotas',
+  },
+];
+---
+
+<BlogLayout
+  title="Blog CertiVeh — Incentivos Tributarios Vehículos Eléctricos e Híbridos Colombia"
+  description="Guías rigurosas sobre los beneficios tributarios para vehículos eléctricos e híbridos en Colombia: deducción en renta, exclusión de IVA, proceso UPME y estrategias para flotas empresariales."
+>
+  <style>
+    .blog-home-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+    .blog-home-intro {
+      text-align: center;
+      padding-bottom: 48px;
+      border-bottom: 2px solid #E2E8F0;
+      margin-bottom: 56px;
+    }
+    .blog-home-intro .label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: #059669; background: #ECFDF5;
+      border: 1px solid #A7F3D0; border-radius: 20px; padding: 4px 14px;
+      margin-bottom: 16px;
+    }
+    .blog-home-intro h1 {
+      font-size: 32px; font-weight: 800; color: #0F172A;
+      letter-spacing: -.03em; margin-bottom: 12px; line-height: 1.2;
+    }
+    .blog-home-intro p { font-size: 16px; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    .articles-grid {
+      display: flex; flex-direction: column; gap: 32px;
+    }
+
+    .article-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .card-banner {
+      min-height: 160px;
+      display: flex; align-items: flex-end;
+      padding: 28px 36px;
+      position: relative; overflow: hidden;
+    }
+    .card-banner.b-green { background: linear-gradient(135deg,#065F46 0%,#059669 60%,#14B8A6 100%); }
+    .card-banner.b-navy  { background: linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%); }
+    .card-banner.b-amber { background: linear-gradient(135deg,#78350F 0%,#D97706 60%,#059669 100%); }
+    .card-banner-num {
+      position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+      font-size: 110px; font-weight: 900; color: rgba(255,255,255,0.06);
+      line-height: 1; letter-spacing: -.05em; user-select: none;
+    }
+    .card-banner-inner { position: relative; z-index: 1; }
+    .card-banner-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 8px;
+    }
+    .card-banner-title {
+      font-size: 20px; font-weight: 800; color: #fff;
+      letter-spacing: -.02em; line-height: 1.25; max-width: 580px;
+    }
+
+    .card-body {
+      padding: 24px 36px 28px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .card-body-left { flex: 1; min-width: 200px; }
+    .card-subtitle {
+      font-size: 14px; color: #475569; line-height: 1.65; margin-bottom: 16px;
+    }
+    .card-meta {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .card-meta-pill {
+      font-size: 11px; color: #64748B;
+      background: #F8FAFC; border: 1px solid #E2E8F0;
+      border-radius: 20px; padding: 3px 10px;
+    }
+    .card-read-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #059669; color: #fff;
+      font-size: 13px; font-weight: 700;
+      padding: 10px 20px; border-radius: 8px;
+      white-space: nowrap; flex-shrink: 0; align-self: flex-end;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .article-card:hover .card-read-btn { background: #047857; transform: translateY(-1px); }
+    .card-read-btn svg { width: 13px; height: 13px; }
+
+    @media (max-width: 640px) {
+      .blog-home-intro h1 { font-size: 24px; }
+      .card-banner { padding: 24px; min-height: 130px; }
+      .card-banner-title { font-size: 17px; }
+      .card-body { padding: 20px 24px 24px; }
+      .card-read-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+
+  <div class="blog-home-wrapper">
+    <div class="blog-home-intro">
+      <div class="label">Blog CertiVeh · Incentivos Tributarios</div>
+      <h1>Guía completa de beneficios tributarios para vehículos eléctricos e híbridos en Colombia</h1>
+      <p>Información basada en la normativa vigente: Ley 1715 de 2014, Ley 2099 de 2021, Resolución UPME 00135 de 2025 y Resolución UPME 0070 de 2026.</p>
+    </div>
+
+    <div class="articles-grid">
+      {articles.map(a => (
+        <a href={`/blog/${a.slug}`} class="article-card">
+          <div class={`card-banner ${a.bannerClass}`}>
+            <div class="card-banner-num">{a.num}</div>
+            <div class="card-banner-inner">
+              <div class="card-banner-tag">{a.tag}</div>
+              <div class="card-banner-title">{a.title}</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-body-left">
+              <p class="card-subtitle">{a.subtitle}</p>
+              <div class="card-meta">
+                <span class="card-meta-pill">{a.date}</span>
+                <span class="card-meta-pill">{a.readTime} de lectura</span>
+                <span class="card-meta-pill">{a.audience}</span>
+              </div>
+            </div>
+            <span class="card-read-btn">
+              Leer artículo
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BlogLayout>

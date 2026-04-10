@@ -496,6 +496,7 @@ function Navbar() {
           <a href="#beneficios">Beneficios</a>
           <a href="#como-funciona">Cómo funciona</a>
           <a href="#calculadora">Calculadora</a>
+          <a href="/blog">Blog</a>
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 14 }}>
               Empezar ahora <Icon name="arrowRight" size={15} color="white" />
@@ -512,6 +513,7 @@ function Navbar() {
         <a href="#beneficios" onClick={() => setMobileMenuOpen(false)}>Beneficios</a>
         <a href="#como-funciona" onClick={() => setMobileMenuOpen(false)}>Cómo funciona</a>
         <a href="#calculadora" onClick={() => setMobileMenuOpen(false)}>Calculadora</a>
+        <a href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</a>
         <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: "12px 20px", fontSize: 14 }} onClick={() => setMobileMenuOpen(false)}>
             Empezar ahora <Icon name="arrowRight" size={15} color="white" />
@@ -1035,6 +1037,7 @@ function Footer() {
           <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
             {[
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
+              { label: "Recursos", links: [{ text: "Blog", href: "/blog" }] },
               { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Privacidad", href: "#" }, { text: "Ley 1964", href: "#" }] }
             ].map(col => (
               <div key={col.label}>
