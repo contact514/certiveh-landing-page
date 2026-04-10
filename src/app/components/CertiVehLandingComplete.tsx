@@ -772,7 +772,7 @@ function Calculadora() {
 
   useEffect(() => {
     const v = valor * 1_000_000;
-    const iva = tipo === "electrico" ? v * 0.05 : v * 0.025;
+    const iva = v * 0.05;
     const renta = v * 0.50;
     const arancel = v * 0.05;
     const total = iva + renta + arancel;
@@ -800,7 +800,7 @@ function Calculadora() {
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido", icon: "battery" }].map(opt => (
+                {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (No MHEV)", icon: "battery" }].map(opt => (
                   <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "11px 16px", borderRadius: 8, border: tipo === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-50)" : "var(--white)", color: tipo === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: 14, fontWeight: tipo === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center" }}>
                     <Icon name={opt.icon} size={16} color={tipo === opt.value ? "var(--emerald-700)" : "var(--slate-600)"} />
                     {opt.label}
