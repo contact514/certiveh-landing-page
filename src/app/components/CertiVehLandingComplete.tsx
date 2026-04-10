@@ -775,7 +775,7 @@ function Calculadora() {
     const renta = v * 0.50 * (tasaRenta / 100);
     const arancel = v * 0.05;
     const total = iva + renta + arancel;
-    const honorarios = v * 0.025;
+    const honorarios = Math.min(v * 0.025, 2_500_000);
     setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
   }, [valor, tipo, perfil, tasaRenta]);
 
@@ -862,11 +862,12 @@ function Calculadora() {
 
             <div style={{ marginTop: 20, padding: "12px 16px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 8 }}>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "var(--slate-500)", marginBottom: 3, lineHeight: 1.5 }}>
-                <span>Honorarios CertiVeh (2.5%)</span>
+                <span>Honorarios CertiVeh (2.5%, tope $2.500.000)</span>
                 <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
               </div>
               <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
-                * Estimación referencial. Valor real depende del régimen tributario.
+                * Estimación referencial. Valor real depende del régimen tributario.<br/>
+                ** Incluye el costo del trámite ante la UPME.
               </div>
             </div>
           </div>
@@ -912,7 +913,7 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "No pierdas la ventana",        desc: "Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo incluido desde el primer día." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "2.5% del valor del vehículo, con un tope de $2.500.000. Incluye el costo del trámite ante la UPME. Sin suscripciones, sin costos adicionales." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--white)" }}>
@@ -1189,7 +1190,7 @@ export default function CertiVehLandingComplete() {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "COP",
-      "description": "Tarifa única de servicio del 2.5% del beneficio total"
+      "description": "Tarifa única de servicio del 2.5% del valor del vehículo, con tope de $2.500.000 COP. Incluye el costo del trámite ante la UPME."
     },
     "provider": {
       "@type": "Organization",
