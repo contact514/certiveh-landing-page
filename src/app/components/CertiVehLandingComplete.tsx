@@ -774,16 +774,14 @@ function Calculadora() {
     const v = valor * 1_000_000;
     const iva = v * 0.05;
     const renta = v * 0.50;
-    const arancel = v * 0.05;
-    const total = iva + renta + arancel;
+    const total = iva + renta;
     const honorarios = Math.min(v * 0.025, 2_500_000);
-    setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
+    setCalc({ iva, renta, total, honorarios, neto: total - honorarios });
   }, [valor, tipo, perfil]);
 
   const bars = [
-    { label: "Exención IVA",    value: calc.iva,     color: "var(--emerald-600)", pct: calc.iva     / calc.total },
-    { label: "Deducción renta", value: calc.renta,   color: "var(--teal-500)", pct: calc.renta   / calc.total },
-    { label: "Ahorro arancel",  value: calc.arancel, color: "var(--amber-500)", pct: calc.arancel / calc.total },
+    { label: "Exención IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
+    { label: "Deducción renta", value: calc.renta, color: "var(--teal-500)",    pct: calc.renta / calc.total },
   ];
   return (
     <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--slate-50)", position: "relative", overflow: "hidden" }}>
