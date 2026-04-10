@@ -5,7 +5,7 @@ import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
 import { ImageComparison } from './ui/image-comparison';
-import imgElectricCar from '@/assets/01fdb1b89e1e3dc564e3f61a00a2b3b99dc99d04.png';
+import imgElectricCar from '@/assets/hyundai-ev.jpg';
 import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
 
 // ─────────────────────────────────────────────────────────────────────────────
