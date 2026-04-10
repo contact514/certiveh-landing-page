@@ -848,20 +848,34 @@ function Calculadora() {
               )}
             </div>
 
-            <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, gap: 8 }}>
-                <div>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>⏳ Tarifa promocional — Ciclo I 2026</span>
-                  <div style={{ fontSize: 13, color: "#78350F", marginTop: 2, lineHeight: 1.5 }}>
-                    2.5% del valor del vehículo, <span style={{ fontWeight: 700 }}>tope $2.500.000</span>. El tope sube a partir del Ciclo II (agosto).
+            {(() => {
+              const sinTope = valor * 1_000_000 * 0.025;
+              const descuento = sinTope > 2_500_000 ? sinTope - 2_500_000 : 0;
+              return (
+                <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, gap: 8 }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                        <Icon name="clock" size={13} color="#92400E" />
+                        <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>Tarifa promocional por tiempo limitado, lanzamiento</span>
+                      </div>
+                      <div style={{ fontSize: 13, color: "#78350F", lineHeight: 1.5 }}>
+                        2.5% del valor del vehículo, tope <span style={{ fontWeight: 700 }}>$2.500.000</span>.
+                        {descuento > 0 && (
+                          <span style={{ display: "inline-block", marginLeft: 6, background: "#FEF08A", borderRadius: 4, padding: "1px 7px", fontWeight: 700, color: "#78350F", fontSize: 12 }}>
+                            Ahorras {fmt(descuento)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: "#92400E", whiteSpace: "nowrap" }}>{calc.honorarios ? fmt(calc.honorarios) : ""}</span>
+                  </div>
+                  <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4 }}>
+                    * La deducción en renta reduce tu base gravable, no el impuesto directamente. Incluye el trámite ante la UPME.
                   </div>
                 </div>
-                <span style={{ fontSize: 14, fontWeight: 700, color: "#92400E", whiteSpace: "nowrap" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
-              </div>
-              <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4 }}>
-                * La deducción en renta reduce tu base gravable, no el impuesto directamente. Incluye el trámite ante la UPME.
-              </div>
-            </div>
+              );
+            })()}
           </div>
 
           {/* Result */}
