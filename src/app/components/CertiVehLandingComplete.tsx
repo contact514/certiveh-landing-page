@@ -763,24 +763,22 @@ function ComoFunciona() {
 }
 
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
-// v2.0 - Con perfil tributario, tasa de renta y depreciación acelerada
 function Calculadora() {
   const [valor, setValor] = useState(120);
   const [tipo, setTipo] = useState("electrico");
   const [perfil, setPerfil] = useState("natural");
-  const [tasaRenta, setTasaRenta] = useState(19);
   const [calc, setCalc] = useState<any>({});
   const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
 
   useEffect(() => {
     const v = valor * 1_000_000;
     const iva = tipo === "electrico" ? v * 0.05 : v * 0.025;
-    const renta = v * 0.50 * (tasaRenta / 100);
+    const renta = v * 0.50;
     const arancel = v * 0.05;
     const total = iva + renta + arancel;
     const honorarios = Math.min(v * 0.025, 2_500_000);
     setCalc({ iva, renta, arancel, total, honorarios, neto: total - honorarios });
-  }, [valor, tipo, perfil, tasaRenta]);
+  }, [valor, tipo, perfil]);
 
   const bars = [
     { label: "Exención IVA",    value: calc.iva,     color: "var(--emerald-600)", pct: calc.iva     / calc.total },
@@ -833,17 +831,6 @@ function Calculadora() {
               </div>
             </div>
 
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Tu tasa de renta</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--teal-500)", letterSpacing: "-0.02em" }}>{tasaRenta}%</div>
-              </div>
-              <input type="range" min="19" max="39" step="1" value={tasaRenta} onChange={e => setTasaRenta(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 6, borderRadius: 3, outline: "none", cursor: "pointer", background: `linear-gradient(to right,#14B8A6 0%,#14B8A6 ${((tasaRenta-19)/20)*100}%,#E2E8F0 ${((tasaRenta-19)/20)*100}%,#E2E8F0 100%)` }}/>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
-                <span>19%</span><span>39%</span>
-              </div>
-            </div>
-
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {bars.map((b, i) => (
                 <div key={i}>
@@ -869,7 +856,7 @@ function Calculadora() {
                 <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
               </div>
               <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
-                * Estimación referencial. Valor real depende del régimen tributario.<br/>
+                * Estimación referencial. La deducción en renta reduce tu base gravable, no el impuesto directamente.<br/>
                 ** Incluye el costo del trámite ante la UPME.
               </div>
             </div>
@@ -891,7 +878,7 @@ function Calculadora() {
             {calc.honorarios && calc.total && (
               <div style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 28 }}>
                 Por cada <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>$1 invertido</span> en CertiVeh, recibes{" "}
-                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${Math.round(calc.total / calc.honorarios * 10) / 10}</span> en beneficios.
+                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.neto / calc.honorarios * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
 
