@@ -5,9 +5,10 @@ interface ImageComparisonProps {
   beforeImage: string | any;
   afterImage: string | any;
   className?: string;
+  beforeImageScale?: number;
 }
 
-export function ImageComparison({ beforeImage, afterImage, className = "" }: ImageComparisonProps) {
+export function ImageComparison({ beforeImage, afterImage, className = "", beforeImageScale = 1 }: ImageComparisonProps) {
   const [inset, setInset] = useState<number>(50);
   const [onMouseDown, setOnMouseDown] = useState<boolean>(false);
 
@@ -78,6 +79,7 @@ export function ImageComparison({ beforeImage, afterImage, className = "" }: Ima
           alt="Vehículo Eléctrico"
           loading="lazy"
           className="absolute left-0 top-0 w-full h-full rounded-2xl select-none object-cover border border-slate-200"
+          style={{ transform: `scale(${beforeImageScale})` }}
         />
       </div>
     </div>

@@ -752,6 +752,7 @@ function ComoFunciona() {
           <ImageComparison
             beforeImage={imgElectricCar}
             afterImage={imgPortalUsuario}
+            beforeImageScale={1.4}
           />
         </div>
       </div>
