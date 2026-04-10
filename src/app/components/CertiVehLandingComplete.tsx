@@ -860,10 +860,13 @@ function Calculadora() {
                         <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>Tarifa promocional por tiempo limitado, lanzamiento</span>
                       </div>
                       <div style={{ fontSize: 13, color: "#78350F", lineHeight: 1.5 }}>
-                        2.5% del valor del vehículo, tope <span style={{ fontWeight: 700 }}>$2.500.000</span>.
+                        2.5% del valor del vehículo, tope <span style={{ fontWeight: 700 }}>$2.500.000</span>. Incluye el costo del trámite ante la UPME.
                         {descuento > 0 && (
-                          <span style={{ display: "inline-block", marginLeft: 6, background: "#FEF08A", borderRadius: 4, padding: "1px 7px", fontWeight: 700, color: "#78350F", fontSize: 12 }}>
-                            Ahorras {fmt(descuento)}
+                          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, marginLeft: 6 }}>
+                            <span style={{ textDecoration: "line-through", color: "#B45309", fontSize: 12, opacity: 0.75 }}>{fmt(sinTope)}</span>
+                            <span style={{ background: "#FEF08A", borderRadius: 4, padding: "1px 7px", fontWeight: 700, color: "#78350F", fontSize: 12 }}>
+                              {fmt(2_500_000)}
+                            </span>
                           </span>
                         )}
                       </div>
