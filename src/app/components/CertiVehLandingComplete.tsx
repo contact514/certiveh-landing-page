@@ -850,14 +850,18 @@ function Calculadora() {
               )}
             </div>
 
-            <div style={{ marginTop: 20, padding: "12px 16px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 8 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "var(--slate-500)", marginBottom: 3, lineHeight: 1.5 }}>
-                <span>Honorarios CertiVeh (2.5%, tope $2.500.000)</span>
-                <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
+            <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, gap: 8 }}>
+                <div>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>⏳ Tarifa promocional — Ciclo I 2026</span>
+                  <div style={{ fontSize: 13, color: "#78350F", marginTop: 2, lineHeight: 1.5 }}>
+                    2.5% del valor del vehículo, <span style={{ fontWeight: 700 }}>tope $2.500.000</span>. El tope sube a partir del Ciclo II (agosto).
+                  </div>
+                </div>
+                <span style={{ fontSize: 14, fontWeight: 700, color: "#92400E", whiteSpace: "nowrap" }}>{calc.honorarios ? fmt(calc.honorarios) : "—"}</span>
               </div>
-              <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>
-                * Estimación referencial. La deducción en renta reduce tu base gravable, no el impuesto directamente.<br/>
-                ** Incluye el costo del trámite ante la UPME.
+              <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4 }}>
+                * La deducción en renta reduce tu base gravable, no el impuesto directamente. Incluye el trámite ante la UPME.
               </div>
             </div>
           </div>
