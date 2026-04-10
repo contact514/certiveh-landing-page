@@ -1032,15 +1032,18 @@ function Footer() {
             </p>
           </div>
           <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
-            {[{ label: "Plataforma", links: ["Beneficios","Cómo funciona","Calculadora"] },{ label: "Legal", links: ["Términos","Privacidad","Ley 1964"] }].map(col => (
+            {[
+              { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
+              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Privacidad", href: "#" }, { text: "Ley 1964", href: "#" }] }
+            ].map(col => (
               <div key={col.label}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>{col.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {col.links.map(l => (
-                    <a key={l} href="#" style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
+                    <a key={l.text} href={l.href} style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
                       onMouseEnter={e => e.currentTarget.style.color = "white"}
                       onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}
-                    >{l}</a>
+                    >{l.text}</a>
                   ))}
                 </div>
               </div>
