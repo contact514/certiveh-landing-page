@@ -70,6 +70,74 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
       gtag('config', 'G-FJ10NX1DV6');
     </script>
 
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1323375866331511');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1323375866331511&ev=PageView&noscript=1"/>
+    </noscript>
+
+    <!-- Meta brand signals -->
+    <meta name="application-name" content="CertiVeh" />
+    <meta name="apple-mobile-web-app-title" content="CertiVeh" />
+
+    <!-- Organization schema — helps Google recognize "CertiVeh" as a brand -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': 'https://certiveh.co/#organization',
+      name: 'CertiVeh',
+      alternateName: ['Certi Veh', 'Certiveh', 'CertiVeh Colombia'],
+      url: 'https://certiveh.co',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://certiveh.co/favicon.svg',
+        width: 100,
+        height: 100,
+      },
+      description: 'CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia, habilitando la deducción en renta, la exclusión de IVA y la exención arancelaria bajo la Ley 1715 de 2014 y la Ley 2099 de 2021.',
+      email: 'contacto@certiveh.co',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'CO',
+        addressRegion: 'Colombia',
+      },
+      areaServed: { '@type': 'Country', name: 'Colombia' },
+      knowsAbout: [
+        'Certificado UPME',
+        'Vehículos eléctricos',
+        'Vehículos híbridos',
+        'Ley 1715 de 2014',
+        'Ley 2099 de 2021',
+        'Beneficios tributarios movilidad eléctrica',
+        'Gestión Eficiente de la Energía',
+      ],
+    })} />
+
+    <!-- WebSite schema with SearchAction -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': 'https://certiveh.co/#website',
+      url: 'https://certiveh.co',
+      name: 'CertiVeh',
+      alternateName: 'CertiVeh — Certificado UPME Colombia',
+      description: 'Plataforma que automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia.',
+      inLanguage: 'es-CO',
+      publisher: { '@id': 'https://certiveh.co/#organization' },
+    })} />
+
     <!-- Structured Data slot (JSON-LD) -->
     <slot name="head" />
   </head>
