@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { Navbar } from "./Navbar";
 import { AnimatePresence, motion } from "motion/react";
 import { BackgroundPaths } from './ui/background-paths';
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
@@ -481,52 +482,12 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
   );
 }
 
-// ── NAVBAR ───────────────────────────────��────────────────────────────────────
-function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  return (
-    <>
-      <nav aria-label="Navegación principal">
-        <CertiVehLogo compact />
-        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}>
-          <Icon name={mobileMenuOpen ? "x" : "menu"} size={24} />
-        </button>
-        <div className="nav-links">
-          <a href="#beneficios">Beneficios</a>
-          <a href="#como-funciona">Cómo funciona</a>
-          <a href="#calculadora">Calculadora</a>
-          <a href="/blog">Blog</a>
-          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 14 }}>
-              Empezar ahora <Icon name="arrowRight" size={15} color="white" />
-            </button>
-          </a>
-        </div>
-      </nav>
-      
-      {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu-overlay${mobileMenuOpen ? " open" : ""}`} onClick={() => setMobileMenuOpen(false)} />
-      
-      {/* Mobile Menu */}
-      <div className={`mobile-menu${mobileMenuOpen ? " open" : ""}`}>
-        <a href="#beneficios" onClick={() => setMobileMenuOpen(false)}>Beneficios</a>
-        <a href="#como-funciona" onClick={() => setMobileMenuOpen(false)}>Cómo funciona</a>
-        <a href="#calculadora" onClick={() => setMobileMenuOpen(false)}>Calculadora</a>
-        <a href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</a>
-        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: "12px 20px", fontSize: 14 }} onClick={() => setMobileMenuOpen(false)}>
-            Empezar ahora <Icon name="arrowRight" size={15} color="white" />
-          </button>
-        </a>
-      </div>
-    </>
-  );
-}
+// ── NAVBAR — uses shared Navbar component ─────────────────────────────────────
+// (imported from ./Navbar.tsx — same component used in blog)
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Ley 1964 de 2019","Exención de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
+  const items = ["Exención de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -636,7 +597,7 @@ function Beneficios() {
   const cards = [
     { icon: "percent",  tag: "IVA",     title: "Exención de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $6M que no pagas.", ejemplo: "$120M → ahorras $6.000.000" },
     { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta del año de la compra.", ejemplo: "$150M → deduces $75.000.000" },
-    { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
+    { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
   ];
   return (
     <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--slate-50)" }}>
@@ -956,7 +917,7 @@ function Confianza() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos de la Ley 1964 de 2019. El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos vigentes. El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación." },
     { q: "¿Qué documentos necesito?",               a: "Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
@@ -1044,7 +1005,7 @@ function Footer() {
             {[
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
               { label: "Recursos", links: [{ text: "Blog", href: "/blog" }] },
-              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Privacidad", href: "#" }, { text: "Ley 1964", href: "#" }] }
+              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }] }
             ].map(col => (
               <div key={col.label}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>{col.label}</div>
@@ -1140,7 +1101,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'var(--slate-600)',
             marginBottom: 32
           }}>
-            La normativa tributaria cambia. Los incentivos de la Ley 1964 que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
+            La normativa tributaria cambia. Los incentivos que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
           </p>
 
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
@@ -1196,7 +1157,7 @@ export default function CertiVehLandingComplete() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CertiVeh",
-    "description": "CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la exención de IVA, deducción en renta y reducción arancelaria bajo la Ley 1964 de 2019.",
+    "description": "CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la exención de IVA, deducción en renta y reducción arancelaria.",
     "url": "https://certiveh.co",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
@@ -1224,7 +1185,7 @@ export default function CertiVehLandingComplete() {
         "name": "¿Qué vehículos califican?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos de la Ley 1964 de 2019. El vehículo debe estar a nombre del solicitante en el RUNT."
+          "text": "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos vigentes. El vehículo debe estar a nombre del solicitante en el RUNT."
         }
       },
       {
