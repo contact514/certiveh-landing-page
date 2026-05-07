@@ -736,8 +736,28 @@ function Calculadora() {
     const iva = v * 0.05;
     const renta = v * 0.50;
     const total = iva + renta;
-    const honorarios = Math.min(v * 0.025, 2_500_000);
-    setCalc({ iva, renta, total, honorarios, neto: total - honorarios });
+
+    // Trámite UPME — Resolución UPME No. 135 de 2025
+    const UVT = 52_374;
+    const invUVT = v / UVT;
+    let pagoUVT: number;
+    if (invUVT < 275)        pagoUVT = 1.2;
+    else if (invUVT < 826)   pagoUVT = 3.4;
+    else if (invUVT < 1_652) pagoUVT = 6.7;
+    else if (invUVT < 3_305) pagoUVT = 13.4;
+    else {
+      const beneficio = (invUVT - 3_305) * 0.405;
+      pagoUVT = Math.min(13.4 + beneficio * 0.005, 275);
+    }
+    const costoUPME = Math.round(pagoUVT * UVT);
+
+    // Honorarios CertiVeh
+    const honorariosBase = 599_990;
+    const honorariosIVA = Math.round(honorariosBase * 0.19);
+    const honorariosCertiVeh = honorariosBase + honorariosIVA;
+
+    const costoTotal = costoUPME + honorariosCertiVeh;
+    setCalc({ iva, renta, total, costoUPME, honorariosBase, honorariosIVA, honorariosCertiVeh, costoTotal, neto: total - costoTotal });
   }, [valor, tipo, perfil]);
 
   const bars = [
@@ -809,37 +829,35 @@ function Calculadora() {
               )}
             </div>
 
-            {(() => {
-              const sinTope = valor * 1_000_000 * 0.025;
-              const descuento = sinTope > 2_500_000 ? sinTope - 2_500_000 : 0;
-              return (
-                <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, gap: 8 }}>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                        <Icon name="clock" size={13} color="#92400E" />
-                        <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>Tarifa promocional por tiempo limitado, lanzamiento</span>
-                      </div>
-                      <div style={{ fontSize: 13, color: "#78350F", lineHeight: 1.5 }}>
-                        2.5% del valor del vehículo, tope <span style={{ fontWeight: 700 }}>$2.500.000</span>. Incluye el costo del trámite ante la UPME.
-                        {descuento > 0 && (
-                          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, marginLeft: 6 }}>
-                            <span style={{ textDecoration: "line-through", color: "#B45309", fontSize: 12, opacity: 0.75 }}>{fmt(sinTope)}</span>
-                            <span style={{ background: "#FEF08A", borderRadius: 4, padding: "1px 7px", fontWeight: 700, color: "#78350F", fontSize: 12 }}>
-                              {fmt(2_500_000)}
-                            </span>
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: "#92400E", whiteSpace: "nowrap" }}>{calc.honorarios ? fmt(calc.honorarios) : ""}</span>
+            {calc.costoUPME != null && (
+              <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
+                  <Icon name="fileText" size={13} color="#92400E" />
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>Costo del servicio</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "#78350F", lineHeight: 1.5 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span>Trámite ante UPME</span>
+                    <span style={{ fontWeight: 600 }}>{fmt(calc.costoUPME)}</span>
                   </div>
-                  <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4 }}>
-                    * La deducción en renta reduce tu base gravable, no el impuesto directamente. Incluye el trámite ante la UPME.
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span>Honorarios CertiVeh</span>
+                    <span style={{ fontWeight: 600 }}>{fmt(calc.honorariosBase)}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: 12, color: "#92400E", opacity: 0.7 }}>IVA (19%)</span>
+                    <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.7 }}>{fmt(calc.honorariosIVA)}</span>
+                  </div>
+                  <div style={{ borderTop: "1px solid #FDE68A", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontWeight: 700 }}>Total</span>
+                    <span style={{ fontWeight: 700 }}>{fmt(calc.costoTotal)}</span>
                   </div>
                 </div>
-              );
-            })()}
+                <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4, marginTop: 8 }}>
+                  * La deducción en renta reduce tu base gravable, no el impuesto directamente. Trámite UPME según Resolución No. 135 de 2025.
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Result */}
@@ -851,14 +869,14 @@ function Calculadora() {
             <div style={{ fontSize: 14, color: "var(--slate-500)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios recuperables</div>
 
             <div className="card" style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "white", borderColor: "var(--emerald-200)", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos honorarios)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos costo del servicio)</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
             </div>
 
-            {calc.honorarios && calc.total && (
+            {calc.costoTotal && calc.total && (
               <div style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 28 }}>
                 Por cada <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>$1 invertido</span> en CertiVeh, recibes{" "}
-                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.neto / calc.honorarios * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
+                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.neto / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
 
