@@ -758,11 +758,11 @@ function Calculadora() {
 
     // Honorarios CertiVeh
     const honorariosBase = 599_990;
-    const honorariosIVA = Math.round(honorariosBase * 0.19);
-    const honorariosCertiVeh = honorariosBase + honorariosIVA;
+    const subtotal = costoUPME + honorariosBase;
+    const ivaServicio = Math.round(subtotal * 0.19);
+    const costoTotal = subtotal + ivaServicio;
 
-    const costoTotal = costoUPME + honorariosCertiVeh;
-    setCalc({ iva, renta, total, costoUPME, honorariosBase, honorariosIVA, honorariosCertiVeh, costoTotal, neto: total - costoTotal });
+    setCalc({ iva, renta, total, costoUPME, honorariosBase, subtotal, ivaServicio, costoTotal, neto: total - costoTotal });
   }, [valor, tipo, perfil]);
 
   const bars = [
@@ -851,7 +851,7 @@ function Calculadora() {
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontSize: 12, color: "#92400E", opacity: 0.7 }}>IVA (19%)</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.7 }}>{fmt(calc.honorariosIVA)}</span>
+                    <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.7 }}>{fmt(calc.ivaServicio)}</span>
                   </div>
                   <div style={{ borderTop: "1px solid #FDE68A", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontWeight: 700 }}>Total</span>
