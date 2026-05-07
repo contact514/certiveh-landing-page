@@ -31,7 +31,7 @@ export function ImageComparison({ beforeImage, afterImage, className = "", befor
   return (
     <div className={className}>
       <div
-        className="relative w-full h-full overflow-hidden rounded-2xl select-none"
+        className="relative w-full overflow-hidden rounded-2xl select-none"
         style={{ aspectRatio: '16/9' }}
         onMouseMove={onMouseMove}
         onMouseUp={() => setOnMouseDown(false)}

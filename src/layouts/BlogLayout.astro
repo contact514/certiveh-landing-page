@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { Navbar } from '../app/components/Navbar';
 
 interface Props {
   title?: string;
@@ -55,52 +56,7 @@ const jsonLd = isArticle ? JSON.stringify({
       --light:  #F8FAFC;
       --amber:  #D97706;
     }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #F1F5F9; color: var(--dark); line-height: 1.75; }
-
-    /* ── NAVBAR ───────────────────────────────────────────────────────── */
-    .blog-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-    }
-    .blog-nav-logo {
-      display: flex; align-items: center; gap: 8px;
-      text-decoration: none;
-    }
-    .blog-nav-logo .logo-icon { width: 34px; height: 34px; flex-shrink: 0; }
-    .blog-nav-logo .logo-wordmark {
-      font-size: 19px; font-weight: 800; color: var(--dark);
-      letter-spacing: -0.03em; white-space: nowrap;
-    }
-    .blog-nav-logo .logo-wordmark span { color: var(--green); }
-    .blog-nav-links {
-      display: flex; align-items: center; gap: 28px;
-    }
-    .blog-nav-links a {
-      font-size: 14px; font-weight: 500; color: var(--muted);
-      text-decoration: none; transition: color 0.15s;
-    }
-    .blog-nav-links a:hover { color: var(--dark); }
-    .blog-nav-links a.active { color: var(--green); font-weight: 600; }
-    .blog-nav-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--green); color: #fff !important;
-      font-size: 14px !important; font-weight: 700 !important;
-      padding: 9px 18px; border-radius: 8px;
-      text-decoration: none; white-space: nowrap;
-      transition: background 0.15s, transform 0.1s !important;
-    }
-    .blog-nav-cta:hover { background: #047857 !important; transform: translateY(-1px); }
-    @media (max-width: 640px) {
-      .blog-nav { padding: 0 20px; }
-      .blog-nav-links { gap: 16px; }
-      .blog-nav-links .nav-text-link { display: none; }
-    }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #F1F5F9; color: var(--dark); line-height: 1.75; -webkit-font-smoothing: antialiased; }
 
     /* ── PAGE SPACER ──────────────────────────────────────────────────── */
     .page-top { height: 64px; }
@@ -242,30 +198,8 @@ const jsonLd = isArticle ? JSON.stringify({
     .back-link svg { width: 14px; height: 14px; }
   </style>
 
-  <!-- NAV -->
-  <nav class="blog-nav" aria-label="Navegación principal">
-    <a href="/" class="blog-nav-logo" aria-label="CertiVeh — inicio">
-      <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="sg-blog" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/>
-            <stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#sg-blog)"/>
-        <path d="M55 30 L42 52 L50 52 L45 70 L62 44 L53 44 L58 30 Z" fill="white"/>
-      </svg>
-      <span class="logo-wordmark">Certi<span>Veh</span></span>
-    </a>
-    <div class="blog-nav-links">
-      <a href="/" class="nav-text-link">Inicio</a>
-      <a href="/blog" class="nav-text-link active">Blog</a>
-      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="blog-nav-cta">
-        Empieza ahora
-        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </nav>
+  <!-- NAV — mismo componente React que la landing -->
+  <Navbar isHome={false} client:load />
 
   <div class="page-top"></div>
 
@@ -311,8 +245,6 @@ const jsonLd = isArticle ? JSON.stringify({
             <div class="blog-footer-col-label">Legal</div>
             <div class="blog-footer-col-links">
               <a href="/terminos-y-condiciones">Términos y Condiciones</a>
-              <a href="#">Privacidad</a>
-              <a href="#">Ley 1964</a>
             </div>
           </div>
         </div>
