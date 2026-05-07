@@ -561,6 +561,11 @@ function Hero() {
             Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
+        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+          <button className="btn-primary btn-primary-lg" style={{ background: "var(--slate-900)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
+          </button>
+        </a>
         <a href="#como-funciona" style={{ textDecoration: "none" }}>
           <button className="btn-secondary">¿Cómo funciona?</button>
         </a>
@@ -876,7 +881,7 @@ function Calculadora() {
             {calc.costoTotal && calc.total && (
               <div style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 28 }}>
                 Por cada <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>$1 invertido</span> en CertiVeh, recibes{" "}
-                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.neto / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
+                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
 
@@ -901,7 +906,7 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "No pierdas la ventana",        desc: "Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "2.5% del valor del vehículo, con un tope de $2.500.000. Incluye el costo del trámite ante la UPME. Sin suscripciones, sin costos adicionales." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Honorarios de $599.990 + IVA, más el costo del trámite ante la UPME según resolución vigente. Sin suscripciones, sin costos adicionales." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--white)" }}>
@@ -1182,7 +1187,7 @@ export default function CertiVehLandingComplete() {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "COP",
-      "description": "Tarifa única de servicio del 2.5% del valor del vehículo, con tope de $2.500.000 COP. Incluye el costo del trámite ante la UPME."
+      "description": "Honorarios de $599.990 COP + IVA, más el costo del trámite ante la UPME según resolución vigente."
     },
     "provider": {
       "@type": "Organization",
