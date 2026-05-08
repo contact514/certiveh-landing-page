@@ -487,7 +487,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Exención de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
+  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -501,7 +501,7 @@ function Ticker() {
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
-  const flipWords = ["exención de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
+  const flipWords = ["devolución de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
   return (
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
@@ -586,7 +586,7 @@ function Hero() {
 
       {/* Stat pills */}
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", animation: "fadeUp 0.6s 0.4s ease both", position: "relative", zIndex: 1 }}>
-        {[{ num: "5%", label: "Exención de IVA", color: "var(--emerald-600)" },{ num: "50%", label: "Deducción renta", color: "var(--teal-500)" },{ num: "5%", label: "Ahorro arancel", color: "var(--amber-500)" }].map(s => (
+        {[{ num: "5%", label: "Devolución de IVA", color: "var(--emerald-600)" },{ num: "50%", label: "Deducción renta", color: "var(--teal-500)" },{ num: "5%", label: "Ahorro arancel", color: "var(--amber-500)" }].map(s => (
           <div key={s.label} className="card" style={{ padding: "20px 28px", textAlign: "center", minWidth: 140, flex: "1 1 auto", maxWidth: 200 }}>
             <div style={{ fontSize: 32, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
             <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 4 }}>{s.label}</div>
@@ -600,7 +600,7 @@ function Hero() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Exención de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $6M que no pagas.", ejemplo: "$120M → ahorras $6.000.000" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Al comprar tu vehículo eléctrico o híbrido pagas un IVA del 5%. Con el certificado UPME, la DIAN te devuelve el 100% del IVA pagado.", ejemplo: "$120M → la DIAN te devuelve $6.000.000" },
     { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta del año de la compra.", ejemplo: "$150M → deduces $75.000.000" },
     { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
   ];
@@ -766,7 +766,7 @@ function Calculadora() {
   }, [valor, tipo, perfil]);
 
   const bars = [
-    { label: "Exención IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
+    { label: "Devolución IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
     { label: "Deducción renta", value: calc.renta, color: "var(--teal-500)",    pct: calc.renta / calc.total },
   ];
   return (
@@ -1180,7 +1180,7 @@ export default function CertiVehLandingComplete() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CertiVeh",
-    "description": "CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la exención de IVA, deducción en renta y reducción arancelaria.",
+    "description": "CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y reducción arancelaria.",
     "url": "https://certiveh.co",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
