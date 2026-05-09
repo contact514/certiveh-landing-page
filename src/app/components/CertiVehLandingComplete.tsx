@@ -936,7 +936,45 @@ function Confianza() {
   );
 }
 
-// ── FAQ ────────────────────────────────────────────────────────────────────���──
+// ── TESTIMONIOS ──────────────────────────────────────────────────────────────
+function Testimonios() {
+  const testimonios = [
+    { nombre: "Andrés M.", ciudad: "Medellín", vehiculo: "BYD Dolphin Mini · Eléctrico", texto: "CertiVeh se encargó de todo. Yo subí mis documentos desde el celular y no tuve que entrar al portal de la UPME en ningún momento. A las pocas semanas ya tenía mi certificado listo." },
+    { nombre: "Carolina R.", ciudad: "Medellín", vehiculo: "Toyota RAV4 Hybrid · Híbrido", texto: "Intenté hacer el trámite por mi cuenta y me lo rechazaron. Con CertiVeh lo volvimos a radicar, corrigieron lo que estaba mal y por fin pude acceder a mis beneficios tributarios. Súper agradecida." },
+    { nombre: "Felipe T.", ciudad: "Bogotá", vehiculo: "Renault Megane E-Tech · Eléctrico", texto: "Fue muy rápido. En menos de 5 minutos ya había subido todo y empezado mi trámite en el portal de CertiVeh. Me avisaron por WhatsApp en cada paso. Muy recomendado." },
+  ];
+  return (
+    <section id="testimonios" aria-label="Testimonios" style={{ background: "var(--white)" }}>
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>
+            Lo que dicen nuestros usuarios
+          </h2>
+        </div>
+        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {testimonios.map((t, i) => (
+            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", gap: 2 }}>
+                {[...Array(5)].map((_, j) => (
+                  <svg key={j} width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B" stroke="none">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1 }}>"{t.texto}"</p>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-900)" }}>{t.nombre}</div>
+                <div style={{ fontSize: 13, color: "var(--slate-400)" }}>{t.ciudad} · {t.vehiculo}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── FAQ ──────────────────────────────────────────────────────────────────────
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
@@ -1265,6 +1303,7 @@ export default function CertiVehLandingComplete() {
         <ComoFunciona/>
         <Calculadora/>
         <Confianza/>
+        <Testimonios/>
         <FAQ/>
         <CTAFinal/>
       </main>
