@@ -92,6 +92,7 @@ export default function CamilaChat() {
 
       const data = await res.json();
       const rawReply = data?.reply || 'lo siento, hubo un problema, puedes intentar de nuevo?';
+      const shouldClose = data?.closeChat === true;
       const parts = rawReply.split(/\n?---\n?/).map((s: string) => s.trim()).filter(Boolean);
 
       const firstDelay = getTypingDelay(parts[0] || '');
@@ -105,6 +106,10 @@ export default function CamilaChat() {
           setIsTyping(false);
         }
         addAssistantMessage(parts[i]);
+      }
+
+      if (shouldClose) {
+        setTimeout(() => { setOpen(false); resetChat(); }, 3000);
       }
     } catch {
       setIsTyping(false);
