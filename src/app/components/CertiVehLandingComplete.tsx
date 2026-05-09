@@ -939,9 +939,9 @@ function Confianza() {
 // ── TESTIMONIOS ──────────────────────────────────────────────────────────────
 function Testimonios() {
   const testimonios = [
-    { nombre: "Andrés M.", ciudad: "Medellín", vehiculo: "BYD Dolphin Mini · Eléctrico", texto: "CertiVeh se encargó de todo. Yo subí mis documentos desde el celular y no tuve que entrar al portal de la UPME en ningún momento. A las pocas semanas ya tenía mi certificado listo." },
-    { nombre: "Carolina R.", ciudad: "Medellín", vehiculo: "Toyota RAV4 Hybrid · Híbrido", texto: "Intenté hacer el trámite por mi cuenta y me lo rechazaron. Con CertiVeh lo volvimos a radicar, corrigieron lo que estaba mal y por fin pude acceder a mis beneficios tributarios. Súper agradecida." },
-    { nombre: "Felipe T.", ciudad: "Bogotá", vehiculo: "Renault Megane E-Tech · Eléctrico", texto: "Fue muy rápido. En menos de 5 minutos ya había subido todo y empezado mi trámite en el portal de CertiVeh. Me avisaron por WhatsApp en cada paso. Muy recomendado." },
+    { nombre: "Andrés M.", ciudad: "Medellín", vehiculo: "BYD Yuan Up · Eléctrico", texto: "CertiVeh se encargó de todo. Yo subí mis documentos desde el celular y no tuve que entrar al portal de la UPME en ningún momento. A las pocas semanas ya tenía mi certificado listo." },
+    { nombre: "Carolina R.", ciudad: "Medellín", vehiculo: "Toyota Corolla Cross Hybrid · Híbrido", texto: "Intenté hacer el trámite por mi cuenta y me lo rechazaron. Con CertiVeh lo volvimos a radicar, corrigieron lo que estaba mal y por fin pude acceder a mis beneficios tributarios. Súper agradecida." },
+    { nombre: "Felipe T.", ciudad: "Bogotá", vehiculo: "BYD Seagull · Eléctrico", texto: "Fue muy rápido. En menos de 5 minutos ya había subido todo y empezado mi trámite en el portal de CertiVeh. Me avisaron por WhatsApp en cada paso. Muy recomendado." },
   ];
   return (
     <section id="testimonios" aria-label="Testimonios" style={{ background: "var(--white)" }}>
