@@ -978,12 +978,12 @@ function Testimonios() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos vigentes. El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación." },
     { q: "¿Qué documentos necesito?",               a: "Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
-    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. Nuestra política de garantía está detallada en los términos del servicio." },
-    { q: "¿Funciona para personas jurídicas?",      a: "Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026." },
+    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
+    { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--slate-50)" }}>
@@ -1246,7 +1246,7 @@ export default function CertiVehLandingComplete() {
         "name": "¿Qué vehículos califican?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos vigentes. El vehículo debe estar a nombre del solicitante en el RUNT."
+          "text": "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT."
         }
       },
       {
@@ -1278,15 +1278,15 @@ export default function CertiVehLandingComplete() {
         "name": "¿Qué pasa si la UPME rechaza mi solicitud?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. Nuestra política de garantía está detallada en los términos del servicio."
+          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, acompañamos el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Funciona para personas jurídicas?",
+        "name": "¿Funciona para empresas e independientes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026."
+          "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años."
         }
       }
     ]
