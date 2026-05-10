@@ -974,6 +974,61 @@ function Testimonios() {
   );
 }
 
+// ── WIN WIN ──────────────────────────────────────────────────────────────────
+function WinWin() {
+  const steps = [
+    { num: "01", icon: "award", title: "Completa tu trámite", desc: "Obtén tu certificado UPME con CertiVeh y desbloquea tu código de referido." },
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento." },
+    { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo pague su trámite, tú ganas $75.000 que puedes retirar cuando quieras." },
+  ];
+  return (
+    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--slate-50)" }}>
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 20, padding: "6px 16px", marginBottom: 20 }}>
+            <Icon name="gift" size={14} color="var(--emerald-600)" />
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--emerald-700)" }}>Programa de referidos</span>
+          </div>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 12 }}>
+            CertiVeh <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Win Win</span>
+          </h2>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-500)", lineHeight: 1.6 }}>Refiere amigos y gana dinero</p>
+        </div>
+
+        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
+          {steps.map((s, i) => (
+            <div key={i} className="card" style={{ padding: 28, position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "var(--grad-primary)" }} />
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Icon name={s.icon} size={20} color="var(--emerald-600)" />
+                </div>
+                <span style={{ fontSize: 12, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "0.06em" }}>PASO {s.num}</span>
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{s.title}</h3>
+              <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6 }}>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
+          <p style={{ fontSize: 15, color: "var(--emerald-700)", fontWeight: 600, lineHeight: 1.6, margin: 0 }}>
+            Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.
+          </p>
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+            <button className="btn-primary btn-primary-lg">
+              Empezar mi trámite <Icon name="arrowRight" size={18} color="white" />
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── FAQ ──────────────────────────────────────────────────────────────────────
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
@@ -1304,6 +1359,7 @@ export default function CertiVehLandingComplete() {
         <Calculadora/>
         <Confianza/>
         <Testimonios/>
+        <WinWin/>
         <FAQ/>
         <CTAFinal/>
       </main>
