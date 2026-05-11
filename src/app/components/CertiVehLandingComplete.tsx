@@ -502,6 +502,96 @@ function Ticker() {
   );
 }
 
+// ── COUNTDOWN VENTANA UPME ───────────────────────────────────────────────────
+function VentanaUPME() {
+  const ciclos = [
+    { inicio: new Date(2026, 2, 1), fin: new Date(2026, 4, 31, 23, 59, 59), nombre: "Ciclo I 2026" },
+    { inicio: new Date(2026, 7, 15), fin: new Date(2026, 10, 14, 23, 59, 59), nombre: "Ciclo II 2026" },
+    { inicio: new Date(2027, 2, 1), fin: new Date(2027, 4, 31, 23, 59, 59), nombre: "Ciclo I 2027" },
+  ];
+
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  let ventanaAbierta = false;
+  let target: Date = new Date();
+  let cicloNombre = "";
+  let proximoCiclo = "";
+
+  for (const c of ciclos) {
+    if (now >= c.inicio && now <= c.fin) {
+      ventanaAbierta = true;
+      target = c.fin;
+      cicloNombre = c.nombre;
+      break;
+    }
+    if (now < c.inicio) {
+      ventanaAbierta = false;
+      target = c.inicio;
+      proximoCiclo = c.nombre;
+      break;
+    }
+  }
+
+  const diff = Math.max(0, target.getTime() - now.getTime());
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  return (
+    <section aria-label="Ventana de radicación UPME" style={{ background: ventanaAbierta ? "var(--emerald-600)" : "var(--slate-800)", padding: "28px 20px", position: "relative", overflow: "hidden" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 20, padding: "5px 14px", marginBottom: 14 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
+          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            {ventanaAbierta ? `Ventana abierta — ${cicloNombre}` : `Ventana cerrada — próximo: ${proximoCiclo}`}
+          </span>
+        </div>
+
+        <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 16, lineHeight: 1.5 }}>
+          {ventanaAbierta
+            ? "La UPME está recibiendo solicitudes. Radica antes de que cierre:"
+            : "La próxima ventana de radicación abre en:"}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 20 }}>
+          {[
+            { val: days, label: "Días" },
+            { val: hours, label: "Horas" },
+            { val: mins, label: "Min" },
+            { val: secs, label: "Seg" },
+          ].map((u, i) => (
+            <div key={i} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
+                {pad(u.val)}
+              </div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>{u.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
+          </button>
+        </a>
+
+        {!ventanaAbierta && (
+          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 12, lineHeight: 1.5 }}>
+            Puedes cargar tu solicitud ahora y la radicamos automáticamente cuando abra la ventana.
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   const flipWords = ["devolución de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
@@ -1357,6 +1447,7 @@ export default function CertiVehLandingComplete() {
       <main>
         <Hero/>
         <Ticker/>
+        <VentanaUPME/>
         <Beneficios/>
         <ComoFunciona/>
         <Calculadora/>
