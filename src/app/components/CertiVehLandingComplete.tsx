@@ -979,8 +979,8 @@ function Calculadora() {
             )}
 
             <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
-              <button className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: "14px 24px" }}>
-                Empezar ahora <Icon name="arrowRight" size={18} color="white"/>
+              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center" }}>
+                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
             </a>
             <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 12 }}>Sin riesgo · Si la UPME rechaza, revisamos tu caso</div>
@@ -1113,7 +1113,7 @@ function WinWin() {
         <div style={{ textAlign: "center" }}>
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-primary btn-primary-lg">
-              Empezar mi trámite <Icon name="arrowRight" size={18} color="white" />
+              Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
             </button>
           </a>
         </div>
@@ -1179,11 +1179,8 @@ function CTAFinal() {
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
         </p>
         <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="cta-button" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "white", color: "var(--emerald-700)", border: "none", borderRadius: 8, padding: "16px 36px", fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "var(--ff)", transition: "transform 0.15s, box-shadow 0.15s", boxShadow: "0 4px 16px rgba(0,0,0,0.15)" }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.2)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)"; }}
-          >
-            Empezar ahora <Icon name="arrowRight" size={18} color="#047857"/>
+          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
           </button>
         </a>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
@@ -1314,17 +1311,14 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           </p>
 
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
-            <button 
-              className="btn-primary"
+            <button
+              className="btn-primary btn-primary-lg"
               style={{
                 width: '100%',
-                justifyContent: 'center',
-                padding: '16px 32px',
-                fontSize: 16,
-                fontWeight: 700
+                justifyContent: 'center'
               }}
             >
-              Blindar mi beneficio ahora
+              Empezar mi trámite ahora
               <Icon name="arrowRight" size={18} color="white" />
             </button>
           </a>
