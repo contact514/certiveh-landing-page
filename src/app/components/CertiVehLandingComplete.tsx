@@ -1037,8 +1037,8 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
-    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación." },
-    { q: "¿Qué documentos necesito?",               a: "Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
+    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Nosotros nos encargamos de radicarla ante la UPME en la ventana correspondiente. Si no hay ventana abierta en ese momento, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura." },
+    { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
@@ -1312,7 +1312,7 @@ export default function CertiVehLandingComplete() {
         "name": "¿Cuándo puedo radicar mi solicitud?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura."
+          "text": "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Nosotros nos encargamos de radicarla ante la UPME en la ventana correspondiente. Si no hay ventana abierta en ese momento, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura."
         }
       },
       {
@@ -1320,7 +1320,7 @@ export default function CertiVehLandingComplete() {
         "name": "¿Qué documentos necesito?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono."
+          "text": "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono."
         }
       },
       {
