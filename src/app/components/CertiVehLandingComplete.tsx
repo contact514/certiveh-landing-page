@@ -639,8 +639,8 @@ function Hero() {
         marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        CertiVeh automatiza el trámite ante la UPME de principio a fin.
-        Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
+        Tu tramitador virtual del certificado UPME.
+        Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
       </p>
 
       {/* CTAs */}
@@ -1360,7 +1360,7 @@ export default function CertiVehLandingComplete() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CertiVeh",
-    "description": "CertiVeh automatiza el trámite del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y reducción arancelaria.",
+    "description": "CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y reducción arancelaria.",
     "url": "https://certiveh.co",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
