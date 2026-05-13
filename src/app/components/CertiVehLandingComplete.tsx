@@ -686,6 +686,11 @@ function Hero() {
           </div>
         ))}
       </div>
+
+      {/* Ticker inside hero */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1 }}>
+        <Ticker />
+      </div>
     </section>
   );
 }
@@ -1440,7 +1445,6 @@ export default function CertiVehLandingComplete() {
       <Navbar />
       <main>
         <Hero/>
-        <Ticker/>
         <VentanaUPME/>
         <Beneficios/>
         <ComoFunciona/>
