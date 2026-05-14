@@ -195,6 +195,40 @@ import '../styles/index.css';
     }
     .tc-highlight p { color: var(--slate-700) !important; margin-bottom: 0 !important; }
 
+    /* ANEXO A SEPARATOR */
+    .tc-anexo-separator {
+      border: none;
+      border-top: 3px solid var(--emerald-200);
+      margin: 64px 0 48px;
+    }
+    .tc-anexo-header-block {
+      background: var(--emerald-50);
+      border: 1.5px solid var(--emerald-200);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .tc-anexo-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--emerald-600);
+      margin-bottom: 8px;
+    }
+    .tc-anexo-title {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 700;
+      color: var(--slate-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .tc-anexo-meta {
+      font-size: 13px;
+      color: var(--slate-500);
+      line-height: 1.6;
+    }
+
     /* FOOTER */
     .tc-footer {
       background: var(--slate-900);
@@ -291,7 +325,7 @@ import '../styles/index.css';
     <div class="tc-badge">Documento legal</div>
     <h1 class="tc-title">Términos y Condiciones de Uso</h1>
     <p class="tc-subtitle">CERTIVEH S.A.S. — NIT 902051875-8</p>
-    <p class="tc-date">Última actualización: abril 2026</p>
+    <p class="tc-date">Última actualización: mayo 2026</p>
   </div>
 
   <!-- CONTENT -->
@@ -314,6 +348,7 @@ import '../styles/index.css';
         <a href="#xi" class="tc-index-item">XI. Requerimientos adicionales</a>
         <a href="#xii" class="tc-index-item">XII. Rechazo de la solicitud</a>
         <a href="#xiii" class="tc-index-item">XIII. Pagos del servicio</a>
+        <a href="#xiii-a" class="tc-index-item">XIII-A. Programa Win Win</a>
         <a href="#xiv" class="tc-index-item">XIV. Política de reembolsos</a>
         <a href="#xv" class="tc-index-item">XV. Derecho de retracto</a>
         <a href="#xvi" class="tc-index-item">XVI. Limitación de responsabilidad</a>
@@ -329,6 +364,7 @@ import '../styles/index.css';
         <a href="#xxvi" class="tc-index-item">XXVI. Modificación</a>
         <a href="#xxvii" class="tc-index-item">XXVII. Ley aplicable</a>
         <a href="#xxviii" class="tc-index-item">XXVIII. Información del Operador</a>
+        <a href="#anexo-a" class="tc-index-item">Anexo A — Reglamento Win Win</a>
       </div>
     </div>
 
@@ -361,9 +397,10 @@ import '../styles/index.css';
       </div>
       <p>Los presentes Términos y Condiciones se regirán e interpretarán de conformidad con las leyes de la República de Colombia, incluyendo, entre otras, las normas civiles, comerciales, tributarias, de comercio electrónico, de protección al consumidor y de protección de datos personales que resulten aplicables.</p>
       <p>En particular, el tratamiento de los datos personales del Usuario se realizará conforme a lo dispuesto en la Ley 1581 de 2012, el Decreto 1377 de 2013, el Decreto 1074 de 2015 y demás normas que los modifiquen, sustituyan o complementen.</p>
-      <p>Así mismo, el uso de la Plataforma se sujetará a las disposiciones aplicables en materia de comercio electrónico, incluyendo la Ley 527 de 1999 y sus modificaciones, así como a las normas de protección al consumidor establecidas en la Ley 1480 de 2011.</p>
+      <p>Así mismo, el uso de la Plataforma se sujetará a las disposiciones aplicables en materia de comercio electrónico, incluyendo la Ley 527 de 1999 y sus modificaciones, así como a las normas de protección al consumidor establecidas en la Ley 1480 de 2011, en lo que resulte aplicable a la naturaleza del servicio prestado por el Operador de la Plataforma.</p>
       <p>El Usuario reconoce que el trámite de certificación objeto del servicio se encuentra sujeto a la normativa vigente aplicable a los incentivos tributarios asociados a vehículos eléctricos o híbridos, así como a los procedimientos, lineamientos y criterios técnicos establecidos por la UPME en ejercicio de sus competencias.</p>
-      <p>La evaluación, validación, expedición, modificación o rechazo del Certificado UPME se regirá exclusivamente por la normativa aplicable y por las decisiones adoptadas por la UPME, sin que el Operador de la Plataforma tenga injerencia en dichas actuaciones.</p>
+      <p>En este sentido, la evaluación, validación, expedición, modificación o rechazo del Certificado UPME se regirá exclusivamente por la normativa aplicable y por las decisiones adoptadas por la UPME, sin que el Operador de la Plataforma tenga injerencia en dichas actuaciones.</p>
+      <p>El Operador de la Plataforma presta un servicio de intermediación tecnológica y de gestión administrativa, limitado a la recopilación, organización, preparación y radicación de la solicitud, así como al seguimiento del trámite ante la UPME, de conformidad con lo establecido en los presentes Términos y Condiciones.</p>
     </div>
 
     <div class="tc-section" id="iv">
@@ -380,6 +417,10 @@ import '../styles/index.css';
         <li><strong>Servicios:</strong> Las funcionalidades tecnológicas ofrecidas por la Plataforma que permiten la recopilación, organización, validación preliminar y gestión de la información necesaria para la preparación y radicación de solicitudes de certificación ante la UPME.</li>
         <li><strong>Certificado UPME:</strong> El documento emitido por la UPME mediante el cual se certifica que un proyecto, bien o tecnología cumple con los requisitos establecidos en la normativa vigente para acceder a los incentivos tributarios aplicables.</li>
         <li><strong>Información del Usuario:</strong> El conjunto de datos, documentos y demás información suministrada por el Usuario a través de la Plataforma para efectos de gestionar la solicitud de certificación ante la UPME.</li>
+        <li><strong>Referidor:</strong> El Usuario activo que cumple los requisitos de elegibilidad establecidos en el Reglamento del Programa, genera un Código Win Win desde el dashboard de su Cuenta de Usuario y lo comparte con terceros para que estos contraten el servicio en la Plataforma.</li>
+        <li><strong>Referido:</strong> El nuevo usuario que accede a la Plataforma por primera vez, utiliza un Código Win Win válido al momento de pagar su primer trámite y cumple las condiciones de elegibilidad establecidas en el Reglamento del Programa.</li>
+        <li><strong>Código Win Win:</strong> El código alfanumérico único e intransferible, con formato NOMBRE-XXX, generado manualmente por el Referidor desde el dashboard de su Cuenta de Usuario, que constituye el único mecanismo válido para la atribución de la referenciación y para el reconocimiento de la comisión al Referidor y del descuento al Referido, conforme al Reglamento del Programa.</li>
+        <li><strong>Saldo Win Win:</strong> El valor acumulado de las comisiones causadas y acreditadas a favor del Referidor en el marco del Programa, disponible para retiro desde el dashboard de su Cuenta de Usuario conforme a las condiciones del Reglamento.</li>
       </ul>
     </div>
 
@@ -389,31 +430,68 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Naturaleza del servicio y proceso de solicitud del incentivo</h2>
       </div>
       <p>La Plataforma constituye una herramienta tecnológica de apoyo mediante la cual los Usuarios pueden registrar, organizar y suministrar la información y los documentos necesarios para la solicitud del Certificado UPME que habilita el acceso a los incentivos tributarios aplicables a vehículos eléctricos o híbridos.</p>
-      <p>El Usuario declara que la solicitud de certificación gestionada a través de la Plataforma corresponde exclusivamente a vehículos eléctricos o híbridos que cumplen con las condiciones establecidas en la normativa aplicable. En caso de que el Usuario registre información correspondiente a vehículos que no cumplan con dichas condiciones, cualquier consecuencia derivada del rechazo, requerimiento o negación del trámite será de exclusiva responsabilidad del Usuario.</p>
+      <p>El Usuario declara que la solicitud de certificación gestionada a través de la Plataforma corresponde exclusivamente a vehículos eléctricos o híbridos que cumplen con las condiciones establecidas en la normativa aplicable para acceder a los incentivos tributarios.</p>
+      <p>A través de la Plataforma, el Usuario podrá proporcionar la información y documentación requerida para que el Operador de la Plataforma gestione y radique la solicitud correspondiente ante la UPME, de conformidad con la normativa aplicable y con los procedimientos y canales oficiales establecidos por dicha entidad.</p>
+      <p>En este sentido, el servicio ofrecido por la Plataforma consiste en facilitar la recopilación, estructuración, seguimiento y verificación preliminar de la Información del Usuario, así como gestionar la presentación del trámite ante la UPME, con el fin de simplificar el proceso para el Usuario.</p>
+      <p>En caso de que el Usuario registre información correspondiente a vehículos que no cumplan con dichas condiciones, o que no correspondan a tecnologías eléctricas o híbridas, cualquier consecuencia derivada del rechazo, requerimiento o negación del trámite será de exclusiva responsabilidad del Usuario.</p>
       <p>El proceso podrá comprender, entre otras, las siguientes etapas:</p>
-      <ol>
+      <ul>
         <li>Registro del Usuario en la Plataforma y diligenciamiento de la información básica del solicitante.</li>
-        <li>Registro de la información del vehículo o del proyecto, incluyendo las características técnicas y demás datos requeridos para la solicitud.</li>
-        <li>Carga de los documentos de soporte necesarios para el trámite, tales como documentos de identificación, certificado de existencia y representación legal (cuando corresponda), ficha técnica del vehículo y certificaciones técnicas exigidas.</li>
+        <li>Registro de la información del vehículo o del proyecto, cuando el trámite sea realizado por la ventanilla general de GEE, incluyendo las características técnicas y demás datos requeridos para la solicitud.</li>
+        <li>Carga de los documentos de soporte necesarios para el trámite, tales como documentos de identificación, certificado de existencia y representación legal, cuando corresponda, ficha técnica del vehículo y certificaciones técnicas exigidas.</li>
         <li>Revisión preliminar de la información y documentos suministrados por el Usuario con el fin de verificar su integridad antes de la radicación del trámite.</li>
         <li>Gestión y radicación de la solicitud ante la UPME mediante los sistemas oficiales dispuestos por dicha entidad.</li>
         <li>Seguimiento del trámite, incluida la comunicación al Usuario de eventuales requerimientos de información adicional que formule la UPME.</li>
-      </ol>
-      <p>El Usuario reconoce que la evaluación, verificación y decisión sobre la solicitud corresponden exclusivamente a la UPME. En consecuencia, el Operador de la Plataforma no tiene competencia para aprobar, negar o modificar certificaciones ni para otorgar incentivos tributarios.</p>
+      </ul>
+      <p>El Usuario reconoce que la evaluación, verificación y decisión sobre la solicitud corresponden exclusivamente a la UPME, entidad competente para determinar el cumplimiento de los requisitos y para expedir, modificar o negar el certificado correspondiente.</p>
+      <p>En consecuencia, el Operador de la Plataforma no tiene competencia para aprobar, negar o modificar certificaciones ni para otorgar incentivos tributarios, funciones que corresponden exclusivamente a la UPME.</p>
     </div>
 
     <div class="tc-section" id="vi">
       <div class="tc-section-header">
         <div class="tc-section-num">VI</div>
-        <h2 class="tc-section-title">Creación y administración de la Cuenta de Usuario</h2>
+        <h2 class="tc-section-title">Creación y administración de la Cuenta de Usuario dentro del aplicativo</h2>
       </div>
-      <p>Para acceder a los servicios ofrecidos a través de la Plataforma, el Usuario deberá crear una Cuenta de Usuario mediante el registro de la información solicitada. Durante el proceso de registro y uso de la Plataforma, el Usuario deberá proporcionar información veraz, completa, actualizada y legible, incluyendo:</p>
-      <ol>
-        <li><strong>Información de identificación y contacto:</strong> tipo de persona, tipo y número de documento, nombres y apellidos, correo electrónico, número telefónico, dirección de notificación y actividad económica (cuando corresponda).</li>
-        <li><strong>Información del vehículo:</strong> tipo de vehículo, marca y línea, tecnología (EV, HEV o PHEV), modelo, cantidad, valor unitario y total, e información sobre vehículo a reemplazar (cuando corresponda).</li>
-        <li><strong>Documentos de soporte:</strong> documento de identidad, certificado de existencia y representación legal (personas jurídicas), ficha técnica o catálogo del vehículo con certificado de cumplimiento de normas técnicas, y cualquier otro documento requerido por la normativa o por la UPME.</li>
-      </ol>
+      <p>Para acceder a los servicios ofrecidos a través de la Plataforma, el Usuario deberá crear una Cuenta de Usuario mediante el registro de la información solicitada en el formulario previsto para tal efecto.</p>
+      <p>Durante el proceso de registro y uso de la Plataforma, el Usuario deberá proporcionar información veraz, completa, actualizada y legible, incluyendo, entre otros, los siguientes datos:</p>
+      <ul>
+        <li><strong>Información de identificación y contacto del Usuario:</strong>
+          <ol>
+            <li>Tipo de persona (natural o jurídica).</li>
+            <li>Tipo y número de documento de identificación.</li>
+            <li>Nombres y apellidos del solicitante.</li>
+            <li>Correo electrónico para notificaciones.</li>
+            <li>Número telefónico y celular.</li>
+            <li>Dirección de notificación y datos de ubicación.</li>
+            <li>Actividad económica (código CIIU), cuando corresponda.</li>
+            <li>Información relacionada con el solicitante principal y los solicitantes secundarios, cuando aplique.</li>
+          </ol>
+        </li>
+        <li><strong>Información relacionada con el vehículo objeto del trámite:</strong>
+          <ol>
+            <li>Tipo de vehículo.</li>
+            <li>Marca y línea.</li>
+            <li>Tecnología del vehículo (por ejemplo, EV, HEV o PHEV).</li>
+            <li>Modelo.</li>
+            <li>Cantidad de vehículos.</li>
+            <li>Valor unitario y valor total del vehículo.</li>
+            <li>Información del vehículo que se pretende reemplazar, cuando corresponda.</li>
+            <li>Consumo anual estimado y rendimiento del vehículo, cuando aplique.</li>
+          </ol>
+        </li>
+        <li><strong>Régimen tributario del usuario solicitante:</strong> El Usuario reconoce que algunos beneficios tributarios asociados al Certificado UPME, incluyendo la deducción prevista en la Ley 1715 de 2014, pueden no resultar aplicables a contribuyentes acogidos al régimen simple de tributación, en la medida en que dicho régimen no contempla la depuración de la renta líquida en los mismos términos del régimen ordinario. El Usuario declara que la información tributaria suministrada a través de la Plataforma es veraz, completa y actualizada, y acepta que el Operador de la Plataforma confiará en dicha información para efectos de la gestión del trámite.</li>
+        <li><strong>Información adicional:</strong> Cualquier otra información técnica o administrativa necesaria para la gestión del trámite de certificación ante la UPME.</li>
+        <li><strong>Documentos de soporte:</strong> El Usuario deberá adjuntar los documentos necesarios para la gestión del trámite, entre los cuales podrán incluirse:
+          <ol>
+            <li>Documento de identidad, cuando se trate de persona natural.</li>
+            <li>Certificado de existencia y representación legal, cuando el solicitante sea persona jurídica.</li>
+            <li>Ficha técnica o catálogo del vehículo junto con el certificado vigente de cumplimiento de normas técnicas, suministrado por el concesionario o proveedor.</li>
+            <li>Cualquier otro documento requerido por la normativa aplicable o por la UPME para la evaluación del trámite.</li>
+          </ol>
+        </li>
+      </ul>
       <p>El Usuario será responsable de la exactitud, integridad, vigencia y legibilidad de los documentos cargados en la Plataforma, así como de la autenticidad de la información contenida en los mismos.</p>
+      <p>El Usuario reconoce y autoriza que el Operador de la Plataforma podrá utilizar la información y documentos suministrados para preparar, diligenciar y gestionar las solicitudes correspondientes dentro de los sistemas oficiales dispuestos por la UPME, cuando ello sea necesario para la radicación o gestión del trámite.</p>
     </div>
 
     <div class="tc-section" id="vii">
@@ -428,7 +506,9 @@ import '../styles/index.css';
         <li>Administrar temporalmente las credenciales de acceso necesarias para la radicación, seguimiento y atención de requerimientos asociados a la solicitud.</li>
         <li>Utilizar dicha cuenta exclusivamente para la gestión del trámite de certificación objeto de los presentes Términos y Condiciones.</li>
       </ol>
-      <p>Una vez finalizado el trámite, el Operador de la Plataforma podrá, a solicitud del Usuario, entregar, transferir o actualizar las credenciales de acceso a la cuenta ante la UPME. En caso de que el Usuario ya cuente con una cuenta previamente creada ante la UPME, este autoriza al Operador de la Plataforma para gestionar el trámite a través de dicha cuenta.</p>
+      <p>El Usuario reconoce y acepta que la administración temporal de las credenciales por parte del Operador de la Plataforma es necesaria para la correcta gestión del trámite ante la UPME.</p>
+      <p>Una vez finalizado el trámite, el Operador de la Plataforma podrá, a solicitud del Usuario, entregar, transferir o actualizar las credenciales de acceso a la cuenta ante la UPME.</p>
+      <p>En caso de que el Usuario ya cuente con una cuenta previamente creada ante la UPME, este autoriza al Operador de la Plataforma para gestionar el trámite a través de dicha cuenta o para realizar los ajustes necesarios en las credenciales con el fin de adelantar el proceso de certificación.</p>
     </div>
 
     <div class="tc-section" id="viii">
@@ -436,14 +516,26 @@ import '../styles/index.css';
         <div class="tc-section-num">VIII</div>
         <h2 class="tc-section-title">Responsabilidad del Usuario sobre la información</h2>
       </div>
-      <p>El Usuario es el único responsable de la veracidad, exactitud, integridad, actualización y legibilidad de la información y de los documentos que suministre a través de la Plataforma. El Usuario declara y garantiza que:</p>
+      <p>El Usuario es el único responsable de la veracidad, exactitud, integridad, actualización y legibilidad de la información y de los documentos que suministre a través de la Plataforma para efectos de la gestión del trámite de certificación ante la UPME.</p>
+      <p>En consecuencia, el Usuario declara y garantiza que:</p>
       <ol>
         <li>Toda la información proporcionada en la Plataforma es verdadera, completa, actualizada y verificable.</li>
         <li>Los documentos cargados en la Plataforma son auténticos, legibles y corresponden a la información real del vehículo, del solicitante y del proyecto.</li>
         <li>Cuenta con las autorizaciones necesarias para utilizar y suministrar la información y los documentos cargados en la Plataforma.</li>
         <li>Los datos relacionados con el vehículo corresponden a la información suministrada por el fabricante, concesionario o proveedor.</li>
+        <li>La información tributaria suministrada por el Usuario, incluyendo su régimen tributario, corresponde a su situación real y vigente.</li>
       </ol>
-      <p>El Operador de la Plataforma no será responsable por retrasos, requerimientos de información adicional, rechazo de la solicitud o negación del certificado cuando dichas situaciones se deriven de información incompleta o incorrecta suministrada por el Usuario, documentos ilegibles o incompletos, incumplimiento de los requisitos establecidos por la normativa o por la UPME, o falta de entrega oportuna de información requerida durante el proceso de evaluación.</p>
+      <p>El Usuario reconoce que el Operador de la Plataforma no realiza validaciones técnicas, jurídicas ni regulatorias exhaustivas sobre la veracidad de la información suministrada, y que la evaluación de la información y los documentos corresponde exclusivamente a la UPME.</p>
+      <p>El Operador de la Plataforma tampoco garantiza la procedencia, cuantificación o aprovechamiento efectivo de beneficios tributarios particulares del Usuario, los cuales dependen, entre otros factores, de su régimen tributario, situación fiscal concreta, interpretación normativa aplicable y decisiones de las autoridades competentes.</p>
+      <p>En consecuencia, el Operador de la Plataforma no será responsable por retrasos, requerimientos de información adicional, rechazo de la solicitud o negación del certificado cuando dichas situaciones se deriven de:</p>
+      <ol>
+        <li>Información incompleta o incorrecta suministrada por el Usuario.</li>
+        <li>Documentos ilegibles o incompletos.</li>
+        <li>Incumplimiento de los requisitos establecidos por la normativa aplicable o por la UPME.</li>
+        <li>Falta de entrega oportuna de información requerida durante el proceso de evaluación.</li>
+      </ol>
+      <p>El suministro de información incorrecta o inconsistente en relación con la tecnología del vehículo constituirá una causal de rechazo atribuible al Usuario.</p>
+      <p>El suministro de información falsa o fraudulenta podrá dar lugar al rechazo de la solicitud por parte de la autoridad competente y a las consecuencias legales correspondientes.</p>
     </div>
 
     <div class="tc-section" id="ix">
@@ -451,14 +543,16 @@ import '../styles/index.css';
         <div class="tc-section-num">IX</div>
         <h2 class="tc-section-title">Autorización para la gestión y radicación del trámite</h2>
       </div>
-      <p>Mediante la aceptación de los presentes Términos y Condiciones y el uso de la Plataforma, el Usuario autoriza expresamente al Operador de la Plataforma para gestionar, preparar y radicar en su nombre la solicitud de certificación correspondiente ante la UPME. En virtud de esta autorización, el Operador de la Plataforma podrá:</p>
+      <p>Mediante la aceptación de los presentes Términos y Condiciones y el uso de la Plataforma, el Usuario autoriza expresamente al Operador de la Plataforma para gestionar, preparar y radicar en su nombre la solicitud de certificación correspondiente ante la UPME, cuando ello sea necesario para la tramitación de los incentivos tributarios aplicables a vehículos eléctricos o híbridos.</p>
+      <p>En virtud de esta autorización, el Operador de la Plataforma podrá:</p>
       <ol>
         <li>Utilizar la información y los documentos suministrados por el Usuario.</li>
         <li>Diligenciar formularios, cargar documentos y completar la información requerida en los sistemas oficiales de la UPME.</li>
         <li>Presentar o radicar la solicitud correspondiente.</li>
         <li>Realizar seguimiento al estado del trámite y comunicar al Usuario cualquier requerimiento de información adicional formulado por la UPME.</li>
       </ol>
-      <p>La autorización otorgada se limita exclusivamente a la gestión administrativa y técnica del trámite y no implica la representación del Usuario para otros actos jurídicos distintos del proceso de solicitud del certificado ante la UPME. Dicha autorización permanecerá vigente durante el tiempo necesario para adelantar las actuaciones relacionadas con la solicitud de certificación.</p>
+      <p>La autorización otorgada mediante este artículo se limita exclusivamente a la gestión administrativa y técnica del trámite y no implica la representación del Usuario para otros actos jurídicos distintos del proceso de solicitud del certificado ante la UPME.</p>
+      <p>Dicha autorización permanecerá vigente durante el tiempo necesario para adelantar las actuaciones relacionadas con la solicitud de certificación.</p>
     </div>
 
     <div class="tc-section" id="x">
@@ -467,9 +561,11 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Tiempos del trámite</h2>
       </div>
       <p>La gestión del trámite de certificación ante la UPME se sujetará a los tiempos, etapas y plazos establecidos por la normativa aplicable y por los lineamientos que dicha entidad expida para cada ciclo de recepción de solicitudes.</p>
-      <p>El Usuario reconoce que los términos de evaluación del trámite no dependen exclusivamente del Operador de la Plataforma, sino de la revisión, validación y decisión que adopte la UPME en ejercicio de sus competencias. Una vez radicada la solicitud ante la UPME, la evaluación del trámite podrá realizarse dentro de un plazo aproximado de treinta (30) días hábiles, contado a partir de la radicación completa de la solicitud.</p>
+      <p>El Usuario reconoce que los términos de evaluación del trámite no dependen exclusivamente del Operador de la Plataforma, sino de la revisión, validación y decisión que adopte la UPME en ejercicio de sus competencias.</p>
+      <p>Una vez radicada la solicitud ante la UPME, la evaluación del trámite podrá realizarse dentro de un plazo aproximado de treinta (30) días hábiles, contado a partir de la radicación completa de la solicitud, de conformidad con los plazos establecidos por dicha entidad.</p>
       <p>No obstante, el Usuario reconoce que el término de evaluación podrá suspenderse en aquellos casos en los que la UPME solicite información adicional, aclaraciones o documentos complementarios. En tales casos, el Usuario deberá atender el requerimiento dentro del plazo establecido por la autoridad competente, el cual podrá ser de hasta un (1) mes contado a partir de la comunicación del requerimiento.</p>
-      <p>El Operador de la Plataforma realizará las gestiones razonables para radicar oportunamente la solicitud y dar seguimiento al trámite; no obstante, no garantiza tiempos específicos de respuesta, evaluación, expedición del Certificado UPME o acceso efectivo al incentivo tributario, toda vez que ello depende exclusivamente de la UPME.</p>
+      <p>Una vez atendido el requerimiento por parte del Usuario, el trámite continuará con su proceso de evaluación por parte de la UPME, conforme a los tiempos y procedimientos establecidos por dicha entidad.</p>
+      <p>El Operador de la Plataforma realizará las gestiones razonables para radicar oportunamente la solicitud y dar seguimiento al trámite; no obstante, no garantiza tiempos específicos de respuesta, evaluación, expedición del Certificado UPME o acceso efectivo al incentivo tributario, toda vez que ello depende exclusivamente de la UPME y del cumplimiento de los requisitos aplicables por parte del Usuario.</p>
     </div>
 
     <div class="tc-section" id="xi">
@@ -478,8 +574,11 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Requerimientos de información adicional</h2>
       </div>
       <p>Durante el proceso de evaluación de la solicitud, la UPME podrá solicitar al Usuario información adicional, aclaraciones o documentos complementarios que considere necesarios para verificar el cumplimiento de los requisitos establecidos en la normativa aplicable.</p>
-      <p>En caso de que la UPME formule un requerimiento de información adicional, el Operador de la Plataforma notificará al Usuario a través de los canales de comunicación registrados en la Cuenta de Usuario. El Usuario deberá proporcionar la información requerida dentro de un plazo máximo de quince (15) días calendario, contados a partir de la notificación realizada por el Operador de la Plataforma.</p>
-      <p>En caso de que el Usuario no atienda el requerimiento dentro del plazo establecido o no suministre la información solicitada, el Operador de la Plataforma no será responsable por las consecuencias derivadas de dicha omisión, incluyendo la posible suspensión, archivo, desistimiento o rechazo de la solicitud por parte de la UPME.</p>
+      <p>En caso de que la UPME formule un requerimiento de información adicional, el Operador de la Plataforma notificará al Usuario a través de los canales de comunicación registrados en la Cuenta de Usuario, con el fin de que este suministre la información o los documentos solicitados.</p>
+      <p>El Usuario deberá proporcionar la información requerida dentro de un plazo máximo de quince (15) días calendario, contados a partir de la notificación realizada por el Operador de la Plataforma.</p>
+      <p>El Usuario reconoce que la atención oportuna y adecuada de los requerimientos formulados por la UPME es su responsabilidad, por lo que deberá suministrar la información o documentación solicitada dentro del plazo indicado y en las condiciones exigidas por la autoridad competente.</p>
+      <p>En caso de que el Usuario no atienda el requerimiento dentro del plazo establecido o no suministre la información solicitada, el Operador de la Plataforma no será responsable por las consecuencias derivadas de dicha omisión, incluyendo la posible suspensión, archivo, desistimiento o rechazo de la solicitud por parte de la UPME, conforme a la normativa aplicable.</p>
+      <p>El Operador de la Plataforma podrá brindar apoyo al Usuario para la gestión y carga de la información requerida; no obstante, no será responsable por las consecuencias derivadas del incumplimiento de los plazos o de la entrega incompleta de la información solicitada por la UPME.</p>
     </div>
 
     <div class="tc-section" id="xii">
@@ -487,10 +586,12 @@ import '../styles/index.css';
         <div class="tc-section-num">XII</div>
         <h2 class="tc-section-title">Rechazo de la solicitud</h2>
       </div>
-      <p>El Operador de la Plataforma no garantiza la aprobación de la solicitud ni la expedición del Certificado UPME, toda vez que el resultado del trámite dependerá del cumplimiento de los requisitos establecidos por la normativa vigente y de la evaluación realizada por la UPME. En caso de que la solicitud sea rechazada por la UPME, se podrán presentar los siguientes escenarios:</p>
+      <p>El Usuario reconoce que la evaluación, validación y decisión sobre la solicitud de certificación corresponden exclusivamente a la Unidad de Planeación Minero Energética (UPME), entidad competente para determinar el cumplimiento de los requisitos establecidos en la normativa aplicable y para expedir, modificar o negar el Certificado UPME.</p>
+      <p>En consecuencia, el Operador de la Plataforma no garantiza la aprobación de la solicitud ni la expedición del Certificado UPME, toda vez que el resultado del trámite dependerá del cumplimiento de los requisitos establecidos por la normativa vigente y de la evaluación realizada por la UPME.</p>
+      <p>En caso de que la solicitud sea rechazada por la UPME, se podrán presentar los siguientes escenarios:</p>
       <ol>
-        <li><strong>Rechazo derivado de errores atribuibles al Operador de la Plataforma:</strong> Cuando el rechazo de la solicitud se derive de errores u omisiones atribuibles al Operador de la Plataforma en la preparación o radicación del trámite, el Operador de la Plataforma volverá a presentar la solicitud correspondiente sin generar costos adicionales para el Usuario, siempre que se mantengan vigentes los requisitos establecidos por la normativa aplicable y por la UPME. En caso de que la solicitud sea rechazada por segunda vez por causas imputables al Operador de la Plataforma, este reconocerá la devolución del cinco por ciento (5%) del valor pagado.</li>
-        <li><strong>Rechazo derivado de información o documentación atribuible al Usuario:</strong> Cuando el rechazo de la solicitud se derive de información incorrecta, incompleta o inconsistente suministrada por el Usuario, o de documentos que no cumplan con los requisitos establecidos por la normativa aplicable o por la UPME, el Usuario podrá solicitar la presentación de una nueva solicitud una vez haya subsanado las observaciones formuladas por la autoridad competente. En estos casos, la gestión de una nueva solicitud podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite.</li>
+        <li><strong>Rechazo derivado de errores atribuibles al Operador de la Plataforma:</strong> Cuando el rechazo de la solicitud se derive de errores u omisiones atribuibles al Operador de la Plataforma en la preparación o radicación del trámite, el Operador de la Plataforma volverá a presentar la solicitud correspondiente sin generar costos adicionales para el Usuario, siempre que se mantengan vigentes los requisitos establecidos por la normativa aplicable y por la UPME. En caso de que la ventana de tiempo para presentar la solicitud haya finalizado, la solicitud será presentada nuevamente una vez se abra el ciclo siguiente. En caso de que la solicitud sea rechazada por segunda vez por causas imputables al Operador de la Plataforma, este reconocerá la devolución del cinco por ciento (5%) del valor pagado.</li>
+        <li><strong>Rechazo derivado de información o documentación atribuible al Usuario:</strong> Cuando el rechazo de la solicitud se derive de información incorrecta, incompleta o inconsistente suministrada por el Usuario, o de documentos que no cumplan con los requisitos establecidos por la normativa aplicable o por la UPME, el Usuario podrá solicitar la presentación de una nueva solicitud una vez haya subsanado las observaciones formuladas por la autoridad competente. En estos casos, la gestión de una nueva solicitud podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite, la cual será informada previamente al Usuario por parte del Operador de la Plataforma. El Operador de la Plataforma podrá brindar apoyo al Usuario en la subsanación de las observaciones formuladas por la UPME; no obstante, no será responsable del rechazo de la solicitud cuando este se derive de información o documentación suministrada por el Usuario o del incumplimiento de los requisitos establecidos por la normativa aplicable.</li>
       </ol>
     </div>
 
@@ -499,18 +600,32 @@ import '../styles/index.css';
         <div class="tc-section-num">XIII</div>
         <h2 class="tc-section-title">Pagos del servicio</h2>
       </div>
-      <p>El acceso a los servicios ofrecidos a través de la Plataforma estará sujeto al pago de una tarifa por la gestión del trámite de certificación ante la UPME. La tarifa del servicio corresponderá al <strong>dos punto cinco por ciento (2.5%)</strong> más el Impuesto sobre las Ventas (IVA), o cualquier otro impuesto aplicable al momento del pago.</p>
+      <p>El acceso a los servicios ofrecidos a través de la Plataforma estará sujeto al pago de una tarifa por la gestión del trámite de certificación ante la UPME.</p>
+      <p>La tarifa del servicio prestado por el Operador de la Plataforma corresponderá a un porcentaje del valor de la inversión asociada al vehículo o al proyecto objeto de la solicitud de certificación, el cual se aplicará de manera uniforme, independientemente del valor del vehículo o del monto total de la inversión.</p>
+      <p>La tarifa del servicio corresponderá al <strong>dos punto cinco por ciento (2.5%)</strong> más el Impuesto sobre las Ventas (IVA), o cualquier otro impuesto aplicable al momento del pago.</p>
+      <ul>
+        <li>El Usuario reconoce y acepta que el valor de la tarifa se calculará con base en el valor de la inversión reportado en la solicitud presentada a través de la Plataforma.</li>
+        <li>El Usuario reconoce que la tarifa podrá estar sujeta a impuestos, tasas o contribuciones aplicables conforme a la normativa vigente al momento del pago.</li>
+        <li>El pago del servicio se realizará en un único pago, a través de los medios de pago habilitados en la Plataforma o de los mecanismos de pago informados por el Operador de la Plataforma.</li>
+        <li>El pago realizado por el Usuario corresponde exclusivamente al servicio de gestión administrativa y tecnológica del trámite, incluyendo la recopilación, organización, revisión preliminar de la información, la preparación de la solicitud y la gestión de la radicación ante la UPME.</li>
+      </ul>
       <div class="tc-highlight">
         <p>La tarifa del servicio <strong>incluye el valor del pago que debe realizarse ante la UPME</strong> para la evaluación de la solicitud de certificación, el cual será gestionado por el Operador de la Plataforma como parte del trámite.</p>
       </div>
-      <ol>
-        <li>El valor de la tarifa se calculará con base en el valor de la inversión reportado en la solicitud presentada a través de la Plataforma.</li>
-        <li>La tarifa podrá estar sujeta a impuestos, tasas o contribuciones aplicables conforme a la normativa vigente al momento del pago.</li>
-        <li>El pago del servicio se realizará en un único pago, a través de los medios de pago habilitados en la Plataforma.</li>
-        <li>El pago realizado por el Usuario corresponde exclusivamente al servicio de gestión administrativa y tecnológica del trámite, incluyendo la recopilación, organización, revisión preliminar de la información, la preparación de la solicitud y la gestión de la radicación ante la UPME.</li>
-      </ol>
-      <p>El Usuario reconoce que el pago correspondiente a la evaluación del trámite por parte de la UPME no es reembolsable por dicha entidad, incluso en aquellos casos en que la solicitud sea rechazada o el Certificado UPME no sea expedido, salvo la política de reembolso establecida en los presentes términos y condiciones.</p>
+      <p>El Usuario reconoce que dicho pago corresponde a la evaluación del trámite por parte de la UPME y que dicho valor no es reembolsable por dicha entidad, incluso en aquellos casos en que la solicitud sea rechazada o el Certificado UPME no sea expedido, salvo la política de reembolso establecida en los presentes términos y condiciones.</p>
       <p>La tarifa del servicio no incluye otros gastos adicionales que puedan surgir durante el proceso del trámite, tales como costos asociados a la obtención de documentos, certificaciones técnicas, traducciones, autenticaciones, legalizaciones u otros requisitos exigidos por la normativa aplicable o por la UPME, los cuales deberán ser asumidos directamente por el Usuario.</p>
+      <p>En caso de que el Usuario utilice un Código Win Win válido conforme al Reglamento del Programa de Referidos CertiVeh Win Win (Anexo A de los presentes Términos y Condiciones), el descuento correspondiente se aplicará automáticamente sobre la tarifa del servicio al momento del pago, de acuerdo con las condiciones establecidas en dicho Reglamento.</p>
+    </div>
+
+    <div class="tc-section" id="xiii-a">
+      <div class="tc-section-header">
+        <div class="tc-section-num" style="font-size:10px;">XIII-A</div>
+        <h2 class="tc-section-title">Programa de Referidos CertiVeh Win Win</h2>
+      </div>
+      <p>El Operador de la Plataforma podrá habilitar, de manera voluntaria y discrecional, el programa de referidos denominado CertiVeh Win Win (en adelante, el "Programa"), a través del cual los Usuarios activos podrán referir a nuevos usuarios a la Plataforma y obtener una comisión económica por cada referido que contrate efectivamente el servicio, mientras que el nuevo usuario referido accederá a un descuento sobre la tarifa del primer trámite.</p>
+      <p>La participación en el Programa es completamente voluntaria y no constituye un requisito para el acceso ni para el uso de los demás servicios de la Plataforma. El Programa está regulado en su totalidad por el Anexo A — Reglamento del Programa de Referidos CertiVeh Win Win (en adelante, el "Reglamento"), el cual forma parte integral de los presentes Términos y Condiciones y se entiende incorporado a los mismos por referencia expresa en el presente artículo.</p>
+      <p>En todo lo relativo al Programa —incluyendo las condiciones de elegibilidad del Referidor y del Referido, el funcionamiento del Código Win Win, los valores de comisión y descuento, el procedimiento de retiro de comisiones, las restricciones aplicables y las causales de exclusión— se aplicará lo dispuesto en dicho Reglamento.</p>
+      <p>El Operador de la Plataforma podrá modificar, suspender o dar por terminado el Programa en cualquier momento, mediante actualización del Reglamento y notificación a los Usuarios a través de los canales habilitados en la Plataforma, sin que ello implique modificación de los presentes Términos y Condiciones ni afecte las comisiones ya causadas y acreditadas con anterioridad a dicho cambio.</p>
     </div>
 
     <div class="tc-section" id="xiv">
@@ -518,12 +633,15 @@ import '../styles/index.css';
         <div class="tc-section-num">XIV</div>
         <h2 class="tc-section-title">Política de reembolsos</h2>
       </div>
-      <p>Los pagos realizados por el Usuario a través de la Plataforma corresponden a la prestación del servicio de gestión administrativa y tecnológica del trámite de certificación ante la UPME, así como al pago de la tarifa correspondiente a la evaluación de la solicitud por parte de dicha entidad. La devolución de pagos por parte del Operador de la Plataforma únicamente procederá en los siguientes casos:</p>
+      <p>Los pagos realizados por el Usuario a través de la Plataforma corresponden a la prestación del servicio de gestión administrativa y tecnológica del trámite de certificación ante la UPME, así como al pago de la tarifa correspondiente a la evaluación de la solicitud por parte de dicha entidad.</p>
+      <p>El Usuario reconoce y acepta que el valor pagado a la UPME por concepto de evaluación de la solicitud no es reembolsable, incluso en aquellos casos en que la solicitud sea rechazada o el Certificado UPME no sea expedido, de conformidad con las reglas establecidas por dicha autoridad.</p>
+      <p>En consecuencia, la devolución de pagos por parte del Operador de la Plataforma únicamente procederá en los siguientes casos:</p>
       <ol>
-        <li><strong>Rechazo atribuible al Operador de la Plataforma:</strong> En caso de que la solicitud presentada ante la UPME sea rechazada como consecuencia de errores, omisiones o fallas imputables al Operador de la Plataforma en la gestión del trámite, este se compromete a subsanar las observaciones y presentar nuevamente la solicitud sin generar cobros adicionales al Usuario. En caso de que la solicitud sea rechazada por segunda vez por causas imputables al Operador de la Plataforma, este reconocerá la devolución del cinco por ciento (5%) del valor pagado.</li>
-        <li><strong>Rechazo atribuible al Usuario:</strong> En caso de que la solicitud sea rechazada por causas atribuibles al Usuario, no habrá lugar a la devolución de los valores pagados. Si el Usuario desea presentar nuevamente la solicitud una vez subsanadas las observaciones, deberá pagar la tarifa correspondiente a un nuevo trámite.</li>
+        <li><strong>Rechazo atribuible al Operador de la Plataforma:</strong> En caso de que la solicitud presentada ante la UPME sea rechazada como consecuencia de errores, omisiones o fallas imputables al Operador de la Plataforma en la gestión del trámite, este se compromete a subsanar las observaciones y presentar nuevamente la solicitud sin generar cobros adicionales al Usuario, siempre que el rechazo no esté relacionado con la información o documentación suministrada por el Usuario. En caso de que la solicitud sea rechazada por segunda vez por causas imputables al Operador de la Plataforma, este reconocerá la devolución del cinco por ciento (5%) del valor pagado.</li>
+        <li><strong>Rechazo atribuible al Usuario:</strong> En caso de que la solicitud sea rechazada por causas atribuibles al Usuario, incluyendo, pero sin limitarse a, la presentación de información incompleta, incorrecta o inconsistente, o de documentación que no cumpla con los requisitos exigidos por la normativa aplicable o por la UPME, no habrá lugar a la devolución de los valores pagados. En estos casos, si el Usuario desea presentar nuevamente la solicitud una vez subsanadas las observaciones formuladas por la UPME, deberá pagar la tarifa correspondiente a un nuevo trámite, conforme a las condiciones económicas vigentes al momento de la nueva solicitud.</li>
         <li><strong>Desistimiento del Usuario:</strong> En caso de que el Usuario decida desistir voluntariamente del trámite una vez iniciado el proceso de gestión por parte del Operador de la Plataforma, no habrá lugar a devolución del valor pagado, teniendo en cuenta que dicho pago corresponde a actividades administrativas, tecnológicas y de gestión ya realizadas. En caso de desistimiento posterior a cinco (5) días calendario, se podrá reconocer la devolución del cinco por ciento (5%) del valor pagado.</li>
       </ol>
+      <p>En cualquier caso, el Operador de la Plataforma no será responsable por decisiones adoptadas por la UPME en relación con la evaluación, aprobación o rechazo de las solicitudes presentadas.</p>
     </div>
 
     <div class="tc-section" id="xv">
@@ -532,9 +650,10 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Derecho de retracto</h2>
       </div>
       <p>El Usuario reconoce que el servicio prestado por el Operador de la Plataforma corresponde a un servicio de intermediación tecnológica y de gestión administrativa que se entiende iniciado desde el momento en que el Usuario confirma su solicitud a través de la Plataforma, realiza el pago correspondiente y completa el registro de su Cuenta de Usuario con la información requerida para la gestión del trámite.</p>
-      <p>En consecuencia, el Usuario acepta que, de conformidad con la normativa aplicable, el derecho de retracto no procederá una vez se haya iniciado la ejecución del servicio, lo cual ocurrirá desde la confirmación de la solicitud, el pago en la Plataforma y la finalización del proceso de registro de la cuenta por parte del Usuario.</p>
+      <p>En consecuencia, el Usuario acepta que, de conformidad con la normativa aplicable, el derecho de retracto no procederá una vez se haya iniciado la ejecución del servicio, lo cual ocurrirá desde la confirmación de la solicitud, el pago en la Plataforma y la finalización del proceso de registro de la cuenta por parte del Usuario. A partir de ese momento, se entenderá que el Operador de la Plataforma ha comenzado la ejecución de actividades administrativas, tecnológicas y operativas orientadas a la gestión del trámite.</p>
       <p>Sin perjuicio de lo anterior, cuando el Usuario manifieste su intención de ejercer el derecho de retracto antes de la confirmación de la solicitud, del pago en la Plataforma y de la finalización del registro de su Cuenta de Usuario, podrá solicitar la devolución de los valores pagados, sin incluir aquellos costos transaccionales, administrativos o no reembolsables que ya se hubieren causado.</p>
-      <p>En caso de desistimiento posterior a cinco (5) días calendario, se podrá reconocer la devolución del cinco por ciento (5%) del valor pagado. En todo caso, el Usuario reconoce que no habrá lugar a devolución de los valores correspondientes al pago realizado ante la UPME por concepto de evaluación de la solicitud, ni respecto de actividades que ya hubieren sido ejecutadas por el Operador de la Plataforma.</p>
+      <p>En caso de desistimiento posterior a cinco (5) días calendario, se podrá reconocer la devolución del cinco por ciento (5%) del valor pagado.</p>
+      <p>En todo caso, el Usuario reconoce que no habrá lugar a devolución de los valores correspondientes al pago realizado ante la UPME por concepto de evaluación de la solicitud, ni respecto de actividades que ya hubieren sido ejecutadas por el Operador de la Plataforma en desarrollo del servicio.</p>
     </div>
 
     <div class="tc-section" id="xvi">
@@ -542,15 +661,19 @@ import '../styles/index.css';
         <div class="tc-section-num">XVI</div>
         <h2 class="tc-section-title">Limitación de responsabilidad</h2>
       </div>
-      <p>El Operador de la Plataforma presta un servicio de intermediación tecnológica y de gestión administrativa que facilita al Usuario el registro, la organización y la radicación de la información requerida para la solicitud del Certificado UPME. En ningún caso el Operador de la Plataforma actúa como autoridad pública, entidad certificadora o entidad competente para aprobar, evaluar o decidir sobre las solicitudes de certificación.</p>
+      <p>El Operador de la Plataforma presta un servicio de intermediación tecnológica y de gestión administrativa que facilita al Usuario el registro, la organización y la radicación de la información requerida para la solicitud del Certificado UPME, conforme a la normativa vigente aplicable a los incentivos tributarios asociados a vehículos eléctricos o híbridos.</p>
+      <p>En ningún caso el Operador de la Plataforma actúa como autoridad pública, entidad certificadora o entidad competente para aprobar, evaluar o decidir sobre las solicitudes de certificación.</p>
+      <p>El Usuario reconoce y acepta que la UPME es la única entidad competente para evaluar las solicitudes y decidir sobre la expedición o no del Certificado UPME, de conformidad con los criterios técnicos y normativos establecidos por dicha entidad.</p>
       <p>En consecuencia, el Operador de la Plataforma no garantiza la aprobación de la solicitud ni la expedición del Certificado UPME, ni será responsable de las decisiones adoptadas por la UPME, incluyendo la solicitud de información adicional, la suspensión de términos, la formulación de observaciones o el rechazo de la solicitud.</p>
-      <p>El Operador de la Plataforma tampoco será responsable por retrasos, demoras o suspensiones del trámite que se originen en actuaciones de la UPME, en requerimientos de información adicional, en cambios normativos o en circunstancias ajenas al control del Operador de la Plataforma, ni por perjuicios que puedan derivarse de:</p>
-      <ol>
+      <p>El Operador de la Plataforma tampoco será responsable por retrasos, demoras o suspensiones del trámite que se originen en actuaciones de la UPME, en requerimientos de información adicional, en cambios normativos o en circunstancias ajenas al control del Operador de la Plataforma.</p>
+      <p>Igualmente, el Operador de la Plataforma no será responsable por los perjuicios que puedan derivarse de:</p>
+      <ul>
         <li>La presentación de información incorrecta, incompleta o inconsistente por parte del Usuario.</li>
         <li>La entrega de documentos falsos, alterados o que no cumplan con los requisitos técnicos o normativos aplicables.</li>
         <li>El incumplimiento, por parte del Usuario, de los requisitos establecidos por la normativa vigente o por la UPME para la obtención del Certificado UPME.</li>
         <li>Cambios en la normativa aplicable, en los procedimientos establecidos por la UPME o en los criterios de evaluación utilizados por dicha entidad.</li>
-      </ol>
+      </ul>
+      <p>El Usuario reconoce que el servicio prestado por el Operador de la Plataforma corresponde exclusivamente a la gestión del trámite, sin que ello implique garantía alguna respecto del resultado final del proceso ante la UPME.</p>
     </div>
 
     <div class="tc-section" id="xvii">
@@ -558,14 +681,22 @@ import '../styles/index.css';
         <div class="tc-section-num">XVII</div>
         <h2 class="tc-section-title">Entrega del Certificado UPME y prohibición de elusión del servicio</h2>
       </div>
-      <p>El Operador de la Plataforma gestionará ante la UPME la radicación y el seguimiento de la solicitud de certificación presentada por el Usuario. Una vez la UPME expida el Certificado UPME, el Operador de la Plataforma informará al Usuario sobre la disponibilidad del certificado y procederá a su entrega una vez se haya verificado el pago único del servicio.</p>
-      <p>El Usuario se obliga a no realizar actuaciones destinadas a eludir el pago del servicio, incluyendo, pero sin limitarse a:</p>
-      <ol>
+      <p>El Operador de la Plataforma gestionará ante la UPME la radicación y el seguimiento de la solicitud de certificación presentada por el Usuario, conforme al procedimiento establecido por dicha entidad.</p>
+      <p>Una vez la UPME expida el Certificado UPME, el Operador de la Plataforma informará al Usuario sobre la disponibilidad del certificado y procederá a su entrega una vez se haya verificado el pago único del servicio, de conformidad con lo establecido en el artículo XIII de los presentes Términos y Condiciones.</p>
+      <p>El Usuario reconoce y acepta que el servicio prestado por el Operador de la Plataforma comprende la gestión integral del trámite, incluyendo la preparación, organización, radicación y seguimiento de la solicitud ante la UPME, por lo que la expedición del Certificado UPME constituye el resultado de dicha gestión.</p>
+      <p>En consecuencia, el Usuario se obliga a no realizar actuaciones destinadas a eludir el pago del servicio, incluyendo, pero sin limitarse a:</p>
+      <ul>
         <li>Solicitar directamente a la UPME el envío del Certificado UPME cuando el trámite haya sido gestionado a través de la Plataforma.</li>
         <li>Utilizar el número de radicado o la información del trámite para obtener el certificado directamente ante la UPME sin haber realizado el pago único correspondiente.</li>
         <li>Intentar acceder al Certificado UPME por medios distintos de los establecidos por el Operador de la Plataforma, con el fin de evitar el pago del servicio.</li>
-      </ol>
-      <p>Cualquier actuación orientada a evadir el pago del servicio prestado facultará al Operador de la Plataforma para exigir el pago inmediato del valor pendiente del servicio, suspender el acceso del Usuario a la Plataforma e iniciar las acciones legales correspondientes. El Usuario reconoce que la obligación de pago del servicio subsiste aun en el evento en que obtenga el Certificado UPME por una vía distinta, siempre que este haya sido resultado de la gestión adelantada por el Operador de la Plataforma.</p>
+      </ul>
+      <p>El Usuario reconoce que cualquier actuación orientada a evadir el pago del servicio prestado por el Operador de la Plataforma constituirá un incumplimiento de los presentes Términos y Condiciones, lo cual facultará al Operador de la Plataforma para:</p>
+      <ul>
+        <li>Exigir el pago inmediato del valor pendiente del servicio.</li>
+        <li>Suspender el acceso del Usuario a la Plataforma.</li>
+        <li>Iniciar las acciones legales correspondientes para el cobro del servicio prestado.</li>
+      </ul>
+      <p>El Usuario reconoce que la obligación de pago del servicio subsiste aun en el evento en que obtenga el Certificado UPME por una vía distinta, siempre que este haya sido resultado de la gestión adelantada por el Operador de la Plataforma.</p>
     </div>
 
     <div class="tc-section" id="xviii">
@@ -573,14 +704,23 @@ import '../styles/index.css';
         <div class="tc-section-num">XVIII</div>
         <h2 class="tc-section-title">Seguridad y prevención de fraude</h2>
       </div>
-      <p>El Operador de la Plataforma adopta medidas razonables de carácter tecnológico, administrativo y organizacional orientadas a proteger la seguridad de la Plataforma, así como la integridad de la información registrada por los Usuarios. El Usuario se compromete a utilizar la Plataforma de manera diligente, responsable y conforme a la normativa aplicable, absteniéndose de:</p>
-      <ol>
-        <li>Suministrar información falsa, inexacta o inconsistente.</li>
-        <li>Cargar documentos falsificados, alterados o que no correspondan al titular de la solicitud.</li>
-        <li>Realizar cualquier conducta que implique suplantación de identidad, falsificación documental o uso indebido de la Plataforma.</li>
-        <li>Usar la Plataforma para fines distintos a los establecidos en los presentes Términos y Condiciones.</li>
-      </ol>
-      <p>El Operador de la Plataforma podrá suspender temporal o definitivamente el acceso del Usuario a la Plataforma cuando existan indicios razonables de las conductas anteriores y, cuando corresponda, poner la situación en conocimiento de las autoridades competentes o de la UPME.</p>
+      <p>El Operador de la Plataforma adopta medidas razonables de carácter tecnológico, administrativo y organizacional orientadas a proteger la seguridad de la Plataforma, así como la integridad de la información registrada por los Usuarios.</p>
+      <p>El Usuario se compromete a utilizar la Plataforma de manera diligente, responsable y conforme a la normativa aplicable, absteniéndose de realizar cualquier actividad que pueda afectar la seguridad del sistema o el correcto funcionamiento del servicio.</p>
+      <p>En particular, el Usuario se obliga a:</p>
+      <ul>
+        <li>Suministrar información veraz, completa y actualizada en el registro y en la solicitud del trámite.</li>
+        <li>Cargar únicamente documentos auténticos y que correspondan a la información del vehículo o proyecto objeto de la solicitud.</li>
+        <li>Abstenerse de realizar cualquier conducta que implique suplantación de identidad, falsificación documental o uso indebido de la Plataforma.</li>
+      </ul>
+      <p>El Operador de la Plataforma podrá suspender temporal o definitivamente el acceso del Usuario a la Plataforma cuando existan indicios razonables de:</p>
+      <ul>
+        <li>Presentación de información falsa, inexacta o inconsistente.</li>
+        <li>Uso de documentos falsificados, alterados o que no correspondan al titular de la solicitud.</li>
+        <li>Intentos de suplantación de identidad o utilización indebida de cuentas de terceros.</li>
+        <li>Uso de la Plataforma para fines distintos a los establecidos en los presentes Términos y Condiciones.</li>
+      </ul>
+      <p>En caso de identificarse posibles conductas fraudulentas, el Operador de la Plataforma podrá abstenerse de continuar con la gestión del trámite y, cuando corresponda, poner la situación en conocimiento de las autoridades competentes o de la UPME, sin que ello genere responsabilidad alguna para el Operador de la Plataforma.</p>
+      <p>El Usuario reconoce que cualquier intento de fraude, falsificación documental o suplantación podrá generar la cancelación inmediata del trámite, la suspensión del acceso a la Plataforma y las acciones legales correspondientes conforme a la legislación vigente.</p>
     </div>
 
     <div class="tc-section" id="xix">
@@ -589,13 +729,15 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Conservación de datos</h2>
       </div>
       <p>El Operador de la Plataforma conservará la información y los datos personales suministrados por el Usuario durante el tiempo necesario para cumplir con las finalidades del servicio prestado a través de la Plataforma, incluyendo la gestión del trámite de certificación ante la UPME, el seguimiento del proceso y la atención de eventuales requerimientos relacionados con la solicitud.</p>
-      <p>La información registrada en la Plataforma podrá ser conservada por el Operador de la Plataforma por un período mínimo de <strong>cinco (5) años</strong> contados a partir de la finalización del trámite o de la expedición del Certificado UPME, con el fin de:</p>
-      <ol>
+      <p>Los datos serán conservados por el tiempo necesario para cumplir las finalidades del tratamiento, así como para el cumplimiento de obligaciones legales, o hasta que el Usuario solicite su supresión, salvo que exista un deber legal o contractual que obligue a su conservación.</p>
+      <p>En todo caso, la información registrada en la Plataforma podrá ser conservada por el Operador de la Plataforma por un período mínimo de <strong>cinco (5) años</strong> contados a partir de la finalización del trámite o de la expedición del Certificado UPME, con el fin de:</p>
+      <ul>
         <li>Atender solicitudes, consultas o reclamaciones presentadas por el Usuario.</li>
         <li>Dar cumplimiento a obligaciones legales, regulatorias o contractuales aplicables.</li>
         <li>Atender requerimientos de autoridades administrativas o judiciales competentes.</li>
         <li>Mantener registros asociados al servicio prestado a través de la Plataforma.</li>
-      </ol>
+      </ul>
+      <p>Una vez cumplido el período de conservación señalado, el Operador de la Plataforma podrá proceder a la eliminación, anonimización o bloqueo de la información, conforme a las políticas internas de tratamiento de datos y a la normativa vigente en materia de protección de datos personales.</p>
       <p>El tratamiento, almacenamiento y conservación de los datos personales del Usuario se realizará en cumplimiento de lo dispuesto en la Ley 1581 de 2012, el Decreto 1377 de 2013, el Decreto 1074 de 2015 y demás normas que los modifiquen, sustituyan o complementen.</p>
     </div>
 
@@ -605,13 +747,16 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Propiedad intelectual</h2>
       </div>
       <p>La Plataforma, incluyendo su software, arquitectura tecnológica, interfaces, bases de datos, diseños, contenidos, textos, gráficos, logotipos, marcas, manuales, metodologías y demás elementos que la componen, es propiedad del Operador de la Plataforma o de sus respectivos titulares, y se encuentra protegida por las normas nacionales e internacionales sobre propiedad intelectual e industrial.</p>
-      <p>El acceso y uso de la Plataforma por parte del Usuario no implican, en ningún caso, la cesión, transferencia o autorización de uso de los derechos de propiedad intelectual del Operador de la Plataforma. El Usuario se obliga a abstenerse de:</p>
-      <ol>
+      <p>El acceso y uso de la Plataforma por parte del Usuario no implican, en ningún caso, la cesión, transferencia o autorización de uso de los derechos de propiedad intelectual del Operador de la Plataforma, salvo en lo estrictamente necesario para la utilización del servicio conforme a los presentes Términos y Condiciones.</p>
+      <p>El Usuario se obliga a abstenerse de:</p>
+      <ul>
         <li>Copiar, reproducir, modificar, adaptar, distribuir o explotar, de cualquier forma, el software o los contenidos de la Plataforma sin autorización previa y expresa del Operador de la Plataforma.</li>
         <li>Desarrollar o utilizar herramientas destinadas a extraer, recopilar o replicar la información contenida en la Plataforma.</li>
         <li>Realizar ingeniería inversa, descompilar o cualquier otro intento de acceder al código fuente del software de la Plataforma.</li>
         <li>Utilizar las marcas, nombres comerciales, logotipos o cualquier otro signo distintivo asociado a la Plataforma sin autorización previa del Operador de la Plataforma.</li>
-      </ol>
+      </ul>
+      <p>El Usuario reconoce que cualquier uso no autorizado de los elementos protegidos por derechos de propiedad intelectual podrá constituir una infracción a la normativa vigente y dará lugar a las acciones legales correspondientes por parte del Operador de la Plataforma.</p>
+      <p>El uso de la Plataforma se limita exclusivamente a los fines establecidos en los presentes Términos y Condiciones, relacionados con la gestión del trámite de certificación ante la UPME.</p>
     </div>
 
     <div class="tc-section" id="xxi">
@@ -620,8 +765,16 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Prohibición de suplantación de identidad</h2>
       </div>
       <p>El Usuario se compromete a registrarse en la Plataforma utilizando únicamente su propia identidad o, en el caso de personas jurídicas, actuando con las facultades legales correspondientes para representar a la entidad titular del vehículo o del proyecto objeto de la solicitud.</p>
-      <p>El Usuario declara y garantiza que cuenta con la autorización necesaria para suministrar la información y la documentación registradas en la Plataforma, incluidos los datos personales y los documentos asociados al titular del vehículo o del proyecto para el cual se solicita el Certificado UPME. En consecuencia, el Usuario se obliga a abstenerse de suplantar la identidad de otra persona natural o jurídica, registrar información o documentos con datos de terceros sin la debida autorización, o utilizar la Plataforma en nombre de terceros sin contar con la representación legal o autorización correspondiente.</p>
+      <p>El Usuario declara y garantiza que cuenta con la autorización necesaria para suministrar la información y la documentación registradas en la Plataforma, incluidos los datos personales y los documentos asociados al titular del vehículo o del proyecto para el cual se solicita el Certificado UPME.</p>
+      <p>En consecuencia, el Usuario se obliga a abstenerse de:</p>
+      <ul>
+        <li>Suplantar la identidad de otra persona natural o jurídica.</li>
+        <li>Registrar información o documentos con datos de terceros sin la debida autorización.</li>
+        <li>Utilizar la Plataforma en nombre de terceros sin contar con la representación legal o autorización correspondiente.</li>
+      </ul>
+      <p>El Operador de la Plataforma no será responsable del uso indebido de la identidad de terceros por parte del Usuario, ni de la información o documentación suministrada sin autorización del titular correspondiente.</p>
       <p>En caso de identificarse indicios de suplantación de identidad, uso indebido de datos personales o representación no autorizada, el Operador de la Plataforma podrá suspender inmediatamente el acceso del Usuario a la Plataforma, cancelar el trámite en curso y, cuando corresponda, poner la situación en conocimiento de las autoridades competentes o de la UPME.</p>
+      <p>El Usuario reconoce que la suplantación de identidad y el uso indebido de datos personales pueden constituir infracciones a la legislación vigente y dar lugar a las acciones legales correspondientes.</p>
     </div>
 
     <div class="tc-section" id="xxii">
@@ -629,7 +782,8 @@ import '../styles/index.css';
         <div class="tc-section-num">XXII</div>
         <h2 class="tc-section-title">Comunicaciones electrónicas</h2>
       </div>
-      <p>El Usuario acepta que todas las comunicaciones, notificaciones, requerimientos de información, avisos y demás mensajes relacionados con el uso de la Plataforma y con la gestión del trámite de certificación ante la UPME podrán realizarse por medios electrónicos, incluyendo el correo electrónico registrado en la Cuenta de Usuario, mensajes dentro de la Plataforma u otros canales digitales habilitados.</p>
+      <p>El Usuario acepta que todas las comunicaciones, notificaciones, requerimientos de información, avisos y demás mensajes relacionados con el uso de la Plataforma y con la gestión del trámite de certificación ante la UPME podrán realizarse por medios electrónicos.</p>
+      <p>En particular, el Usuario autoriza al Operador de la Plataforma para enviar comunicaciones a través del correo electrónico registrado en la Cuenta de Usuario, mensajes dentro de la Plataforma u otros canales digitales habilitados.</p>
       <p>El Usuario reconoce que dichas comunicaciones tendrán plena validez jurídica y se considerarán recibidas en el momento en que sean enviadas al canal registrado, siendo responsabilidad del Usuario mantener actualizada su información de contacto y revisar periódicamente los medios de comunicación asociados a su cuenta.</p>
     </div>
 
@@ -639,14 +793,14 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Suspensión y cancelación de la cuenta</h2>
       </div>
       <p>El Operador de la Plataforma podrá suspender temporal o definitivamente el acceso del Usuario a la Plataforma, cancelar la Cuenta de Usuario o abstenerse de continuar con la prestación del servicio, cuando se configure cualquiera de las siguientes situaciones:</p>
-      <ol>
+      <ul>
         <li>Incumplimiento de los presentes Términos y Condiciones.</li>
         <li>Suministro de información falsa, inexacta, incompleta o inconsistente.</li>
         <li>Uso de documentos falsificados, alterados o que no correspondan al titular de la solicitud.</li>
         <li>Incumplimiento de los requisitos establecidos por la normativa aplicable o por la UPME.</li>
         <li>Uso indebido de la Plataforma o utilización de la misma para fines distintos a los previstos en estos Términos y Condiciones.</li>
         <li>Intentos de fraude, suplantación de identidad o afectación de la seguridad de la Plataforma.</li>
-      </ol>
+      </ul>
       <p>La suspensión o cancelación de la cuenta no generará derecho a indemnización alguna a favor del Usuario, sin perjuicio de las acciones legales a que haya lugar.</p>
     </div>
 
@@ -655,7 +809,8 @@ import '../styles/index.css';
         <div class="tc-section-num">XXIV</div>
         <h2 class="tc-section-title">Integridad del acuerdo</h2>
       </div>
-      <p>Los presentes Términos y Condiciones constituyen el acuerdo total entre el Usuario y el Operador de la Plataforma en relación con el acceso y uso de la Plataforma y la prestación de los servicios ofrecidos a través de la misma. En consecuencia, sustituyen cualquier acuerdo, comunicación, negociación o entendimiento previo, verbal o escrito, relacionado con el objeto de estos Términos y Condiciones.</p>
+      <p>Los presentes Términos y Condiciones constituyen el acuerdo total entre el Usuario y el Operador de la Plataforma en relación con el acceso y uso de la Plataforma y la prestación de los servicios ofrecidos a través de la misma.</p>
+      <p>En consecuencia, sustituyen cualquier acuerdo, comunicación, negociación o entendimiento previo, verbal o escrito, relacionado con el objeto de estos Términos y Condiciones.</p>
     </div>
 
     <div class="tc-section" id="xxv">
@@ -672,8 +827,10 @@ import '../styles/index.css';
         <h2 class="tc-section-title">Modificación de los Términos y Condiciones</h2>
       </div>
       <p>El Operador de la Plataforma se reserva el derecho de modificar, actualizar o ajustar en cualquier momento los presentes Términos y Condiciones, cuando ello resulte necesario para mejorar el funcionamiento de la Plataforma, adaptar el servicio a cambios normativos o regulatorios, o actualizar las condiciones operativas y comerciales del servicio.</p>
-      <p>En caso de realizarse modificaciones sustanciales, el Operador de la Plataforma informará a los Usuarios a través de la Plataforma, mediante correo electrónico registrado por el Usuario o por cualquier otro medio de comunicación habilitado. Las modificaciones entrarán en vigencia a partir de la fecha de su publicación en la Plataforma, salvo que se indique expresamente una fecha distinta.</p>
-      <p>El uso continuo de la Plataforma por parte del Usuario después de la publicación de las modificaciones se entenderá como aceptación expresa de los nuevos Términos y Condiciones. En caso de que el Usuario no esté de acuerdo con las modificaciones introducidas, deberá abstenerse de continuar utilizando la Plataforma y podrá solicitar la cancelación de su cuenta.</p>
+      <p>En caso de realizarse modificaciones sustanciales a los presentes Términos y Condiciones, el Operador de la Plataforma informará a los Usuarios a través de la Plataforma, mediante correo electrónico registrado por el Usuario o por cualquier otro medio de comunicación habilitado.</p>
+      <p>Las modificaciones entrarán en vigencia a partir de la fecha de su publicación en la Plataforma, salvo que se indique expresamente una fecha distinta.</p>
+      <p>El uso continuo de la Plataforma por parte del Usuario después de la publicación de las modificaciones se entenderá como aceptación expresa de los nuevos Términos y Condiciones.</p>
+      <p>En caso de que el Usuario no esté de acuerdo con las modificaciones introducidas, deberá abstenerse de continuar utilizando la Plataforma y podrá solicitar la cancelación de su cuenta conforme a los procedimientos establecidos por el Operador de la Plataforma.</p>
     </div>
 
     <div class="tc-section" id="xxvii">
@@ -681,9 +838,10 @@ import '../styles/index.css';
         <div class="tc-section-num">XXVII</div>
         <h2 class="tc-section-title">Ley aplicable y resolución de disputas</h2>
       </div>
-      <p>Los presentes Términos y Condiciones se regirán e interpretarán de conformidad con las leyes de la República de Colombia. Cualquier controversia, reclamación o diferencia que surja entre el Usuario y el Operador de la Plataforma será resuelta conforme al siguiente procedimiento:</p>
+      <p>Los presentes Términos y Condiciones se regirán e interpretarán de conformidad con las leyes de la República de Colombia.</p>
+      <p>Cualquier controversia, reclamación o diferencia que surja entre el Usuario y el Operador de la Plataforma con ocasión de la interpretación, ejecución, cumplimiento o terminación de los presentes Términos y Condiciones será resuelta conforme al siguiente procedimiento:</p>
       <ol>
-        <li><strong>Arreglo directo.</strong> Las partes procurarán resolver cualquier controversia mediante arreglo directo, por medio de comunicaciones escritas, dentro de un plazo de treinta (30) días calendario contados a partir de la notificación de la controversia.</li>
+        <li><strong>Arreglo directo.</strong> Las partes procurarán resolver cualquier controversia mediante arreglo directo, por medio de comunicaciones escritas entre el Usuario y el Operador de la Plataforma, dentro de un plazo de treinta (30) días calendario contados a partir de la notificación de la controversia.</li>
         <li><strong>Conciliación.</strong> En caso de no lograrse una solución mediante arreglo directo dentro del plazo señalado, las partes acudirán a un procedimiento de conciliación ante un Centro de Conciliación legalmente autorizado en la ciudad de Bogotá, D.C., de conformidad con lo dispuesto en la legislación colombiana.</li>
         <li><strong>Jurisdicción competente.</strong> En caso de no lograrse una solución mediante el procedimiento de conciliación, las controversias serán sometidas a la jurisdicción de los jueces de la República de Colombia, conforme a las normas procesales vigentes.</li>
       </ol>
@@ -698,11 +856,195 @@ import '../styles/index.css';
       <ul>
         <li><strong>Razón social:</strong> CERTIVEH S.A.S.</li>
         <li><strong>NIT:</strong> 902051875-8</li>
-        <li><strong>Domicilio:</strong> Carrera 43A No. 1 SUR 100, Medellín, Antioquia, Colombia</li>
-        <li><strong>Correo electrónico de contacto:</strong> contacto@certiveh.co</li>
-        <li><strong>Correo electrónico para notificaciones judiciales:</strong> contacto@certiveh.co</li>
+        <li><strong>Domicilio:</strong> Carrera 43 A No. 1 SUR 100, Medellín, Antioquia, Colombia</li>
+        <li><strong>Correo electrónico de contacto:</strong> certiveh.contacto@gmail.com</li>
+        <li><strong>Correo electrónico para notificaciones judiciales:</strong> certiveh.contacto@gmail.com</li>
       </ul>
       <p>Para cualquier consulta, solicitud o reclamación relacionada con el uso de la Plataforma o con los servicios prestados a través de la misma, el Usuario podrá comunicarse a través de los canales de contacto indicados anteriormente.</p>
+      <p>Las notificaciones judiciales dirigidas al Operador de la Plataforma deberán enviarse al correo electrónico indicado para tal fin, de conformidad con lo dispuesto en la legislación colombiana vigente.</p>
+    </div>
+
+    <!-- ANEXO A SEPARATOR -->
+    <hr class="tc-anexo-separator" />
+
+    <div class="tc-anexo-header-block" id="anexo-a">
+      <div class="tc-anexo-label">Anexo A — Parte integral de los Términos y Condiciones</div>
+      <div class="tc-anexo-title">Reglamento del Programa de Referidos CertiVeh Win Win</div>
+      <div class="tc-anexo-meta">
+        CERTIVEH S.A.S. &nbsp;|&nbsp; NIT 902051875-8<br>
+        Versión 1.0 &nbsp;|&nbsp; Fecha de entrada en vigencia: 14 de mayo de 2026
+      </div>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">1</div>
+        <h2 class="tc-section-title">Naturaleza y relación con los Términos y Condiciones</h2>
+      </div>
+      <p>El presente documento constituye el Anexo A de los Términos y Condiciones de Uso de la Plataforma CertiVeh (en adelante, los "Términos y Condiciones"), operada por CERTIVEH S.A.S., con NIT 902051875-8 (en adelante, el "Operador de la Plataforma"). El presente Reglamento forma parte integral de dichos Términos y Condiciones y se entiende incorporado a los mismos por referencia expresa en el artículo XIII-A.</p>
+      <p>En caso de contradicción entre las disposiciones del presente Reglamento y los Términos y Condiciones, prevalecerán estos últimos, salvo en lo que se refiere a las condiciones específicas del Programa aquí reguladas.</p>
+      <p>En todo lo no previsto expresamente en este Reglamento se aplicarán las disposiciones de los Términos y Condiciones, incluyendo sin limitación las normas sobre protección de datos personales, seguridad y prevención de fraude, modificación de condiciones y ley aplicable.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">2</div>
+        <h2 class="tc-section-title">Objeto del Programa</h2>
+      </div>
+      <p>CertiVeh Win Win es un programa voluntario de referidos que permite a los Usuarios activos de la Plataforma obtener una comisión económica por referir a nuevos usuarios, quienes a su vez acceden a un descuento sobre la tarifa del servicio en su primer trámite.</p>
+      <p>La participación en el Programa es completamente voluntaria y no constituye un requisito para el acceso ni para la contratación de los servicios de la Plataforma. El Programa no modifica ni afecta la naturaleza del servicio principal descrito en los Términos y Condiciones.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">3</div>
+        <h2 class="tc-section-title">Definiciones</h2>
+      </div>
+      <p>Para efectos del presente Reglamento, y en concordancia con el Artículo IV de los Términos y Condiciones, se entenderá por:</p>
+      <ul>
+        <li><strong>Referidor:</strong> El Usuario activo que cumple los requisitos del numeral 4, genera un Código Win Win desde el dashboard de su Cuenta de Usuario y lo comparte con terceros para que estos contraten el servicio en la Plataforma.</li>
+        <li><strong>Referido:</strong> El nuevo usuario que accede a la Plataforma por primera vez, utiliza un Código Win Win válido al momento de pagar su primer trámite y cumple las condiciones del numeral 5.</li>
+        <li><strong>Código Win Win:</strong> El código alfanumérico único e intransferible, con formato NOMBRE-XXX, generado manualmente por el Referidor desde el dashboard de su Cuenta de Usuario, que constituye el único mecanismo válido para la atribución de la referenciación y para el reconocimiento de la comisión al Referidor y del descuento al Referido.</li>
+        <li><strong>Saldo Win Win:</strong> El valor acumulado de las comisiones causadas y acreditadas a favor del Referidor en el Programa, disponible para retiro desde el dashboard de la Cuenta de Usuario conforme al numeral 8.</li>
+      </ul>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">4</div>
+        <h2 class="tc-section-title">Elegibilidad del Referidor</h2>
+      </div>
+      <p>Podrá participar como Referidor el Usuario que cumpla las siguientes condiciones al momento de generar su Código Win Win:</p>
+      <ol>
+        <li>Tener al menos un (1) trámite pagado y completado en la Plataforma.</li>
+        <li>Tener su Cuenta de Usuario activa y sin restricciones, sanciones o suspensiones vigentes.</li>
+        <li>Generar su Código Win Win directamente desde el dashboard. Cada Usuario tiene derecho a un (1) único Código Win Win. No se permitirá la generación de códigos adicionales bajo ninguna circunstancia.</li>
+      </ol>
+      <p>No existe límite en el número de personas que el Referidor puede referir mediante su Código Win Win, ni en el monto total de comisiones que puede acumular mientras el Programa esté activo.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">5</div>
+        <h2 class="tc-section-title">Elegibilidad del Referido</h2>
+      </div>
+      <p>Para que la referenciación sea válida y se reconozcan el descuento al Referido y la comisión al Referidor, el Usuario referido deberá cumplir simultáneamente las siguientes condiciones:</p>
+      <ol>
+        <li>Ser un nuevo usuario que contrata y paga el servicio de la Plataforma por primera vez.</li>
+        <li>No haber accedido a la Plataforma a través del enlace o código de un Aliado Comercial vinculado a CertiVeh. El Programa no es compatible ni acumulable con los beneficios derivados de alianzas comerciales. En caso de conflicto entre un Código Win Win y un enlace de Aliado Comercial, prevalecerá este último y no se reconocerá la referenciación Win Win.</li>
+        <li>No utilizar su propio Código Win Win para obtener el descuento.</li>
+        <li>Ingresar el Código Win Win en el proceso de pago (checkout) antes de completar la transacción. No se reconocerán descuentos ni comisiones por códigos ingresados con posterioridad al pago efectivo.</li>
+      </ol>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">6</div>
+        <h2 class="tc-section-title">Descuento para el Referido</h2>
+      </div>
+      <p>El Usuario que cumpla las condiciones del numeral 5 y utilice un Código Win Win válido al momento de pagar su primer trámite recibirá un descuento de <strong>sesenta mil pesos colombianos ($60.000 COP)</strong> aplicado directamente sobre la tarifa del servicio al momento del pago.</p>
+      <p>Este descuento está sujeto a las siguientes condiciones:</p>
+      <ol>
+        <li>Aplica exclusivamente al primer trámite del Referido en la Plataforma. No aplica a trámites posteriores bajo ninguna circunstancia.</li>
+        <li>No es acumulable con descuentos derivados de alianzas comerciales con Aliados Comerciales de CertiVeh, ni con otras promociones que el Operador de la Plataforma pueda habilitar, salvo indicación expresa en contrario.</li>
+        <li>No tiene valor en efectivo, no es transferible y no podrá ser canjeado por dinero ni aplicado retroactivamente a pagos ya realizados.</li>
+        <li>Es asumido directamente por el Operador de la Plataforma y no genera costo alguno para el Referidor.</li>
+      </ol>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">7</div>
+        <h2 class="tc-section-title">Comisión para el Referidor</h2>
+      </div>
+      <p>El Referidor tendrá derecho a recibir una comisión de <strong>setenta y cinco mil pesos colombianos ($75.000 COP)</strong> por cada Referido que complete efectivamente el pago de su primer trámite en la Plataforma mediante el uso del Código Win Win del Referidor.</p>
+      <p>La comisión se rige por las siguientes condiciones:</p>
+      <ol>
+        <li>Se causará exclusivamente cuando el Referido complete el pago de forma efectiva y el mismo no sea objeto de reversión, retracto, devolución, fraude o contracargo dentro de los plazos legales aplicables. El simple registro del Referido no genera comisión.</li>
+        <li>Si el pago del Referido es objeto de reversión, retracto, devolución, fraude o contracargo después de haberse acreditado la comisión, el Operador de la Plataforma podrá descontar el valor correspondiente del Saldo Win Win del Referidor.</li>
+        <li>Las comisiones causadas y no revertidas se acreditarán al Saldo Win Win del Referidor sin límite de monto ni fecha de vencimiento, mientras el Programa esté activo y la Cuenta de Usuario del Referidor se encuentre vigente.</li>
+        <li>En ningún caso el Operador de la Plataforma garantiza un número mínimo de referidos ni un valor mínimo de comisiones. El Programa no constituye una actividad comercial remunerada garantizada.</li>
+      </ol>
+      <p>Las comisiones del Programa constituyen una contraprestación por la referenciación efectiva de nuevos usuarios y no tienen carácter de salario, honorario, rendimiento financiero ni beneficio tributario. El Referidor es el único responsable de las obligaciones tributarias que le correspondan conforme a la normativa vigente aplicable a los ingresos que perciba por este concepto.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">8</div>
+        <h2 class="tc-section-title">Retiro de Comisiones — Saldo Win Win</h2>
+      </div>
+      <p>El Referidor podrá solicitar el retiro de las comisiones acumuladas en su Saldo Win Win desde el dashboard de su Cuenta de Usuario, sujeto a las siguientes condiciones:</p>
+      <p><strong>8.1 Monto mínimo y procedimiento</strong></p>
+      <ol>
+        <li>El monto mínimo para solicitar un retiro es de <strong>setenta y cinco mil pesos colombianos ($75.000 COP)</strong>, equivalente al menos a una (1) comisión causada, acreditada y no revertida.</li>
+        <li>El Referidor deberá solicitar el retiro directamente desde el dashboard de su Cuenta de Usuario, diligenciando el formulario habilitado para tal efecto.</li>
+        <li>Los retiros pendientes de procesamiento reducirán el saldo disponible de forma inmediata. No será posible solicitar retiros por valores ya en proceso de pago ni por el mismo saldo dos veces.</li>
+      </ol>
+      <p><strong>8.2 Información bancaria requerida</strong></p>
+      <p>Para procesar el retiro, el Referidor deberá suministrar la siguiente información en el formulario:</p>
+      <ol>
+        <li>Nombre de la entidad financiera.</li>
+        <li>Tipo de cuenta: ahorros o corriente.</li>
+        <li>Número de cuenta.</li>
+        <li>Nombre completo del titular de la cuenta.</li>
+        <li>Número de documento de identificación del titular.</li>
+      </ol>
+      <p>El titular de la cuenta bancaria deberá coincidir con el Usuario registrado en la Plataforma. No se procesarán retiros a cuentas de terceros bajo ninguna circunstancia.</p>
+      <p><strong>8.3 Procesamiento del retiro</strong></p>
+      <ol>
+        <li>El Operador de la Plataforma procesará el retiro de forma manual una vez verificada la información, en un plazo de hasta veinte (20) días hábiles contados desde la solicitud.</li>
+        <li>El Operador de la Plataforma podrá rechazar o suspender el procesamiento cuando: (i) la información bancaria sea incorrecta, incompleta o no coincida con el titular registrado; (ii) existan indicios de uso fraudulento del Programa; (iii) el saldo esté sujeto a revisión por reversión o contracargo pendiente.</li>
+        <li>El Operador de la Plataforma no será responsable por demoras atribuibles a información bancaria incorrecta suministrada por el Referidor, ni por demoras propias del sistema financiero.</li>
+      </ol>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">9</div>
+        <h2 class="tc-section-title">Restricciones Generales del Programa</h2>
+      </div>
+      <p>Sin perjuicio de las restricciones específicas señaladas en los numerales anteriores, el Programa está sujeto a las siguientes condiciones generales:</p>
+      <ol>
+        <li>El Código Win Win solo es válido para el primer trámite de un Usuario nuevo que no haya accedido previamente a la Plataforma a través de un enlace de Aliado Comercial de CertiVeh.</li>
+        <li>El Programa no aplica retroactivamente. Los trámites pagados antes de la activación del Programa, o antes de que el Usuario generara su Código Win Win, no generan comisión ni descuento bajo ninguna circunstancia.</li>
+        <li>Queda prohibido el uso del Código Win Win para beneficio propio, incluyendo su uso en cuentas propias o cualquier mecanismo destinado a obtener el descuento o la comisión de manera artificial.</li>
+        <li>Cualquier uso fraudulento del Programa —incluyendo la creación de cuentas falsas, manipulación de referidos, uso de bots o generación artificial de transacciones— dará lugar a: (i) cancelación inmediata del Saldo Win Win; (ii) suspensión o cancelación definitiva de la Cuenta de Usuario; y (iii) las acciones legales a que haya lugar conforme a la legislación colombiana vigente, incluyendo la Ley 1273 de 2009 sobre delitos informáticos.</li>
+      </ol>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">10</div>
+        <h2 class="tc-section-title">Modificación y Terminación del Programa</h2>
+      </div>
+      <p>El Operador de la Plataforma se reserva el derecho de modificar las condiciones del Programa —incluyendo los valores de comisión y descuento, los requisitos de elegibilidad y el procedimiento de retiro— o de suspenderlo o darlo por terminado en cualquier momento, mediante la actualización del presente Reglamento.</p>
+      <p>La modificación o terminación del Programa no afectará las comisiones ya causadas, acreditadas y no revertidas en el Saldo Win Win del Referidor con anterioridad a dicho cambio, las cuales podrán ser retiradas conforme al numeral 8 dentro de los dos (2) meses siguientes a la comunicación de la terminación.</p>
+      <p>En caso de terminación del Programa, el Operador procesará los retiros pendientes dentro del plazo señalado. Vencido dicho plazo, los saldos no reclamados prescribirán conforme a la normativa civil colombiana aplicable.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">11</div>
+        <h2 class="tc-section-title">Protección de Datos Personales</h2>
+      </div>
+      <p>El tratamiento de los datos personales del Referidor en el marco del Programa —incluyendo los datos bancarios suministrados para el retiro de comisiones— se realizará conforme a los Términos y Condiciones, la Política de Tratamiento de Datos Personales de CertiVeh y la Ley 1581 de 2012 y sus normas reglamentarias.</p>
+      <p>Los datos bancarios suministrados para el retiro serán utilizados exclusivamente para el procesamiento del retiro solicitado y no serán compartidos con terceros, salvo los proveedores de servicios de pago que actúen como Encargados del Tratamiento en los términos de la normativa aplicable.</p>
+    </div>
+
+    <div class="tc-section">
+      <div class="tc-section-header">
+        <div class="tc-section-num">12</div>
+        <h2 class="tc-section-title">Vigencia del Reglamento</h2>
+      </div>
+      <p>El presente Reglamento entra en vigencia a partir del 14 de mayo de 2026 y permanecerá vigente mientras el Programa esté activo, hasta tanto sea modificado o dado por terminado conforme al numeral 10. La fecha de vigencia de cada versión se indicará en el encabezado del documento.</p>
+      <p>En todo lo no previsto en el presente Reglamento se aplicarán las disposiciones de los Términos y Condiciones de Uso de la Plataforma CertiVeh, los cuales hacen parte integral del presente instrumento.</p>
+      <p>El presente Reglamento ha sido adoptado por CERTIVEH S.A.S. en la ciudad de Medellín, como Anexo A de los Términos y Condiciones de Uso de la Plataforma CertiVeh.</p>
+      <div class="tc-highlight">
+        <p><strong>Representante Legal — CERTIVEH S.A.S.</strong><br>
+        Nombre: Agustín Jaramillo Londoño<br>
+        Fecha de adopción: 14 de mayo de 2026<br><br>
+        Versión 1.0 &nbsp;|&nbsp; Anexo A &nbsp;|&nbsp; CERTIVEH S.A.S. &nbsp;|&nbsp; NIT 902051875-8 &nbsp;|&nbsp; certiveh.contacto@gmail.com</p>
+      </div>
     </div>
 
   </div>
