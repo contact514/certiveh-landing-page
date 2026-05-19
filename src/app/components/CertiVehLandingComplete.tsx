@@ -628,11 +628,19 @@ function Hero() {
         maxWidth: 860, marginBottom: 12, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tu vehículo eléctrico <br />tiene derecho a{" "}
+        Tu tramitador virtual del <br />certificado UPME en Colombia
+      </h1>
+      <div style={{
+        fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 600,
+        color: "var(--emerald-600)", marginBottom: 0,
+        animation: "fadeUp 0.6s 0.12s ease both",
+        position: "relative", zIndex: 1
+      }}>
+        Accede a{" "}
         <span style={{ position: "relative", display: "inline-block" }}>
           <FlipWords words={flipWords} duration={2800}/>
         </span>
-      </h1>
+      </div>
 
       {/* Sub */}
       <p style={{
@@ -657,12 +665,7 @@ function Hero() {
           </button>
         </a>
         <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "var(--slate-900)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
-          </button>
-        </a>
-        <a href="#como-funciona" style={{ textDecoration: "none" }}>
-          <button className="btn-secondary">¿Cómo funciona?</button>
+          <button className="btn-secondary">Empezar mi trámite ahora</button>
         </a>
       </div>
 
@@ -1358,7 +1361,7 @@ export default function CertiVehLandingComplete() {
     const timer = setTimeout(() => {
       setShowUrgencyModal(true);
       sessionStorage.setItem('urgencyModalSeen', 'true');
-    }, 10000);
+    }, 45000);
 
     return () => clearTimeout(timer);
   }, []);

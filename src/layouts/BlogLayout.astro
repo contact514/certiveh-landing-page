@@ -22,9 +22,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 const jsonLd = isArticle ? JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': 'BlogPosting',
   headline: title,
   description: description,
+  image: 'https://certiveh.co/og-image.png',
   datePublished: datePublished,
   dateModified: datePublished,
   author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
@@ -32,16 +33,29 @@ const jsonLd = isArticle ? JSON.stringify({
     '@type': 'Organization',
     name: 'CertiVeh',
     url: 'https://certiveh.co',
-    logo: { '@type': 'ImageObject', url: 'https://certiveh.co/favicon.svg' },
+    logo: { '@type': 'ImageObject', url: 'https://certiveh.co/og-image.png', width: 1200, height: 630 },
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
   inLanguage: 'es-CO',
+}) : null;
+
+const breadcrumbLd = isArticle ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://certiveh.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://certiveh.co/blog/' },
+    { '@type': 'ListItem', position: 3, name: title },
+  ]
 }) : null;
 ---
 
 <BaseLayout title={title} description={description} keywords={keywords} ogType={isArticle ? 'article' : 'website'}>
   {jsonLd && (
     <script slot="head" type="application/ld+json" set:html={jsonLd} />
+  )}
+  {breadcrumbLd && (
+    <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   )}
   <style is:global>
     /* ── RESET & BASE ──────────────────────────────────────────────────── */
