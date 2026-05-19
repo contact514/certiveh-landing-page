@@ -675,7 +675,7 @@ function Hero() {
         marginBottom: 64, animation: "fadeUp 0.6s 0.32s ease both",
         position: "relative", zIndex: 1
       }}>
-        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único, sin sorpresas"],["smartphone","100% en línea"]].map(([ico,txt]) => (
+        {[["zap","100+ trámites gestionados"],["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único, sin sorpresas"],["smartphone","100% en línea"]].map(([ico,txt]) => (
           <span key={txt as string} className="trust-item" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--slate-500)", fontWeight: 500, lineHeight: 1.5 }}>
             <Icon name={ico as string} size={14} color="var(--emerald-600)"/>{txt}
           </span>
