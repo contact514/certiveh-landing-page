@@ -669,15 +669,33 @@ function Hero() {
         </a>
       </div>
 
-      {/* Trust strip */}
+      {/* Stats */}
       <div style={{
-        display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 64, animation: "fadeUp 0.6s 0.32s ease both",
+        display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center",
+        marginBottom: 24, animation: "fadeUp 0.6s 0.32s ease both",
         position: "relative", zIndex: 1
       }}>
-        {[["zap","100+ trámites gestionados"],["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único, sin sorpresas"],["smartphone","100% en línea"]].map(([ico,txt]) => (
-          <span key={txt as string} className="trust-item" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--slate-500)", fontWeight: 500, lineHeight: 1.5 }}>
-            <Icon name={ico as string} size={14} color="var(--emerald-600)"/>{txt}
+        {[
+          { num: "$2.000M+", label: "en vehículos gestionados", color: "var(--emerald-600)" },
+          { num: "$1.000M+", label: "en deducciones de renta", color: "var(--teal-500)" },
+          { num: "$100M+", label: "en IVA por devolver", color: "var(--emerald-600)" },
+        ].map(s => (
+          <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220 }}>
+            <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
+            <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 6 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Trust strip */}
+      <div style={{
+        display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center",
+        marginBottom: 64, animation: "fadeUp 0.6s 0.36s ease both",
+        position: "relative", zIndex: 1
+      }}>
+        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único"],["smartphone","100% en línea"]].map(([ico,txt]) => (
+          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "var(--slate-400)", fontWeight: 500 }}>
+            <Icon name={ico as string} size={13} color="var(--emerald-600)"/>{txt}
           </span>
         ))}
       </div>
