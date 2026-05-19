@@ -419,9 +419,11 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
 
 // ── Logo ──────────────────────────────────────────────────────────────────────
 function CertiVehLogo({ variant = "default", compact = false }: { variant?: "default" | "light"; compact?: boolean }) {
-  const textColor = variant === "light" ? "#FFFFFF" : getComputedStyle(document.documentElement).getPropertyValue('--slate-900').trim() || "#0F172A";
-  const primary = getComputedStyle(document.documentElement).getPropertyValue('--emerald-600').trim() || "#059669";
-  const accent = getComputedStyle(document.documentElement).getPropertyValue('--teal-500').trim() || "#14B8A6";
+  const isBrowser = typeof document !== 'undefined';
+  const getCSSVar = (name: string, fallback: string) => isBrowser ? (getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback) : fallback;
+  const textColor = variant === "light" ? "#FFFFFF" : getCSSVar('--slate-900', '#0F172A');
+  const primary = getCSSVar('--emerald-600', '#059669');
+  const accent = getCSSVar('--teal-500', '#14B8A6');
   const w = compact ? 180 : 220, h = compact ? 44 : 56;
   return (
     <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none" role="img" aria-label="Logo CertiVeh — Certificación Vehicular">
@@ -440,7 +442,7 @@ function CertiVehLogo({ variant = "default", compact = false }: { variant?: "def
           Certi<tspan fill={primary}>Veh</tspan>
         </text>
         {!compact && (
-          <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : (getComputedStyle(document.documentElement).getPropertyValue('--slate-500').trim() || "#64748B")}
+          <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : getCSSVar('--slate-500', '#64748B')}
             fontSize="10" fontWeight="500" fontFamily="Inter, system-ui, sans-serif" letterSpacing="1.5">
             CERTIFICACIÓN VEHICULAR
           </text>
@@ -1361,84 +1363,6 @@ export default function CertiVehLandingComplete() {
     return () => clearTimeout(timer);
   }, []);
 
-  const structuredDataApp = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "CertiVeh",
-    "description": "CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y reducción arancelaria.",
-    "url": "https://certiveh.co",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "COP",
-      "description": "Honorarios de $599.990 COP + IVA, más el costo del trámite ante la UPME según resolución vigente."
-    },
-    "provider": {
-      "@type": "Organization",
-      "name": "CertiVeh",
-      "url": "https://certiveh.co",
-      "email": "contacto@certiveh.co",
-      "areaServed": "CO",
-      "description": "Automatización del trámite UPME para certificados de beneficio tributario en Colombia"
-    }
-  };
-
-  const structuredDataFAQ = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Qué vehículos califican?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Cuándo puedo radicar mi solicitud?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Nosotros nos encargamos de radicarla ante la UPME en la ventana correspondiente. Si no hay ventana abierta en ese momento, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué documentos necesito?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Cuánto toma el proceso completo?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué pasa si la UPME rechaza mi solicitud?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, acompañamos el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Funciona para empresas e independientes?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años."
-        }
-      }
-    ]
-  };
-
   return (
     <>
       <style>{CSS}</style>
@@ -1460,9 +1384,7 @@ export default function CertiVehLandingComplete() {
       {/* Urgency Modal */}
       {showUrgencyModal && <UrgencyModal onClose={() => setShowUrgencyModal(false)} />}
       
-      {/* Structured Data - JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredDataApp)}} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredDataFAQ)}} />
+      {/* Structured Data moved to index.astro for SSR */}
     </>
   );
 }
