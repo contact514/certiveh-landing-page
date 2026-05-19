@@ -603,8 +603,7 @@ function Hero() {
     return "$" + m.toLocaleString("es-CO") + "M+";
   };
 
-  const fallback = { vehiculos_gestionados: 2_347_000_000, deducciones_renta: 1_173_000_000, iva_por_devolver: 117_000_000 };
-  const [stats, setStats] = useState(fallback);
+  const [stats, setStats] = useState<{ vehiculos_gestionados: number; deducciones_renta: number; iva_por_devolver: number } | null>(null);
 
   useEffect(() => {
     const fetchStats = () => {
@@ -699,12 +698,15 @@ function Hero() {
         position: "relative", zIndex: 1
       }}>
         {[
-          { num: fmtM(stats.vehiculos_gestionados), label: "en vehículos gestionados", color: "var(--emerald-600)" },
-          { num: fmtM(stats.deducciones_renta), label: "en deducciones de renta", color: "var(--teal-500)" },
-          { num: fmtM(stats.iva_por_devolver), label: "en IVA por devolver", color: "var(--emerald-600)" },
+          { num: stats ? fmtM(stats.vehiculos_gestionados) : null, label: "en vehículos gestionados", color: "var(--emerald-600)" },
+          { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta", color: "var(--teal-500)" },
+          { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "var(--emerald-600)" },
         ].map(s => (
           <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220 }}>
-            <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
+            {s.num
+              ? <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
+              : <div style={{ height: 24, width: 100, borderRadius: 6, background: "var(--slate-200)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
+            }
             <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 6 }}>{s.label}</div>
           </div>
         ))}
