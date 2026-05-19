@@ -676,9 +676,9 @@ function Hero() {
         position: "relative", zIndex: 1
       }}>
         {[
-          { num: "$2.000M+", label: "en vehículos gestionados", color: "var(--emerald-600)" },
-          { num: "$1.000M+", label: "en deducciones de renta", color: "var(--teal-500)" },
-          { num: "$100M+", label: "en IVA por devolver", color: "var(--emerald-600)" },
+          { num: "$2.347M+", label: "en vehículos gestionados", color: "var(--emerald-600)" },
+          { num: "$1.173M+", label: "en deducciones de renta", color: "var(--teal-500)" },
+          { num: "$117M+", label: "en IVA por devolver", color: "var(--emerald-600)" },
         ].map(s => (
           <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220 }}>
             <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
