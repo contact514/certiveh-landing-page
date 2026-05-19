@@ -597,6 +597,29 @@ function VentanaUPME() {
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   const flipWords = ["devolución de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
+
+  const fmtM = (n: number) => {
+    const m = Math.round(n / 1_000_000);
+    return "$" + m.toLocaleString("es-CO") + "M+";
+  };
+
+  const fallback = { vehiculos_gestionados: 2_347_000_000, deducciones_renta: 1_173_000_000, iva_por_devolver: 117_000_000 };
+  const [stats, setStats] = useState(fallback);
+
+  useEffect(() => {
+    const fetchStats = () => {
+      fetch("https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/public-stats")
+        .then(r => r.json())
+        .then(data => {
+          if (data.vehiculos_gestionados) setStats(data);
+        })
+        .catch(() => {});
+    };
+    fetchStats();
+    const interval = setInterval(fetchStats, 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
@@ -676,9 +699,9 @@ function Hero() {
         position: "relative", zIndex: 1
       }}>
         {[
-          { num: "$2.347M+", label: "en vehículos gestionados", color: "var(--emerald-600)" },
-          { num: "$1.173M+", label: "en deducciones de renta", color: "var(--teal-500)" },
-          { num: "$117M+", label: "en IVA por devolver", color: "var(--emerald-600)" },
+          { num: fmtM(stats.vehiculos_gestionados), label: "en vehículos gestionados", color: "var(--emerald-600)" },
+          { num: fmtM(stats.deducciones_renta), label: "en deducciones de renta", color: "var(--teal-500)" },
+          { num: fmtM(stats.iva_por_devolver), label: "en IVA por devolver", color: "var(--emerald-600)" },
         ].map(s => (
           <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220 }}>
             <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
