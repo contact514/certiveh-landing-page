@@ -492,7 +492,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","100% en línea · Sin filas","Notificaciones WhatsApp","Pago único · Sin suscripciones"];
+  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -679,16 +679,6 @@ function Hero() {
           <span key={txt as string} className="trust-item" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--slate-500)", fontWeight: 500, lineHeight: 1.5 }}>
             <Icon name={ico as string} size={14} color="var(--emerald-600)"/>{txt}
           </span>
-        ))}
-      </div>
-
-      {/* Stat pills */}
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", animation: "fadeUp 0.6s 0.4s ease both", position: "relative", zIndex: 1 }}>
-        {[{ num: "5%", label: "Devolución de IVA", color: "var(--emerald-600)" },{ num: "50%", label: "Deducción renta", color: "var(--teal-500)" },{ num: "5%", label: "Ahorro arancel", color: "var(--amber-500)" }].map(s => (
-          <div key={s.label} className="card" style={{ padding: "20px 28px", textAlign: "center", minWidth: 140, flex: "1 1 auto", maxWidth: 200 }}>
-            <div style={{ fontSize: 32, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
-            <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 4 }}>{s.label}</div>
-          </div>
         ))}
       </div>
 
