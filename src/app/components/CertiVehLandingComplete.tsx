@@ -585,8 +585,8 @@ function VentanaUPME() {
         </a>
 
         {!ventanaAbierta && (
-          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 12, lineHeight: 1.5 }}>
-            Puedes cargar tu solicitud ahora y la radicamos automáticamente cuando abra la ventana.
+          <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 14, lineHeight: 1.6, maxWidth: 480, margin: "14px auto 0" }}>
+            No tienes que esperar. Carga tu solicitud ahora y nosotros la radicamos automáticamente el día que abra la ventana. Tu lugar en la cola queda asegurado.
           </div>
         )}
       </div>
