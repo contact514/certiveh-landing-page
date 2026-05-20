@@ -509,6 +509,7 @@ function Ticker() {
 
 // ── COUNTDOWN VENTANA UPME ───────────────────────────────────────────────────
 function VentanaUPME() {
+  const portalUrl = usePortalUrl();
   const ciclos = [
     { inicio: new Date(2026, 2, 1), fin: new Date(2026, 4, 31, 23, 59, 59), nombre: "Ciclo I 2026" },
     { inicio: new Date(2026, 7, 15), fin: new Date(2026, 10, 14, 23, 59, 59), nombre: "Ciclo II 2026" },
@@ -581,7 +582,7 @@ function VentanaUPME() {
           ))}
         </div>
 
-        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
           </button>
@@ -599,6 +600,7 @@ function VentanaUPME() {
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
+  const portalUrl = usePortalUrl();
   const flipWords = ["devolución de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
 
   const fmtM = (n: number) => {
@@ -689,7 +691,7 @@ function Hero() {
             Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
-        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-secondary">Empezar mi trámite ahora</button>
         </a>
       </div>
@@ -869,6 +871,7 @@ function ComoFunciona() {
 
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
 function Calculadora() {
+  const portalUrl = usePortalUrl();
   const [valor, setValor] = useState(120);
   const [tipo, setTipo] = useState("electrico");
   const [perfil, setPerfil] = useState("natural");
@@ -1024,7 +1027,7 @@ function Calculadora() {
               </div>
             )}
 
-            <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
+            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
               <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center" }}>
                 Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
@@ -1115,6 +1118,7 @@ function Testimonios() {
 
 // ── WIN WIN ──────────────────────────────────────────────────────────────────
 function WinWin() {
+  const portalUrl = usePortalUrl();
   const steps = [
     { num: "01", icon: "award", title: "Completa tu trámite", desc: "Obtén tu certificado UPME con CertiVeh y desbloquea tu código de referido." },
     { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento." },
@@ -1157,7 +1161,7 @@ function WinWin() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-primary btn-primary-lg">
               Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
             </button>
@@ -1208,6 +1212,7 @@ function FAQ() {
 
 // ── CTA FINAL ─────────────────────────────────────────────────────────────────
 function CTAFinal() {
+  const portalUrl = usePortalUrl();
   return (
     <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--grad-primary)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       <AnimatedGridPattern
@@ -1224,7 +1229,7 @@ function CTAFinal() {
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
         </p>
-        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
           </button>
@@ -1284,6 +1289,7 @@ function Footer() {
 
 // ── URGENCY MODAL ───────────────────────────────────────────���─────────────────
 function UrgencyModal({ onClose }: { onClose: () => void }) {
+  const portalUrl = usePortalUrl();
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -1356,7 +1362,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             La normativa tributaria cambia. Los incentivos que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
           </p>
 
-          <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
+          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
             <button
               className="btn-primary btn-primary-lg"
               style={{
