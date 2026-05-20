@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, createContext, useContext } from "react";
 import { Navbar } from "./Navbar";
 import { AnimatePresence, motion } from "motion/react";
 import { BackgroundPaths } from './ui/background-paths';
@@ -8,6 +8,9 @@ import { cn } from '@/lib/utils';
 import { ImageComparison } from './ui/image-comparison';
 import imgElectricCar from '@/assets/hyundai-ev.jpg';
 import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
+
+const PortalUrlContext = createContext("https://portal.certiveh.co");
+const usePortalUrl = () => useContext(PortalUrlContext);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh, Landing Page
@@ -578,7 +581,7 @@ function VentanaUPME() {
           ))}
         </div>
 
-        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
           </button>
@@ -623,7 +626,7 @@ function Hero() {
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "120px 48px 80px", position: "relative",
+      padding: "100px 48px 60px", position: "relative",
       background: "var(--white)", overflow: "hidden",
     }}>
       {/* Animated Background Paths */}
@@ -686,7 +689,7 @@ function Hero() {
             Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
-        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-secondary">Empezar mi trámite ahora</button>
         </a>
       </div>
@@ -715,7 +718,7 @@ function Hero() {
       {/* Trust strip */}
       <div style={{
         display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 64, animation: "fadeUp 0.6s 0.36s ease both",
+        marginBottom: 48, animation: "fadeUp 0.6s 0.36s ease both",
         position: "relative", zIndex: 1
       }}>
         {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único"],["smartphone","100% en línea"]].map(([ico,txt]) => (
@@ -1021,7 +1024,7 @@ function Calculadora() {
               </div>
             )}
 
-            <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
+            <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
               <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center" }}>
                 Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
@@ -1154,7 +1157,7 @@ function WinWin() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+          <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-primary btn-primary-lg">
               Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
             </button>
@@ -1221,7 +1224,7 @@ function CTAFinal() {
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
         </p>
-        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
           </button>
@@ -1353,7 +1356,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             La normativa tributaria cambia. Los incentivos que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
           </p>
 
-          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
+          <a href={usePortalUrl()} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
             <button
               className="btn-primary btn-primary-lg"
               style={{
@@ -1383,7 +1386,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
-export default function CertiVehLandingComplete() {
+export default function CertiVehLandingComplete({ portalUrl = "https://portal.certiveh.co" }: { portalUrl?: string } = {}) {
   const [showUrgencyModal, setShowUrgencyModal] = useState(false);
 
   // Urgency modal logic - shows after 10 seconds, once per session
@@ -1400,7 +1403,7 @@ export default function CertiVehLandingComplete() {
   }, []);
 
   return (
-    <>
+    <PortalUrlContext.Provider value={portalUrl}>
       <style>{CSS}</style>
       <Navbar />
       <main>
@@ -1416,11 +1419,11 @@ export default function CertiVehLandingComplete() {
         <CTAFinal/>
       </main>
       <Footer/>
-      
+
       {/* Urgency Modal */}
       {showUrgencyModal && <UrgencyModal onClose={() => setShowUrgencyModal(false)} />}
-      
+
       {/* Structured Data moved to index.astro for SSR */}
-    </>
+    </PortalUrlContext.Provider>
   );
 }

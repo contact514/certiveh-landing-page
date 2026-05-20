@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CertiVehLandingComplete from '../app/components/CertiVehLandingComplete';
+import CamilaChat from '../app/components/CamilaChat';
+import '../styles/index.css';
+---
+
+<BaseLayout>
+  <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" />
+  <CamilaChat client:load />
+
+  <!-- Structured Data — rendered server-side for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CertiVeh",
+    "description": "CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y reducción arancelaria.",
+    "url": "https://exotics.certiveh.co",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "COP",
+      "price": "599990",
+      "availability": "https://schema.org/InStock",
+      "description": "Honorarios de $599.990 COP + IVA, más el costo del trámite ante la UPME según resolución vigente."
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "CertiVeh",
+      "url": "https://certiveh.co"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "3",
+      "bestRating": "5"
+    }
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Qué vehículos califican?", "acceptedAnswer": { "@type": "Answer", "text": "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." } },
+      { "@type": "Question", "name": "¿Cuándo puedo radicar mi solicitud?", "acceptedAnswer": { "@type": "Answer", "text": "Solo tienes que entrar al portal, crear tu cuenta y cargar tu solicitud. Nosotros nos encargamos de radicarla ante la UPME en la ventana correspondiente." } },
+      { "@type": "Question", "name": "¿Qué documentos necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Si eres persona natural: cédula, tarjeta de propiedad y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal, tarjeta de propiedad y factura de compra." } },
+      { "@type": "Question", "name": "¿Funciona para empresas e independientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años." } }
+    ]
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Cómo obtener el certificado UPME con CertiVeh",
+    "description": "Proceso paso a paso para obtener el certificado UPME para vehículos eléctricos e híbridos en Colombia.",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Sube tus documentos", "text": "Solo necesitas tu cédula, la tarjeta de propiedad del vehículo y la factura de compra." },
+      { "@type": "HowToStep", "position": 2, "name": "Revisa y confirma", "text": "Verificas que los datos extraídos sean correctos." },
+      { "@type": "HowToStep", "position": 3, "name": "Pago único", "text": "Pagas la tarifa del servicio una sola vez." },
+      { "@type": "HowToStep", "position": 4, "name": "CertiVeh hace todo", "text": "Nuestro agente automatizado crea tu cuenta en la UPME, llena formularios y radica la solicitud." },
+      { "@type": "HowToStep", "position": 5, "name": "Recibe tu certificado", "text": "Te notificamos por WhatsApp y email. Descargas el certificado desde tu dashboard." }
+    ]
+  })} />
+</BaseLayout>
