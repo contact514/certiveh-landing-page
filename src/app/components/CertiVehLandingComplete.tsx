@@ -10,16 +10,15 @@ import imgElectricCar from '@/assets/hyundai-ev.jpg';
 import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
 
 const PortalUrlContext = createContext("https://portal.certiveh.co");
+const getPortalUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname === 'exotics.certiveh.co') {
+    return "https://exotics.portal.certiveh.co";
+  }
+  return "https://portal.certiveh.co";
+};
 const usePortalUrl = () => {
-  const ctxUrl = useContext(PortalUrlContext);
-  const [url, setUrl] = useState(ctxUrl);
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hostname === 'exotics.certiveh.co') {
-      setUrl("https://exotics.portal.certiveh.co");
-    } else {
-      setUrl(ctxUrl);
-    }
-  }, [ctxUrl]);
+  const [url, setUrl] = useState("https://portal.certiveh.co");
+  useEffect(() => { setUrl(getPortalUrl()); }, []);
   return url;
 };
 
