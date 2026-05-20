@@ -9,6 +9,19 @@ import '../styles/index.css';
   <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" />
   <CamilaChat client:load />
 
+  <!-- Exotics: rewrite all portal links -->
+  <script is:inline>
+    var rewrite = function() {
+      document.querySelectorAll('a[href*="portal.certiveh.co"]').forEach(function(a) {
+        if (!a.href.includes('exotics.portal')) {
+          a.href = a.href.replace('portal.certiveh.co', 'exotics.portal.certiveh.co');
+        }
+      });
+    };
+    rewrite();
+    new MutationObserver(rewrite).observe(document.body, { childList: true, subtree: true });
+  </script>
+
   <!-- Structured Data — rendered server-side for SEO -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
