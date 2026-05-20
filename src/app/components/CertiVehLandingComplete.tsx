@@ -10,7 +10,18 @@ import imgElectricCar from '@/assets/hyundai-ev.jpg';
 import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
 
 const PortalUrlContext = createContext("https://portal.certiveh.co");
-const usePortalUrl = () => useContext(PortalUrlContext);
+const usePortalUrl = () => {
+  const ctxUrl = useContext(PortalUrlContext);
+  const [url, setUrl] = useState(ctxUrl);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hostname === 'exotics.certiveh.co') {
+      setUrl("https://exotics.portal.certiveh.co");
+    } else {
+      setUrl(ctxUrl);
+    }
+  }, [ctxUrl]);
+  return url;
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh, Landing Page
