@@ -1,12 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://certiveh.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Partner API' },
+  ]
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'CertiVeh Partner API — Documentación de Integración',
+  description: 'Documentación técnica de la API de integración para partners de CertiVeh. Automatiza trámites de certificados UPME para vehículos eléctricos e híbridos en Colombia.',
+  url: 'https://certiveh.co/api-docs/',
+  author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+  publisher: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+  inLanguage: 'es-CO',
+  datePublished: '2026-05-22',
+  dateModified: '2026-05-22',
+  proficiencyLevel: 'Expert',
+});
 ---
 
 <BaseLayout
-  title="Partner API — CertiVeh"
-  description="Documentacion de la API de integracion para partners de CertiVeh. Automatiza tramites de certificados UPME para vehiculos electricos e hibridos en Colombia."
-  keywords="CertiVeh API, partner API, UPME certificado API, integracion CertiVeh, vehiculos electricos API Colombia"
+  title="Partner API — Documentación de Integración | CertiVeh"
+  description="Documentación técnica de la API de integración para partners de CertiVeh. Automatiza trámites de certificados UPME para vehículos eléctricos e híbridos en Colombia."
+  keywords="CertiVeh API, partner API, UPME certificado API, integración CertiVeh, vehículos eléctricos API Colombia, API REST UPME"
 >
+  <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
+  <script slot="head" type="application/ld+json" set:html={webPageLd} />
   <style is:inline>
     :root {
       --emerald-600: #059669;

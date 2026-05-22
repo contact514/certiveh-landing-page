@@ -9,7 +9,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   site: 'https://certiveh.co',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap({
+    filter: (page) => !page.includes('/terminos-y-condiciones') && !page.includes('/exotics'),
+  })],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
