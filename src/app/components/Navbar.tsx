@@ -127,6 +127,7 @@ export function Navbar({ isHome = true }: NavbarProps) {
           <a href={link("#como-funciona")}>Cómo funciona</a>
           <a href={link("#calculadora")}>Calculadora</a>
           <a href="/blog">Blog</a>
+          <a href="/api-docs">API</a>
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="shared-nav-btn">
               Empezar ahora <Icon name="arrowRight" size={15} color="white" />
@@ -141,6 +142,7 @@ export function Navbar({ isHome = true }: NavbarProps) {
         <a href={link("#como-funciona")} onClick={() => setMobileOpen(false)}>Cómo funciona</a>
         <a href={link("#calculadora")} onClick={() => setMobileOpen(false)}>Calculadora</a>
         <a href="/blog" onClick={() => setMobileOpen(false)}>Blog</a>
+        <a href="/api-docs" onClick={() => setMobileOpen(false)}>API</a>
         <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="shared-nav-btn" style={{ width: "100%", justifyContent: "center", padding: "12px 20px" }}
             onClick={() => setMobileOpen(false)}>

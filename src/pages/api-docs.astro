@@ -1,0 +1,1106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Partner API — CertiVeh"
+  description="Documentacion de la API de integracion para partners de CertiVeh. Automatiza tramites de certificados UPME para vehiculos electricos e hibridos en Colombia."
+  keywords="CertiVeh API, partner API, UPME certificado API, integracion CertiVeh, vehiculos electricos API Colombia"
+>
+  <style is:inline>
+    :root {
+      --emerald-600: #059669;
+      --emerald-500: #10B981;
+      --emerald-400: #34D399;
+      --emerald-50:  #ECFDF5;
+      --blue-500:    #3B82F6;
+      --blue-50:     #EFF6FF;
+      --amber-400:   #FBBF24;
+      --cyan-400:    #22D3EE;
+      --green-400:   #4ADE80;
+      --red-500:     #EF4444;
+      --red-50:      #FEF2F2;
+      --slate-900:   #0F172A;
+      --slate-800:   #1E293B;
+      --slate-700:   #334155;
+      --slate-600:   #475569;
+      --slate-500:   #64748B;
+      --slate-400:   #94A3B8;
+      --slate-300:   #CBD5E1;
+      --slate-200:   #E2E8F0;
+      --slate-100:   #F1F5F9;
+      --slate-50:    #F8FAFC;
+      --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+
+    /* NAV */
+    .api-nav {
+      background: var(--slate-900);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .api-nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: 12px;
+    }
+    .api-nav-logo-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--emerald-400);
+      background: rgba(5,150,105,0.15);
+      border: 1px solid rgba(5,150,105,0.25);
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .api-nav-back {
+      font-size: 14px;
+      color: var(--slate-400);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .api-nav-back:hover { color: white; }
+
+    /* LAYOUT */
+    .api-layout {
+      display: flex;
+      margin-top: 64px;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* SIDEBAR */
+    .api-sidebar {
+      width: 280px;
+      min-width: 280px;
+      background: var(--slate-900);
+      position: fixed;
+      top: 64px;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      padding: 24px 0;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      z-index: 100;
+    }
+    .api-sidebar::-webkit-scrollbar { width: 4px; }
+    .api-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .api-sidebar::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 4px; }
+
+    .sidebar-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate-500);
+      padding: 16px 24px 8px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-link:hover {
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+    .sidebar-link.active {
+      color: var(--emerald-400);
+      border-left-color: var(--emerald-500);
+      background: rgba(5,150,105,0.08);
+    }
+    .sidebar-link .method-badge-sm {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+      font-family: var(--mono);
+    }
+    .sidebar-link .method-post { background: rgba(5,150,105,0.2); color: var(--emerald-400); }
+    .sidebar-link .method-get { background: rgba(59,130,246,0.2); color: var(--blue-500); }
+    .sidebar-endpoint-path {
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .sidebar-sub {
+      padding-left: 40px;
+    }
+
+    /* MAIN CONTENT */
+    .api-main {
+      margin-left: 280px;
+      flex: 1;
+      padding: 48px 64px 80px;
+      max-width: 900px;
+    }
+
+    /* MOBILE NAV */
+    .api-mobile-nav {
+      display: none;
+      background: var(--slate-900);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0 20px;
+      gap: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 64px;
+      z-index: 99;
+      -webkit-overflow-scrolling: touch;
+    }
+    .api-mobile-nav::-webkit-scrollbar { display: none; }
+    .api-mobile-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--slate-400);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .api-mobile-nav a:hover { color: white; }
+    .api-mobile-nav a.active {
+      color: var(--emerald-400);
+      border-bottom-color: var(--emerald-500);
+    }
+
+    @media (max-width: 768px) {
+      .api-sidebar { display: none; }
+      .api-mobile-nav { display: flex; }
+      .api-main {
+        margin-left: 0;
+        padding: 32px 20px 60px;
+        max-width: 100%;
+      }
+      .api-nav { padding: 0 20px; }
+    }
+    @media (min-width: 769px) and (max-width: 1100px) {
+      .api-sidebar { width: 240px; min-width: 240px; }
+      .api-main { margin-left: 240px; padding: 40px 40px 80px; }
+    }
+
+    /* TYPOGRAPHY */
+    .section-anchor {
+      scroll-margin-top: 80px;
+    }
+    .api-main h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin: 56px 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--slate-200);
+      letter-spacing: -0.02em;
+    }
+    .api-main h2:first-child { margin-top: 0; }
+    .api-main h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--slate-900);
+      margin: 40px 0 12px;
+    }
+    .api-main h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--slate-700);
+      margin: 24px 0 8px;
+    }
+    .api-main p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--slate-600);
+      margin-bottom: 16px;
+    }
+    .api-main ul, .api-main ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    .api-main li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--slate-600);
+      margin-bottom: 4px;
+    }
+
+    /* ENDPOINT HEADER */
+    .endpoint-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 12px;
+      flex-wrap: wrap;
+    }
+    .method-badge {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+    }
+    .method-badge.post { background: var(--emerald-600); color: white; }
+    .method-badge.get { background: var(--blue-500); color: white; }
+    .endpoint-path {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--slate-900);
+    }
+    .endpoint-desc {
+      font-size: 14px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+    }
+
+    /* CODE BLOCKS */
+    .code-block-wrapper {
+      position: relative;
+      margin-bottom: 24px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: #151D2E;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-block-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .copy-btn {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--slate-500);
+      background: none;
+      border: 1px solid var(--slate-700);
+      border-radius: 4px;
+      padding: 3px 10px;
+      cursor: pointer;
+      font-family: var(--ff);
+      transition: all 0.15s;
+    }
+    .copy-btn:hover { color: white; border-color: var(--slate-500); }
+    .code-block {
+      background: var(--slate-800);
+      padding: 20px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.7;
+      color: #E2E8F0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .code-block::-webkit-scrollbar { height: 6px; }
+    .code-block::-webkit-scrollbar-track { background: transparent; }
+    .code-block::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 3px; }
+
+    /* SYNTAX COLORS */
+    .ck { color: var(--cyan-400); }     /* key */
+    .cs { color: var(--green-400); }    /* string */
+    .cn { color: var(--amber-400); }    /* number */
+    .cp { color: var(--slate-500); }    /* punctuation */
+    .cc { color: var(--slate-500); }    /* comment */
+    .cm { color: #C084FC; }            /* method */
+
+    /* INLINE CODE */
+    code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--slate-200);
+    }
+
+    /* TABLES */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 24px;
+      border-radius: 10px;
+      border: 1px solid var(--slate-200);
+      -webkit-overflow-scrolling: touch;
+    }
+    .api-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 540px;
+    }
+    .api-table th {
+      background: var(--slate-100);
+      font-weight: 600;
+      color: var(--slate-700);
+      text-align: left;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--slate-200);
+      white-space: nowrap;
+    }
+    .api-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--slate-100);
+      color: var(--slate-600);
+      vertical-align: top;
+    }
+    .api-table tr:nth-child(even) td { background: var(--slate-50); }
+    .api-table tr:last-child td { border-bottom: none; }
+    .api-table .field-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-800);
+    }
+    .api-table .required {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--red-500);
+      background: var(--red-50);
+      padding: 1px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 6px;
+    }
+    .api-table .optional {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--slate-500);
+      background: var(--slate-100);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+    }
+    .api-table .type-badge {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--slate-500);
+    }
+
+    /* STATUS LIST */
+    .status-list {
+      list-style: none;
+      padding: 0;
+    }
+    .status-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--slate-100);
+    }
+    .status-list li:last-child { border-bottom: none; }
+    .status-code {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      min-width: 56px;
+      text-align: center;
+    }
+    .status-code.s2 { background: var(--emerald-50); color: var(--emerald-600); }
+    .status-code.s4 { background: #FEF3C7; color: #B45309; }
+    .status-code.s5 { background: var(--red-50); color: var(--red-500); }
+
+    /* CALLOUT */
+    .callout {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .callout-info {
+      background: var(--blue-50);
+      border: 1px solid rgba(59,130,246,0.2);
+      color: #1E40AF;
+    }
+    .callout-warn {
+      background: #FFFBEB;
+      border: 1px solid rgba(245,158,11,0.2);
+      color: #92400E;
+    }
+    .callout-icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+
+    /* FLOW STEPS */
+    .flow-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: flow;
+    }
+    .flow-steps li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--slate-100);
+      align-items: flex-start;
+    }
+    .flow-steps li:last-child { border-bottom: none; }
+    .flow-steps li::before {
+      counter-increment: flow;
+      content: counter(flow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: var(--emerald-50);
+      color: var(--emerald-600);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .flow-step-content {
+      flex: 1;
+    }
+    .flow-step-content strong {
+      color: var(--slate-900);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .flow-step-content code {
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+    .api-footer {
+      background: var(--slate-900);
+      padding: 32px 48px;
+      text-align: center;
+      color: var(--slate-500);
+      font-size: 13px;
+    }
+    .api-footer a {
+      color: var(--emerald-400);
+      text-decoration: none;
+    }
+    .api-footer a:hover { text-decoration: underline; }
+
+    /* DIVIDER */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--slate-200);
+      margin: 48px 0;
+    }
+  </style>
+
+  <!-- NAV -->
+  <nav class="api-nav">
+    <a href="/" class="api-nav-logo">
+      <svg width="140" height="36" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+        <defs>
+          <linearGradient id="apiLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(4,8) scale(0.48)">
+          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#apiLogoGrad)"/>
+          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+        </g>
+        <g transform="translate(60,28)">
+          <text x="0" y="0" fill="white" font-size="26" font-weight="700"
+            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
+            Certi<tspan fill="#34D399">Veh</tspan>
+          </text>
+        </g>
+      </svg>
+      <span class="api-nav-logo-badge">API Docs</span>
+    </a>
+    <a href="/" class="api-nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al inicio
+    </a>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="api-mobile-nav" id="mobileNav">
+    <a href="#introduction">Intro</a>
+    <a href="#authentication">Auth</a>
+    <a href="#base-url">Base URL</a>
+    <a href="#post-users">POST /users</a>
+    <a href="#post-tramites">POST /tramites</a>
+    <a href="#post-documents">Documents</a>
+    <a href="#get-tramite">GET /tramites</a>
+    <a href="#post-payment">Payment</a>
+    <a href="#webhooks">Webhooks</a>
+    <a href="#errors">Errors</a>
+    <a href="#integration-flow">Flow</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="api-layout">
+    <!-- SIDEBAR -->
+    <aside class="api-sidebar" id="sidebar">
+      <div class="sidebar-section-title">Getting Started</div>
+      <a href="#introduction" class="sidebar-link active">Introduction</a>
+      <a href="#authentication" class="sidebar-link">Authentication</a>
+      <a href="#base-url" class="sidebar-link">Base URL</a>
+
+      <div class="sidebar-section-title">Endpoints</div>
+      <a href="#post-users" class="sidebar-link">
+        <span class="method-badge-sm method-post">POST</span>
+        <span class="sidebar-endpoint-path">/users</span>
+      </a>
+      <a href="#post-tramites" class="sidebar-link">
+        <span class="method-badge-sm method-post">POST</span>
+        <span class="sidebar-endpoint-path">/tramites</span>
+      </a>
+      <a href="#post-documents" class="sidebar-link">
+        <span class="method-badge-sm method-post">POST</span>
+        <span class="sidebar-endpoint-path">/tramites/:id/documents</span>
+      </a>
+      <a href="#get-tramite" class="sidebar-link">
+        <span class="method-badge-sm method-get">GET</span>
+        <span class="sidebar-endpoint-path">/tramites/:id</span>
+      </a>
+      <a href="#post-payment" class="sidebar-link">
+        <span class="method-badge-sm method-post">POST</span>
+        <span class="sidebar-endpoint-path">/tramites/:id/payment</span>
+      </a>
+      <a href="#webhooks" class="sidebar-link">Webhooks</a>
+
+      <div class="sidebar-section-title">Reference</div>
+      <a href="#errors" class="sidebar-link">Errors</a>
+      <a href="#integration-flow" class="sidebar-link">Integration Flow</a>
+      <a href="#contact" class="sidebar-link">Contact</a>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="api-main">
+
+      <!-- INTRODUCTION -->
+      <h2 id="introduction" class="section-anchor">Introduction</h2>
+      <p>
+        <strong>CertiVeh Partner API</strong> &mdash; Integra CertiVeh en tu aplicacion para que tus usuarios obtengan su certificado UPME sin salir de tu plataforma.
+      </p>
+      <p>
+        Esta API REST permite crear usuarios, iniciar tramites de certificacion UPME, subir documentos, procesar pagos y consultar el estado de cada tramite de forma programatica.
+      </p>
+
+      <!-- AUTHENTICATION -->
+      <h2 id="authentication" class="section-anchor">Authentication</h2>
+      <p>
+        Todas las solicitudes requieren el header <code>X-API-Key</code> con tu clave de partner.
+      </p>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">Header</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">X-API-Key: pk_live_xxxxxxxxxxxxx</pre>
+      </div>
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>Contacta <strong>contacto@certiveh.co</strong> para solicitar tu API key.</span>
+      </div>
+
+      <!-- BASE URL -->
+      <h2 id="base-url" class="section-anchor">Base URL</h2>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">Production</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api</pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- POST /users -->
+      <div class="endpoint-header" id="post-users">
+        <span class="method-badge post section-anchor">POST</span>
+        <span class="endpoint-path">/users</span>
+      </div>
+      <p class="endpoint-desc">Registers a new user associated with your partner account.</p>
+
+      <h4>Request Body &mdash; Persona Natural</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">email</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Email del usuario</td></tr>
+            <tr><td><span class="field-name">phone</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Telefono formato E.164 (ej: +573001234567)</td></tr>
+            <tr><td><span class="field-name">person_type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td><code>"natural"</code> o <code>"juridica"</code></td></tr>
+            <tr><td><span class="field-name">first_names</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombres</td></tr>
+            <tr><td><span class="field-name">last_names</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Apellidos</td></tr>
+            <tr><td><span class="field-name">cedula_number</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Numero de cedula (solo digitos)</td></tr>
+            <tr><td><span class="field-name">date_of_birth</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Fecha nacimiento AAAA-MM-DD</td></tr>
+            <tr><td><span class="field-name">expedition_date</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Fecha expedicion cedula AAAA-MM-DD</td></tr>
+            <tr><td><span class="field-name">ciiu_code</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Codigo CIIU 4 digitos</td></tr>
+            <tr><td><span class="field-name">department</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Departamento (ej: "ANTIOQUIA")</td></tr>
+            <tr><td><span class="field-name">municipality</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Municipio (ej: "MEDELLIN")</td></tr>
+            <tr><td><span class="field-name">address</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Direccion de residencia</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Additional Fields &mdash; Persona Juridica</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">company_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Razon social</td></tr>
+            <tr><td><span class="field-name">nit</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>NIT sin digito verificacion (9 digitos)</td></tr>
+            <tr><td><span class="field-name">nit_dv</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Digito de verificacion (1 digito)</td></tr>
+            <tr><td><span class="field-name">legal_rep_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre representante legal</td></tr>
+            <tr><td><span class="field-name">legal_rep_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Cedula representante legal</td></tr>
+            <tr><td><span class="field-name">company_address</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Direccion empresa</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Response <code>201</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"user_id"</span>: <span class="cs">"uuid-del-usuario"</span>,
+  <span class="ck">"status"</span>: <span class="cs">"created"</span>
+&#125;</pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- POST /tramites -->
+      <div class="endpoint-header" id="post-tramites">
+        <span class="method-badge post section-anchor">POST</span>
+        <span class="endpoint-path">/tramites</span>
+      </div>
+      <p class="endpoint-desc">Creates UPME certification tramite with vehicle data. Returns amount to pay.</p>
+
+      <h4>Request Body</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">user_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>UUID del usuario (from /users)</td></tr>
+            <tr><td><span class="field-name">plate</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Placa (6 chars, ej: "ABC123")</td></tr>
+            <tr><td><span class="field-name">vin</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>VIN (17 chars)</td></tr>
+            <tr><td><span class="field-name">brand</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Marca (ej: "KIA")</td></tr>
+            <tr><td><span class="field-name">line</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Linea/modelo (ej: "NIRO DESIRE")</td></tr>
+            <tr><td><span class="field-name">year</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Ano del modelo</td></tr>
+            <tr><td><span class="field-name">engine_number</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Numero motor (N/A para electricos puros)</td></tr>
+            <tr><td><span class="field-name">displacement_kw</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Potencia en kW</td></tr>
+            <tr><td><span class="field-name">propulsion_type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td><code>"Electrico"</code> o <code>"Hibrido"</code></td></tr>
+            <tr><td><span class="field-name">owner_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre propietario registrado</td></tr>
+            <tr><td><span class="field-name">owner_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Cedula/NIT propietario</td></tr>
+            <tr><td><span class="field-name">purchase_value_cop</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Valor bruto vehiculo COP (sin IVA)</td></tr>
+            <tr><td><span class="field-name">purchase_date</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Fecha compra AAAA-MM-DD</td></tr>
+            <tr><td><span class="field-name">dealer_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre concesionario</td></tr>
+            <tr><td><span class="field-name">invoice_number</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Numero factura</td></tr>
+            <tr><td><span class="field-name">buyer_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre comprador en factura</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Response <code>201</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"case_id"</span>: <span class="cs">"uuid-del-tramite"</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">1131566</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
+  <span class="ck">"breakdown"</span>: &#123;
+    <span class="ck">"costo_upme"</span>: <span class="cn">350906</span>,
+    <span class="ck">"honorarios"</span>: <span class="cn">599990</span>,
+    <span class="ck">"iva"</span>: <span class="cn">180670</span>,
+    <span class="ck">"discount"</span>: <span class="cn">0</span>,
+    <span class="ck">"total"</span>: <span class="cn">1131566</span>
+  &#125;
+&#125;</pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- POST /tramites/:id/documents -->
+      <div class="endpoint-header" id="post-documents">
+        <span class="method-badge post section-anchor">POST</span>
+        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/documents</span>
+      </div>
+      <p class="endpoint-desc">Uploads required documents. Each document is processed automatically with AI.</p>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">!</span>
+        <span>Content-Type debe ser <code>multipart/form-data</code>. Archivos soportados: JPG, PNG o PDF, max 10 MB.</span>
+      </div>
+
+      <h4>Form Fields</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Document type (see table below)</td></tr>
+            <tr><td><span class="field-name">file</span><span class="required">required</span></td><td><span class="type-badge">file</span></td><td>File (JPG, PNG or PDF, max 10MB)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Document Types</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Type value</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">cedula-frente</span></td><td>Cedula ciudadania (frente)</td></tr>
+            <tr><td><span class="field-name">cedula-reverso</span></td><td>Cedula ciudadania (reverso)</td></tr>
+            <tr><td><span class="field-name">rut</span></td><td>RUT (persona natural)</td></tr>
+            <tr><td><span class="field-name">tarjeta-propiedad-frente</span></td><td>Tarjeta propiedad vehiculo (frente)</td></tr>
+            <tr><td><span class="field-name">tarjeta-propiedad-reverso</span></td><td>Tarjeta propiedad vehiculo (reverso)</td></tr>
+            <tr><td><span class="field-name">factura</span></td><td>Factura compra vehiculo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Response <code>200</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
+  <span class="ck">"type"</span>: <span class="cs">"factura"</span>,
+  <span class="ck">"ocr_status"</span>: <span class="cs">"pending"</span>
+&#125;</pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- GET /tramites/:id -->
+      <div class="endpoint-header" id="get-tramite">
+        <span class="method-badge get section-anchor">GET</span>
+        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;</span>
+      </div>
+      <p class="endpoint-desc">Returns the current status and details of a tramite.</p>
+
+      <h4>Response <code>200</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
+  <span class="ck">"status"</span>: <span class="cs">"IN_PROGRESS"</span>,
+  <span class="ck">"step"</span>: <span class="cn">5</span>,
+  <span class="ck">"progress_pct"</span>: <span class="cn">44</span>,
+  <span class="ck">"paid_at"</span>: <span class="cs">"2026-05-20T..."</span>,
+  <span class="ck">"created_at"</span>: <span class="cs">"2026-05-15T..."</span>,
+  <span class="ck">"updated_at"</span>: <span class="cs">"2026-05-20T..."</span>,
+  <span class="ck">"vehicle"</span>: &#123;
+    <span class="ck">"brand"</span>: <span class="cs">"KIA"</span>,
+    <span class="ck">"line"</span>: <span class="cs">"NIRO DESIRE"</span>,
+    <span class="ck">"year"</span>: <span class="cn">2025</span>,
+    <span class="ck">"plate"</span>: <span class="cs">"QMX060"</span>,
+    <span class="ck">"vin"</span>: <span class="cs">"KNACP81EGT5328961"</span>,
+    <span class="ck">"propulsion_type"</span>: <span class="cs">"Hibrido"</span>,
+    <span class="ck">"purchase_value_cop"</span>: <span class="cn">116805309</span>
+  &#125;,
+  <span class="ck">"documents"</span>: [
+    &#123; <span class="ck">"type"</span>: <span class="cs">"factura"</span>, <span class="ck">"ocr_status"</span>: <span class="cs">"done"</span> &#125;,
+    &#123; <span class="ck">"type"</span>: <span class="cs">"tarjeta-propiedad-frente"</span>, <span class="ck">"ocr_status"</span>: <span class="cs">"done"</span> &#125;
+  ],
+  <span class="ck">"payment"</span>: &#123;
+    <span class="ck">"status"</span>: <span class="cs">"APPROVED"</span>,
+    <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
+    <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>
+  &#125;
+&#125;</pre>
+      </div>
+
+      <h4>Tramite Statuses</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Status</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">DRAFT</span></td><td>Tramite creado, pendiente de pago</td></tr>
+            <tr><td><span class="field-name">DOCUMENT_REVIEW</span></td><td>Pago recibido, documentos en revision</td></tr>
+            <tr><td><span class="field-name">IN_PROGRESS</span></td><td>En tramite ante la UPME</td></tr>
+            <tr><td><span class="field-name">FILED</span></td><td>Solicitud de certificado enviada a UPME</td></tr>
+            <tr><td><span class="field-name">APPROVED</span></td><td>UPME aprobo la solicitud</td></tr>
+            <tr><td><span class="field-name">ACTION_REQUIRED</span></td><td>Se necesita una accion del usuario</td></tr>
+            <tr><td><span class="field-name">COMPLETED</span></td><td>Certificado emitido</td></tr>
+            <tr><td><span class="field-name">REJECTED</span></td><td>Solicitud rechazada por la UPME</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- POST /tramites/:id/payment -->
+      <div class="endpoint-header" id="post-payment">
+        <span class="method-badge post section-anchor">POST</span>
+        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/payment</span>
+      </div>
+      <p class="endpoint-desc">Initializes a payment session and returns Wompi integration data.</p>
+
+      <h4>Response <code>200</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">1131566</span>,
+  <span class="ck">"currency"</span>: <span class="cs">"COP"</span>,
+  <span class="ck">"public_key"</span>: <span class="cs">"pub_prod_xxx"</span>,
+  <span class="ck">"signature"</span>: <span class="cs">"sha256-hash"</span>,
+  <span class="ck">"redirect_url"</span>: <span class="cs">"https://portal.certiveh.co/tramite/confirmacion?ref=xxx"</span>
+&#125;</pre>
+      </div>
+
+      <h4>Wompi Widget Integration</h4>
+      <p>Use the response values to render the Wompi checkout button:</p>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">HTML</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block"><span class="cp">&lt;</span><span class="cm">script</span> <span class="ck">src</span>=<span class="cs">"https://checkout.wompi.co/widget.js"</span>
+  <span class="ck">data-render</span>=<span class="cs">"button"</span>
+  <span class="ck">data-public-key</span>=<span class="cs">"&#123;'&#123;'+'public_key&#125;'&#125;"</span>
+  <span class="ck">data-currency</span>=<span class="cs">"&#123;'&#123;'+'currency&#125;'&#125;"</span>
+  <span class="ck">data-amount-in-cents</span>=<span class="cs">"&#123;'&#123;'+'amount_cents&#125;'&#125;"</span>
+  <span class="ck">data-reference</span>=<span class="cs">"&#123;'&#123;'+'reference&#125;'&#125;"</span>
+  <span class="ck">data-redirect-url</span>=<span class="cs">"&#123;'&#123;'+'redirect_url&#125;'&#125;"</span>
+  <span class="ck">data-signature:integrity</span>=<span class="cs">"&#123;'&#123;'+'signature&#125;'&#125;"</span><span class="cp">&gt;</span>
+<span class="cp">&lt;/</span><span class="cm">script</span><span class="cp">&gt;</span></pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- WEBHOOKS -->
+      <h2 id="webhooks" class="section-anchor">Webhooks</h2>
+      <p>
+        CertiVeh sends notifications to your webhook URL when a tramite status changes. Provide your webhook URL when requesting your API key.
+      </p>
+
+      <h4>Payload</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON &mdash; POST to your webhook URL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"event"</span>: <span class="cs">"tramite.status_changed"</span>,
+  <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
+  <span class="ck">"status"</span>: <span class="cs">"DOCUMENT_REVIEW"</span>,
+  <span class="ck">"timestamp"</span>: <span class="cs">"2026-05-20T15:30:00Z"</span>
+&#125;</pre>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- ERRORS -->
+      <h2 id="errors" class="section-anchor">Errors</h2>
+      <p>All error responses follow a consistent format:</p>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">Error Response</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"error"</span>: <span class="cs">"Description"</span>
+&#125;</pre>
+      </div>
+
+      <h4>HTTP Status Codes</h4>
+      <ul class="status-list">
+        <li>
+          <span class="status-code s4">400</span>
+          <span>Invalid request &mdash; missing field or wrong format</span>
+        </li>
+        <li>
+          <span class="status-code s4">401</span>
+          <span>Invalid or inactive API key</span>
+        </li>
+        <li>
+          <span class="status-code s4">403</span>
+          <span>Unauthorized &mdash; resource doesn't belong to your partner account</span>
+        </li>
+        <li>
+          <span class="status-code s4">404</span>
+          <span>Resource not found</span>
+        </li>
+        <li>
+          <span class="status-code s5">500</span>
+          <span>Internal server error</span>
+        </li>
+      </ul>
+
+      <hr class="section-divider" />
+
+      <!-- INTEGRATION FLOW -->
+      <h2 id="integration-flow" class="section-anchor">Integration Flow</h2>
+      <p>Typical end-to-end integration in 6 steps:</p>
+      <ol class="flow-steps">
+        <li>
+          <div class="flow-step-content">
+            <strong>Create user</strong>
+            <code>POST /users</code> &mdash; Register the end-user with personal data.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Create tramite with vehicle data</strong>
+            <code>POST /tramites</code> &mdash; Submit vehicle details, receive pricing breakdown.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Upload documents</strong>
+            <code>POST /tramites/:id/documents</code> &mdash; Upload cedula, tarjeta de propiedad, and factura.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Initialize payment</strong>
+            <code>POST /tramites/:id/payment</code> &mdash; Get Wompi widget parameters and render checkout.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Poll status</strong>
+            <code>GET /tramites/:id</code> &mdash; Check tramite progress periodically.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Receive webhooks</strong>
+            Your endpoint receives status updates automatically as the tramite progresses.
+          </div>
+        </li>
+      </ol>
+
+      <hr class="section-divider" />
+
+      <!-- CONTACT -->
+      <h2 id="contact" class="section-anchor">Contact</h2>
+      <p>
+        Para solicitar tu API key o soporte tecnico, escribe a:
+      </p>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">Email</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">contacto@certiveh.co</pre>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="api-footer">
+    CertiVeh Partner API &mdash; <a href="/">certiveh.co</a> &mdash; <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script is:inline>
+    // Copy buttons via data attribute
+    document.querySelectorAll('[data-copy]').forEach(function(btn) {
+      btn.addEventListener('click', function() { copyCode(btn); });
+    });
+    function copyCode(btn) {
+      const block = btn.closest('.code-block-wrapper').querySelector('.code-block');
+      const text = block.innerText || block.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.color = '#34D399';
+        btn.style.borderColor = '#34D399';
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }, 2000);
+      });
+    }
+
+    // Active sidebar link tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section-anchor');
+      const sidebarLinks = document.querySelectorAll('.api-sidebar .sidebar-link');
+      const mobileLinks = document.querySelectorAll('.api-mobile-nav a');
+
+      function setActive(id) {
+        sidebarLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+        });
+        mobileLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+        });
+      }
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+    });
+  </script>
+</BaseLayout>
