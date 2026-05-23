@@ -122,14 +122,14 @@ const articles = [
     }
     .blog-home-intro .label {
       display: inline-block;
-      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      font-size: 12px; font-weight: 600; letter-spacing: .05em;
       text-transform: uppercase; color: #059669; background: #ECFDF5;
-      border: 1px solid #A7F3D0; border-radius: 20px; padding: 4px 14px;
+      border: 1px solid #A7F3D0; border-radius: 9999px; padding: 4px 12px;
       margin-bottom: 16px;
     }
     .blog-home-intro h1 {
-      font-size: 32px; font-weight: 800; color: #0F172A;
-      letter-spacing: -.03em; margin-bottom: 12px; line-height: 1.2;
+      font-size: clamp(28px, 3.5vw, 36px); font-weight: 700; color: #0F172A;
+      letter-spacing: -.02em; margin-bottom: 12px; line-height: 1.2;
     }
     .blog-home-intro p { font-size: 16px; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
@@ -142,14 +142,14 @@ const articles = [
       border-radius: 16px;
       border: 1px solid #E2E8F0;
       overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
       text-decoration: none;
       display: block;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .article-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
     .card-banner {
       min-height: 160px;
@@ -171,7 +171,7 @@ const articles = [
       text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 8px;
     }
     .card-banner-title {
-      font-size: 20px; font-weight: 800; color: #fff;
+      font-size: 20px; font-weight: 700; color: #fff;
       letter-spacing: -.02em; line-height: 1.25; max-width: 580px;
     }
 
@@ -187,15 +187,15 @@ const articles = [
       display: flex; gap: 10px; flex-wrap: wrap;
     }
     .card-meta-pill {
-      font-size: 11px; color: #64748B;
+      font-size: 12px; color: #64748B;
       background: #F8FAFC; border: 1px solid #E2E8F0;
-      border-radius: 20px; padding: 3px 10px;
+      border-radius: 9999px; padding: 4px 12px;
     }
     .card-read-btn {
       display: inline-flex; align-items: center; gap: 6px;
       background: #059669; color: #fff;
-      font-size: 13px; font-weight: 700;
-      padding: 10px 20px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      padding: 12px 24px; border-radius: 8px;
       white-space: nowrap; flex-shrink: 0; align-self: flex-end;
       transition: background 0.15s, transform 0.1s;
     }
