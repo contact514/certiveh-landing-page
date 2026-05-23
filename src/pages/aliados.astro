@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Navbar } from '../app/components/Navbar';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -72,38 +73,6 @@ const webPageLd = JSON.stringify({
     html { scroll-behavior: smooth; }
     body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
 
-    /* ── NAV ── */
-    .al-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--slate-900);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-    }
-    .al-nav-logo {
-      font-size: 19px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -0.03em;
-      text-decoration: none;
-    }
-    .al-nav-logo span { color: var(--emerald-400); }
-    .al-nav-back {
-      font-size: 14px;
-      color: var(--slate-400);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .al-nav-back:hover { color: white; }
-
     /* ── HERO ── */
     .al-hero {
       background: var(--slate-900);
@@ -159,12 +128,12 @@ const webPageLd = JSON.stringify({
       font-size: 16px;
       font-weight: 700;
       padding: 14px 32px;
-      border-radius: 10px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
-      letter-spacing: -0.01em;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 2px 8px rgba(5,150,105,0.25);
     }
-    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); }
+    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.3); }
     .al-hero-trust {
       display: flex;
       align-items: center;
@@ -226,11 +195,22 @@ const webPageLd = JSON.stringify({
       gap: 20px;
     }
     .al-benefit-card {
-      background: var(--slate-50);
+      background: white;
       border: 1px solid var(--slate-200);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 28px 24px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .al-benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
     }
     .al-benefit-card:hover {
       transform: translateY(-3px);
@@ -470,17 +450,9 @@ const webPageLd = JSON.stringify({
     }
   </style>
 
-  <!-- NAV -->
-  <nav class="al-nav">
-    <a href="/" class="al-nav-logo">Certi<span>Veh</span></a>
-    <a href="/" class="al-nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="12 19 5 12 12 5"/>
-      </svg>
-      Volver al inicio
-    </a>
-  </nav>
+  <!-- NAV — shared component -->
+  <Navbar isHome={false} client:load />
+  <div style="height: 64px;"></div>
 
   <!-- HERO -->
   <section class="al-hero">
@@ -773,17 +745,37 @@ const webPageLd = JSON.stringify({
 
   <!-- FOOTER -->
   <footer class="al-footer">
-    <div class="al-footer-inner">
-      <a href="/" class="al-footer-logo">Certi<span>Veh</span></a>
-      <div class="al-footer-links">
-        <a href="/">Inicio</a>
-        <a href="/blog/">Blog</a>
-        <a href="/api-docs/">API Docs</a>
-        <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 40px;">
+        <div>
+          <a href="/" class="al-footer-logo">Certi<span>Veh</span></a>
+          <p style="font-size: 14px; color: var(--slate-500); margin-top: 10px; max-width: 260px; line-height: 1.5;">
+            Tu tramitador virtual del certificado UPME en Colombia.
+          </p>
+        </div>
+        <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--slate-300); letter-spacing: 0.08em; margin-bottom: 14px; text-transform: uppercase;">Plataforma</div>
+            <div class="al-footer-links">
+              <a href="/">Inicio</a>
+              <a href="/vehiculos/">Veh&#237;culos</a>
+              <a href="/blog/">Blog</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--slate-300); letter-spacing: 0.08em; margin-bottom: 14px; text-transform: uppercase;">Partners</div>
+            <div class="al-footer-links">
+              <a href="/aliados/">Programa de Aliados</a>
+              <a href="/api-docs/">API Docs</a>
+              <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="al-footer-copy">
-        &copy; 2026 CertiVeh &mdash; Programa de Aliados &mdash; Colombia
-      </p>
+      <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <span style="font-size: 12px;">&copy; 2026 CertiVeh &middot; Certificados de Beneficio Tributario &middot; Colombia</span>
+        <span style="font-size: 12px;">CERTIVEH S.A.S. &middot; NIT 902051875-8</span>
+      </div>
     </div>
   </footer>
 
