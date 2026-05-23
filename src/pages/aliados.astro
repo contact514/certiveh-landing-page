@@ -139,14 +139,17 @@ const webPageLd = JSON.stringify({
       background: var(--emerald-600);
       color: white;
       font-size: 16px;
-      font-weight: 700;
-      padding: 14px 32px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border: none;
       border-radius: 8px;
       text-decoration: none;
+      cursor: pointer;
+      font-family: var(--ff);
       transition: background 0.15s, transform 0.1s;
-      box-shadow: 0 2px 8px rgba(5,150,105,0.25);
     }
-    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.3); }
+    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); }
+    .al-btn-primary:active { transform: translateY(0); }
     .al-hero-trust {
       display: flex;
       align-items: center;
