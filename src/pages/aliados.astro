@@ -1,0 +1,777 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://certiveh.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Programa de Aliados', item: 'https://certiveh.co/aliados/' },
+  ]
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  headline: 'Programa de Aliados CertiVeh — Genera ingresos con vehículos eléctricos e híbridos',
+  description: 'Únete al programa de aliados CertiVeh. Concesionarios, talleres, vendedores e influencers generan ingresos adicionales ofreciendo el certificado UPME a sus clientes. Sin costo de entrada.',
+  url: 'https://certiveh.co/aliados/',
+  author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+  publisher: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+  inLanguage: 'es-CO',
+  datePublished: '2026-05-22',
+  dateModified: '2026-05-22',
+});
+---
+
+<BaseLayout
+  title="Programa de Aliados CertiVeh — Genera ingresos con beneficios tributarios"
+  description="Únete al programa de aliados CertiVeh. Concesionarios, talleres y vendedores de vehículos eléctricos e híbridos generan ingresos adicionales ofreciendo el certificado UPME. Sin costo de entrada, comisiones inmediatas."
+  keywords="programa aliados vehículos eléctricos Colombia, partner CertiVeh, comisión certificado UPME, aliado concesionario vehículos híbridos, programa referidos vehículos eléctricos"
+  robots="index, follow"
+>
+  <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
+  <script slot="head" type="application/ld+json" set:html={webPageLd} />
+
+  <style is:inline>
+    :root {
+      --emerald-600: #059669;
+      --emerald-500: #10B981;
+      --emerald-400: #34D399;
+      --emerald-200: #A7F3D0;
+      --emerald-50:  #ECFDF5;
+      --teal-500:    #14B8A6;
+      --teal-400:    #2DD4BF;
+      --slate-900:   #0F172A;
+      --slate-800:   #1E293B;
+      --slate-700:   #334155;
+      --slate-600:   #475569;
+      --slate-500:   #64748B;
+      --slate-400:   #94A3B8;
+      --slate-300:   #CBD5E1;
+      --slate-200:   #E2E8F0;
+      --slate-100:   #F1F5F9;
+      --slate-50:    #F8FAFC;
+      --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    .al-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate-900);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+    .al-nav-logo {
+      font-size: 19px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+    .al-nav-logo span { color: var(--emerald-400); }
+    .al-nav-back {
+      font-size: 14px;
+      color: var(--slate-400);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .al-nav-back:hover { color: white; }
+
+    /* ── HERO ── */
+    .al-hero {
+      background: var(--slate-900);
+      padding: 80px 48px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .al-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(5,150,105,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .al-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(5,150,105,0.15);
+      border: 1px solid rgba(5,150,105,0.35);
+      color: var(--emerald-400);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .al-hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .al-hero-title span { color: var(--emerald-400); }
+    .al-hero-subtitle {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--slate-400);
+      line-height: 1.65;
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .al-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--emerald-600);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); }
+    .al-hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .al-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--slate-400);
+    }
+    .al-trust-item svg { color: var(--emerald-400); flex-shrink: 0; }
+
+    /* ── SECTION WRAPPER ── */
+    .al-section {
+      padding: 80px 48px;
+    }
+    .al-section-light { background: white; }
+    .al-section-muted { background: var(--slate-50); }
+    .al-section-dark { background: var(--slate-900); }
+    .al-container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .al-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--emerald-600);
+      margin-bottom: 10px;
+    }
+    .al-section-title {
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 800;
+      color: var(--slate-900);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .al-section-title-white { color: white; }
+    .al-section-desc {
+      font-size: 16px;
+      color: var(--slate-500);
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .al-section-desc-light { color: var(--slate-400); }
+
+    /* ── BENEFITS GRID ── */
+    .al-benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .al-benefit-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .al-benefit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+      border-color: var(--emerald-200);
+    }
+    .al-benefit-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--emerald-50);
+      border: 1px solid var(--emerald-200);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--emerald-600);
+    }
+    .al-benefit-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--slate-900);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .al-benefit-desc {
+      font-size: 14px;
+      color: var(--slate-500);
+      line-height: 1.6;
+    }
+    .al-benefit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--emerald-600);
+      text-decoration: none;
+      margin-top: 12px;
+      transition: gap 0.15s;
+    }
+    .al-benefit-link:hover { gap: 7px; }
+
+    /* ── HOW IT WORKS ── */
+    .al-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .al-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.67% + 20px);
+      right: calc(16.67% + 20px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--emerald-200), var(--teal-400), var(--emerald-200));
+    }
+    .al-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .al-step-num {
+      width: 56px;
+      height: 56px;
+      background: var(--emerald-600);
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 6px rgba(5,150,105,0.15);
+    }
+    .al-step-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--slate-900);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .al-step-desc {
+      font-size: 14px;
+      color: var(--slate-500);
+      line-height: 1.6;
+    }
+
+    /* ── WHO SECTION ── */
+    .al-who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .al-who-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .al-who-item:hover {
+      background: rgba(5,150,105,0.1);
+      border-color: rgba(5,150,105,0.3);
+    }
+    .al-who-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(5,150,105,0.15);
+      border: 1px solid rgba(5,150,105,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--emerald-400);
+    }
+    .al-who-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      line-height: 1.4;
+    }
+
+    /* ── CTA FINAL ── */
+    .al-cta-box {
+      background: linear-gradient(135deg, #0f2818 0%, var(--slate-900) 100%);
+      border: 1px solid rgba(5,150,105,0.25);
+      border-radius: 20px;
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .al-cta-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .al-cta-subtitle {
+      font-size: 16px;
+      color: var(--slate-400);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+    .al-cta-note {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: 18px;
+    }
+    .al-cta-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .al-cta-note span::before {
+      content: '·';
+      margin: 0 4px;
+    }
+    .al-cta-note span:first-child::before { display: none; }
+
+    /* ── FOOTER ── */
+    .al-footer {
+      background: var(--slate-900);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 48px;
+    }
+    .al-footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .al-footer-logo {
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .al-footer-logo span { color: var(--emerald-400); }
+    .al-footer-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .al-footer-links a {
+      font-size: 13px;
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .al-footer-links a:hover { color: white; }
+    .al-footer-copy {
+      font-size: 12px;
+      color: var(--slate-600);
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .al-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .al-who-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .al-nav { padding: 0 20px; }
+      .al-hero { padding: 56px 20px 72px; }
+      .al-hero-trust { gap: 16px; }
+      .al-section { padding: 56px 20px; }
+      .al-benefits-grid { grid-template-columns: 1fr; }
+      .al-steps { grid-template-columns: 1fr; gap: 40px; }
+      .al-steps::before { display: none; }
+      .al-step { align-items: flex-start; text-align: left; flex-direction: row; gap: 20px; padding: 0; }
+      .al-step-num { flex-shrink: 0; margin-bottom: 0; }
+      .al-who-grid { grid-template-columns: 1fr; }
+      .al-cta-box { padding: 40px 24px; }
+      .al-footer { padding: 24px 20px; }
+      .al-footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+
+  <!-- NAV -->
+  <nav class="al-nav">
+    <a href="/" class="al-nav-logo">Certi<span>Veh</span></a>
+    <a href="/" class="al-nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Volver al inicio
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="al-hero">
+    <div class="al-hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Programa B2B
+    </div>
+    <h1 class="al-hero-title">Sé un aliado <span>CertiVeh</span></h1>
+    <p class="al-hero-subtitle">
+      Genera ingresos adicionales ayudando a tus clientes a obtener su certificado UPME.
+      Sin inversión, sin riesgo.
+    </p>
+    <a href="https://aliado.certiveh.co/" class="al-btn-primary" target="_blank" rel="noopener">
+      Aplicar ahora
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+    <div class="al-hero-trust">
+      <div class="al-trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Sin costo de entrada
+      </div>
+      <div class="al-trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Comisiones inmediatas
+      </div>
+      <div class="al-trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Dashboard en tiempo real
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="al-section al-section-light">
+    <div class="al-container">
+      <div class="al-section-label">Beneficios del programa</div>
+      <h2 class="al-section-title">Todo lo que obtienes como aliado</h2>
+      <p class="al-section-desc">
+        Diseñado para que puedas integrar CertiVeh a tu negocio con el mínimo esfuerzo y el máximo retorno.
+      </p>
+      <div class="al-benefits-grid">
+
+        <!-- Card 1 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">Comisión por trámite</div>
+          <p class="al-benefit-desc">
+            Gana una comisión por cada cliente que pague su trámite a través de tu enlace.
+            Las liquidaciones se procesan de forma automática.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+              <line x1="7" y1="7" x2="7.01" y2="7"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">Descuento para tus clientes</div>
+          <p class="al-benefit-desc">
+            Tus clientes reciben un descuento exclusivo en su primer trámite.
+            Más razón para elegirte frente a la competencia.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">Subdominio personalizado</div>
+          <p class="al-benefit-desc">
+            Obtén tu propio portal en <strong>tu-negocio.portal.certiveh.co</strong> — tu marca integrada en la experiencia del usuario final.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">Código QR personalizado</div>
+          <p class="al-benefit-desc">
+            Comparte tu código QR en el concesionario, taller o redes sociales.
+            Cada escaneo queda registrado en tu dashboard.
+          </p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">Dashboard con reportes</div>
+          <p class="al-benefit-desc">
+            Consulta trámites, comisiones y liquidaciones en tiempo real.
+            Exporta reportes y mantén el control total de tu actividad.
+          </p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="al-benefit-card">
+          <div class="al-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <div class="al-benefit-title">API de integración</div>
+          <p class="al-benefit-desc">
+            Para concesionarios con sistemas propios. Automatiza trámites directamente desde tu plataforma.
+          </p>
+          <a href="/api-docs/" class="al-benefit-link">
+            Ver documentación
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="al-section al-section-muted">
+    <div class="al-container">
+      <div class="al-section-label">Cómo funciona</div>
+      <h2 class="al-section-title">Tres pasos para empezar a ganar</h2>
+      <p class="al-section-desc">
+        El proceso de onboarding toma menos de 24 horas. Sin burocracia, sin costos ocultos.
+      </p>
+      <div class="al-steps">
+        <div class="al-step">
+          <div class="al-step-num">1</div>
+          <div>
+            <div class="al-step-title">Aplica en línea</div>
+            <p class="al-step-desc">
+              Completa el formulario de aplicación en menos de 2 minutos.
+              Solo necesitamos información básica de tu negocio.
+            </p>
+          </div>
+        </div>
+        <div class="al-step">
+          <div class="al-step-num">2</div>
+          <div>
+            <div class="al-step-title">Recibe tu kit de aliado</div>
+            <p class="al-step-desc">
+              Subdominio personalizado, código QR único y acceso al dashboard.
+              Todo listo para operar el mismo día.
+            </p>
+          </div>
+        </div>
+        <div class="al-step">
+          <div class="al-step-num">3</div>
+          <div>
+            <div class="al-step-title">Empieza a ganar</div>
+            <p class="al-step-desc">
+              Comparte tu enlace con tus clientes y gana comisiones por cada trámite pagado.
+              Sin límite de ingresos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO CAN BE AN ALLY -->
+  <section class="al-section al-section-dark">
+    <div class="al-container">
+      <div class="al-section-label">&#191;Quién puede ser aliado?</div>
+      <h2 class="al-section-title al-section-title-white">Si trabajas con movilidad eléctrica, esto es para ti</h2>
+      <p class="al-section-desc al-section-desc-light">
+        Cualquier persona o empresa con contactos en el ecosistema de vehículos eléctricos e híbridos puede aplicar.
+      </p>
+      <div class="al-who-grid">
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Concesionarios de vehículos eléctricos e híbridos</div>
+        </div>
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Talleres especializados</div>
+        </div>
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Vendedores independientes</div>
+        </div>
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+              <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Influencers de movilidad eléctrica</div>
+        </div>
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Asesores tributarios y contadores</div>
+        </div>
+
+        <div class="al-who-item">
+          <div class="al-who-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+            </svg>
+          </div>
+          <div class="al-who-label">Cualquier persona con red en el ecosistema</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="al-section al-section-muted">
+    <div class="al-container">
+      <div class="al-cta-box">
+        <h2 class="al-cta-title">&#191;Listo para ser aliado?</h2>
+        <p class="al-cta-subtitle">
+          Únete a la red de aliados CertiVeh y empieza a generar ingresos adicionales
+          ofreciendo beneficios tributarios reales a tus clientes.
+        </p>
+        <a href="https://aliado.certiveh.co/" class="al-btn-primary" target="_blank" rel="noopener">
+          Aplicar ahora
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <p class="al-cta-note">
+          <span>Respuesta en menos de 24 horas</span>
+          <span>Sin costo de entrada</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="al-footer">
+    <div class="al-footer-inner">
+      <a href="/" class="al-footer-logo">Certi<span>Veh</span></a>
+      <div class="al-footer-links">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/api-docs/">API Docs</a>
+        <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+      </div>
+      <p class="al-footer-copy">
+        &copy; 2026 CertiVeh &mdash; Programa de Aliados &mdash; Colombia
+      </p>
+    </div>
+  </footer>
+
+</BaseLayout>
