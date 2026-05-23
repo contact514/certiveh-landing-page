@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Navbar } from '../app/components/Navbar';
-
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -73,6 +71,19 @@ const webPageLd = JSON.stringify({
     html { scroll-behavior: smooth; }
     body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
 
+    /* ── NAV ── */
+    .al-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--slate-900);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      height: 64px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 48px;
+    }
+    .al-nav-logo { font-size: 19px; font-weight: 800; color: white; letter-spacing: -0.03em; text-decoration: none; }
+    .al-nav-logo span { color: var(--emerald-400); }
+    .al-nav-back { font-size: 14px; color: var(--slate-400); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .al-nav-back:hover { color: white; }
+
     /* ── HERO ── */
     .al-hero {
       background: var(--slate-900);
@@ -104,7 +115,7 @@ const webPageLd = JSON.stringify({
       margin-bottom: 24px;
     }
     .al-hero-title {
-      font-size: clamp(32px, 5vw, 56px);
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 800;
       color: white;
       letter-spacing: -0.03em;
@@ -113,7 +124,7 @@ const webPageLd = JSON.stringify({
     }
     .al-hero-title span { color: var(--emerald-400); }
     .al-hero-subtitle {
-      font-size: clamp(16px, 2vw, 19px);
+      font-size: clamp(15px, 2vw, 18px);
       color: var(--slate-400);
       line-height: 1.65;
       max-width: 600px;
@@ -171,7 +182,7 @@ const webPageLd = JSON.stringify({
       margin-bottom: 10px;
     }
     .al-section-title {
-      font-size: clamp(24px, 3.5vw, 38px);
+      font-size: clamp(28px, 3.5vw, 36px);
       font-weight: 800;
       color: var(--slate-900);
       letter-spacing: -0.025em;
@@ -210,7 +221,7 @@ const webPageLd = JSON.stringify({
       left: 0;
       width: 100%;
       height: 3px;
-      background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
+      background: var(--emerald-600);
     }
     .al-benefit-card:hover {
       transform: translateY(-3px);
@@ -268,7 +279,7 @@ const webPageLd = JSON.stringify({
       left: calc(16.67% + 20px);
       right: calc(16.67% + 20px);
       height: 2px;
-      background: linear-gradient(90deg, var(--emerald-200), var(--teal-400), var(--emerald-200));
+      background: var(--emerald-200);
     }
     .al-step {
       display: flex;
@@ -347,14 +358,14 @@ const webPageLd = JSON.stringify({
 
     /* ── CTA FINAL ── */
     .al-cta-box {
-      background: linear-gradient(135deg, #0f2818 0%, var(--slate-900) 100%);
+      background: var(--slate-900);
       border: 1px solid rgba(5,150,105,0.25);
       border-radius: 20px;
       padding: 64px 48px;
       text-align: center;
     }
     .al-cta-title {
-      font-size: clamp(28px, 4vw, 44px);
+      font-size: clamp(28px, 3.5vw, 36px);
       font-weight: 800;
       color: white;
       letter-spacing: -0.03em;
@@ -450,9 +461,17 @@ const webPageLd = JSON.stringify({
     }
   </style>
 
-  <!-- NAV — shared component -->
-  <Navbar isHome={false} client:load />
-  <div style="height: 64px;"></div>
+  <!-- NAV -->
+  <nav class="al-nav">
+    <a href="/" class="al-nav-logo">Certi<span>Veh</span></a>
+    <a href="/" class="al-nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Volver al inicio
+    </a>
+  </nav>
 
   <!-- HERO -->
   <section class="al-hero">
