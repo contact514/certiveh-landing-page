@@ -13,6 +13,7 @@ const breadcrumbLd = JSON.stringify({
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
+  name: 'Programa de Aliados CertiVeh',
   headline: 'Programa de Aliados CertiVeh — Genera ingresos con vehículos eléctricos e híbridos',
   description: 'Únete al programa de aliados CertiVeh. Concesionarios, talleres, vendedores e influencers generan ingresos adicionales ofreciendo el certificado UPME a sus clientes. Sin costo de entrada.',
   url: 'https://certiveh.co/aliados/',
@@ -21,6 +22,18 @@ const webPageLd = JSON.stringify({
   inLanguage: 'es-CO',
   datePublished: '2026-05-22',
   dateModified: '2026-05-22',
+  mainEntity: {
+    '@type': 'Service',
+    name: 'Programa de Aliados CertiVeh',
+    serviceType: 'Programa de referidos y alianzas comerciales',
+    description: 'Programa para concesionarios, talleres y vendedores de vehículos eléctricos e híbridos que quieren generar ingresos ofreciendo el trámite del certificado UPME a sus clientes.',
+    provider: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+    areaServed: { '@type': 'Country', name: 'Colombia' },
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: 'Concesionarios, talleres, vendedores de vehículos eléctricos e híbridos'
+    }
+  }
 });
 ---
 
@@ -478,7 +491,7 @@ const webPageLd = JSON.stringify({
       </svg>
       Programa B2B
     </div>
-    <h1 class="al-hero-title">Sé un aliado <span>CertiVeh</span></h1>
+    <h1 class="al-hero-title">Programa de Aliados <span>CertiVeh</span></h1>
     <p class="al-hero-subtitle">
       Genera ingresos adicionales ayudando a tus clientes a obtener su certificado UPME.
       Sin inversión, sin riesgo.
