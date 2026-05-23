@@ -81,7 +81,7 @@ const productLd = JSON.stringify({
       --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
 
     .v-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--slate-200); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
     .v-nav a { text-decoration: none; font-size: 14px; color: var(--slate-500); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
@@ -94,15 +94,15 @@ const productLd = JSON.stringify({
     .v-breadcrumb { font-size: 13px; color: var(--slate-400); margin-bottom: 20px; }
     .v-breadcrumb a { color: var(--slate-400); text-decoration: none; }
     .v-breadcrumb a:hover { color: white; }
-    .v-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+    .v-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px; }
     .v-badge-ev { background: rgba(5,150,105,0.15); border: 1px solid rgba(5,150,105,0.3); color: #34D399; }
     .v-badge-hev { background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3); color: #5EEAD4; }
-    .v-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .v-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 12px; }
     .v-desc { font-size: 16px; color: var(--slate-400); line-height: 1.6; max-width: 640px; }
 
     .v-container { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; }
-    .v-card { background: white; border: 1px solid var(--slate-200); border-radius: 12px; padding: 32px; margin-bottom: 24px; }
-    .v-card-title { font-size: 20px; font-weight: 700; color: var(--slate-900); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .v-card { background: white; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 32px; margin-bottom: 24px; }
+    .v-card-title { font-size: 20px; font-weight: 600; color: var(--slate-900); margin-bottom: 20px; letter-spacing: -0.01em; }
 
     .v-benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
     .v-benefit { padding: 20px; border-radius: 10px; border: 1px solid; }
@@ -119,12 +119,12 @@ const productLd = JSON.stringify({
     .v-roi-big { font-size: 32px; font-weight: 700; color: var(--emerald-600); letter-spacing: -0.02em; }
     .v-roi-text { font-size: 14px; color: var(--emerald-700); margin-top: 4px; }
 
-    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--emerald-600); color: white; border: none; border-radius: 8px; padding: 16px 32px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: var(--ff); transition: background 0.15s; text-decoration: none; }
-    .v-cta:hover { background: var(--emerald-700); }
+    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--emerald-600); color: white; border: none; border-radius: 8px; padding: 16px 32px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: background 0.15s, transform 0.1s; text-decoration: none; }
+    .v-cta:hover { background: var(--emerald-700); transform: translateY(-1px); }
     .v-cta-wrap { text-align: center; margin-top: 32px; }
     .v-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 10px; }
 
-    .v-faq-q { font-size: 16px; font-weight: 600; color: var(--slate-900); margin-bottom: 6px; }
+    .v-faq-q { font-size: 15px; font-weight: 500; color: var(--slate-900); margin-bottom: 6px; }
     .v-faq-a { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px; }
 
     .v-footer { font-size: 13px; color: var(--slate-400); text-align: center; padding: 32px 48px; border-top: 1px solid var(--slate-200); }
