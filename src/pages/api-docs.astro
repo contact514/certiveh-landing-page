@@ -656,7 +656,7 @@ const webPageLd = JSON.stringify({
       <!-- INTRODUCTION -->
       <h1 id="introduction" class="section-anchor">Introduction</h1>
       <p>
-        <strong>CertiVeh Partner API</strong> &mdash; Integra CertiVeh en tu aplicacion para que tus usuarios obtengan su certificado UPME sin salir de tu plataforma.
+        <strong>CertiVeh Partner API</strong> –Integra CertiVeh en tu aplicacion para que tus usuarios obtengan su certificado UPME sin salir de tu plataforma.
       </p>
       <p>
         Esta API REST permite crear usuarios, iniciar tramites de certificacion UPME, subir documentos, procesar pagos y consultar el estado de cada tramite de forma programatica.
@@ -698,7 +698,7 @@ const webPageLd = JSON.stringify({
       </div>
       <p class="endpoint-desc">Registers a new user associated with your partner account.</p>
 
-      <h4>Request Body &mdash; Persona Natural</h4>
+      <h4>Request Body –Persona Natural</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
@@ -721,7 +721,7 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <h4>Additional Fields &mdash; Persona Juridica</h4>
+      <h4>Additional Fields –Persona Juridica</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
@@ -981,7 +981,7 @@ const webPageLd = JSON.stringify({
       <h4>Payload</h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
-          <span class="code-block-label">JSON &mdash; POST to your webhook URL</span>
+          <span class="code-block-label">JSON –POST to your webhook URL</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
         <pre class="code-block">&#123;
@@ -1011,7 +1011,7 @@ const webPageLd = JSON.stringify({
       <ul class="status-list">
         <li>
           <span class="status-code s4">400</span>
-          <span>Invalid request &mdash; missing field or wrong format</span>
+          <span>Invalid request –missing field or wrong format</span>
         </li>
         <li>
           <span class="status-code s4">401</span>
@@ -1019,7 +1019,7 @@ const webPageLd = JSON.stringify({
         </li>
         <li>
           <span class="status-code s4">403</span>
-          <span>Unauthorized &mdash; resource doesn't belong to your partner account</span>
+          <span>Unauthorized –resource doesn't belong to your partner account</span>
         </li>
         <li>
           <span class="status-code s4">404</span>
@@ -1040,31 +1040,31 @@ const webPageLd = JSON.stringify({
         <li>
           <div class="flow-step-content">
             <strong>Create user</strong>
-            <code>POST /users</code> &mdash; Register the end-user with personal data.
+            <code>POST /users</code> –Register the end-user with personal data.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
             <strong>Create tramite with vehicle data</strong>
-            <code>POST /tramites</code> &mdash; Submit vehicle details, receive pricing breakdown.
+            <code>POST /tramites</code> –Submit vehicle details, receive pricing breakdown.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
             <strong>Upload documents</strong>
-            <code>POST /tramites/:id/documents</code> &mdash; Upload cedula, tarjeta de propiedad, and factura.
+            <code>POST /tramites/:id/documents</code> –Upload cedula, tarjeta de propiedad, and factura.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
             <strong>Initialize payment</strong>
-            <code>POST /tramites/:id/payment</code> &mdash; Get Wompi widget parameters and render checkout.
+            <code>POST /tramites/:id/payment</code> –Get Wompi widget parameters and render checkout.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
             <strong>Poll status</strong>
-            <code>GET /tramites/:id</code> &mdash; Check tramite progress periodically.
+            <code>GET /tramites/:id</code> –Check tramite progress periodically.
           </div>
         </li>
         <li>
@@ -1095,7 +1095,7 @@ const webPageLd = JSON.stringify({
 
   <!-- FOOTER -->
   <footer class="api-footer">
-    CertiVeh Partner API &mdash; <a href="/">certiveh.co</a> &mdash; <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+    CertiVeh Partner API –<a href="/">certiveh.co</a> –<a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
   </footer>
 
   <!-- SCRIPTS -->
