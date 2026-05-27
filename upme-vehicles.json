@@ -1,0 +1,466 @@
+{
+  "scraped_at": "2026-05-21T09:26:08.705Z",
+  "vehicles": {
+    "AUDI": {
+      "E-TRON 55 QUATTRO PRESTIGE": [],
+      "Q8 E-TRON 50 QUATTRO PRESTIGE": [],
+      "Q8 SPORTBACK E-TRON 50 QUATTRO S LINE": [],
+      "Q8 SPORTBACK E-TRON 55 QUATTRO PRESTIGE": [],
+      "Q8 E-TRON 55 QUATTRO PRESTIGE": [],
+      "A6 E-TRON": [],
+      "E-TRON 55 ADVANCED 300KW": [],
+      "E-TRON 55 PRESTIGE 300KW": [],
+      "E-TRON SPORTBACK 55 PRESTIGE 300KW": [],
+      "Q6 E-TRON": [],
+      "Q6 E-TRON QUATTRO": [],
+      "Q6 E-TRON S LINE": [],
+      "Q6 SB E-TRON": [],
+      "Q8 E-TRON 50 250KW": [],
+      "Q8 E-TRON 50 S LINE 250 KW": [],
+      "Q8 E-TRON 55 300KW": [],
+      "Q8 E-TRON SPORTBACK 50 250KW": [],
+      "Q8 E-TRON SPORTBACK 55 300KW": [],
+      "Q8 SPORTBACK E-TRON 50 S LINE 250 KW": [],
+      "RS E-TRON GT": []
+    },
+    "BMW": {
+      "330 E": [],
+      "IX1 XDRIVE 30 EDICION M": [],
+      "IX1 XDRIVE 20 XLINE": [],
+      "IX2 XDRIVE 30 EDICION M": [],
+      "X3 XDRIVE 30E IPERFORMANCE": [],
+      "X3 XDRIVE 30E EDICION M": [],
+      "X5 XDRIVE 45E": [],
+      "X5 XDRIVE 50E": [],
+      "X5 XDRIVE 50E EDICION M": [],
+      "X5 XDRIVE 40I": [],
+      "IX XDRIVE 40": [],
+      "IX XDRIVE 45": [],
+      "IX3 M SPORT IMPRESIVE": [],
+      "I5 EDRIVE 40": [],
+      "I3": [],
+      "I3S": [],
+      "CE 04": [],
+      "MINI COOPER SE": [],
+      "IX1 EDRIVE20 EDICIÓN M": [],
+      "IX2 XDRIVE30": [],
+      "530 E": [],
+      "X1 XDRIVE 25E": []
+    },
+    "BYD": {
+      "YUAN PLUS EV": [],
+      "YUAN PLUS": [],
+      "YUAN UP 380 GS": [],
+      "YUAN UP 380 LUX": [],
+      "SEAGULL 300 GL": [],
+      "SEAGULL 400 GS": [],
+      "DOLPHIN": [],
+      "SEAL": [],
+      "SEALION 7": [],
+      "SONG PLUS DMI": [],
+      "SONG PLUS": [],
+      "SONG PRO GLX": [],
+      "TANG EV": [],
+      "HAN EV": [],
+      "QIN PLUS DMI": [],
+      "SHARK": [],
+      "E1 GS": [],
+      "E1 GL": [],
+      "E5 GL": [],
+      "E5 GS": [],
+      "YUAN EV 300 GL": [],
+      "YUAN EV 400 GL": [],
+      "YUAN EV 400 GS": [],
+      "YUAN PRO GL": [],
+      "YUAN PRO GS": [],
+      "SONG PLUS EV": [],
+      "BYD SEAGULL 380": [],
+      "BYD SEAGULL (GL)": [],
+      "BYD SEAGULL (GS)": [],
+      "BYD SONG PRO DMI": [],
+      "BYD YUAN UP DMI": [],
+      "T3": [],
+      "YUAN PRO": []
+    },
+    "DEEPAL": {
+      "S07 EMAX": [],
+      "S07 MAX": [],
+      "S05 EMAX": [],
+      "S05 MAX": [],
+      "S05 REEV": [],
+      "G318": []
+    },
+    "CHANGAN": {
+      "HUNTER": []
+    },
+    "CHERY": {
+      "ICAR 03 2WD": [],
+      "TIGGO 7": [],
+      "TIGGO 8": [],
+      "ICAR 03 EV ALL ROAD IWD": [],
+      "ICAR 03 EV 2WD": [],
+      "EQ7": []
+    },
+    "CHEVROLET": {
+      "BLAZER EV": [],
+      "BOLT EUV": [],
+      "EQUINOX": [],
+      "BOLT": [],
+      "CAPTIVA EV": [],
+      "CAPTIVA PHEV": [],
+      "SPARK": [],
+      "EQUNOX EV 2EAWD LT": []
+    },
+    "TOYOTA": {
+      "COROLLA CROSS XEI": [],
+      "COROLLA CROSS SEG": [],
+      "YARIS CROSS XS HV": [],
+      "YARIS CROSS XLS HV": [],
+      "SEQUOIA": [],
+      "RAV 4 XLE": [],
+      "COROLLA CROSS XLI": [],
+      "RAV 4 LIMITED": [],
+      "SEQUOIA TRD PRO": [],
+      "COROLLA SEG 1.8 HEV 4X2 ECVT": [],
+      "BZ4X": [],
+      "COROLLA CROSS HEV": [],
+      "COROLLA HEV": [],
+      "RAV4 HEV": [],
+      "TUNDRA HEV": [],
+      "YARIS CROSS HEV": [],
+      "BZ3X": [],
+      "BZ3X MAX": [],
+      "RAV4 LE": []
+    },
+    "CUPRA": {
+      "FORMENTOR": [],
+      "TERRAMAR": []
+    },
+    "DFSK": {
+      "SERES 3": [],
+      "EC35": [],
+      "SERES 5": [],
+      "E5 PHEV": []
+    },
+    "DONGFENG": {
+      "E70": [],
+      "S50 EV": [],
+      "E70 AEOLUS": [],
+      "BOX": []
+    },
+    "ZHIDOU": {
+      "D2S": []
+    },
+    "ZERO": {
+      "SR": []
+    },
+    "ZEEKR": {
+      "X": [],
+      "X PREMIUM RWD": [],
+      "X SPORT RWD": [],
+      "7X LFP": [],
+      "7X NMC": []
+    },
+    "VOLVO": {
+      "XC90 RECHARGE ULTIMATE T8": [],
+      "XC60 RECHARGE PLUS T8": [],
+      "XC40 ULTIMATE": [],
+      "XC40 RECHARGE PLUS": [],
+      "C40 RECHARGE PURE ELECTRIC P8": [],
+      "EX30": [],
+      "XC60 T8 RECHARGE": [],
+      "C40 RECHARGE PURE ELECTRIC P6": [],
+      "EC40 P8": [],
+      "EC40 ULTRA P8": []
+    },
+    "SUBARU": {
+      "FORESTER STRONG": [],
+      "CROSSTREK": []
+    },
+    "RIDDARA": {
+      "RD6": [],
+      "RD6 PRO": [],
+      "RD6 ULTRA": [],
+      "RD6 AIR": []
+    },
+    "RENAULT": {
+      "ZOE E-TECH": [],
+      "ZOE ICONIC": [],
+      "MEGANE E-TECH": [],
+      "KWID E-TECH": [],
+      "ZOE E-TECH ICONIC": [],
+      "KOLEOS E-TECH": [],
+      "KOLEOS ALPINE": [],
+      "KANGOO E-TECH": [],
+      "KANGOO Z.E.": [],
+      "MASTER E-TECH": [],
+      "TWIZY": [],
+      "ZOE": []
+    },
+    "RADAR": {
+      "MAX": [],
+      "AIR 4WD": [],
+      "MAX 4WD": []
+    },
+    "PORSCHE": {
+      "CAYENNE E-HYBRID COUPE": [],
+      "TAYCAN": [],
+      "TAYCAN PLUS": []
+    },
+    "NIU": {
+      "NQI SPORT": []
+    },
+    "NISSAN": {
+      "X TRAIL E-POWER EXCLUSIVE": [],
+      "X TRAIL E-POWER ADVANCE": [],
+      "LEAF": [],
+      "NEW LEAF TEKNA": [],
+      "X-TRAIL T33": []
+    },
+    "MG": {
+      "ZS": [],
+      "MG4": [],
+      "MARVEL R": [],
+      "MARVEL R 4X4": [],
+      "MG4 CROSS PLUS": [],
+      "MG4 DELUXE": [],
+      "MG4 PLUS": [],
+      "ZS EV DLX": [],
+      "ZS EV COM": [],
+      "MG4 AWD": [],
+      "MARVEL R 4X2": []
+    },
+    "MAZDA": {
+      "MX-30": [],
+      "CX-90": [],
+      "MX30": [],
+      "CX-60 2.5L SKYACTIV PHEV": []
+    },
+    "FORD": {
+      "SCAPE ACTIVE": [],
+      "SCAPE PLATINUM": [],
+      "SCAPE ST-LINE": [],
+      "F150 XLT": [],
+      "F150 PLATINUM": [],
+      "ESCAPE TITANIUM 4X4 HEV - U0X2": [],
+      "TERRITORY": [],
+      "ESCAPE ACTIVE 4X2 HÍBRIDA": [],
+      "ESCAPE PLATINUM 4X4 HIBRIDA": [],
+      "ESCAPE SE 4X2": [],
+      "ESCAPE SEL 4X2": [],
+      "ESCAPE ST LINE 4X2 HIBRIDA": [],
+      "ESCAPE ST LINE SELECT 4X4 HIBRIDA": [],
+      "ESCAPE TITANIUM 4X4": [],
+      "ETRANSIT 318 L2H2": [],
+      "ETRANSIT 318 L2H3": [],
+      "ETRANSIT 318 L3": [],
+      "ETRANSIT 318 L3H3": [],
+      "ETRANSIT 318 L4": [],
+      "ETRANSIT 327 L2H2": [],
+      "ETRANSIT 327 L2H3": [],
+      "ETRANSIT 327 L3": [],
+      "ETRANSIT 327 L3H3": [],
+      "ETRANSIT 327 L4": [],
+      "ETRANSIT 418 L3": [],
+      "ETRANSIT 418 L4": [],
+      "ETRANSIT 427 L3": [],
+      "ETRANSIT 427 L4": [],
+      "F-150 3.5L FHEV 4X4 AT LARIAT CREW CAB": [],
+      "F-150 3.5L FHEV 4X4 AT PLATINUM CREW CAB": [],
+      "F-150 3.5L FHEV 4X4 AT PLATINUM SUPER CREW": [],
+      "F-150 3.5L FHEV 4X4 AT XLT SUPER CREW": [],
+      "MAVERICK LARIAT 2.5L FHEV": [],
+      "MAVERICK XLT 2.5L FHEV": [],
+      "TERRITORY FHEV": [],
+      "TERRITORY TITANIUM FHEV": [],
+      "TERRITORY TREND FHEV": []
+    },
+    "GOGORO": {
+      "VIVA MIX": []
+    },
+    "GREAT WALL": {
+      "TANK 300 HEV": [],
+      "H6 AWD": [],
+      "H6 HEV": [],
+      "H6 PHEV": [],
+      "H7 HEV": [],
+      "JOLION HEV": [],
+      "JOLION PRO HEV": [],
+      "ORA 03": [],
+      "ORA 03 GT": [],
+      "TANK 500 HEV": []
+    },
+    "HONDA": {
+      "CR-V ADVANCE": [],
+      "CIVIC 2WD": [],
+      "CR-V ADVANCED HYBRID AWD": [],
+      "CIVIC HYBRID": [],
+      "CIVIC 2WD HEV (E-CVT)": [],
+      "CRV 4WD FHEXLA (E-CVT)": []
+    },
+    "HYUNDAI": {
+      "KONA LIMITED": [],
+      "KONA PREMIUM": [],
+      "KONA N-LINE": [],
+      "SANTA FE LIMITED": [],
+      "TUCSON PREMIUM": [],
+      "TUCSON HIBRIDA ATLIMITED 4x2": [],
+      "KONA ELECTRICA": [],
+      "SANTA FE PREMIUM HEV": []
+    },
+    "JMC": {
+      "EV3": [],
+      "E819 EV / CHR EV": [],
+      "E820 EV / CPR EV": [],
+      "E820 EV / CPR EV BUS": [],
+      "GRAND AVENUE EV": [],
+      "GSE 400": [],
+      "GSE 500": [],
+      "GSE 530": [],
+      "GSX 500": [],
+      "GSX 600": [],
+      "JX1032PSEF5BEV / VIGUS EV": [],
+      "JX5040XXYTHB-M5BEV / TOURING EV": [],
+      "JX5043XXTGE25BEV / CPR EV": [],
+      "JX7001ESLBEV / JMEV 3": [],
+      "JX7001ESPBEV / JMEV 3": [],
+      "JX7004ESBBEV / JMEV 2": []
+    },
+    "KIA": {
+      "EV5 LIGHT": [],
+      "EV5 LIGHT PLUS": [],
+      "EV5 WIND": [],
+      "EV9 SX": [],
+      "NIRO SG2": [],
+      "SPORTAGE ZENITH": [],
+      "CARNIVAL ZENITH": [],
+      "EV2": [],
+      "EV3 LIGHT": [],
+      "EV3 LIGHT PLUS": [],
+      "EV9 GT LINE": [],
+      "NIRO DESIRE": [],
+      "NIRO VIBRANT": [],
+      "NIRO ZENITH": [],
+      "SORENTO ZENITH": [],
+      "SPORTAGE VIBRANT": [],
+      "TELLURIDE": []
+    },
+    "TESLA": {
+      "MODEL Y REAR-WHEEL": [],
+      "MODEL Y LONG RANGE AWD": [],
+      "MODEL Y REAR-WHEEL DRIVE": [],
+      "MODEL 3 REAR-WHEEL DRIVE": [],
+      "MODEL 3 RWD": [],
+      "MODEL 3 LR AWD": [],
+      "MODEL 3 AWD": []
+    },
+    "MERCEDES BENZ": {
+      "EQB350": [],
+      "EQA350 4MATIC": [],
+      "C350E": [],
+      "EQA250+": [],
+      "EQB250+": [],
+      "EQB350 4MATIC": [],
+      "EQE350+": [],
+      "EQE350+ SUV": [],
+      "EQS450 4MATIC": [],
+      "EQS450+": [],
+      "G580": [],
+      "E-SPRINTER 314": [],
+      "EQS350": [],
+      "EQS450+ SEDAN": [],
+      "EQS450 SUV": [],
+      "C 350 E": [],
+      "E 300 E": [],
+      "E 350 E": [],
+      "GLC 300 E 4MATIC": [],
+      "GLC 300 E 4MATIC COUPE": [],
+      "GLC 350 E 4MATIC": [],
+      "GLE 350 DE 4MATIC": [],
+      "GLE 350 DE 4MATIC COUPE": [],
+      "GLE 400 E 4MATIC": []
+    },
+    "SMART": {
+      "SMART # 1 PRO +": [],
+      "SMART # 1 BRABUS": [],
+      "SMART # 1 PURE": [],
+      "SMART # 3 BRABUS": [],
+      "SMART # 3 PRO": [],
+      "SMART # 3 PRO+": [],
+      "SMART # 5 BRABUS": [],
+      "SMART # 5 PRO+": []
+    },
+    "MINI COOPER": {
+      "MINI COOPER E CHN": []
+    },
+    "CITROEN": {
+      "E-BERLINGO": []
+    },
+    "JAC": {
+      "E10X": [],
+      "E30X": [],
+      "E40X": []
+    },
+    "JETOUR": {
+      "T1 IDM": [],
+      "T2 IDM": []
+    },
+    "SUZUKI": {
+      "E-VITARA 2WD GLX": []
+    },
+    "MINI": {
+      "ACEMAN E": [],
+      "ACEMAN SE": [],
+      "COUNTRYMAN E": []
+    },
+    "JEEP": {
+      "AVENGER": []
+    },
+    "PEUGEOT": {
+      "E-2008": [],
+      "E-2008 GT": []
+    },
+    "GAC": {
+      "AION UT": [],
+      "AION V500": [],
+      "AION V600": [],
+      "AION Y": [],
+      "AION Y PLUS": []
+    },
+    "AVATR": {
+      "AVATR 7": []
+    },
+    "FANG CHENG BAO": {
+      "TITANIUM 3": []
+    },
+    "FAW": {
+      "BESTUNE JOY03/JOYFUL03": [],
+      "BESTUNE PONY": [],
+      "BESTUNE XIAOMA": [],
+      "BESTUNE YUEYI 03/E03": []
+    },
+    "JAGUAR": {
+      "I-PACE BLACK LIMITED EDITION": [],
+      "I-PACE HSE 90kWh 400PS": [],
+      "I-PACE R-DYNAMIC SE": [],
+      "I-PACE S 90kWh 400PS": []
+    },
+    "RAYSINCE": {
+      "E5 CITY PLUS": [],
+      "E5 HIGH SPEED (PRO)": [],
+      "E5 LONG RANGE": [],
+      "E5 STANDARD": []
+    },
+    "STARK": {
+      "E-VAN 1.0T LITE": []
+    },
+    "XPENG": {
+      "G6 LONG RANGE PRO": [],
+      "G6 STANDARD RANGE AIR": [],
+      "G9 AWD PERFORMANCE": []
+    },
+    "VOYAH": {
+      "COURAGE": []
+    }
+  }
+}
