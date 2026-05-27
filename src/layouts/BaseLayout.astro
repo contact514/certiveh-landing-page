@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  title = 'CertiVeh — Tu Tramitador Virtual del Certificado UPME en Colombia',
+  title = 'CertiVeh, Tu Tramitador Virtual del Certificado UPME en Colombia',
   description = 'CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia. Devolución de IVA, deducción en renta y reducción arancelaria. 100% en línea.',
   keywords = 'certificado UPME, tramitador virtual UPME, vehículos eléctricos Colombia, beneficios tributarios vehículo eléctrico, devolución IVA vehículo eléctrico, deducción renta vehículo eléctrico, trámite UPME, certificado beneficio tributario Colombia',
   ogType = 'website',
@@ -108,21 +108,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
         width: 100,
         height: 100,
       },
-      description: 'CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia, habilitando la deducción en renta, la devolución de IVA y la reducción arancelaria bajo la Ley 1715 de 2014 y la Ley 2099 de 2021.',
+      description: 'CertiVeh es una plataforma colombiana que gestiona el trámite del certificado UPME para vehículos eléctricos e híbridos, habilitando la devolución de IVA, la deducción en renta y la exclusión de arancel conforme a la Ley 1715 de 2014, la Ley 2099 de 2021 y la Resolución UPME 045 de 2016. Cubre 362+ modelos de 51 marcas certificadas por la UPME.',
       email: 'contacto@certiveh.co',
+      foundingDate: '2025',
+      legalName: 'CertiVeh S.A.S.',
       address: {
         '@type': 'PostalAddress',
+        addressLocality: 'Medellín',
+        addressRegion: 'Antioquia',
         addressCountry: 'CO',
-        addressRegion: 'Colombia',
       },
       areaServed: { '@type': 'Country', name: 'Colombia' },
+      serviceType: 'Gestión de certificados UPME para beneficios tributarios de vehículos eléctricos e híbridos',
       knowsAbout: [
         'Certificado UPME',
         'Vehículos eléctricos',
         'Vehículos híbridos',
         'Ley 1715 de 2014',
         'Ley 2099 de 2021',
+        'Resolución UPME 045 de 2016',
+        'Resolución CREG 030 de 2018',
         'Beneficios tributarios movilidad eléctrica',
+        'Devolución de IVA vehículos eléctricos',
+        'Deducción en renta vehículos eléctricos',
         'Gestión Eficiente de la Energía',
       ],
     })} />
@@ -142,8 +150,33 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
     <!-- Structured Data slot (JSON-LD) -->
     <slot name="head" />
+    <style>
+      html { scroll-behavior: smooth; }
+      .skip-link {
+        position: absolute; top: -100%; left: 16px;
+        background: #059669; color: #fff; padding: 12px 24px;
+        border-radius: 0 0 8px 8px; font-size: 14px; font-weight: 600;
+        text-decoration: none; z-index: 9999;
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      .skip-link:focus { top: 0; }
+      /* G1: Global focus-visible for keyboard accessibility */
+      a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+        outline: 2px solid #059669;
+        outline-offset: 2px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
   </head>
   <body style="background:#ffffff">
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
     <slot />
   </body>
 </html>

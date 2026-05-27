@@ -98,6 +98,25 @@ const CSS = `
   ::-webkit-scrollbar-track { background: var(--slate-100); }
   ::-webkit-scrollbar-thumb { background: var(--emerald-600); border-radius: 3px; }
 
+  /* H3: Range slider cross-browser thumb */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--emerald-600); cursor: pointer;
+    border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--emerald-600); cursor: pointer;
+    border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  input[type=range]:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(5,150,105,0.3);
+  }
+  input[type=range]:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px rgba(5,150,105,0.3);
+  }
+
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(255,255,255,0.96);
@@ -261,7 +280,7 @@ const CSS = `
   
   .mobile-menu {
     position: fixed;
-    top: 56px;
+    top: 64px;
     left: 0;
     right: 0;
     background: white;
@@ -300,7 +319,7 @@ const CSS = `
   .mobile-menu-overlay {
     display: none;
     position: fixed;
-    top: 56px;
+    top: 64px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -314,7 +333,7 @@ const CSS = `
   }
   
   @media (max-width: 768px) {
-    nav { padding: 0 20px; height: 56px; }
+    nav { padding: 0 20px; height: 64px; }
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
     
@@ -366,7 +385,7 @@ const CSS = `
   @media (max-width: 400px) {
     /* Ajustes para móviles muy pequeños */
     .trust-item { font-size: 11px !important; }
-    .cta-feature { font-size: 12px !important; }
+    .cta-feature { font-size: 12px !important; gap: 4px !important; }
     .cta-button { padding: 12px 24px !important; font-size: 14px !important; }
   }
   
@@ -566,7 +585,7 @@ function VentanaUPME() {
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 20, padding: "5px 14px", marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
           <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            {ventanaAbierta ? `Ventana abierta — ${cicloNombre}` : `Ventana cerrada — próximo: ${proximoCiclo}`}
+            {ventanaAbierta ? `Ventana abierta, ${cicloNombre}` : `Ventana cerrada, próximo: ${proximoCiclo}`}
           </span>
         </div>
 
@@ -717,7 +736,10 @@ function Hero() {
           { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta", color: "var(--teal-500)" },
           { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "var(--emerald-600)" },
         ].map(s => (
-          <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220 }}>
+          <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220, transition: "transform 0.2s, box-shadow 0.2s", cursor: "default" }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+          >
             {s.num
               ? <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
               : <div style={{ height: 24, width: 100, borderRadius: 6, background: "var(--slate-200)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
@@ -734,7 +756,7 @@ function Hero() {
         position: "relative", zIndex: 1
       }}>
         {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único"],["smartphone","100% en línea"]].map(([ico,txt]) => (
-          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "var(--slate-400)", fontWeight: 500 }}>
+          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "var(--slate-400)", fontWeight: 500, cursor: "default" }}>
             <Icon name={ico as string} size={13} color="var(--emerald-600)"/>{txt}
           </span>
         ))}
@@ -867,7 +889,7 @@ function ComoFunciona() {
         </div>
 
         {/* Image Comparison */}
-        <div style={{ marginTop: 64 }}>
+        <div style={{ marginTop: 80 }}>
           <ImageComparison
             beforeImage={imgElectricCar}
             afterImage={imgPortalUsuario}
@@ -1203,7 +1225,7 @@ function FAQ() {
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {items.map((item, i) => (
               <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
-                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)}>
+                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
                   <span>{item.q}</span><div className="faq-icon">+</div>
                 </button>
                 {open === i && (
@@ -1413,6 +1435,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
 
     const timer = setTimeout(() => {
       setShowUrgencyModal(true);
+      document.body.style.overflow = 'hidden';
       sessionStorage.setItem('urgencyModalSeen', 'true');
     }, 45000);
 
@@ -1438,7 +1461,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       <Footer/>
 
       {/* Urgency Modal */}
-      {showUrgencyModal && <UrgencyModal onClose={() => setShowUrgencyModal(false)} />}
+      {showUrgencyModal && <UrgencyModal onClose={() => { setShowUrgencyModal(false); document.body.style.overflow = ''; }} />}
 
       {/* Structured Data moved to index.astro for SSR */}
     </PortalUrlContext.Provider>

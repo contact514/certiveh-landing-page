@@ -8,7 +8,7 @@ const articles = [
     bannerClass: 'b-green',
     tag: 'Ley 1715/2014 · Ley 2099/2021 · Beneficios Tributarios',
     title: 'Los beneficios tributarios reales que tienen los vehículos eléctricos e híbridos en Colombia: qué dice exactamente la ley',
-    subtitle: 'Una guía rigurosa sobre la deducción en renta, la exclusión de IVA y la exención arancelaria — con las fuentes normativas que los soportan.',
+    subtitle: 'Una guía rigurosa sobre la deducción en renta, la exclusión de IVA y la exención arancelaria, con las fuentes normativas que los soportan.',
     date: 'Abril 2026',
     readTime: '15 min',
     audience: 'Personas naturales y jurídicas',
@@ -105,7 +105,7 @@ const articles = [
 ---
 
 <BlogLayout
-  title="Blog CertiVeh — Incentivos Tributarios Vehículos Eléctricos e Híbridos Colombia"
+  title="Blog CertiVeh | Incentivos Tributarios Vehículos Eléctricos e Híbridos Colombia"
   description="Guías rigurosas sobre los beneficios tributarios para vehículos eléctricos e híbridos en Colombia: deducción en renta, exclusión de IVA, proceso UPME y estrategias para flotas empresariales."
 >
   <style>
@@ -128,10 +128,10 @@ const articles = [
       margin-bottom: 16px;
     }
     .blog-home-intro h1 {
-      font-size: clamp(28px, 3.5vw, 36px); font-weight: 700; color: #0F172A;
+      font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: #0F172A;
       letter-spacing: -.02em; margin-bottom: 12px; line-height: 1.2;
     }
-    .blog-home-intro p { font-size: 16px; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .blog-home-intro p { font-size: 16px; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
     .articles-grid {
       display: flex; flex-direction: column; gap: 32px;
@@ -172,7 +172,7 @@ const articles = [
     }
     .card-banner-title {
       font-size: 20px; font-weight: 700; color: #fff;
-      letter-spacing: -.02em; line-height: 1.25; max-width: 580px;
+      letter-spacing: -.02em; line-height: 1.25; max-width: 580px; margin: 0;
     }
 
     .card-body {
@@ -203,7 +203,7 @@ const articles = [
     .card-read-btn svg { width: 13px; height: 13px; }
 
     @media (max-width: 640px) {
-      .blog-home-intro h1 { font-size: 24px; }
+      .blog-home-intro h1 { font-size: 32px; }
       .card-banner { padding: 24px; min-height: 130px; }
       .card-banner-title { font-size: 17px; }
       .card-body { padding: 20px 24px 24px; }
@@ -213,7 +213,6 @@ const articles = [
 
   <div class="blog-home-wrapper">
     <div class="blog-home-intro">
-      <div class="label">Blog CertiVeh · Incentivos Tributarios</div>
       <h1>Guía completa de beneficios tributarios para vehículos eléctricos e híbridos en Colombia</h1>
       <p>Información basada en la normativa vigente: Ley 1715 de 2014, Ley 2099 de 2021, Resolución UPME 00135 de 2025 y Resolución UPME 0070 de 2026.</p>
     </div>
@@ -222,10 +221,10 @@ const articles = [
       {articles.map(a => (
         <a href={`/blog/${a.slug}`} class="article-card">
           <div class={`card-banner ${a.bannerClass}`}>
-            <div class="card-banner-num">{a.num}</div>
+            <div class="card-banner-num" aria-hidden="true">{a.num}</div>
             <div class="card-banner-inner">
               <div class="card-banner-tag">{a.tag}</div>
-              <div class="card-banner-title">{a.title}</div>
+              <h2 class="card-banner-title">{a.title}</h2>
             </div>
           </div>
           <div class="card-body">
@@ -246,4 +245,5 @@ const articles = [
       ))}
     </div>
   </div>
+
 </BlogLayout>

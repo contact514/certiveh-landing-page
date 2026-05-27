@@ -36,7 +36,7 @@ const roi = Math.round(totalBeneficio / costoTotal * 10) / 10;
 
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
 
-const title = `${v.marca} ${v.modelo} — Certificado UPME y Beneficios Tributarios | CertiVeh`;
+const title = `${v.marca} ${v.modelo}, Certificado UPME y Beneficios Tributarios | CertiVeh`;
 const description = `¿Tienes un ${v.marca} ${v.modelo}? Calcula cuánto puedes recuperar con el certificado UPME: devolución de IVA ${fmt(iva)}, deducción en renta ${fmt(renta)}. Tramítalo con CertiVeh.`;
 const keywords = `${v.marca} ${v.modelo} certificado UPME, ${v.marca} ${v.modelo} beneficios tributarios, ${v.marca} ${v.modelo} devolución IVA Colombia, ${v.slug.replace(/-/g, ' ')}`;
 
@@ -55,6 +55,7 @@ const productLd = JSON.stringify({
   '@type': 'Product',
   name: `Certificado UPME para ${v.marca} ${v.modelo}`,
   description: description,
+  image: 'https://certiveh.co/og-image.png',
   brand: { '@type': 'Brand', name: 'CertiVeh' },
   offers: {
     '@type': 'Offer',
@@ -64,11 +65,59 @@ const productLd = JSON.stringify({
     url: `https://certiveh.co/vehiculos/${v.slug}/`,
   },
 });
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: `¿El ${v.marca} ${v.modelo} aplica para el certificado UPME?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Sí. El ${v.marca} ${v.modelo} es un vehículo ${v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `¿Cuánto me devuelve la DIAN por el IVA de mi ${v.marca} ${v.modelo}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Con un precio de ${fmt(v.precioCOP)}, el IVA pagado es de ${fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuánto puedo deducir en mi declaración de renta?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Puedes deducir hasta el 50% del valor del vehículo, es decir ${fmt(renta)}, de tu base gravable en la declaración de renta del año de la compra.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `El costo total para un ${v.marca} ${v.modelo} es de ${fmt(costoTotal)} COP (incluye trámite UPME ${fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA). Es un pago único, sin suscripciones.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué documentos necesito?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Solo tres: tu cédula de ciudadanía, la tarjeta de propiedad del vehículo y la factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.',
+      },
+    },
+  ],
+});
 ---
 
 <BaseLayout title={title} description={description} keywords={keywords}>
   <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   <script slot="head" type="application/ld+json" set:html={productLd} />
+  <script slot="head" type="application/ld+json" set:html={faqLd} />
 
   <style>
     :root {
@@ -83,26 +132,26 @@ const productLd = JSON.stringify({
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
 
-    .v-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--slate-200); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
-    .v-nav a { text-decoration: none; font-size: 14px; color: var(--slate-500); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
-    .v-nav a:hover { color: var(--slate-900); }
-    .v-nav-logo { font-size: 19px; font-weight: 800; color: var(--slate-900); letter-spacing: -0.03em; }
-    .v-nav-logo span { color: var(--emerald-600); }
+    .v-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--slate-900); border-bottom: 1px solid rgba(255,255,255,0.06); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; box-sizing: border-box; }
+    .v-nav-spacer { height: 64px; background: var(--slate-900); }
+    .v-nav a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--slate-400); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .v-nav a:hover { color: white; }
+    .v-nav-logo { display: flex; align-items: center; }
 
     .v-hero { background: var(--slate-900); padding: 64px 48px; }
-    .v-hero-inner { max-width: 900px; margin: 0 auto; }
-    .v-breadcrumb { font-size: 13px; color: var(--slate-400); margin-bottom: 20px; }
+    .v-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .v-breadcrumb { font-size: 13px; font-weight: 500; color: var(--slate-400); margin-bottom: 20px; }
     .v-breadcrumb a { color: var(--slate-400); text-decoration: none; }
     .v-breadcrumb a:hover { color: white; }
     .v-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px; }
     .v-badge-ev { background: rgba(5,150,105,0.15); border: 1px solid rgba(5,150,105,0.3); color: #34D399; }
     .v-badge-hev { background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3); color: #5EEAD4; }
-    .v-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 12px; }
+    .v-title { font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
     .v-desc { font-size: 16px; color: var(--slate-400); line-height: 1.6; max-width: 640px; }
 
-    .v-container { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; }
+    .v-container { max-width: 1200px; margin: 0 auto; padding: 48px 48px 80px; }
     .v-card { background: white; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 32px; margin-bottom: 24px; }
-    .v-card-title { font-size: 20px; font-weight: 600; color: var(--slate-900); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .v-card-title { font-size: 20px; font-weight: 600; color: var(--slate-900); margin-top: 0; margin-bottom: 20px; letter-spacing: -0.01em; line-height: 1.4; }
 
     .v-benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
     .v-benefit { padding: 20px; border-radius: 10px; border: 1px solid; }
@@ -119,28 +168,83 @@ const productLd = JSON.stringify({
     .v-roi-big { font-size: 32px; font-weight: 700; color: var(--emerald-600); letter-spacing: -0.02em; }
     .v-roi-text { font-size: 14px; color: var(--emerald-700); margin-top: 4px; }
 
-    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--emerald-600); color: white; border: none; border-radius: 8px; padding: 16px 32px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: background 0.15s, transform 0.1s; text-decoration: none; }
+    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--emerald-600); color: white; border: none; border-radius: 8px; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: background 0.15s, transform 0.1s; text-decoration: none; }
     .v-cta:hover { background: var(--emerald-700); transform: translateY(-1px); }
     .v-cta-wrap { text-align: center; margin-top: 32px; }
     .v-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 10px; }
 
-    .v-faq-q { font-size: 15px; font-weight: 500; color: var(--slate-900); margin-bottom: 6px; }
-    .v-faq-a { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px; }
+    .v-faq-item { border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; transition: border-color 0.15s; margin-bottom: 12px; }
+    .v-faq-item.open { border-color: var(--emerald-200); }
+    .v-faq-btn {
+      width: 100%; padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 500; color: var(--slate-900);
+      font-family: var(--ff); text-align: left; line-height: 1.4;
+    }
+    .v-faq-btn:hover { background: var(--slate-50); }
+    .v-faq-btn:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: -2px; }
+    .v-faq-icon {
+      width: 24px; height: 24px; border-radius: 9999px;
+      background: var(--emerald-50); color: var(--emerald-600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 600; flex-shrink: 0; margin-left: 16px;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+    .v-faq-item.open .v-faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
+    .v-faq-body {
+      display: none; padding: 0 24px 20px; font-size: 15px; font-weight: 400; line-height: 1.65;
+      color: var(--slate-600); background: var(--emerald-50);
+    }
+    .v-faq-item.open .v-faq-body { display: block; }
 
-    .v-footer { font-size: 13px; color: var(--slate-400); text-align: center; padding: 32px 48px; border-top: 1px solid var(--slate-200); }
-    .v-footer a { color: var(--emerald-600); text-decoration: none; }
+    .v-disclaimer { font-size: 13px; color: var(--slate-400); line-height: 1.5; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--slate-200); }
+    .v-footer { background: var(--slate-900); color: #94A3B8; padding: 48px 48px; }
+    .v-footer-inner { max-width: 1200px; margin: 0 auto; }
+    .v-footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+    .v-footer-brand p { font-size: 13px; color: #475569; margin-top: 10px; max-width: 260px; line-height: 1.5; }
+    .v-footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
+    .v-footer-col-label { font-size: 12px; font-weight: 600; color: #CBD5E1; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 14px; }
+    .v-footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+    .v-footer-col-links a { font-size: 14px; color: #475569; text-decoration: none; transition: color 0.15s; }
+    .v-footer-col-links a:hover { color: #fff; }
+    .v-footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .v-footer-bottom span { font-size: 13px; line-height: 1.4; }
 
     @media (max-width: 640px) {
       .v-nav { padding: 0 20px; }
       .v-hero { padding: 48px 20px; }
       .v-container { padding: 32px 20px 64px; }
       .v-benefits { grid-template-columns: 1fr; }
+      .v-faq-btn { padding: 16px 20px; font-size: 14px; }
+      .v-faq-body { padding: 0 20px 16px; font-size: 14px; }
+      .v-benefit-value { font-size: clamp(22px, 5vw, 28px); }
+      .v-footer { padding: 40px 20px; }
     }
   </style>
 
   <!-- NAV -->
+  <div class="v-nav-spacer"></div>
   <nav class="v-nav">
-    <a href="/" class="v-nav-logo">Certi<span>Veh</span></a>
+    <a href="/" class="v-nav-logo" aria-label="CertiVeh — inicio">
+      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+        <defs>
+          <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(4,8) scale(0.48)">
+          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#navLogoGrad)"/>
+          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+        </g>
+        <g transform="translate(60,28)">
+          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
+            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
+            Certi<tspan fill="#059669">Veh</tspan>
+          </text>
+        </g>
+      </svg>
+    </a>
     <a href="/vehiculos/">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Todos los vehículos
@@ -148,6 +252,7 @@ const productLd = JSON.stringify({
   </nav>
 
   <!-- HERO -->
+  <main id="main-content">
   <div class="v-hero">
     <div class="v-hero-inner">
       <div class="v-breadcrumb">
@@ -166,7 +271,7 @@ const productLd = JSON.stringify({
 
     <!-- BENEFITS CARD -->
     <div class="v-card">
-      <div class="v-card-title">Beneficios tributarios para tu {v.marca} {v.modelo}</div>
+      <h2 class="v-card-title">Beneficios tributarios para tu {v.marca} {v.modelo}</h2>
       <p style="font-size: 14px; color: var(--slate-500); margin-bottom: 20px;">
         Precio de referencia: {fmt(v.precioCOP)} COP · Fuente: {v.precioFuente}
       </p>
@@ -175,12 +280,12 @@ const productLd = JSON.stringify({
         <div class="v-benefit" style={`background: var(--emerald-50); border-color: var(--emerald-200);`}>
           <div class="v-benefit-label" style="color: var(--emerald-600);">Devolución de IVA</div>
           <div class="v-benefit-value" style="color: var(--emerald-600);">{fmt(iva)}</div>
-          <div class="v-benefit-note" style="color: var(--emerald-700);">5% del valor — la DIAN te lo devuelve</div>
+          <div class="v-benefit-note" style="color: var(--emerald-700);">5% del valor, la DIAN te lo devuelve</div>
         </div>
         <div class="v-benefit" style={`background: var(--teal-50); border-color: var(--teal-200);`}>
           <div class="v-benefit-label" style="color: var(--teal-500);">Deducción en renta</div>
           <div class="v-benefit-value" style="color: var(--teal-500);">{fmt(renta)}</div>
-          <div class="v-benefit-note" style="color: var(--teal-500);">50% del valor — reduce tu base gravable</div>
+          <div class="v-benefit-note" style="color: var(--teal-500);">50% del valor, reduce tu base gravable</div>
         </div>
       </div>
 
@@ -192,7 +297,7 @@ const productLd = JSON.stringify({
 
     <!-- COST CARD -->
     <div class="v-card">
-      <div class="v-card-title">Costo del servicio CertiVeh</div>
+      <h2 class="v-card-title">Costo del servicio CertiVeh</h2>
       <div class="v-cost-row">
         <span class="v-cost-label">Trámite ante UPME</span>
         <span class="v-cost-value">{fmt(costoUPME)} COP</span>
@@ -218,22 +323,47 @@ const productLd = JSON.stringify({
 
     <!-- FAQ -->
     <div class="v-card">
-      <div class="v-card-title">Preguntas frecuentes — {v.marca} {v.modelo}</div>
+      <h2 class="v-card-title">Preguntas frecuentes, {v.marca} {v.modelo}</h2>
 
-      <div class="v-faq-q">¿El {v.marca} {v.modelo} aplica para el certificado UPME?</div>
-      <div class="v-faq-a">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
+      <div class="v-faq-item">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+          <span>¿El {v.marca} {v.modelo} aplica para el certificado UPME?</span>
+          <div class="v-faq-icon">+</div>
+        </button>
+        <div class="v-faq-body">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
+      </div>
 
-      <div class="v-faq-q">¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</div>
-      <div class="v-faq-a">Con un precio de {fmt(v.precioCOP)}, el IVA pagado es de {fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.</div>
+      <div class="v-faq-item">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+          <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
+          <div class="v-faq-icon">+</div>
+        </button>
+        <div class="v-faq-body">Con un precio de {fmt(v.precioCOP)}, el IVA pagado es de {fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.</div>
+      </div>
 
-      <div class="v-faq-q">¿Cuánto puedo deducir en mi declaración de renta?</div>
-      <div class="v-faq-a">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta del año de la compra.</div>
+      <div class="v-faq-item">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+          <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
+          <div class="v-faq-icon">+</div>
+        </button>
+        <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta del año de la compra.</div>
+      </div>
 
-      <div class="v-faq-q">¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</div>
-      <div class="v-faq-a">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA). Es un pago único, sin suscripciones.</div>
+      <div class="v-faq-item">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+          <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
+          <div class="v-faq-icon">+</div>
+        </button>
+        <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA). Es un pago único, sin suscripciones.</div>
+      </div>
 
-      <div class="v-faq-q">¿Qué documentos necesito?</div>
-      <div class="v-faq-a">Solo tres: tu cédula de ciudadanía, la tarjeta de propiedad del vehículo y la factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
+      <div class="v-faq-item">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+          <span>¿Qué documentos necesito?</span>
+          <div class="v-faq-icon">+</div>
+        </button>
+        <div class="v-faq-body">Solo tres: tu cédula de ciudadanía, la tarjeta de propiedad del vehículo y la factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
+      </div>
     </div>
 
     <!-- CTA -->
@@ -244,10 +374,70 @@ const productLd = JSON.stringify({
       </a>
       <div class="v-cta-note">Sin riesgo · Si la UPME rechaza, revisamos tu caso</div>
     </div>
+
+    <p class="v-disclaimer">* Los valores de devolución de IVA, deducción en renta y beneficio total son estimaciones basadas en el precio de referencia público del {v.marca} {v.modelo}. Los montos exactos dependen del precio registrado en tu factura de compra. El costo del trámite UPME se calcula según la tabla de tarifas vigente de la UPME en UVT. CertiVeh no garantiza valores específicos, el beneficio final lo determina la DIAN.</p>
   </div>
 
+  </main>
+
+  <script is:inline>
+    document.querySelectorAll('.v-faq-btn').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+      });
+    });
+  </script>
+
   <!-- FOOTER -->
-  <div class="v-footer">
-    <p>CertiVeh — Tu tramitador virtual del certificado UPME · <a href="/">certiveh.co</a> · <a href="/vehiculos/">Ver todos los vehículos</a></p>
-  </div>
+  <footer class="v-footer" aria-label="Pie de página">
+    <div class="v-footer-inner">
+      <div class="v-footer-top">
+        <div class="v-footer-brand">
+          <svg width="140" height="36" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+            <defs><linearGradient id="fLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/></linearGradient></defs>
+            <g transform="translate(4,8) scale(0.48)"><path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#fLogoGrad)"/><path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/></g>
+            <g transform="translate(60,28)"><text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text></g>
+          </svg>
+          <p>Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
+        </div>
+        <div class="v-footer-cols">
+          <div>
+            <div class="v-footer-col-label">Plataforma</div>
+            <div class="v-footer-col-links">
+              <a href="/#beneficios">Beneficios</a>
+              <a href="/#como-funciona">Cómo funciona</a>
+              <a href="/#calculadora">Calculadora</a>
+            </div>
+          </div>
+          <div>
+            <div class="v-footer-col-label">Recursos</div>
+            <div class="v-footer-col-links">
+              <a href="/vehiculos/">Vehículos</a>
+              <a href="/blog/">Blog</a>
+              <a href="/api-docs/">API</a>
+            </div>
+          </div>
+          <div>
+            <div class="v-footer-col-label">Partners</div>
+            <div class="v-footer-col-links">
+              <a href="/aliados/">Programa de Aliados</a>
+              <a href="https://aliado.certiveh.co/" target="_blank" rel="noopener noreferrer">Aplicar ahora</a>
+            </div>
+          </div>
+          <div>
+            <div class="v-footer-col-label">Legal</div>
+            <div class="v-footer-col-links">
+              <a href="/terminos-y-condiciones">Términos y Condiciones</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-footer-bottom">
+        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
+        <span>contacto@certiveh.co</span>
+      </div>
+    </div>
+  </footer>
 </BaseLayout>
