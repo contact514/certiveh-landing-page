@@ -1535,8 +1535,8 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
             </p>
           </div>
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", flexShrink: 0 }}>
-            <button className="btn-primary" style={{ whiteSpace: "nowrap", padding: "10px 24px", fontSize: 14 }}>
-              Iniciar trámite <Icon name="arrowRight" size={16} color="#fff" />
+            <button className="btn-primary" style={{ whiteSpace: "nowrap" }}>
+              Iniciar trámite <Icon name="arrowRight" size={18} color="#fff" />
             </button>
           </a>
           <button onClick={() => setShowDisclaimer(false)} aria-label="Cerrar" style={{
