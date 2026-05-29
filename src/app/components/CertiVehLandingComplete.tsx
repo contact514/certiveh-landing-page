@@ -885,8 +885,8 @@ function Beneficios() {
             <Icon name="calendar" size={20} color="var(--amber-600)"/>
           </div>
           <div style={{ fontSize: 15, lineHeight: 1.6, paddingTop: 2 }}>
-            <span style={{ fontWeight: 600, color: "var(--slate-900)" }}>La UPME abre ventanas de radicación dos veces al año. </span>
-            <span style={{ color: "var(--slate-600)" }}>Si pierdes la ventana, esperas hasta el siguiente semestre. CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.</span>
+            <span style={{ fontWeight: 600, color: "var(--slate-900)" }}>La UPME ahora recibe solicitudes de forma continua (Resolución 400 de 2026). </span>
+            <span style={{ color: "var(--slate-600)" }}>La ventana de radicación va del 1 de febrero al 15 de diciembre. CertiVeh radica tu solicitud de inmediato, sin esperar ciclos.</span>
           </div>
         </div>
       </div>
@@ -1171,7 +1171,7 @@ function Confianza() {
     { icon: "zap",         title: "Agente automatizado",          desc: "Nuestra tecnología navega el portal UPME por ti, llena todos los formularios y radica la solicitud sin que tengas que hacer nada." },
     { icon: "smartphone",  title: "Actualización en tiempo real", desc: "Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está tu trámite, en todo momento." },
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
-    { icon: "calendar",    title: "No pierdas la ventana",        desc: "Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre." },
+    { icon: "calendar",    title: "Radicación inmediata",        desc: "Gracias a la ventana continua de la UPME, tu solicitud se radica de inmediato, sin esperar ciclos." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
     { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Honorarios de $599.990 + IVA, más el costo del trámite ante la UPME según resolución vigente. Sin suscripciones, sin costos adicionales." },
   ];
