@@ -444,6 +444,8 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
     share2:      <><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></>,
     dollarSign:  <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
     info:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
+    user:        <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
+    building:    <><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="2"/><line x1="15" y1="22" x2="15" y2="2"/><line x1="4" y1="8" x2="9" y2="8"/><line x1="15" y1="8" x2="20" y2="8"/><line x1="4" y1="14" x2="9" y2="14"/><line x1="15" y1="14" x2="20" y2="14"/></>,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
@@ -1052,8 +1054,9 @@ function Calculadora() {
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Perfil tributario</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Independiente/Empresa" }].map(opt => (
-                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "11px 14px", borderRadius: 8, border: perfil === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-50)" : "var(--white)", color: perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3 }}>
+                {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Independiente/Empresa", icon: "building" }].map(opt => (
+                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "11px 14px", borderRadius: 8, border: perfil === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-50)" : "var(--white)", color: perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center" }}>
+                    <Icon name={opt.icon} size={16} color={perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)"} />
                     {opt.label}
                   </button>
                 ))}
