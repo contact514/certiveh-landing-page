@@ -440,6 +440,7 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
     gift:        <><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></>,
     share2:      <><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></>,
     dollarSign:  <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+    info:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
@@ -723,6 +724,25 @@ function Hero() {
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="btn-secondary">Empezar mi trámite ahora</button>
         </a>
+      </div>
+
+      {/* Deadline banner */}
+      <div style={{
+        display: "flex", alignItems: "flex-start", gap: 12,
+        background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 12,
+        padding: "16px 20px", maxWidth: 640, width: "100%", textAlign: "left",
+        marginBottom: 32, animation: "fadeUp 0.6s 0.28s ease both",
+        position: "relative", zIndex: 1
+      }}>
+        <Icon name="info" size={20} color="#2563EB" style={{ flexShrink: 0, marginTop: 2 }} />
+        <div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#1E40AF", marginBottom: 4 }}>
+            Queremos darte el mejor servicio posible
+          </div>
+          <div style={{ fontSize: 13, color: "#1E40AF", lineHeight: 1.5, opacity: 0.85 }}>
+            Recibimos solicitudes para el Ciclo I hasta el 31 de mayo a las 12:00 del mediodía. Las solicitudes recibidas después de esta fecha serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
+          </div>
+        </div>
       </div>
 
       {/* Stats */}
