@@ -1293,7 +1293,7 @@ function WinWin() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
