@@ -1483,6 +1483,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function CertiVehLandingComplete({ portalUrl = "https://portal.certiveh.co" }: { portalUrl?: string } = {}) {
   const [showUrgencyModal, setShowUrgencyModal] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   // Urgency modal logic - shows after 10 seconds, once per session
   useEffect(() => {
@@ -1518,33 +1519,41 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       <Footer/>
 
       {/* Sticky bottom disclaimer */}
-      <div style={{
-        position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 50,
-        background: "#1a2e1a", borderTop: "2px solid var(--emerald-600)",
-        padding: "12px 24px",
-        display: "flex", alignItems: "center", justifyContent: "center", gap: 16,
-        flexWrap: "wrap",
-      }}>
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: "1 1 0", minWidth: 0, maxWidth: 860 }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--emerald-500)", flexShrink: 0, marginTop: 5 }} />
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.9)", lineHeight: 1.5, margin: 0 }}>
-            <strong style={{ color: "#fff" }}>Queremos darte el mejor servicio posible, </strong>
-            las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
-          </p>
+      {showDisclaimer && (
+        <div style={{
+          position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 50,
+          background: "#1a2e1a", borderTop: "2px solid var(--emerald-600)",
+          padding: "12px 24px",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 16,
+          flexWrap: "wrap",
+        }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: "1 1 0", minWidth: 0, maxWidth: 860 }}>
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--emerald-500)", flexShrink: 0, marginTop: 5 }} />
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.9)", lineHeight: 1.5, margin: 0 }}>
+              <strong style={{ color: "#fff" }}>Queremos darte el mejor servicio posible, </strong>
+              las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
+            </p>
+          </div>
+          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "var(--emerald-600)", color: "#fff", border: "1px solid var(--emerald-500)",
+            borderRadius: 9999, padding: "10px 24px", fontSize: 14, fontWeight: 600,
+            textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0,
+            transition: "background 0.2s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = "var(--emerald-700)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "var(--emerald-600)"; }}
+          >
+            Iniciar trámite <Icon name="arrowRight" size={16} color="#fff" />
+          </a>
+          <button onClick={() => setShowDisclaimer(false)} aria-label="Cerrar" style={{
+            background: "none", border: "none", cursor: "pointer", padding: 4,
+            flexShrink: 0, lineHeight: 1,
+          }}>
+            <Icon name="x" size={18} color="rgba(255,255,255,0.5)" />
+          </button>
         </div>
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{
-          display: "inline-flex", alignItems: "center", gap: 8,
-          background: "var(--emerald-600)", color: "#fff", border: "1px solid var(--emerald-500)",
-          borderRadius: 9999, padding: "10px 24px", fontSize: 14, fontWeight: 600,
-          textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0,
-          transition: "background 0.2s",
-        }}
-          onMouseEnter={e => { e.currentTarget.style.background = "var(--emerald-700)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "var(--emerald-600)"; }}
-        >
-          Iniciar trámite <Icon name="arrowRight" size={16} color="#fff" />
-        </a>
-      </div>
+      )}
 
       {/* Urgency Modal */}
       {showUrgencyModal && <UrgencyModal onClose={() => { setShowUrgencyModal(false); document.body.style.overflow = ''; }} />}
