@@ -878,17 +878,6 @@ function Beneficios() {
             </div>
           ))}
         </div>
-
-        <div className="info-callout" style={{ marginTop: 40, padding: "24px 28px", background: "linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.04) 100%)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 16, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: 0, left: 0, width: 4, height: "100%", background: "var(--amber-500)" }}></div>
-          <div style={{ width: 40, height: 40, borderRadius: 10, background: "white", border: "1px solid rgba(245,158,11,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <Icon name="calendar" size={20} color="var(--amber-600)"/>
-          </div>
-          <div style={{ fontSize: 15, lineHeight: 1.6, paddingTop: 2 }}>
-            <span style={{ fontWeight: 600, color: "var(--slate-900)" }}>La UPME ahora recibe solicitudes de forma continua (Resolución 400 de 2026). </span>
-            <span style={{ color: "var(--slate-600)" }}>La ventana de radicación va del 1 de febrero al 15 de diciembre. CertiVeh radica tu solicitud de inmediato, sin esperar ciclos.</span>
-          </div>
-        </div>
       </div>
     </section>
   );
