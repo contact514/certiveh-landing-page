@@ -668,7 +668,7 @@ function Hero() {
       <video
         autoPlay muted loop playsInline
         preload="metadata"
-        poster="/hero-bg-poster.jpg"
+        poster="/hero-bg-poster.webp"
         className="hero-video"
         style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -680,7 +680,7 @@ function Hero() {
       {/* Static poster fallback for mobile */}
       <div className="hero-poster" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "url(/hero-bg-poster.jpg)",
+        backgroundImage: "url(/hero-bg-poster.webp)",
         backgroundSize: "cover", backgroundPosition: "center",
       }} />
       {/* Overlay for legibility */}
