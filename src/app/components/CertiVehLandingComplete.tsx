@@ -726,21 +726,6 @@ function Hero() {
         </a>
       </div>
 
-      {/* Deadline notice */}
-      <div style={{
-        display: "flex", alignItems: "flex-start", gap: 10,
-        background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 10,
-        padding: "10px 16px", maxWidth: 600, width: "100%", textAlign: "left",
-        marginBottom: 20, animation: "fadeUp 0.6s 0.28s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <Icon name="info" size={16} color="#2563EB" style={{ flexShrink: 0, marginTop: 1 }} />
-        <div style={{ fontSize: 12, color: "#1E40AF", lineHeight: 1.5 }}>
-          <span style={{ fontWeight: 600 }}>Queremos darte el mejor servicio posible: </span>
-          Las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
-        </div>
-      </div>
-
       {/* Stats */}
       <div style={{
         display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center",
@@ -1517,6 +1502,18 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
     <PortalUrlContext.Provider value={portalUrl}>
       <style>{CSS}</style>
       <Navbar />
+      {/* Deadline top banner */}
+      <div style={{
+        background: "#EFF6FF", borderBottom: "1px solid #BFDBFE",
+        padding: "10px 24px", display: "flex", alignItems: "center",
+        justifyContent: "center", gap: 8, position: "relative", zIndex: 40,
+      }}>
+        <Icon name="info" size={14} color="#2563EB" style={{ flexShrink: 0 }} />
+        <p style={{ fontSize: 13, color: "#1E40AF", lineHeight: 1.5, margin: 0, maxWidth: 720 }}>
+          <strong>Queremos darte el mejor servicio posible:</strong>{" "}
+          Las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
+        </p>
+      </div>
       <main>
         <Hero/>
         <VentanaUPME/>
