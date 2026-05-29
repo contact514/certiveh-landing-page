@@ -740,7 +740,7 @@ function Hero() {
             Queremos darte el mejor servicio posible
           </div>
           <div style={{ fontSize: 13, color: "#1E40AF", lineHeight: 1.5, opacity: 0.85 }}>
-            Recibimos solicitudes para el Ciclo I hasta el 31 de mayo a las 12:00 del mediodía. Las solicitudes recibidas después de esta fecha serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
+            Las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
           </div>
         </div>
       </div>
