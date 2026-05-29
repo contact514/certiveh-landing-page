@@ -887,7 +887,7 @@ function Beneficios() {
 function ComoFunciona() {
   const [active, setActive] = useState(0);
   const steps = [
-    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
+    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, la tarjeta de propiedad y la factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática con IA." },
     { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito: tarjeta, PSE o Nequi." },
     { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
