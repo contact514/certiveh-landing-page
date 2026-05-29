@@ -1162,7 +1162,7 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "Radicación inmediata",        desc: "Gracias a la ventana continua de la UPME, tu solicitud se radica de inmediato, sin esperar ciclos." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Honorarios de $599.990 + IVA, más el costo del trámite ante la UPME según resolución vigente. Sin suscripciones, sin costos adicionales." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "$599.990 + IVA, más costo del trámite UPME. Sin suscripciones ni costos ocultos." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--white)" }}>
@@ -1530,7 +1530,6 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       <Navbar />
       <main>
         <Hero/>
-        <VentanaUPME/>
         <Aliados/>
         <Beneficios/>
         <ComoFunciona/>
