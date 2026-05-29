@@ -843,7 +843,7 @@ function Aliados() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Al comprar tu vehículo eléctrico o híbrido pagas un IVA del 5%. Con el certificado UPME, la DIAN te devuelve el 100% del IVA pagado.", ejemplo: "$120M → la DIAN te devuelve $6.000.000" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Pagas un IVA del 5% en la compra. Con el certificado UPME, la DIAN te devuelve el 100%.", ejemplo: "$120M → la DIAN te devuelve $6.000.000" },
     { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
     { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
   ];
