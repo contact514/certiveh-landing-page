@@ -805,12 +805,12 @@ function Aliados() {
       </p>
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        gap: 48, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
+        gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
       }}>
         {/* Seguros Mundial */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
           <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
-            height: 40, width: "auto", objectFit: "contain",
+            maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
             filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
             onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
@@ -821,9 +821,9 @@ function Aliados() {
           </span>
         </div>
         {/* FonLenovo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
           <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
-            height: 48, width: "auto", objectFit: "contain",
+            maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
             filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
             onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
@@ -831,9 +831,9 @@ function Aliados() {
           />
         </div>
         {/* ExoticsCo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
           <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
-            height: 40, width: "auto", objectFit: "contain",
+            maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
             filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
             onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
