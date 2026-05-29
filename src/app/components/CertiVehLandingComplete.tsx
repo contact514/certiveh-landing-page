@@ -659,11 +659,18 @@ function Hero() {
       background: "var(--white)", overflow: "hidden",
     }}>
       {/* Background video */}
-      <video autoPlay muted loop playsInline
+      {/* eslint-disable-next-line */}
+      <video
+        autoPlay muted loop playsInline
+        // @ts-ignore — webkit-playsinline needed for older iOS
+        webkit-playsinline=""
+        preload="metadata"
+        poster="/hero-bg-poster.jpg"
         style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
           objectFit: "cover", pointerEvents: "none",
         }}
+        ref={(el) => { if (el) el.play().catch(() => {}); }}
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
