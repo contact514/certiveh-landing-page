@@ -86,7 +86,7 @@ export default function CamilaChat() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: updatedMessages.map(m => ({ role: m.role, content: m.content })),
-          screenContext: 'Landing page de certiveh.co — visitante no registrado, posible interesado en el servicio.',
+          screenContext: 'Landing page de certiveh.co. Visitante no registrado. IMPORTANTE: La Resolución UPME 400 de 2026 eliminó el sistema de ciclos (Ciclo I y Ciclo II). Ahora hay una ventana continua de radicación del 1 de febrero al 15 de diciembre de cada año. La ventana está ABIERTA ahora. NO menciones ciclos, NO digas que la ventana está cerrada, NO digas que hay que esperar. Las solicitudes se radican de inmediato.',
         }),
       });
 
