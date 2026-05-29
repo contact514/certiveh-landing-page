@@ -316,7 +316,7 @@ const ClientPortal = () => {
               </div>
 
               <div style={{ background: "#fef3c7", border: "1px solid #fde68a", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: "#92400e" }}>
-                ⏳ Tu solicitud está en cola. La próxima ventana de procesamiento abre el <strong>1 de agosto de 2025</strong>.
+                ✅ Ventana de radicación abierta. Tu solicitud se procesa de forma continua (Res. UPME 400/2026).
               </div>
             </Card>
 
@@ -453,7 +453,7 @@ const ClientPortal = () => {
                   <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 600 }}>Resumen y pago</h3>
                   <div style={{ background: "#f8fafc", borderRadius: 10, padding: 20, marginBottom: 20 }}>
                     <div style={{ fontSize: 13, fontWeight: 600, color: "#64748b", marginBottom: 12, textTransform: "uppercase", letterSpacing: "0.05em" }}>Detalle del servicio</div>
-                    {[["Vehículo", "Nissan Leaf 2023"], ["VIN", "1N4AZ1CP4PC123789"], ["Valor registro", "$520,000 MXN"], ["Ventana de procesamiento", "Agosto 15 – Noviembre 14, 2025"]].map(([k, v]) => (
+                    {[["Vehículo", "Nissan Leaf 2023"], ["VIN", "1N4AZ1CP4PC123789"], ["Valor registro", "$520,000 MXN"], ["Ventana de recepción", "Continua (Feb 1 – Dic 15, 2026)"]].map(([k, v]) => (
                       <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid #e2e8f0", fontSize: 14 }}>
                         <span style={{ color: "#64748b" }}>{k}</span>
                         <span style={{ fontWeight: 500 }}>{v}</span>
@@ -465,7 +465,7 @@ const ClientPortal = () => {
                     </div>
                   </div>
                   <div style={{ padding: "14px 16px", background: "#fef3c7", border: "1px solid #fde68a", borderRadius: 8, fontSize: 13, color: "#92400e", marginBottom: 20 }}>
-                    ⏳ Tu solicitud quedará en cola hasta que abra la ventana de procesamiento el <strong>15 de agosto de 2025</strong>.
+                    ✅ Tu solicitud se radica de inmediato. La ventana de recepción es continua (Res. UPME 400/2026).
                   </div>
                   <div style={{ display: "flex", gap: 10 }}>
                     <button style={{ ...styles.btn, background: "#f1f5f9", color: "#1e293b", width: "auto", padding: "11px 24px" }} onClick={() => setSubmitStep(2)}>← Atrás</button>
@@ -913,8 +913,7 @@ const AdminPortal = () => {
             <div style={{ animation: "fadeIn 0.3s ease", maxWidth: 700 }}>
               <h1 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px" }}>Ventanas de procesamiento</h1>
               {[
-                { name: "Ciclo 1 — 2026", open: "1 Marzo 2026", close: "31 Mayo 2026", status: "open", queued: 12, processed: 8 },
-                { name: "Ciclo 2 — 2026", open: "15 Agosto 2026", close: "14 Noviembre 2026", status: "upcoming", queued: 0, processed: 0 },
+                { name: "Ventana continua 2026", open: "1 Feb 2026", close: "15 Dic 2026", status: "open", queued: 12, processed: 8 },
               ].map((w, i) => (
                 <div key={i} style={{ background: "#1e293b", borderRadius: 10, border: `1px solid ${w.status === "open" ? "#2563eb" : "#334155"}`, padding: 20, marginBottom: 14 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -937,7 +936,7 @@ const AdminPortal = () => {
                     </div>
                   </div>
                   {w.status === "open" && (
-                    <button onClick={() => showToast("⚠️ Ventana cerrada. 4 solicitudes pasadas a siguiente ciclo.", "warning")} style={{ marginTop: 14, width: "100%", padding: "9px", background: "#dc262620", color: "#f87171", border: "1px solid #dc2626", borderRadius: 7, fontSize: 13, cursor: "pointer", fontWeight: 600 }}>
+                    <button onClick={() => showToast("⚠️ Ventana cerrada manualmente. Solicitudes pendientes se reanudan al reabrir.", "warning")} style={{ marginTop: 14, width: "100%", padding: "9px", background: "#dc262620", color: "#f87171", border: "1px solid #dc2626", borderRadius: 7, fontSize: 13, cursor: "pointer", fontWeight: 600 }}>
                       Cerrar ventana manualmente
                     </button>
                   )}

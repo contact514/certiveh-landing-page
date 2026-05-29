@@ -540,47 +540,31 @@ function Ticker() {
   );
 }
 
-// ── COUNTDOWN VENTANA UPME ───────────────────────────────────────────────────
+// ── VENTANA UPME (Resolución 400 de 2026 – ventana continua) ─────────────────
 function VentanaUPME() {
   const portalUrl = usePortalUrl();
-  const ciclos = [
-    { inicio: new Date(2026, 2, 1), fin: new Date(2026, 4, 31, 23, 59, 59), nombre: "Ciclo I 2026" },
-    { inicio: new Date(2026, 7, 15), fin: new Date(2026, 10, 14, 23, 59, 59), nombre: "Ciclo II 2026" },
-    { inicio: new Date(2027, 2, 1), fin: new Date(2027, 4, 31, 23, 59, 59), nombre: "Ciclo I 2027" },
-  ];
 
   const [now, setNow] = useState(new Date());
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
+    const t = setInterval(() => setNow(new Date()), 60000);
     return () => clearInterval(t);
   }, []);
 
-  let ventanaAbierta = false;
-  let target: Date = new Date();
-  let cicloNombre = "";
-  let proximoCiclo = "";
+  const month = now.getMonth(); // 0-indexed
+  const day = now.getDate();
+  // Window open: Feb 1 (month 1, day 1) to Dec 15 (month 11, day 15)
+  const ventanaAbierta =
+    (month > 0 && month < 11) ||
+    (month === 0 && day >= 1 && false) || // Jan is always closed
+    (month === 11 && day <= 15);
 
-  for (const c of ciclos) {
-    if (now >= c.inicio && now <= c.fin) {
-      ventanaAbierta = true;
-      target = c.fin;
-      cicloNombre = c.nombre;
-      break;
-    }
-    if (now < c.inicio) {
-      ventanaAbierta = false;
-      target = c.inicio;
-      proximoCiclo = c.nombre;
-      break;
-    }
-  }
-
+  // Countdown target: next Feb 1
+  const nextYear = month === 0 ? now.getFullYear() : now.getFullYear() + 1;
+  const target = new Date(nextYear, 1, 1);
   const diff = Math.max(0, target.getTime() - now.getTime());
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
   const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
@@ -589,42 +573,61 @@ function VentanaUPME() {
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 20, padding: "5px 14px", marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
           <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            {ventanaAbierta ? `Ventana abierta, ${cicloNombre}` : `Ventana cerrada, próximo: ${proximoCiclo}`}
+            {ventanaAbierta ? "Ventana de radicación abierta" : "Ventana cerrada"}
           </span>
         </div>
 
-        <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 16, lineHeight: 1.5 }}>
-          {ventanaAbierta
-            ? "La UPME está recibiendo solicitudes. Radica antes de que cierre:"
-            : "La próxima ventana de radicación abre en:"}
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 20 }}>
-          {[
-            { val: days, label: "Días" },
-            { val: hours, label: "Horas" },
-            { val: mins, label: "Min" },
-            { val: secs, label: "Seg" },
-          ].map((u, i) => (
-            <div key={i} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
-                {pad(u.val)}
-              </div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>{u.label}</div>
+        {ventanaAbierta ? (
+          <>
+            <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 20, lineHeight: 1.5 }}>
+              La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre. Radica en cualquier momento.
             </div>
-          ))}
-        </div>
 
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
-          </button>
-        </a>
+            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
+                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
+              </button>
+            </a>
 
-        {!ventanaAbierta && (
-          <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 14, lineHeight: 1.6, maxWidth: 480, margin: "14px auto 0" }}>
-            No tienes que esperar. Carga tu solicitud ahora y nosotros la radicamos automáticamente el día que abra la ventana. Tu lugar en la cola queda asegurado.
-          </div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginTop: 14 }}>
+              Resolución UPME 400 de 2026
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 16, lineHeight: 1.5 }}>
+              La próxima ventana de radicación abre en:
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 20 }}>
+              {[
+                { val: days, label: "Días" },
+                { val: hours, label: "Horas" },
+                { val: mins, label: "Min" },
+              ].map((u, i) => (
+                <div key={i} style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
+                    {pad(u.val)}
+                  </div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>{u.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
+                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
+              </button>
+            </a>
+
+            <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 14, lineHeight: 1.6, maxWidth: 480, margin: "14px auto 0" }}>
+              No tienes que esperar. Carga tu solicitud ahora y nosotros la radicamos automáticamente el 1 de febrero. Tu lugar queda asegurado.
+            </div>
+
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginTop: 10 }}>
+              Resolución UPME 400 de 2026
+            </div>
+          </>
         )}
       </div>
     </section>
@@ -1299,7 +1302,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
-    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Nosotros nos encargamos de radicarla ante la UPME en la ventana correspondiente. Si no hay ventana abierta en ese momento, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura." },
+    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
