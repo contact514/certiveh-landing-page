@@ -1522,7 +1522,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       {showDisclaimer && (
         <div style={{
           position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 50,
-          background: "#1a2e1a", borderTop: "2px solid var(--emerald-600)",
+          background: "var(--slate-900)", borderTop: "2px solid var(--emerald-600)",
           padding: "12px 24px",
           display: "flex", alignItems: "center", justifyContent: "center", gap: 16,
           flexWrap: "wrap",
