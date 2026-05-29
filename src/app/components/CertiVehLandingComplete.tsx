@@ -790,6 +790,61 @@ function Hero() {
   );
 }
 
+// ── ALIADOS ─────────────────────────────────────────────────────────────────
+function Aliados() {
+  return (
+    <section aria-label="Aliados de CertiVeh" style={{
+      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
+      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
+    }}>
+      <p style={{
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
+        textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
+      }}>
+        Aliados que confían en CertiVeh
+      </p>
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "center",
+        gap: 48, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
+      }}>
+        {/* Seguros Mundial */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
+            height: 40, width: "auto", objectFit: "contain",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+          />
+          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
+            Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
+          </span>
+        </div>
+        {/* FonLenovo */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
+            height: 48, width: "auto", objectFit: "contain",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+          />
+        </div>
+        {/* ExoticsCo */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
+            height: 40, width: "auto", objectFit: "contain",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
@@ -1468,6 +1523,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       <Navbar />
       <main>
         <Hero/>
+        <Aliados/>
         <VentanaUPME/>
         <Beneficios/>
         <ComoFunciona/>
