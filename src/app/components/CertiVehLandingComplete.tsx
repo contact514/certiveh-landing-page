@@ -726,23 +726,18 @@ function Hero() {
         </a>
       </div>
 
-      {/* Deadline banner */}
+      {/* Deadline notice — compact inline */}
       <div style={{
-        display: "flex", alignItems: "flex-start", gap: 12,
-        background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 12,
-        padding: "16px 20px", maxWidth: 640, width: "100%", textAlign: "left",
-        marginBottom: 32, animation: "fadeUp 0.6s 0.28s ease both",
+        display: "flex", alignItems: "center", gap: 8,
+        background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 9999,
+        padding: "8px 16px", marginBottom: 24, animation: "fadeUp 0.6s 0.28s ease both",
         position: "relative", zIndex: 1
       }}>
-        <Icon name="info" size={20} color="#2563EB" style={{ flexShrink: 0, marginTop: 2 }} />
-        <div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "#1E40AF", marginBottom: 4 }}>
-            Queremos darte el mejor servicio posible
-          </div>
-          <div style={{ fontSize: 13, color: "#1E40AF", lineHeight: 1.5, opacity: 0.85 }}>
-            Las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
-          </div>
-        </div>
+        <Icon name="info" size={14} color="#2563EB" style={{ flexShrink: 0 }} />
+        <span style={{ fontSize: 13, color: "#1E40AF", fontWeight: 500 }}>
+          Solicitudes desde el 30 de mayo van al Ciclo II (agosto 2026).{" "}
+          <span style={{ fontWeight: 400, opacity: 0.8 }}>Monta tu trámite ahora y queda listo.</span>
+        </span>
       </div>
 
       {/* Stats */}
@@ -1523,8 +1518,8 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       <Navbar />
       <main>
         <Hero/>
-        <Aliados/>
         <VentanaUPME/>
+        <Aliados/>
         <Beneficios/>
         <ComoFunciona/>
         <Calculadora/>
