@@ -1,0 +1,78 @@
+# CertiVeh — Tramitador Virtual del Certificado UPME en Colombia
+
+> CertiVeh es una plataforma colombiana que automatiza el trámite del certificado UPME (Unidad de Planeación Minero-Energética) para vehículos eléctricos e híbridos, habilitando beneficios tributarios bajo la Ley 1715 de 2014 y la Ley 2099 de 2021.
+
+## Qué hace CertiVeh
+
+CertiVeh gestiona ante la UPME el certificado que permite a propietarios de vehículos eléctricos e híbridos en Colombia acceder a:
+
+- **Devolución del IVA**: la DIAN devuelve el 5% del valor del vehículo.
+- **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
+- **Exclusión de arancel**: reducción de aranceles en la importación.
+
+Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021, la Resolución UPME 135 de 2025 y la Resolución UPME 400 de 2026.
+
+## Ventana de radicación UPME (actualizado mayo 2026)
+
+La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: las solicitudes se radican de inmediato.
+
+## Cómo funciona
+
+1. El usuario sube 3 documentos (cédula, tarjeta de propiedad, factura de compra) en la plataforma web portal.certiveh.co.
+2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
+3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución 400 de 2026).
+4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
+
+## Datos clave
+
+- Sitio web: https://certiveh.co
+- Portal de trámite: https://portal.certiveh.co
+- Cobertura: 362+ modelos de 51 marcas certificadas por la UPME
+- Marco legal: Ley 1715/2014, Ley 2099/2021, Resolución UPME 135/2025, Resolución UPME 400/2026
+- Registro mercantil: Cámara de Comercio de Medellín
+- Contacto: contacto@certiveh.co
+- País: Colombia
+
+## Vehículos con calculadora de beneficios
+
+CertiVeh ofrece cálculos detallados de beneficios tributarios para los vehículos más vendidos en Colombia:
+
+- BYD Yuan Up: https://certiveh.co/vehiculos/byd-yuan-up/
+- BYD Seagull: https://certiveh.co/vehiculos/byd-seagull/
+- BYD Yuan Plus: https://certiveh.co/vehiculos/byd-yuan-plus/
+- Toyota Corolla Cross Hybrid: https://certiveh.co/vehiculos/toyota-corolla-cross-hybrid/
+- Toyota Yaris Cross Hybrid: https://certiveh.co/vehiculos/toyota-yaris-cross-hybrid/
+- Kia EV5: https://certiveh.co/vehiculos/kia-ev5/
+- Kia Niro EV: https://certiveh.co/vehiculos/kia-niro-ev/
+- Volvo EX30: https://certiveh.co/vehiculos/volvo-ex30/
+- Hyundai Ioniq 5: https://certiveh.co/vehiculos/hyundai-ioniq-5/
+- BYD Sealion 7: https://certiveh.co/vehiculos/byd-sealion-7/
+- Chery iCAR 03: https://certiveh.co/vehiculos/chery-icar-03/
+- BYD Dolphin Mini: https://certiveh.co/vehiculos/byd-dolphin-mini/
+- Tesla Model Y: https://certiveh.co/vehiculos/tesla-model-y/
+- Tesla Model 3: https://certiveh.co/vehiculos/tesla-model-3/
+
+## Directorio completo de vehículos elegibles UPME
+
+https://certiveh.co/vehiculos/ — listado de 362+ modelos de 51 marcas que la UPME certifica oficialmente.
+
+## Blog — Guías sobre beneficios tributarios
+
+- Qué es el certificado UPME: https://certiveh.co/blog/que-es-certificado-upme-vehiculo-electrico-colombia/
+- Proceso de certificación UPME: https://certiveh.co/blog/certificacion-upme-proceso-documentos-plazos/
+- Beneficios tributarios para vehículos eléctricos: https://certiveh.co/blog/beneficios-tributarios-vehiculos-electricos-colombia/
+- Devolución de IVA: https://certiveh.co/blog/devolucion-iva-vehiculos-electricos-hibridos-colombia/
+- Deducción en renta: https://certiveh.co/blog/deduccion-renta-vehiculo-electrico-hibrido-colombia/
+- Cuánto ahorro en impuestos: https://certiveh.co/blog/cuanto-ahorro-impuestos-vehiculo-electrico-colombia/
+- Flotas empresariales: https://certiveh.co/blog/flotas-electricas-hibridas-beneficios-tributarios-empresas/
+- Resolución UPME 400 de 2026 (ventana continua): https://certiveh.co/blog/resolucion-upme-400-2026-ventana-continua-certificado/
+
+## Diferenciadores
+
+- 100% digital: todo el trámite se hace en línea, sin papeleos físicos ni visitas a oficinas.
+- Automatización: un agente de software radica la solicitud directamente en el portal UPME.
+- Precios transparentes: costo publicado en el sitio, sin costos ocultos. Pago único, sin suscripciones.
+- Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 135 de 2025.
+- Radicación inmediata: gracias a la ventana continua (Resolución 400 de 2026), ya no hay que esperar ciclos.
+- Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (362+ modelos).
+- Seguimiento: el usuario recibe notificaciones por WhatsApp en cada etapa del trámite.
