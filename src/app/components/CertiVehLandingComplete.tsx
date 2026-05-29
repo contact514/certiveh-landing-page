@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, createContext, useContext } from "react";
 import { Navbar } from "./Navbar";
 import { AnimatePresence, motion } from "motion/react";
-import { BackgroundPaths } from './ui/background-paths';
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
@@ -659,21 +658,19 @@ function Hero() {
       padding: "100px 48px 60px", position: "relative",
       background: "var(--white)", overflow: "hidden",
     }}>
-      {/* Animated Background Paths */}
-      <div style={{ position: "absolute", inset: 0, opacity: 0.6, pointerEvents: "none" }}>
-        <BackgroundPaths />
-      </div>
-      
-      {/* Dot pattern */}
+      {/* Background video */}
+      <video autoPlay muted loop playsInline
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", pointerEvents: "none",
+        }}
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+      {/* Overlay for legibility */}
       <div style={{
-        position: "absolute", inset: 0, opacity: 0.035, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, var(--emerald-600) 1px, transparent 1px)",
-        backgroundSize: "28px 28px",
-      }}/>
-      {/* Top gradient */}
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 400,
-        background: "linear-gradient(180deg, var(--emerald-50) 0%, transparent 100%)", pointerEvents: "none",
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "linear-gradient(180deg, rgba(248,250,252,0.92) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.80) 70%, rgba(236,253,245,0.92) 100%)",
       }}/>
 
       {/* H1 */}
