@@ -5,8 +5,6 @@ import { BackgroundPaths } from './ui/background-paths';
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
-import { ImageComparison } from './ui/image-comparison';
-import imgElectricCar from '@/assets/hyundai-ev.jpg';
 import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
 
 const PortalUrlContext = createContext("https://portal.certiveh.co");
@@ -944,12 +942,35 @@ function ComoFunciona() {
           </div>
         </div>
 
-        {/* Image Comparison */}
-        <div style={{ marginTop: 80 }}>
-          <ImageComparison
-            beforeImage={imgElectricCar}
-            afterImage={imgPortalUsuario}
-            beforeImageScale={1.4}
+        {/* Portal screenshot */}
+        <div style={{
+          marginTop: 80, maxWidth: 720, marginLeft: "auto", marginRight: "auto",
+          borderRadius: 12, overflow: "hidden",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08)",
+          border: "1px solid var(--slate-200)",
+        }}>
+          {/* Browser chrome */}
+          <div style={{
+            background: "var(--slate-100)", padding: "10px 16px",
+            display: "flex", alignItems: "center", gap: 8,
+            borderBottom: "1px solid var(--slate-200)",
+          }}>
+            <div style={{ display: "flex", gap: 6 }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
+            </div>
+            <div style={{
+              flex: 1, background: "var(--white)", borderRadius: 6,
+              padding: "4px 12px", fontSize: 12, color: "var(--slate-400)",
+              fontFamily: "var(--ff)",
+            }}>
+              portal.certiveh.co
+            </div>
+          </div>
+          <img src={typeof imgPortalUsuario === 'string' ? imgPortalUsuario : imgPortalUsuario.src}
+            alt="Portal CertiVeh — gestiona tu certificado UPME"
+            style={{ width: "100%", display: "block" }}
           />
         </div>
       </div>
