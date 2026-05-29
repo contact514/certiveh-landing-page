@@ -329,7 +329,13 @@ const CSS = `
     display: block;
   }
   
+  .hero-video { display: block; }
+  .hero-poster { display: none; }
+
   @media (max-width: 768px) {
+    .hero-video { display: none !important; }
+    .hero-poster { display: block !important; }
+
     nav { padding: 0 20px; height: 64px; }
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
@@ -658,22 +664,25 @@ function Hero() {
       padding: "100px 48px 60px", position: "relative",
       background: "var(--white)", overflow: "hidden",
     }}>
-      {/* Background video */}
-      {/* eslint-disable-next-line */}
+      {/* Background video (desktop) / poster (mobile) */}
       <video
         autoPlay muted loop playsInline
-        // @ts-ignore — webkit-playsinline needed for older iOS
-        webkit-playsinline=""
         preload="metadata"
         poster="/hero-bg-poster.jpg"
+        className="hero-video"
         style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
           objectFit: "cover", pointerEvents: "none",
         }}
-        ref={(el) => { if (el) el.play().catch(() => {}); }}
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
+      {/* Static poster fallback for mobile */}
+      <div className="hero-poster" style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        backgroundImage: "url(/hero-bg-poster.jpg)",
+        backgroundSize: "cover", backgroundPosition: "center",
+      }} />
       {/* Overlay for legibility */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
