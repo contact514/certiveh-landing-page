@@ -1299,6 +1299,7 @@ function FAQ() {
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
+    { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra del vehículo (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, se aplica en la declaración del año gravable en que se realiza la inversión. El certificado UPME puede obtenerse después de la compra, no necesitas tenerlo al momento de adquirir el vehículo." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--slate-50)" }}>
