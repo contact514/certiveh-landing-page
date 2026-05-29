@@ -1534,17 +1534,10 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
               las solicitudes creadas a partir del 30 de mayo serán radicadas en la próxima ventana UPME (Ciclo II, agosto 2026). Puedes montar tu trámite desde ahora y apenas se abra la siguiente ventana quedará radicado para que obtengas tus beneficios.
             </p>
           </div>
-          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            background: "var(--emerald-600)", color: "#fff", border: "1px solid var(--emerald-500)",
-            borderRadius: 9999, padding: "10px 24px", fontSize: 14, fontWeight: 600,
-            textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0,
-            transition: "background 0.2s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.background = "var(--emerald-700)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "var(--emerald-600)"; }}
-          >
-            Iniciar trámite <Icon name="arrowRight" size={16} color="#fff" />
+          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", flexShrink: 0 }}>
+            <button className="btn-primary" style={{ whiteSpace: "nowrap", padding: "10px 24px", fontSize: 14 }}>
+              Iniciar trámite <Icon name="arrowRight" size={16} color="#fff" />
+            </button>
           </a>
           <button onClick={() => setShowDisclaimer(false)} aria-label="Cerrar" style={{
             background: "none", border: "none", cursor: "pointer", padding: 4,
