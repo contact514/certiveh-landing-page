@@ -1257,7 +1257,7 @@ function Testimonios() {
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {testimonios.map((t, i) => (
             <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16, borderLeft: "3px solid var(--emerald-600)", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: -10, left: 8, fontSize: 80, fontWeight: 700, color: "var(--emerald-100)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
+              <div style={{ position: "absolute", top: -10, left: 8, fontSize: 80, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
               <div style={{ display: "flex", gap: 2, position: "relative" }}>
                 {[...Array(5)].map((_, j) => (
                   <svg key={j} width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B" stroke="none">
