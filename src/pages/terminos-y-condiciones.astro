@@ -26,7 +26,7 @@ import { Navbar } from '../app/components/Navbar';
       --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: white; color: var(--slate-700); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--ff); background: white; color: var(--slate-600); -webkit-font-smoothing: antialiased; }
 
     /* HERO */
     .tc-hero {
@@ -48,11 +48,11 @@ import { Navbar } from '../app/components/Navbar';
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 6px 14px;
-      border-radius: 100px;
+      border-radius: 9999px;
       margin-bottom: 20px;
     }
     .tc-title {
-      font-size: clamp(28px, 4vw, 42px);
+      font-size: clamp(36px, 5.5vw, 56px);
       font-weight: 700;
       color: white;
       letter-spacing: -0.03em;
@@ -66,7 +66,7 @@ import { Navbar } from '../app/components/Navbar';
     }
     .tc-date {
       font-size: 13px;
-      color: var(--slate-500);
+      color: rgba(255,255,255,0.4);
     }
 
     /* CONTENT */
@@ -80,9 +80,10 @@ import { Navbar } from '../app/components/Navbar';
     .tc-index {
       background: white;
       border: 1px solid var(--slate-200);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 28px 32px;
       margin-bottom: 56px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
     }
     .tc-index-title {
       font-size: 12px;
@@ -126,7 +127,7 @@ import { Navbar } from '../app/components/Navbar';
       height: 36px;
       background: var(--emerald-50);
       border: 1.5px solid var(--emerald-200);
-      border-radius: 8px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -158,7 +159,7 @@ import { Navbar } from '../app/components/Navbar';
       color: var(--slate-600);
       margin-bottom: 6px;
     }
-    .tc-section li strong { color: var(--slate-800); }
+    .tc-section li strong { color: var(--slate-900); }
 
     /* HIGHLIGHT BOX */
     .tc-highlight {
@@ -207,7 +208,7 @@ import { Navbar } from '../app/components/Navbar';
     /* FOOTER */
     .tc-footer {
       background: var(--slate-900);
-      color: var(--slate-400);
+      color: #64748B;
       padding: 48px 48px;
     }
     .tc-footer-inner {
