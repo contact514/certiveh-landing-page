@@ -191,9 +191,9 @@ const CSS = `
     width: 24px; height: 24px; border-radius: 9999px;
     background: var(--emerald-50);
     display: flex; align-items: center; justify-content: center;
-    color: var(--emerald-600); font-size: 18px; font-weight: 300; flex-shrink: 0;
+    color: var(--emerald-600); font-size: 20px; font-weight: 300; flex-shrink: 0;
     transition: transform 0.2s, background 0.15s;
-    line-height: 1;
+    line-height: 0; padding-bottom: 1px;
   }
   .faq-item.open .faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
   .faq-body {
@@ -1081,8 +1081,8 @@ function Calculadora() {
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (No MHEV)", icon: "battery" }].map(opt => (
-                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "11px 16px", borderRadius: 8, border: tipo === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-50)" : "var(--white)", color: tipo === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: 14, fontWeight: tipo === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center" }}>
-                    <Icon name={opt.icon} size={16} color={tipo === opt.value ? "var(--emerald-700)" : "var(--slate-600)"} />
+                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 16px", borderRadius: 10, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: 14, fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 8, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
+                    <Icon name={opt.icon} size={16} color={tipo === opt.value ? "white" : "var(--slate-400)"} />
                     {opt.label}
                   </button>
                 ))}
@@ -1093,8 +1093,8 @@ function Calculadora() {
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Perfil tributario</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Independiente/Empresa", icon: "building" }].map(opt => (
-                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "11px 14px", borderRadius: 8, border: perfil === opt.value ? "1.5px solid #059669" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-50)" : "var(--white)", color: perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 400, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center" }}>
-                    <Icon name={opt.icon} size={16} color={perfil === opt.value ? "var(--emerald-700)" : "var(--slate-600)"} />
+                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 14px", borderRadius: 10, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 8, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
+                    <Icon name={opt.icon} size={16} color={perfil === opt.value ? "white" : "var(--slate-400)"} />
                     {opt.label}
                   </button>
                 ))}
@@ -1373,7 +1373,7 @@ function CTAFinal() {
         maxOpacity={0.08}
         duration={3}
         repeatDelay={1}
-        className="fill-emerald-500/20 stroke-emerald-500/20"
+        className="fill-white/30 stroke-white/30"
       />
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
