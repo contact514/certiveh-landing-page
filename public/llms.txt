@@ -8,7 +8,7 @@ CertiVeh gestiona ante la UPME el certificado que permite a propietarios de veh�
 
 - **Devolución del IVA**: la DIAN devuelve el 5% del valor del vehículo.
 - **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
-- **Exclusión de arancel**: reducción de aranceles en la importación.
+- **Depreciación acelerada**: independientes y empresas pueden depreciar el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.
 
 Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021, la Resolución UPME 135 de 2025 y la Resolución UPME 400 de 2026.
 

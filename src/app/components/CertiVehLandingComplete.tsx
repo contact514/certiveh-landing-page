@@ -536,7 +536,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Reducción arancelaria · 5%","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
+  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -645,7 +645,7 @@ function VentanaUPME() {
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   const portalUrl = usePortalUrl();
-  const flipWords = ["devolución de IVA","deducción en renta","reducción arancelaria","un certificado UPME"];
+  const flipWords = ["devolución de IVA","deducción en renta","depreciación acelerada","un certificado UPME"];
 
   const fmtM = (n: number) => {
     const m = Math.round(n / 1_000_000);
