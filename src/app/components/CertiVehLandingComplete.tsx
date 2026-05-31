@@ -691,7 +691,7 @@ function Hero() {
       {/* Overlay for legibility */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(248,250,252,0.92) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.80) 70%, rgba(236,253,245,0.92) 100%)",
+        background: "linear-gradient(180deg, rgba(248,250,252,0.72) 0%, rgba(255,255,255,0.65) 40%, rgba(255,255,255,0.60) 70%, rgba(236,253,245,0.72) 100%)",
       }}/>
 
       {/* H1 */}
