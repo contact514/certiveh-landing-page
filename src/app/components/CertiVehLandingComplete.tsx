@@ -194,14 +194,13 @@ const CSS = `
   }
   .faq-btn:hover { background: var(--slate-50); }
   .faq-icon {
-    width: 24px; height: 24px; border-radius: 9999px;
+    width: 28px; height: 28px; border-radius: 9999px;
     background: var(--emerald-50);
     display: flex; align-items: center; justify-content: center;
-    color: var(--emerald-600); font-size: 20px; font-weight: 300; flex-shrink: 0;
+    flex-shrink: 0;
     transition: transform 0.2s, background 0.15s;
-    line-height: 0; padding-bottom: 1px;
   }
-  .faq-item.open .faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
+  .faq-item.open .faq-icon { background: var(--emerald-600); transform: rotate(45deg); }
   .faq-body {
     padding: 16px 24px 20px; font-size: 15px; line-height: 1.65;
     color: var(--slate-600); background: var(--emerald-50);
@@ -1353,7 +1352,7 @@ function FAQ() {
             {items.map((item, i) => (
               <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
                 <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
-                  <span>{item.q}</span><div className="faq-icon">+</div>
+                  <span>{item.q}</span><div className="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={open === i ? "white" : "var(--emerald-600)"} strokeWidth="2" strokeLinecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
                 </button>
                 {open === i && (
                   <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
@@ -1375,11 +1374,11 @@ function CTAFinal() {
   return (
     <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       <AnimatedGridPattern
-        numSquares={40}
-        maxOpacity={0.08}
+        numSquares={50}
+        maxOpacity={0.25}
         duration={3}
-        repeatDelay={1}
-        className="fill-white/30 stroke-white/30"
+        repeatDelay={0.5}
+        className="fill-emerald-400/40 stroke-emerald-400/20"
       />
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
