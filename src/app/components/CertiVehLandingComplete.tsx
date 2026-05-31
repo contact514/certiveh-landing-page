@@ -1132,30 +1132,30 @@ function Calculadora() {
             </div>
 
             {calc.costoUPME != null && (
-              <div style={{ marginTop: 20, padding: "14px 16px", background: "#FFFBEB", border: "1.5px solid #FDE68A", borderRadius: 8 }}>
+              <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 10 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
-                  <Icon name="fileText" size={13} color="#92400E" />
-                  <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E" }}>Costo del servicio</span>
+                  <Icon name="fileText" size={13} color="var(--slate-500)" />
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Costo del servicio</span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "#78350F", lineHeight: 1.5 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Trámite ante UPME</span>
-                    <span style={{ fontWeight: 600 }}>{fmt(calc.costoUPME)}</span>
+                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Honorarios CertiVeh</span>
-                    <span style={{ fontWeight: 600 }}>{fmt(calc.honorariosBase)}</span>
+                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "#92400E", opacity: 0.7 }}>IVA (19%)</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.7 }}>{fmt(calc.ivaServicio)}</span>
+                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19%)</span>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
                   </div>
-                  <div style={{ borderTop: "1px solid #FDE68A", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontWeight: 700 }}>Total</span>
-                    <span style={{ fontWeight: 700 }}>{fmt(calc.costoTotal)}</span>
+                  <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>Total</span>
+                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>{fmt(calc.costoTotal)}</span>
                   </div>
                 </div>
-                <div style={{ fontSize: 11, color: "#92400E", opacity: 0.7, lineHeight: 1.4, marginTop: 8 }}>
+                <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4, marginTop: 8 }}>
                   * La deducción en renta reduce tu base gravable, no el impuesto directamente. Trámite UPME según Resolución No. 135 de 2025.
                 </div>
               </div>
@@ -1473,15 +1473,19 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           </button>
 
           <div style={{ marginBottom: 20 }}>
-            <span className="badge" style={{ 
-              background: 'var(--amber-50)', 
-              color: 'var(--amber-700)', 
-              borderColor: 'var(--amber-200)',
+            <span style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              background: 'var(--slate-900)',
+              color: 'white',
+              border: "none",
+              borderRadius: 6,
+              padding: "5px 12px",
               fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: '0.08em'
+              fontWeight: 600,
+              letterSpacing: '0.06em'
             }}>
-              ALERTA REGULATORIA
+              <Icon name="shield" size={11} color="#34D399" />
+              PROTEGE TU BENEFICIO
             </span>
           </div>
 
