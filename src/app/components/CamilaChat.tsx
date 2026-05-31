@@ -170,7 +170,7 @@ export default function CamilaChat() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" />
                 </svg>
               </div>
               <div>
@@ -208,7 +208,7 @@ export default function CamilaChat() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" />
                 </svg>
               </div>
               <div>
@@ -330,7 +330,7 @@ export default function CamilaChat() {
           </svg>
         ) : (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" />
           </svg>
         )}
         {unread > 0 && (
