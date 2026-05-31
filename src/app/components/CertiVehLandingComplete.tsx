@@ -1373,13 +1373,14 @@ function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
     <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <AnimatedGridPattern
-        numSquares={50}
-        maxOpacity={0.25}
-        duration={3}
-        repeatDelay={0.5}
-        className="fill-emerald-400/40 stroke-emerald-400/20"
-      />
+      <div style={{ position: "absolute", inset: 0, color: "rgba(52,211,153,0.5)" }}>
+        <AnimatedGridPattern
+          numSquares={50}
+          maxOpacity={0.3}
+          duration={3}
+          repeatDelay={0.5}
+        />
+      </div>
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
           Tu certificado UPME <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
