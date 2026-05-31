@@ -46,7 +46,7 @@ const NAV_CSS = `
   .shared-nav-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); color: #fff;
-    border: none; border-radius: 10px;
+    border: none; border-radius: 12px;
     padding: 10px 22px; font-size: 14px; font-weight: 600;
     cursor: pointer;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
