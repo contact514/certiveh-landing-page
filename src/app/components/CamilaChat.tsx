@@ -292,9 +292,9 @@ export default function CamilaChat() {
         onClick={() => { setOpen(o => !o); }}
         style={{
           position: 'fixed', bottom: 20, right: 16, width: 56, height: 56, borderRadius: '50%',
-          background: '#059669', border: 'none', cursor: 'pointer', zIndex: 9999,
-          boxShadow: '0 4px 14px rgba(5,150,105,0.4)', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', transition: 'transform 0.2s',
+          background: 'linear-gradient(135deg, #059669, #14B8A6)', border: 'none', cursor: 'pointer', zIndex: 9999,
+          boxShadow: '0 4px 24px rgba(5,150,105,0.4)', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', transition: 'transform 150ms',
         }}
         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
