@@ -138,7 +138,7 @@ const CSS = `
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--emerald-600); color: var(--white);
-    border: none; border-radius: 8px;
+    border: none; border-radius: 12px;
     padding: 12px 24px; font-size: 15px; font-weight: 600;
     cursor: pointer; font-family: var(--ff);
     transition: background 0.15s, transform 0.1s;
@@ -151,7 +151,7 @@ const CSS = `
   .btn-secondary {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--white); color: var(--slate-700);
-    border: 1.5px solid var(--slate-300); border-radius: 8px;
+    border: 1.5px solid var(--slate-300); border-radius: 12px;
     padding: 11px 24px; font-size: 15px; font-weight: 500;
     cursor: pointer; font-family: var(--ff);
     transition: border-color 0.15s, background 0.15s;
@@ -208,7 +208,7 @@ const CSS = `
 
   .step-tab {
     display: flex; align-items: center; gap: 14px;
-    padding: 14px 16px; border-radius: 10px; cursor: pointer;
+    padding: 14px 16px; border-radius: 12px; cursor: pointer;
     border: 1.5px solid transparent; background: transparent;
     text-align: left; font-family: var(--ff); transition: all 0.15s; width: 100%;
   }
@@ -615,7 +615,7 @@ function VentanaUPME() {
                 { val: mins, label: "Min" },
               ].map((u, i) => (
                 <div key={i} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
+                  <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
                     {pad(u.val)}
                   </div>
                   <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>{u.label}</div>
@@ -916,7 +916,7 @@ function Beneficios() {
               <div style={{ fontSize: 40, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 14 }}>{c.pct}</div>
               <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5, marginBottom: 16 }}>{c.desc}</p>
               <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 16 }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 8, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 12, fontWeight: 600, color: c.accentColor }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 12, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 12, fontWeight: 600, color: c.accentColor }}>
                   <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
                 </div>
               </div>
@@ -981,7 +981,7 @@ function ComoFunciona() {
                 </div>
                 <h3 style={{ fontSize: 24, fontWeight: 600, color: "white", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
                 <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontSize: 14, fontWeight: 500, color: "#34D399" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontSize: 14, fontWeight: 500, color: "#34D399" }}>
                   <Icon name="checkCircle" size={14} color="#34D399"/>{steps[active].detail}
                 </div>
               </motion.div>
@@ -1087,7 +1087,7 @@ function Calculadora() {
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (No MHEV)", icon: "battery" }].map(opt => (
-                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 12px", borderRadius: 10, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none", lineHeight: 1.3 }}>
+                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none", lineHeight: 1.3 }}>
                     <Icon name={opt.icon} size={16} color={tipo === opt.value ? "white" : "var(--slate-400)"} />
                     {opt.label}
                   </button>
@@ -1099,7 +1099,7 @@ function Calculadora() {
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Perfil tributario</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Independiente/Empresa", icon: "building" }].map(opt => (
-                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 12px", borderRadius: 10, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
+                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
                     <Icon name={opt.icon} size={16} color={perfil === opt.value ? "white" : "var(--slate-400)"} />
                     {opt.label}
                   </button>
@@ -1131,14 +1131,14 @@ function Calculadora() {
                 </div>
               ))}
               {perfil === "empresa" && (
-                <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 8, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5 }}>
+                <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5 }}>
                   Depreciación acelerada a 3 años, reduce tu base gravable más rápido y paga menos impuestos hoy.
                 </div>
               )}
             </div>
 
             {calc.costoUPME != null && (
-              <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 10 }}>
+              <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <Icon name="fileText" size={13} color="var(--slate-500)" />
                   <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Costo del servicio</span>
@@ -1226,7 +1226,7 @@ function Confianza() {
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
               <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "var(--grad-primary)" }}></div>
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+              <div style={{ width: 40, height: 40, borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
                 <Icon name={p.icon} size={20} color="#34D399"/>
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 600, color: "white", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{p.title}</h3>
