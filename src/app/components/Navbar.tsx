@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Inline Icon component (same as in CertiVehLandingComplete)
 function Icon({ name, size = 20, color = "currentColor" }: { name: string; size?: number; color?: string }) {
@@ -18,38 +18,49 @@ function Icon({ name, size = 20, color = "currentColor" }: { name: string; size?
 const NAV_CSS = `
   .shared-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #E2E8F0;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid transparent;
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
     box-sizing: border-box;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  }
+  .shared-nav.scrolled {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom-color: #E2E8F0;
   }
   .shared-nav-logo { text-decoration: none; display: flex; align-items: center; }
   .shared-nav-links { display: flex; align-items: center; gap: 32px; }
   .shared-nav-links a {
-    font-size: 14px; font-weight: 500; color: #475569;
-    text-decoration: none; transition: color 0.15s;
+    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75);
+    text-decoration: none; transition: color 0.3s;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   }
-  .shared-nav-links a:hover { color: #059669; }
+  .shared-nav-links a:hover { color: #34D399; }
+  .shared-nav.scrolled .shared-nav-links a { color: #475569; }
+  .shared-nav.scrolled .shared-nav-links a:hover { color: #059669; }
   .shared-nav-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #059669; color: #fff;
-    border: none; border-radius: 8px;
-    padding: 10px 20px; font-size: 14px; font-weight: 600;
+    background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); color: #fff;
+    border: none; border-radius: 10px;
+    padding: 10px 22px; font-size: 14px; font-weight: 600;
     cursor: pointer;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    transition: background 0.15s, transform 0.1s;
+    transition: transform 0.1s, box-shadow 0.2s;
     line-height: normal;
+    box-shadow: 0 2px 10px rgba(5,150,105,0.25);
   }
-  .shared-nav-btn:hover { background: #047857; transform: translateY(-1px); }
+  .shared-nav-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.35); }
   .shared-mobile-btn {
     display: none; background: none; border: none;
-    cursor: pointer; padding: 8px; color: #334155;
+    cursor: pointer; padding: 8px; color: rgba(255,255,255,0.8);
+    transition: color 0.3s;
   }
+  .shared-nav.scrolled .shared-mobile-btn { color: #334155; }
   .shared-mobile-menu {
     position: fixed; top: 64px; left: 0; right: 0;
     background: white; border-bottom: 1px solid #E2E8F0;
@@ -80,9 +91,9 @@ const NAV_CSS = `
 `;
 
 // Logo SVG identical to CertiVehLogo compact
-function Logo() {
+function Logo({ scrolled }: { scrolled: boolean }) {
   return (
-    <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+    <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh" style={{ transition: "all 0.3s" }}>
       <defs>
         <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#059669"/><stop offset="100%" stopColor="#14B8A6"/>
@@ -93,8 +104,8 @@ function Logo() {
         <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
       </g>
       <g transform="translate(60,28)">
-        <text x="0" y="0" fill="#0F172A" fontSize="26" fontWeight="700"
-          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5">
+        <text x="0" y="0" fill={scrolled ? "#0F172A" : "#FFFFFF"} fontSize="26" fontWeight="700"
+          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5" style={{ transition: "fill 0.3s" }}>
           Certi<tspan fill="#059669">Veh</tspan>
         </text>
       </g>
@@ -109,14 +120,22 @@ interface NavbarProps {
 
 export function Navbar({ isHome = true }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const link = (hash: string) => isHome ? hash : `/${hash}`;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: NAV_CSS }} />
-      <nav className="shared-nav" aria-label="Navegación principal">
+      <nav className={`shared-nav${scrolled ? " scrolled" : ""}`} aria-label="Navegación principal">
         <a href={link("#hero")} className="shared-nav-logo" aria-label="CertiVeh — inicio">
-          <Logo />
+          <Logo scrolled={scrolled} />
         </a>
         <button className="shared-mobile-btn" onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}>
