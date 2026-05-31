@@ -120,15 +120,16 @@ interface NavbarProps {
 
 export function Navbar({ isHome = true }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(!isHome);
   const link = (hash: string) => isHome ? hash : `/${hash}`;
 
   useEffect(() => {
+    if (!isHome) { setScrolled(true); return; }
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <>
