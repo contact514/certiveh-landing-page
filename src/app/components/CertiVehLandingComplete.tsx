@@ -1003,9 +1003,9 @@ function ComoFunciona() {
         }}>
           {/* Browser chrome */}
           <div style={{
-            background: "rgba(255,255,255,0.06)", padding: "10px 16px",
+            background: "#F1F5F9", padding: "10px 16px",
             display: "flex", alignItems: "center", gap: 8,
-            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            borderBottom: "1px solid #E2E8F0",
           }}>
             <div style={{ display: "flex", gap: 6 }}>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
@@ -1013,8 +1013,8 @@ function ComoFunciona() {
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
             </div>
             <div style={{
-              flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 6,
-              padding: "4px 12px", fontSize: 12, color: "rgba(255,255,255,0.4)",
+              flex: 1, background: "#FFFFFF", borderRadius: 6,
+              padding: "4px 12px", fontSize: 12, color: "#94A3B8",
               fontFamily: "var(--ff)",
             }}>
               portal.certiveh.co
