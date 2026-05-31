@@ -338,8 +338,7 @@ const CSS = `
   .hero-poster { display: none; }
 
   @media (max-width: 768px) {
-    .hero-video { display: none !important; }
-    .hero-poster { display: block !important; opacity: 0.25 !important; }
+    .hero-poster { display: none !important; }
     .hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.15) 100%) !important; }
 
     nav { padding: 0 20px; height: 64px; }
