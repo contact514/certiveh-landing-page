@@ -667,7 +667,7 @@ function Hero() {
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "120px 48px 80px", position: "relative",
+      padding: "100px 48px 60px", position: "relative",
       background: "var(--slate-900)", overflow: "hidden",
     }}>
       {/* Background video (desktop) / poster (mobile) */}
@@ -700,7 +700,7 @@ function Hero() {
         display: "inline-flex", alignItems: "center", gap: 8,
         background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
         border: "1px solid rgba(255,255,255,0.15)", borderRadius: 9999,
-        padding: "6px 16px", marginBottom: 28,
+        padding: "6px 16px", marginBottom: 20,
         animation: "fadeUp 0.6s 0.04s ease both",
         position: "relative", zIndex: 1
       }}>
@@ -714,7 +714,7 @@ function Hero() {
       <h1 style={{
         fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
         lineHeight: 1.15, letterSpacing: "-0.03em", color: "#FFFFFF",
-        maxWidth: 800, marginBottom: 16, animation: "fadeUp 0.6s 0.08s ease both",
+        maxWidth: 800, marginBottom: 10, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
       }}>
         Tu tramitador virtual del{" "}
@@ -739,7 +739,7 @@ function Hero() {
       <p style={{
         fontSize: "clamp(15px, 1.8vw, 17px)", lineHeight: 1.7,
         color: "rgba(255,255,255,0.5)", maxWidth: 520,
-        marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
+        marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
         Tu tramitador virtual del certificado UPME.
@@ -749,7 +749,7 @@ function Hero() {
       {/* CTAs */}
       <div style={{
         display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 56, animation: "fadeUp 0.6s 0.24s ease both",
+        marginBottom: 36, animation: "fadeUp 0.6s 0.24s ease both",
         position: "relative", zIndex: 1
       }}>
         <a href="#calculadora" style={{ textDecoration: "none" }}>
@@ -775,7 +775,7 @@ function Hero() {
       {/* Stats */}
       <div style={{
         display: "flex", gap: 1, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 28, animation: "fadeUp 0.6s 0.32s ease both",
+        marginBottom: 20, animation: "fadeUp 0.6s 0.32s ease both",
         position: "relative", zIndex: 1,
         background: "rgba(255,255,255,0.06)", backdropFilter: "blur(12px)",
         border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16,
@@ -787,7 +787,7 @@ function Hero() {
           { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "#34D399" },
         ].map((s, i) => (
           <div key={s.label} style={{
-            padding: "20px 32px", textAlign: "center", minWidth: 180,
+            padding: "16px 28px", textAlign: "center", minWidth: 160,
             flex: "1 1 auto", cursor: "default",
             borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
           }}>
