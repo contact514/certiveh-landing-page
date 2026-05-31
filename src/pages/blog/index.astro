@@ -128,8 +128,18 @@ const articles = [
     .blog-home-intro {
       text-align: center;
       padding-bottom: 48px;
-      border-bottom: 2px solid #E2E8F0;
+      border-bottom: none;
       margin-bottom: 56px;
+      position: relative;
+    }
+    .blog-home-intro::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #059669, #14B8A6);
+      margin: 32px auto 0;
+      border-radius: 2px;
     }
     .blog-home-intro .label {
       display: inline-block;
@@ -192,7 +202,7 @@ const articles = [
     }
     .card-body-left { flex: 1; min-width: 200px; }
     .card-subtitle {
-      font-size: 14px; color: #475569; line-height: 1.65; margin-bottom: 16px;
+      font-size: 14px; color: #475569; line-height: 1.7; margin-bottom: 16px;
     }
     .card-meta {
       display: flex; gap: 10px; flex-wrap: wrap;
@@ -226,7 +236,7 @@ const articles = [
   <div class="blog-home-wrapper">
     <div class="blog-home-intro">
       <h1>Guía completa de beneficios tributarios para vehículos eléctricos e híbridos en Colombia</h1>
-      <p>Información basada en la normativa vigente: Ley 1715 de 2014, Ley 2099 de 2021, Resolución UPME 00135 de 2025 y Resolución UPME 0070 de 2026.</p>
+      <p>Información basada en la normativa vigente: Ley 1715 de 2014, Ley 2099 de 2021, Resolución UPME 135 de 2025 y Resolución UPME 400 de 2026.</p>
     </div>
 
     <div class="articles-grid">
