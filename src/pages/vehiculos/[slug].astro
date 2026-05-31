@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Navbar } from '../../app/components/Navbar';
 import { vehiculos } from '../../data/vehiculos';
 
 export async function getStaticPaths() {
@@ -91,7 +92,7 @@ const faqLd = JSON.stringify({
       name: '¿Cuánto puedo deducir en mi declaración de renta?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `Puedes deducir hasta el 50% del valor del vehículo, es decir ${fmt(renta)}, de tu base gravable en la declaración de renta del año de la compra.`,
+        text: `Puedes deducir hasta el 50% del valor del vehículo, es decir ${fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.`,
       },
     },
     {
@@ -107,7 +108,7 @@ const faqLd = JSON.stringify({
       name: '¿Qué documentos necesito?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Solo tres: tu cédula de ciudadanía, la tarjeta de propiedad del vehículo y la factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.',
+        text: 'Tu cédula o pasaporte, tarjeta de propiedad, factura de compra y RUT. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.',
       },
     },
   ],
@@ -132,22 +133,16 @@ const faqLd = JSON.stringify({
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
 
-    .v-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--slate-900); border-bottom: 1px solid rgba(255,255,255,0.06); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; box-sizing: border-box; }
-    .v-nav-spacer { height: 64px; background: var(--slate-900); }
-    .v-nav a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--slate-400); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
-    .v-nav a:hover { color: white; }
-    .v-nav-logo { display: flex; align-items: center; }
-
-    .v-hero { background: var(--slate-900); padding: 64px 48px; }
+    .v-hero { background: var(--slate-900); padding: 120px 48px 64px; }
     .v-hero-inner { max-width: 1200px; margin: 0 auto; }
-    .v-breadcrumb { font-size: 13px; font-weight: 500; color: var(--slate-400); margin-bottom: 20px; }
-    .v-breadcrumb a { color: var(--slate-400); text-decoration: none; }
+    .v-breadcrumb { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+    .v-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
     .v-breadcrumb a:hover { color: white; }
     .v-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px; }
-    .v-badge-ev { background: rgba(5,150,105,0.15); border: 1px solid rgba(5,150,105,0.3); color: #34D399; }
-    .v-badge-hev { background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3); color: #5EEAD4; }
+    .v-badge-ev { background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); }
+    .v-badge-hev { background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); }
     .v-title { font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
-    .v-desc { font-size: 16px; color: var(--slate-400); line-height: 1.6; max-width: 640px; }
+    .v-desc { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 640px; }
 
     .v-container { max-width: 1200px; margin: 0 auto; padding: 48px 48px 80px; }
     .v-card { background: white; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 32px; margin-bottom: 24px; }
@@ -168,8 +163,8 @@ const faqLd = JSON.stringify({
     .v-roi-big { font-size: 32px; font-weight: 700; color: var(--emerald-600); letter-spacing: -0.02em; }
     .v-roi-text { font-size: 14px; color: var(--emerald-700); margin-top: 4px; }
 
-    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--emerald-600); color: white; border: none; border-radius: 8px; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: background 0.15s, transform 0.1s; text-decoration: none; }
-    .v-cta:hover { background: var(--emerald-700); transform: translateY(-1px); }
+    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #059669, #14B8A6); color: white; border: none; border-radius: 12px; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: transform 0.1s, box-shadow 0.2s; text-decoration: none; box-shadow: 0 4px 24px rgba(5,150,105,0.4); }
+    .v-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.5); }
     .v-cta-wrap { text-align: center; margin-top: 32px; }
     .v-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 10px; }
 
@@ -202,18 +197,17 @@ const faqLd = JSON.stringify({
     .v-footer { background: var(--slate-900); color: #94A3B8; padding: 48px 48px; }
     .v-footer-inner { max-width: 1200px; margin: 0 auto; }
     .v-footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
-    .v-footer-brand p { font-size: 13px; color: #475569; margin-top: 10px; max-width: 260px; line-height: 1.5; }
+    .v-footer-brand p { font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5; }
     .v-footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
-    .v-footer-col-label { font-size: 12px; font-weight: 600; color: #CBD5E1; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 14px; }
+    .v-footer-col-label { font-size: 12px; font-weight: 700; color: #CBD5E1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
     .v-footer-col-links { display: flex; flex-direction: column; gap: 10px; }
-    .v-footer-col-links a { font-size: 14px; color: #475569; text-decoration: none; transition: color 0.15s; }
+    .v-footer-col-links a { font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.15s; }
     .v-footer-col-links a:hover { color: #fff; }
-    .v-footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .v-footer-bottom span { font-size: 13px; line-height: 1.4; }
+    .v-footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .v-footer-bottom span { font-size: 12px; line-height: 1.4; }
 
     @media (max-width: 640px) {
-      .v-nav { padding: 0 20px; }
-      .v-hero { padding: 48px 20px; }
+      .v-hero { padding: 100px 20px 48px; }
       .v-container { padding: 32px 20px 64px; }
       .v-benefits { grid-template-columns: 1fr; }
       .v-faq-btn { padding: 16px 20px; font-size: 14px; }
@@ -224,32 +218,7 @@ const faqLd = JSON.stringify({
   </style>
 
   <!-- NAV -->
-  <div class="v-nav-spacer"></div>
-  <nav class="v-nav">
-    <a href="/" class="v-nav-logo" aria-label="CertiVeh — inicio">
-      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-        <defs>
-          <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(4,8) scale(0.48)">
-          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#navLogoGrad)"/>
-          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-        </g>
-        <g transform="translate(60,28)">
-          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
-            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
-            Certi<tspan fill="#059669">Veh</tspan>
-          </text>
-        </g>
-      </svg>
-    </a>
-    <a href="/vehiculos/">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Todos los vehículos
-    </a>
-  </nav>
+  <Navbar isHome={false} darkHero={true} client:load />
 
   <!-- HERO -->
   <main id="main-content">
@@ -346,7 +315,7 @@ const faqLd = JSON.stringify({
           <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
           <div class="v-faq-icon">+</div>
         </button>
-        <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta del año de la compra.</div>
+        <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
       </div>
 
       <div class="v-faq-item">
@@ -362,7 +331,7 @@ const faqLd = JSON.stringify({
           <span>¿Qué documentos necesito?</span>
           <div class="v-faq-icon">+</div>
         </button>
-        <div class="v-faq-body">Solo tres: tu cédula de ciudadanía, la tarjeta de propiedad del vehículo y la factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
+        <div class="v-faq-body">Tu cédula o pasaporte, tarjeta de propiedad, factura de compra y RUT. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
     </div>
 
