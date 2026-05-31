@@ -98,20 +98,26 @@ const CSS = `
   /* H3: Range slider cross-browser thumb */
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--emerald-600); cursor: pointer;
-    border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    width: 22px; height: 22px; border-radius: 50%;
+    background: white; cursor: pointer;
+    border: 3px solid var(--emerald-600);
+    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
+    transition: box-shadow 0.15s;
   }
   input[type=range]::-moz-range-thumb {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--emerald-600); cursor: pointer;
-    border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    width: 22px; height: 22px; border-radius: 50%;
+    background: white; cursor: pointer;
+    border: 3px solid var(--emerald-600);
+    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
+  }
+  input[type=range]::-webkit-slider-thumb:hover {
+    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.12);
   }
   input[type=range]:focus-visible::-webkit-slider-thumb {
-    box-shadow: 0 0 0 3px rgba(5,150,105,0.3);
+    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.15);
   }
   input[type=range]:focus-visible::-moz-range-thumb {
-    box-shadow: 0 0 0 3px rgba(5,150,105,0.3);
+    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.15);
   }
 
   nav {
@@ -1106,7 +1112,7 @@ function Calculadora() {
                 <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Valor del vehículo</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
               </div>
-              <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 6, borderRadius: 3, outline: "none", cursor: "pointer", background: `linear-gradient(to right,#059669 0%,#059669 ${((valor-40)/560)*100}%,#E2E8F0 ${((valor-40)/560)*100}%,#E2E8F0 100%)` }}/>
+              <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 4, borderRadius: 4, outline: "none", cursor: "pointer", background: `linear-gradient(to right, #059669 0%, #14B8A6 ${((valor-40)/560)*100}%, #E2E8F0 ${((valor-40)/560)*100}%, #E2E8F0 100%)` }}/>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
                 <span>$40M</span><span>$600M</span>
               </div>
