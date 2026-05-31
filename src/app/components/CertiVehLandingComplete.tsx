@@ -667,8 +667,8 @@ function Hero() {
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "100px 48px 60px", position: "relative",
-      background: "var(--white)", overflow: "hidden",
+      padding: "120px 48px 80px", position: "relative",
+      background: "var(--slate-900)", overflow: "hidden",
     }}>
       {/* Background video (desktop) / poster (mobile) */}
       <video
@@ -678,48 +678,67 @@ function Hero() {
         className="hero-video"
         style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", pointerEvents: "none",
+          objectFit: "cover", pointerEvents: "none", opacity: 0.35,
         }}
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
       {/* Static poster fallback for mobile */}
       <div className="hero-poster" style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
+        position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.35,
         backgroundImage: "url(/hero-bg-poster.webp)",
         backgroundSize: "cover", backgroundPosition: "center",
       }} />
-      {/* Overlay for legibility */}
+      {/* Gradient overlay */}
       <div className="hero-overlay" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(248,250,252,0.72) 0%, rgba(255,255,255,0.65) 40%, rgba(255,255,255,0.60) 70%, rgba(236,253,245,0.72) 100%)",
+        background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.15) 100%)",
       }}/>
+
+      {/* Badge */}
+      <div style={{
+        display: "inline-flex", alignItems: "center", gap: 8,
+        background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
+        border: "1px solid rgba(255,255,255,0.15)", borderRadius: 9999,
+        padding: "6px 16px", marginBottom: 28,
+        animation: "fadeUp 0.6s 0.04s ease both",
+        position: "relative", zIndex: 1
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ADE80" }} />
+        <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.85)", letterSpacing: "0.04em" }}>
+          Ventana de radicación abierta
+        </span>
+      </div>
 
       {/* H1 */}
       <h1 style={{
-        fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700,
-        lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--slate-900)",
-        maxWidth: 860, marginBottom: 12, animation: "fadeUp 0.6s 0.08s ease both",
+        fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
+        lineHeight: 1.15, letterSpacing: "-0.03em", color: "#FFFFFF",
+        maxWidth: 800, marginBottom: 16, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tu tramitador virtual del <br />certificado UPME en Colombia
+        Tu tramitador virtual del{" "}
+        <span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          certificado UPME
+        </span>
+        {" "}en Colombia
       </h1>
       <div style={{
-        fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 600,
-        color: "var(--emerald-600)", marginBottom: 0,
+        fontSize: "clamp(18px, 2.5vw, 24px)", fontWeight: 500,
+        color: "rgba(255,255,255,0.7)", marginBottom: 0,
         animation: "fadeUp 0.6s 0.12s ease both",
         position: "relative", zIndex: 1
       }}>
         Accede a{" "}
-        <span style={{ position: "relative", display: "inline-block" }}>
+        <span style={{ position: "relative", display: "inline-block", color: "#34D399", fontWeight: 600 }}>
           <FlipWords words={flipWords} duration={2800}/>
         </span>
       </div>
 
       {/* Sub */}
       <p style={{
-        fontSize: "clamp(16px, 1.8vw, 18px)", lineHeight: 1.6,
-        color: "var(--slate-500)", maxWidth: 560,
+        fontSize: "clamp(15px, 1.8vw, 17px)", lineHeight: 1.7,
+        color: "rgba(255,255,255,0.5)", maxWidth: 520,
         marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
@@ -730,52 +749,66 @@ function Hero() {
       {/* CTAs */}
       <div style={{
         display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 48, animation: "fadeUp 0.6s 0.24s ease both",
+        marginBottom: 56, animation: "fadeUp 0.6s 0.24s ease both",
         position: "relative", zIndex: 1
       }}>
         <a href="#calculadora" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg">
+          <button className="btn-primary btn-primary-lg" style={{
+            background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)",
+            boxShadow: "0 4px 24px rgba(5,150,105,0.4), 0 1px 2px rgba(0,0,0,0.2)",
+            padding: "16px 36px", fontSize: 16, borderRadius: 12,
+          }}>
             Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-secondary">Empezar mi trámite ahora</button>
+          <button className="btn-secondary" style={{
+            background: "rgba(255,255,255,0.08)", color: "#FFFFFF",
+            border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: 12,
+            backdropFilter: "blur(4px)", padding: "15px 28px",
+          }}>
+            Empezar mi trámite ahora
+          </button>
         </a>
       </div>
 
       {/* Stats */}
       <div style={{
-        display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 24, animation: "fadeUp 0.6s 0.32s ease both",
-        position: "relative", zIndex: 1
+        display: "flex", gap: 1, flexWrap: "wrap", justifyContent: "center",
+        marginBottom: 28, animation: "fadeUp 0.6s 0.32s ease both",
+        position: "relative", zIndex: 1,
+        background: "rgba(255,255,255,0.06)", backdropFilter: "blur(12px)",
+        border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16,
+        overflow: "hidden",
       }}>
         {[
-          { num: stats ? fmtM(stats.vehiculos_gestionados) : null, label: "en vehículos gestionados", color: "var(--emerald-600)" },
-          { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta", color: "var(--teal-500)" },
-          { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "var(--emerald-600)" },
-        ].map(s => (
-          <div key={s.label} className="card" style={{ padding: "16px 24px", textAlign: "center", minWidth: 160, flex: "1 1 auto", maxWidth: 220, transition: "transform 0.2s, box-shadow 0.2s", cursor: "default" }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-          >
+          { num: stats ? fmtM(stats.vehiculos_gestionados) : null, label: "en vehículos gestionados", color: "#34D399" },
+          { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta", color: "#5EEAD4" },
+          { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "#34D399" },
+        ].map((s, i) => (
+          <div key={s.label} style={{
+            padding: "20px 32px", textAlign: "center", minWidth: 180,
+            flex: "1 1 auto", cursor: "default",
+            borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
+          }}>
             {s.num
-              ? <div style={{ fontSize: 24, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
-              : <div style={{ height: 24, width: 100, borderRadius: 6, background: "var(--slate-200)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
+              ? <div style={{ fontSize: 26, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
+              : <div style={{ height: 26, width: 100, borderRadius: 6, background: "rgba(255,255,255,0.1)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
             }
-            <div style={{ fontSize: 12, color: "var(--slate-500)", fontWeight: 500, marginTop: 6 }}>{s.label}</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", fontWeight: 500, marginTop: 8 }}>{s.label}</div>
           </div>
         ))}
       </div>
 
       {/* Trust strip */}
       <div style={{
-        display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center",
+        display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center",
         marginBottom: 48, animation: "fadeUp 0.6s 0.36s ease both",
         position: "relative", zIndex: 1
       }}>
         {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único"],["smartphone","100% en línea"]].map(([ico,txt]) => (
-          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "var(--slate-400)", fontWeight: 500, cursor: "default" }}>
-            <Icon name={ico as string} size={13} color="var(--emerald-600)"/>{txt}
+          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "rgba(255,255,255,0.4)", fontWeight: 500, cursor: "default" }}>
+            <Icon name={ico as string} size={13} color="#34D399"/>{txt}
           </span>
         ))}
       </div>
