@@ -825,11 +825,11 @@ function Hero() {
 function Aliados() {
   return (
     <section aria-label="Aliados de CertiVeh" style={{
-      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
-      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
+      background: "var(--slate-900)", borderTop: "1px solid rgba(255,255,255,0.06)",
+      borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "40px 24px",
     }}>
       <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.5)",
         textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
       }}>
         Aliados que confían en CertiVeh
@@ -842,12 +842,12 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
           <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
             maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
           />
-          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
+          <span style={{ fontSize: 8, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
             Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
           </span>
         </div>
@@ -855,20 +855,20 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
           <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
             maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
           />
         </div>
         {/* ExoticsCo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
           <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
             maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
           />
         </div>
       </div>
@@ -887,6 +887,10 @@ function Beneficios() {
     <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--slate-50)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 9999, padding: "5px 14px", marginBottom: 20 }}>
+            <Icon name="percent" size={12} color="var(--emerald-600)" />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--emerald-700)", letterSpacing: "0.05em" }}>BENEFICIOS TRIBUTARIOS</span>
+          </div>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 16 }}>
             Tres beneficios tributarios. <br/>
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
@@ -899,7 +903,7 @@ function Beneficios() {
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {cards.map((c, i) => (
             <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: c.bgColor, borderColor: c.borderColor, transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(5,150,105,0.15), 0 0 0 1px rgba(5,150,105,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
               <div style={{ width: 44, height: 44, borderRadius: 10, background: "white", border: `1px solid ${c.borderColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
@@ -1202,25 +1206,25 @@ function Confianza() {
     { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Honorarios de $599.990 + IVA, más el costo del trámite ante la UPME. Sin suscripciones ni costos ocultos." },
   ];
   return (
-    <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--white)" }}>
+    <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25 }}>
             Hecho para que no <br/><span style={{ color: "var(--slate-400)" }}>tengas que preocuparte.</span>
           </h2>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {puntos.map((p, i) => (
-            <div key={i} className="card trust-card" style={{ padding: 28, transition: "transform 0.2s, box-shadow 0.2s", position: "relative", overflow: "hidden" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
+            <div key={i} className="card trust-card" style={{ padding: 28, transition: "transform 0.2s, box-shadow 0.2s", position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12 }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
               <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "var(--grad-primary)" }}></div>
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-                <Icon name={p.icon} size={20} color="var(--emerald-600)"/>
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+                <Icon name={p.icon} size={20} color="#34D399"/>
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{p.title}</h3>
-              <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.5 }}>{p.desc}</p>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: "white", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{p.title}</h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{p.desc}</p>
             </div>
           ))}
         </div>
@@ -1246,16 +1250,17 @@ function Testimonios() {
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {testimonios.map((t, i) => (
-            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ display: "flex", gap: 2 }}>
+            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16, borderLeft: "3px solid var(--emerald-600)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: -10, left: 8, fontSize: 80, fontWeight: 700, color: "var(--emerald-100)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
+              <div style={{ display: "flex", gap: 2, position: "relative" }}>
                 {[...Array(5)].map((_, j) => (
                   <svg key={j} width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B" stroke="none">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 ))}
               </div>
-              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1 }}>"{t.texto}"</p>
-              <div>
+              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1, position: "relative" }}>"{t.texto}"</p>
+              <div style={{ position: "relative" }}>
                 <div style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-900)" }}>{t.nombre}</div>
                 <div style={{ fontSize: 13, color: "var(--slate-400)" }}>{t.ciudad} · {t.vehiculo}</div>
               </div>
@@ -1340,6 +1345,10 @@ function FAQ() {
       <div className="section">
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 9999, padding: "5px 14px", marginBottom: 20 }}>
+              <Icon name="info" size={12} color="var(--emerald-600)" />
+              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--emerald-700)", letterSpacing: "0.05em" }}>PREGUNTAS FRECUENTES</span>
+            </div>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>Todo lo que necesitas saber</h2>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -1366,30 +1375,30 @@ function FAQ() {
 function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
-    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--grad-primary)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       <AnimatedGridPattern
         numSquares={40}
-        maxOpacity={0.15}
+        maxOpacity={0.06}
         duration={3}
         repeatDelay={1}
         className="fill-white/30 stroke-white/30"
       />
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tu certificado UPME <br/>te está esperando.
+          Tu certificado UPME <br/><span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
         </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
+          <button className="btn-primary btn-primary-lg" style={{ background: "var(--grad-primary)", color: "white", boxShadow: "0 0 24px rgba(5,150,105,0.4), 0 0 60px rgba(5,150,105,0.15)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
           {["Pago único · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
-            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
-              <Icon name="checkCircle" size={13} color="rgba(255,255,255,0.75)"/>{t}
+            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
+              <Icon name="checkCircle" size={13} color="#34D399"/>{t}
             </span>
           ))}
         </div>
