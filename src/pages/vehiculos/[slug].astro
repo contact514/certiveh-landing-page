@@ -231,7 +231,7 @@ const faqLd = JSON.stringify({
       <div class={`v-badge ${v.tipo === 'BEV' ? 'v-badge-ev' : 'v-badge-hev'}`}>
         {v.tipoLabel} · {v.elegible ? 'Elegible UPME' : 'No elegible'}
       </div>
-      <h1 class="v-title">{v.marca} {v.modelo}</h1>
+      <h1 class="v-title">{v.marca} <span style="background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{v.modelo}</span></h1>
       <p class="v-desc">{v.descripcion}</p>
     </div>
   </div>
