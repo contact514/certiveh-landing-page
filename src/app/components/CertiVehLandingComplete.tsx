@@ -207,13 +207,13 @@ const CSS = `
     border: 1.5px solid transparent; background: transparent;
     text-align: left; font-family: var(--ff); transition: all 0.15s; width: 100%;
   }
-  .step-tab.active { background: var(--emerald-50); border-color: var(--emerald-200); }
-  .step-tab:hover:not(.active) { background: var(--slate-50); }
+  .step-tab.active { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+  .step-tab:hover:not(.active) { background: rgba(255,255,255,0.04); }
   .step-num {
     width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700;
-    background: var(--slate-100); color: var(--slate-500); transition: all 0.15s;
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); transition: all 0.15s;
   }
   .step-tab.active .step-num { background: var(--emerald-600); color: white; }
 
@@ -825,11 +825,11 @@ function Hero() {
 function Aliados() {
   return (
     <section aria-label="Aliados de CertiVeh" style={{
-      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
-      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
+      background: "var(--slate-900)", borderTop: "1px solid rgba(255,255,255,0.06)",
+      borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "40px 24px",
     }}>
       <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.5)",
         textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
       }}>
         Aliados que confían en CertiVeh
@@ -842,12 +842,12 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
           <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
             maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
           />
-          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
+          <span style={{ fontSize: 8, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
             Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
           </span>
         </div>
@@ -855,20 +855,20 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
           <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
             maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
           />
         </div>
         {/* ExoticsCo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
           <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
             maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
+            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
           />
         </div>
       </div>
@@ -879,12 +879,12 @@ function Aliados() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100%.", ejemplo: "$120M → la DIAN te devuelve $6.000.000" },
-    { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
-    { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100%.", ejemplo: "$120M → la DIAN te devuelve $6.000.000" },
+    { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
+    { icon: "car",      tag: "ARANCEL", title: "Reducción arancelaria",   pct: "5%",  accentColor: "var(--amber-500)", iconBg: "rgba(245,158,11,0.1)", bgColor: "var(--amber-50)", borderColor: "var(--amber-200)", desc: "Reducción del arancel de importación para vehículos eléctricos e híbridos. Aplica al momento de la importación.", ejemplo: "Varía según modelo y origen" },
   ];
   return (
-    <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--slate-50)" }}>
+    <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--white)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 16 }}>
@@ -898,18 +898,21 @@ function Beneficios() {
 
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {cards.map((c, i) => (
-            <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: c.bgColor, borderColor: c.borderColor, transition: "transform 0.2s, box-shadow 0.2s" }}
+            <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderLeft: `4px solid ${c.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ width: 44, height: 44, borderRadius: 10, background: "white", border: `1px solid ${c.borderColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+              <div style={{ position: "absolute", top: 12, right: 16, fontSize: 80, fontWeight: 700, color: c.accentColor, opacity: 0.04, lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
                 <Icon name={c.icon} size={22} color={c.accentColor}/>
               </div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 4, lineHeight: 1.4 }}>{c.title}</h3>
               <div style={{ fontSize: 40, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 14 }}>{c.pct}</div>
               <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5, marginBottom: 16 }}>{c.desc}</p>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 8, background: "white", border: `1px solid ${c.borderColor}`, fontSize: 12, fontWeight: 600, color: c.accentColor }}>
-                <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
+              <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 16 }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 8, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 12, fontWeight: 600, color: c.accentColor }}>
+                  <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
+                </div>
               </div>
             </div>
           ))}
@@ -938,46 +941,48 @@ function ComoFunciona() {
   }, [steps.length]);
   
   return (
-    <section id="como-funciona" aria-label="Cómo funciona" style={{ background: "var(--white)" }}>
+    <section id="como-funciona" aria-label="Cómo funciona" style={{ background: "var(--slate-900)" }}>
       <div className="section">
         <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <div>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 12 }}>
-              Así de simple <br/><span style={{ color: "var(--slate-400)" }}>es el trámite.</span>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25, marginBottom: 12 }}>
+              Así de simple <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>es el trámite.</span>
             </h2>
-            <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "var(--slate-500)", lineHeight: 1.6, marginBottom: 32 }}>
+            <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
               De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún portal gubernamental.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {steps.map((s, i) => (
-                <button key={i} className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)}>
-                  <div className="step-num">{s.num}</div>
+                <button key={i} className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)}
+                  style={active === i ? { background: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.1)" } : { background: "transparent", borderColor: "transparent" }}
+                >
+                  <div className="step-num" style={active === i ? { background: "var(--emerald-600)", color: "white" } : { background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}>{s.num}</div>
                   <div>
-                    <div style={{ fontSize: 16, fontWeight: 600, color: active === i ? "var(--slate-900)" : "var(--slate-600)", lineHeight: 1.6 }}>{s.title}</div>
-                    <div style={{ fontSize: 12, fontWeight: 500, color: active === i ? "var(--emerald-600)" : "var(--slate-400)", marginTop: 1, lineHeight: 1.4 }}>{s.subtitle}</div>
+                    <div style={{ fontSize: 16, fontWeight: 600, color: active === i ? "white" : "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>{s.title}</div>
+                    <div style={{ fontSize: 12, fontWeight: 500, color: active === i ? "#34D399" : "rgba(255,255,255,0.3)", marginTop: 1, lineHeight: 1.4 }}>{s.subtitle}</div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "var(--grad-subtle)", borderColor: "var(--emerald-200)", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: -8, right: 16, fontSize: 140, fontWeight: 700, color: "var(--emerald-600)", opacity: 0.06, lineHeight: 1, pointerEvents: "none" }}>{steps[active].num}</div>
+          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: -8, right: 16, fontSize: 140, fontWeight: 700, color: "rgba(255,255,255,0.03)", lineHeight: 1, pointerEvents: "none" }}>{steps[active].num}</div>
             <AnimatePresence mode="wait">
               <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
                 <div style={{ width: 52, height: 52, borderRadius: 12, background: "var(--grad-primary)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, boxShadow: "0 4px 14px rgba(5,150,105,0.3)" }}>
                   <Icon name={steps[active].icon} size={24} color="white"/>
                 </div>
-                <h3 style={{ fontSize: 24, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
-                <p style={{ fontSize: 16, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, background: "white", border: "1px solid var(--emerald-200)", fontSize: 14, fontWeight: 500, color: "var(--emerald-700)" }}>
-                  <Icon name="checkCircle" size={14} color="var(--emerald-600)"/>{steps[active].detail}
+                <h3 style={{ fontSize: 24, fontWeight: 600, color: "white", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
+                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontSize: 14, fontWeight: 500, color: "#34D399" }}>
+                  <Icon name="checkCircle" size={14} color="#34D399"/>{steps[active].detail}
                 </div>
               </motion.div>
             </AnimatePresence>
             <div style={{ display: "flex", gap: 6, marginTop: 28 }}>
               {steps.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)} style={{ height: 6, width: i === active ? 24 : 6, borderRadius: 3, background: i === active ? "var(--emerald-600)" : "var(--slate-300)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.25s" }}/>
+                <button key={i} onClick={() => setActive(i)} style={{ height: 6, width: i === active ? 24 : 6, borderRadius: 3, background: i === active ? "var(--emerald-500)" : "rgba(255,255,255,0.15)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.25s" }}/>
               ))}
             </div>
           </div>
@@ -987,14 +992,14 @@ function ComoFunciona() {
         <div style={{
           marginTop: 80, maxWidth: 720, marginLeft: "auto", marginRight: "auto",
           borderRadius: 12, overflow: "hidden",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08)",
-          border: "1px solid var(--slate-200)",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(5,150,105,0.15)",
+          border: "1px solid rgba(255,255,255,0.08)",
         }}>
           {/* Browser chrome */}
           <div style={{
-            background: "var(--slate-100)", padding: "10px 16px",
+            background: "rgba(255,255,255,0.06)", padding: "10px 16px",
             display: "flex", alignItems: "center", gap: 8,
-            borderBottom: "1px solid var(--slate-200)",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
           }}>
             <div style={{ display: "flex", gap: 6 }}>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
@@ -1002,8 +1007,8 @@ function ComoFunciona() {
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
             </div>
             <div style={{
-              flex: 1, background: "var(--white)", borderRadius: 6,
-              padding: "4px 12px", fontSize: 12, color: "var(--slate-400)",
+              flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 6,
+              padding: "4px 12px", fontSize: 12, color: "rgba(255,255,255,0.4)",
               fontFamily: "var(--ff)",
             }}>
               portal.certiveh.co
@@ -1062,15 +1067,14 @@ function Calculadora() {
     { label: "Deducción renta", value: calc.renta, color: "var(--teal-500)",    pct: calc.renta / calc.total },
   ];
   return (
-    <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--slate-50)", position: "relative", overflow: "hidden" }}>
-      <BGPattern variant="grid" mask="fade-edges" fill="#059669" size={40} className="opacity-10" />
-      <div className="section" style={{ position: "relative", zIndex: 1 }}>
+    <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--white)" }}>
+      <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto puedes recuperar?</h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-500)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
         </div>
 
-        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0 }}>
+        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 4px 32px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)" }}>
           {/* Controls */}
           <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
             <div style={{ marginBottom: 24 }}>
@@ -1159,31 +1163,31 @@ function Calculadora() {
           </div>
 
           {/* Result */}
-          <div className="card-calc-result" style={{ padding: 48, background: "var(--grad-subtle)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 12, textTransform: "uppercase" }}>Beneficio total estimado</div>
-            <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 6, transition: "all 0.3s" }}>
+          <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12, textTransform: "uppercase" }}>Beneficio total estimado</div>
+            <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
               {calc.total ? fmt(calc.total) : "—"}
             </div>
-            <div style={{ fontSize: 14, color: "var(--slate-500)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios recuperables</div>
+            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
 
-            <div className="card" style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "white", borderColor: "var(--emerald-200)", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "var(--emerald-600)", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos costo del servicio)</div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
+            <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos costo del servicio)</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
             </div>
 
             {calc.costoTotal && calc.total && (
-              <div style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>$1 invertido</span> en CertiVeh, recibes{" "}
-                <span style={{ fontWeight: 700, color: "var(--emerald-600)" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
+              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, recibes{" "}
+                <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
 
             <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
-              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center" }}>
+              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
                 Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
             </a>
-            <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 12 }}>Sin riesgo · Si la UPME rechaza, revisamos tu caso</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>Sin riesgo · Si la UPME rechaza, revisamos tu caso</div>
           </div>
         </div>
       </div>
@@ -1277,7 +1281,7 @@ function WinWin() {
     { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo pague su trámite, tú ganas $75.000 que puedes retirar cuando quieras." },
   ];
   return (
-    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--slate-50)" }}>
+    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--white)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 20, padding: "6px 16px", marginBottom: 20 }}>
