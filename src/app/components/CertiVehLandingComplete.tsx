@@ -825,11 +825,11 @@ function Hero() {
 function Aliados() {
   return (
     <section aria-label="Aliados de CertiVeh" style={{
-      background: "var(--slate-900)", borderTop: "1px solid rgba(255,255,255,0.06)",
-      borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "40px 24px",
+      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
+      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
     }}>
       <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.5)",
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
         textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
       }}>
         Aliados que confían en CertiVeh
@@ -842,12 +842,12 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
           <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
             maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
           />
-          <span style={{ fontSize: 8, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
+          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
             Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
           </span>
         </div>
@@ -855,20 +855,20 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
           <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
             maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
           />
         </div>
         {/* ExoticsCo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
           <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
             maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.4)", transition: "filter 0.3s",
+            filter: "grayscale(100%) opacity(0.55)", transition: "filter 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.8)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.4)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%) opacity(1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%) opacity(0.55)"; }}
           />
         </div>
       </div>
@@ -887,10 +887,6 @@ function Beneficios() {
     <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--slate-50)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 9999, padding: "5px 14px", marginBottom: 20 }}>
-            <Icon name="percent" size={12} color="var(--emerald-600)" />
-            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--emerald-700)", letterSpacing: "0.05em" }}>BENEFICIOS TRIBUTARIOS</span>
-          </div>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 16 }}>
             Tres beneficios tributarios. <br/>
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
@@ -903,7 +899,7 @@ function Beneficios() {
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {cards.map((c, i) => (
             <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: c.bgColor, borderColor: c.borderColor, transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(5,150,105,0.15), 0 0 0 1px rgba(5,150,105,0.1)"; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
               <div style={{ width: 44, height: 44, borderRadius: 10, background: "white", border: `1px solid ${c.borderColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
@@ -1345,10 +1341,6 @@ function FAQ() {
       <div className="section">
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 9999, padding: "5px 14px", marginBottom: 20 }}>
-              <Icon name="info" size={12} color="var(--emerald-600)" />
-              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--emerald-700)", letterSpacing: "0.05em" }}>PREGUNTAS FRECUENTES</span>
-            </div>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>Todo lo que necesitas saber</h2>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -1375,30 +1367,30 @@ function FAQ() {
 function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
-    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--grad-primary)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       <AnimatedGridPattern
         numSquares={40}
-        maxOpacity={0.06}
+        maxOpacity={0.15}
         duration={3}
         repeatDelay={1}
         className="fill-white/30 stroke-white/30"
       />
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tu certificado UPME <br/><span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
+          Tu certificado UPME <br/>te está esperando.
         </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "var(--grad-primary)", color: "white", boxShadow: "0 0 24px rgba(5,150,105,0.4), 0 0 60px rgba(5,150,105,0.15)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
+          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
           </button>
         </a>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
           {["Pago único · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
-            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
-              <Icon name="checkCircle" size={13} color="#34D399"/>{t}
+            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
+              <Icon name="checkCircle" size={13} color="rgba(255,255,255,0.75)"/>{t}
             </span>
           ))}
         </div>
