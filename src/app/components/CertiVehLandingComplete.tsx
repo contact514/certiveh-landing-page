@@ -335,6 +335,10 @@ const CSS = `
   @media (max-width: 768px) {
     .hero-video { display: none !important; }
     .hero-poster { display: block !important; }
+    .hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.75) 50%, rgba(236,253,245,0.85) 100%) !important; }
+    .hero-split { flex-direction: column !important; text-align: center !important; }
+    .hero-split > div { flex: 1 1 auto !important; text-align: center !important; }
+    .hero-split > div:last-child { display: none !important; }
 
     nav { padding: 0 20px; height: 64px; }
     .nav-links { display: none; }
@@ -665,7 +669,7 @@ function Hero() {
   return (
     <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
-      justifyContent: "center", alignItems: "center", textAlign: "center",
+      justifyContent: "center", alignItems: "center",
       padding: "100px 48px 60px", position: "relative",
       background: "var(--white)", overflow: "hidden",
     }}>
@@ -676,7 +680,7 @@ function Hero() {
         poster="/hero-bg-poster.webp"
         className="hero-video"
         style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
+          position: "absolute", top: 0, right: 0, width: "55%", height: "100%",
           objectFit: "cover", pointerEvents: "none",
         }}
       >
@@ -688,64 +692,70 @@ function Hero() {
         backgroundImage: "url(/hero-bg-poster.webp)",
         backgroundSize: "cover", backgroundPosition: "center",
       }} />
-      {/* Overlay for legibility */}
-      <div style={{
+      {/* Overlay — gradient from solid left to transparent right */}
+      <div className="hero-overlay" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(248,250,252,0.72) 0%, rgba(255,255,255,0.65) 40%, rgba(255,255,255,0.60) 70%, rgba(236,253,245,0.72) 100%)",
+        background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 35%, rgba(255,255,255,0.7) 55%, rgba(255,255,255,0.2) 80%, rgba(236,253,245,0.1) 100%)",
       }}/>
 
-      {/* H1 */}
-      <h1 style={{
-        fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700,
-        lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--slate-900)",
-        maxWidth: 860, marginBottom: 12, animation: "fadeUp 0.6s 0.08s ease both",
-        position: "relative", zIndex: 1
+      {/* Split layout — text left */}
+      <div className="hero-split" style={{
+        display: "flex", alignItems: "center", width: "100%",
+        maxWidth: 1200, position: "relative", zIndex: 1,
       }}>
-        Tu tramitador virtual del <br />certificado UPME en Colombia
-      </h1>
-      <div style={{
-        fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 600,
-        color: "var(--emerald-600)", marginBottom: 0,
-        animation: "fadeUp 0.6s 0.12s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Accede a{" "}
-        <span style={{ position: "relative", display: "inline-block" }}>
-          <FlipWords words={flipWords} duration={2800}/>
-        </span>
+        <div style={{ flex: "0 0 55%", textAlign: "left" }}>
+          {/* H1 */}
+          <h1 style={{
+            fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700,
+            lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--slate-900)",
+            maxWidth: 600, marginBottom: 12, animation: "fadeUp 0.6s 0.08s ease both",
+          }}>
+            Tu tramitador virtual del <br />certificado UPME en Colombia
+          </h1>
+          <div style={{
+            fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 600,
+            color: "var(--emerald-600)", marginBottom: 0,
+            animation: "fadeUp 0.6s 0.12s ease both",
+          }}>
+            Accede a{" "}
+            <span style={{ position: "relative", display: "inline-block" }}>
+              <FlipWords words={flipWords} duration={2800}/>
+            </span>
+          </div>
+
+          {/* Sub */}
+          <p style={{
+            fontSize: "clamp(16px, 1.8vw, 18px)", lineHeight: 1.6,
+            color: "var(--slate-500)", maxWidth: 480,
+            marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
+          }}>
+            Tu tramitador virtual del certificado UPME.
+            Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
+          </p>
+
+          {/* CTAs */}
+          <div style={{
+            display: "flex", gap: 12, flexWrap: "wrap",
+            marginBottom: 0, animation: "fadeUp 0.6s 0.24s ease both",
+          }}>
+            <a href="#calculadora" style={{ textDecoration: "none" }}>
+              <button className="btn-primary btn-primary-lg">
+                Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
+              </button>
+            </a>
+            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <button className="btn-secondary">Empezar mi trámite ahora</button>
+            </a>
+          </div>
+        </div>
+        {/* Right side — empty, video shows through */}
+        <div style={{ flex: "0 0 45%" }} />
       </div>
 
-      {/* Sub */}
-      <p style={{
-        fontSize: "clamp(16px, 1.8vw, 18px)", lineHeight: 1.6,
-        color: "var(--slate-500)", maxWidth: 560,
-        marginTop: 24, marginBottom: 40, animation: "fadeUp 0.6s 0.16s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Tu tramitador virtual del certificado UPME.
-        Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
-      </p>
-
-      {/* CTAs */}
-      <div style={{
-        display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 48, animation: "fadeUp 0.6s 0.24s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <a href="#calculadora" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg">
-            Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
-          </button>
-        </a>
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-secondary">Empezar mi trámite ahora</button>
-        </a>
-      </div>
-
-      {/* Stats */}
+      {/* Stats — centered below */}
       <div style={{
         display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 24, animation: "fadeUp 0.6s 0.32s ease both",
+        marginTop: 48, marginBottom: 24, animation: "fadeUp 0.6s 0.32s ease both",
         position: "relative", zIndex: 1
       }}>
         {[
