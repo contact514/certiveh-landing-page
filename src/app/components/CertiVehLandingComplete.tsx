@@ -33,7 +33,7 @@ const usePortalUrl = () => {
 //
 // Tipografía: Inter · 400 / 500 / 600 / 700
 // Iconos: Lucide (SVG inline, sin dependencias extra)
-// Border-radius: lg=8px, xl=12px, 2xl=16px, 3xl=24px
+// Border-radius: sm=8px, md=12px, lg=16px, full=9999px, modal=20px
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CSS = `
@@ -145,8 +145,7 @@ const CSS = `
   }
   .btn-primary:hover { background: var(--emerald-700); transform: translateY(-1px); }
   .btn-primary:active { transform: translateY(0); }
-  .btn-primary-lg { padding: 16px 32px; font-size: 16px; box-shadow: none; }
-  .btn-primary-lg:hover { box-shadow: none; }
+  .btn-primary-lg { padding: 16px 32px; font-size: 16px; }
 
   .btn-secondary {
     display: inline-flex; align-items: center; gap: 8px;
@@ -183,7 +182,7 @@ const CSS = `
   }
   .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
 
-  .faq-item { border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; transition: border-color 0.15s; }
+  .faq-item { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; transition: border-color 0.15s; }
   .faq-item.open { border-color: var(--emerald-200); }
   .faq-btn {
     width: 100%; padding: 20px 24px;
@@ -418,7 +417,7 @@ const CSS = `
     .info-callout { padding: 20px !important; gap: 12px !important; }
     
     /* Stat pills en móvil */
-    .card { border-radius: 12px; }
+    .card { border-radius: 16px; }
 
     /* Urgency modal en móviles muy pequeños */
     .urgency-modal {
@@ -517,7 +516,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
         transition={{ type: "spring", stiffness: 100, damping: 14 }}
         style={{
           display: "inline-block", position: "relative",
-          color: "var(--emerald-600)",
+          color: "#34D399",
         }}
       >
         {current.split(" ").map((w, i) => (
@@ -579,7 +578,7 @@ function VentanaUPME() {
   return (
     <section aria-label="Ventana de radicación UPME" style={{ background: ventanaAbierta ? "var(--emerald-600)" : "var(--slate-800)", padding: "28px 20px", position: "relative", overflow: "hidden" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 20, padding: "5px 14px", marginBottom: 14 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 9999, padding: "5px 14px", marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
           <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
             {ventanaAbierta ? "Ventana de radicación abierta" : "Ventana cerrada"}
@@ -801,7 +800,7 @@ function Hero() {
               ? <div style={{ fontSize: 26, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
               : <div style={{ height: 26, width: 100, borderRadius: 6, background: "rgba(255,255,255,0.1)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
             }
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", fontWeight: 500, marginTop: 8 }}>{s.label}</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontWeight: 500, marginTop: 8 }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -897,7 +896,7 @@ function Beneficios() {
             Tres beneficios tributarios. <br/>
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-500)", lineHeight: 1.6, maxWidth: 520, margin: "0 auto" }}>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 520, margin: "0 auto" }}>
             El Estado colombiano creó estos incentivos para promover la movilidad eléctrica. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
           </p>
         </div>
@@ -908,7 +907,7 @@ function Beneficios() {
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ position: "absolute", top: 12, right: 16, fontSize: 80, fontWeight: 700, color: c.accentColor, opacity: 0.04, lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
+              <div style={{ position: "absolute", top: 12, right: 16, fontSize: 80, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
               <div style={{ width: 48, height: 48, borderRadius: 12, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
                 <Icon name={c.icon} size={22} color={c.accentColor}/>
               </div>
@@ -972,12 +971,12 @@ function ComoFunciona() {
             </div>
           </div>
 
-          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
+          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", top: -8, right: 16, fontSize: 140, fontWeight: 700, color: "rgba(255,255,255,0.03)", lineHeight: 1, pointerEvents: "none" }}>{steps[active].num}</div>
             <AnimatePresence mode="wait">
               <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
-                <div style={{ width: 52, height: 52, borderRadius: 12, background: "var(--grad-primary)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, boxShadow: "0 4px 14px rgba(5,150,105,0.3)" }}>
-                  <Icon name={steps[active].icon} size={24} color="white"/>
+                <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <Icon name={steps[active].icon} size={24} color="#34D399"/>
                 </div>
                 <h3 style={{ fontSize: 24, fontWeight: 600, color: "white", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
                 <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
@@ -997,8 +996,8 @@ function ComoFunciona() {
         {/* Portal screenshot */}
         <div style={{
           marginTop: 80, maxWidth: 720, marginLeft: "auto", marginRight: "auto",
-          borderRadius: 12, overflow: "hidden",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(5,150,105,0.15)",
+          borderRadius: 16, overflow: "hidden",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
           border: "1px solid rgba(255,255,255,0.08)",
         }}>
           {/* Browser chrome */}
@@ -1077,10 +1076,10 @@ function Calculadora() {
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto puedes recuperar?</h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-500)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
         </div>
 
-        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 4px 32px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)" }}>
+        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
           {/* Controls */}
           <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
             <div style={{ marginBottom: 24 }}>
@@ -1216,7 +1215,7 @@ function Confianza() {
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25 }}>
-            Hecho para que no <br/><span style={{ color: "var(--slate-400)" }}>tengas que preocuparte.</span>
+            Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
           </h2>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
@@ -1225,8 +1224,8 @@ function Confianza() {
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "var(--grad-primary)" }}></div>
-              <div style={{ width: 40, height: 40, borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "linear-gradient(90deg, #059669 0%, #14B8A6 100%)" }}></div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
                 <Icon name={p.icon} size={20} color="#34D399"/>
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 600, color: "white", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{p.title}</h3>
@@ -1293,26 +1292,26 @@ function WinWin() {
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 12 }}>
             CertiVeh <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Win Win</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-500)", lineHeight: 1.6 }}>Refiere amigos y gana dinero</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Refiere amigos y gana dinero</p>
         </div>
 
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
           {steps.map((s, i) => (
             <div key={i} className="card" style={{ padding: 28, position: "relative", overflow: "hidden", borderLeft: "4px solid var(--emerald-500)", transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ position: "absolute", top: 16, right: 20, fontSize: 48, fontWeight: 700, color: "var(--emerald-600)", opacity: 0.06, lineHeight: 1, pointerEvents: "none" }}>{s.num}</div>
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: "var(--emerald-50)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+              <div style={{ position: "absolute", top: 16, right: 20, fontSize: 48, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none" }}>{s.num}</div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "var(--emerald-50)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
                 <Icon name={s.icon} size={22} color="var(--emerald-600)" />
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{s.title}</h3>
-              <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6 }}>{s.desc}</p>
+              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6 }}>{s.desc}</p>
             </div>
           ))}
         </div>
 
-        <div style={{ background: "var(--white)", border: "1px solid var(--slate-200)", borderRadius: 12, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
+        <div style={{ background: "var(--white)", border: "1px solid var(--slate-200)", borderRadius: 16, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
           <p style={{ fontSize: 15, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.6, margin: 0 }}>
             Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.
           </p>
@@ -1320,7 +1319,7 @@ function WinWin() {
 
         <div style={{ textAlign: "center" }}>
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-primary btn-primary-lg">
+            <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
               Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
             </button>
           </a>
