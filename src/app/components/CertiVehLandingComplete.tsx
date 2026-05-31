@@ -1256,7 +1256,7 @@ function Testimonios() {
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {testimonios.map((t, i) => (
-            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16, borderLeft: "3px solid var(--emerald-600)", position: "relative", overflow: "hidden" }}>
+            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16, position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", top: -10, left: 8, fontSize: 80, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
               <div style={{ display: "flex", gap: 2, position: "relative" }}>
                 {[...Array(5)].map((_, j) => (
