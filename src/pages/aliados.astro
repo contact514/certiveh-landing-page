@@ -129,7 +129,7 @@ const webPageLd = JSON.stringify({
     .al-hero-title span { background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .al-hero-subtitle {
       font-size: 16px;
-      color: var(--slate-400);
+      color: rgba(255,255,255,0.5);
       line-height: 1.6;
       max-width: 600px;
       margin: 0 auto 36px;
@@ -144,12 +144,12 @@ const webPageLd = JSON.stringify({
       font-weight: 600;
       padding: 14px 28px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
       font-family: var(--ff);
       transition: transform 0.1s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(5,150,105,0.3);
+      box-shadow: 0 4px 24px rgba(5,150,105,0.4);
     }
     .al-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.4); }
     .al-btn-primary:active { transform: translateY(0); }
@@ -166,7 +166,7 @@ const webPageLd = JSON.stringify({
       align-items: center;
       gap: 7px;
       font-size: 13px;
-      color: var(--slate-400);
+      color: rgba(255,255,255,0.5);
     }
     .al-trust-item svg { color: var(--emerald-400); flex-shrink: 0; }
 
@@ -205,7 +205,7 @@ const webPageLd = JSON.stringify({
       max-width: 560px;
       margin-bottom: 48px;
     }
-    .al-section-desc-light { color: var(--slate-400); }
+    .al-section-desc-light { color: rgba(255,255,255,0.5); }
 
     /* ── BENEFITS GRID ── */
     .al-benefits-grid {
@@ -350,11 +350,11 @@ const webPageLd = JSON.stringify({
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
     .al-who-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(5,150,105,0.15);
-      border: 1px solid rgba(5,150,105,0.25);
-      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -422,7 +422,7 @@ const webPageLd = JSON.stringify({
       gap: 16px;
     }
     .al-footer-logo { display: flex; align-items: center; text-decoration: none; }
-    .al-footer-col-label { font-size: 12px; font-weight: 600; color: #CBD5E1; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 14px; }
+    .al-footer-col-label { font-size: 12px; font-weight: 700; color: #CBD5E1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
     .al-footer-links {
       display: flex;
       align-items: center;
@@ -430,8 +430,8 @@ const webPageLd = JSON.stringify({
       flex-wrap: wrap;
     }
     .al-footer-links a {
-      font-size: 13px;
-      color: var(--slate-400);
+      font-size: 14px;
+      color: #64748B;
       text-decoration: none;
       transition: color 0.15s;
     }
@@ -809,7 +809,7 @@ const webPageLd = JSON.stringify({
               </g>
             </svg>
           </a>
-          <p style="font-size: 13px; color: #475569; margin-top: 10px; max-width: 260px; line-height: 1.5;">
+          <p style="font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5;">
             Automatización del trámite UPME para certificados de beneficio tributario en Colombia.
           </p>
         </div>
@@ -846,8 +846,8 @@ const webPageLd = JSON.stringify({
         </div>
       </div>
       <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <span style="font-size: 13px; line-height: 1.4;">© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <span style="font-size: 13px; line-height: 1.4;">contacto@certiveh.co</span>
+        <span style="font-size: 12px; line-height: 1.4;">© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
+        <span style="font-size: 12px; line-height: 1.4;">contacto@certiveh.co</span>
       </div>
     </div>
   </footer>
