@@ -180,15 +180,16 @@ const faqLd = JSON.stringify({
     .v-faq-btn:hover { background: var(--slate-50); }
     .v-faq-btn:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: -2px; }
     .v-faq-icon {
-      width: 24px; height: 24px; border-radius: 9999px;
-      background: var(--emerald-50); color: var(--emerald-600);
+      width: 28px; height: 28px; border-radius: 9999px;
+      background: var(--emerald-50);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 600; flex-shrink: 0; margin-left: 16px;
-      transition: transform 0.2s, background 0.2s, color 0.2s;
+      flex-shrink: 0; margin-left: 16px;
+      transition: transform 0.2s, background 0.15s;
     }
+    .v-faq-icon { color: var(--emerald-600); }
     .v-faq-item.open .v-faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
     .v-faq-body {
-      display: none; padding: 0 24px 20px; font-size: 15px; font-weight: 400; line-height: 1.65;
+      display: none; padding: 16px 24px 20px; font-size: 15px; font-weight: 400; line-height: 1.65;
       color: var(--slate-600); background: var(--emerald-50);
     }
     .v-faq-item.open .v-faq-body { display: block; }
@@ -297,7 +298,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿El {v.marca} {v.modelo} aplica para el certificado UPME?</span>
-          <div class="v-faq-icon">+</div>
+          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
       </div>
@@ -305,7 +306,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
-          <div class="v-faq-icon">+</div>
+          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Con un precio de {fmt(v.precioCOP)}, el IVA pagado es de {fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.</div>
       </div>
@@ -313,7 +314,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
-          <div class="v-faq-icon">+</div>
+          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
       </div>
@@ -321,7 +322,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
-          <div class="v-faq-icon">+</div>
+          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA). Es un pago único, sin suscripciones.</div>
       </div>
@@ -329,7 +330,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Qué documentos necesito?</span>
-          <div class="v-faq-icon">+</div>
+          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Tu cédula o pasaporte, tarjeta de propiedad, factura de compra y RUT. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
