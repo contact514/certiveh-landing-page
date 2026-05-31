@@ -152,8 +152,8 @@ export default function CamilaChat() {
         <div
           ref={chatRef}
           style={{
-            position: 'fixed', bottom: 88, right: 16, width: 370, maxWidth: 'calc(100vw - 32px)',
-            maxHeight: 520, zIndex: 9999, borderRadius: 16, overflow: 'hidden',
+            position: 'fixed', bottom: 88, right: 16, width: 380, maxWidth: 'calc(100vw - 32px)',
+            height: 500, maxHeight: 'calc(100vh - 120px)', zIndex: 9999, borderRadius: 16, overflow: 'hidden',
             boxShadow: '0 8px 30px rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column',
             background: '#fff', border: '1px solid #e2e8f0',
           }}
@@ -174,7 +174,7 @@ export default function CamilaChat() {
                 </svg>
               </div>
               <div>
-                <div style={{ color: '#fff', fontWeight: 600, fontSize: 14, lineHeight: 1.2 }}>Camila · CertiVeh</div>
+                <div style={{ color: '#fff', fontWeight: 600, fontSize: 14, lineHeight: 1.2 }}>Camila · Soporte</div>
                 <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
                   En línea
@@ -257,18 +257,18 @@ export default function CamilaChat() {
                   <div key={m.id} style={{
                     alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
                     maxWidth: '82%',
-                    background: m.role === 'user' ? '#059669' : '#fff',
+                    background: m.role === 'user' ? '#059669' : '#F1F5F9',
                     color: m.role === 'user' ? '#fff' : '#1e293b',
-                    padding: '10px 14px', borderRadius: 12, fontSize: 14, lineHeight: 1.5,
-                    border: m.role === 'assistant' ? '1px solid #e2e8f0' : 'none',
+                    padding: '10px 14px', fontSize: 14, lineHeight: 1.5,
+                    borderRadius: m.role === 'user' ? '12px 12px 4px 12px' : '12px 12px 12px 4px',
                   }}>
                     {m.content}
                   </div>
                 ))}
                 {isTyping && (
                   <div style={{
-                    alignSelf: 'flex-start', background: '#fff', border: '1px solid #e2e8f0',
-                    padding: '10px 14px', borderRadius: 12, fontSize: 14, color: '#94a3b8',
+                    alignSelf: 'flex-start', background: '#F1F5F9',
+                    padding: '10px 14px', borderRadius: '12px 12px 12px 4px', fontSize: 14, color: '#94a3b8',
                   }}>
                     <span style={{ animation: 'pulse 1.5s infinite' }}>Escribiendo...</span>
                   </div>
@@ -290,7 +290,10 @@ export default function CamilaChat() {
                   style={{
                     flex: 1, border: '1px solid #e2e8f0', borderRadius: 8, padding: '10px 12px',
                     fontSize: 14, outline: 'none', background: '#f8fafc',
+                    transition: 'border-color 0.15s, box-shadow 0.15s',
                   }}
+                  onFocus={e => { e.currentTarget.style.borderColor = '#059669'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(5,150,105,0.15)'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
                 <button
                   onClick={sendMessage}
@@ -302,7 +305,7 @@ export default function CamilaChat() {
                   }}
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" />
                   </svg>
                 </button>
               </div>
