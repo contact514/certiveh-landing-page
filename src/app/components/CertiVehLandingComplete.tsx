@@ -229,8 +229,8 @@ const CSS = `
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
     z-index: 200;
     display: flex;
     align-items: center;
@@ -240,13 +240,13 @@ const CSS = `
 
   .urgency-modal {
     position: relative;
-    background: var(--white);
-    border-radius: 16px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(5,150,105,0.08);
     max-width: 520px;
     width: 100%;
-    padding: 40px;
-    border: 1px solid var(--slate-200);
+    padding: 44px;
+    border: 1px solid rgba(255,255,255,0.08);
   }
 
   .urgency-modal-close {
@@ -256,18 +256,19 @@ const CSS = `
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: var(--slate-100);
-    border: none;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.15s;
-    color: var(--slate-600);
+    color: rgba(255,255,255,0.5);
   }
 
   .urgency-modal-close:hover {
-    background: var(--slate-200);
+    background: rgba(255,255,255,0.12);
+    color: white;
   }
 
   /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
@@ -1480,15 +1481,16 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 
           <div style={{ marginBottom: 20 }}>
             <span style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              background: 'var(--slate-900)',
-              color: 'white',
-              border: "none",
-              borderRadius: 6,
-              padding: "5px 12px",
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: 'rgba(255,255,255,0.06)',
+              backdropFilter: 'blur(8px)',
+              color: 'rgba(255,255,255,0.85)',
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: 9999,
+              padding: "6px 14px",
               fontSize: 11,
               fontWeight: 600,
-              letterSpacing: '0.06em'
+              letterSpacing: '0.04em'
             }}>
               <Icon name="shield" size={11} color="#34D399" />
               PROTEGE TU BENEFICIO
@@ -1498,7 +1500,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           <h2 style={{
             fontSize: 'clamp(24px, 4vw, 32px)',
             fontWeight: 400,
-            color: 'var(--slate-900)',
+            color: 'rgba(255,255,255,0.7)',
             lineHeight: 1.3,
             marginBottom: 8,
             letterSpacing: '-0.01em'
@@ -1509,7 +1511,10 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           <h3 style={{
             fontSize: 'clamp(24px, 4vw, 32px)',
             fontWeight: 700,
-            color: 'var(--emerald-600)',
+            background: 'linear-gradient(135deg, #34D399 0%, #14B8A6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             lineHeight: 1.3,
             marginBottom: 24,
             letterSpacing: '-0.02em'
@@ -1520,7 +1525,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           <p style={{
             fontSize: 15,
             lineHeight: 1.7,
-            color: 'var(--slate-600)',
+            color: 'rgba(255,255,255,0.5)',
             marginBottom: 32
           }}>
             La normativa tributaria cambia. Los incentivos que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
@@ -1531,7 +1536,10 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
               className="btn-primary btn-primary-lg"
               style={{
                 width: '100%',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, #059669 0%, #14B8A6 100%)',
+                boxShadow: '0 4px 24px rgba(5,150,105,0.4)',
+                borderRadius: 12,
               }}
             >
               Empezar mi trámite ahora
@@ -1542,7 +1550,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           <p style={{
             fontSize: 13,
             lineHeight: 1.6,
-            color: 'var(--slate-500)',
+            color: 'rgba(255,255,255,0.35)',
             marginTop: 16,
             fontStyle: 'italic',
             textAlign: 'center'
