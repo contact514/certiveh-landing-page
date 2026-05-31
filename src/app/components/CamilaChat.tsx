@@ -17,6 +17,8 @@ export default function CamilaChat() {
   const [unread, setUnread] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
   const openRef = useRef(open);
 
   useEffect(() => { openRef.current = open; }, [open]);
@@ -31,6 +33,18 @@ export default function CamilaChat() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (chatRef.current && !chatRef.current.contains(target) && fabRef.current && !fabRef.current.contains(target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
 
   const addAssistantMessage = useCallback((content: string) => {
     const reply: Message = { id: crypto.randomUUID(), role: 'assistant', content };
@@ -136,6 +150,7 @@ export default function CamilaChat() {
       {/* Chat window */}
       {open && (
         <div
+          ref={chatRef}
           style={{
             position: 'fixed', bottom: 88, right: 16, width: 370, maxWidth: 'calc(100vw - 32px)',
             maxHeight: 520, zIndex: 9999, borderRadius: 16, overflow: 'hidden',
@@ -289,6 +304,7 @@ export default function CamilaChat() {
 
       {/* FAB button */}
       <button
+        ref={fabRef}
         onClick={() => { setOpen(o => !o); }}
         style={{
           position: 'fixed', bottom: 20, right: 16, width: 56, height: 56, borderRadius: '50%',
