@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/index.css';
+import { Navbar } from '../app/components/Navbar';
 ---
 
 <BaseLayout
@@ -25,40 +26,12 @@ import '../styles/index.css';
       --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
-
-    /* NAV */
-    .tc-nav {
-      background: var(--slate-900);
-      padding: 0 48px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .tc-nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .tc-nav-back {
-      font-size: 14px;
-      color: var(--slate-400);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .tc-nav-back:hover { color: white; }
+    body { font-family: var(--ff); background: white; color: var(--slate-700); -webkit-font-smoothing: antialiased; }
 
     /* HERO */
     .tc-hero {
       background: var(--slate-900);
-      padding: 64px 48px 56px;
+      padding: 120px 48px 56px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
@@ -66,9 +39,10 @@ import '../styles/index.css';
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(5,150,105,0.15);
-      border: 1px solid rgba(5,150,105,0.3);
-      color: #34D399;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.1em;
@@ -87,7 +61,7 @@ import '../styles/index.css';
     }
     .tc-subtitle {
       font-size: 16px;
-      color: var(--slate-400);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 8px;
     }
     .tc-date {
@@ -250,7 +224,7 @@ import '../styles/index.css';
     }
     .tc-footer-logo-desc {
       font-size: 14px;
-      color: var(--slate-500);
+      color: #64748B;
       margin-top: 10px;
       max-width: 260px;
       line-height: 1.5;
@@ -270,7 +244,7 @@ import '../styles/index.css';
     }
     .tc-footer-link {
       font-size: 14px;
-      color: var(--slate-500);
+      color: #64748B;
       text-decoration: none;
       transition: color 0.15s;
     }
@@ -286,8 +260,7 @@ import '../styles/index.css';
     }
 
     @media (max-width: 640px) {
-      .tc-nav { padding: 0 20px; }
-      .tc-hero { padding: 48px 20px 40px; }
+      .tc-hero { padding: 100px 20px 40px; }
       .tc-container { padding: 40px 16px 64px; }
       .tc-index { padding: 20px 20px; }
       .tc-index-grid { grid-template-columns: 1fr; }
@@ -298,30 +271,7 @@ import '../styles/index.css';
   </style>
 
   <!-- NAV -->
-  <nav class="tc-nav">
-    <a href="/" class="tc-nav-logo" aria-label="Ir al inicio CertiVeh">
-      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-        <defs>
-          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(4,8) scale(0.48)">
-          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGrad)"/>
-          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-        </g>
-        <g transform="translate(60,28)">
-          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
-        </g>
-      </svg>
-    </a>
-    <a href="/" class="tc-nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
-      </svg>
-      Volver al inicio
-    </a>
-  </nav>
+  <Navbar isHome={false} client:load />
 
   <!-- HERO -->
   <div class="tc-hero">

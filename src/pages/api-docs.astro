@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Navbar } from '../app/components/Navbar';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -61,48 +62,6 @@ const webPageLd = JSON.stringify({
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
-
-    /* NAV */
-    .api-nav {
-      background: var(--slate-900);
-      padding: 0 48px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .api-nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 12px;
-    }
-    .api-nav-logo-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--emerald-400);
-      background: rgba(5,150,105,0.15);
-      border: 1px solid rgba(5,150,105,0.25);
-      padding: 3px 10px;
-      border-radius: 100px;
-      letter-spacing: 0.05em;
-    }
-    .api-nav-back {
-      font-size: 14px;
-      color: var(--slate-400);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .api-nav-back:hover { color: white; }
 
     /* LAYOUT */
     .api-layout {
@@ -225,7 +184,6 @@ const webPageLd = JSON.stringify({
         padding: 32px 20px 60px;
         max-width: 100%;
       }
-      .api-nav { padding: 0 20px; }
     }
     @media (min-width: 769px) and (max-width: 1100px) {
       .api-sidebar { width: 240px; min-width: 240px; }
@@ -532,16 +490,57 @@ const webPageLd = JSON.stringify({
     /* FOOTER */
     .api-footer {
       background: var(--slate-900);
-      padding: 32px 48px;
-      text-align: center;
-      color: var(--slate-500);
-      font-size: 13px;
+      padding: 48px 48px;
+      color: var(--slate-400);
     }
-    .api-footer a {
-      color: var(--emerald-400);
+    .api-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .api-footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .api-footer-logo-desc {
+      font-size: 14px;
+      color: #64748B;
+      margin-top: 10px;
+      max-width: 260px;
+      line-height: 1.5;
+    }
+    .api-footer-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate-300);
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .api-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .api-footer-link {
+      font-size: 14px;
+      color: #64748B;
       text-decoration: none;
+      transition: color 0.15s;
     }
-    .api-footer a:hover { text-decoration: underline; }
+    .api-footer-link:hover { color: white; }
+    .api-footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+    }
 
     /* DIVIDER */
     .section-divider {
@@ -570,32 +569,7 @@ const webPageLd = JSON.stringify({
   </style>
 
   <!-- NAV -->
-  <nav class="api-nav">
-    <a href="/" class="api-nav-logo" aria-label="CertiVeh — inicio">
-      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-        <defs>
-          <linearGradient id="apiLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(4,8) scale(0.48)">
-          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#apiLogoGrad)"/>
-          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-        </g>
-        <g transform="translate(60,28)">
-          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
-            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
-            Certi<tspan fill="#059669">Veh</tspan>
-          </text>
-        </g>
-      </svg>
-      <span class="api-nav-logo-badge">API Docs for Developers</span>
-    </a>
-    <a href="/" class="api-nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Volver al inicio
-    </a>
-  </nav>
+  <Navbar isHome={false} darkHero={true} client:load />
 
   <!-- MOBILE NAV -->
   <div class="api-mobile-nav" id="mobileNav">
@@ -1094,8 +1068,50 @@ const webPageLd = JSON.stringify({
   </div>
 
   <!-- FOOTER -->
-  <footer class="api-footer">
-    CertiVeh Partner API · <a href="/">certiveh.co</a> · <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
+  <footer class="api-footer" aria-label="Pie de página">
+    <div class="api-footer-inner">
+      <div class="api-footer-top">
+        <div>
+          <a href="/" aria-label="Ir al inicio CertiVeh" style="display:inline-block;text-decoration:none;margin-bottom:10px;">
+            <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
+              <defs>
+                <linearGradient id="logoGradFooterApi" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+                </linearGradient>
+              </defs>
+              <g transform="translate(4,8) scale(0.48)">
+                <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGradFooterApi)"/>
+                <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+              </g>
+              <g transform="translate(60,28)">
+                <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
+              </g>
+            </svg>
+          </a>
+          <p class="api-footer-logo-desc">Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
+        </div>
+        <div style="display:flex;gap:48px;flex-wrap:wrap;">
+          <div>
+            <div class="api-footer-col-title">Plataforma</div>
+            <div class="api-footer-links">
+              <a href="/#beneficios" class="api-footer-link">Beneficios</a>
+              <a href="/#como-funciona" class="api-footer-link">Cómo funciona</a>
+              <a href="/#calculadora" class="api-footer-link">Calculadora</a>
+            </div>
+          </div>
+          <div>
+            <div class="api-footer-col-title">Legal</div>
+            <div class="api-footer-links">
+              <a href="/terminos-y-condiciones" class="api-footer-link">Términos y Condiciones</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="api-footer-bottom">
+        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
+        <span>contacto@certiveh.co</span>
+      </div>
+    </div>
   </footer>
 
   <!-- SCRIPTS -->
