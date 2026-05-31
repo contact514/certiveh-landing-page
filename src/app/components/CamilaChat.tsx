@@ -160,12 +160,13 @@ export default function CamilaChat() {
         >
           {/* Header */}
           <div style={{
-            background: '#059669', padding: '14px 16px', display: 'flex', alignItems: 'center',
+            background: 'linear-gradient(135deg, #059669, #14B8A6)', padding: '14px 16px', display: 'flex', alignItems: 'center',
             justifyContent: 'space-between',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{
-                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.15)',
+                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -180,7 +181,15 @@ export default function CamilaChat() {
                 </div>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: 4 }}>
+            <button onClick={() => setOpen(false)} style={{
+              background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+              color: 'white', cursor: 'pointer', padding: 4, borderRadius: 8,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'background 0.15s',
+            }}
+              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
@@ -214,21 +223,21 @@ export default function CamilaChat() {
                 <button
                   onClick={() => handlePrefilter(false)}
                   style={{
-                    background: '#059669', color: '#fff', border: 'none', borderRadius: 10,
+                    background: 'linear-gradient(135deg, #059669, #14B8A6)', color: '#fff', border: 'none', borderRadius: 8,
                     padding: '12px 16px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
-                    transition: 'background 0.2s',
+                    boxShadow: '0 4px 24px rgba(5,150,105,0.4)', transition: 'transform 0.15s',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.background = '#047857')}
-                  onMouseLeave={e => (e.currentTarget.style.background = '#059669')}
+                  onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-1px)')}
+                  onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
                 >
                   Quiero saber más sobre CertiVeh
                 </button>
                 <button
                   onClick={() => handlePrefilter(true)}
                   style={{
-                    background: '#fff', color: '#334155', border: '1px solid #e2e8f0', borderRadius: 10,
+                    background: '#fff', color: '#334155', border: '1.5px solid #CBD5E1', borderRadius: 8,
                     padding: '12px 16px', fontSize: 14, fontWeight: 500, cursor: 'pointer',
-                    transition: 'background 0.2s',
+                    transition: 'background 0.15s, border-color 0.15s',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.background = '#f1f5f9')}
                   onMouseLeave={e => (e.currentTarget.style.background = '#fff')}
