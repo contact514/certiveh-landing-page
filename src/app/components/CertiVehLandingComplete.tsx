@@ -1281,13 +1281,9 @@ function WinWin() {
     { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo pague su trámite, tú ganas $75.000 que puedes retirar cuando quieras." },
   ];
   return (
-    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--white)" }}>
+    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--slate-50)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 20, padding: "6px 16px", marginBottom: 20 }}>
-            <Icon name="gift" size={14} color="var(--emerald-600)" />
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--emerald-700)" }}>Programa de referidos</span>
-          </div>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 12 }}>
             CertiVeh <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Win Win</span>
           </h2>
@@ -1296,13 +1292,13 @@ function WinWin() {
 
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
           {steps.map((s, i) => (
-            <div key={i} className="card" style={{ padding: 28, position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "var(--grad-primary)" }} />
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Icon name={s.icon} size={20} color="var(--emerald-600)" />
-                </div>
-                <span style={{ fontSize: 12, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "0.06em" }}>PASO {s.num}</span>
+            <div key={i} className="card" style={{ padding: 28, position: "relative", overflow: "hidden", borderLeft: "4px solid var(--emerald-500)", transition: "transform 0.2s, box-shadow 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+            >
+              <div style={{ position: "absolute", top: 16, right: 20, fontSize: 48, fontWeight: 700, color: "var(--emerald-600)", opacity: 0.06, lineHeight: 1, pointerEvents: "none" }}>{s.num}</div>
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: "var(--emerald-50)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <Icon name={s.icon} size={22} color="var(--emerald-600)" />
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{s.title}</h3>
               <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6 }}>{s.desc}</p>
@@ -1310,8 +1306,8 @@ function WinWin() {
           ))}
         </div>
 
-        <div style={{ background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
-          <p style={{ fontSize: 15, color: "var(--emerald-700)", fontWeight: 600, lineHeight: 1.6, margin: 0 }}>
+        <div style={{ background: "var(--white)", border: "1px solid var(--slate-200)", borderRadius: 12, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
+          <p style={{ fontSize: 15, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.6, margin: 0 }}>
             Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.
           </p>
         </div>
@@ -1341,7 +1337,7 @@ function FAQ() {
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
   ];
   return (
-    <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--slate-50)" }}>
+    <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
       <div className="section">
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -1371,30 +1367,30 @@ function FAQ() {
 function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
-    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--grad-primary)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       <AnimatedGridPattern
         numSquares={40}
-        maxOpacity={0.15}
+        maxOpacity={0.08}
         duration={3}
         repeatDelay={1}
-        className="fill-white/30 stroke-white/30"
+        className="fill-emerald-500/20 stroke-emerald-500/20"
       />
       <div style={{ position: "relative" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tu certificado UPME <br/>te está esperando.
+          Tu certificado UPME <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
         </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)"/>
+          <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
+            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
           {["Pago único · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
-            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
-              <Icon name="checkCircle" size={13} color="rgba(255,255,255,0.75)"/>{t}
+            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
+              <Icon name="checkCircle" size={13} color="#34D399"/>{t}
             </span>
           ))}
         </div>
