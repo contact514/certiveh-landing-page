@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Navbar } from '../app/components/Navbar';
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -71,24 +72,10 @@ const webPageLd = JSON.stringify({
     html { scroll-behavior: smooth; }
     body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
 
-    /* ── NAV ── */
-    .al-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--slate-900);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      height: 64px; display: flex; align-items: center;
-      justify-content: space-between; padding: 0 48px;
-      box-sizing: border-box;
-    }
-    .al-nav-spacer { height: 64px; background: var(--slate-900); }
-    .al-nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .al-nav-back { font-size: 14px; color: var(--slate-400); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
-    .al-nav-back:hover { color: white; }
-
     /* ── HERO ── */
     .al-hero {
       background: var(--slate-900);
-      padding: 80px 48px 96px;
+      padding: 120px 48px 96px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -413,38 +400,32 @@ const webPageLd = JSON.stringify({
       padding: 48px 48px;
     }
     .al-footer-inner {
-      max-width: 1040px;
+      max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
     }
-    .al-footer-logo { display: flex; align-items: center; text-decoration: none; }
+    .al-footer-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; flex-wrap: wrap; gap: 32px;
+      margin-bottom: 40px;
+    }
+    .al-footer-brand p {
+      font-size: 14px; color: #64748B; margin-top: 10px;
+      max-width: 260px; line-height: 1.5;
+    }
+    .al-footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
     .al-footer-col-label { font-size: 12px; font-weight: 700; color: #CBD5E1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
-    .al-footer-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
+    .al-footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+    .al-footer-col-links a {
+      font-size: 14px; color: #64748B;
+      text-decoration: none; transition: color 0.15s;
     }
-    .al-footer-links a {
-      font-size: 14px;
-      color: #64748B;
-      text-decoration: none;
-      transition: color 0.15s;
+    .al-footer-col-links a:hover { color: white; }
+    .al-footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
-    .al-footer-links a:hover { color: white; }
-    .al-footer-copy {
-      font-size: 12px;
-      color: var(--slate-600);
-      width: 100%;
-      text-align: center;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+    .al-footer-bottom span { font-size: 12px; line-height: 1.4; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -452,8 +433,7 @@ const webPageLd = JSON.stringify({
       .al-who-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
-      .al-nav { padding: 0 20px; }
-      .al-hero { padding: 56px 20px 72px; }
+      .al-hero { padding: 100px 20px 72px; }
       .al-hero-trust { gap: 16px; }
       .al-section { padding: 64px 20px; }
       .al-benefits-grid { grid-template-columns: 1fr; }
@@ -463,41 +443,12 @@ const webPageLd = JSON.stringify({
       .al-step-num { flex-shrink: 0; margin-bottom: 0; }
       .al-who-grid { grid-template-columns: 1fr; }
       .al-cta-box { padding: 40px 24px; }
-      .al-footer { padding: 24px 20px; }
-      .al-footer-inner { flex-direction: column; align-items: flex-start; }
+      .al-footer { padding: 40px 20px; }
     }
   </style>
 
   <!-- NAV -->
-  <div class="al-nav-spacer"></div>
-  <nav class="al-nav">
-    <a href="/" class="al-nav-logo" aria-label="CertiVeh — inicio">
-      <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-        <defs>
-          <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(4,8) scale(0.48)">
-          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#navLogoGrad)"/>
-          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-        </g>
-        <g transform="translate(60,28)">
-          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
-            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
-            Certi<tspan fill="#059669">Veh</tspan>
-          </text>
-        </g>
-      </svg>
-    </a>
-    <a href="/" class="al-nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="12 19 5 12 12 5"/>
-      </svg>
-      Volver al inicio
-    </a>
-  </nav>
+  <Navbar isHome={false} darkHero={true} client:load />
 
   <!-- HERO -->
   <main id="main-content">
@@ -786,37 +737,28 @@ const webPageLd = JSON.stringify({
   <!-- FOOTER -->
   </main>
 
-  <footer class="al-footer">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px;">
-        <div>
-          <a href="/" class="al-footer-logo" aria-label="CertiVeh — inicio">
-            <svg width="140" height="36" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-              <defs>
-                <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-                </linearGradient>
-              </defs>
-              <g transform="translate(4,8) scale(0.48)">
-                <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#footerLogoGrad)"/>
-                <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-              </g>
-              <g transform="translate(60,28)">
-                <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
-                  font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
-                  Certi<tspan fill="#059669">Veh</tspan>
-                </text>
-              </g>
-            </svg>
-          </a>
-          <p style="font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5;">
-            Automatización del trámite UPME para certificados de beneficio tributario en Colombia.
-          </p>
+  <footer class="al-footer" aria-label="Pie de página">
+    <div class="al-footer-inner">
+      <div class="al-footer-top">
+        <div class="al-footer-brand">
+          <svg width="140" height="36" viewBox="0 0 240 60" fill="none" aria-label="CertiVeh">
+            <defs>
+              <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(5,10) scale(0.5)">
+              <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#footerLogoGrad)"/>
+              <path d="M55 30 L42 52 L50 52 L45 70 L62 44 L53 44 L58 30 Z" fill="white"/>
+            </g>
+            <text x="65" y="30" fill="#FFFFFF" font-size="28" font-weight="700" font-family="system-ui, -apple-system, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
+          </svg>
+          <p>Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
         </div>
-        <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+        <div class="al-footer-cols">
           <div>
             <div class="al-footer-col-label">Plataforma</div>
-            <div class="al-footer-links">
+            <div class="al-footer-col-links">
               <a href="/#beneficios">Beneficios</a>
               <a href="/#como-funciona">Cómo funciona</a>
               <a href="/#calculadora">Calculadora</a>
@@ -824,7 +766,7 @@ const webPageLd = JSON.stringify({
           </div>
           <div>
             <div class="al-footer-col-label">Recursos</div>
-            <div class="al-footer-links">
+            <div class="al-footer-col-links">
               <a href="/vehiculos/">Vehículos</a>
               <a href="/blog/">Blog</a>
               <a href="/api-docs/">API</a>
@@ -832,22 +774,22 @@ const webPageLd = JSON.stringify({
           </div>
           <div>
             <div class="al-footer-col-label">Partners</div>
-            <div class="al-footer-links">
+            <div class="al-footer-col-links">
               <a href="/aliados/">Programa de Aliados</a>
               <a href="https://aliado.certiveh.co/" target="_blank" rel="noopener noreferrer">Aplicar ahora</a>
             </div>
           </div>
           <div>
             <div class="al-footer-col-label">Legal</div>
-            <div class="al-footer-links">
+            <div class="al-footer-col-links">
               <a href="/terminos-y-condiciones">Términos y Condiciones</a>
             </div>
           </div>
         </div>
       </div>
-      <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <span style="font-size: 12px; line-height: 1.4;">© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <span style="font-size: 12px; line-height: 1.4;">contacto@certiveh.co</span>
+      <div class="al-footer-bottom">
+        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
+        <span>contacto@certiveh.co</span>
       </div>
     </div>
   </footer>

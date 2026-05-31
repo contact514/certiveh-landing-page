@@ -116,20 +116,23 @@ function Logo({ scrolled }: { scrolled: boolean }) {
 interface NavbarProps {
   /** true = links are anchors (#section), false = links go to /#section */
   isHome?: boolean;
+  /** true = start transparent over dark hero, false = start solid */
+  darkHero?: boolean;
 }
 
-export function Navbar({ isHome = true }: NavbarProps) {
+export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(!isHome);
+  const startTransparent = isHome || darkHero;
+  const [scrolled, setScrolled] = useState(!startTransparent);
   const link = (hash: string) => isHome ? hash : `/${hash}`;
 
   useEffect(() => {
-    if (!isHome) { setScrolled(true); return; }
+    if (!startTransparent) { setScrolled(true); return; }
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+  }, [startTransparent]);
 
   return (
     <>
