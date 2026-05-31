@@ -105,15 +105,16 @@ const webPageLd = JSON.stringify({
     .al-hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(5,150,105,0.15);
-      border: 1px solid rgba(5,150,105,0.35);
-      color: var(--emerald-400);
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      padding: 4px 12px;
+      padding: 6px 16px;
       border-radius: 9999px;
       margin-bottom: 24px;
     }
@@ -125,7 +126,7 @@ const webPageLd = JSON.stringify({
       line-height: 1.2;
       margin-bottom: 20px;
     }
-    .al-hero-title span { color: var(--emerald-400); }
+    .al-hero-title span { background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .al-hero-subtitle {
       font-size: 16px;
       color: var(--slate-400);
@@ -137,19 +138,20 @@ const webPageLd = JSON.stringify({
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--emerald-600);
+      background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
       color: white;
       font-size: 15px;
       font-weight: 600;
-      padding: 12px 24px;
+      padding: 14px 28px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
       font-family: var(--ff);
-      transition: background 0.15s, transform 0.1s;
+      transition: transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(5,150,105,0.3);
     }
-    .al-btn-primary:hover { background: #047857; transform: translateY(-1px); }
+    .al-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.4); }
     .al-btn-primary:active { transform: translateY(0); }
     .al-hero-trust {
       display: flex;
@@ -232,7 +234,7 @@ const webPageLd = JSON.stringify({
     }
     .al-benefit-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+      box-shadow: 0 12px 32px rgba(5,150,105,0.12), 0 0 0 1px rgba(5,150,105,0.08);
       border-color: var(--emerald-200);
     }
     .al-benefit-icon {
@@ -758,7 +760,7 @@ const webPageLd = JSON.stringify({
   <section class="al-section al-section-muted">
     <div class="al-container">
       <div class="al-cta-box">
-        <h2 class="al-cta-title">&#191;Listo para ser aliado?</h2>
+        <h2 class="al-cta-title">¿Listo para ser <span style="background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">aliado</span>?</h2>
         <p class="al-cta-subtitle">
           Únete a la red de aliados CertiVeh y empieza a generar ingresos adicionales
           ofreciendo beneficios tributarios reales a tus clientes.
