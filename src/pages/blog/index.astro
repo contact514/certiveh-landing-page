@@ -144,15 +144,15 @@ const articles = [
     .blog-home-intro .label {
       display: inline-block;
       font-size: 12px; font-weight: 600; letter-spacing: .05em;
-      text-transform: uppercase; color: #059669; background: #ECFDF5;
+      text-transform: uppercase; color: #047857; background: #ECFDF5;
       border: 1px solid #A7F3D0; border-radius: 9999px; padding: 4px 12px;
       margin-bottom: 16px;
     }
     .blog-home-intro h1 {
-      font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: #0F172A;
-      letter-spacing: -.02em; margin-bottom: 12px; line-height: 1.2;
+      font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: #0F172A;
+      letter-spacing: -0.03em; margin-bottom: 12px; line-height: 1.2;
     }
-    .blog-home-intro p { font-size: 16px; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+    .blog-home-intro p { font-size: 16px; color: #475569; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
     .articles-grid {
       display: flex; flex-direction: column; gap: 32px;
@@ -163,7 +163,7 @@ const articles = [
       border-radius: 16px;
       border: 1px solid #E2E8F0;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       text-decoration: none;
       display: block;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -183,7 +183,7 @@ const articles = [
     .card-banner.b-amber { background: linear-gradient(135deg,#78350F 0%,#D97706 60%,#059669 100%); }
     .card-banner-num {
       position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
-      font-size: 110px; font-weight: 900; color: rgba(255,255,255,0.06);
+      font-size: 110px; font-weight: 900; color: rgba(255,255,255,0.03);
       line-height: 1; letter-spacing: -.05em; user-select: none;
     }
     .card-banner-inner { position: relative; z-index: 1; }
@@ -216,7 +216,7 @@ const articles = [
       display: inline-flex; align-items: center; gap: 6px;
       background: linear-gradient(135deg, #059669, #14B8A6); color: #fff;
       font-size: 15px; font-weight: 600;
-      padding: 12px 24px; border-radius: 8px;
+      padding: 12px 24px; border-radius: 12px;
       white-space: nowrap; flex-shrink: 0; align-self: flex-end;
       box-shadow: 0 4px 24px rgba(5,150,105,0.4);
       transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
