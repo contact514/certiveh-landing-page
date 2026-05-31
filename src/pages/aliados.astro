@@ -84,7 +84,7 @@ const webPageLd = JSON.stringify({
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(circle, rgba(5,150,105,0.3) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
       background-size: 28px 28px;
       opacity: 0.15;
       pointer-events: none;
@@ -106,11 +106,11 @@ const webPageLd = JSON.stringify({
       margin-bottom: 24px;
     }
     .al-hero-title {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(36px, 5.5vw, 56px);
       font-weight: 700;
       color: white;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
       margin-bottom: 20px;
     }
     .al-hero-title span { background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -169,12 +169,35 @@ const webPageLd = JSON.stringify({
       margin: 0 auto;
     }
     .al-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--emerald-600);
-      margin-bottom: 10px;
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+      border-radius: 9999px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
+    }
+    .al-section-label-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 9999px;
+      padding: 6px 16px;
+      margin-bottom: 16px;
     }
     .al-section-title {
       font-size: clamp(28px, 3.5vw, 36px);
@@ -187,7 +210,7 @@ const webPageLd = JSON.stringify({
     .al-section-title-white { color: white; }
     .al-section-desc {
       font-size: 16px;
-      color: var(--slate-500);
+      color: var(--slate-600);
       line-height: 1.6;
       max-width: 560px;
       margin-bottom: 48px;
@@ -205,7 +228,7 @@ const webPageLd = JSON.stringify({
       border: 1px solid var(--slate-200);
       border-radius: 16px;
       padding: 28px 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       position: relative;
       overflow: hidden;
@@ -244,7 +267,7 @@ const webPageLd = JSON.stringify({
     }
     .al-benefit-desc {
       font-size: 14px;
-      color: var(--slate-500);
+      color: var(--slate-600);
       line-height: 1.6;
     }
     .al-benefit-link {
@@ -297,7 +320,7 @@ const webPageLd = JSON.stringify({
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
-      box-shadow: 0 4px 16px rgba(5,150,105,0.3), 0 0 0 6px rgba(5,150,105,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15), 0 0 0 6px rgba(5,150,105,0.1);
     }
     .al-step-title {
       font-size: 16px;
@@ -308,7 +331,7 @@ const webPageLd = JSON.stringify({
     }
     .al-step-desc {
       font-size: 14px;
-      color: var(--slate-500);
+      color: var(--slate-600);
       line-height: 1.6;
     }
 
@@ -373,13 +396,13 @@ const webPageLd = JSON.stringify({
     }
     .al-cta-subtitle {
       font-size: 16px;
-      color: var(--slate-400);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 36px;
       line-height: 1.6;
     }
     .al-cta-note {
       font-size: 13px;
-      color: var(--slate-500);
+      color: rgba(255,255,255,0.4);
       margin-top: 18px;
     }
     .al-cta-note span {
@@ -641,7 +664,7 @@ const webPageLd = JSON.stringify({
   <!-- WHO CAN BE AN ALLY -->
   <section class="al-section al-section-dark">
     <div class="al-container">
-      <div class="al-section-label" style="color: var(--emerald-400);">Para quién es</div>
+      <div class="al-section-label-dark">Para quién es</div>
       <h2 class="al-section-title al-section-title-white">Si trabajas con movilidad eléctrica, esto es para ti</h2>
       <p class="al-section-desc al-section-desc-light">
         Cualquier persona o empresa con contactos en el ecosistema de vehículos eléctricos e híbridos puede aplicar.
