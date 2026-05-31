@@ -151,9 +151,10 @@ export default function CamilaChat() {
       {open && (
         <div
           ref={chatRef}
+          className="camila-chat-window"
           style={{
-            position: 'fixed', bottom: 88, right: 16, width: 380, maxWidth: 'calc(100vw - 32px)',
-            height: 500, maxHeight: 'calc(100vh - 120px)', zIndex: 9999, borderRadius: 16, overflow: 'hidden',
+            position: 'fixed', bottom: 88, right: 16, width: 400, maxWidth: 'calc(100vw - 32px)',
+            height: 560, maxHeight: 'calc(100vh - 120px)', zIndex: 9999, borderRadius: 16, overflow: 'hidden',
             boxShadow: '0 8px 30px rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column',
             background: '#fff', border: '1px solid #e2e8f0',
           }}
@@ -288,7 +289,7 @@ export default function CamilaChat() {
                   onKeyDown={handleKeyDown}
                   placeholder="Escribe tu mensaje..."
                   style={{
-                    flex: 1, border: '1px solid #e2e8f0', borderRadius: 8, padding: '10px 12px',
+                    flex: 1, border: '1px solid #e2e8f0', borderRadius: 12, padding: '10px 16px',
                     fontSize: 14, outline: 'none', background: '#f8fafc',
                     transition: 'border-color 0.15s, box-shadow 0.15s',
                   }}
@@ -299,7 +300,7 @@ export default function CamilaChat() {
                   onClick={sendMessage}
                   disabled={!input.trim() || isTyping}
                   style={{
-                    background: '#059669', border: 'none', borderRadius: 8, width: 40, height: 40,
+                    background: '#059669', border: 'none', borderRadius: 12, width: 40, height: 40,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                     opacity: !input.trim() || isTyping ? 0.5 : 1,
                   }}
@@ -351,6 +352,18 @@ export default function CamilaChat() {
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.4; }
+        }
+        @media (max-width: 640px) {
+          .camila-chat-window {
+            bottom: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            border-radius: 0 !important;
+            border: none !important;
+          }
         }
       `}</style>
     </>
