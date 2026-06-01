@@ -682,8 +682,7 @@ function Hero() {
         poster="/hero-bg-poster.webp"
         className="hero-video"
         style={{
-          position: "absolute", width: "130%", height: "130%",
-          left: "-25%", top: "-15%", right: "-5%", bottom: "-15%",
+          position: "absolute", inset: 0, width: "100%", height: "100%",
           objectFit: "cover", pointerEvents: "none", opacity: 0.35,
         }}
       >
