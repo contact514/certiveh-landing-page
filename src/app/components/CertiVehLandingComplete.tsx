@@ -346,7 +346,7 @@ const CSS = `
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
 
-    .hero-section { padding: 100px 20px 60px !important; min-height: 75vh !important; }
+    .hero-section { padding: 100px 20px 60px !important; min-height: 60vh !important; }
     .section { padding: 64px 20px; }
     
     .btn-primary { padding: 12px 20px; font-size: 14px; }
