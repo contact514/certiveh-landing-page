@@ -115,31 +115,35 @@ export function AnimatedGridPattern({
 
     // Spawn random sparks around the cursor
     const newSparks: Spark[] = [];
-    const outerRadius = hoverRadius + 4;
+    // Always light up the hovered cell
+    newSparks.push({
+      cx: newCx, cy: newCy,
+      opacity: 0.9,
+      id: sparkId++,
+    });
+    const outerRadius = hoverRadius + 5;
     for (let dx = -outerRadius; dx <= outerRadius; dx++) {
       for (let dy = -outerRadius; dy <= outerRadius; dy++) {
+        if (dx === 0 && dy === 0) continue;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 1.5 || dist > outerRadius) continue;
-        const chance = dist < hoverRadius ? 0.2 : 0.08;
+        if (dist > outerRadius) continue;
+        const chance = dist <= 2 ? 0.55 : dist <= hoverRadius ? 0.35 : 0.15;
         if (Math.random() < chance) {
           newSparks.push({
             cx: newCx + dx,
             cy: newCy + dy,
-            opacity: 0.3 + Math.random() * 0.6,
+            opacity: Math.max(0.3, 0.9 - dist * 0.1 + Math.random() * 0.2),
             id: sparkId++,
           });
         }
       }
     }
 
-    if (newSparks.length > 0) {
-      setSparks((prev) => [...prev, ...newSparks]);
-      // Remove these sparks after they fade
-      const ids = newSparks.map((s) => s.id);
-      setTimeout(() => {
-        setSparks((prev) => prev.filter((s) => !ids.includes(s.id)));
-      }, 400 + Math.random() * 500);
-    }
+    setSparks((prev) => [...prev, ...newSparks]);
+    const ids = newSparks.map((s) => s.id);
+    setTimeout(() => {
+      setSparks((prev) => prev.filter((s) => !ids.includes(s.id)));
+    }, 500 + Math.random() * 400);
   }, [width, height, hoverRadius]);
 
   const handleMouseLeave = useCallback(() => {
@@ -180,32 +184,6 @@ export function AnimatedGridPattern({
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
       <svg x={x} y={y} className="overflow-visible">
-        {/* Radial glow around cursor */}
-        {mouseCell && cols > 0 && rows > 0 ? Array.from(
-          { length: cols * rows },
-          (_, i) => {
-            const cellX = i % cols;
-            const cellY = Math.floor(i / cols);
-            const dx = cellX - mouseCell.cx;
-            const dy = cellY - mouseCell.cy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist > hoverRadius) return null;
-            const opacity = Math.max(0, 1 - dist / hoverRadius);
-            return (
-              <rect
-                key={`glow-${cellX}-${cellY}`}
-                width={width - 1}
-                height={height - 1}
-                x={cellX * width + 1}
-                y={cellY * height + 1}
-                fill="currentColor"
-                strokeWidth="0"
-                opacity={opacity}
-                style={{ transition: "opacity 0.15s ease" }}
-              />
-            );
-          }
-        ) : null}
         {/* Random sparks */}
         {sparks.map((spark) => (
           <rect
