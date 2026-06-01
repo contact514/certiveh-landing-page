@@ -99,12 +99,12 @@ export function AnimatedGridPattern({
     };
   }, [containerRef]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+  const handlePointer = useCallback((clientX: number, clientY: number) => {
     const svg = containerRef.current;
     if (!svg) return;
     const rect = svg.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+    const mx = clientX - rect.left;
+    const my = clientY - rect.top;
     const newCx = Math.floor(mx / width);
     const newCy = Math.floor(my / height);
     setMouseCell({ cx: newCx, cy: newCy });
@@ -146,6 +146,15 @@ export function AnimatedGridPattern({
     }, 500 + Math.random() * 400);
   }, [width, height, hoverRadius]);
 
+  const handleMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+    handlePointer(e.clientX, e.clientY);
+  }, [handlePointer]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent<SVGSVGElement>) => {
+    const touch = e.touches[0];
+    if (touch) handlePointer(touch.clientX, touch.clientY);
+  }, [handlePointer]);
+
   const handleMouseLeave = useCallback(() => {
     setMouseCell(null);
     lastCellRef.current = "";
@@ -164,6 +173,8 @@ export function AnimatedGridPattern({
       )}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleMouseLeave}
       {...props}
     >
       <defs>
