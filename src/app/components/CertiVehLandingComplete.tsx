@@ -1373,10 +1373,10 @@ function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
     <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, color: "rgba(0,0,0,0.5)" }}>
+      <div style={{ position: "absolute", inset: 0, color: "rgba(0,0,0,0.4)" }}>
         <AnimatedGridPattern
           numSquares={50}
-          maxOpacity={0.65}
+          maxOpacity={0.6}
           duration={4}
           repeatDelay={0.5}
         />
