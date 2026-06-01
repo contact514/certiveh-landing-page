@@ -338,7 +338,7 @@ const CSS = `
   .hero-poster { display: none; }
 
   @media (max-width: 768px) {
-    .hero-video { object-fit: cover !important; object-position: 70% center; opacity: 0.35 !important; }
+    .hero-video { object-fit: cover !important; object-position: center center; opacity: 0.35 !important; }
     .hero-poster { display: none !important; }
     .hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.15) 100%) !important; }
 
