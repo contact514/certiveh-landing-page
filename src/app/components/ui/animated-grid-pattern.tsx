@@ -99,7 +99,7 @@ export function AnimatedGridPattern({
       ref={containerRef}
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
+        "absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
         className,
       )}
       {...props}
@@ -122,10 +122,35 @@ export function AnimatedGridPattern({
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
       <svg x={x} y={y} className="overflow-visible">
+        {/* Invisible hover targets for all grid cells */}
+        {dimensions.width && dimensions.height ? Array.from(
+          { length: Math.ceil(dimensions.width / width) * Math.ceil(dimensions.height / height) },
+          (_, i) => {
+            const cols = Math.ceil(dimensions.width / width);
+            const cx = i % cols;
+            const cy = Math.floor(i / cols);
+            return (
+              <motion.rect
+                key={`hover-${cx}-${cy}`}
+                width={width - 1}
+                height={height - 1}
+                x={cx * width + 1}
+                y={cy * height + 1}
+                fill="currentColor"
+                strokeWidth="0"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1, transition: { duration: 0.15 } }}
+                style={{ cursor: "default" }}
+              />
+            );
+          }
+        ) : null}
+        {/* Animated squares */}
         {squares.map(({ pos: [x, y], id }, index) => (
           <motion.rect
             initial={{ opacity: 0 }}
             animate={{ opacity: maxOpacity }}
+            whileHover={{ opacity: 1, transition: { duration: 0.2 } }}
             transition={{
               duration,
               repeat: 1,
@@ -140,6 +165,7 @@ export function AnimatedGridPattern({
             y={y * height + 1}
             fill="currentColor"
             strokeWidth="0"
+            style={{ cursor: "default" }}
           />
         ))}
       </svg>

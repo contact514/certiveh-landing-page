@@ -338,14 +338,15 @@ const CSS = `
   .hero-poster { display: none; }
 
   @media (max-width: 768px) {
+    .hero-video { object-position: center center; }
     .hero-poster { display: none !important; }
     .hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.15) 100%) !important; }
 
     nav { padding: 0 20px; height: 64px; }
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
-    
-    .hero-section { padding: 100px 20px 60px !important; min-height: 90vh !important; }
+
+    .hero-section { padding: 100px 20px 60px !important; min-height: 70vh !important; }
     .section { padding: 64px 20px; }
     
     .btn-primary { padding: 12px 20px; font-size: 14px; }
@@ -1380,14 +1381,14 @@ function CTAFinal() {
           repeatDelay={0.5}
         />
       </div>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", pointerEvents: "none" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
           Tu certificado UPME <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
         </h2>
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
           Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
         </p>
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
           </button>
