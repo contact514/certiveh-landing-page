@@ -338,7 +338,7 @@ const CSS = `
   .hero-poster { display: none; }
 
   @media (max-width: 768px) {
-    .hero-video { object-fit: cover !important; object-position: center center; opacity: 0.35 !important; }
+    .hero-video { width: 100% !important; height: 100% !important; left: 0 !important; top: 0 !important; object-fit: cover !important; object-position: center center; opacity: 0.35 !important; }
     .hero-poster { display: none !important; }
     .hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.15) 100%) !important; }
 
@@ -682,7 +682,8 @@ function Hero() {
         poster="/hero-bg-poster.webp"
         className="hero-video"
         style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
+          position: "absolute", inset: 0, width: "120%", height: "120%",
+          left: "-20%", top: "-10%",
           objectFit: "cover", pointerEvents: "none", opacity: 0.35,
         }}
       >
