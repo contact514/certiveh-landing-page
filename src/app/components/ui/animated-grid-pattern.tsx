@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
@@ -16,6 +16,7 @@ interface AnimatedGridPatternProps {
   maxOpacity?: number;
   duration?: number;
   repeatDelay?: number;
+  hoverRadius?: number;
 }
 
 export function AnimatedGridPattern({
@@ -29,12 +30,14 @@ export function AnimatedGridPattern({
   maxOpacity = 0.5,
   duration = 4,
   repeatDelay = 0.5,
+  hoverRadius = 4,
   ...props
 }: AnimatedGridPatternProps) {
   const id = useId();
-  const containerRef = useRef(null);
+  const containerRef = useRef<SVGSVGElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [squares, setSquares] = useState(() => generateSquares(numSquares));
+  const [mouseCell, setMouseCell] = useState<{ cx: number; cy: number } | null>(null);
 
   function getPos() {
     return [
@@ -43,7 +46,6 @@ export function AnimatedGridPattern({
     ];
   }
 
-  // Adjust the generateSquares function to return objects with an id, x, and y
   function generateSquares(count: number) {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -51,28 +53,20 @@ export function AnimatedGridPattern({
     }));
   }
 
-  // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
     setSquares((currentSquares) =>
       currentSquares.map((sq) =>
-        sq.id === id
-          ? {
-              ...sq,
-              pos: getPos(),
-            }
-          : sq,
+        sq.id === id ? { ...sq, pos: getPos() } : sq,
       ),
     );
   };
 
-  // Update squares to animate in
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
   }, [dimensions, numSquares]);
 
-  // Resize observer to update container dimensions
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
@@ -94,6 +88,25 @@ export function AnimatedGridPattern({
     };
   }, [containerRef]);
 
+  const handleMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+    const svg = containerRef.current;
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    setMouseCell({
+      cx: Math.floor(mx / width),
+      cy: Math.floor(my / height),
+    });
+  }, [width, height]);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouseCell(null);
+  }, []);
+
+  const cols = dimensions.width ? Math.ceil(dimensions.width / width) : 0;
+  const rows = dimensions.height ? Math.ceil(dimensions.height / height) : 0;
+
   return (
     <svg
       ref={containerRef}
@@ -102,6 +115,8 @@ export function AnimatedGridPattern({
         "absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
         className,
       )}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       {...props}
     >
       <defs>
@@ -122,25 +137,28 @@ export function AnimatedGridPattern({
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
       <svg x={x} y={y} className="overflow-visible">
-        {/* Invisible hover targets for all grid cells */}
-        {dimensions.width && dimensions.height ? Array.from(
-          { length: Math.ceil(dimensions.width / width) * Math.ceil(dimensions.height / height) },
+        {/* Hover glow cells */}
+        {mouseCell && cols > 0 && rows > 0 ? Array.from(
+          { length: cols * rows },
           (_, i) => {
-            const cols = Math.ceil(dimensions.width / width);
-            const cx = i % cols;
-            const cy = Math.floor(i / cols);
+            const cellX = i % cols;
+            const cellY = Math.floor(i / cols);
+            const dx = cellX - mouseCell.cx;
+            const dy = cellY - mouseCell.cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > hoverRadius) return null;
+            const opacity = Math.max(0, 1 - dist / hoverRadius);
             return (
-              <motion.rect
-                key={`hover-${cx}-${cy}`}
+              <rect
+                key={`glow-${cellX}-${cellY}`}
                 width={width - 1}
                 height={height - 1}
-                x={cx * width + 1}
-                y={cy * height + 1}
+                x={cellX * width + 1}
+                y={cellY * height + 1}
                 fill="currentColor"
                 strokeWidth="0"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1, transition: { duration: 0.15 } }}
-                style={{ cursor: "default" }}
+                opacity={opacity}
+                style={{ transition: "opacity 0.15s ease" }}
               />
             );
           }
@@ -150,7 +168,6 @@ export function AnimatedGridPattern({
           <motion.rect
             initial={{ opacity: 0 }}
             animate={{ opacity: maxOpacity }}
-            whileHover={{ opacity: 1, transition: { duration: 0.2 } }}
             transition={{
               duration,
               repeat: 1,
@@ -165,7 +182,6 @@ export function AnimatedGridPattern({
             y={y * height + 1}
             fill="currentColor"
             strokeWidth="0"
-            style={{ cursor: "default" }}
           />
         ))}
       </svg>
