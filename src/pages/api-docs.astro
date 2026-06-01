@@ -609,6 +609,7 @@ const webPageLd = JSON.stringify({
     <a href="#post-payment">Payment</a>
     <a href="#webhooks">Webhooks</a>
     <a href="#errors">Errors</a>
+    <a href="#rate-limiting">Rate Limit</a>
     <a href="#integration-flow">Flow</a>
     <a href="#contact">Contact</a>
   </div>
@@ -646,6 +647,9 @@ const webPageLd = JSON.stringify({
 
       <div class="sidebar-section-title">Reference</div>
       <a href="#errors" class="sidebar-link">Errors</a>
+      <a href="#rate-limiting" class="sidebar-link">Rate Limiting</a>
+      <a href="#security" class="sidebar-link">Security</a>
+      <a href="#partner-discounts" class="sidebar-link">Partner Discounts</a>
       <a href="#integration-flow" class="sidebar-link">Integration Flow</a>
       <a href="#contact" class="sidebar-link">Contact</a>
     </aside>
@@ -767,8 +771,8 @@ const webPageLd = JSON.stringify({
           </thead>
           <tbody>
             <tr><td><span class="field-name">user_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>UUID del usuario (from /users)</td></tr>
-            <tr><td><span class="field-name">plate</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Placa (6 chars, ej: "ABC123")</td></tr>
-            <tr><td><span class="field-name">vin</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>VIN (17 chars)</td></tr>
+            <tr><td><span class="field-name">plate</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Placa, formato ABC123 o ABC12D (3 letras + 2 digitos + 1 alfanumerico)</td></tr>
+            <tr><td><span class="field-name">vin</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>VIN (exactamente 17 chars, no puede contener I, O, Q)</td></tr>
             <tr><td><span class="field-name">brand</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Marca (ej: "KIA")</td></tr>
             <tr><td><span class="field-name">line</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Linea/modelo (ej: "NIRO DESIRE")</td></tr>
             <tr><td><span class="field-name">year</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Ano del modelo</td></tr>
@@ -777,7 +781,7 @@ const webPageLd = JSON.stringify({
             <tr><td><span class="field-name">propulsion_type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td><code>"Electrico"</code> o <code>"Hibrido"</code></td></tr>
             <tr><td><span class="field-name">owner_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre propietario registrado</td></tr>
             <tr><td><span class="field-name">owner_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Cedula/NIT propietario</td></tr>
-            <tr><td><span class="field-name">purchase_value_cop</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Valor bruto vehiculo COP (sin IVA)</td></tr>
+            <tr><td><span class="field-name">purchase_value_cop</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Valor bruto vehiculo COP (sin IVA, minimo 1.000.000)</td></tr>
             <tr><td><span class="field-name">purchase_date</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Fecha compra AAAA-MM-DD</td></tr>
             <tr><td><span class="field-name">dealer_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre concesionario</td></tr>
             <tr><td><span class="field-name">invoice_number</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Numero factura</td></tr>
@@ -856,9 +860,17 @@ const webPageLd = JSON.stringify({
           <span class="code-block-label">JSON</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
-        <pre class="code-block">&#123;
+        <pre class="code-block"><span class="cc">// Vehicle documents (factura, tarjeta-propiedad-*)</span>
+&#123;
   <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
   <span class="ck">"type"</span>: <span class="cs">"factura"</span>,
+  <span class="ck">"ocr_status"</span>: <span class="cs">"pending"</span>
+&#125;
+
+<span class="cc">// Profile documents (cedula-frente, cedula-reverso, rut)</span>
+&#123;
+  <span class="ck">"document_id"</span>: <span class="cs">"uuid"</span>,
+  <span class="ck">"type"</span>: <span class="cs">"cedula-frente"</span>,
   <span class="ck">"ocr_status"</span>: <span class="cs">"pending"</span>
 &#125;</pre>
       </div>
@@ -881,8 +893,8 @@ const webPageLd = JSON.stringify({
         <pre class="code-block">&#123;
   <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
   <span class="ck">"status"</span>: <span class="cs">"IN_PROGRESS"</span>,
-  <span class="ck">"step"</span>: <span class="cn">5</span>,
-  <span class="ck">"progress_pct"</span>: <span class="cn">44</span>,
+  <span class="ck">"step"</span>: <span class="cn">5</span>,          <span class="cc">// 1-7</span>
+  <span class="ck">"progress_pct"</span>: <span class="cn">71</span>,   <span class="cc">// 0-100, based on 7 steps</span>
   <span class="ck">"paid_at"</span>: <span class="cs">"2026-05-20T..."</span>,
   <span class="ck">"created_at"</span>: <span class="cs">"2026-05-15T..."</span>,
   <span class="ck">"updated_at"</span>: <span class="cs">"2026-05-20T..."</span>,
@@ -907,6 +919,24 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
+      <h4>Pipeline Steps (1–7)</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Step</th><th>Label</th><th>DB Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="cn">1</span></td><td>En borrador</td><td><span class="field-name">DRAFT</span></td></tr>
+            <tr><td><span class="cn">2</span></td><td>Solicitud enviada</td><td><span class="field-name">DOCUMENT_REVIEW</span></td></tr>
+            <tr><td><span class="cn">3</span></td><td>Registro en UPME</td><td><span class="field-name">IN_PROGRESS</span> (UPME_REGISTER)</td></tr>
+            <tr><td><span class="cn">4</span></td><td>Esperando ventana UPME</td><td><span class="field-name">IN_PROGRESS</span> (WAITING_WINDOW)</td></tr>
+            <tr><td><span class="cn">5</span></td><td>Tramite en UPME</td><td><span class="field-name">IN_PROGRESS</span> (FILL_TRAMITE)</td></tr>
+            <tr><td><span class="cn">6</span></td><td>Espera de certificado</td><td><span class="field-name">FILED</span>, <span class="field-name">APPROVED</span>, o <span class="field-name">REJECTED</span></td></tr>
+            <tr><td><span class="cn">7</span></td><td>Certificado emitido</td><td><span class="field-name">COMPLETED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <h4>Tramite Statuses</h4>
       <div class="table-wrapper">
         <table class="api-table">
@@ -914,14 +944,14 @@ const webPageLd = JSON.stringify({
             <tr><th>Status</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr><td><span class="field-name">DRAFT</span></td><td>Tramite creado, pendiente de pago</td></tr>
-            <tr><td><span class="field-name">DOCUMENT_REVIEW</span></td><td>Pago recibido, documentos en revision</td></tr>
-            <tr><td><span class="field-name">IN_PROGRESS</span></td><td>En tramite ante la UPME</td></tr>
-            <tr><td><span class="field-name">FILED</span></td><td>Solicitud de certificado enviada a UPME</td></tr>
-            <tr><td><span class="field-name">APPROVED</span></td><td>UPME aprobo la solicitud</td></tr>
-            <tr><td><span class="field-name">ACTION_REQUIRED</span></td><td>Se necesita una accion del usuario</td></tr>
-            <tr><td><span class="field-name">COMPLETED</span></td><td>Certificado emitido</td></tr>
-            <tr><td><span class="field-name">REJECTED</span></td><td>Solicitud rechazada por la UPME</td></tr>
+            <tr><td><span class="field-name">DRAFT</span></td><td>Tramite creado, pendiente de pago (step 1)</td></tr>
+            <tr><td><span class="field-name">DOCUMENT_REVIEW</span></td><td>Pago recibido, documentos en revision (step 2)</td></tr>
+            <tr><td><span class="field-name">IN_PROGRESS</span></td><td>En tramite ante la UPME (steps 3–5)</td></tr>
+            <tr><td><span class="field-name">FILED</span></td><td>Solicitud de certificado enviada a UPME (step 6)</td></tr>
+            <tr><td><span class="field-name">APPROVED</span></td><td>UPME aprobo la solicitud (step 6)</td></tr>
+            <tr><td><span class="field-name">ACTION_REQUIRED</span></td><td>Se necesita una accion del usuario (se resuelve al step donde estaba)</td></tr>
+            <tr><td><span class="field-name">COMPLETED</span></td><td>Certificado emitido (step 7)</td></tr>
+            <tr><td><span class="field-name">REJECTED</span></td><td>Solicitud rechazada por la UPME (step 6)</td></tr>
           </tbody>
         </table>
       </div>
@@ -1026,10 +1056,46 @@ const webPageLd = JSON.stringify({
           <span>Resource not found</span>
         </li>
         <li>
+          <span class="status-code s4">429</span>
+          <span>Too many requests · rate limit exceeded</span>
+        </li>
+        <li>
           <span class="status-code s5">500</span>
           <span>Internal server error</span>
         </li>
       </ul>
+
+      <hr class="section-divider" />
+
+      <!-- RATE LIMITING -->
+      <h2 id="rate-limiting" class="section-anchor">Rate Limiting</h2>
+      <p>All API endpoints are rate-limited to <strong>100 requests per minute</strong> per API key.</p>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Response Header</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">X-RateLimit-Limit</span></td><td>Maximum requests per minute (100)</td></tr>
+            <tr><td><span class="field-name">X-RateLimit-Remaining</span></td><td>Remaining requests in the current window</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--slate-500);">When the limit is exceeded, the API returns <code>429 Too Many Requests</code>. Wait until the window resets before retrying.</p>
+
+      <hr class="section-divider" />
+
+      <!-- SECURITY -->
+      <h2 id="security" class="section-anchor">Security</h2>
+      <p>All API requests are automatically logged including IP address, user-agent, and response status code for auditing and security purposes.</p>
+
+      <hr class="section-divider" />
+
+      <!-- PARTNER DISCOUNTS -->
+      <h2 id="partner-discounts" class="section-anchor">Partner Discounts</h2>
+      <p>
+        The pricing returned by <code>POST /tramites</code> and <code>POST /tramites/:id/payment</code> automatically applies any discount configured for your partner account. The <code>breakdown.discount</code> field reflects the applied discount amount. No additional parameters are needed.
+      </p>
 
       <hr class="section-divider" />
 
