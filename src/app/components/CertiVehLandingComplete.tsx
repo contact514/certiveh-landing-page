@@ -536,7 +536,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
+  const items = ["Eléctricos e híbridos","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -747,7 +747,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tu tramitador virtual del certificado UPME.
+        Tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos.
         Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
       </p>
 
@@ -897,7 +897,7 @@ function Beneficios() {
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 520, margin: "0 auto" }}>
-            El Estado colombiano creó estos incentivos para promover la movilidad eléctrica. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
+            El Estado colombiano creó estos incentivos para promover la movilidad eléctrica e híbrida. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
           </p>
         </div>
 
@@ -1386,7 +1386,7 @@ function CTAFinal() {
           Tu certificado UPME <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
         </h2>
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
-          Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
+          Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
