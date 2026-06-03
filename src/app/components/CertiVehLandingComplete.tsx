@@ -1264,7 +1264,7 @@ function Testimonios() {
                   </svg>
                 ))}
               </div>
-              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1, position: "relative" }}>"{t.texto}"</p>
+              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1, position: "relative", fontStyle: "italic" }}>"{t.texto}"</p>
               <div style={{ position: "relative" }}>
                 <div style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-900)" }}>{t.nombre}</div>
                 <div style={{ fontSize: 13, color: "var(--slate-400)" }}>{t.ciudad} · {t.vehiculo}</div>
