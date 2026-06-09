@@ -107,10 +107,43 @@ $599.990 COP (tarifa fija)
 ### 3. IVA
 19% sobre la suma del trámite UPME + honorarios CertiVeh
 
-### Ejemplos de costo total
+### Ejemplos de costo total (solo certificado UPME)
 - Vehículo de $40M: ~$892.000 COP
 - Vehículo de $120M: ~$1.549.000 COP
 - Vehículo de $200M: ~$1.614.000 COP
+
+### 4. Gestión de devolución de IVA ante la DIAN (OPCIONAL)
+Componente adicional opcional que viene pre-seleccionado en el checkout. Ver sección "Servicio de gestión de devolución de IVA ante la DIAN" para detalles y tarifas.
+
+---
+
+## Servicio de gestión de devolución de IVA ante la DIAN
+
+CertiVeh ahora ofrece gestionar ante la DIAN la devolución del 5% del IVA que el usuario pagó al comprar su vehículo eléctrico o híbrido. Este servicio es OPCIONAL pero viene PRE-SELECCIONADO en el checkout del portal.
+
+### Qué incluye
+CertiVeh se encarga de TODO el proceso ante la DIAN para solicitar la devolución del 5% del IVA. El usuario no tiene que hacer nada.
+
+### Costo del servicio
+- Si el vehículo vale $200 millones o menos: tarifa fija de $499.990 + IVA.
+- Si el vehículo vale más de $200 millones: 5% del IVA a devolver + IVA (equivalente al 0.25% del valor del vehículo).
+
+### Ejemplos concretos
+- Vehículo de $80M: DIAN devuelve $4M de IVA. Costo del servicio: $499.990 + IVA = ~$595K. El usuario gana $4M y paga menos de $600K.
+- Vehículo de $150M: DIAN devuelve $7.5M de IVA. Costo del servicio: $499.990 + IVA = ~$595K. Recupera más de 12 veces lo que paga.
+- Vehículo de $300M: DIAN devuelve $15M de IVA. Costo del servicio: $750.000 + IVA = ~$893K.
+
+### Requisito
+Se necesita primero el certificado UPME. Por eso se ofrece junto con el trámite del certificado.
+
+### Tiempo
+Una vez radicada la solicitud ante la DIAN, tarda entre 2 y 6 meses.
+
+### Si preguntan "puedo hacerlo yo mismo?"
+Técnicamente sí, pero el proceso ante la DIAN es complejo y puede tomar meses si no se hace correctamente. CertiVeh lo gestiona de forma automatizada.
+
+### Para ventas
+Siempre destacar cuánto dinero recuperan vs cuánto cuesta el servicio. Ejemplo: "con tu carro de $150M la DIAN te devuelve $7.5M de IVA y el servicio de gestión cuesta menos de $600K, o sea que recuperas más de 12 veces lo que pagas".
 
 ---
 
@@ -142,6 +175,18 @@ Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo a
 
 **¿Funciona para personas jurídicas?**
 Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026.
+
+**¿CertiVeh gestiona la devolución del IVA?**
+Sí, gestionamos todo el proceso ante la DIAN. Cuesta $499.990 + IVA para vehículos hasta $200M, o 5% del IVA a devolver + IVA para vehículos de mayor valor.
+
+**¿Cuánto tarda la devolución del IVA?**
+Entre 2 y 6 meses una vez radicada la solicitud ante la DIAN.
+
+**¿Cuánto me devuelven de IVA?**
+El 5% del valor del vehículo. Ejemplo: vehículo de $150M = $7.5M de devolución.
+
+**¿Necesito el certificado UPME para la devolución del IVA?**
+Sí, es requisito. CertiVeh ofrece ambos servicios juntos.
 
 ---
 
