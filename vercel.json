@@ -1,1 +1,16 @@
-{}
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "flyer.certiveh.co" }],
+      "destination": "https://certiveh.co/:path*?utm_source=flyer&utm_medium=print&utm_campaign=volantes",
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "enterprise.certiveh.co" }],
+      "destination": "https://certiveh.co/:path*?utm_source=enterprise&utm_medium=print&utm_campaign=empresas",
+      "permanent": false
+    }
+  ]
+}
