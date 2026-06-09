@@ -15,7 +15,14 @@ const getPortalUrl = () => {
 };
 const usePortalUrl = () => {
   const [url, setUrl] = useState("https://portal.certiveh.co");
-  useEffect(() => { setUrl(getPortalUrl()); }, []);
+  useEffect(() => {
+    const base = getPortalUrl();
+    const params = new URLSearchParams(window.location.search);
+    const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const kept = new URLSearchParams();
+    utms.forEach(k => { const v = params.get(k); if (v) kept.set(k, v); });
+    setUrl(kept.toString() ? `${base}?${kept}` : base);
+  }, []);
   return url;
 };
 
