@@ -147,12 +147,9 @@ Siempre destacar cuánto dinero recuperan vs cuánto cuesta el servicio. Ejemplo
 
 ---
 
-## Ventanas de radicación UPME
+## Ventana de radicación UPME
 
-- La UPME abre ventanas de radicación dos veces al año (por semestres/ciclos)
-- Si no hay ventana abierta cuando el usuario se registra, su caso queda en cola y se radica automáticamente en la siguiente apertura
-- CertiVeh monitorea las fechas de apertura y avisa con anticipación
-- Si se pierde una ventana, hay que esperar hasta el siguiente semestre
+Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua: del 1 de febrero al 15 de diciembre de cada año. Ya no hay ciclos ni semestres. La solicitud se radica de inmediato, sin esperar turnos.
 
 ---
 
@@ -162,7 +159,7 @@ Siempre destacar cuánto dinero recuperan vs cuánto cuesta el servicio. Ejemplo
 Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos vigentes. El vehículo debe estar a nombre del solicitante en el RUNT. Los MHEV (micro-híbridos) NO califican.
 
 **¿Cuándo puedo radicar mi solicitud?**
-La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación.
+Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Se radica de inmediato, sin esperar ciclos.
 
 **¿Qué documentos necesito?**
 Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono.
@@ -212,7 +209,7 @@ IMPORTANTE: No se debe hacer referencia a la Ley 1964 de 2019 en ninguna comunic
 - Notificaciones por WhatsApp y email en cada etapa
 - Pago único, sin suscripciones
 - Cifrado de extremo a extremo
-- Monitoreo de ventanas de radicación UPME
+- Radicación inmediata (ventana continua desde Resolución UPME 400 de 2026)
 - Garantía: si la UPME rechaza, se revisa y corrige sin costo adicional
 
 ---
