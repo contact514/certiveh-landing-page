@@ -173,8 +173,8 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 **¿Qué pasa si la UPME rechaza mi solicitud?**
 Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. La política de garantía está detallada en los términos del servicio.
 
-**¿Funciona para personas jurídicas?**
-Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026.
+**¿Funciona para empresas (personas jurídicas)?**
+Si. CertiVeh funciona tanto para personas naturales como para empresas (personas juridicas) e independientes. Para empresas, en vez del RUT personal se sube el certificado de Camara de Comercio, y en vez de la cedula del titular se sube la cedula del representante legal. El resto del proceso es igual.
 
 **¿CertiVeh gestiona la devolución del IVA?**
 Sí, gestionamos todo el proceso ante la DIAN. Cuesta $499.990 + IVA para vehículos hasta $200M, o 5% del IVA a devolver + IVA para vehículos de mayor valor.
