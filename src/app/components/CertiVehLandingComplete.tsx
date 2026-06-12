@@ -425,7 +425,7 @@ const CSS = `
     .trust-item { font-size: 12px !important; gap: 4px !important; }
 
     /* WhatsApp FAB más pequeño en mobile */
-    .whatsapp-fab { width: 42px !important; height: 42px !important; bottom: 76px !important; right: 12px !important; }
+    .whatsapp-fab { width: 48px !important; height: 48px !important; bottom: 16px !important; right: 12px !important; }
     
     /* Info callout responsive */
     .info-callout { padding: 20px !important; gap: 12px !important; }
@@ -1620,8 +1620,8 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         aria-label="Escríbenos por WhatsApp"
         className="whatsapp-fab"
         style={{
-          position: "fixed", bottom: 88, right: 16, zIndex: 900,
-          width: 48, height: 48, borderRadius: "50%",
+          position: "fixed", bottom: 20, right: 16, zIndex: 9999,
+          width: 56, height: 56, borderRadius: "50%",
           background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",
           boxShadow: "0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2)",
           textDecoration: "none", cursor: "pointer",

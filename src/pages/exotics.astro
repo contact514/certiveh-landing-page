@@ -1,13 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CertiVehLandingComplete from '../app/components/CertiVehLandingComplete';
-import CamilaChat from '../app/components/CamilaChat';
 import '../styles/index.css';
 ---
 
 <BaseLayout robots="noindex, nofollow">
   <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" />
-  <CamilaChat client:load />
 
   <!-- Exotics: rewrite all portal links -->
   <script is:inline>
