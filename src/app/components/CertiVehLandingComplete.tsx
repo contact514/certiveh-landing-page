@@ -1436,7 +1436,7 @@ function Footer() {
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
               { label: "Recursos", links: [{ text: "Vehículos", href: "/vehiculos/" }, { text: "Blog", href: "/blog" }, { text: "API", href: "/api-docs" }] },
               { label: "Partners", links: [{ text: "Programa de Aliados", href: "/aliados" }, { text: "Aplicar ahora", href: "https://aliado.certiveh.co/" }] },
-              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }] }
+              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
             ].map(col => (
               <div key={col.label}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>{col.label}</div>
