@@ -6,7 +6,7 @@ import { Navbar } from '../app/components/Navbar';
 
 <BaseLayout
   title="Política de Privacidad - CertiVeh"
-  description="Política de Tratamiento de Datos Personales de CertiVeh. Conoce cómo recopilamos, usamos y protegemos tu información personal. CERTIVEH S.A.S. - NIT 902051875-8."
+  description="Política de Tratamiento de Datos Personales de CertiVeh. CERTIVEH S.A.S. - NIT 902051875-8."
   robots="noindex, follow"
 >
   <style>
@@ -28,344 +28,261 @@ import { Navbar } from '../app/components/Navbar';
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--ff); background: white; color: var(--slate-600); -webkit-font-smoothing: antialiased; }
 
-    .pp-hero {
+    .tc-hero {
       background: var(--slate-900);
       padding: 120px 48px 56px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .pp-badge {
+    .tc-badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
       font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 6px 14px; border-radius: 9999px; margin-bottom: 20px;
     }
-    .pp-title {
+    .tc-title {
       font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: white;
       letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px;
     }
-    .pp-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
-    .pp-date { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .tc-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .tc-date { font-size: 13px; color: rgba(255,255,255,0.4); }
 
-    .pp-container { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
+    .tc-container { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
 
-    .pp-section { margin-bottom: 48px; scroll-margin-top: 80px; }
-    .pp-section-header {
+    .tc-index {
+      background: white; border: 1px solid var(--slate-200); border-radius: 16px;
+      padding: 28px 32px; margin-bottom: 56px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .tc-index-title {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--slate-500); margin-bottom: 16px;
+    }
+    .tc-index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+    .tc-index-item {
+      font-size: 13px; color: var(--emerald-600); text-decoration: none;
+      padding: 4px 0; line-height: 1.5; transition: color 0.15s;
+    }
+    .tc-index-item:hover { color: #047857; text-decoration: underline; }
+
+    .tc-section { margin-bottom: 48px; scroll-margin-top: 80px; }
+    .tc-section-header {
       display: flex; align-items: flex-start; gap: 16px;
       margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--emerald-200);
     }
-    .pp-section-num {
+    .tc-section-num {
       flex-shrink: 0; width: 36px; height: 36px;
       background: var(--emerald-50); border: 1.5px solid var(--emerald-200); border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 12px; font-weight: 700; color: var(--emerald-600);
     }
-    .pp-section-title {
+    .tc-section-title {
       font-size: clamp(17px, 2.5vw, 20px); font-weight: 700;
       color: var(--slate-900); letter-spacing: -0.01em; padding-top: 6px;
     }
-    .pp-section p { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 14px; }
-    .pp-section p:last-child { margin-bottom: 0; }
-    .pp-section ul, .pp-section ol { padding-left: 20px; margin-bottom: 14px; }
-    .pp-section li { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 6px; }
-    .pp-section li strong { color: var(--slate-900); }
+    .tc-section p { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 14px; }
+    .tc-section p:last-child { margin-bottom: 0; }
+    .tc-section ul, .tc-section ol { padding-left: 20px; margin-bottom: 14px; }
+    .tc-section li { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 6px; }
+    .tc-section li strong { color: var(--slate-900); }
 
-    .pp-highlight {
+    .tc-highlight {
       background: var(--emerald-50); border: 1px solid var(--emerald-200);
       border-radius: 12px; padding: 18px 22px; margin: 16px 0;
     }
-    .pp-highlight p { color: var(--slate-700) !important; margin-bottom: 0 !important; }
+    .tc-highlight p { color: var(--slate-700) !important; margin-bottom: 0 !important; }
 
-    .pp-index {
-      background: white; border: 1px solid var(--slate-200); border-radius: 16px;
-      padding: 28px 32px; margin-bottom: 56px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    }
-    .pp-index-title {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--slate-500); margin-bottom: 16px;
-    }
-    .pp-index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
-    .pp-index-item {
-      font-size: 13px; color: var(--emerald-600); text-decoration: none;
-      padding: 4px 0; line-height: 1.5; transition: color 0.15s;
-    }
-    .pp-index-item:hover { color: #047857; text-decoration: underline; }
-
-    .pp-footer {
+    .tc-footer {
       background: var(--slate-900); color: #64748B; padding: 48px 48px;
     }
-    .pp-footer-inner { max-width: 1200px; margin: 0 auto; }
-    .pp-footer-top {
+    .tc-footer-inner { max-width: 1200px; margin: 0 auto; }
+    .tc-footer-top {
       display: flex; justify-content: space-between; align-items: flex-start;
       flex-wrap: wrap; gap: 32px; margin-bottom: 40px;
     }
-    .pp-footer-col-title {
+    .tc-footer-logo-desc { font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5; }
+    .tc-footer-col-title {
       font-size: 12px; font-weight: 700; color: var(--slate-300);
       letter-spacing: 0.08em; margin-bottom: 14px; text-transform: uppercase;
     }
-    .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .pp-footer-link {
-      font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.15s;
-    }
-    .pp-footer-link:hover { color: white; }
-    .pp-footer-bottom {
+    .tc-footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .tc-footer-link { font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.15s; }
+    .tc-footer-link:hover { color: white; }
+    .tc-footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px;
     }
 
     @media (max-width: 640px) {
-      .pp-hero { padding: 100px 20px 40px; }
-      .pp-container { padding: 40px 16px 64px; }
-      .pp-index { padding: 20px 20px; }
-      .pp-index-grid { grid-template-columns: 1fr; }
-      .pp-section-header { gap: 12px; }
-      .pp-footer { padding: 40px 20px; }
-      .pp-footer-top { flex-direction: column; }
+      .tc-hero { padding: 100px 20px 40px; }
+      .tc-container { padding: 40px 16px 64px; }
+      .tc-index { padding: 20px 20px; }
+      .tc-index-grid { grid-template-columns: 1fr; }
+      .tc-section-header { gap: 12px; }
+      .tc-footer { padding: 40px 20px; }
+      .tc-footer-top { flex-direction: column; }
     }
   </style>
 
   <Navbar isHome={false} client:load />
 
-  <div class="pp-hero">
-    <div class="pp-badge">Documento legal</div>
-    <h1 class="pp-title">Política de Privacidad</h1>
-    <p class="pp-subtitle">CERTIVEH S.A.S. - NIT 902051875-8</p>
-    <p class="pp-date">Última actualización: junio 2026</p>
+  <div class="tc-hero">
+    <div class="tc-badge">Documento legal</div>
+    <h1 class="tc-title">Política de Tratamiento de Datos Personales</h1>
+    <p class="tc-subtitle">CERTIVEH S.A.S. - NIT 902051875-8</p>
+    <p class="tc-date">Última actualización: junio 2026</p>
   </div>
 
-  <div class="pp-container">
+  <div class="tc-container">
 
-    <div class="pp-index">
-      <div class="pp-index-title">Contenido</div>
-      <div class="pp-index-grid">
-        <a href="#responsable" class="pp-index-item">1. Responsable del tratamiento</a>
-        <a href="#datos" class="pp-index-item">2. Datos que recopilamos</a>
-        <a href="#finalidades" class="pp-index-item">3. Finalidades del tratamiento</a>
-        <a href="#autorizacion" class="pp-index-item">4. Autorización</a>
-        <a href="#derechos" class="pp-index-item">5. Derechos del titular</a>
-        <a href="#seguridad" class="pp-index-item">6. Medidas de seguridad</a>
-        <a href="#transferencia" class="pp-index-item">7. Transferencia de datos</a>
-        <a href="#conservacion" class="pp-index-item">8. Conservación</a>
-        <a href="#cookies" class="pp-index-item">9. Cookies y tecnologías</a>
-        <a href="#menores" class="pp-index-item">10. Menores de edad</a>
-        <a href="#cambios" class="pp-index-item">11. Cambios a esta política</a>
-        <a href="#contacto" class="pp-index-item">12. Contacto</a>
+    <div class="tc-index">
+      <div class="tc-index-title">Contenido</div>
+      <div class="tc-index-grid">
+        <a href="#responsable" class="tc-index-item">I. Responsable del tratamiento</a>
+        <a href="#marco" class="tc-index-item">II. Marco normativo</a>
+        <a href="#autorizacion" class="tc-index-item">III. Autorización</a>
+        <a href="#finalidades" class="tc-index-item">IV. Finalidades del tratamiento</a>
+        <a href="#derechos" class="tc-index-item">V. Derechos del titular</a>
+        <a href="#conservacion" class="tc-index-item">VI. Conservación de datos</a>
+        <a href="#comunicaciones" class="tc-index-item">VII. Comunicaciones electrónicas</a>
+        <a href="#seguridad" class="tc-index-item">VIII. Seguridad y prevención de fraude</a>
+        <a href="#contacto" class="tc-index-item">IX. Contacto</a>
       </div>
     </div>
 
-    <!-- 1 -->
-    <div class="pp-section" id="responsable">
-      <div class="pp-section-header">
-        <div class="pp-section-num">1</div>
-        <h2 class="pp-section-title">Responsable del tratamiento</h2>
+    <!-- I -->
+    <div class="tc-section" id="responsable">
+      <div class="tc-section-header">
+        <div class="tc-section-num">I</div>
+        <h2 class="tc-section-title">Responsable del tratamiento</h2>
       </div>
-      <p><strong>CERTIVEH S.A.S.</strong>, sociedad comercial constituida bajo las leyes de la República de Colombia, identificada con NIT 902051875-8, con domicilio en la ciudad de Medellín, Colombia, es la entidad responsable del tratamiento de los datos personales recopilados a través de la plataforma certiveh.co y portal.certiveh.co (en adelante, la "Plataforma").</p>
-      <p>Correo de contacto para asuntos de datos personales: <strong>contacto@certiveh.co</strong></p>
+      <p><strong>CERTIVEH S.A.S.</strong>, sociedad comercial constituida bajo las leyes de la República de Colombia, identificada con NIT 902051875-8, con domicilio en la ciudad de Medellín, Colombia, es el Operador de la Plataforma y responsable del tratamiento de los datos personales recopilados a través de certiveh.co y portal.certiveh.co.</p>
+      <p>El Operador de la Plataforma presta un servicio de intermediación tecnológica y de gestión administrativa que facilita la recopilación, organización, preparación y radicación de solicitudes de certificación ante la Unidad de Planeación Minero Energética (UPME).</p>
     </div>
 
-    <!-- 2 -->
-    <div class="pp-section" id="datos">
-      <div class="pp-section-header">
-        <div class="pp-section-num">2</div>
-        <h2 class="pp-section-title">Datos que recopilamos</h2>
+    <!-- II -->
+    <div class="tc-section" id="marco">
+      <div class="tc-section-header">
+        <div class="tc-section-num">II</div>
+        <h2 class="tc-section-title">Marco normativo</h2>
       </div>
-      <p>En el marco de la prestación de nuestros servicios, recopilamos las siguientes categorías de datos personales:</p>
-      <p><strong>Datos de identificación:</strong></p>
-      <ul>
-        <li>Nombres y apellidos</li>
-        <li>Número de cédula de ciudadanía o NIT</li>
-        <li>Fecha de nacimiento y fecha de expedición de la cédula</li>
-        <li>RUT (personas naturales) o Certificado de Cámara de Comercio (personas jurídicas)</li>
-      </ul>
-      <p><strong>Datos de contacto:</strong></p>
-      <ul>
-        <li>Correo electrónico</li>
-        <li>Número de teléfono celular</li>
-        <li>Dirección de residencia</li>
-        <li>Departamento y municipio</li>
-      </ul>
-      <p><strong>Datos del vehículo:</strong></p>
-      <ul>
-        <li>Placa, VIN, marca, línea, modelo y año</li>
-        <li>Tipo de propulsión (eléctrico, híbrido)</li>
-        <li>Valor de compra y fecha de compra</li>
-        <li>Número de factura y nombre del concesionario</li>
-        <li>Tarjeta de propiedad (matrícula)</li>
-      </ul>
-      <p><strong>Datos financieros:</strong></p>
-      <ul>
-        <li>Información de pagos procesados a través de Wompi (no almacenamos datos de tarjetas de crédito)</li>
-        <li>Datos bancarios para retiro de comisiones del programa Win Win</li>
-      </ul>
-      <p><strong>Datos técnicos:</strong></p>
-      <ul>
-        <li>Dirección IP, tipo de navegador, sistema operativo</li>
-        <li>Datos de uso de la Plataforma y cookies</li>
-      </ul>
+      <p>El tratamiento de los datos personales del Usuario se realizará conforme a lo dispuesto en la Ley 1581 de 2012, el Decreto 1377 de 2013, el Decreto 1074 de 2015 y demás normas que los modifiquen, sustituyan o complementen.</p>
+      <p>Así mismo, el uso de la Plataforma se sujetará a las disposiciones aplicables en materia de comercio electrónico, incluyendo la Ley 527 de 1999 y sus modificaciones, así como a las normas de protección al consumidor establecidas en la Ley 1480 de 2011, en lo que resulte aplicable a la naturaleza del servicio prestado por el Operador de la Plataforma.</p>
     </div>
 
-    <!-- 3 -->
-    <div class="pp-section" id="finalidades">
-      <div class="pp-section-header">
-        <div class="pp-section-num">3</div>
-        <h2 class="pp-section-title">Finalidades del tratamiento</h2>
+    <!-- III -->
+    <div class="tc-section" id="autorizacion">
+      <div class="tc-section-header">
+        <div class="tc-section-num">III</div>
+        <h2 class="tc-section-title">Autorización</h2>
       </div>
-      <p>Los datos personales son tratados para las siguientes finalidades:</p>
+      <p>Mediante la aceptación de los Términos y Condiciones y el uso de la Plataforma, el Usuario autoriza expresamente al Operador de la Plataforma para gestionar, preparar y radicar en su nombre la solicitud de certificación correspondiente ante la UPME, cuando ello sea necesario para la tramitación de los incentivos tributarios aplicables a vehículos eléctricos o híbridos.</p>
+      <p>En virtud de esta autorización, el Operador de la Plataforma podrá:</p>
+      <ol>
+        <li>Utilizar la información y los documentos suministrados por el Usuario.</li>
+        <li>Diligenciar formularios, cargar documentos y completar la información requerida en los sistemas oficiales de la UPME.</li>
+        <li>Presentar o radicar la solicitud correspondiente.</li>
+        <li>Realizar seguimiento al estado del trámite y comunicar al Usuario cualquier requerimiento de información adicional formulado por la UPME.</li>
+      </ol>
+      <p>La autorización otorgada se limita exclusivamente a la gestión administrativa y técnica del trámite y no implica la representación del Usuario para otros actos jurídicos distintos del proceso de solicitud del certificado ante la UPME.</p>
+      <p>El Usuario declara y garantiza que cuenta con la autorización necesaria para suministrar la información y la documentación registradas en la Plataforma, incluidos los datos personales y los documentos asociados al titular del vehículo o del proyecto para el cual se solicita el Certificado UPME.</p>
+    </div>
+
+    <!-- IV -->
+    <div class="tc-section" id="finalidades">
+      <div class="tc-section-header">
+        <div class="tc-section-num">IV</div>
+        <h2 class="tc-section-title">Finalidades del tratamiento</h2>
+      </div>
+      <p>Los datos personales recopilados a través de la Plataforma serán tratados para las siguientes finalidades:</p>
       <ul>
-        <li><strong>Prestación del servicio:</strong> gestionar el trámite del certificado UPME ante la Unidad de Planeación Minero Energética, incluyendo la creación de cuenta en el portal UPME, el diligenciamiento de formularios y la radicación de la solicitud.</li>
-        <li><strong>Gestión de devolución de IVA:</strong> cuando el usuario opte por este servicio, gestionar la solicitud de devolución del IVA ante la DIAN.</li>
-        <li><strong>Verificación de identidad:</strong> confirmar la identidad del usuario y la titularidad del vehículo.</li>
-        <li><strong>Procesamiento de pagos:</strong> gestionar los pagos del servicio a través de pasarelas de pago autorizadas.</li>
-        <li><strong>Comunicaciones:</strong> enviar notificaciones sobre el estado del trámite por WhatsApp y correo electrónico, así como información relevante sobre el servicio.</li>
-        <li><strong>Programa Win Win:</strong> administrar el programa de referidos, incluyendo el cálculo y pago de comisiones.</li>
-        <li><strong>Mejora del servicio:</strong> analizar el uso de la Plataforma para mejorar la experiencia del usuario.</li>
-        <li><strong>Cumplimiento legal:</strong> cumplir con las obligaciones legales y regulatorias aplicables.</li>
+        <li>La recopilación, organización, validación preliminar y gestión de la información necesaria para la preparación y radicación de solicitudes de certificación ante la UPME.</li>
+        <li>La gestión del trámite de certificación ante la UPME, incluyendo la creación de cuenta en el portal UPME, el diligenciamiento de formularios y la radicación de la solicitud.</li>
+        <li>Cuando el Usuario opte por el servicio, la gestión de la solicitud de devolución del IVA ante la DIAN.</li>
+        <li>El seguimiento del proceso y la atención de eventuales requerimientos relacionados con la solicitud.</li>
+        <li>El procesamiento de pagos del servicio a través de pasarelas de pago autorizadas.</li>
+        <li>El envío de comunicaciones, notificaciones y avisos relacionados con el uso de la Plataforma y con la gestión del trámite.</li>
+        <li>La administración del programa de referidos Win Win, incluyendo el cálculo y pago de comisiones.</li>
+        <li>El cumplimiento de obligaciones legales, regulatorias o contractuales aplicables.</li>
       </ul>
     </div>
 
-    <!-- 4 -->
-    <div class="pp-section" id="autorizacion">
-      <div class="pp-section-header">
-        <div class="pp-section-num">4</div>
-        <h2 class="pp-section-title">Autorización</h2>
+    <!-- V -->
+    <div class="tc-section" id="derechos">
+      <div class="tc-section-header">
+        <div class="tc-section-num">V</div>
+        <h2 class="tc-section-title">Derechos del titular</h2>
       </div>
-      <p>El tratamiento de datos personales requiere la autorización previa, expresa e informada del titular, la cual se obtiene al momento del registro en la Plataforma y la aceptación de los Términos y Condiciones.</p>
-      <p>Al registrarse y utilizar la Plataforma, el usuario autoriza a CERTIVEH S.A.S. para recopilar, almacenar, usar, circular y tratar sus datos personales conforme a las finalidades descritas en esta política.</p>
-      <p>La autorización puede ser revocada en cualquier momento, en los términos establecidos en la sección de Derechos del titular.</p>
-    </div>
-
-    <!-- 5 -->
-    <div class="pp-section" id="derechos">
-      <div class="pp-section-header">
-        <div class="pp-section-num">5</div>
-        <h2 class="pp-section-title">Derechos del titular</h2>
-      </div>
-      <p>De conformidad con la Ley 1581 de 2012 y el Decreto 1377 de 2013, el titular de los datos personales tiene los siguientes derechos:</p>
+      <p>De conformidad con la Ley 1581 de 2012, el Decreto 1377 de 2013 y demás normas aplicables, el titular de los datos personales tiene derecho a:</p>
       <ul>
-        <li><strong>Conocer:</strong> acceder a sus datos personales que hayan sido objeto de tratamiento.</li>
-        <li><strong>Actualizar:</strong> solicitar la actualización de sus datos cuando estos sean inexactos o estén incompletos.</li>
-        <li><strong>Rectificar:</strong> solicitar la corrección de la información tratada.</li>
-        <li><strong>Suprimir:</strong> solicitar la eliminación de sus datos cuando considere que no están siendo tratados conforme a la ley o la autorización otorgada.</li>
-        <li><strong>Revocar:</strong> revocar la autorización otorgada para el tratamiento de sus datos personales.</li>
-        <li><strong>Presentar quejas:</strong> ante la Superintendencia de Industria y Comercio (SIC) por infracciones a la normativa de protección de datos.</li>
+        <li><strong>Conocer, actualizar y rectificar</strong> sus datos personales.</li>
+        <li><strong>Solicitar la supresión</strong> de sus datos cuando considere que no están siendo tratados conforme a la ley o la autorización otorgada, salvo que exista un deber legal o contractual que obligue a su conservación.</li>
+        <li><strong>Revocar la autorización</strong> otorgada para el tratamiento de sus datos personales.</li>
+        <li><strong>Presentar quejas</strong> ante la Superintendencia de Industria y Comercio (SIC) por infracciones a la normativa de protección de datos.</li>
       </ul>
       <p>Para ejercer estos derechos, el titular puede enviar su solicitud a <strong>contacto@certiveh.co</strong>, indicando su nombre completo, número de identificación y el derecho que desea ejercer.</p>
-      <div class="pp-highlight">
-        <p>CERTIVEH S.A.S. atenderá las solicitudes dentro de los plazos establecidos por la ley: diez (10) días hábiles para consultas y quince (15) días hábiles para reclamos, contados a partir de la fecha de recibo de la solicitud.</p>
-      </div>
     </div>
 
-    <!-- 6 -->
-    <div class="pp-section" id="seguridad">
-      <div class="pp-section-header">
-        <div class="pp-section-num">6</div>
-        <h2 class="pp-section-title">Medidas de seguridad</h2>
+    <!-- VI -->
+    <div class="tc-section" id="conservacion">
+      <div class="tc-section-header">
+        <div class="tc-section-num">VI</div>
+        <h2 class="tc-section-title">Conservación de datos</h2>
       </div>
-      <p>CERTIVEH S.A.S. implementa medidas técnicas, administrativas y humanas para proteger los datos personales contra acceso no autorizado, pérdida, alteración o divulgación, incluyendo:</p>
+      <p>El Operador de la Plataforma conservará la información y los datos personales suministrados por el Usuario durante el tiempo necesario para cumplir con las finalidades del servicio prestado a través de la Plataforma, incluyendo la gestión del trámite de certificación ante la UPME, el seguimiento del proceso y la atención de eventuales requerimientos relacionados con la solicitud.</p>
+      <p>Los datos serán conservados por el tiempo necesario para cumplir las finalidades del tratamiento, así como para el cumplimiento de obligaciones legales, o hasta que el Usuario solicite su supresión, salvo que exista un deber legal o contractual que obligue a su conservación.</p>
+      <p>En todo caso, la información registrada en la Plataforma podrá ser conservada por el Operador de la Plataforma por un período mínimo de <strong>cinco (5) años</strong> contados a partir de la finalización del trámite o de la expedición del Certificado UPME, con el fin de:</p>
       <ul>
-        <li>Cifrado de datos en tránsito y en reposo</li>
-        <li>Control de acceso basado en roles</li>
-        <li>Almacenamiento seguro en infraestructura de Supabase con cifrado a nivel de servidor</li>
-        <li>Procesamiento de pagos a través de Wompi, plataforma certificada PCI DSS</li>
-        <li>Monitoreo y registro de accesos a la Plataforma</li>
-        <li>No almacenamos datos de tarjetas de crédito ni débito</li>
+        <li>Atender solicitudes, consultas o reclamaciones presentadas por el Usuario.</li>
+        <li>Dar cumplimiento a obligaciones legales, regulatorias o contractuales aplicables.</li>
+        <li>Atender requerimientos de autoridades administrativas o judiciales competentes.</li>
+        <li>Mantener registros asociados al servicio prestado a través de la Plataforma.</li>
       </ul>
+      <p>Una vez cumplido el período de conservación señalado, el Operador de la Plataforma podrá proceder a la eliminación, anonimización o bloqueo de la información, conforme a las políticas internas de tratamiento de datos y a la normativa vigente en materia de protección de datos personales.</p>
+      <p>El tratamiento, almacenamiento y conservación de los datos personales del Usuario se realizará en cumplimiento de lo dispuesto en la Ley 1581 de 2012, el Decreto 1377 de 2013, el Decreto 1074 de 2015 y demás normas que los modifiquen, sustituyan o complementen.</p>
     </div>
 
-    <!-- 7 -->
-    <div class="pp-section" id="transferencia">
-      <div class="pp-section-header">
-        <div class="pp-section-num">7</div>
-        <h2 class="pp-section-title">Transferencia y transmisión de datos</h2>
+    <!-- VII -->
+    <div class="tc-section" id="comunicaciones">
+      <div class="tc-section-header">
+        <div class="tc-section-num">VII</div>
+        <h2 class="tc-section-title">Comunicaciones electrónicas</h2>
       </div>
-      <p>Los datos personales podrán ser compartidos con los siguientes terceros, exclusivamente para las finalidades descritas en esta política:</p>
-      <ul>
-        <li><strong>UPME:</strong> para la gestión del trámite de certificación, incluyendo la creación de cuenta y radicación de solicitudes.</li>
-        <li><strong>DIAN:</strong> cuando el usuario opte por el servicio de gestión de devolución de IVA.</li>
-        <li><strong>Wompi (Bancolombia):</strong> para el procesamiento de pagos.</li>
-        <li><strong>Compañía Mundial de Seguros S.A.:</strong> cuando el usuario contrate el seguro asociado al servicio.</li>
-        <li><strong>Proveedores de infraestructura:</strong> Supabase (almacenamiento), Vercel (hosting), para la operación de la Plataforma.</li>
-      </ul>
-      <p>CERTIVEH S.A.S. exige a sus proveedores y aliados el cumplimiento de estándares de protección de datos personales equivalentes a los establecidos en la legislación colombiana.</p>
+      <p>El Usuario acepta que todas las comunicaciones, notificaciones, requerimientos de información, avisos y demás mensajes relacionados con el uso de la Plataforma y con la gestión del trámite de certificación ante la UPME podrán realizarse por medios electrónicos.</p>
+      <p>En particular, el Usuario autoriza al Operador de la Plataforma para enviar comunicaciones a través del correo electrónico registrado en la Cuenta de Usuario, mensajes dentro de la Plataforma u otros canales digitales habilitados.</p>
+      <p>El Usuario reconoce que dichas comunicaciones tendrán plena validez jurídica y se considerarán recibidas en el momento en que sean enviadas al canal registrado, siendo responsabilidad del Usuario mantener actualizada su información de contacto y revisar periódicamente los medios de comunicación asociados a su cuenta.</p>
     </div>
 
-    <!-- 8 -->
-    <div class="pp-section" id="conservacion">
-      <div class="pp-section-header">
-        <div class="pp-section-num">8</div>
-        <h2 class="pp-section-title">Conservación de datos</h2>
+    <!-- VIII -->
+    <div class="tc-section" id="seguridad">
+      <div class="tc-section-header">
+        <div class="tc-section-num">VIII</div>
+        <h2 class="tc-section-title">Seguridad y prevención de fraude</h2>
       </div>
-      <p>Los datos personales serán conservados durante el tiempo necesario para cumplir con las finalidades del tratamiento, y como mínimo durante los siguientes plazos:</p>
-      <ul>
-        <li><strong>Datos del trámite UPME:</strong> diez (10) años contados a partir de la finalización del trámite, conforme a las obligaciones tributarias y contables aplicables.</li>
-        <li><strong>Datos de pago:</strong> cinco (5) años contados a partir de la transacción.</li>
-        <li><strong>Datos de contacto:</strong> mientras exista una relación activa con el usuario, o hasta que este solicite su eliminación.</li>
-      </ul>
-      <p>Una vez cumplido el periodo de conservación, los datos serán eliminados, anonimizados o bloqueados conforme a la normativa vigente.</p>
+      <p>En caso de identificarse indicios de suplantación de identidad, uso indebido de datos personales o representación no autorizada, el Operador de la Plataforma podrá suspender inmediatamente el acceso del Usuario a la Plataforma, cancelar el trámite en curso y, cuando corresponda, poner la situación en conocimiento de las autoridades competentes o de la UPME.</p>
+      <p>El Usuario reconoce que la suplantación de identidad y el uso indebido de datos personales pueden constituir infracciones a la legislación vigente y dar lugar a las acciones legales correspondientes.</p>
+      <p>El tratamiento de los datos personales del Referidor en el marco del Programa de Referidos -incluyendo los datos bancarios suministrados para el retiro de comisiones- se realizará conforme a los Términos y Condiciones, la presente Política de Tratamiento de Datos Personales y la Ley 1581 de 2012 y sus normas reglamentarias.</p>
     </div>
 
-    <!-- 9 -->
-    <div class="pp-section" id="cookies">
-      <div class="pp-section-header">
-        <div class="pp-section-num">9</div>
-        <h2 class="pp-section-title">Cookies y tecnologías de seguimiento</h2>
-      </div>
-      <p>La Plataforma utiliza cookies y tecnologías similares para:</p>
-      <ul>
-        <li>Mantener la sesión del usuario activa</li>
-        <li>Recordar preferencias del usuario</li>
-        <li>Analizar el uso de la Plataforma mediante herramientas de analítica</li>
-        <li>Medir la efectividad de campañas de marketing (parámetros UTM)</li>
-      </ul>
-      <p>El usuario puede configurar su navegador para rechazar cookies, aunque esto puede afectar la funcionalidad de la Plataforma.</p>
-    </div>
-
-    <!-- 10 -->
-    <div class="pp-section" id="menores">
-      <div class="pp-section-header">
-        <div class="pp-section-num">10</div>
-        <h2 class="pp-section-title">Menores de edad</h2>
-      </div>
-      <p>La Plataforma no está dirigida a menores de edad. CERTIVEH S.A.S. no recopila de manera intencional datos personales de menores de 18 años. Si identificamos que se han recopilado datos de un menor sin la autorización correspondiente, procederemos a eliminarlos de inmediato.</p>
-    </div>
-
-    <!-- 11 -->
-    <div class="pp-section" id="cambios">
-      <div class="pp-section-header">
-        <div class="pp-section-num">11</div>
-        <h2 class="pp-section-title">Cambios a esta política</h2>
-      </div>
-      <p>CERTIVEH S.A.S. se reserva el derecho de modificar esta Política de Privacidad en cualquier momento. Las modificaciones serán publicadas en la Plataforma y, cuando sean sustanciales, se notificará a los usuarios por correo electrónico o a través de la Plataforma.</p>
-      <p>El uso continuado de la Plataforma después de la publicación de las modificaciones constituye la aceptación de la política actualizada.</p>
-    </div>
-
-    <!-- 12 -->
-    <div class="pp-section" id="contacto">
-      <div class="pp-section-header">
-        <div class="pp-section-num">12</div>
-        <h2 class="pp-section-title">Contacto</h2>
+    <!-- IX -->
+    <div class="tc-section" id="contacto">
+      <div class="tc-section-header">
+        <div class="tc-section-num">IX</div>
+        <h2 class="tc-section-title">Contacto</h2>
       </div>
       <p>Para consultas, solicitudes o reclamos relacionados con el tratamiento de datos personales, el titular puede comunicarse a través de:</p>
-      <ul>
-        <li><strong>Correo electrónico:</strong> contacto@certiveh.co</li>
-        <li><strong>WhatsApp:</strong> +57 313 268 9212</li>
-      </ul>
-      <div class="pp-highlight">
+      <div class="tc-highlight">
         <p><strong>CERTIVEH S.A.S.</strong><br>NIT 902051875-8<br>Medellín, Colombia<br>contacto@certiveh.co</p>
       </div>
+      <p>La presente política forma parte integral de los <a href="/terminos-y-condiciones" style="color: var(--emerald-600);">Términos y Condiciones de Uso</a> de la Plataforma.</p>
     </div>
-
-    <p style="font-size: 13px; color: var(--slate-400); text-align: center; margin-top: 48px;">
-      Esta política se rige por la Ley 1581 de 2012, el Decreto 1377 de 2013, el Decreto 1074 de 2015 y demás normas complementarias vigentes en la República de Colombia.
-    </p>
 
   </div>
 
-  <footer class="pp-footer" aria-label="Pie de página">
-    <div class="pp-footer-inner">
-      <div class="pp-footer-top">
+  <footer class="tc-footer" aria-label="Pie de página">
+    <div class="tc-footer-inner">
+      <div class="tc-footer-top">
         <div>
           <a href="/" aria-label="Ir al inicio CertiVeh" style="display:inline-block;text-decoration:none;margin-bottom:10px;">
             <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
@@ -374,27 +291,27 @@ import { Navbar } from '../app/components/Navbar';
               <g transform="translate(60,28)"><text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text></g>
             </svg>
           </a>
-          <p style="font-size:14px;color:#64748B;margin-top:10px;max-width:260px;line-height:1.5;">Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
+          <p class="tc-footer-logo-desc">Automatización del trámite UPME para certificados de beneficio tributario en Colombia.</p>
         </div>
         <div style="display:flex;gap:48px;flex-wrap:wrap;">
           <div>
-            <div class="pp-footer-col-title">Plataforma</div>
-            <div class="pp-footer-links">
-              <a href="/#beneficios" class="pp-footer-link">Beneficios</a>
-              <a href="/#como-funciona" class="pp-footer-link">Cómo funciona</a>
-              <a href="/#calculadora" class="pp-footer-link">Calculadora</a>
+            <div class="tc-footer-col-title">Plataforma</div>
+            <div class="tc-footer-links">
+              <a href="/#beneficios" class="tc-footer-link">Beneficios</a>
+              <a href="/#como-funciona" class="tc-footer-link">Cómo funciona</a>
+              <a href="/#calculadora" class="tc-footer-link">Calculadora</a>
             </div>
           </div>
           <div>
-            <div class="pp-footer-col-title">Legal</div>
-            <div class="pp-footer-links">
-              <a href="/terminos-y-condiciones" class="pp-footer-link">Términos y Condiciones</a>
-              <a href="/politica-de-privacidad" class="pp-footer-link">Política de Privacidad</a>
+            <div class="tc-footer-col-title">Legal</div>
+            <div class="tc-footer-links">
+              <a href="/terminos-y-condiciones" class="tc-footer-link">Términos y Condiciones</a>
+              <a href="/politica-de-privacidad" class="tc-footer-link">Política de Privacidad</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="pp-footer-bottom">
+      <div class="tc-footer-bottom">
         <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
         <span>contacto@certiveh.co</span>
       </div>
