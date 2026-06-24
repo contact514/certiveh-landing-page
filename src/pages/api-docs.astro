@@ -20,7 +20,7 @@ const webPageLd = JSON.stringify({
   publisher: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
   inLanguage: 'es-CO',
   datePublished: '2026-05-22',
-  dateModified: '2026-05-22',
+  dateModified: '2026-06-23',
   proficiencyLevel: 'Expert',
 });
 ---
@@ -604,25 +604,25 @@ const webPageLd = JSON.stringify({
     <a href="#base-url">Base URL</a>
     <a href="#post-users">POST /users</a>
     <a href="#post-tramites">POST /tramites</a>
-    <a href="#post-documents">Documents</a>
+    <a href="#post-documents">Documentos</a>
     <a href="#get-tramite">GET /tramites</a>
-    <a href="#post-payment">Payment</a>
+    <a href="#post-payment">Pago</a>
     <a href="#webhooks">Webhooks</a>
-    <a href="#errors">Errors</a>
-    <a href="#rate-limiting">Rate Limit</a>
-    <a href="#integration-flow">Flow</a>
-    <a href="#contact">Contact</a>
+    <a href="#errors">Errores</a>
+    <a href="#rate-limiting">Limite</a>
+    <a href="#integration-flow">Flujo</a>
+    <a href="#contact">Contacto</a>
   </div>
 
   <div class="api-layout">
     <!-- SIDEBAR -->
     <aside class="api-sidebar" id="sidebar">
-      <div class="sidebar-section-title">Getting Started</div>
-      <a href="#introduction" class="sidebar-link active">Introduction</a>
-      <a href="#authentication" class="sidebar-link">Authentication</a>
+      <div class="sidebar-section-title">Inicio</div>
+      <a href="#introduction" class="sidebar-link active">Introduccion</a>
+      <a href="#authentication" class="sidebar-link">Autenticacion</a>
       <a href="#base-url" class="sidebar-link">Base URL</a>
 
-      <div class="sidebar-section-title">Endpoints</div>
+      <div class="sidebar-section-title">Endpoints</div> <!-- Technical term, kept in English -->
       <a href="#post-users" class="sidebar-link">
         <span class="method-badge-sm method-post">POST</span>
         <span class="sidebar-endpoint-path">/users</span>
@@ -645,29 +645,35 @@ const webPageLd = JSON.stringify({
       </a>
       <a href="#webhooks" class="sidebar-link">Webhooks</a>
 
-      <div class="sidebar-section-title">Reference</div>
-      <a href="#errors" class="sidebar-link">Errors</a>
-      <a href="#rate-limiting" class="sidebar-link">Rate Limiting</a>
-      <a href="#security" class="sidebar-link">Security</a>
-      <a href="#partner-discounts" class="sidebar-link">Partner Discounts</a>
-      <a href="#integration-flow" class="sidebar-link">Integration Flow</a>
-      <a href="#contact" class="sidebar-link">Contact</a>
+      <div class="sidebar-section-title">Referencia</div>
+      <a href="#errors" class="sidebar-link">Errores</a>
+      <a href="#rate-limiting" class="sidebar-link">Limite de tasa</a>
+      <a href="#security" class="sidebar-link">Seguridad</a>
+      <a href="#partner-discounts" class="sidebar-link">Descuentos</a>
+      <a href="#integration-flow" class="sidebar-link">Flujo de integracion</a>
+      <a href="#contact" class="sidebar-link">Contacto</a>
     </aside>
 
     <!-- MAIN -->
     <main class="api-main">
 
       <!-- INTRODUCTION -->
-      <h1 id="introduction" class="section-anchor">Introduction</h1>
+      <h1 id="introduction" class="section-anchor">Introduccion</h1>
       <p>
         <strong>CertiVeh Partner API</strong> · Integra CertiVeh en tu aplicacion para que tus usuarios obtengan su certificado UPME sin salir de tu plataforma.
       </p>
       <p>
         Esta API REST permite crear usuarios, iniciar tramites de certificacion UPME, subir documentos, procesar pagos y consultar el estado de cada tramite de forma programatica.
       </p>
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Flujo tipico:</strong> Tu plataforma recopila los datos del usuario y su vehiculo, los envia a la API, sube los documentos, y procesa el pago via Wompi. Desde ese momento, CertiVeh gestiona todo el tramite ante la UPME de forma automatizada. Tu plataforma puede consultar el estado en cualquier momento via polling o recibir notificaciones via webhook.
+        </span>
+      </div>
 
       <!-- AUTHENTICATION -->
-      <h2 id="authentication" class="section-anchor">Authentication</h2>
+      <h2 id="authentication" class="section-anchor">Autenticacion</h2>
       <p>
         Todas las solicitudes requieren el header <code>X-API-Key</code> con tu clave de partner.
       </p>
@@ -687,7 +693,7 @@ const webPageLd = JSON.stringify({
       <h2 id="base-url" class="section-anchor">Base URL</h2>
       <div class="code-block-wrapper">
         <div class="code-block-header">
-          <span class="code-block-label">Production</span>
+          <span class="code-block-label">Produccion</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
         <pre class="code-block">https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api</pre>
@@ -700,13 +706,13 @@ const webPageLd = JSON.stringify({
         <span class="method-badge post section-anchor">POST</span>
         <span class="endpoint-path">/users</span>
       </div>
-      <p class="endpoint-desc">Registers a new user associated with your partner account.</p>
+      <p class="endpoint-desc">Registra un nuevo usuario asociado a tu cuenta de partner.</p>
 
-      <h4>Request Body · Persona Natural</h4>
+      <h4>Cuerpo de la solicitud · Persona Natural</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+            <tr><th>Campo</th><th>Tipo</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
             <tr><td><span class="field-name">email</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Email del usuario</td></tr>
@@ -725,11 +731,11 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <h4>Additional Fields · Persona Juridica</h4>
+      <h4>Campos adicionales · Persona Juridica</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+            <tr><th>Campo</th><th>Tipo</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
             <tr><td><span class="field-name">company_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Razon social</td></tr>
@@ -742,7 +748,33 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <h4>Response <code>201</code></h4>
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X POST \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/users \
+  -H "X-API-Key: pk_live_xxxxxxxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '&#123;
+    "email": "usuario@ejemplo.com",
+    "phone": "+573001234567",
+    "person_type": "natural",
+    "first_names": "JUAN CARLOS",
+    "last_names": "GARCIA LOPEZ",
+    "cedula_number": "1020304050",
+    "date_of_birth": "1990-05-15",
+    "expedition_date": "2010-03-20",
+    "ciiu_code": "4511",
+    "department": "CUNDINAMARCA",
+    "municipality": "BOGOTA D.C.",
+    "address": "Calle 100 #15-20 Apto 501"
+  &#125;'</pre>
+      </div>
+
+      <h4>Respuesta <code>201</code></h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">JSON</span>
@@ -754,6 +786,13 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Idempotente:</strong> Si el email ya existe en CertiVeh, la API retorna el <code>user_id</code> existente y actualiza el perfil con los datos enviados. No se crea un usuario duplicado. Esto permite reintentos seguros.
+        </span>
+      </div>
+
       <hr class="section-divider" />
 
       <!-- POST /tramites -->
@@ -761,36 +800,65 @@ const webPageLd = JSON.stringify({
         <span class="method-badge post section-anchor">POST</span>
         <span class="endpoint-path">/tramites</span>
       </div>
-      <p class="endpoint-desc">Creates UPME certification tramite with vehicle data. Returns amount to pay.</p>
+      <p class="endpoint-desc">Crea un tramite de certificacion UPME con los datos del vehiculo. Retorna el desglose de costos.</p>
 
-      <h4>Request Body</h4>
+      <h4>Cuerpo de la solicitud</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+            <tr><th>Campo</th><th>Tipo</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
-            <tr><td><span class="field-name">user_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>UUID del usuario (from /users)</td></tr>
+            <tr><td><span class="field-name">user_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>UUID del usuario (obtenido de POST /users)</td></tr>
             <tr><td><span class="field-name">plate</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Placa, formato ABC123 o ABC12D (3 letras + 2 digitos + 1 alfanumerico)</td></tr>
-            <tr><td><span class="field-name">vin</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>VIN (exactamente 17 chars, no puede contener I, O, Q)</td></tr>
+            <tr><td><span class="field-name">vin</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>VIN (exactamente 17 caracteres, no puede contener I, O, Q)</td></tr>
             <tr><td><span class="field-name">brand</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Marca (ej: "KIA")</td></tr>
             <tr><td><span class="field-name">line</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Linea/modelo (ej: "NIRO DESIRE")</td></tr>
             <tr><td><span class="field-name">year</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Ano del modelo</td></tr>
-            <tr><td><span class="field-name">engine_number</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Numero motor (N/A para electricos puros)</td></tr>
-            <tr><td><span class="field-name">displacement_kw</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Potencia en kW</td></tr>
+            <tr><td><span class="field-name">engine_number</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Numero de motor (no aplica para electricos puros)</td></tr>
+            <tr><td><span class="field-name">displacement_kw</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td>Potencia en kW (ej: "150")</td></tr>
             <tr><td><span class="field-name">propulsion_type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td><code>"Electrico"</code> o <code>"Hibrido"</code></td></tr>
             <tr><td><span class="field-name">owner_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre propietario registrado</td></tr>
             <tr><td><span class="field-name">owner_id</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Cedula/NIT propietario</td></tr>
-            <tr><td><span class="field-name">purchase_value_cop</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Valor bruto vehiculo COP (sin IVA, minimo 1.000.000)</td></tr>
+            <tr><td><span class="field-name">purchase_value_cop</span><span class="required">required</span></td><td><span class="type-badge">number</span></td><td>Valor del vehiculo en COP antes de IVA (minimo 1.000.000)</td></tr>
             <tr><td><span class="field-name">purchase_date</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Fecha compra AAAA-MM-DD</td></tr>
             <tr><td><span class="field-name">dealer_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre concesionario</td></tr>
             <tr><td><span class="field-name">invoice_number</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Numero factura</td></tr>
             <tr><td><span class="field-name">buyer_name</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Nombre comprador en factura</td></tr>
+            <tr><td><span class="field-name">person_type</span><span class="optional">optional</span></td><td><span class="type-badge">string</span></td><td><code>"natural"</code> o <code>"juridica"</code>. Default: <code>"natural"</code>. Debe coincidir con el tipo usado en POST /users.</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h4>Response <code>201</code></h4>
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X POST \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/tramites \
+  -H "X-API-Key: pk_live_xxxxxxxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '&#123;
+    "user_id": "uuid-del-usuario",
+    "plate": "QMX060",
+    "vin": "KNACP81EGT5328961",
+    "brand": "KIA",
+    "line": "NIRO DESIRE",
+    "year": 2025,
+    "propulsion_type": "Hibrido",
+    "owner_name": "JUAN CARLOS GARCIA LOPEZ",
+    "owner_id": "1020304050",
+    "purchase_value_cop": 116805309,
+    "purchase_date": "2025-08-10",
+    "dealer_name": "KIA MOTORS BOGOTA",
+    "invoice_number": "FV-2025-001234",
+    "buyer_name": "JUAN CARLOS GARCIA LOPEZ"
+  &#125;'</pre>
+      </div>
+
+      <h4>Respuesta <code>201</code></h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">JSON</span>
@@ -798,14 +866,14 @@ const webPageLd = JSON.stringify({
         </div>
         <pre class="code-block">&#123;
   <span class="ck">"case_id"</span>: <span class="cs">"uuid-del-tramite"</span>,
-  <span class="ck">"amount_cop"</span>: <span class="cn">1131566</span>,
-  <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">1415800</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
   <span class="ck">"breakdown"</span>: &#123;
-    <span class="ck">"costo_upme"</span>: <span class="cn">350906</span>,
+    <span class="ck">"costo_upme"</span>: <span class="cn">701812</span>,
     <span class="ck">"honorarios"</span>: <span class="cn">599990</span>,
-    <span class="ck">"iva"</span>: <span class="cn">180670</span>,
+    <span class="ck">"iva"</span>: <span class="cn">113998</span>,
     <span class="ck">"discount"</span>: <span class="cn">0</span>,
-    <span class="ck">"total"</span>: <span class="cn">1131566</span>
+    <span class="ck">"total"</span>: <span class="cn">1415800</span>
   &#125;
 &#125;</pre>
       </div>
@@ -817,31 +885,31 @@ const webPageLd = JSON.stringify({
         <span class="method-badge post section-anchor">POST</span>
         <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/documents</span>
       </div>
-      <p class="endpoint-desc">Uploads required documents. Each document is processed automatically with AI.</p>
+      <p class="endpoint-desc">Sube documentos requeridos. Cada documento se procesa automaticamente con IA.</p>
 
       <div class="callout callout-warn">
         <span class="callout-icon">!</span>
         <span>Content-Type debe ser <code>multipart/form-data</code>. Archivos soportados: JPG, PNG o PDF, max 10 MB.</span>
       </div>
 
-      <h4>Form Fields</h4>
+      <h4>Campos del formulario</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+            <tr><th>Campo</th><th>Tipo</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
-            <tr><td><span class="field-name">type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Document type (see table below)</td></tr>
-            <tr><td><span class="field-name">file</span><span class="required">required</span></td><td><span class="type-badge">file</span></td><td>File (JPG, PNG or PDF, max 10MB)</td></tr>
+            <tr><td><span class="field-name">type</span><span class="required">required</span></td><td><span class="type-badge">string</span></td><td>Tipo de documento (ver tabla abajo)</td></tr>
+            <tr><td><span class="field-name">file</span><span class="required">required</span></td><td><span class="type-badge">file</span></td><td>Archivo (JPG, PNG o PDF, max 10MB)</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h4>Document Types</h4>
+      <h4>Tipos de documento</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Type value</th><th>Description</th></tr>
+            <tr><th>Valor de type</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
             <tr><td><span class="field-name">cedula-frente</span></td><td>Cedula ciudadania (frente)</td></tr>
@@ -854,25 +922,52 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <h4>Response <code>200</code></h4>
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Documentos obligatorios:</strong> Para que el tramite avance despues del pago, se necesitan minimo 5 documentos: <code>cedula-frente</code>, <code>cedula-reverso</code>, <code>tarjeta-propiedad-frente</code>, <code>tarjeta-propiedad-reverso</code> y <code>factura</code>. El <code>rut</code> es opcional pero recomendado.
+        </span>
+      </div>
+
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X POST \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/tramites/uuid-del-tramite/documents \
+  -H "X-API-Key: pk_live_xxxxxxxxxxxxx" \
+  -F "type=factura" \
+  -F "file=@/path/to/factura.pdf"</pre>
+      </div>
+
+      <h4>Respuesta <code>200</code></h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">JSON</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
-        <pre class="code-block"><span class="cc">// Vehicle documents (factura, tarjeta-propiedad-*)</span>
+        <pre class="code-block"><span class="cc">// Documentos del vehiculo (factura, tarjeta-propiedad-*)</span>
 &#123;
   <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
   <span class="ck">"type"</span>: <span class="cs">"factura"</span>,
   <span class="ck">"ocr_status"</span>: <span class="cs">"pending"</span>
 &#125;
 
-<span class="cc">// Profile documents (cedula-frente, cedula-reverso, rut)</span>
+<span class="cc">// Documentos personales (cedula-frente, cedula-reverso, rut)</span>
 &#123;
   <span class="ck">"document_id"</span>: <span class="cs">"uuid"</span>,
   <span class="ck">"type"</span>: <span class="cs">"cedula-frente"</span>,
   <span class="ck">"ocr_status"</span>: <span class="cs">"pending"</span>
 &#125;</pre>
+      </div>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Procesamiento OCR asincrono:</strong> Cada documento se procesa automaticamente con IA para extraer datos. El campo <code>ocr_status</code> inicia en <code>"pending"</code> y cambia a <code>"done"</code> cuando la extraccion finaliza (normalmente 5-15 segundos). Puedes verificar el estado consultando <code>GET /tramites/:id</code> y revisando el array <code>documents</code>.
+        </span>
       </div>
 
       <hr class="section-divider" />
@@ -882,9 +977,20 @@ const webPageLd = JSON.stringify({
         <span class="method-badge get section-anchor">GET</span>
         <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;</span>
       </div>
-      <p class="endpoint-desc">Returns the current status and details of a tramite.</p>
+      <p class="endpoint-desc">Retorna el estado actual y detalles de un tramite.</p>
 
-      <h4>Response <code>200</code></h4>
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X GET \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/tramites/uuid-del-tramite \
+  -H "X-API-Key: pk_live_xxxxxxxxxxxxx"</pre>
+      </div>
+
+      <h4>Respuesta <code>200</code></h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">JSON</span>
@@ -894,7 +1000,7 @@ const webPageLd = JSON.stringify({
   <span class="ck">"case_id"</span>: <span class="cs">"uuid"</span>,
   <span class="ck">"status"</span>: <span class="cs">"IN_PROGRESS"</span>,
   <span class="ck">"step"</span>: <span class="cn">5</span>,          <span class="cc">// 1-7</span>
-  <span class="ck">"progress_pct"</span>: <span class="cn">71</span>,   <span class="cc">// 0-100, based on 7 steps</span>
+  <span class="ck">"progress_pct"</span>: <span class="cn">67</span>,   <span class="cc">// 0-100, basado en 7 pasos</span>
   <span class="ck">"paid_at"</span>: <span class="cs">"2026-05-20T..."</span>,
   <span class="ck">"created_at"</span>: <span class="cs">"2026-05-15T..."</span>,
   <span class="ck">"updated_at"</span>: <span class="cs">"2026-05-20T..."</span>,
@@ -913,17 +1019,18 @@ const webPageLd = JSON.stringify({
   ],
   <span class="ck">"payment"</span>: &#123;
     <span class="ck">"status"</span>: <span class="cs">"APPROVED"</span>,
-    <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
-    <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>
+    <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
+    <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>,
+    <span class="ck">"created_at"</span>: <span class="cs">"2026-05-20T14:00:00Z"</span>
   &#125;
 &#125;</pre>
       </div>
 
-      <h4>Pipeline Steps (1–7)</h4>
+      <h4>Pasos del pipeline (1–7)</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Step</th><th>Label</th><th>DB Status</th></tr>
+            <tr><th>Paso</th><th>Etapa</th><th>Status en DB</th></tr>
           </thead>
           <tbody>
             <tr><td><span class="cn">1</span></td><td>En borrador</td><td><span class="field-name">DRAFT</span></td></tr>
@@ -937,11 +1044,11 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <h4>Tramite Statuses</h4>
+      <h4>Estados del tramite</h4>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Status</th><th>Description</th></tr>
+            <tr><th>Status</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
             <tr><td><span class="field-name">DRAFT</span></td><td>Tramite creado, pendiente de pago (step 1)</td></tr>
@@ -963,9 +1070,20 @@ const webPageLd = JSON.stringify({
         <span class="method-badge post section-anchor">POST</span>
         <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/payment</span>
       </div>
-      <p class="endpoint-desc">Initializes a payment session and returns Wompi integration data.</p>
+      <p class="endpoint-desc">Inicializa una sesion de pago y retorna los datos de integracion con Wompi.</p>
 
-      <h4>Response <code>200</code></h4>
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X POST \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/tramites/uuid-del-tramite/payment \
+  -H "X-API-Key: pk_live_xxxxxxxxxxxxx"</pre>
+      </div>
+
+      <h4>Respuesta <code>200</code></h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">JSON</span>
@@ -973,8 +1091,8 @@ const webPageLd = JSON.stringify({
         </div>
         <pre class="code-block">&#123;
   <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>,
-  <span class="ck">"amount_cents"</span>: <span class="cn">113156600</span>,
-  <span class="ck">"amount_cop"</span>: <span class="cn">1131566</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">1415800</span>,
   <span class="ck">"currency"</span>: <span class="cs">"COP"</span>,
   <span class="ck">"public_key"</span>: <span class="cs">"pub_prod_xxx"</span>,
   <span class="ck">"signature"</span>: <span class="cs">"sha256-hash"</span>,
@@ -982,8 +1100,8 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
-      <h4>Wompi Widget Integration</h4>
-      <p>Use the response values to render the Wompi checkout button:</p>
+      <h4>Integracion Widget Wompi</h4>
+      <p>Usa los valores de la respuesta para renderizar el boton de pago de Wompi:</p>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-label">HTML</span>
@@ -1000,18 +1118,32 @@ const webPageLd = JSON.stringify({
 <span class="cp">&lt;/</span><span class="cm">script</span><span class="cp">&gt;</span></pre>
       </div>
 
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Despues del pago:</strong> Cuando el usuario completa el pago en Wompi, CertiVeh recibe un webhook automatico de Wompi y cambia el estado del tramite de <code>DRAFT</code> a <code>DOCUMENT_REVIEW</code>. No necesitas hacer nada adicional. Tu plataforma puede confirmar el pago consultando <code>GET /tramites/:id</code> y verificando que <code>payment.status</code> sea <code>"APPROVED"</code> y que <code>paid_at</code> no sea null.
+        </span>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">!</span>
+        <span>
+          <strong>redirect_url:</strong> Despues del pago, Wompi redirige al usuario a <code>portal.certiveh.co</code>. Si necesitas redirigir a una URL propia de tu plataforma, contacta al equipo para configurarlo.
+        </span>
+      </div>
+
       <hr class="section-divider" />
 
       <!-- WEBHOOKS -->
       <h2 id="webhooks" class="section-anchor">Webhooks</h2>
       <p>
-        CertiVeh sends notifications to your webhook URL when a tramite status changes. Provide your webhook URL when requesting your API key.
+        CertiVeh envia notificaciones HTTP POST a tu webhook URL cuando el estado de un tramite cambia. Proporciona tu webhook URL al solicitar tu API key.
       </p>
 
       <h4>Payload</h4>
       <div class="code-block-wrapper">
         <div class="code-block-header">
-          <span class="code-block-label">JSON · POST to your webhook URL</span>
+          <span class="code-block-label">JSON · POST a tu webhook URL</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
         <pre class="code-block">&#123;
@@ -1022,14 +1154,39 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
+      <h4>Transiciones de estado tipicas</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Transicion</th><th>Evento</th><th>Significado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">DRAFT → DOCUMENT_REVIEW</span></td><td>Pago recibido</td><td>Wompi confirmo el pago exitosamente</td></tr>
+            <tr><td><span class="field-name">DOCUMENT_REVIEW → IN_PROGRESS</span></td><td>Documentos aprobados</td><td>CertiVeh inicio el tramite ante la UPME</td></tr>
+            <tr><td><span class="field-name">IN_PROGRESS → FILED</span></td><td>Solicitud radicada</td><td>Se radico la solicitud en el portal UPME</td></tr>
+            <tr><td><span class="field-name">FILED → APPROVED</span></td><td>Solicitud aprobada</td><td>La UPME aprobo la solicitud, certificado en emision</td></tr>
+            <tr><td><span class="field-name">APPROVED → COMPLETED</span></td><td>Certificado emitido</td><td>El certificado UPME fue emitido y esta disponible</td></tr>
+            <tr><td><span class="field-name">* → ACTION_REQUIRED</span></td><td>Accion requerida</td><td>El usuario debe corregir algo (ej: documento ilegible)</td></tr>
+            <tr><td><span class="field-name">FILED → REJECTED</span></td><td>Solicitud rechazada</td><td>La UPME rechazo la solicitud</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">!</span>
+        <span>
+          <strong>Recomendacion:</strong> Aunque los webhooks notifican los cambios de estado, te recomendamos implementar un polling periodico con <code>GET /tramites/:id</code> como respaldo en caso de que un webhook falle.
+        </span>
+      </div>
+
       <hr class="section-divider" />
 
       <!-- ERRORS -->
-      <h2 id="errors" class="section-anchor">Errors</h2>
-      <p>All error responses follow a consistent format:</p>
+      <h2 id="errors" class="section-anchor">Errores</h2>
+      <p>Todas las respuestas de error siguen un formato consistente:</p>
       <div class="code-block-wrapper">
         <div class="code-block-header">
-          <span class="code-block-label">Error Response</span>
+          <span class="code-block-label">Respuesta de error</span>
           <button class="copy-btn" data-copy="true">Copy</button>
         </div>
         <pre class="code-block">&#123;
@@ -1037,114 +1194,121 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
-      <h4>HTTP Status Codes</h4>
+      <h4>Codigos HTTP</h4>
       <ul class="status-list">
         <li>
           <span class="status-code s4">400</span>
-          <span>Invalid request · missing field or wrong format</span>
+          <span>Solicitud invalida · campo faltante o formato incorrecto</span>
         </li>
         <li>
           <span class="status-code s4">401</span>
-          <span>Invalid or inactive API key</span>
+          <span>API key invalida o inactiva</span>
         </li>
         <li>
           <span class="status-code s4">403</span>
-          <span>Unauthorized · resource doesn't belong to your partner account</span>
+          <span>No autorizado · el recurso no pertenece a tu cuenta de partner</span>
         </li>
         <li>
           <span class="status-code s4">404</span>
-          <span>Resource not found</span>
+          <span>Recurso no encontrado</span>
         </li>
         <li>
           <span class="status-code s4">429</span>
-          <span>Too many requests · rate limit exceeded</span>
+          <span>Demasiadas solicitudes · limite de tasa excedido</span>
         </li>
         <li>
           <span class="status-code s5">500</span>
-          <span>Internal server error</span>
+          <span>Error interno del servidor</span>
         </li>
       </ul>
 
       <hr class="section-divider" />
 
       <!-- RATE LIMITING -->
-      <h2 id="rate-limiting" class="section-anchor">Rate Limiting</h2>
-      <p>All API endpoints are rate-limited to <strong>100 requests per minute</strong> per API key.</p>
+      <h2 id="rate-limiting" class="section-anchor">Limite de tasa</h2>
+      <p>Todos los endpoints estan limitados a <strong>100 solicitudes por minuto</strong> por API key.</p>
       <div class="table-wrapper">
         <table class="api-table">
           <thead>
-            <tr><th>Response Header</th><th>Description</th></tr>
+            <tr><th>Header de respuesta</th><th>Descripcion</th></tr>
           </thead>
           <tbody>
-            <tr><td><span class="field-name">X-RateLimit-Limit</span></td><td>Maximum requests per minute (100)</td></tr>
-            <tr><td><span class="field-name">X-RateLimit-Remaining</span></td><td>Remaining requests in the current window</td></tr>
+            <tr><td><span class="field-name">X-RateLimit-Limit</span></td><td>Maximo de solicitudes por minuto (100)</td></tr>
+            <tr><td><span class="field-name">X-RateLimit-Remaining</span></td><td>Solicitudes restantes en la ventana actual</td></tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top: 12px; font-size: 14px; color: var(--slate-500);">When the limit is exceeded, the API returns <code>429 Too Many Requests</code>. Wait until the window resets before retrying.</p>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--slate-500);">Cuando se excede el limite, la API retorna <code>429 Too Many Requests</code>. Espera a que la ventana se reinicie antes de reintentar.</p>
 
       <hr class="section-divider" />
 
       <!-- SECURITY -->
-      <h2 id="security" class="section-anchor">Security</h2>
-      <p>All API requests are automatically logged including IP address, user-agent, and response status code for auditing and security purposes.</p>
+      <h2 id="security" class="section-anchor">Seguridad</h2>
+      <p>Todas las solicitudes a la API se registran automaticamente incluyendo direccion IP, user-agent y codigo de respuesta para auditoria y seguridad.</p>
 
       <hr class="section-divider" />
 
       <!-- PARTNER DISCOUNTS -->
-      <h2 id="partner-discounts" class="section-anchor">Partner Discounts</h2>
+      <h2 id="partner-discounts" class="section-anchor">Descuentos de partner</h2>
       <p>
-        The pricing returned by <code>POST /tramites</code> and <code>POST /tramites/:id/payment</code> automatically applies any discount configured for your partner account. The <code>breakdown.discount</code> field reflects the applied discount amount. No additional parameters are needed.
+        Los precios retornados por <code>POST /tramites</code> y <code>POST /tramites/:id/payment</code> aplican automaticamente cualquier descuento configurado para tu cuenta de partner. El campo <code>breakdown.discount</code> refleja el monto del descuento aplicado. No se necesitan parametros adicionales.
       </p>
 
       <hr class="section-divider" />
 
       <!-- INTEGRATION FLOW -->
-      <h2 id="integration-flow" class="section-anchor">Integration Flow</h2>
-      <p>Typical end-to-end integration in 6 steps:</p>
+      <h2 id="integration-flow" class="section-anchor">Flujo de integracion</h2>
+      <p>Integracion tipica de punta a punta en 6 pasos:</p>
       <ol class="flow-steps">
         <li>
           <div class="flow-step-content">
-            <strong>Create user</strong>
-            <code>POST /users</code> · Register the end-user with personal data.
+            <strong>Crear usuario</strong>
+            <code>POST /users</code> · Registra al usuario con sus datos personales. Si el email ya existe, retorna el user_id existente.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
-            <strong>Create tramite with vehicle data</strong>
-            <code>POST /tramites</code> · Submit vehicle details, receive pricing breakdown.
+            <strong>Crear tramite con datos del vehiculo</strong>
+            <code>POST /tramites</code> · Envia los datos del vehiculo y recibe el desglose de costos. El tramite se crea en estado <code>DRAFT</code>.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
-            <strong>Upload documents</strong>
-            <code>POST /tramites/:id/documents</code> · Upload cedula, tarjeta de propiedad, and factura.
+            <strong>Subir documentos</strong>
+            <code>POST /tramites/:id/documents</code> · Sube cedula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura. Cada documento se procesa con OCR automaticamente. El orden no importa.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
-            <strong>Initialize payment</strong>
-            <code>POST /tramites/:id/payment</code> · Get Wompi widget parameters and render checkout.
+            <strong>Iniciar pago</strong>
+            <code>POST /tramites/:id/payment</code> · Obtiene los parametros para renderizar el widget de Wompi. Cuando el usuario paga, el tramite cambia automaticamente a <code>DOCUMENT_REVIEW</code>.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
-            <strong>Poll status</strong>
-            <code>GET /tramites/:id</code> · Check tramite progress periodically.
+            <strong>Consultar estado</strong>
+            <code>GET /tramites/:id</code> · Consulta el progreso del tramite periodicamente. Usa <code>status</code> para el estado general y <code>step</code> (1-7) para el progreso detallado.
           </div>
         </li>
         <li>
           <div class="flow-step-content">
-            <strong>Receive webhooks</strong>
-            Your endpoint receives status updates automatically as the tramite progresses.
+            <strong>Recibir webhooks</strong>
+            Tu endpoint recibe notificaciones automaticas cada vez que el estado del tramite cambia (pago recibido, en proceso, certificado emitido, etc.).
           </div>
         </li>
       </ol>
 
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Nota:</strong> Los pasos 3 y 4 pueden ejecutarse en cualquier orden. Puedes subir documentos antes o despues del pago. El tramite avanza cuando ambos estan completos (pago aprobado + documentos subidos).
+        </span>
+      </div>
+
       <hr class="section-divider" />
 
       <!-- CONTACT -->
-      <h2 id="contact" class="section-anchor">Contact</h2>
+      <h2 id="contact" class="section-anchor">Contacto</h2>
       <p>
         Para solicitar tu API key o soporte tecnico, escribe a:
       </p>
