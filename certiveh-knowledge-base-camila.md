@@ -105,12 +105,14 @@ Para inversiones >= 3.305 UVT:
 $599.990 COP (tarifa fija)
 
 ### 3. IVA
-19% sobre la suma del trámite UPME + honorarios CertiVeh
+19% sobre los honorarios de CertiVeh ($599.990). La tasa UPME NO lleva IVA. El IVA siempre es $113.998.
 
 ### Ejemplos de costo total (solo certificado UPME)
 - Vehículo de $40M: ~$892.000 COP
-- Vehículo de $120M: ~$1.549.000 COP
-- Vehículo de $200M: ~$1.614.000 COP
+- Vehículo de $80M: ~$1.065.000 COP
+- Vehículo de $120M: ~$1.416.000 COP
+- Vehículo de $150M: ~$1.416.000 COP
+- Vehículo de $200M: ~$1.470.000 COP
 
 ### 4. Gestión de devolución de IVA ante la DIAN (OPCIONAL)
 Componente adicional opcional que viene pre-seleccionado en el checkout. Ver sección "Servicio de gestión de devolución de IVA ante la DIAN" para detalles y tarifas.

@@ -1075,8 +1075,8 @@ function Calculadora() {
     // Honorarios CertiVeh
     const honorariosBase = 599_990;
     const subtotal = costoUPME + honorariosBase;
-    const ivaServicio = Math.round(subtotal * 0.19);
-    const costoTotal = subtotal + ivaServicio;
+    const ivaServicio = Math.round(honorariosBase * 0.19);
+    const costoTotal = costoUPME + honorariosBase + ivaServicio;
 
     setCalc({ iva, renta, total, costoUPME, honorariosBase, subtotal, ivaServicio, costoTotal, neto: total - costoTotal });
   }, [valor, tipo, perfil]);

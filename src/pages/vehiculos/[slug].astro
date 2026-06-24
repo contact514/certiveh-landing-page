@@ -26,8 +26,8 @@ else {
 const costoUPME = Math.round(pagoUVT * UVT);
 const honorarios = 599_990;
 const subtotal = costoUPME + honorarios;
-const ivaServicio = Math.round(subtotal * 0.19);
-const costoTotal = subtotal + ivaServicio;
+const ivaServicio = Math.round(honorarios * 0.19);
+const costoTotal = costoUPME + honorarios + ivaServicio;
 
 const iva = v.precioCOP * 0.05;
 const renta = v.precioCOP * 0.50;
