@@ -20,7 +20,7 @@ const webPageLd = JSON.stringify({
   publisher: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
   inLanguage: 'es-CO',
   datePublished: '2026-05-22',
-  dateModified: '2026-06-23',
+  dateModified: '2026-06-25',
   proficiencyLevel: 'Expert',
 });
 ---
@@ -643,7 +643,14 @@ const webPageLd = JSON.stringify({
         <span class="method-badge-sm method-post">POST</span>
         <span class="sidebar-endpoint-path">/tramites/:id/payment</span>
       </a>
+      <a href="#post-simulate-payment" class="sidebar-link">
+        <span class="method-badge-sm method-post">POST</span>
+        <span class="sidebar-endpoint-path">/tramites/:id/simulate-payment</span>
+      </a>
       <a href="#webhooks" class="sidebar-link">Webhooks</a>
+
+      <div class="sidebar-section-title">Sandbox</div>
+      <a href="#sandbox" class="sidebar-link">Ambiente de pruebas</a>
 
       <div class="sidebar-section-title">Referencia</div>
       <a href="#errors" class="sidebar-link">Errores</a>
@@ -1134,6 +1141,56 @@ const webPageLd = JSON.stringify({
 
       <hr class="section-divider" />
 
+      <!-- SIMULATE PAYMENT -->
+      <div class="endpoint-header" id="post-simulate-payment">
+        <span class="method-badge post section-anchor">POST</span>
+        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/simulate-payment</span>
+      </div>
+      <p class="endpoint-desc">Simula la aprobacion de un pago sin realizar un cobro real. <strong>Solo disponible en modo sandbox.</strong></p>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">!</span>
+        <span>
+          <strong>Solo sandbox:</strong> Este endpoint solo funciona con tu API key de sandbox (<code>sk_sandbox_xxx</code>). Retorna <code>403</code> si se usa con la API key de produccion.
+        </span>
+      </div>
+
+      <h4>Ejemplo de solicitud</h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">cURL</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">curl -X POST \
+  https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api/tramites/uuid-del-tramite/simulate-payment \
+  -H "X-API-Key: sk_sandbox_xxxxxxxxxxxxx"</pre>
+      </div>
+
+      <h4>Respuesta <code>200</code></h4>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-block-label">JSON</span>
+          <button class="copy-btn" data-copy="true">Copy</button>
+        </div>
+        <pre class="code-block">&#123;
+  <span class="ck">"case_id"</span>: <span class="cs">"uuid-del-tramite"</span>,
+  <span class="ck">"payment_id"</span>: <span class="cs">"uuid-del-pago"</span>,
+  <span class="ck">"status"</span>: <span class="cs">"APPROVED"</span>,
+  <span class="ck">"case_status"</span>: <span class="cs">"DOCUMENT_REVIEW"</span>,
+  <span class="ck">"sandbox"</span>: <span class="cn">true</span>,
+  <span class="ck">"message"</span>: <span class="cs">"Payment simulated successfully. No real charge was made."</span>
+&#125;</pre>
+      </div>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Requisito previo:</strong> Debes haber llamado <code>POST /tramites/:id/payment</code> antes para crear el registro de pago PENDING. Este endpoint toma ese pago pendiente y lo marca como APPROVED, avanzando el caso a <code>DOCUMENT_REVIEW</code>. Si tienes un webhook URL configurado, recibiras la notificacion <code>tramite.payment_confirmed</code> con <code>sandbox: true</code>.
+        </span>
+      </div>
+
+      <hr class="section-divider" />
+
       <!-- WEBHOOKS -->
       <h2 id="webhooks" class="section-anchor">Webhooks</h2>
       <p>
@@ -1253,6 +1310,75 @@ const webPageLd = JSON.stringify({
       <p>
         Los precios retornados por <code>POST /tramites</code> y <code>POST /tramites/:id/payment</code> aplican automaticamente cualquier descuento configurado para tu cuenta de partner. El campo <code>breakdown.discount</code> refleja el monto del descuento aplicado. No se necesitan parametros adicionales.
       </p>
+
+      <hr class="section-divider" />
+
+      <!-- SANDBOX -->
+      <h2 id="sandbox" class="section-anchor">Ambiente de pruebas (Sandbox)</h2>
+      <p>
+        CertiVeh provee un ambiente de sandbox completo para que puedas desarrollar y probar tu integracion sin generar cobros reales, facturas, ni emails.
+      </p>
+
+      <h4>Como funciona</h4>
+      <div class="table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr><th>Aspecto</th><th>Produccion</th><th>Sandbox</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="field-name">API Key</span></td><td><code>sk_live_xxx</code></td><td><code>sk_sandbox_xxx</code></td></tr>
+            <tr><td><span class="field-name">Cobros reales</span></td><td>Si (Wompi produccion)</td><td>No (Wompi sandbox o simulado)</td></tr>
+            <tr><td><span class="field-name">Facturas Alegra</span></td><td>Si</td><td>No</td></tr>
+            <tr><td><span class="field-name">Emails / WhatsApp</span></td><td>Si</td><td>No</td></tr>
+            <tr><td><span class="field-name">Emision seguros</span></td><td>Si</td><td>No</td></tr>
+            <tr><td><span class="field-name">OCR documentos</span></td><td>Si</td><td>Si (para testear)</td></tr>
+            <tr><td><span class="field-name">Webhooks al partner</span></td><td>Si</td><td>Si (con <code>sandbox: true</code>)</td></tr>
+            <tr><td><span class="field-name">Datos</span></td><td>Base de datos principal</td><td>Misma base, marcados <code>sandbox=true</code></td></tr>
+            <tr><td><span class="field-name">Header de respuesta</span></td><td>—</td><td><code>X-Sandbox: true</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Flujo tipico de prueba</h4>
+      <ol class="flow-steps">
+        <li>
+          <div class="flow-step-content">
+            <strong>Usa tu API key sandbox</strong>
+            <code>X-API-Key: sk_sandbox_xxx</code> · Todos los endpoints funcionan igual, pero la data se marca como sandbox.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Crea usuario y tramite</strong>
+            <code>POST /users</code> y <code>POST /tramites</code> · Funcionan identico a produccion. Las respuestas incluyen <code>"sandbox": true</code>.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Sube documentos</strong>
+            <code>POST /tramites/:id/documents</code> · El OCR se ejecuta normalmente para que puedas validar la extraccion de datos.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Simula el pago</strong>
+            <code>POST /tramites/:id/payment</code> para crear el pago, luego <code>POST /tramites/:id/simulate-payment</code> para aprobar instantaneamente sin Wompi.
+          </div>
+        </li>
+        <li>
+          <div class="flow-step-content">
+            <strong>Recibe el webhook</strong>
+            Tu endpoint recibe <code>tramite.payment_confirmed</code> con <code>sandbox: true</code>. Valida tu implementacion.
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">i</span>
+        <span>
+          <strong>Wompi sandbox:</strong> Si prefieres probar con el widget real de Wompi (tarjetas de prueba), el endpoint <code>POST /tramites/:id/payment</code> en sandbox retorna la llave publica de Wompi sandbox automaticamente. Usa las <a href="https://docs.wompi.co/docs/en/pruebas-de-tarjetas" target="_blank" rel="noopener">tarjetas de prueba de Wompi</a> para simular pagos.
+        </span>
+      </div>
 
       <hr class="section-divider" />
 
