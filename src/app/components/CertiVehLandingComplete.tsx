@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
-import imgPortalUsuario from '@/assets/878e55d5a2f4bcff614314941422acc1fce4e6b2.png';
+import imgPortalUsuario from '@/assets/portal-dashboard.jpg';
 
 const PortalUrlContext = createContext("https://portal.certiveh.co");
 const getPortalUrl = () => {
@@ -1007,34 +1007,14 @@ function ComoFunciona() {
           </div>
         </div>
 
-        {/* Portal screenshot */}
+        {/* Portal photo */}
         <div style={{
-          marginTop: 80, maxWidth: 720, marginLeft: "auto", marginRight: "auto",
+          marginTop: 80, maxWidth: 800, marginLeft: "auto", marginRight: "auto",
           borderRadius: 16, overflow: "hidden",
           boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-          border: "1px solid rgba(255,255,255,0.08)",
         }}>
-          {/* Browser chrome */}
-          <div style={{
-            background: "#F1F5F9", padding: "10px 16px",
-            display: "flex", alignItems: "center", gap: 8,
-            borderBottom: "1px solid #E2E8F0",
-          }}>
-            <div style={{ display: "flex", gap: 6 }}>
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
-            </div>
-            <div style={{
-              flex: 1, background: "#FFFFFF", borderRadius: 6,
-              padding: "4px 12px", fontSize: 12, color: "#94A3B8",
-              fontFamily: "var(--ff)",
-            }}>
-              portal.certiveh.co
-            </div>
-          </div>
           <img src={typeof imgPortalUsuario === 'string' ? imgPortalUsuario : imgPortalUsuario.src}
-            alt="Portal CertiVeh — gestiona tu certificado UPME"
+            alt="Usuario gestionando su certificado UPME desde el portal de CertiVeh"
             style={{ width: "100%", display: "block" }}
           />
         </div>
