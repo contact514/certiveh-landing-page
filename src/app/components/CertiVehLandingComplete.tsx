@@ -1142,11 +1142,11 @@ function Calculadora() {
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Honorarios CertiVeh</span>
+                    <span>Tramitación del certificado UPME</span>
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre honorarios)</span>
+                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitación)</span>
                     <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
                   </div>
                   <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
