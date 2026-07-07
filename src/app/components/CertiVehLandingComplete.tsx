@@ -978,7 +978,7 @@ function Servicios() {
                 <div style={{ width: 48, height: 48, borderRadius: 12, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name={s.icon} size={22} color={s.accentColor}/>
                 </div>
-                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: s.accentColor }}>{s.tag}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.02em", color: s.accentColor }}>{s.tag}</span>
               </div>
 
               <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
