@@ -1440,7 +1440,7 @@ function WinWin() {
   const portalUrl = usePortalUrl();
   const steps = [
     { num: "01", icon: "award", title: "Crea tu cuenta", desc: "Regístrate en portal.certiveh.co, sube tus documentos y completa tu trámite para desbloquear tu código de referido." },
-    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento." },
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento al solicitar su trámite." },
     { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo pague su trámite, tú ganas $75.000 que puedes retirar cuando quieras." },
   ];
   return (
