@@ -1253,7 +1253,7 @@ function Calculadora() {
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Tramitación del certificado UPME</span>
+                    <span>Servicio de tramitación</span>
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
