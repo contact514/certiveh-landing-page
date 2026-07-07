@@ -138,7 +138,7 @@ export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
     <>
       <style dangerouslySetInnerHTML={{ __html: NAV_CSS }} />
       <nav className={`shared-nav${scrolled ? " scrolled" : ""}`} aria-label="Navegación principal">
-        <a href={link("#hero")} className="shared-nav-logo" aria-label="CertiVeh — inicio">
+        <a href={link("#hero")} className="shared-nav-logo" aria-label="CertiVeh - inicio">
           <Logo scrolled={scrolled} />
         </a>
         <button className="shared-mobile-btn" onClick={() => setMobileOpen(!mobileOpen)}

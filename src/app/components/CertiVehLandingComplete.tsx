@@ -486,7 +486,7 @@ function CertiVehLogo({ variant = "default", compact = false }: { variant?: "def
   const accent = getCSSVar('--teal-500', '#14B8A6');
   const w = compact ? 180 : 220, h = compact ? 44 : 56;
   return (
-    <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none" role="img" aria-label="Logo CertiVeh — Certificación Vehicular">
+    <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none" role="img" aria-label="Logo CertiVeh - Certificación Vehicular">
       <defs>
         <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={primary}/><stop offset="100%" stopColor={accent}/>
@@ -685,7 +685,7 @@ function Hero() {
   }, []);
 
   return (
-    <section id="hero" aria-label="Portada — CertiVeh" className="hero-section" style={{
+    <section id="hero" aria-label="Portada - CertiVeh" className="hero-section" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
       padding: "100px 48px 60px", position: "relative",
@@ -1227,7 +1227,7 @@ function Calculadora() {
                 <div key={i}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
                     <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>{b.label}</span>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5 }}>{b.value ? fmt(b.value) : "—"}</span>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5 }}>{b.value ? fmt(b.value) : "-"}</span>
                   </div>
                   <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
                     <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct||0)*100}%`, transition: "width 0.4s ease" }}/>
@@ -1285,7 +1285,7 @@ function Calculadora() {
           <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
             <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
-              {calc.total ? fmt(calc.total) : "—"}
+              {calc.total ? fmt(calc.total) : "-"}
             </div>
             <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
 
@@ -1298,7 +1298,7 @@ function Calculadora() {
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
             </div>
 
             {calc.costoTotal && calc.total && (

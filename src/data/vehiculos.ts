@@ -19,7 +19,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 99_900_000,
-    precioFuente: "BYD Colombia — mayo 2026",
+    precioFuente: "BYD Colombia,mayo 2026",
     descripcion: "SUV eléctrico compacto, el más vendido en Colombia en 2025 con más de 5.200 unidades. Batería Blade de 45 kWh, autonomía de hasta 400 km y motor de 174 HP.",
   },
   {
@@ -30,7 +30,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 84_990_000,
-    precioFuente: "BYD Colombia — mayo 2026",
+    precioFuente: "BYD Colombia,mayo 2026",
     descripcion: "City car eléctrico, el segundo eléctrico más vendido en Colombia. Disponible en versiones de 300 y 400 km de autonomía. Ideal para ciudad.",
   },
   {
@@ -41,7 +41,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 149_900_000,
-    precioFuente: "BYD Colombia — mayo 2026",
+    precioFuente: "BYD Colombia,mayo 2026",
     descripcion: "SUV eléctrico deportivo con batería Blade de 60,5 kWh, autonomía de hasta 480 km y motor de 204 HP. Diseño premium con pantalla giratoria.",
   },
   {
@@ -52,7 +52,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Híbrido (HEV)",
     elegible: true,
     precioCOP: 136_200_000,
-    precioFuente: "Toyota Colombia — mayo 2026",
+    precioFuente: "Toyota Colombia,mayo 2026",
     descripcion: "El híbrido más vendido en Colombia. Motor 1.8L combinado con motor eléctrico, 126 HP combinados. Sistema híbrido autorecargable (no necesita enchufe).",
   },
   {
@@ -63,7 +63,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 169_990_000,
-    precioFuente: "Kia Colombia — mayo 2026",
+    precioFuente: "Kia Colombia,mayo 2026",
     descripcion: "SUV eléctrico mediano con amplio espacio interior. Batería de 58 kWh en versión Light y hasta 88 kWh en versión Wind. Diseño moderno y tecnología avanzada.",
   },
   {
@@ -74,7 +74,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 269_990_000,
-    precioFuente: "Volvo Colombia — mayo 2026",
+    precioFuente: "Volvo Colombia,mayo 2026",
     descripcion: "SUV compacto premium 100% eléctrico. Diseño escandinavo minimalista, materiales sostenibles y los estándares de seguridad Volvo. Autonomía de hasta 480 km.",
   },
   {
@@ -85,7 +85,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 184_990_000,
-    precioFuente: "Hyundai Colombia — mayo 2026",
+    precioFuente: "Hyundai Colombia,mayo 2026",
     descripcion: "Crossover eléctrico con diseño retro-futurista. Batería de 72,6 kWh, 218 HP, carga ultra-rápida de 10% a 80% en 18 minutos con cargador de 350 kW.",
   },
   {
@@ -96,7 +96,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 214_990_000,
-    precioFuente: "Kia Colombia — mayo 2026",
+    precioFuente: "Kia Colombia,mayo 2026",
     descripcion: "Crossover 100% eléctrico con batería de 64,8 kWh, autonomía de hasta 460 km y 201 HP. Diseño sostenible con materiales reciclados.",
   },
   {
@@ -107,7 +107,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 219_990_000,
-    precioFuente: "BYD Colombia — mayo 2026",
+    precioFuente: "BYD Colombia,mayo 2026",
     descripcion: "SUV eléctrico deportivo de alto rendimiento. Diseño aerodinámico inspirado en el océano, doble motor disponible y tecnología de batería Blade.",
   },
   {
@@ -118,7 +118,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 134_990_000,
-    precioFuente: "Chery Colombia — mayo 2026",
+    precioFuente: "Chery Colombia,mayo 2026",
     descripcion: "SUV eléctrico compacto con diseño futurista. Autonomía competitiva y precio accesible, posicionado como alternativa a los BYD en el segmento de entrada.",
   },
   {
@@ -129,7 +129,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Híbrido (HEV)",
     elegible: true,
     precioCOP: 119_900_000,
-    precioFuente: "Toyota Colombia — mayo 2026",
+    precioFuente: "Toyota Colombia,mayo 2026",
     descripcion: "SUV subcompacto híbrido autorecargable. Motor 1.5L con sistema híbrido, ideal para ciudad con bajo consumo de combustible.",
   },
   {
@@ -140,7 +140,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 79_900_000,
-    precioFuente: "BYD Colombia — mayo 2026",
+    precioFuente: "BYD Colombia,mayo 2026",
     descripcion: "El eléctrico más económico del mercado colombiano. Compacto y ágil para la ciudad, autonomía de hasta 200 km. Perfecto como segundo vehículo urbano.",
   },
 ];
