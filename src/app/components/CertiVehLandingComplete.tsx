@@ -1271,6 +1271,46 @@ function Testimonios() {
   );
 }
 
+// ── PRENSA ──────────────────────────────────────────────────────────────────
+function Prensa() {
+  const medios = [
+    { name: "Semana", logo: "/prensa-semana.svg", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 28, maxW: 140 },
+    { name: "Valora Analitik", logo: "/prensa-valora.svg", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 28, maxW: 180 },
+    { name: "Portafolio", logo: "/prensa-portafolio.svg", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 28, maxW: 160 },
+  ];
+  return (
+    <section aria-label="CertiVeh en los medios" style={{
+      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
+      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
+    }}>
+      <p style={{
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
+        textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
+      }}>
+        CertiVeh en los medios
+      </p>
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "center",
+        gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
+      }}>
+        {medios.map((m, i) => (
+          <a key={i} href={m.url} target="_blank" rel="noopener noreferrer"
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none" }}
+          >
+            <img src={m.logo} alt={m.name} style={{
+              maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain",
+              opacity: 0.3, transition: "opacity 0.3s",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = "0.7"; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = "0.3"; }}
+            />
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ── WIN WIN ──────────────────────────────────────────────────────────────────
 function WinWin() {
   const portalUrl = usePortalUrl();
@@ -1586,6 +1626,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <Calculadora/>
         <Confianza/>
         <Testimonios/>
+        <Prensa/>
         <WinWin/>
         <FAQ/>
         <CTAFinal/>
