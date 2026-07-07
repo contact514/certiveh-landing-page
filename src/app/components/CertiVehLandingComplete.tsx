@@ -466,6 +466,8 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
     info:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
     user:        <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
     building:    <><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></>,
+    receipt:     <><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></>,
+    users:       <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
@@ -550,7 +552,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Eléctricos e híbridos (no MHEV)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital"];
+  const items = ["Eléctricos e híbridos (no MHEV)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Gestión de devolución de IVA ante la DIAN"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -761,7 +763,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos.
+        Certificado UPME y devolución de IVA para vehículos eléctricos e híbridos.
         Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
       </p>
 
@@ -924,6 +926,96 @@ function Beneficios() {
   );
 }
 
+// ── SERVICIOS ────────────────────────────────────────────────────────────────
+function Servicios() {
+  const portalUrl = usePortalUrl();
+  const servicios = [
+    {
+      icon: "shield",
+      tag: "SERVICIO 1",
+      title: "Certificado UPME",
+      desc: "Gestionamos todo el trámite ante la UPME: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
+      price: "Desde $599.990",
+      priceNote: "+ IVA + costo trámite UPME",
+      features: ["Radicación automática ante la UPME", "Sin tocar ningún portal gubernamental", "Desbloquea los 3 beneficios tributarios"],
+      accentColor: "var(--emerald-600)",
+      iconBg: "rgba(5,150,105,0.1)",
+    },
+    {
+      icon: "receipt",
+      tag: "SERVICIO 2",
+      title: "Devolución de IVA",
+      desc: "¿Ya tienes tu certificado UPME? Nosotros nos encargamos de recuperar tu IVA ante la DIAN. Todo el proceso, de principio a fin.",
+      price: "Desde $499.990",
+      priceNote: "+ IVA · precio preferencial con UPME",
+      features: ["Gestión completa ante la DIAN", "100% en línea desde tu dashboard", "Recupera el 5% de IVA de tu vehículo"],
+      accentColor: "var(--teal-500)",
+      iconBg: "rgba(20,184,166,0.1)",
+    },
+  ];
+  return (
+    <section id="servicios" aria-label="Servicios CertiVeh" style={{ background: "var(--slate-50)" }}>
+      <div className="section">
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
+            Dos servicios. <br/>
+            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Cero burocracia.</span>
+          </h2>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 540, margin: "0 auto" }}>
+            CertiVeh gestiona tus beneficios tributarios de principio a fin. Desde el certificado UPME hasta la devolución de tu IVA ante la DIAN.
+          </p>
+        </div>
+
+        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, maxWidth: 880, margin: "0 auto" }}>
+          {servicios.map((s, i) => (
+            <div key={i} className="card" style={{
+              padding: 36, position: "relative", overflow: "hidden",
+              borderLeft: `4px solid ${s.accentColor}`,
+              transition: "transform 0.2s, box-shadow 0.2s",
+              display: "flex", flexDirection: "column",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Icon name={s.icon} size={22} color={s.accentColor}/>
+                </div>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: s.accentColor, textTransform: "uppercase" }}>{s.tag}</span>
+              </div>
+
+              <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
+              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 20, flex: 1 }}>{s.desc}</p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
+                {s.features.map((f, j) => (
+                  <div key={j} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5 }}>
+                    <Icon name="checkCircle" size={14} color={s.accentColor}/>{f}
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 20, marginTop: "auto" }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: s.accentColor, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.price}</div>
+                <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 4 }}>{s.priceNote}</div>
+              </div>
+
+              <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", marginTop: 20 }}>
+                <button className="btn-primary" style={{
+                  width: "100%", justifyContent: "center",
+                  background: i === 0 ? "var(--emerald-600)" : "var(--teal-500)",
+                }}>
+                  {i === 0 ? "Empezar mi trámite" : "Recuperar mi IVA"} <Icon name="arrowRight" size={16} color="white"/>
+                </button>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── CÓMO FUNCIONA ─────────────────────────────────────────────────────────────
 function ComoFunciona() {
   const [active, setActive] = useState(0);
@@ -1012,6 +1104,7 @@ function Calculadora() {
   const [valor, setValor] = useState(120);
   const [tipo, setTipo] = useState("electrico");
   const [perfil, setPerfil] = useState("natural");
+  const [conIva, setConIva] = useState(false);
   const [calc, setCalc] = useState<any>({});
   const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
 
@@ -1035,14 +1128,22 @@ function Calculadora() {
     }
     const costoUPME = Math.round(pagoUVT * UVT);
 
-    // Honorarios CertiVeh
+    // Honorarios CertiVeh — Certificado UPME
     const honorariosBase = 599_990;
-    const subtotal = costoUPME + honorariosBase;
     const ivaServicio = Math.round(honorariosBase * 0.19);
-    const costoTotal = costoUPME + honorariosBase + ivaServicio;
 
-    setCalc({ iva, renta, total, costoUPME, honorariosBase, subtotal, ivaServicio, costoTotal, neto: total - costoTotal });
-  }, [valor, tipo, perfil]);
+    // Honorarios devolución IVA (bundled pricing)
+    let honorariosIvaRefund = 0;
+    let ivaIvaRefund = 0;
+    if (conIva) {
+      honorariosIvaRefund = v <= 200_000_000 ? 499_990 : Math.round(v * 0.0025);
+      ivaIvaRefund = Math.round(honorariosIvaRefund * 0.19);
+    }
+
+    const costoTotal = costoUPME + honorariosBase + ivaServicio + honorariosIvaRefund + ivaIvaRefund;
+
+    setCalc({ iva, renta, total, costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal, neto: total - costoTotal });
+  }, [valor, tipo, perfil, conIva]);
 
   const bars = [
     { label: "Devolución IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
@@ -1094,6 +1195,39 @@ function Calculadora() {
               </div>
             </div>
 
+            <div style={{ marginBottom: 24 }}>
+              <label style={{
+                display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+                padding: "14px 16px", borderRadius: 12,
+                background: conIva ? "var(--emerald-50)" : "var(--slate-50)",
+                border: conIva ? "1.5px solid var(--emerald-500)" : "1.5px solid var(--slate-200)",
+                transition: "all 0.15s",
+              }}>
+                <div style={{
+                  width: 40, height: 22, borderRadius: 11, position: "relative",
+                  background: conIva ? "var(--emerald-600)" : "var(--slate-300)",
+                  transition: "background 0.2s", flexShrink: 0,
+                }}
+                  onClick={() => setConIva(!conIva)}
+                >
+                  <div style={{
+                    width: 18, height: 18, borderRadius: "50%", background: "white",
+                    position: "absolute", top: 2, left: conIva ? 20 : 2,
+                    transition: "left 0.2s",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                  }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
+                    También quiero recuperar mi IVA
+                  </div>
+                  <div style={{ fontSize: 12, color: conIva ? "var(--emerald-600)" : "var(--slate-400)", lineHeight: 1.4 }}>
+                    Gestión de devolución ante la DIAN
+                  </div>
+                </div>
+              </label>
+            </div>
+
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {bars.map((b, i) => (
                 <div key={i}>
@@ -1132,6 +1266,18 @@ function Calculadora() {
                     <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitación)</span>
                     <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
                   </div>
+                  {conIva && (
+                    <>
+                      <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
+                        <span style={{ color: "var(--teal-600)" }}>Gestión devolución IVA</span>
+                        <span style={{ fontWeight: 600, color: "var(--teal-600)" }}>{fmt(calc.honorariosIvaRefund)}</span>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre gestión)</span>
+                        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaIvaRefund)}</span>
+                      </div>
+                    </>
+                  )}
                   <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>Total</span>
                     <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>{fmt(calc.costoTotal)}</span>
@@ -1151,6 +1297,13 @@ function Calculadora() {
               {calc.total ? fmt(calc.total) : "—"}
             </div>
             <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
+
+            {conIva && calc.iva && (
+              <div style={{ width: "100%", padding: "16px 24px", marginBottom: 16, background: "rgba(20,184,166,0.12)", border: "1px solid rgba(20,184,166,0.25)", borderRadius: 12, textAlign: "center" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#5EEAD4", marginBottom: 6, textTransform: "uppercase" }}>IVA a recuperar ante la DIAN</div>
+                <div style={{ fontSize: 24, fontWeight: 700, color: "#5EEAD4", letterSpacing: "-0.02em" }}>{fmt(calc.iva)}</div>
+              </div>
+            )}
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos costo del servicio)</div>
@@ -1357,6 +1510,8 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh gestiona todo el proceso de devolución del IVA ante la DIAN. Puedes contratarlo al momento del checkout del certificado UPME con precio preferencial, o después de forma standalone desde tu dashboard. Todo el proceso es 100% en línea." },
+    { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
@@ -1400,10 +1555,10 @@ function CTAFinal() {
       </div>
       <div style={{ position: "relative", pointerEvents: "none" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tu certificado UPME <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te está esperando.</span>
+          Tus beneficios tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te están esperando.</span>
         </h2>
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
-          Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado sus beneficios. La ventana UPME está abierta, radica ahora.
+          Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
           <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
@@ -1431,7 +1586,7 @@ function Footer() {
           <div>
             <CertiVehLogo variant="light" compact/>
             <p style={{ fontSize: 14, color: "var(--slate-500)", marginTop: 10, maxWidth: 260, lineHeight: 1.5 }}>
-              Automatización del trámite UPME para certificados de beneficio tributario en Colombia.
+              Certificado UPME y gestión de devolución de IVA para vehículos eléctricos e híbridos en Colombia.
             </p>
           </div>
           <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
@@ -1605,6 +1760,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <Hero/>
         <Aliados/>
         <Beneficios/>
+        <Servicios/>
         <ComoFunciona/>
         <Calculadora/>
         <Confianza/>
@@ -1618,7 +1774,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
 
       {/* WhatsApp floating button */}
       <a
-        href="https://wa.me/573132689212?text=Hola%20quiero%20información%20sobre%20el%20certificado%20UPME"
+        href="https://wa.me/573132689212?text=Hola%20quiero%20información%20sobre%20los%20beneficios%20tributarios%20para%20vehículos%20eléctricos"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escríbenos por WhatsApp"

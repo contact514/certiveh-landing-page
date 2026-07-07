@@ -25,7 +25,7 @@ import '../styles/index.css';
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CertiVeh",
-    "description": "CertiVeh es tu tramitador virtual del certificado UPME para vehículos eléctricos e híbridos en Colombia. Gestiona la devolución de IVA, deducción en renta y depreciación acelerada.",
+    "description": "CertiVeh gestiona tu certificado UPME y la devolución de IVA para vehículos eléctricos e híbridos en Colombia. Accede a devolución de IVA, deducción en renta y depreciación acelerada.",
     "url": "https://exotics.certiveh.co",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
@@ -34,7 +34,7 @@ import '../styles/index.css';
       "priceCurrency": "COP",
       "price": "599990",
       "availability": "https://schema.org/InStock",
-      "description": "Honorarios de $599.990 COP + IVA (19% sobre honorarios), más el costo del trámite ante la UPME según resolución vigente. La tasa UPME no lleva IVA."
+      "description": "Certificado UPME desde $599.990 COP + IVA. Gestión de devolución de IVA desde $499.990 COP + IVA. Más el costo del trámite ante la UPME según resolución vigente."
     },
     "author": {
       "@type": "Organization",
@@ -56,7 +56,9 @@ import '../styles/index.css';
       { "@type": "Question", "name": "¿Qué vehículos califican?", "acceptedAnswer": { "@type": "Answer", "text": "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." } },
       { "@type": "Question", "name": "¿Cuándo puedo radicar mi solicitud?", "acceptedAnswer": { "@type": "Answer", "text": "Solo tienes que entrar al portal, crear tu cuenta y cargar tu solicitud. Tu solicitud se radica de inmediato gracias a la ventana continua de recepción (Resolución UPME 400 de 2026)." } },
       { "@type": "Question", "name": "¿Qué documentos necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Si eres persona natural: cédula, tarjeta de propiedad y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal, tarjeta de propiedad y factura de compra." } },
-      { "@type": "Question", "name": "¿Funciona para empresas e independientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años." } }
+      { "@type": "Question", "name": "¿Funciona para empresas e independientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años." } },
+      { "@type": "Question", "name": "¿CertiVeh gestiona la devolución del IVA?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Una vez tienes tu certificado UPME, CertiVeh gestiona todo el proceso de devolución del IVA ante la DIAN. Puedes contratarlo al momento del checkout del certificado UPME con precio preferencial, o después de forma standalone desde tu dashboard." } },
+      { "@type": "Question", "name": "¿Puedo hacer el trámite a nombre de otra persona o empresa?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." } }
     ]
   })} />
 
@@ -72,6 +74,26 @@ import '../styles/index.css';
       { "@type": "HowToStep", "position": 4, "name": "CertiVeh hace todo", "text": "Nuestro agente automatizado crea tu cuenta en la UPME, llena formularios y radica la solicitud." },
       { "@type": "HowToStep", "position": 5, "name": "Recibe tu certificado", "text": "Te notificamos por WhatsApp y email. Descargas el certificado desde tu dashboard." }
     ]
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Gestión de devolución de IVA para vehículos eléctricos",
+    "description": "CertiVeh gestiona todo el proceso de devolución del IVA ante la DIAN para propietarios de vehículos eléctricos e híbridos en Colombia.",
+    "provider": {
+      "@type": "Organization",
+      "name": "CertiVeh",
+      "url": "https://certiveh.co"
+    },
+    "areaServed": "CO",
+    "serviceType": "Gestión tributaria",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "COP",
+      "price": "499990",
+      "description": "Desde $499.990 COP + IVA (precio preferencial contratando junto al certificado UPME). Standalone desde $699.990 COP + IVA."
+    }
   })} />
 
   <script type="application/ld+json" set:html={JSON.stringify([
