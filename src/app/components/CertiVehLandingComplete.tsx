@@ -998,8 +998,8 @@ function Servicios() {
               </div>
 
               <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", marginTop: 20 }}>
-                <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center" }}>
-                  {i === 0 ? "Empezar mi trámite" : "Recuperar mi IVA"} <Icon name="arrowRight" size={18} color="white"/>
+                <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
+                  {i === 0 ? "Empezar mi trámite" : "Solicitar devolución de IVA"} <Icon name="arrowRight" size={18} color="white"/>
                 </button>
               </a>
             </div>
