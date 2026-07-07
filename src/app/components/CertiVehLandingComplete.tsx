@@ -1329,7 +1329,7 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "Radicación inmediata",        desc: "La UPME recibe solicitudes del 1 de febrero al 15 de diciembre, sin ciclos. Tu trámite se radica de inmediato en esta ventana." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin costos ocultos." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones ni costos ocultos." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
