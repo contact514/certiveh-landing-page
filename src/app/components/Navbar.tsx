@@ -147,6 +147,7 @@ export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
         </button>
         <div className="shared-nav-links">
           <a href={link("#beneficios")}>Beneficios</a>
+          <a href={link("#servicios")}>Servicios</a>
           <a href={link("#como-funciona")}>Cómo funciona</a>
           <a href={link("#calculadora")}>Calculadora</a>
           <a href="/blog">Blog</a>
@@ -163,6 +164,7 @@ export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
       {mobileOpen && <div className="shared-mobile-overlay" onClick={() => setMobileOpen(false)} />}
       <div className={`shared-mobile-menu${mobileOpen ? " open" : ""}`}>
         <a href={link("#beneficios")} onClick={() => setMobileOpen(false)}>Beneficios</a>
+        <a href={link("#servicios")} onClick={() => setMobileOpen(false)}>Servicios</a>
         <a href={link("#como-funciona")} onClick={() => setMobileOpen(false)}>Cómo funciona</a>
         <a href={link("#calculadora")} onClick={() => setMobileOpen(false)}>Calculadora</a>
         <a href="/blog" onClick={() => setMobileOpen(false)}>Blog</a>
