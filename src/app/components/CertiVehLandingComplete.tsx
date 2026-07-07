@@ -857,39 +857,22 @@ function Aliados() {
         display: "flex", alignItems: "center", justifyContent: "center",
         gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
       }}>
-        {/* Seguros Mundial */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
-          <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
-            maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
-          />
-          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
-            Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
-          </span>
-        </div>
-        {/* FonLenovo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
-          <img src="/aliados-fonlenovo.png" alt="FonLenovo - El Fondo inteligente para todos" style={{
-            maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
-          />
-        </div>
-        {/* ExoticsCo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
-          <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
-            maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
-            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
-          />
-        </div>
+        {[
+          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", maxH: 28, maxW: 150, note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
+          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", maxH: 44, maxW: 90, note: "" },
+          { src: "/aliados-exotics.png", alt: "ExoticsCo", maxH: 36, maxW: 120, note: "" },
+        ].map((a, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, height: 56, justifyContent: "center" }}>
+            <img src={a.src} alt={a.alt} loading="lazy" style={{
+              maxHeight: a.maxH, maxWidth: a.maxW, width: "auto", objectFit: "contain",
+              filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
+              onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
+            />
+            {a.note && <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>{a.note}</span>}
+          </div>
+        ))}
       </div>
     </section>
   );
