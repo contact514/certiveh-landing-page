@@ -844,11 +844,11 @@ function Hero() {
 function Aliados() {
   return (
     <section aria-label="Aliados de CertiVeh" style={{
-      background: "var(--slate-900)", borderTop: "1px solid rgba(255,255,255,0.06)",
-      borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "40px 24px",
+      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
+      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
     }}>
       <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.5)",
+        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
         textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
       }}>
         Aliados que confían en CertiVeh
@@ -861,33 +861,33 @@ function Aliados() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 180 }}>
           <img src="/aliados-seguros-mundial.png" alt="Seguros Mundial" style={{
             maxHeight: 36, maxWidth: 170, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
+            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
           />
-          <span style={{ fontSize: 8, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
+          <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>
             Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia
           </span>
         </div>
         {/* FonLenovo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 120 }}>
-          <img src="/aliados-fonlenovo.png" alt="FonLenovo – El Fondo inteligente para todos" style={{
+          <img src="/aliados-fonlenovo.png" alt="FonLenovo - El Fondo inteligente para todos" style={{
             maxHeight: 52, maxWidth: 120, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
+            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
           />
         </div>
         {/* ExoticsCo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
           <img src="/aliados-exotics.png" alt="ExoticsCo" style={{
             maxHeight: 48, maxWidth: 140, width: "auto", objectFit: "contain",
-            filter: "brightness(0) invert(1) opacity(0.35)", transition: "filter 0.3s",
+            filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
           }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.75)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0) invert(1) opacity(0.35)"; }}
+            onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
+            onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
           />
         </div>
       </div>
