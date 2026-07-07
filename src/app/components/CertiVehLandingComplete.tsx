@@ -1213,7 +1213,7 @@ function Calculadora() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
-                    Agregar gestión de devolución de IVA
+                    Gestión de devolución de IVA
                   </div>
                   <div style={{ fontSize: 12, color: conIva ? "var(--emerald-600)" : "var(--slate-400)", lineHeight: 1.4 }}>
                     CertiVeh gestiona tu devolución ante la DIAN
