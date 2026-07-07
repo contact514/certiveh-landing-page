@@ -934,7 +934,7 @@ function Servicios() {
       icon: "shield",
       tag: "Servicio 1",
       title: "Certificado UPME",
-      desc: "Gestionamos todo el trámite ante la UPME: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
+      desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
       features: ["Radicación automática ante la UPME", "Sin tocar ningún portal gubernamental", "Desbloquea los 3 beneficios tributarios"],
