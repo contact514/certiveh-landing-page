@@ -250,7 +250,7 @@ const CSS = `
 
   .urgency-modal {
     position: relative;
-    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    background: #0F172A;
     border-radius: 20px;
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(5,150,105,0.08);
     max-width: 520px;
@@ -596,7 +596,7 @@ function VentanaUPME() {
       <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 9999, padding: "5px 14px", marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em" }}>
             {ventanaAbierta ? "Ventana de radicación abierta" : "Ventana cerrada"}
           </span>
         </div>
@@ -633,7 +633,7 @@ function VentanaUPME() {
                   <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
                     {pad(u.val)}
                   </div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>{u.label}</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, letterSpacing: "0.06em" }}>{u.label}</div>
                 </div>
               ))}
             </div>
@@ -851,7 +851,7 @@ function Aliados() {
     }}>
       <p style={{
         textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
-        textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
+        letterSpacing: "1.5px", marginBottom: 32,
       }}>
         Aliados que confían en CertiVeh
       </p>
@@ -884,8 +884,8 @@ function Aliados() {
 function Beneficios() {
   const cards = [
     { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100%.", ejemplo: "$120M → te devuelven $6.000.000" },
-    { icon: "fileText", tag: "RENTA",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
-    { icon: "zap",      tag: "DEPRECIACIÓN", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas" },
+    { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
+    { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas" },
   ];
   return (
     <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--white)" }}>
@@ -932,10 +932,10 @@ function Servicios() {
   const servicios = [
     {
       icon: "shield",
-      tag: "SERVICIO 1",
+      tag: "Servicio 1",
       title: "Certificado UPME",
       desc: "Gestionamos todo el trámite ante la UPME: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
-      price: "Desde $599.990",
+      price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
       features: ["Radicación automática ante la UPME", "Sin tocar ningún portal gubernamental", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
@@ -943,11 +943,11 @@ function Servicios() {
     },
     {
       icon: "receipt",
-      tag: "SERVICIO 2",
+      tag: "Servicio 2",
       title: "Devolución de IVA",
       desc: "¿Ya tienes tu certificado UPME? Nosotros nos encargamos de recuperar tu IVA ante la DIAN. Todo el proceso, de principio a fin.",
       price: "Desde $499.990",
-      priceNote: "+ IVA · precio preferencial con UPME",
+      priceNote: "+ IVA · contratando junto al certificado UPME",
       features: ["Gestión completa ante la DIAN", "100% en línea desde tu dashboard", "Recupera el 5% de IVA de tu vehículo"],
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
@@ -971,17 +971,14 @@ function Servicios() {
             <div key={i} className="card" style={{
               padding: 36, position: "relative", overflow: "hidden",
               borderLeft: `4px solid ${s.accentColor}`,
-              transition: "transform 0.2s, box-shadow 0.2s",
               display: "flex", flexDirection: "column",
             }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                 <div style={{ width: 48, height: 48, borderRadius: 12, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name={s.icon} size={22} color={s.accentColor}/>
                 </div>
-                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: s.accentColor, textTransform: "uppercase" }}>{s.tag}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: s.accentColor }}>{s.tag}</span>
               </div>
 
               <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
@@ -1001,10 +998,7 @@ function Servicios() {
               </div>
 
               <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", marginTop: 20 }}>
-                <button className="btn-primary" style={{
-                  width: "100%", justifyContent: "center",
-                  background: i === 0 ? "var(--emerald-600)" : "var(--teal-500)",
-                }}>
+                <button className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
                   {i === 0 ? "Empezar mi trámite" : "Recuperar mi IVA"} <Icon name="arrowRight" size={16} color="white"/>
                 </button>
               </a>
@@ -1161,7 +1155,7 @@ function Calculadora() {
           {/* Controls */}
           <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
             <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Tipo de vehículo</div>
+              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (No MHEV)", icon: "battery" }].map(opt => (
                   <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none", lineHeight: 1.3 }}>
@@ -1173,7 +1167,7 @@ function Calculadora() {
             </div>
 
             <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10, textTransform: "uppercase" }}>Perfil tributario</div>
+              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Perfil tributario</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Independiente/Empresa", icon: "building" }].map(opt => (
                   <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
@@ -1186,7 +1180,7 @@ function Calculadora() {
 
             <div style={{ marginBottom: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", textTransform: "uppercase" }}>Valor del vehículo</div>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)" }}>Valor del vehículo</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
               </div>
               <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 4, borderRadius: 4, outline: "none", cursor: "pointer", background: `linear-gradient(to right, #059669 0%, #14B8A6 ${((valor-40)/560)*100}%, #E2E8F0 ${((valor-40)/560)*100}%, #E2E8F0 100%)` }}/>
@@ -1219,10 +1213,10 @@ function Calculadora() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
-                    También quiero recuperar mi IVA
+                    Agregar gestión de devolución de IVA
                   </div>
                   <div style={{ fontSize: 12, color: conIva ? "var(--emerald-600)" : "var(--slate-400)", lineHeight: 1.4 }}>
-                    Gestión de devolución ante la DIAN
+                    CertiVeh gestiona tu devolución ante la DIAN
                   </div>
                 </div>
               </label>
@@ -1251,7 +1245,7 @@ function Calculadora() {
               <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Costo del servicio</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo del servicio</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -1283,16 +1277,13 @@ function Calculadora() {
                     <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>{fmt(calc.costoTotal)}</span>
                   </div>
                 </div>
-                <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4, marginTop: 8 }}>
-                  * La deducción en renta reduce tu base gravable, no el impuesto directamente. Trámite UPME según Resolución No. 135 de 2025.
-                </div>
               </div>
             )}
           </div>
 
           {/* Result */}
           <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12, textTransform: "uppercase" }}>Beneficio total estimado</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
             <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
               {calc.total ? fmt(calc.total) : "—"}
             </div>
@@ -1300,13 +1291,13 @@ function Calculadora() {
 
             {conIva && calc.iva && (
               <div style={{ width: "100%", padding: "16px 24px", marginBottom: 16, background: "rgba(20,184,166,0.12)", border: "1px solid rgba(20,184,166,0.25)", borderRadius: 12, textAlign: "center" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#5EEAD4", marginBottom: 6, textTransform: "uppercase" }}>IVA a recuperar ante la DIAN</div>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#5EEAD4", marginBottom: 6 }}>IVA a recuperar ante la DIAN</div>
                 <div style={{ fontSize: 24, fontWeight: 700, color: "#5EEAD4", letterSpacing: "-0.02em" }}>{fmt(calc.iva)}</div>
               </div>
             )}
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8, textTransform: "uppercase" }}>Beneficio neto (menos costo del servicio)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "—"}</div>
             </div>
 
@@ -1421,7 +1412,7 @@ function Prensa() {
     }}>
       <p style={{
         textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
-        textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 32,
+        letterSpacing: "1.5px", marginBottom: 32,
       }}>
         CertiVeh en los medios
       </p>
@@ -1597,7 +1588,7 @@ function Footer() {
               { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
             ].map(col => (
               <div key={col.label}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>{col.label}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14 }}>{col.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {col.links.map(l => (
                     <a key={l.text} href={l.href} style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
@@ -1664,7 +1655,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
               letterSpacing: '0.04em'
             }}>
               <Icon name="shield" size={11} color="#34D399" />
-              PROTEGE TU BENEFICIO
+              Protege tu beneficio
             </span>
           </div>
 
