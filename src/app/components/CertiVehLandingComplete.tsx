@@ -1274,9 +1274,9 @@ function Testimonios() {
 // ── PRENSA ──────────────────────────────────────────────────────────────────
 function Prensa() {
   const medios = [
-    { name: "SEMANA", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", font: "Georgia, 'Times New Roman', serif", size: 22, weight: 700, spacing: 3 },
-    { name: "Valora Analitik", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", font: "'Inter', sans-serif", size: 18, weight: 700, spacing: 0.5 },
-    { name: "PORTAFOLIO", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", font: "Georgia, 'Times New Roman', serif", size: 20, weight: 700, spacing: 2 },
+    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 28, maxW: 150 },
+    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 52, maxW: 120 },
+    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 28, maxW: 170 },
   ];
   return (
     <section aria-label="CertiVeh en los medios" style={{
@@ -1291,19 +1291,19 @@ function Prensa() {
       </p>
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        gap: 48, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
+        gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
       }}>
         {medios.map((m, i) => (
           <a key={i} href={m.url} target="_blank" rel="noopener noreferrer"
-            style={{
-              textDecoration: "none", fontFamily: m.font, fontSize: m.size,
-              fontWeight: m.weight, letterSpacing: m.spacing,
-              color: "var(--slate-900)", opacity: 0.25, transition: "opacity 0.3s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = "0.6"; }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = "0.25"; }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 56, textDecoration: "none" }}
           >
-            {m.name}
+            <img src={m.logo} alt={m.name} loading="lazy" style={{
+              maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain",
+              filter: "grayscale(100%)", opacity: 0.35, transition: "opacity 0.3s, filter 0.3s",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.filter = "grayscale(0%)"; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = "0.35"; e.currentTarget.style.filter = "grayscale(100%)"; }}
+            />
           </a>
         ))}
       </div>
