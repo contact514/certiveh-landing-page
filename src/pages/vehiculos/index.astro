@@ -43,7 +43,7 @@ const totalUpmeModels = upmeBrands.reduce((sum, b) => sum + b.modelos.length, 0)
 
 const title = "Vehículos Elegibles para Certificado UPME, Beneficios Tributarios | CertiVeh";
 const description = `Listado completo de ${totalUpmeModels}+ vehículos eléctricos e híbridos elegibles para el certificado UPME en Colombia. Consulta tu marca y modelo, calcula tu devolución de IVA y deducción en renta.`;
-const keywords = "vehículos elegibles UPME, certificado UPME vehículo eléctrico, beneficios tributarios vehículo eléctrico Colombia, BYD UPME, Toyota híbrido UPME, Kia eléctrico UPME, Tesla UPME Colombia, BMW eléctrico UPME, Mercedes UPME, Volvo UPME, Hyundai UPME, Chevrolet UPME";
+const keywords = "vehículos elegibles UPME, certificado UPME vehículo eléctrico, beneficios tributarios vehículo eléctrico Colombia, BYD UPME, Toyota híbrido UPME, Kia eléctrico UPME, Tesla UPME Colombia, BMW eléctrico UPME, Mercedes UPME, Volvo UPME, Hyundai UPME, Chevrolet UPME, Ford híbrido UPME, Renault eléctrico UPME, Chery UPME Colombia, MG eléctrico UPME, Mazda UPME, Audi eléctrico UPME, Porsche híbrido UPME, Lexus UPME, Mitsubishi UPME, MINI eléctrico UPME";
 
 const itemListLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -196,7 +196,7 @@ const itemListLd = JSON.stringify({
   <div class="vh-section-divider"><hr /></div>
   <div class="vh-directory" id="directorio">
     <div class="vh-directory-header">
-      <div class="vh-directory-badge">Listado oficial UPME · Actualizado mayo 2026</div>
+      <div class="vh-directory-badge">Listado oficial UPME · Actualizado julio 2026</div>
       <h2 class="vh-directory-title">Todos los vehículos elegibles para certificado UPME en Colombia</h2>
       <p class="vh-directory-desc">Directorio de {totalUpmeModels}+ modelos de {upmeBrands.length} marcas que la UPME ha certificado para beneficios tributarios. Esta lista se actualiza periódicamente, pero puede no incluir todos los vehículos elegibles; la UPME agrega nuevos modelos con frecuencia.</p>
     </div>
@@ -288,7 +288,12 @@ const itemListLd = JSON.stringify({
       </div>
       <div class="vh-footer-bottom">
         <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <span>contacto@certiveh.co</span>
+        <div style="display:flex;align-items:center;gap:16px">
+          <span>contacto@certiveh.co</span>
+          <a href="https://www.instagram.com/certiveh" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
