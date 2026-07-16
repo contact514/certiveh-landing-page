@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GNVCalculadora from '../app/components/GNVCalculadora';
+---
+
+<BaseLayout
+  title="CertiVeh - Certificado UPME para vehiculos GNV"
+  description="Calculadora de costos para la certificacion UPME de vehiculos a Gas Natural Vehicular (GNV) mediante Gestion de Eficiencia Energetica (GEE)."
+  robots="noindex, nofollow"
+>
+  <GNVCalculadora client:load />
+</BaseLayout>
