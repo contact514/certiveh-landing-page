@@ -182,7 +182,7 @@ export default function GNVCalculadora() {
     const v = valor * 1_000_000;
 
     // Beneficios tributarios
-    const iva = v * 0.05;
+    const iva = v * 0.19;
     const renta = v * 0.50;
     const totalBeneficio = iva + renta;
 
@@ -281,7 +281,7 @@ export default function GNVCalculadora() {
               {/* Benefit bars */}
               <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
                 {[
-                  { label: "Devolución IVA (5%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
+                  { label: "Devolución IVA (19%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
                   { label: "Deducción en renta (50%)", value: calc.renta, color: "var(--teal-500)", pct: calc.renta / (calc.totalBeneficio || 1) },
                 ].map((b, i) => (
                   <div key={i}>
