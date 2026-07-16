@@ -179,10 +179,12 @@ export default function GNVCalculadora() {
   useEffect(() => {
     const v = valor * 1_000_000;
 
-    // Beneficio: deducción en renta del 50%
+    // Beneficios tributarios
+    const iva = v * 0.05;
     const renta = v * 0.50;
+    const totalBeneficio = iva + renta;
 
-    // Trámite UPME — Resolución UPME No. 135 de 2025
+    // Trámite UPME - Resolución UPME No. 135 de 2025
     const UVT = 52_374;
     const invUVT = v / UVT;
     let pagoUVT: number;
@@ -196,7 +198,7 @@ export default function GNVCalculadora() {
     }
     const costoUPME = Math.round(pagoUVT * UVT);
 
-    // Honorarios CertiVeh — GNV/GEE
+    // Honorarios CertiVeh - GNV/GEE
     let honorariosBase: number;
     if (v <= 150_000_000) {
       honorariosBase = 899_990;
@@ -207,7 +209,7 @@ export default function GNVCalculadora() {
 
     const costoTotal = costoUPME + honorariosBase + ivaServicio;
 
-    setCalc({ renta, costoUPME, honorariosBase, ivaServicio, costoTotal, neto: renta - costoTotal });
+    setCalc({ iva, renta, totalBeneficio, costoUPME, honorariosBase, ivaServicio, costoTotal, neto: totalBeneficio - costoTotal });
   }, [valor, perfil]);
 
   return (
@@ -231,7 +233,7 @@ export default function GNVCalculadora() {
             Gestión de Eficiencia Energética
           </div>
           <h1 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, letterSpacing: "-0.03em", color: "white", lineHeight: 1.2, marginBottom: 16 }}>
-            Certificado UPME para vehículos a<br/>
+            Certificado UPME para vehículos a {" "}<br/>
             <span style={{ background: "linear-gradient(135deg, #34D399, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Gas Natural Vehicular</span>
           </h1>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 600, margin: "0 auto" }}>
@@ -274,15 +276,22 @@ export default function GNVCalculadora() {
                 </div>
               </div>
 
-              {/* Benefit bar — renta */}
-              <div style={{ marginBottom: 16 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-                  <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>Deducción en renta (50%)</span>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: "var(--emerald-600)", lineHeight: 1.5 }}>{calc.renta ? fmt(calc.renta) : "-"}</span>
-                </div>
-                <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
-                  <div style={{ height: "100%", borderRadius: 3, background: "var(--emerald-600)", width: "100%", transition: "width 0.4s ease" }}/>
-                </div>
+              {/* Benefit bars */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
+                {[
+                  { label: "Devolución IVA (5%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
+                  { label: "Deducción en renta (50%)", value: calc.renta, color: "var(--teal-500)", pct: calc.renta / (calc.totalBeneficio || 1) },
+                ].map((b, i) => (
+                  <div key={i}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                      <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>{b.label}</span>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5 }}>{b.value ? fmt(b.value) : "-"}</span>
+                    </div>
+                    <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
+                      <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct || 0) * 100}%`, transition: "width 0.4s ease" }}/>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {perfil === "empresa" && (
@@ -321,21 +330,21 @@ export default function GNVCalculadora() {
 
             {/* Result */}
             <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Deducción en renta estimada</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
               <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
-                {calc.renta ? fmt(calc.renta) : "-"}
+                {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
               </div>
-              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en beneficio tributario</div>
+              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
 
               <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
                 <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
                 <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
               </div>
 
-              {calc.costoTotal && calc.renta && (
+              {calc.costoTotal && calc.totalBeneficio && (
                 <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                  Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, accedes a{" "}
-                  <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.renta / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en deducción de renta.
+                  Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, recibes{" "}
+                  <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
                 </div>
               )}
 
@@ -372,10 +381,17 @@ export default function GNVCalculadora() {
       </section>
 
       {/* Footer */}
+      {/* Disclaimer */}
+      <div style={{ background: "var(--amber-50)", borderTop: "1px solid var(--amber-200)", padding: "16px 48px", textAlign: "center" }}>
+        <p style={{ fontSize: 13, color: "var(--amber-600)", lineHeight: 1.6, maxWidth: 700, margin: "0 auto" }}>
+          Aplica para vehículos de más de 10 toneladas dedicados al transporte de carga que operan con Gas Natural Vehicular.
+        </p>
+      </div>
+
       <footer className="gnv-footer" style={{ background: "var(--slate-900)", padding: "40px 48px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <CertiVehLogo variant="light" compact />
         <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 16, lineHeight: 1.6 }}>
-          Demo interno — Calculadora GNV / Gestión de Eficiencia Energética
+          Demo interno - Calculadora GNV / Gestión de Eficiencia Energética
         </p>
         <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", marginTop: 8 }}>
           Los valores son estimados. El costo de la certificación UPME depende de la resolución vigente.
