@@ -106,6 +106,7 @@ const CSS = `
     .btn-primary-lg { padding: 14px 24px; font-size: 15px; }
     h1 br { display: none; }
     .gnv-footer { padding: 40px 20px !important; }
+    .gnv-disclaimer { padding: 16px 20px !important; }
   }
 
   @media (max-width: 480px) {
@@ -116,6 +117,7 @@ const CSS = `
     .card-calc-result { padding: 24px 16px !important; }
     .btn-primary-lg { padding: 12px 20px; font-size: 14px; }
     .gnv-footer { padding: 32px 16px !important; }
+    .gnv-disclaimer { padding: 14px 16px !important; }
   }
 `;
 
@@ -233,7 +235,7 @@ export default function GNVCalculadora() {
             Gestión de Eficiencia Energética
           </div>
           <h1 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, letterSpacing: "-0.03em", color: "white", lineHeight: 1.2, marginBottom: 16 }}>
-            Certificado UPME para vehículos a {" "}<br/>
+            Certificado UPME para vehículos a{" "}<br/>
             <span style={{ background: "linear-gradient(135deg, #34D399, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Gas Natural Vehicular</span>
           </h1>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 600, margin: "0 auto" }}>
@@ -285,7 +287,7 @@ export default function GNVCalculadora() {
                   <div key={i}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
                       <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>{b.label}</span>
-                      <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5 }}>{b.value ? fmt(b.value) : "-"}</span>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5, whiteSpace: "nowrap" }}>{b.value ? fmt(b.value) : "-"}</span>
                     </div>
                     <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
                       <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct || 0) * 100}%`, transition: "width 0.4s ease" }}/>
@@ -382,7 +384,7 @@ export default function GNVCalculadora() {
 
       {/* Footer */}
       {/* Disclaimer */}
-      <div style={{ background: "var(--amber-50)", borderTop: "1px solid var(--amber-200)", padding: "16px 48px", textAlign: "center" }}>
+      <div className="gnv-disclaimer" style={{ background: "var(--amber-50)", borderTop: "1px solid var(--amber-200)", padding: "16px 48px", textAlign: "center" }}>
         <p style={{ fontSize: 13, color: "var(--amber-600)", lineHeight: 1.6, maxWidth: 700, margin: "0 auto" }}>
           Aplica para vehículos de más de 10 toneladas dedicados al transporte de carga que operan con Gas Natural Vehicular.
         </p>
