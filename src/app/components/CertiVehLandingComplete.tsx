@@ -860,9 +860,9 @@ function Aliados() {
         gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
       }}>
         {[
-          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", maxH: 28, maxW: 150, note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
-          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", maxH: 44, maxW: 90, note: "" },
-          { src: "/aliados-exotics.png", alt: "ExoticsCo", maxH: 36, maxW: 120, note: "" },
+          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", maxH: 30, maxW: 150, note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
+          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", maxH: 32, maxW: 90, note: "" },
+          { src: "/aliados-exotics.png", alt: "ExoticsCo", maxH: 32, maxW: 120, note: "" },
         ].map((a, i) => (
           <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, height: 56, justifyContent: "center" }}>
             <img src={a.src} alt={a.alt} loading="lazy" style={{
@@ -1398,9 +1398,11 @@ function Testimonios() {
 // ── PRENSA ──────────────────────────────────────────────────────────────────
 function Prensa() {
   const medios = [
-    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 24, maxW: 140 },
-    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 48, maxW: 100 },
-    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 22, maxW: 140 },
+    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 28, maxW: 140 },
+    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 30, maxW: 100 },
+    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 28, maxW: 140 },
+    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 26, maxW: 120 },
+    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 28, maxW: 110 },
   ];
   return (
     <section aria-label="CertiVeh en los medios" style={{
@@ -1600,7 +1602,12 @@ function Footer() {
         </div>
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <span style={{ fontSize: 12, lineHeight: 1.4 }}>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-          <span style={{ fontSize: 12, lineHeight: 1.4 }}>contacto@certiveh.co</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <span style={{ fontSize: 12, lineHeight: 1.4 }}>contacto@certiveh.co</span>
+            <a href="https://www.instagram.com/certiveh" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
