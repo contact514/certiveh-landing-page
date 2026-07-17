@@ -1403,6 +1403,7 @@ function Prensa() {
     { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 28, maxW: 140 },
     { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 26, maxW: 120 },
     { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 28, maxW: 110 },
+    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 24, maxW: 140 },
   ];
   return (
     <section aria-label="CertiVeh en los medios" style={{
