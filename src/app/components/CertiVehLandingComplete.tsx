@@ -1404,6 +1404,7 @@ function Prensa() {
     { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 26, maxW: 120 },
     { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 28, maxW: 110 },
     { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 24, maxW: 140 },
+    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 30, maxW: 110 },
   ];
   return (
     <section aria-label="CertiVeh en los medios" style={{
