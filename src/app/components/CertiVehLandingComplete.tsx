@@ -1398,18 +1398,19 @@ function Testimonios() {
 // ── PRENSA ──────────────────────────────────────────────────────────────────
 function Prensa() {
   const medios = [
-    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 22, maxW: 110 },
-    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 24, maxW: 80 },
-    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 22, maxW: 110 },
-    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 20, maxW: 95 },
-    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 22, maxW: 88 },
-    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 18, maxW: 110 },
-    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 24, maxW: 88 },
+    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 26, maxW: 130 },
+    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 28, maxW: 95 },
+    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 26, maxW: 130 },
+    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 24, maxW: 110 },
+    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 26, maxW: 105 },
+    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 22, maxW: 130 },
+    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 28, maxW: 105 },
   ];
+  const track = [...medios, ...medios];
   return (
     <section aria-label="CertiVeh en los medios" style={{
       background: "var(--white)", borderTop: "1px solid var(--slate-200)",
-      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
+      borderBottom: "1px solid var(--slate-200)", padding: "40px 0",
     }}>
       <p style={{
         textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
@@ -1418,22 +1419,32 @@ function Prensa() {
         CertiVeh en los medios
       </p>
       <div style={{
-        display: "flex", alignItems: "center", justifyContent: "center",
-        gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
+        overflow: "hidden", position: "relative",
+        maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
       }}>
-        {medios.map((m, i) => (
-          <a key={i} href={m.url} target="_blank" rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 56, textDecoration: "none" }}
-          >
-            <img src={m.logo} alt={m.name} loading="lazy" style={{
-              maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain",
-              filter: "grayscale(100%)", opacity: 0.35, transition: "opacity 0.3s, filter 0.3s",
-            }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.filter = "grayscale(0%)"; }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = "0.35"; e.currentTarget.style.filter = "grayscale(100%)"; }}
-            />
-          </a>
-        ))}
+        <div style={{
+          display: "flex", alignItems: "center",
+          animation: "ticker 18s linear infinite",
+          width: "max-content",
+        }}
+          onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.animationPlayState = "paused"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.animationPlayState = "running"; }}
+        >
+          {track.map((m, i) => (
+            <a key={i} href={m.url} target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 56, padding: "0 40px", textDecoration: "none", flexShrink: 0 }}
+            >
+              <img src={m.logo} alt={m.name} loading="lazy" style={{
+                maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain",
+                filter: "grayscale(100%)", opacity: 0.35, transition: "opacity 0.3s, filter 0.3s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.filter = "grayscale(0%)"; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = "0.35"; e.currentTarget.style.filter = "grayscale(100%)"; }}
+              />
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
