@@ -1398,13 +1398,13 @@ function Testimonios() {
 // ── PRENSA ──────────────────────────────────────────────────────────────────
 function Prensa() {
   const medios = [
-    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 28, maxW: 140 },
-    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 30, maxW: 100 },
-    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 28, maxW: 140 },
-    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 26, maxW: 120 },
-    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 28, maxW: 110 },
-    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 24, maxW: 140 },
-    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 30, maxW: 110 },
+    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 22, maxW: 110 },
+    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 24, maxW: 80 },
+    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 22, maxW: 110 },
+    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 20, maxW: 95 },
+    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 22, maxW: 88 },
+    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 18, maxW: 110 },
+    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 24, maxW: 88 },
   ];
   return (
     <section aria-label="CertiVeh en los medios" style={{
