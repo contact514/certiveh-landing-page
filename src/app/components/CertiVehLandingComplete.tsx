@@ -1046,7 +1046,7 @@ function PorQueNoSolo() {
     {
       num: "04",
       title: "Leasing, prenda o copropiedad",
-      problema: "El portal no tiene flujo definido para estos casos. Sin guía, los errores son difíciles de corregir.",
+      problema: "El portal de la UPME no tiene flujo definido para estos casos. Sin guía, los errores son difíciles de corregir.",
       solucion: "Tenemos respuestas oficiales de la DIAN y la entidad certificadora que guían cada escenario.",
     },
     {
