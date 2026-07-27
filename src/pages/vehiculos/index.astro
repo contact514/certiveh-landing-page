@@ -118,6 +118,17 @@ const itemListLd = JSON.stringify({
     .vh-directory-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 16px; line-height: 1.5; }
     .vh-directory-cta-note a { color: var(--emerald-600); text-decoration: none; }
     .vh-disclaimer { font-size: 13px; color: var(--slate-400); line-height: 1.5; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--slate-200); }
+
+    .vh-search-wrap { margin-bottom: 24px; position: relative; }
+    .vh-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--slate-400); pointer-events: none; }
+    .vh-search-input { width: 100%; padding: 14px 16px 14px 46px; font-size: 15px; font-family: var(--ff); border: 1px solid var(--slate-200); border-radius: 12px; background: white; color: var(--slate-900); outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+    .vh-search-input:focus { border-color: var(--emerald-600); box-shadow: 0 0 0 3px rgba(5,150,105,0.1); }
+    .vh-search-input::placeholder { color: var(--slate-400); }
+    .vh-brand-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .vh-brand-pill { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 9999px; border: 1px solid var(--slate-200); background: var(--slate-50); color: var(--slate-600); cursor: pointer; transition: all 0.15s; font-family: var(--ff); letter-spacing: 0.01em; }
+    .vh-brand-pill:hover { border-color: var(--emerald-200); background: var(--emerald-50); color: var(--emerald-700); }
+    .vh-brand-pill.active { background: var(--emerald-600); border-color: var(--emerald-600); color: white; }
+    .vh-no-results { text-align: center; padding: 48px 0; color: var(--slate-400); font-size: 15px; display: none; }
     .vh-footer { background: var(--slate-900); color: #64748B; padding: 48px 48px; }
     .vh-footer-inner { max-width: 1200px; margin: 0 auto; }
     .vh-footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
@@ -201,10 +212,23 @@ const itemListLd = JSON.stringify({
       <p class="vh-directory-desc">Directorio de {totalUpmeModels}+ modelos de {upmeBrands.length} marcas que la UPME ha certificado para beneficios tributarios. Esta lista se actualiza periódicamente, pero puede no incluir todos los vehículos elegibles; la UPME agrega nuevos modelos con frecuencia.</p>
     </div>
 
+    <!-- SEARCH + BRAND FILTER -->
+    <div class="vh-search-wrap">
+      <svg class="vh-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="vh-search" class="vh-search-input" type="text" placeholder="Busca por marca o modelo..." autocomplete="off" />
+    </div>
+    <div class="vh-brand-pills">
+      <button class="vh-brand-pill active" data-brand="TODAS">Todas ({totalUpmeModels})</button>
+      {upmeBrands.map(b => (
+        <button class="vh-brand-pill" data-brand={b.marca}>{b.marca} ({b.modelos.length})</button>
+      ))}
+    </div>
+    <p id="vh-no-results" class="vh-no-results">No se encontraron vehículos para tu búsqueda.</p>
+
     {upmeBrands.map(brand => {
       const brandSlugPrefix = brand.marca.toLowerCase().replace(/\s+/g, '-');
       return (
-        <div class="vh-brand-group">
+        <div class="vh-brand-group" data-brand={brand.marca}>
           <h3 class="vh-brand-name">
             {brand.marca}
             <span class="vh-brand-count">{brand.modelos.length} {brand.modelos.length === 1 ? 'modelo' : 'modelos'}</span>
@@ -215,12 +239,12 @@ const itemListLd = JSON.stringify({
               const manualKey = `${brand.marca}:${modelo}`;
               const matchedSlug = upmeToSlug[manualKey] || [...slugSet].find(s => modelSlug.startsWith(s) || s === modelSlug);
               return matchedSlug ? (
-                <a href={`/vehiculos/${matchedSlug}/`} class="vh-model-tag vh-model-tag-linked">
+                <a href={`/vehiculos/${matchedSlug}/`} class="vh-model-tag vh-model-tag-linked" data-model={modelo}>
                   {modelo}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               ) : (
-                <span class="vh-model-tag" title="Página de detalle no disponible aún">{modelo}</span>
+                <span class="vh-model-tag" data-model={modelo} title="Página de detalle no disponible aún">{modelo}</span>
               );
             })}
           </div>
@@ -240,6 +264,57 @@ const itemListLd = JSON.stringify({
   </div>
 
   </main>
+
+  <script is:inline>
+    (function() {
+      const searchInput = document.getElementById('vh-search');
+      const brandPills  = document.querySelectorAll('.vh-brand-pill');
+      const brandGroups = document.querySelectorAll('.vh-brand-group');
+      const noResults   = document.getElementById('vh-no-results');
+      let activeBrand   = 'TODAS';
+
+      function filter() {
+        const q = searchInput.value.toLowerCase().trim();
+        let anyVisible = false;
+
+        brandGroups.forEach(function(group) {
+          const brand = group.dataset.brand;
+          const brandMatch = activeBrand === 'TODAS' || brand === activeBrand;
+          if (!brandMatch) { group.style.display = 'none'; return; }
+
+          if (!q) {
+            group.style.display = '';
+            group.querySelectorAll('[data-model]').forEach(function(m) { m.style.display = ''; });
+            anyVisible = true;
+            return;
+          }
+
+          const brandNameMatch = brand.toLowerCase().includes(q);
+          let anyModel = false;
+          group.querySelectorAll('[data-model]').forEach(function(m) {
+            const show = brandNameMatch || m.dataset.model.toLowerCase().includes(q);
+            m.style.display = show ? '' : 'none';
+            if (show) anyModel = true;
+          });
+          group.style.display = anyModel ? '' : 'none';
+          if (anyModel) anyVisible = true;
+        });
+
+        noResults.style.display = anyVisible ? 'none' : 'block';
+      }
+
+      searchInput.addEventListener('input', filter);
+
+      brandPills.forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          brandPills.forEach(function(p) { p.classList.remove('active'); });
+          pill.classList.add('active');
+          activeBrand = pill.dataset.brand;
+          filter();
+        });
+      });
+    })();
+  </script>
 
   <!-- FOOTER -->
   <footer class="vh-footer" aria-label="Pie de página">
