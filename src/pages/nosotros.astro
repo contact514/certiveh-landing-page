@@ -91,7 +91,7 @@ const webPageLd = JSON.stringify({
       margin-bottom: 24px;
     }
     .nos-hero-title {
-      font-size: clamp(36px, 5.5vw, 52px);
+      font-size: clamp(36px, 5.5vw, 56px);
       font-weight: 700;
       color: white;
       letter-spacing: -0.03em;
@@ -168,7 +168,23 @@ const webPageLd = JSON.stringify({
       border: 1px solid var(--slate-200);
       border-radius: 16px;
       padding: 28px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nos-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #059669 0%, #14B8A6 100%);
+    }
+    .nos-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
     .nos-card-header {
       display: flex;
@@ -241,6 +257,12 @@ const webPageLd = JSON.stringify({
       max-width: 100%;
       height: 40px;
       object-fit: contain;
+    }
+    .nos-lznp-desc {
+      font-size: 15px;
+      color: var(--slate-600);
+      line-height: 1.65;
+      margin-bottom: 4px;
     }
     .nos-lznp-points {
       display: flex;
@@ -444,7 +466,7 @@ const webPageLd = JSON.stringify({
 
         <div>
           <h2 class="nos-section-title">Con el respaldo experto de Lotero Zuluaga Naranjo Puyo</h2>
-          <p style="font-size: 15px; color: var(--slate-600); line-height: 1.65; margin-bottom: 4px;">
+          <p class="nos-lznp-desc">
             Firma colombiana con amplia trayectoria en regulación del sector energético. Su respaldo garantiza que la metodología de CertiVeh esté alineada con los criterios regulatorios vigentes de la UPME y la DIAN.
           </p>
           <div class="nos-lznp-points">
