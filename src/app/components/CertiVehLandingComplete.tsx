@@ -1028,26 +1028,26 @@ function PorQueNoSolo() {
     {
       num: "01",
       title: "Tu vehículo no aparece en la base",
-      problema: "Muchos modelos exigen un concepto técnico previo. Sin él, el trámite se rechaza sin explicación.",
-      solucion: "Gestionamos el alta técnica incluida en la tarifa, antes de radicar.",
+      problema: "Si la línea o modelo no está en la base de la UPME, la solicitud requiere documentación técnica adicional para poder radicarse.",
+      solucion: "Reunimos la documentación técnica adicional necesaria para que cualquier modelo pueda radicarse, esté o no en la base.",
     },
     {
       num: "02",
       title: "Referencia equivocada en el certificado",
-      problema: "\"Tucson\" y \"Tucson Hybrid\" son referencias distintas en la UPME. Un error aquí bloquea el IVA y la deducción en renta.",
+      problema: "Una diferencia mínima en la denominación del modelo puede invalidar el certificado. La UPME trata como referencias distintas versiones que parecen idénticas.",
       solucion: "Verificamos la referencia exacta y gestionamos el alta técnica si no existe en la base.",
     },
     {
       num: "03",
-      title: "El valor registrado incluye IVA",
-      problema: "La base gravable es el valor sin IVA. Registrar el total de la factura genera inconsistencias que bloquean la devolución.",
+      title: "El valor debe registrarse sin IVA",
+      problema: "El certificado debe reflejar el valor sin IVA. Registrar el total de la factura genera un dato incoherente con la DIAN que puede bloquear la devolución.",
       solucion: "Validamos todos los valores antes de radicar para que el certificado sea coherente con la DIAN.",
     },
     {
       num: "04",
       title: "Leasing, prenda o copropiedad",
-      problema: "El portal de la UPME no tiene flujo definido para estos casos. Sin guía, los errores son difíciles de corregir.",
-      solucion: "Sabemos exactamente cómo radicar en cada uno de estos escenarios para que el certificado quede bien emitido.",
+      problema: "La UPME no tiene un proceso estándar documentado para estos escenarios. Sin experiencia previa, los errores son difíciles de corregir una vez radicados.",
+      solucion: "Sabemos cómo radicar estos casos para que el certificado quede bien emitido.",
     },
     {
       num: "05",
