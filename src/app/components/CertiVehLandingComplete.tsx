@@ -1082,13 +1082,13 @@ function PorQueNoSolo() {
           </p>
         </div>
 
-        <div style={{ maxWidth: 1000, margin: "0 auto", border: "1px solid var(--slate-200)", borderRadius: 16, overflow: "hidden" }}>
+        <div style={{ border: "1px solid var(--slate-200)", borderRadius: 16, overflow: "hidden" }}>
 
           {/* Header row */}
           <div className="pqns-row" style={{ ...colStyle, borderBottom: "2px solid var(--slate-200)" }}>
             <div style={{ padding: "14px 32px" }}>
               <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--slate-400)", textTransform: "uppercase" }}>
-                El detalle que puede fallar
+                Problemas comunes
               </span>
             </div>
             <div style={{ padding: "14px 28px", background: "var(--emerald-50)", borderLeft: "2px solid var(--emerald-200)" }}>
@@ -1917,10 +1917,10 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <ComoFunciona/>
         <Calculadora/>
         <Confianza/>
+        <PorQueNoSolo/>
         <Testimonios/>
         <Prensa/>
         <WinWin/>
-        <PorQueNoSolo/>
         <FAQ/>
         <CTAFinal/>
       </main>
