@@ -104,7 +104,7 @@ const CSS = `
   .pqns-row { display: grid; grid-template-columns: 3fr 2fr; }
   @media (max-width: 640px) {
     .pqns-row { grid-template-columns: 1fr !important; }
-    .pqns-row > div:last-child { border-left: none !important; border-top: 1px solid var(--emerald-200); }
+    .pqns-row > div:last-child { border-top: 1px solid var(--slate-200); }
   }
 
   ::-webkit-scrollbar { width: 6px; }
@@ -1085,13 +1085,13 @@ function PorQueNoSolo() {
         <div style={{ border: "1px solid var(--slate-200)", borderRadius: 16, overflow: "hidden" }}>
 
           {/* Header row */}
-          <div className="pqns-row" style={{ ...colStyle, borderBottom: "2px solid var(--slate-200)" }}>
-            <div style={{ padding: "14px 32px" }}>
+          <div className="pqns-row" style={{ ...colStyle, borderBottom: "1px solid var(--slate-200)" }}>
+            <div style={{ padding: "12px 32px" }}>
               <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--slate-400)", textTransform: "uppercase" }}>
                 Problemas comunes
               </span>
             </div>
-            <div style={{ padding: "14px 28px", background: "var(--emerald-50)", borderLeft: "2px solid var(--emerald-200)" }}>
+            <div style={{ padding: "12px 32px", background: "var(--emerald-50)" }}>
               <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--emerald-600)", textTransform: "uppercase" }}>
                 Cómo lo resuelve CertiVeh
               </span>
@@ -1099,19 +1099,21 @@ function PorQueNoSolo() {
           </div>
 
           {/* Data rows */}
-          {items.map((item, i) => (
+          {items.map((item) => (
             <div key={item.num} className="pqns-row" style={{
               ...colStyle,
-              background: i % 2 === 0 ? "var(--white)" : "var(--slate-50)",
+              background: "var(--white)",
               borderTop: "1px solid var(--slate-200)",
             }}>
-              <div style={{ padding: "24px 32px", display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <span style={{
-                  fontSize: 11, fontWeight: 700, color: "var(--emerald-600)",
-                  letterSpacing: "0.04em", paddingTop: 3, flexShrink: 0,
+              <div style={{ padding: "28px 32px", display: "flex", gap: 16, alignItems: "flex-start" }}>
+                <div style={{
+                  width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+                  background: "var(--emerald-50)", color: "var(--emerald-600)",
+                  fontSize: 13, fontWeight: 700,
+                  display: "flex", alignItems: "center", justifyContent: "center",
                 }}>
                   {item.num}
-                </span>
+                </div>
                 <div>
                   <p style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.4, marginBottom: 6, letterSpacing: "-0.01em" }}>
                     {item.title}
@@ -1122,12 +1124,14 @@ function PorQueNoSolo() {
                 </div>
               </div>
               <div style={{
-                padding: "24px 28px",
+                padding: "28px 32px",
                 background: "var(--emerald-50)",
-                borderLeft: "2px solid var(--emerald-200)",
-                display: "flex", alignItems: "center",
+                display: "flex", alignItems: "center", gap: 12,
               }}>
-                <p style={{ fontSize: 14, color: "var(--emerald-800)", lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                <div style={{ flexShrink: 0, marginTop: 1 }}>
+                  <Icon name="checkCircle" size={16} color="var(--emerald-600)" />
+                </div>
+                <p style={{ fontSize: 14, color: "var(--slate-700)", lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
                   {item.solucion}
                 </p>
               </div>
