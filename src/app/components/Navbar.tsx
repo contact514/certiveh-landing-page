@@ -150,6 +150,7 @@ export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
           <a href={link("#servicios")}>Servicios</a>
           <a href={link("#como-funciona")}>Cómo funciona</a>
           <a href={link("#calculadora")}>Calculadora</a>
+          <a href="/vehiculos">Vehículos</a>
           <a href="/blog">Blog</a>
           <a href="/aliados">Aliados</a>
           <a href="/api-docs">API</a>
@@ -167,6 +168,7 @@ export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
         <a href={link("#servicios")} onClick={() => setMobileOpen(false)}>Servicios</a>
         <a href={link("#como-funciona")} onClick={() => setMobileOpen(false)}>Cómo funciona</a>
         <a href={link("#calculadora")} onClick={() => setMobileOpen(false)}>Calculadora</a>
+        <a href="/vehiculos" onClick={() => setMobileOpen(false)}>Vehículos</a>
         <a href="/blog" onClick={() => setMobileOpen(false)}>Blog</a>
         <a href="/aliados" onClick={() => setMobileOpen(false)}>Aliados</a>
         <a href="/api-docs" onClick={() => setMobileOpen(false)}>API</a>
