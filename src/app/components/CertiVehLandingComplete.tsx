@@ -1040,7 +1040,7 @@ function PorQueNoSolo() {
     {
       num: "03",
       title: "El valor debe registrarse sin IVA",
-      problema: "El certificado debe reflejar el valor sin IVA. Registrar el total de la factura genera un dato incoherente con la DIAN que puede invalidar los beneficios.",
+      problema: "El certificado debe reflejar el valor sin IVA. Registrar el total de la factura genera un dato incoherente con la DIAN que puede impedir la aplicación de los beneficios.",
       solucion: "Validamos todos los valores antes de radicar para que el certificado sea coherente con la DIAN.",
     },
     {
