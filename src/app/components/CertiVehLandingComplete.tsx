@@ -967,7 +967,7 @@ function Servicios() {
           </p>
         </div>
 
-        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, maxWidth: 880, margin: "0 auto" }}>
+        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 1040, margin: "0 auto" }}>
           {servicios.map((s, i) => (
             <div key={i} className="card" style={{
               padding: 36, position: "relative", overflow: "hidden",
