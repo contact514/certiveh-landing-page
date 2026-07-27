@@ -1017,6 +1017,141 @@ function Servicios() {
   );
 }
 
+// ── POR QUÉ NO HACERLO SOLO ──────────────────────────────────────────────────
+function PorQueNoSolo() {
+  const items = [
+    {
+      num: "01",
+      title: "Tu vehículo no aparece en la base de la UPME",
+      problema: "Para muchas marcas y modelos la UPME exige un concepto técnico previo antes de aceptar la solicitud. Si lo desconoces, la plataforma simplemente te rechaza sin explicarte por qué.",
+      solucion: "Gestionamos el alta técnica ante la UPME sin costo adicional, dentro de la misma tarifa. Tu vehículo entra a la base antes de radicar.",
+    },
+    {
+      num: "02",
+      title: "Referencia equivocada en el certificado",
+      problema: "\"Corolla\" y \"Corolla Cross\" son referencias distintas en la UPME. Un certificado emitido con la referencia incorrecta hace que la DIAN rechace tanto la devolución del IVA como la deducción en renta.",
+      solucion: "Identificamos la referencia exacta de tu vehículo antes de radicar. Si no existe en la base, solicitamos el alta técnica oportuna.",
+    },
+    {
+      num: "03",
+      title: "El valor registrado incluye impuestos y la DIAN lo rechaza",
+      problema: "La base gravable para los beneficios es el valor del vehículo sin IVA. Si registras el valor total de la factura, el certificado queda con datos inconsistentes y la solicitud de devolución falla.",
+      solucion: "Validamos la coherencia de todos los valores antes de radicar, con énfasis en el dato exacto que aparecerá en tu solicitud de devolución posterior.",
+    },
+    {
+      num: "04",
+      title: "Casos con leasing, prenda o copropiedad",
+      problema: "La plataforma de la UPME no tiene un flujo claro para vehículos con leasing financiero, prenda o en copropiedad. Intentarlo sin guía genera errores que luego son difíciles de corregir.",
+      solucion: "Hemos elevado consultas formales a la DIAN y la UPME para estos escenarios. Sus respuestas oficiales guían nuestra metodología de radicación en cada caso.",
+    },
+    {
+      num: "05",
+      title: "Certificado bien emitido hoy, auditoría en renta mañana",
+      problema: "La UPME emite el certificado con los datos que tú registras y no valida su coherencia con la declaración de renta ni con la solicitud de devolución de IVA. Un error hoy puede revertirse en auditoría años después.",
+      solucion: "Radicamos entendiendo todo el ciclo posterior: devolución de IVA, aplicación en renta y blindaje ante auditoría. El certificado bien emitido es la condición para que el beneficio sobreviva.",
+    },
+  ];
+
+  return (
+    <section aria-label="Por qué usar CertiVeh" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
+      <div className="section">
+
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <span style={{
+            display: "inline-block", fontSize: 11, fontWeight: 700,
+            letterSpacing: "0.1em", color: "var(--emerald-600)",
+            textTransform: "uppercase", marginBottom: 16,
+          }}>
+            Por qué usar CertiVeh
+          </span>
+          <h2 style={{
+            fontSize: "clamp(28px, 3.5vw, 38px)", fontWeight: 700,
+            letterSpacing: "-0.02em", color: "var(--slate-900)",
+            lineHeight: 1.2, marginBottom: 14,
+          }}>
+            El portal de la UPME es gratuito.{" "}
+            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Estos errores, no.
+            </span>
+          </h2>
+          <p style={{
+            fontSize: "clamp(15px, 2vw, 17px)", color: "var(--slate-500)",
+            lineHeight: 1.6, maxWidth: 540, margin: "0 auto",
+          }}>
+            5 puntos donde la autogestión falla y cómo CertiVeh los resuelve.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 1000, margin: "0 auto" }}>
+          {items.map((item) => (
+            <div key={item.num} style={{
+              display: "grid", gridTemplateColumns: "3fr 2fr",
+              border: "1px solid var(--slate-200)", borderRadius: 16,
+              overflow: "hidden", background: "var(--white)",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
+            }}>
+              {/* Problema */}
+              <div style={{ padding: "28px 32px", position: "relative" }}>
+                <div style={{
+                  position: "absolute", top: 20, left: 24,
+                  fontSize: 48, fontWeight: 800, color: "var(--slate-100)",
+                  lineHeight: 1, letterSpacing: "-0.04em", userSelect: "none",
+                }}>
+                  {item.num}
+                </div>
+                <div style={{ position: "relative" }}>
+                  <span style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
+                    background: "var(--amber-100)", color: "var(--amber-600)",
+                    borderRadius: 9999, padding: "3px 10px",
+                    fontSize: 10, fontWeight: 700, letterSpacing: "0.06em",
+                    marginBottom: 12,
+                  }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    PROBLEMA
+                  </span>
+                  <h3 style={{
+                    fontSize: 15, fontWeight: 700, color: "var(--slate-900)",
+                    lineHeight: 1.4, marginBottom: 10,
+                  }}>
+                    {item.title}
+                  </h3>
+                  <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.65, margin: 0 }}>
+                    {item.problema}
+                  </p>
+                </div>
+              </div>
+
+              {/* Solución */}
+              <div style={{
+                padding: "28px 28px",
+                background: "var(--emerald-50)",
+                borderLeft: "2px solid var(--emerald-200)",
+                display: "flex", flexDirection: "column", justifyContent: "center",
+              }}>
+                <span style={{
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  background: "rgba(5,150,105,0.1)", color: "var(--emerald-700)",
+                  borderRadius: 9999, padding: "3px 10px",
+                  fontSize: 10, fontWeight: 700, letterSpacing: "0.06em",
+                  marginBottom: 12, alignSelf: "flex-start",
+                }}>
+                  <Icon name="checkCircle" size={10} color="var(--emerald-700)" />
+                  LO QUE HACEMOS
+                </span>
+                <p style={{ fontSize: 14, color: "var(--emerald-800)", lineHeight: 1.65, margin: 0, fontWeight: 500 }}>
+                  {item.solucion}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 // ── CÓMO FUNCIONA ─────────────────────────────────────────────────────────────
 function ComoFunciona() {
   const [active, setActive] = useState(0);
@@ -1791,6 +1926,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <Aliados/>
         <Beneficios/>
         <Servicios/>
+        <PorQueNoSolo/>
         <ComoFunciona/>
         <Calculadora/>
         <Confianza/>
