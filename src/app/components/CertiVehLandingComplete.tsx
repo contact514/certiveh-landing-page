@@ -1027,9 +1027,9 @@ function PorQueNoSolo() {
   const items = [
     {
       num: "01",
-      title: "Tu vehículo no aparece en la base",
-      problema: "Si la línea o modelo no está en la base de la UPME, la solicitud requiere documentación técnica adicional para poder radicarse.",
-      solucion: "Gestionamos la documentación técnica para radicar aunque tu modelo no aparezca en la base.",
+      title: "Tu vehículo no aparece en el listado",
+      problema: "Si la línea o modelo no está en el listado de la UPME, la solicitud requiere documentación técnica adicional para poder radicarse.",
+      solucion: "Gestionamos la documentación técnica para radicar aunque tu modelo no aparezca en el listado.",
     },
     {
       num: "02",
