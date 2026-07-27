@@ -1047,7 +1047,7 @@ function PorQueNoSolo() {
       num: "04",
       title: "Leasing, prenda o copropiedad",
       problema: "El portal de la UPME no tiene flujo definido para estos casos. Sin guía, los errores son difíciles de corregir.",
-      solucion: "Tenemos respuestas oficiales de la DIAN y la entidad certificadora que guían cada escenario.",
+      solucion: "Sabemos exactamente cómo radicar en cada uno de estos escenarios para que el certificado quede bien emitido.",
     },
     {
       num: "05",
