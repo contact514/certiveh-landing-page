@@ -145,6 +145,7 @@ import { Navbar } from '../app/components/Navbar';
       line-height: 1.75;
       color: var(--slate-600);
       margin-bottom: 14px;
+      text-align: justify;
     }
     .tc-section p:last-child { margin-bottom: 0; }
     .tc-section ol, .tc-section ul {
@@ -156,6 +157,7 @@ import { Navbar } from '../app/components/Navbar';
       line-height: 1.75;
       color: var(--slate-600);
       margin-bottom: 6px;
+      text-align: justify;
     }
     .tc-section li strong { color: var(--slate-900); }
 
@@ -387,14 +389,14 @@ import { Navbar } from '../app/components/Navbar';
       <p>En este sentido, el servicio ofrecido por la Plataforma consiste en facilitar la recopilación, estructuración, seguimiento y verificación preliminar de la Información del Usuario, así como gestionar la presentación del trámite ante la UPME, con el fin de simplificar el proceso para el Usuario.</p>
       <p>En caso de que el Usuario registre información correspondiente a vehículos que no cumplan con dichas condiciones, o que no correspondan a tecnologías eléctricas o híbridas, cualquier consecuencia derivada del rechazo, requerimiento o negación del trámite será de exclusiva responsabilidad del Usuario.</p>
       <p>El proceso podrá comprender, entre otras, las siguientes etapas:</p>
-      <ul>
+      <ol>
         <li>Registro del Usuario en la Plataforma y diligenciamiento de la información básica del solicitante.</li>
         <li>Registro de la información del vehículo o del proyecto, cuando el trámite sea realizado por la ventanilla general de GEE, incluyendo las características técnicas y demás datos requeridos para la solicitud.</li>
         <li>Carga de los documentos de soporte necesarios para el trámite, tales como documentos de identificación, certificado de existencia y representación legal, cuando corresponda, ficha técnica del vehículo y certificaciones técnicas exigidas.</li>
         <li>Revisión preliminar de la información y documentos suministrados por el Usuario con el fin de verificar su integridad antes de la radicación del trámite.</li>
         <li>Gestión y radicación de la solicitud ante la UPME mediante los sistemas oficiales dispuestos por dicha entidad.</li>
         <li>Seguimiento del trámite, incluida la comunicación al Usuario de eventuales requerimientos de información adicional que formule la UPME.</li>
-      </ul>
+      </ol>
       <p>El Usuario reconoce que la evaluación, verificación y decisión sobre la solicitud corresponden exclusivamente a la UPME, entidad competente para determinar el cumplimiento de los requisitos y para expedir, modificar o negar el certificado correspondiente.</p>
       <p>En consecuencia, el Operador de la Plataforma no tiene competencia para aprobar, negar o modificar certificaciones ni para otorgar incentivos tributarios, funciones que corresponden exclusivamente a la UPME.</p>
     </div>
@@ -818,13 +820,13 @@ import { Navbar } from '../app/components/Navbar';
         <h2 class="tc-section-title">Información del Operador de la Plataforma</h2>
       </div>
       <p>La Plataforma es operada por:</p>
-      <ul>
-        <li><strong>Razón social:</strong> CERTIVEH S.A.S.</li>
-        <li><strong>NIT:</strong> 902051875-8</li>
-        <li><strong>Domicilio:</strong> Carrera 43 A No. 1 SUR 100, Medellín, Antioquia, Colombia</li>
-        <li><strong>Correo electrónico de contacto:</strong> certiveh.contacto@gmail.com</li>
-        <li><strong>Correo electrónico para notificaciones judiciales:</strong> certiveh.contacto@gmail.com</li>
-      </ul>
+      <div class="tc-highlight">
+        <p><strong>CERTIVEH S.A.S.</strong><br>
+        NIT: 902051875-8<br>
+        Domicilio: Carrera 43 A No. 1 SUR 100, Medellín, Antioquia, Colombia<br>
+        Correo de contacto: certiveh.contacto@gmail.com<br>
+        Notificaciones judiciales: certiveh.contacto@gmail.com</p>
+      </div>
       <p>Para cualquier consulta, solicitud o reclamación relacionada con el uso de la Plataforma o con los servicios prestados a través de la misma, el Usuario podrá comunicarse a través de los canales de contacto indicados anteriormente.</p>
       <p>Las notificaciones judiciales dirigidas al Operador de la Plataforma deberán enviarse al correo electrónico indicado para tal fin, de conformidad con lo dispuesto en la legislación colombiana vigente.</p>
     </div>
@@ -1092,7 +1094,7 @@ import { Navbar } from '../app/components/Navbar';
       <p>El Servicio de Devolución del IVA constituye una herramienta tecnológica de apoyo y un servicio de gestión administrativa mediante el cual el Operador de la Plataforma recopila, organiza, revisa de manera preliminar, diligencia y radica ante la DIAN la solicitud de devolución del IVA pagado en la adquisición de un vehículo eléctrico o híbrido, con fundamento en la información y documentación suministradas por el Usuario.</p>
       <p>El Usuario declara que la solicitud de devolución gestionada a través de la Plataforma corresponde exclusivamente al IVA efectivamente pagado en la adquisición de un vehículo eléctrico o híbrido que cuenta con el Certificado UPME y que cumple las condiciones establecidas en la normativa aplicable.</p>
       <p>El proceso podrá comprender, entre otras, las siguientes etapas:</p>
-      <ul>
+      <ol>
         <li>Registro del Usuario en la Plataforma y diligenciamiento de la información básica del solicitante.</li>
         <li>Carga de los Documentos del Trámite a que se refiere el artículo VI.</li>
         <li>Revisión preliminar de la información y documentos suministrados por el Usuario, con el fin de verificar su integridad antes de la radicación.</li>
@@ -1101,7 +1103,7 @@ import { Navbar } from '../app/components/Navbar';
         <li>Solicitud de la Cita DIAN, cuando la ciudad o Dirección Seccional competente así lo exija, sujeta a la disponibilidad de agenda de la DIAN.</li>
         <li>Radicación de la solicitud de devolución ante la DIAN por los canales oficiales dispuestos por dicha entidad.</li>
         <li>Seguimiento del trámite y comunicación al Usuario de eventuales requerimientos de información adicional, inadmisiones, rechazos o decisiones que adopte la DIAN.</li>
-      </ul>
+      </ol>
       <p>El Usuario reconoce que la evaluación, verificación y decisión sobre la solicitud de devolución corresponden exclusivamente a la DIAN, entidad competente para determinar el cumplimiento de los requisitos y para reconocer, inadmitir, rechazar o negar la devolución solicitada. En consecuencia, el Operador de la Plataforma no tiene competencia para aprobar, negar o modificar devoluciones, ni para efectuar el pago correspondiente, funciones que corresponden exclusivamente a la DIAN.</p>
     </div>
 
@@ -1139,7 +1141,7 @@ import { Navbar } from '../app/components/Navbar';
       <div class="tc-highlight">
         <p><strong>El Usuario reconoce y acepta que la solicitud de devolución del IVA únicamente procede dentro de los cinco (5) años contados a partir de la fecha de emisión de la factura de venta del vehículo,</strong> de conformidad con el término de prescripción aplicable y con la doctrina vigente de la DIAN, en particular el Concepto DIAN No. 000673 del 16 de enero de 2026. Transcurrido dicho término, el derecho a solicitar la devolución se extingue y la solicitud podrá ser rechazada por la DIAN por extemporánea.</p>
       </div>
-      <p>Con el fin de proteger al Usuario y de asegurar que el trámite completo —incluyendo el diligenciamiento, la firma, la solicitud de la Cita DIAN y la radicación— pueda surtirse dentro del término legal, la Plataforma no habilitará la contratación del Servicio de Devolución del IVA respecto de vehículos cuya factura de venta tenga una antigüedad superior a cuatro (4) años y seis (6) meses al momento de la solicitud. Lo anterior constituye un margen de seguridad operativo y no modifica el término legal de cinco (5) años establecido por la normativa aplicable.</p>
+      <p>Con el fin de proteger al Usuario y de asegurar que el trámite completo (incluyendo el diligenciamiento, la firma, la solicitud de la Cita DIAN y la radicación) pueda surtirse dentro del término legal, la Plataforma no habilitará la contratación del Servicio de Devolución del IVA respecto de vehículos cuya factura de venta tenga una antigüedad superior a cuatro (4) años y seis (6) meses al momento de la solicitud. Lo anterior constituye un margen de seguridad operativo y no modifica el término legal de cinco (5) años establecido por la normativa aplicable.</p>
       <p>En consecuencia, el Usuario acepta que, si la factura de venta del vehículo supera la antigüedad indicada, la Plataforma no habilitará la opción de contratación de este servicio, y que dicha restricción obedece al cumplimiento de los plazos establecidos por la normativa aplicable.</p>
       <p>No obstante lo anterior, en el evento en que, por cualquier causa, la Plataforma llegare a habilitar la contratación del Servicio de Devolución del IVA respecto de un vehículo cuya factura de venta tenga una antigüedad superior a la permitida, o próxima a cumplir el término de cinco (5) años, el Usuario reconoce y acepta que ello no genera responsabilidad alguna para el Operador de la Plataforma. En tal caso, el Usuario asume de manera exclusiva el riesgo de que la DIAN inadmita, rechace o niegue la solicitud por extemporaneidad o por prescripción del término legal, y declara que es su responsabilidad verificar la fecha de emisión de la factura de venta y el cumplimiento del plazo de cinco (5) años antes de contratar el servicio. El Usuario renuncia expresamente a formular cualquier reclamación, solicitud de reembolso o acción contra el Operador de la Plataforma fundada en el rechazo, la inadmisión o la negación de la solicitud por causa de la antigüedad del vehículo o del vencimiento del término legal aplicable.</p>
     </div>
@@ -1250,12 +1252,12 @@ import { Navbar } from '../app/components/Navbar';
         <h2 class="tc-section-title">Información del Operador de la Plataforma</h2>
       </div>
       <p>La Plataforma es operada por:</p>
-      <ul>
-        <li><strong>Razón social:</strong> CERTIVEH S.A.S.</li>
-        <li><strong>NIT:</strong> 902051875-8</li>
-        <li><strong>Domicilio:</strong> Carrera 43 A No. 1 SUR 100, Medellín, Antioquia, Colombia</li>
-        <li><strong>Correo electrónico de contacto y para notificaciones judiciales:</strong> certiveh.contacto@gmail.com</li>
-      </ul>
+      <div class="tc-highlight">
+        <p><strong>CERTIVEH S.A.S.</strong><br>
+        NIT: 902051875-8<br>
+        Domicilio: Carrera 43 A No. 1 SUR 100, Medellín, Antioquia, Colombia<br>
+        Correo de contacto y notificaciones judiciales: certiveh.contacto@gmail.com</p>
+      </div>
       <p>Para cualquier consulta, solicitud o reclamación relacionada con el Servicio de Devolución del IVA, el Usuario podrá comunicarse a través de los canales de contacto indicados anteriormente.</p>
     </div>
 
