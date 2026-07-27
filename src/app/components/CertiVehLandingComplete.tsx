@@ -942,7 +942,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Documentación técnica si tu modelo no figura en el listado", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
+      features: ["Radicación automática ante la UPME", "Documentación técnica si tu modelo no está en el listado", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
