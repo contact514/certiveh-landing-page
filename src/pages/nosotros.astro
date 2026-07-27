@@ -21,6 +21,28 @@ const webPageLd = JSON.stringify({
   publisher: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
   inLanguage: 'es-CO',
 });
+
+const foundersLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Julian Delgado',
+    jobTitle: 'Co-fundador',
+    worksFor: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+    alumniOf: { '@type': 'Organization', name: 'Stanford Graduate School of Business' },
+    sameAs: 'https://www.linkedin.com/in/juliandelgadomoreno/',
+    url: 'https://certiveh.co/nosotros/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Agustín Jaramillo',
+    jobTitle: 'Co-fundador',
+    worksFor: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
+    sameAs: 'https://www.linkedin.com/in/agustin-jaramillo-londono/',
+    url: 'https://certiveh.co/nosotros/',
+  },
+]);
 ---
 
 <BaseLayout
@@ -31,6 +53,7 @@ const webPageLd = JSON.stringify({
 >
   <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   <script slot="head" type="application/ld+json" set:html={webPageLd} />
+  <script slot="head" type="application/ld+json" set:html={foundersLd} />
 
   <style is:inline>
     :root {

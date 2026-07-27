@@ -13,7 +13,8 @@ export default defineConfig({
     filter: (page) =>
       !page.includes('/terminos-y-condiciones') &&
       !page.includes('/politica-de-privacidad') &&
-      !page.includes('/exotics'),
+      !page.includes('/exotics') &&
+      !page.includes('/gnv'),
   })],
   vite: {
     plugins: [tailwindcss()],
