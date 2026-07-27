@@ -108,7 +108,7 @@ const webPageLd = JSON.stringify({
       font-size: 16px;
       color: rgba(255,255,255,0.5);
       line-height: 1.6;
-      max-width: 540px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
@@ -128,7 +128,7 @@ const webPageLd = JSON.stringify({
       font-weight: 700;
       color: var(--slate-900);
       letter-spacing: -0.02em;
-      line-height: 1.2;
+      line-height: 1.15;
       margin-bottom: 14px;
     }
     .nos-section-desc {
@@ -171,7 +171,7 @@ const webPageLd = JSON.stringify({
       box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     .nos-card::before {
       content: '';
@@ -296,6 +296,7 @@ const webPageLd = JSON.stringify({
       border-radius: 20px;
       padding: 64px 48px;
       text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
     }
     .nos-cta-title {
       font-size: clamp(28px, 3.5vw, 36px);
@@ -328,11 +329,13 @@ const webPageLd = JSON.stringify({
       border: none;
       border-radius: 12px;
       text-decoration: none;
+      cursor: pointer;
       font-family: var(--ff);
       transition: transform 0.1s, box-shadow 0.2s;
       box-shadow: 0 4px 24px rgba(5,150,105,0.4);
     }
     .nos-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.4); }
+    .nos-btn-primary:active { transform: translateY(0); }
 
     /* ── FOOTER ── */
     .nos-footer {
@@ -490,7 +493,7 @@ const webPageLd = JSON.stringify({
   </section>
 
   <!-- CTA -->
-  <section class="nos-section nos-section-light">
+  <section class="nos-section nos-section-muted">
     <div class="nos-container">
       <div class="nos-cta-box">
         <h2 class="nos-cta-title">¿Listo para recuperar <span>lo que es tuyo</span>?</h2>
