@@ -1113,10 +1113,10 @@ function PorQueNoSolo() {
                   {item.num}
                 </span>
                 <div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: "var(--slate-900)", lineHeight: 1.4, marginBottom: 6 }}>
+                  <p style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.4, marginBottom: 6, letterSpacing: "-0.01em" }}>
                     {item.title}
                   </p>
-                  <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.65, margin: 0 }}>
+                  <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6, margin: 0 }}>
                     {item.problema}
                   </p>
                 </div>
@@ -1127,7 +1127,7 @@ function PorQueNoSolo() {
                 borderLeft: "2px solid var(--emerald-200)",
                 display: "flex", alignItems: "center",
               }}>
-                <p style={{ fontSize: 13, color: "var(--emerald-800)", lineHeight: 1.65, margin: 0, fontWeight: 500 }}>
+                <p style={{ fontSize: 14, color: "var(--emerald-800)", lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
                   {item.solucion}
                 </p>
               </div>
