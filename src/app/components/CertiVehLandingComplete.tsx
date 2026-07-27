@@ -1034,7 +1034,7 @@ function PorQueNoSolo() {
     {
       num: "02",
       title: "Referencia equivocada en el certificado",
-      problema: "Una diferencia mínima en la denominación del modelo puede invalidar el certificado. Versiones que parecen idénticas se registran como referencias distintas.",
+      problema: "Una diferencia mínima en la denominación puede invalidar el certificado. Versiones que parecen iguales son referencias distintas.",
       solucion: "Verificamos la referencia exacta y reunimos la documentación adicional si no aparece en la base.",
     },
     {
