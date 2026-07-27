@@ -1034,7 +1034,7 @@ function PorQueNoSolo() {
     {
       num: "02",
       title: "Referencia equivocada en el certificado",
-      problema: "Una diferencia mínima en la denominación del modelo puede invalidar el certificado. La UPME trata como referencias distintas versiones que parecen idénticas.",
+      problema: "Una diferencia mínima en la denominación del modelo puede invalidar el certificado. Versiones que parecen idénticas se registran como referencias distintas.",
       solucion: "Verificamos la referencia exacta y gestionamos el alta técnica si no existe en la base.",
     },
     {
@@ -1047,7 +1047,7 @@ function PorQueNoSolo() {
       num: "04",
       title: "Leasing, prenda o copropiedad",
       problema: "La UPME no tiene un proceso estándar documentado para estos escenarios. Sin experiencia previa, los errores son difíciles de corregir una vez radicados.",
-      solucion: "Sabemos cómo radicar estos casos para que el certificado quede bien emitido.",
+      solucion: "Gestionamos estos escenarios con el proceso correcto para que el certificado quede bien emitido.",
     },
     {
       num: "05",
