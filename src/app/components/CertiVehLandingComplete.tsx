@@ -942,7 +942,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Alta técnica si tu vehículo no figura en UPME", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
+      features: ["Radicación automática ante la UPME", "Documentación técnica si tu modelo no figura en el listado", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
@@ -953,7 +953,7 @@ function Servicios() {
       desc: "Acompañamiento integral para recuperar el IVA ante la DIAN (Concepto DIAN 673/2026). Preparamos todo el expediente y te indicamos exactamente cómo y dónde radicar.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Estudio del perfil tributario", "Determinación de la vía de radicación correcta", "Generación documental completa", "Instructivo paso a paso para la radicación"],
+      features: ["Preparación integral del expediente", "Determinación de la vía de radicación correcta", "Generación documental completa", "Instructivo paso a paso para la radicación"],
       note: "La radicación la haces tú (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades). Te indicamos exactamente qué hacer.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
@@ -1650,7 +1650,7 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh estudia tu perfil tributario, determina la vía de radicación correcta (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades), genera todos los documentos necesarios y te entrega un instructivo paso a paso para que radiques tú mismo ante la DIAN. Todo el proceso de preparación es 100% en línea desde tu dashboard." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh revisa la documentación y prepara el expediente, determina la vía de radicación correcta (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades), genera todos los documentos necesarios y te entrega un instructivo paso a paso para que radiques tú mismo ante la DIAN. Todo el proceso de preparación es 100% en línea desde tu dashboard." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
