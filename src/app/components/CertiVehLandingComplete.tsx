@@ -106,10 +106,6 @@ const CSS = `
     .pqns-row { grid-template-columns: 1fr !important; }
     .pqns-row > div:last-child { border-left: none !important; border-top: 1px solid var(--emerald-200); }
   }
-  .equipo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-  @media (max-width: 768px) {
-    .equipo-grid { grid-template-columns: 1fr; gap: 32px; }
-  }
 
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--slate-100); }
@@ -1636,95 +1632,6 @@ function WinWin() {
   );
 }
 
-// ── EQUIPO ────────────────────────────────────────────────────────────────────
-function Equipo() {
-  const tag = (label: string, variant: "green" | "slate") =>
-    variant === "green"
-      ? <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 9999, background: "var(--emerald-50)", color: "var(--emerald-700)", border: "1px solid var(--emerald-200)" }}>{label}</span>
-      : <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 9999, background: "var(--slate-100)", color: "var(--slate-600)" }}>{label}</span>;
-
-  return (
-    <section aria-label="El equipo de CertiVeh" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
-      <div className="section">
-
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>
-            Quiénes están detrás de{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              CertiVeh
-            </span>
-          </h2>
-        </div>
-
-        <div className="equipo-grid">
-
-          {/* Foto */}
-          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid var(--slate-200)" }}>
-            <img
-              src="/founders-photo.jpg"
-              alt="Julián Delgado y Agustín Jaramillo, co-fundadores de CertiVeh"
-              style={{ width: "100%", height: 480, objectFit: "cover", objectPosition: "top center", display: "block" }}
-            />
-          </div>
-
-          {/* Info */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-
-            {/* Julián */}
-            <div className="card" style={{ padding: 28 }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
-                <p style={{ fontSize: 18, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", margin: 0 }}>Julián Delgado</p>
-                <a href="https://www.linkedin.com/in/juliandelgadomoreno/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--slate-400)", flexShrink: 0 }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#0A66C2")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "var(--slate-400)")}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-              </div>
-              <p style={{ fontSize: 14, color: "var(--slate-500)", marginBottom: 14 }}>Co-fundador · CEO</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
-                {tag("Stanford GSB Alumni", "green")}
-                {tag("Fintech · Tecnología", "slate")}
-              </div>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, margin: 0 }}>
-                Fundador en serie con experiencia en fintech. Lidera el desarrollo tecnológico de CertiVeh.
-              </p>
-            </div>
-
-            {/* Agustín */}
-            <div className="card" style={{ padding: 28 }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
-                <p style={{ fontSize: 18, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", margin: 0 }}>Agustín Jaramillo</p>
-                <a href="https://www.linkedin.com/in/agustin-jaramillo-londono/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--slate-400)", flexShrink: 0 }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#0A66C2")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "var(--slate-400)")}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-              </div>
-              <p style={{ fontSize: 14, color: "var(--slate-500)", marginBottom: 14 }}>Co-fundador · Representante Legal</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
-                {tag("Sector Energía", "green")}
-                {tag("Comercial · BD", "slate")}
-              </div>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6, margin: 0 }}>
-                Trayectoria en el sector energético colombiano. Representante legal y liderazgo comercial de CertiVeh.
-              </p>
-            </div>
-
-            {/* Respaldo LZNP */}
-            <div style={{ padding: "20px 28px", background: "var(--slate-900)", borderRadius: 16 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 14 }}>
-                Con el respaldo experto de
-              </p>
-              <img src="/lznp-logo.png" alt="Lotero Zuluaga Naranjo Puyo" style={{ height: 28, opacity: 0.9 }} />
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ── FAQ ──────────────────────────────────────────────────────────────────────
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
@@ -1819,7 +1726,7 @@ function Footer() {
             {[
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Servicios", href: "#servicios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
               { label: "Recursos", links: [{ text: "Vehículos", href: "/vehiculos/" }, { text: "Blog", href: "/blog" }, { text: "API", href: "/api-docs" }] },
-              { label: "Partners", links: [{ text: "Programa de Aliados", href: "/aliados" }, { text: "Aplicar ahora", href: "https://aliado.certiveh.co/" }] },
+              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }, { text: "Aplicar ahora", href: "https://aliado.certiveh.co/" }] },
               { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
             ].map(col => (
               <div key={col.label}>
@@ -2014,7 +1921,6 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <Testimonios/>
         <Prensa/>
         <WinWin/>
-        <Equipo/>
         <FAQ/>
         <CTAFinal/>
       </main>
