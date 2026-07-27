@@ -1052,8 +1052,8 @@ function PorQueNoSolo() {
     {
       num: "05",
       title: "Certificado correcto hoy, auditoría después",
-      problema: "El certificado recoge lo que registras sin validar coherencia con tu renta ni con la devolución de IVA.",
-      solucion: "Radicamos con visión del ciclo completo: IVA, renta y blindaje ante auditoría.",
+      problema: "El certificado recoge lo que registras sin verificar que los valores y referencias sean correctos. Un error es difícil de corregir una vez emitido.",
+      solucion: "Revisamos que el certificado quede perfectamente emitido para que resista una eventual auditoría.",
     },
   ];
 
