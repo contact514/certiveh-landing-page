@@ -1025,7 +1025,7 @@ function ComoFunciona() {
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
     { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
     { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
-    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas directamente desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
+    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard junto con la guía técnica para tu contador.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
   ];
   
   useEffect(() => {
@@ -1674,18 +1674,18 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
           <div style={{ marginBottom: 20 }}>
             <span style={{
               display: "inline-flex", alignItems: "center", gap: 8,
-              background: 'rgba(255,255,255,0.06)',
+              background: 'rgba(239,68,68,0.12)',
               backdropFilter: 'blur(8px)',
-              color: 'rgba(255,255,255,0.85)',
-              border: "1px solid rgba(255,255,255,0.1)",
+              color: 'rgba(252,165,165,0.9)',
+              border: "1px solid rgba(239,68,68,0.25)",
               borderRadius: 9999,
               padding: "6px 14px",
               fontSize: 11,
               fontWeight: 600,
-              letterSpacing: '0.04em'
+              letterSpacing: '0.08em'
             }}>
-              <Icon name="shield" size={11} color="#34D399" />
-              Protege tu beneficio
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F87171', display: 'inline-block' }} />
+              ADVERTENCIA DE PLAZO
             </span>
           </div>
 
@@ -1697,7 +1697,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             marginBottom: 8,
             letterSpacing: '-0.01em'
           }}>
-            ¿Y si cambian los beneficios?
+            Antes de irte:
           </h2>
 
           <h3 style={{
@@ -1711,16 +1711,25 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             marginBottom: 24,
             letterSpacing: '-0.02em'
           }}>
-            Blinda tu ahorro hoy.
+            Tu IVA puede prescribir.
           </h3>
 
           <p style={{
             fontSize: 15,
             lineHeight: 1.7,
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(255,255,255,0.7)',
+            marginBottom: 16
+          }}>
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si compraste en 2021 o 2022, ya estás contra el reloj.
+          </p>
+
+          <p style={{
+            fontSize: 13,
+            lineHeight: 1.6,
+            color: 'rgba(255,255,255,0.4)',
             marginBottom: 32
           }}>
-            La normativa tributaria cambia. Los incentivos que hoy te dan hasta el 50% de deducción en renta podrían reducirse o eliminarse en una próxima reforma. Radicar tu trámite ahora te permite acogerte a la ley vigente y proteger tu beneficio como un derecho adquirido ante cualquier cambio futuro.
+            Además, la normativa tributaria puede cambiar. Radicar hoy blinda tu beneficio del 50% en renta como un derecho adquirido ante cualquier reforma futura.
           </p>
 
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
@@ -1747,7 +1756,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             fontStyle: 'italic',
             textAlign: 'center'
           }}>
-            Radicar hoy garantiza la aplicación de la norma actual bajo el principio de confianza legítima.
+            Plazo legal: 5 años desde la factura · Art. 2536 Código Civil · Concepto DIAN 673/2026.
           </p>
         </motion.div>
       </motion.div>
