@@ -937,7 +937,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Sin tocar ningún portal gubernamental", "Desbloquea los 3 beneficios tributarios"],
+      features: ["Radicación automática ante la UPME", "Alta técnica si tu vehículo no figura en UPME", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
@@ -945,14 +945,15 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "¿Ya tienes tu certificado UPME? Nosotros nos encargamos de recuperar tu IVA ante la DIAN. Todo el proceso, de principio a fin.",
+      desc: "Acompañamiento integral para recuperar el IVA ante la DIAN (Concepto DIAN 673/2026). Preparamos todo el expediente y te indicamos exactamente cómo y dónde radicar.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Gestión completa ante la DIAN", "100% en línea desde tu dashboard", "Recupera el 5% de IVA de tu vehículo"],
+      features: ["Estudio del perfil tributario", "Determinación de la vía de radicación correcta", "Generación documental completa", "Instructivo paso a paso para la radicación"],
+      note: "La radicación la haces tú (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades). Te indicamos exactamente qué hacer.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
-  ];
+  ] as Array<{ icon: string; tag: string; title: string; desc: string; price: string; priceNote: string; features: string[]; note?: string; accentColor: string; iconBg: string }>;
   return (
     <section id="servicios" aria-label="Servicios CertiVeh" style={{ background: "var(--slate-50)" }}>
       <div className="section">
@@ -962,7 +963,7 @@ function Servicios() {
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Cero burocracia.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 540, margin: "0 auto" }}>
-            CertiVeh gestiona tus beneficios tributarios de principio a fin. Desde el certificado UPME hasta la devolución de tu IVA ante la DIAN.
+            CertiVeh gestiona el certificado UPME y te acompaña paso a paso para recuperar tu IVA ante la DIAN.
           </p>
         </div>
 
@@ -991,6 +992,12 @@ function Servicios() {
                   </div>
                 ))}
               </div>
+
+              {s.note && (
+                <div style={{ background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
+                  <strong style={{ color: "var(--slate-700)", fontWeight: 600 }}>¿Cómo se radica?</strong>{" "}{s.note}
+                </div>
+              )}
 
               <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 20, marginTop: "auto" }}>
                 <div style={{ fontSize: 24, fontWeight: 700, color: s.accentColor, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.price}</div>
@@ -1513,7 +1520,7 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh gestiona todo el proceso de devolución del IVA ante la DIAN. Puedes contratarlo al momento del checkout del certificado UPME con precio preferencial, o después de forma standalone desde tu dashboard. Todo el proceso es 100% en línea." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh estudia tu perfil tributario, determina la vía de radicación correcta (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades), genera todos los documentos necesarios y te entrega un instructivo paso a paso para que radiques tú mismo ante la DIAN. Todo el proceso de preparación es 100% en línea desde tu dashboard." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
