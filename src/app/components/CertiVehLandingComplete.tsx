@@ -1027,33 +1027,33 @@ function PorQueNoSolo() {
   const items = [
     {
       num: "01",
-      title: "Tu vehículo no aparece en la base de certificados",
-      problema: "Para muchas marcas y modelos se exige un concepto técnico previo antes de aceptar la solicitud. Si lo desconoces, el trámite se rechaza sin explicación.",
-      solucion: "Gestionamos el alta técnica sin costo adicional, dentro de la misma tarifa. Tu vehículo entra a la base antes de radicar.",
+      title: "Tu vehículo no aparece en la base",
+      problema: "Muchos modelos exigen un concepto técnico previo. Sin él, el trámite se rechaza sin explicación.",
+      solucion: "Gestionamos el alta técnica incluida en la tarifa, antes de radicar.",
     },
     {
       num: "02",
       title: "Referencia equivocada en el certificado",
-      problema: "\"Corolla\" y \"Corolla Cross\" son referencias distintas. Un certificado con la referencia incorrecta hace que la DIAN rechace la devolución del IVA y la deducción en renta.",
-      solucion: "Identificamos la referencia exacta antes de radicar. Si no existe en la base, solicitamos el alta técnica oportuna.",
+      problema: "\"Tucson\" y \"Tucson Hybrid\" son referencias distintas en la UPME. Un error aquí bloquea el IVA y la deducción en renta.",
+      solucion: "Verificamos la referencia exacta y gestionamos el alta técnica si no existe en la base.",
     },
     {
       num: "03",
-      title: "El valor registrado incluye IVA y la DIAN lo rechaza",
-      problema: "La base gravable es el valor del vehículo sin IVA. Registrar el valor total de la factura deja el certificado con datos inconsistentes y la devolución falla.",
-      solucion: "Validamos la coherencia de todos los valores antes de radicar, con énfasis en el dato exacto que aparecerá en tu solicitud de devolución.",
+      title: "El valor registrado incluye IVA",
+      problema: "La base gravable es el valor sin IVA. Registrar el total de la factura genera inconsistencias que bloquean la devolución.",
+      solucion: "Validamos todos los valores antes de radicar para que el certificado sea coherente con la DIAN.",
     },
     {
       num: "04",
-      title: "Leasing, prenda o copropiedad sin flujo claro",
-      problema: "El portal no tiene un flujo definido para estos escenarios. Intentarlo sin guía genera errores difíciles de corregir después.",
-      solucion: "Hemos elevado consultas formales a la DIAN y a la entidad certificadora. Sus respuestas oficiales guían nuestra metodología en cada caso.",
+      title: "Leasing, prenda o copropiedad",
+      problema: "El portal no tiene flujo definido para estos casos. Sin guía, los errores son difíciles de corregir.",
+      solucion: "Tenemos respuestas oficiales de la DIAN y la entidad certificadora que guían cada escenario.",
     },
     {
       num: "05",
-      title: "Certificado correcto hoy, auditoría en renta después",
-      problema: "El certificado se emite con los datos que registras, sin validar coherencia con tu declaración de renta ni con la devolución de IVA. Un error hoy puede revertirse en auditoría años después.",
-      solucion: "Radicamos entendiendo todo el ciclo posterior: devolución de IVA, aplicación en renta y blindaje ante auditoría. El certificado bien emitido es la condición para que el beneficio sobreviva.",
+      title: "Certificado correcto hoy, auditoría después",
+      problema: "El certificado recoge lo que registras sin validar coherencia con tu renta ni con la devolución de IVA.",
+      solucion: "Radicamos con visión del ciclo completo: IVA, renta y blindaje ante auditoría.",
     },
   ];
 
