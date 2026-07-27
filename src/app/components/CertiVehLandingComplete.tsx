@@ -1034,7 +1034,7 @@ function PorQueNoSolo() {
     {
       num: "02",
       title: "Referencia equivocada en el certificado",
-      problema: "La línea y el modelo exactos del vehículo importan al radicar. Una diferencia mínima puede invalidar el certificado.",
+      problema: "Una diferencia mínima en la denominación puede invalidar el certificado. Versiones que parecen iguales se registran como referencias distintas.",
       solucion: "Verificamos la referencia exacta y reunimos la documentación adicional si no aparece en la base.",
     },
     {
