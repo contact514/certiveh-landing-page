@@ -101,6 +101,24 @@ const CSS = `
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
+  @keyframes grad-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .btn-grad {
+    background: linear-gradient(135deg, #059669 0%, #34D399 50%, #14B8A6 100%) !important;
+    background-size: 200% 200% !important;
+    animation: grad-shift 4s ease infinite;
+    transition: transform 0.1s, box-shadow 0.15s !important;
+  }
+  .btn-grad:hover {
+    background: linear-gradient(135deg, #059669 0%, #34D399 50%, #14B8A6 100%) !important;
+    background-size: 200% 200% !important;
+    animation-duration: 1.5s;
+    transform: translateY(-1px);
+  }
+  .btn-grad:active { transform: translateY(0); }
   .pqns-row { display: grid; grid-template-columns: 3fr 2fr; }
   @media (max-width: 640px) {
     .pqns-row { grid-template-columns: 1fr !important; }
@@ -779,8 +797,7 @@ function Hero() {
         position: "relative", zIndex: 1
       }}>
         <a href="#calculadora" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{
-            background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)",
+          <button className="btn-primary btn-primary-lg btn-grad" style={{
             boxShadow: "0 4px 24px rgba(5,150,105,0.4), 0 1px 2px rgba(0,0,0,0.2)",
             padding: "16px 36px", fontSize: 16, borderRadius: 12,
           }}>
@@ -1010,7 +1027,7 @@ function Servicios() {
               </div>
 
               <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", marginTop: 20 }}>
-                <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
+                <button className="btn-primary btn-primary-lg btn-grad" style={{ width: "100%", justifyContent: "center", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
                   {i === 0 ? "Empezar mi trámite" : "Solicitar devolución de IVA"} <Icon name="arrowRight" size={18} color="white"/>
                 </button>
               </a>
@@ -1440,7 +1457,7 @@ function Calculadora() {
             )}
 
             <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
-              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
+              <button className="btn-primary btn-primary-lg btn-grad" style={{ width: "100%", justifyContent: "center", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
                 Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
             </a>
@@ -1629,7 +1646,7 @@ function WinWin() {
 
         <div style={{ textAlign: "center" }}>
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
+            <button className="btn-primary btn-primary-lg btn-grad" style={{ boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
               Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
             </button>
           </a>
@@ -1701,7 +1718,7 @@ function CTAFinal() {
           Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
+          <button className="btn-primary btn-primary-lg btn-grad" style={{ color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
             Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
           </button>
         </a>
@@ -1864,11 +1881,10 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
             <button
-              className="btn-primary btn-primary-lg"
+              className="btn-primary btn-primary-lg btn-grad"
               style={{
                 width: '100%',
                 justifyContent: 'center',
-                background: 'linear-gradient(135deg, #059669 0%, #14B8A6 100%)',
                 boxShadow: '0 4px 24px rgba(5,150,105,0.4)',
                 borderRadius: 12,
               }}
