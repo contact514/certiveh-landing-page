@@ -124,9 +124,7 @@ const webPageLd = JSON.stringify({
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #059669, #14B8A6, #059669);
-      background-size: 200% 200%;
-      animation: grad-shift 4s ease infinite;
+      background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
       color: white;
       font-size: 15px;
       font-weight: 600;
@@ -139,7 +137,7 @@ const webPageLd = JSON.stringify({
       transition: transform 0.1s, box-shadow 0.2s;
       box-shadow: 0 4px 24px rgba(5,150,105,0.4);
     }
-    .al-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.4); animation-duration: 1.5s; }
+    .al-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.4); }
     .al-btn-primary:active { transform: translateY(0); }
     .al-hero-trust {
       display: flex;

@@ -107,13 +107,13 @@ const CSS = `
     100% { background-position: 0% 50%; }
   }
   .btn-grad {
-    background: linear-gradient(135deg, #059669, #14B8A6, #059669) !important;
+    background: linear-gradient(135deg, #059669 0%, #34D399 50%, #14B8A6 100%) !important;
     background-size: 200% 200% !important;
     animation: grad-shift 4s ease infinite;
     transition: transform 0.1s, box-shadow 0.15s !important;
   }
   .btn-grad:hover {
-    background: linear-gradient(135deg, #059669, #14B8A6, #059669) !important;
+    background: linear-gradient(135deg, #059669 0%, #34D399 50%, #14B8A6 100%) !important;
     background-size: 200% 200% !important;
     animation-duration: 1.5s;
     transform: translateY(-1px);

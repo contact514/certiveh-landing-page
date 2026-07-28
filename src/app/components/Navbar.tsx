@@ -45,9 +45,7 @@ const NAV_CSS = `
   .shared-nav.scrolled .shared-nav-links a:hover { color: #059669; }
   .shared-nav-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, #059669, #14B8A6, #059669); color: #fff;
-    background-size: 200% 200%;
-    animation: grad-shift 4s ease infinite;
+    background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); color: #fff;
     border: none; border-radius: 12px;
     padding: 10px 22px; font-size: 14px; font-weight: 600;
     cursor: pointer;
@@ -56,7 +54,7 @@ const NAV_CSS = `
     line-height: normal;
     box-shadow: 0 2px 10px rgba(5,150,105,0.25);
   }
-  .shared-nav-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.35); animation-duration: 1.5s; }
+  .shared-nav-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.35); }
   .shared-mobile-btn {
     display: none; background: none; border: none;
     cursor: pointer; padding: 8px; color: rgba(255,255,255,0.8);

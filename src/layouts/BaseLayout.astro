@@ -61,14 +61,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <style>
-      html { background: #0f172a; }
-      @keyframes grad-shift {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-    </style>
+    <style>html { background: #0f172a; }</style>
 
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FJ10NX1DV6"></script>
