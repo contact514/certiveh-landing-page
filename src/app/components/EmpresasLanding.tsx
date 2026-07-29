@@ -736,26 +736,6 @@ function Calculadora() {
           </div>
         </div>
 
-        {/* Pricing tiers */}
-        <div style={{ marginTop: 32, padding: "20px 24px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12, maxWidth: 700, marginLeft: "auto", marginRight: "auto" }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--slate-700)", marginBottom: 12 }}>Honorarios CertiVeh</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 8, background: "var(--emerald-600)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 }}>01</div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--slate-900)" }}>Inversion menor o igual a $150.000.000</div>
-                <div style={{ fontSize: 13, color: "var(--slate-500)" }}>Honorarios de $899.990 COP + IVA</div>
-              </div>
-            </div>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 8, background: "var(--emerald-600)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 }}>02</div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--slate-900)" }}>Inversion mayor a $150.000.000</div>
-                <div style={{ fontSize: 13, color: "var(--slate-500)" }}>Se cobra el 0,6% del valor del activo a certificar + IVA</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
