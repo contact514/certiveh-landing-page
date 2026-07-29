@@ -277,14 +277,23 @@ function Hero() {
       padding: "100px 48px 80px", position: "relative",
       background: "var(--slate-900)", overflow: "hidden",
     }}>
-      {/* Animated grid background */}
-      <div style={{ position: "absolute", inset: 0, color: "rgba(0,0,0,0.4)" }}>
-        <AnimatedGridPattern numSquares={60} maxOpacity={0.4} duration={4} repeatDelay={0.5} />
-      </div>
+      {/* Background video */}
+      <video
+        ref={el => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
+        autoPlay muted loop playsInline
+        preload="auto"
+        poster="/otros-activos-poster.webp"
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", pointerEvents: "none", opacity: 0.35,
+        }}
+      >
+        <source src="/otros-activos-hero.mp4" type="video/mp4" />
+      </video>
       {/* Gradient overlay */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(15,23,42,0.5) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.12) 100%)",
+        background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.15) 100%)",
       }}/>
 
       {/* H1 */}
