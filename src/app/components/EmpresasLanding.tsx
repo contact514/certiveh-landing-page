@@ -160,7 +160,7 @@ const CSS = `
 
   /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
-    .hero-section { padding: 100px 20px 60px !important; min-height: 60vh !important; }
+    .hero-section { padding: 100px 20px 60px !important; height: auto !important; min-height: 60vh !important; }
     .section { padding: 64px 20px; }
 
     .btn-primary { padding: 12px 20px; font-size: 14px; }
@@ -272,7 +272,7 @@ function CertiVehLogo({ variant = "default", compact = false }: { variant?: "def
 function Hero() {
   return (
     <section id="hero" aria-label="Portada - CertiVeh Empresas" className="hero-section" style={{
-      minHeight: "100vh", display: "flex", flexDirection: "column",
+      height: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
       padding: "100px 48px 80px", position: "relative",
       background: "var(--slate-900)", overflow: "hidden",
@@ -286,21 +286,6 @@ function Hero() {
         position: "absolute", inset: 0, pointerEvents: "none",
         background: "linear-gradient(180deg, rgba(15,23,42,0.5) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.12) 100%)",
       }}/>
-
-      {/* Badge */}
-      <div style={{
-        display: "inline-flex", alignItems: "center", gap: 8,
-        background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
-        border: "1px solid rgba(255,255,255,0.15)", borderRadius: 9999,
-        padding: "6px 16px", marginBottom: 20,
-        animation: "fadeUp 0.6s 0.04s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ADE80" }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.85)", letterSpacing: "0.04em" }}>
-          Certificación UPME para empresas
-        </span>
-      </div>
 
       {/* H1 */}
       <h1 style={{

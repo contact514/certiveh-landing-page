@@ -721,21 +721,6 @@ function Hero() {
         background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.15) 100%)",
       }}/>
 
-      {/* Badge */}
-      <div style={{
-        display: "inline-flex", alignItems: "center", gap: 8,
-        background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
-        border: "1px solid rgba(255,255,255,0.15)", borderRadius: 9999,
-        padding: "6px 16px", marginBottom: 20,
-        animation: "fadeUp 0.6s 0.04s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ADE80" }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.85)", letterSpacing: "0.04em" }}>
-          Ventana de radicación abierta
-        </span>
-      </div>
-
       {/* H1 */}
       <h1 style={{
         fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
