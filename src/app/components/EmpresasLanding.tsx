@@ -868,7 +868,7 @@ function CTAFinal() {
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
           Tus incentivos tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te estan esperando.</span>
         </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 520, margin: "0 auto 36px" }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto 36px" }}>
           Deduccion de renta del 50%, exclusion de IVA, exencion arancelaria y depreciacion acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
         </p>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
@@ -892,13 +892,6 @@ function CTAFinal() {
 function Footer() {
   return (
     <>
-      {/* Disclaimer */}
-      <div style={{ background: "var(--amber-50)", borderTop: "1px solid var(--amber-200)", padding: "16px 48px", textAlign: "center" }}>
-        <p style={{ fontSize: 12, color: "var(--amber-600)", lineHeight: 1.6, maxWidth: 800, margin: "0 auto" }}>
-          La informacion presentada es de caracter general y no constituye asesoria tributaria, legal o contable. El acceso a los incentivos de la Ley 1715 de 2014 (modificada por la Ley 2099 de 2021) esta sujeto a la obtencion del certificado UPME y al cumplimiento de la normativa vigente (Decreto 895 de 2022, Resolucion UPME 135 de 2025 y normas que las modifiquen). Consulta con tu asesor tributario la aplicacion a tu caso particular.
-        </p>
-      </div>
-
       <footer aria-label="Pie de pagina" style={{ background: "var(--slate-900)", color: "var(--slate-400)", padding: "48px 48px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 40 }}>
