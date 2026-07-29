@@ -699,7 +699,7 @@ function Hero() {
       {/* Background video (desktop) / poster (mobile) */}
       <video
         autoPlay muted loop playsInline
-        preload="metadata"
+        preload="auto"
         poster="/hero-bg-poster.webp"
         className="hero-video"
         style={{
