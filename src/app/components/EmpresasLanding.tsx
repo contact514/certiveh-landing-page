@@ -429,11 +429,11 @@ function Beneficios() {
   const cards = [
     {
       icon: "percent",
-      title: "Deduccion especial en renta",
+      title: "Deduccion en renta",
       pct: "50%",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
-      desc: "Deduccion del 50% del valor total de la inversion, aplicable en un periodo de hasta 15 años. Tope anual: no puede exceder el 50% de la renta liquida del contribuyente.",
+      desc: "Deduccion del 50% del valor total de la inversion, aplicable en un periodo de hasta 15 años. El tope anual no puede exceder el 50% de la renta liquida.",
       norma: "Art. 11, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -451,7 +451,7 @@ function Beneficios() {
       pct: "0%",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
-      desc: "Exencion del pago de derechos arancelarios en la importacion de maquinaria, equipos, materiales e insumos destinados exclusivamente al proyecto.",
+      desc: "Exencion del pago de derechos arancelarios en la importacion de maquinaria, equipos, materiales e insumos destinados exclusivamente al proyecto certificado.",
       norma: "Art. 13, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -460,7 +460,7 @@ function Beneficios() {
       pct: "~3 años",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
-      desc: "Depreciacion acelerada de los activos con tasa anual de hasta el 33,33%, permitiendo la recuperacion contable/fiscal del activo en aproximadamente 3 años.",
+      desc: "Tasa anual de hasta el 33,33%, permitiendo la recuperacion contable y fiscal del activo en aproximadamente 3 años en lugar del periodo convencional.",
       norma: "Art. 14, Ley 1715/2014 (mod. Ley 2099/2021) y Decreto 895/2022",
     },
   ];
@@ -483,7 +483,6 @@ function Beneficios() {
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ position: "absolute", top: 12, right: 16, fontSize: 64, fontWeight: 700, color: "rgba(0,0,0,0.03)", lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
               <div style={{ width: 44, height: 44, borderRadius: 12, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
                 <Icon name={c.icon} size={20} color={c.accentColor}/>
               </div>
@@ -497,19 +496,6 @@ function Beneficios() {
           ))}
         </div>
 
-        {/* Notas */}
-        <div style={{ marginTop: 24, padding: "16px 20px", background: "var(--white)", border: "1px solid var(--slate-200)", borderRadius: 12, maxWidth: 700, marginLeft: "auto", marginRight: "auto" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6 }}>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
-              <Icon name="checkCircle" size={14} color="var(--emerald-600)" style={{ marginTop: 3, flexShrink: 0 }}/>
-              <span>La deduccion en renta y la depreciacion acelerada pueden tomarse simultaneamente sin que se considere concurrencia de beneficios (Decreto 895/2022).</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
-              <Icon name="checkCircle" size={14} color="var(--emerald-600)" style={{ marginTop: 3, flexShrink: 0 }}/>
-              <span>Las inversiones realizadas mediante leasing financiero tambien son elegibles (Decreto 895/2022, art. 1.2.1.18.72).</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
