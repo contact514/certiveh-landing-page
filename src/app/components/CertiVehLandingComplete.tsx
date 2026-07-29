@@ -673,6 +673,18 @@ function Hero() {
     return "$" + m.toLocaleString("es-CO") + "M+";
   };
 
+  const videoRef = useCallback((el: HTMLVideoElement | null) => {
+    if (!el) return;
+    el.muted = true;
+    el.setAttribute("playsinline", "");
+    el.setAttribute("webkit-playsinline", "");
+    const tryPlay = () => { el.play().catch(() => {}); };
+    tryPlay();
+    el.addEventListener("canplay", tryPlay, { once: true });
+    el.addEventListener("loadeddata", tryPlay, { once: true });
+    document.addEventListener("touchstart", tryPlay, { once: true });
+  }, []);
+
   const [stats, setStats] = useState<{ vehiculos_gestionados: number; deducciones_renta: number; iva_por_devolver: number } | null>(null);
 
   useEffect(() => {
@@ -698,7 +710,7 @@ function Hero() {
     }}>
       {/* Background video (desktop) / poster (mobile) */}
       <video
-        ref={el => { if (el) el.play().catch(() => {}); }}
+        ref={videoRef}
         autoPlay muted loop playsInline
         preload="auto"
         poster="/hero-bg-poster.webp"
