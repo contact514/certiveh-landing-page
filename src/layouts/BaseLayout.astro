@@ -178,5 +178,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <body style="background:#ffffff">
     <a href="#main-content" class="skip-link">Ir al contenido principal</a>
     <slot />
+    <script is:inline>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
   </body>
 </html>
