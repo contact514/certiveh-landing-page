@@ -743,11 +743,10 @@ function Hero() {
         maxWidth: 800, marginBottom: 10, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tu tramitador virtual del{" "}
+        Reclama los beneficios tributarios de tu{" "}
         <span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-          certificado UPME
+          carro eléctrico o híbrido
         </span>
-        {" "}en Colombia
       </h1>
       <div style={{
         fontSize: "clamp(18px, 2.5vw, 24px)", fontWeight: 500,
@@ -768,8 +767,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Certificado UPME y devolución de IVA para vehículos eléctricos e híbridos.
-        Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
+        Tramitamos virtualmente tu certificado UPME, el documento que desbloquea los beneficios tributarios para tu carro eléctrico o híbrido, y preparamos todo para que solicites la devolución de tu IVA. Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
       </p>
 
       {/* CTAs */}
