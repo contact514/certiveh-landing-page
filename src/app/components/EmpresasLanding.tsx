@@ -303,7 +303,7 @@ function Hero() {
       {/* Sub */}
       <p style={{
         fontSize: "clamp(15px, 1.8vw, 18px)", lineHeight: 1.7,
-        color: "rgba(255,255,255,0.55)", maxWidth: 560,
+        color: "rgba(255,255,255,0.55)", maxWidth: 600,
         marginBottom: 32, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
@@ -388,7 +388,7 @@ function Activos() {
             Activos que{" "}
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>certificamos</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 560, margin: "0 auto" }}>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
             Gestionamos tu certificado UPME para proyectos de gestion eficiente de la energia (GEE) y de fuentes no convencionales de energia (FNCE).
           </p>
         </div>
@@ -463,7 +463,7 @@ function Beneficios() {
             Cuatro beneficios tributarios. <br/>
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Un solo certificado.</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 580, margin: "0 auto" }}>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
             La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creo cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el unico requisito para acceder a todos.
           </p>
         </div>

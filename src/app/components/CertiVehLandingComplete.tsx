@@ -952,7 +952,7 @@ function Servicios() {
             Dos servicios. <br/>
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Cero burocracia.</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 540, margin: "0 auto" }}>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
             CertiVeh gestiona el certificado UPME y te acompaña paso a paso para recuperar tu IVA ante la DIAN.
           </p>
         </div>
@@ -1682,7 +1682,7 @@ function CTAFinal() {
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
           Tus beneficios tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te están esperando.</span>
         </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 460, margin: "0 auto 36px" }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto 36px" }}>
           Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.
         </p>
         <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
