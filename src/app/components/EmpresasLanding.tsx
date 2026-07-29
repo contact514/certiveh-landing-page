@@ -761,7 +761,7 @@ function PorQueCertificado() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {[
-              { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversion es elegible para los cuatro incentivos tributarios de la Ley 1715 de 2014, modificada por la Ley 2099 de 2021." },
+              { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversion es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
               { icon: "clock", title: "Sin limite de vigencia", desc: "Los certificados emitidos bajo la Resolucion UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años despues de su expedicion." },
               { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o juridica que realice la inversion, incluyendo inversiones via leasing financiero." },
               { icon: "checkCircle", title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 400/2026)." },
