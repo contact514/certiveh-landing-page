@@ -72,8 +72,10 @@
   },
   "devDependencies": {
     "@astrojs/react": "^4.0.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "4.1.12",
     "astro": "^5.0.0",
+    "satori": "^0.29.0",
     "tailwindcss": "4.1.12"
   },
   "pnpm": {
