@@ -698,6 +698,7 @@ function Hero() {
     }}>
       {/* Background video (desktop) / poster (mobile) */}
       <video
+        ref={el => { if (el) el.play().catch(() => {}); }}
         autoPlay muted loop playsInline
         preload="auto"
         poster="/hero-bg-poster.webp"
