@@ -888,9 +888,9 @@ function Aliados() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100% de ese IVA pagado.", ejemplo: "$120M → te devuelven $6.000.000" },
-    { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000" },
-    { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100% de ese IVA pagado.", ejemplo: "$120M → te devuelven $6.000.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
+    { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
+    { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
   return (
     <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--white)" }}>
@@ -917,7 +917,8 @@ function Beneficios() {
               </div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 4, lineHeight: 1.4 }}>{c.title}</h3>
               <div style={{ fontSize: 40, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 14 }}>{c.pct}</div>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5, marginBottom: 16 }}>{c.desc}</p>
+              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5, marginBottom: 12 }}>{c.desc}</p>
+              <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4, marginBottom: 16 }}>{c.norma}</div>
               <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 16 }}>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 12, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 12, fontWeight: 600, color: c.accentColor }}>
                   <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
@@ -1733,7 +1734,7 @@ function Footer() {
             {[
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Servicios", href: "#servicios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
               { label: "Recursos", links: [{ text: "Vehículos", href: "/vehiculos/" }, { text: "Blog", href: "/blog" }, { text: "API", href: "/api-docs" }] },
-              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }] },
+              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }, { text: "Empresas (GEE/FNCE)", href: "/empresas" }] },
               { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
             ].map(col => (
               <div key={col.label}>
