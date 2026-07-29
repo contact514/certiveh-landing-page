@@ -50,7 +50,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
 }) : null;
 ---
 
-<BaseLayout title={title} description={description} keywords={keywords} ogType={isArticle ? 'article' : 'website'}>
+<BaseLayout title={title} description={description} keywords={keywords} ogType={isArticle ? 'article' : 'website'} ogImage="https://certiveh.co/og/blog.png">
   {jsonLd && (
     <script slot="head" type="application/ld+json" set:html={jsonLd} />
   )}
