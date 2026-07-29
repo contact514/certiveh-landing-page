@@ -762,9 +762,9 @@ function PorQueCertificado() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {[
               { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversion es elegible para los cuatro incentivos de la Ley 1715/2014." },
-              { icon: "clock", title: "Sin limite de vigencia", desc: "Los certificados bajo la Resolucion UPME 135 de 2025 no vencen. Modificables hasta 2 años despues." },
+              { icon: "clock", title: "Sin limite de vigencia", desc: "Los certificados emitidos bajo la Resolucion UPME 135 de 2025 no vencen. Pueden modificarse dentro de los 2 años siguientes a su expedicion." },
               { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o juridica que realice la inversion." },
-              { icon: "checkCircle", title: "Ventana continua", desc: "Radicacion abierta del 1 de febrero al 15 de diciembre de cada año (Res. UPME 400/2026)." },
+              { icon: "checkCircle", title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 400/2026)." },
             ].map((item, i) => (
               <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
