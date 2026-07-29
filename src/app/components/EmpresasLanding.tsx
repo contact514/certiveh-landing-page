@@ -368,25 +368,28 @@ function Activos() {
       icon: "battery",
       tag: "GEE - Anexo 2",
       title: "Cargadores de vehiculos electricos y electrolineras",
-      desc: "Infraestructura de carga para movilidad electrica, reconocida en el PAI-PROURE 2022-2030. Incluye cargadores AC, DC y sistemas de gestion de carga.",
+      desc: "Infraestructura de carga para movilidad electrica. Cargadores AC, DC y sistemas de gestion de carga.",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
+      img: "/activo-cargador.webp",
     },
     {
       icon: "truck",
       tag: "GEE - Anexo 2",
       title: "Camiones y flotas a gas natural vehicular (GNV)",
-      desc: "Vehiculos nuevos de bajas emisiones dedicados a gas natural para transporte de carga, pasajeros o uso corporativo. Camiones, tractocamiones, volquetas, buses y camionetas.",
+      desc: "Vehiculos nuevos de bajas emisiones dedicados a gas natural para transporte de carga o uso corporativo.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
+      img: "/activo-camion.webp",
     },
     {
       icon: "sun",
       tag: "FNCE - Anexo 1",
       title: "Proyectos de energia solar",
-      desc: "Autogeneracion, techos solares y granjas solares. Incluye paneles, inversores, estructuras, servicios de diseño e instalacion. Evaluacion en hasta 20 dias habiles.",
+      desc: "Autogeneracion, techos solares y granjas solares. Paneles, inversores, estructuras y servicios de instalacion.",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
+      img: "/activo-solar.webp",
     },
   ];
   return (
@@ -404,18 +407,20 @@ function Activos() {
 
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {activos.map((a, i) => (
-            <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderLeft: `4px solid ${a.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
+            <div key={i} className="card benefit-card" style={{ padding: 0, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderLeft: `4px solid ${a.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
             >
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: a.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                <Icon name={a.icon} size={22} color={a.accentColor}/>
+              <div style={{ height: 160, overflow: "hidden" }}>
+                <img src={a.img} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "3px 10px", borderRadius: 9999, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 11, fontWeight: 600, color: a.accentColor, marginBottom: 12, letterSpacing: "0.02em" }}>
-                {a.tag}
+              <div style={{ padding: "24px 28px" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "3px 10px", borderRadius: 9999, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 11, fontWeight: 600, color: a.accentColor, marginBottom: 12, letterSpacing: "0.02em" }}>
+                  {a.tag}
+                </div>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.35 }}>{a.title}</h3>
+                <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6 }}>{a.desc}</p>
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.35 }}>{a.title}</h3>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6 }}>{a.desc}</p>
             </div>
           ))}
         </div>
