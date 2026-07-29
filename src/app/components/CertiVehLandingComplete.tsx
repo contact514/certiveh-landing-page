@@ -722,7 +722,6 @@ function Hero() {
           objectFit: "cover", pointerEvents: "none", opacity: 0.35,
         }}
       >
-        <source src="/hero-bg-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
       {/* Static poster fallback for mobile */}
