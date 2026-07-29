@@ -260,7 +260,7 @@ function CertiVehLogo({ variant = "default", compact = false }: { variant?: "def
         {!compact && (
           <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : getCSSVar('--slate-500', '#64748B')}
             fontSize="10" fontWeight="500" fontFamily="Inter, system-ui, sans-serif" letterSpacing="1.5">
-            EMPRESAS
+            OTROS ACTIVOS
           </text>
         )}
       </g>
@@ -271,7 +271,7 @@ function CertiVehLogo({ variant = "default", compact = false }: { variant?: "def
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section id="hero" aria-label="Portada - CertiVeh Empresas" className="hero-section" style={{
+    <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="hero-section" style={{
       height: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
       padding: "100px 48px 80px", position: "relative",

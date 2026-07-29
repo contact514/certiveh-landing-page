@@ -1719,7 +1719,7 @@ function Footer() {
             {[
               { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Servicios", href: "#servicios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
               { label: "Recursos", links: [{ text: "Vehículos", href: "/vehiculos/" }, { text: "Blog", href: "/blog" }, { text: "API", href: "/api-docs" }] },
-              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }, { text: "Empresas (GEE/FNCE)", href: "/empresas" }] },
+              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }, { text: "Otros activos (GEE/FNCE)", href: "/otros-activos" }] },
               { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
             ].map(col => (
               <div key={col.label}>
