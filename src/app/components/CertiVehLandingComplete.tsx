@@ -351,6 +351,8 @@ const CSS = `
   }
   
   .hero-video { display: block; object-position: center 25%; }
+  .hero-video::-webkit-media-controls { display: none !important; }
+  .hero-video::-webkit-media-controls-start-playback-button { display: none !important; }
   .hero-poster { display: none; }
 
   @media (max-width: 768px) {
