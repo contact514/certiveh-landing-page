@@ -447,7 +447,7 @@ function Beneficios() {
       pct: "19%",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
-      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA. Si ya se pago, se gestiona la devolucion ante la DIAN.",
+      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si ya se pago, se gestiona la devolucion ante la DIAN con el certificado UPME.",
       norma: "Art. 12, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -456,7 +456,7 @@ function Beneficios() {
       pct: "0%",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
-      desc: "Sin derechos arancelarios en la importacion de maquinaria, equipos, materiales e insumos destinados al proyecto.",
+      desc: "Exencion del pago de derechos arancelarios en la importacion de maquinaria, equipos, materiales e insumos destinados al proyecto.",
       norma: "Art. 13, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
