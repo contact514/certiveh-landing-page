@@ -764,7 +764,7 @@ function Hero() {
       {/* Sub */}
       <p style={{
         fontSize: "clamp(15px, 1.8vw, 17px)", lineHeight: 1.7,
-        color: "rgba(255,255,255,0.5)", maxWidth: 520,
+        color: "rgba(255,255,255,0.5)", maxWidth: 600,
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
