@@ -362,7 +362,7 @@ const CSS = `
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
 
-    .hero-section { padding: 100px 20px 60px !important; min-height: 60vh !important; }
+    .hero-section { padding: 100px 20px 60px !important; height: auto !important; min-height: 60vh !important; }
     .section { padding: 64px 20px; }
     
     .btn-primary { padding: 12px 20px; font-size: 14px; }
@@ -691,7 +691,7 @@ function Hero() {
 
   return (
     <section id="hero" aria-label="Portada - CertiVeh" className="hero-section" style={{
-      minHeight: "100vh", display: "flex", flexDirection: "column",
+      height: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
       padding: "100px 48px 60px", position: "relative",
       background: "var(--slate-900)", overflow: "hidden",
