@@ -559,7 +559,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Eléctricos e híbridos (no MHEV)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Gestión de devolución de IVA ante la DIAN"];
+  const items = ["Eléctricos e híbridos (no MHEV)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Acompañamiento en devolución de IVA ante la DIAN"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
