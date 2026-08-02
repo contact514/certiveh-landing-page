@@ -274,7 +274,7 @@ function Hero() {
     <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="hero-section" style={{
       height: "100vh", display: "flex", flexDirection: "column",
       justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "100px 48px 80px", position: "relative",
+      padding: "100px 48px 60px", position: "relative",
       background: "var(--slate-900)", overflow: "hidden",
     }}>
       {/* Background video */}
@@ -298,7 +298,7 @@ function Hero() {
 
       {/* H1 */}
       <h1 style={{
-        fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 700,
+        fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
         lineHeight: 1.15, letterSpacing: "-0.03em", color: "#FFFFFF",
         maxWidth: 820, marginBottom: 16, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
