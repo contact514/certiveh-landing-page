@@ -74,10 +74,19 @@ const itemListLd = JSON.stringify({
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
 
-    .vh-hero { background: var(--slate-900); padding: 120px 48px 64px; text-align: center; }
+    .vh-hero { background: var(--slate-900); padding: 120px 48px 96px; text-align: center; position: relative; overflow: hidden; }
+    .vh-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .vh-hero > * { position: relative; z-index: 1; }
     .vh-title { font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
     .vh-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 600px; margin: 0 auto; }
-    .vh-count { display: inline-block; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 9999px; margin-bottom: 16px; letter-spacing: 0.05em; }
 
     .vh-container { max-width: 1200px; margin: 0 auto; padding: 96px 48px 80px; }
     .vh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
@@ -142,11 +151,11 @@ const itemListLd = JSON.stringify({
     .vh-footer-bottom span { font-size: 12px; line-height: 1.4; }
 
     @media (max-width: 640px) {
-      .vh-hero { padding: 100px 20px 48px; }
-      .vh-container { padding: 32px 20px 64px; }
+      .vh-hero { padding: 100px 20px 72px; }
+      .vh-container { padding: 64px 20px 64px; }
       .vh-grid { grid-template-columns: 1fr; }
       .vh-section-divider { padding: 0 20px; }
-      .vh-directory { padding: 32px 20px 64px; }
+      .vh-directory { padding: 64px 20px 64px; }
       .vh-directory-cta { padding: 28px 20px; }
       .vh-footer { padding: 40px 20px; }
     }
@@ -350,12 +359,14 @@ const itemListLd = JSON.stringify({
             <div class="vh-footer-col-links">
               <a href="/nosotros/">Quiénes somos</a>
               <a href="/aliados/">Programa de Aliados</a>
+              <a href="/otros-activos">Otros activos (GEE/FNCE)</a>
             </div>
           </div>
           <div>
             <div class="vh-footer-col-label">Legal</div>
             <div class="vh-footer-col-links">
               <a href="/terminos-y-condiciones">Términos y Condiciones</a>
+              <a href="/politica-de-privacidad">Política de Privacidad</a>
             </div>
           </div>
         </div>
