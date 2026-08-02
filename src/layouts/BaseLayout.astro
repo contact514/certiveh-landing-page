@@ -152,6 +152,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <slot name="head" />
     <style>
       html { scroll-behavior: smooth; }
+      /* El reset `*` de cada pagina se scopea y nunca alcanza a <body>, asi que
+         el margen de 8px del navegador dejaba ver el fondo oscuro del <html>
+         como un borde alrededor del contenido. Se resetea aqui, global. */
+      body { margin: 0; }
       .skip-link {
         position: absolute; top: -100%; left: 16px;
         background: #059669; color: #fff; padding: 12px 24px;
