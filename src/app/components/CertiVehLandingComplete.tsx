@@ -1347,7 +1347,7 @@ function Calculadora() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
-                    Gestión de devolución de IVA
+                    Acompañamiento en devolución de IVA
                   </div>
                 </div>
               </label>
@@ -1394,11 +1394,11 @@ function Calculadora() {
                   {conIva && (
                     <>
                       <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--teal-600)" }}>Gestión devolución IVA</span>
+                        <span style={{ color: "var(--teal-600)" }}>Acompañamiento devolución IVA</span>
                         <span style={{ fontWeight: 600, color: "var(--teal-600)" }}>{fmt(calc.honorariosIvaRefund)}</span>
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre gestión)</span>
+                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre acompañamiento)</span>
                         <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaIvaRefund)}</span>
                       </div>
                     </>
@@ -1726,7 +1726,7 @@ function Footer() {
           <div>
             <CertiVehLogo variant="light" compact/>
             <p style={{ fontSize: 14, color: "var(--slate-500)", marginTop: 10, maxWidth: 260, lineHeight: 1.5 }}>
-              Certificado UPME y gestión de devolución de IVA para vehículos eléctricos e híbridos en Colombia.
+              Certificado UPME y acompañamiento en devolución de IVA para vehículos eléctricos e híbridos en Colombia.
             </p>
           </div>
           <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>

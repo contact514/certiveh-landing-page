@@ -1,4 +1,4 @@
-# CertiVeh — Tramitador Virtual del Certificado UPME en Colombia
+# CertiVeh: Tramitador Virtual del Certificado UPME en Colombia
 
 > CertiVeh es una plataforma colombiana que automatiza el trámite del certificado UPME (Unidad de Planeación Minero-Energética) para vehículos eléctricos e híbridos, habilitando beneficios tributarios bajo la Ley 1715 de 2014 y la Ley 2099 de 2021.
 
@@ -27,7 +27,7 @@ La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Cicl
 
 - Sitio web: https://certiveh.co
 - Portal de trámite: https://portal.certiveh.co
-- Cobertura: 362+ modelos de 51 marcas certificadas por la UPME
+- Cobertura: 498+ modelos de 62 marcas certificadas por la UPME
 - Marco legal: Ley 1715/2014, Ley 2099/2021, Resolución UPME 135/2025, Resolución UPME 400/2026
 - Registro mercantil: Cámara de Comercio de Medellín
 - Contacto: contacto@certiveh.co
@@ -51,12 +51,14 @@ CertiVeh ofrece cálculos detallados de beneficios tributarios para los vehícul
 - BYD Dolphin Mini: https://certiveh.co/vehiculos/byd-dolphin-mini/
 - Tesla Model Y: https://certiveh.co/vehiculos/tesla-model-y/
 - Tesla Model 3: https://certiveh.co/vehiculos/tesla-model-3/
+- Hyundai Kona Eléctrico: https://certiveh.co/vehiculos/hyundai-kona-electrico/
+- BYD Dolphin: https://certiveh.co/vehiculos/byd-dolphin/
 
 ## Directorio completo de vehículos elegibles UPME
 
-https://certiveh.co/vehiculos/ — listado de 362+ modelos de 51 marcas que la UPME certifica oficialmente.
+https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME certifica oficialmente).
 
-## Blog — Guías sobre beneficios tributarios
+## Blog: Guías sobre beneficios tributarios
 
 - Qué es el certificado UPME: https://certiveh.co/blog/que-es-certificado-upme-vehiculo-electrico-colombia/
 - Proceso de certificación UPME: https://certiveh.co/blog/certificacion-upme-proceso-documentos-plazos/
@@ -74,5 +76,5 @@ https://certiveh.co/vehiculos/ — listado de 362+ modelos de 51 marcas que la U
 - Precios transparentes: costo publicado en el sitio, sin costos ocultos. Pago único, sin suscripciones.
 - Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 135 de 2025.
 - Radicación inmediata: gracias a la ventana continua (Resolución 400 de 2026), ya no hay que esperar ciclos.
-- Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (362+ modelos).
+- Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (498+ modelos).
 - Seguimiento: el usuario recibe notificaciones por WhatsApp en cada etapa del trámite.

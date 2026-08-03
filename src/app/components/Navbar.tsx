@@ -118,13 +118,15 @@ interface NavbarProps {
   isHome?: boolean;
   /** true = start transparent over dark hero, false = start solid */
   darkHero?: boolean;
+  /** hashes that exist on this page, so they stay local instead of jumping to home */
+  localSections?: string[];
 }
 
-export function Navbar({ isHome = true, darkHero = false }: NavbarProps) {
+export function Navbar({ isHome = true, darkHero = false, localSections = [] }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const startTransparent = isHome || darkHero;
   const [scrolled, setScrolled] = useState(!startTransparent);
-  const link = (hash: string) => isHome ? hash : `/${hash}`;
+  const link = (hash: string) => (isHome || localSections.includes(hash)) ? hash : `/${hash}`;
 
   useEffect(() => {
     if (!startTransparent) { setScrolled(true); return; }

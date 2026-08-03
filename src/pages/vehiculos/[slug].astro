@@ -38,7 +38,7 @@ const roi = Math.round(totalBeneficio / costoTotal * 10) / 10;
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
 
 const title = `${v.marca} ${v.modelo}, Certificado UPME y Devolución de IVA | CertiVeh`;
-const description = `¿Tienes un ${v.marca} ${v.modelo}? Recupera ${fmt(iva)} de IVA y deduce ${fmt(renta)} en renta. CertiVeh gestiona tu certificado UPME y la devolución de IVA ante la DIAN. 100% en línea.`;
+const description = `¿Tienes un ${v.marca} ${v.modelo}? Recupera ${fmt(iva)} de IVA y deduce ${fmt(renta)} en renta. CertiVeh gestiona tu certificado UPME y te acompaña en la devolución de IVA ante la DIAN. 100% en línea.`;
 const keywords = `${v.marca} ${v.modelo} certificado UPME, ${v.marca} ${v.modelo} beneficios tributarios, ${v.marca} ${v.modelo} devolución IVA Colombia, gestión IVA DIAN ${v.marca}, ${v.slug.replace(/-/g, ' ')}`;
 
 const breadcrumbLd = JSON.stringify({
@@ -373,7 +373,7 @@ const faqLd = JSON.stringify({
             <g transform="translate(4,8) scale(0.48)"><path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#fLogoGrad)"/><path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/></g>
             <g transform="translate(60,28)"><text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text></g>
           </svg>
-          <p>Certificado UPME y gestión de devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
+          <p>Certificado UPME y acompañamiento en devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
         </div>
         <div class="v-footer-cols">
           <div>
