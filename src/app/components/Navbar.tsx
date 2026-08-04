@@ -43,6 +43,9 @@ const NAV_CSS = `
   .shared-nav-links a:hover { color: #34D399; }
   .shared-nav.scrolled .shared-nav-links a { color: #475569; }
   .shared-nav.scrolled .shared-nav-links a:hover { color: #059669; }
+  /* link de retorno a la otra vertical: acentuado para que se lea como salida */
+  .shared-nav-links a.nav-vertical { color: #34D399; font-weight: 600; }
+  .shared-nav.scrolled .shared-nav-links a.nav-vertical { color: #059669; font-weight: 600; }
   .shared-nav-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); color: #fff;
@@ -79,8 +82,14 @@ const NAV_CSS = `
     transition: background 0.15s; display: block;
   }
   .shared-mobile-menu a:hover { background: #F8FAFC; }
+  .shared-mobile-menu a.nav-vertical { color: #059669; font-weight: 600; }
   .shared-mobile-overlay {
     display: none; position: fixed; inset: 0; z-index: 98;
+  }
+  /* 9 links + CTA + logo no caben con gap 32 por debajo de ~1400px */
+  @media (max-width: 1400px) {
+    .shared-nav { padding: 0 32px; }
+    .shared-nav-links { gap: 22px; }
   }
   @media (max-width: 768px) {
     .shared-nav { padding: 0 20px; }
@@ -120,13 +129,20 @@ interface NavbarProps {
   darkHero?: boolean;
   /** hashes that exist on this page, so they stay local instead of jumping to home */
   localSections?: string[];
+  /** which product vertical this page belongs to; the nav shows a link to the other one */
+  vertical?: "vehiculos" | "otros-activos";
 }
 
-export function Navbar({ isHome = true, darkHero = false, localSections = [] }: NavbarProps) {
+export function Navbar({ isHome = true, darkHero = false, localSections = [], vertical = "vehiculos" }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const startTransparent = isHome || darkHero;
   const [scrolled, setScrolled] = useState(!startTransparent);
   const link = (hash: string) => (isHome || localSections.includes(hash)) ? hash : `/${hash}`;
+  // en /otros-activos el link "Otros activos" seria un self-link muerto: ahi se convierte
+  // en la salida etiquetada de vuelta a la vertical de electricos e hibridos
+  const otherVertical = vertical === "otros-activos"
+    ? { href: "/", text: "Eléctricos e híbridos" }
+    : { href: "/otros-activos", text: "Otros activos" };
 
   useEffect(() => {
     if (!startTransparent) { setScrolled(true); return; }
@@ -155,7 +171,7 @@ export function Navbar({ isHome = true, darkHero = false, localSections = [] }: 
           <a href="/vehiculos">Vehículos</a>
           <a href="/blog">Blog</a>
           <a href="/aliados">Aliados</a>
-          <a href="/otros-activos">Otros activos</a>
+          <a href={otherVertical.href} className={vertical === "otros-activos" ? "nav-vertical" : undefined}>{otherVertical.text}</a>
           <a href="/api-docs">API</a>
           <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="shared-nav-btn">
@@ -174,7 +190,7 @@ export function Navbar({ isHome = true, darkHero = false, localSections = [] }: 
         <a href="/vehiculos" onClick={() => setMobileOpen(false)}>Vehículos</a>
         <a href="/blog" onClick={() => setMobileOpen(false)}>Blog</a>
         <a href="/aliados" onClick={() => setMobileOpen(false)}>Aliados</a>
-        <a href="/otros-activos" onClick={() => setMobileOpen(false)}>Otros activos</a>
+        <a href={otherVertical.href} className={vertical === "otros-activos" ? "nav-vertical" : undefined} onClick={() => setMobileOpen(false)}>{otherVertical.text}</a>
         <a href="/api-docs" onClick={() => setMobileOpen(false)}>API</a>
         <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="shared-nav-btn" style={{ width: "100%", justifyContent: "center", padding: "12px 20px" }}

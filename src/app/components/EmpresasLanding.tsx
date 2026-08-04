@@ -869,7 +869,7 @@ function Footer() {
             <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
               {[
                 { label: "Secciones", links: [{ text: "Activos", href: "#activos" }, { text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
-                { label: "CertiVeh", links: [{ text: "Vehículos eléctricos", href: "/" }, { text: "Blog", href: "/blog" }, { text: "Quiénes somos", href: "/nosotros/" }] },
+                { label: "CertiVeh", links: [{ text: "Eléctricos e híbridos", href: "/" }, { text: "Blog", href: "/blog" }, { text: "Quiénes somos", href: "/nosotros/" }] },
                 { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
               ].map(col => (
                 <div key={col.label}>
@@ -937,7 +937,7 @@ export default function EmpresasLanding() {
   return (
     <>
       <style>{CSS}</style>
-      <Navbar isHome={false} darkHero localSections={["#beneficios", "#como-funciona", "#calculadora"]} />
+      <Navbar isHome={false} darkHero vertical="otros-activos" localSections={["#beneficios", "#como-funciona", "#calculadora"]} />
       <main>
         <Hero/>
         <Activos/>
