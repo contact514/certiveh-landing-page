@@ -11,6 +11,11 @@
       "has": [{ "type": "host", "value": "enterprise.certiveh.co" }],
       "destination": "https://certiveh.co/:path*?utm_source=enterprise&utm_medium=print&utm_campaign=empresas",
       "permanent": false
+    },
+    {
+      "source": "/gnv",
+      "destination": "/otros-activos",
+      "permanent": true
     }
   ]
 }
