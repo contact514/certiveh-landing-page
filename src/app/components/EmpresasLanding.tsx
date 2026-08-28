@@ -107,7 +107,7 @@ const CSS = `
 
   .badge {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
     padding: 4px 12px; border-radius: 9999px;
     background: var(--emerald-50); color: var(--emerald-700);
     border: 1px solid var(--emerald-200);
@@ -386,7 +386,7 @@ function Activos() {
       icon: "sun",
       tag: "FNCE - Anexo 1",
       title: "Proyectos de energía solar",
-      desc: "Autogeneracion, techos solares y granjas solares. Paneles, inversores, estructuras y servicios de instalacion.",
+      desc: "Autogeneración, techos solares y granjas solares. Paneles, inversores, estructuras y servicios de instalación.",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
       img: "/activo-solar.webp",
@@ -415,7 +415,7 @@ function Activos() {
                 <img src={a.img} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
               <div style={{ padding: "24px 28px" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "3px 10px", borderRadius: 9999, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 11, fontWeight: 600, color: a.accentColor, marginBottom: 12, letterSpacing: "0.02em" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "3px 10px", borderRadius: 9999, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 11, fontWeight: 600, color: a.accentColor, marginBottom: 12, letterSpacing: "0.02em", textTransform: "uppercase" }}>
                   {a.tag}
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.35 }}>{a.title}</h3>
@@ -438,7 +438,7 @@ function Beneficios() {
       pct: "50%",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
-      desc: "Deducción del 50% del valor total de la inversión, aplicable en un periodo de hasta 15 años. El tope anual no puede exceder el 50% de la renta liquida.",
+      desc: "Deducción del 50% del valor total de la inversión, aplicable en un periodo de hasta 15 años. El tope anual no puede exceder el 50% de la renta líquida.",
       norma: "Art. 11, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -447,7 +447,7 @@ function Beneficios() {
       pct: "19%",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
-      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si ya se pago, se gestiona la devolucion ante la DIAN con el certificado UPME.",
+      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si ya se pagó, se gestiona la devolución ante la DIAN con el certificado UPME.",
       norma: "Art. 12, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -456,7 +456,7 @@ function Beneficios() {
       pct: "0%",
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
-      desc: "Exención del pago de derechos arancelarios en la importacion de maquinaria, equipos, materiales e insumos destinados al proyecto.",
+      desc: "Exención del pago de derechos arancelarios en la importación de maquinaria, equipos, materiales e insumos destinados al proyecto.",
       norma: "Art. 13, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -465,7 +465,7 @@ function Beneficios() {
       pct: "~3 años",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
-      desc: "Tasa anual de hasta el 33,33%, permitiendo la recuperacion contable y fiscal del activo en aproximadamente 3 años en lugar del periodo convencional.",
+      desc: "Tasa anual de hasta el 33,33%, permitiendo la recuperación contable y fiscal del activo en aproximadamente 3 años en lugar del periodo convencional.",
       norma: "Art. 14, Ley 1715/2014 (mod. Ley 2099/2021) y Decreto 895/2022",
     },
   ];
@@ -478,7 +478,7 @@ function Beneficios() {
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Un solo certificado.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creo cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el unico requisito para acceder a todos.
+            La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creó cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el único requisito para acceder a todos.
           </p>
         </div>
 
@@ -510,11 +510,11 @@ function Beneficios() {
 function ComoFunciona() {
   const [active, setActive] = useState(0);
   const steps = [
-    { num: "01", icon: "upload",      title: "Recopilación de documentos",  subtitle: "Fichas tecnicas y facturas",      desc: "Nos envias las fichas tecnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolucion UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." },
-    { num: "02", icon: "fileText",    title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a traves del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolucion UPME 400 de 2026, ventana continua." },
-    { num: "03", icon: "clock",       title: "Evaluacion tecnica",          subtitle: "FNCE: 20 dias / GEE: 30 dias",  desc: "La UPME verifica completitud en 10 dias habiles. Luego evalua: hasta 20 dias habiles para proyectos FNCE (solar) o hasta 30 dias habiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." },
-    { num: "04", icon: "award",       title: "Emision del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto tecnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen limite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin limite de vigencia." },
-    { num: "05", icon: "dollarSign",  title: "Aplicacion de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolucion de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." },
+    { num: "01", icon: "upload",      title: "Recopilación de documentos",  subtitle: "Fichas técnicas y facturas",      desc: "Nos envías las fichas técnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolución UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." },
+    { num: "02", icon: "fileText",    title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a través del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolución UPME 400 de 2026, ventana continua." },
+    { num: "03", icon: "clock",       title: "Evaluación técnica",          subtitle: "FNCE: 20 días / GEE: 30 días",  desc: "La UPME verifica completitud en 10 días hábiles. Luego evalúa: hasta 20 días hábiles para proyectos FNCE (solar) o hasta 30 días hábiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." },
+    { num: "04", icon: "award",       title: "Emisión del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto técnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen límite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin límite de vigencia." },
+    { num: "05", icon: "dollarSign",  title: "Aplicación de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolución de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." },
   ];
 
   useEffect(() => {
@@ -533,7 +533,7 @@ function ComoFunciona() {
               El proceso de <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>certificación.</span>
             </h2>
             <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
-              De la documentacion al certificado UPME. CertiVeh gestiona todo el trámite por ti.
+              De la documentación al certificado UPME. CertiVeh gestiona todo el trámite por ti.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {steps.map((s, i) => (
@@ -590,7 +590,7 @@ function Calculadora() {
     const renta = v * 0.50;
     const totalBeneficio = iva + renta;
 
-    // Trámite UPME - Resolucion UPME No. 135 de 2025
+    // Trámite UPME - Resolución UPME No. 135 de 2025
     const UVT = 52_374;
     const invUVT = v / UVT;
     let pagoUVT: number;
@@ -626,7 +626,7 @@ function Calculadora() {
             Calcula tu beneficio y{" "}
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo del servicio</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuanto cuesta el servicio y cuanto puedes recuperar en incentivos.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto cuesta el servicio y cuánto puedes recuperar en incentivos.</p>
         </div>
 
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
@@ -658,7 +658,7 @@ function Calculadora() {
             {/* Benefit bars */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
               {[
-                { label: "Exclusión/devolucion de IVA (19%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
+                { label: "Exclusión/devolución de IVA (19%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
                 { label: "Deducción en renta (50%)", value: calc.renta, color: "var(--teal-500)", pct: calc.renta / (calc.totalBeneficio || 1) },
               ].map((b, i) => (
                 <div key={i}>
@@ -675,7 +675,7 @@ function Calculadora() {
 
             {perfil === "empresa" && (
               <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5, marginBottom: 16 }}>
-                Depreciación acelerada a ~3 años (tasa anual hasta 33,33%), mas exención arancelaria si los equipos son importados.
+                Depreciación acelerada a ~3 años (tasa anual hasta 33,33%), más exención arancelaria si los equipos son importados.
               </div>
             )}
 
@@ -691,11 +691,11 @@ function Calculadora() {
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Servicio de tramitacion CertiVeh</span>
+                    <span>Servicio de tramitación CertiVeh</span>
                     <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitacion)</span>
+                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitación)</span>
                     <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
                   </div>
                   <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
@@ -709,14 +709,14 @@ function Calculadora() {
 
           {/* Result */}
           <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>BENEFICIO TOTAL ESTIMADO</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
             <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
               {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
             </div>
             <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>BENEFICIO NETO (MENOS COSTO DEL SERVICIO)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
             </div>
 
@@ -744,16 +744,16 @@ function Calculadora() {
 // ── POR QUE EL CERTIFICADO UPME ──────────────────────────────────────────────
 function PorQueCertificado() {
   return (
-    <section id="por-que" aria-label="Por que el certificado UPME es indispensable" style={{ background: "var(--slate-50)" }}>
+    <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" style={{ background: "var(--slate-50)" }}>
       <div className="section">
         <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
           <div>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-              Por que el certificado UPME es{" "}
+              Por qué el certificado UPME es{" "}
               <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>indispensable</span>
             </h2>
             <p style={{ fontSize: "clamp(15px, 2vw, 17px)", color: "var(--slate-600)", lineHeight: 1.7, marginBottom: 24 }}>
-              Según la UPME, para acceder a los beneficios de exclusión de IVA, deducción de renta, depreciación acelerada y exención arancelaria, "lo unico que se requiere es tener el certificado de la UPME como soporte".
+              Según la UPME, para acceder a los beneficios de exclusión de IVA, deducción de renta, depreciación acelerada y exención arancelaria, "lo único que se requiere es tener el certificado de la UPME como soporte".
             </p>
             <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "var(--slate-500)", lineHeight: 1.7 }}>
               Sin certificado UPME no hay acceso a ninguno de los cuatro beneficios. Es el requisito habilitante que acredita que tu inversión es elegible para los incentivos de la Ley 1715 de 2014.
@@ -762,8 +762,8 @@ function PorQueCertificado() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {[
               { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversión es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
-              { icon: "clock", title: "Sin limite de vigencia", desc: "Los certificados bajo la Resolucion UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años despues de su expedicion." },
-              { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones via leasing financiero." },
+              { icon: "clock", title: "Sin límite de vigencia", desc: "Los certificados bajo la Resolución UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años después de su expedición." },
+              { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones vía leasing financiero." },
               { icon: "checkCircle", title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 400/2026)." },
             ].map((item, i) => (
               <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
@@ -787,13 +787,13 @@ function PorQueCertificado() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué es el certificado UPME y para que sirve?", a: "Es el documento oficial que acredita que una inversión en eficiencia energética (GEE) o energias renovables (FNCE) es elegible para los incentivos de la Ley 1715 de 2014. Es el unico soporte requerido para acceder a los cuatro beneficios tributarios: deducción en renta, exclusión de IVA, exención arancelaria y depreciación acelerada." },
-    { q: "¿Quien puede solicitarlo?", a: "Cualquier persona natural o jurídica que realice la inversión. Esto incluye empresas, inversionistas, operadores de flotas, desarrolladores de proyectos solares y propietarios de infraestructura de carga, entre otros." },
-    { q: "¿Cuanto se demora el proceso?", a: "La UPME verifica completitud en 10 dias habiles y evalua en hasta 20 dias habiles para proyectos FNCE (como energía solar) o hasta 30 dias habiles para proyectos GEE (como cargadores o vehículos GNV). CertiVeh gestiona todo el proceso y responde a los requerimientos de la UPME." },
-    { q: "¿El certificado vence?", a: "No. Los certificados emitidos bajo la Resolucion UPME 135 de 2025 no tienen limite de vigencia. Pueden modificarse (por ejemplo, para incluir información arancelaria o adicionar solicitantes) dentro de los 2 años siguientes a su expedicion." },
-    { q: "¿Aplica si la inversión se hizo con leasing?", a: "Si. El Decreto 895 de 2022 contempla expresamente las inversiones realizadas mediante leasing financiero (art. 1.2.1.18.72). Esto es especialmente relevante para flotas de vehículos y equipos de alto valor." },
-    { q: "¿Puedo combinar la deducción de renta con la depreciación acelerada?", a: "Si. La norma establece que tomar ambos beneficios no se considera concurrencia de beneficios (Decreto 895 de 2022). Cada caso debe validarse con asesoria tributaria." },
-    { q: "¿Que pasa con el IVA que ya pague?", a: "Con el certificado UPME es posible gestionar la devolucion del IVA ante la DIAN. El mecanismo practico es la solicitud de devolucion con el certificado como soporte." },
+    { q: "¿Qué es el certificado UPME y para qué sirve?", a: "Es el documento oficial que acredita que una inversión en eficiencia energética (GEE) o energías renovables (FNCE) es elegible para los incentivos de la Ley 1715 de 2014. Es el único soporte requerido para acceder a los cuatro beneficios tributarios: deducción en renta, exclusión de IVA, exención arancelaria y depreciación acelerada." },
+    { q: "¿Quién puede solicitarlo?", a: "Cualquier persona natural o jurídica que realice la inversión. Esto incluye empresas, inversionistas, operadores de flotas, desarrolladores de proyectos solares y propietarios de infraestructura de carga, entre otros." },
+    { q: "¿Cuánto se demora el proceso?", a: "La UPME verifica completitud en 10 días hábiles y evalúa en hasta 20 días hábiles para proyectos FNCE (como energía solar) o hasta 30 días hábiles para proyectos GEE (como cargadores o vehículos GNV). CertiVeh gestiona todo el proceso y responde a los requerimientos de la UPME." },
+    { q: "¿El certificado vence?", a: "No. Los certificados emitidos bajo la Resolución UPME 135 de 2025 no tienen límite de vigencia. Pueden modificarse (por ejemplo, para incluir información arancelaria o adicionar solicitantes) dentro de los 2 años siguientes a su expedición." },
+    { q: "¿Aplica si la inversión se hizo con leasing?", a: "Sí. El Decreto 895 de 2022 contempla expresamente las inversiones realizadas mediante leasing financiero (art. 1.2.1.18.72). Esto es especialmente relevante para flotas de vehículos y equipos de alto valor." },
+    { q: "¿Puedo combinar la deducción de renta con la depreciación acelerada?", a: "Sí. La norma establece que tomar ambos beneficios no se considera concurrencia de beneficios (Decreto 895 de 2022). Cada caso debe validarse con asesoría tributaria." },
+    { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME es posible gestionar la devolución del IVA ante la DIAN. El mecanismo práctico es la solicitud de devolución con el certificado como soporte." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
@@ -831,7 +831,7 @@ function CTAFinal() {
       </div>
       <div style={{ position: "relative", pointerEvents: "none" }}>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tus incentivos tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te estan esperando.</span>
+          Tus incentivos tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te están esperando.</span>
         </h2>
         <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto 36px" }}>
           Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.

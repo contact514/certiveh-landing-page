@@ -177,7 +177,7 @@ const CSS = `
 
   .badge {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
     padding: 4px 12px; border-radius: 9999px;
     background: var(--emerald-50); color: var(--emerald-700);
     border: 1px solid var(--emerald-200);
@@ -603,7 +603,7 @@ function VentanaUPME() {
       <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 9999, padding: "5px 14px", marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em" }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
             {ventanaAbierta ? "Ventana de radicación abierta" : "Ventana cerrada"}
           </span>
         </div>
@@ -1812,10 +1812,11 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
               padding: "6px 14px",
               fontSize: 11,
               fontWeight: 600,
-              letterSpacing: '0.08em'
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase'
             }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F87171', display: 'inline-block' }} />
-              ADVERTENCIA DE PLAZO
+              Advertencia de plazo
             </span>
           </div>
 

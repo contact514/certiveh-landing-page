@@ -325,6 +325,58 @@ background: linear-gradient(135deg, #059669 0%, #F59E0B 100%);
 | Semibold | 600 | Subtítulos, botones |
 | Bold | 700 | Títulos principales |
 
+### Capitalización y ortografía
+
+**Regla: el texto fuente siempre va en sentence case.** Nunca se escribe una etiqueta
+en MAYÚSCULAS SOSTENIDAS dentro del JSX, el HTML o el JSON-LD.
+
+Si un label necesita verse en mayúsculas (eyebrows, encabezados de tabla, tags), se
+consigue **solo con CSS**:
+
+```tsx
+// ✅ Correcto — el texto fuente es legible y conserva tildes
+<span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+  Beneficio total estimado
+</span>
+
+// ❌ Incorrecto — mayúsculas escritas a mano
+<span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em" }}>
+  BENEFICIO TOTAL ESTIMADO
+</span>
+```
+
+Por qué: las mayúsculas escritas a mano se leen letra por letra en lectores de
+pantalla, pierden las tildes, no se pueden revertir desde el diseño y rompen la
+consistencia entre verticales.
+
+#### Dónde sí van mayúsculas
+
+**Las píldoras van en mayúsculas** (siempre por CSS). Una píldora es un tag con
+fondo, borde, `border-radius: 9999px` y `letter-spacing` ≥ 0.04em:
+
+| Clase | Página | Ejemplo |
+|-------|--------|---------|
+| `.tc-badge` | Términos, Privacidad | DOCUMENTO LEGAL |
+| `.badge` | Landings principal y otros activos | EL PROCESO |
+| `.al-section-label` / `-dark` | Aliados | CÓMO FUNCIONA |
+| `.label` (en `.page-intro` / `.blog-home-intro`) | Blog | BLOG |
+| `.vh-card-badge`, `.vh-directory-badge` | Directorio de vehículos | ELÉCTRICO |
+
+**No son píldoras** (van en sentence case): los labels de las calculadoras
+(`Beneficio total estimado`, `Perfil tributario`), los títulos de columna del
+footer, `.tc-anexo-label`, `.bc-label`, `.tl-label` y `.banner-tag`.
+
+Tampoco se ponen en mayúsculas las píldoras **sin** tracking, porque llevan
+nombres propios o datos: `.nos-tag-green` / `.nos-tag-slate` (Stanford GSB Alumni),
+`.vh-brand-pill` (BYD, Tesla), `.card-meta-pill`.
+
+Otras excepciones: el lockup del logo (`CERTIFICACIÓN VEHICULAR`, `OTROS ACTIVOS`),
+los numerales romanos de las páginas legales y los verbos HTTP de la API (`POST`, `GET`).
+
+**Ortografía:** todo el copy visible lleva tildes y signos de apertura (`¿`, `¡`),
+incluidos los textos dentro de bloques JSON-LD. Los identificadores de código,
+slugs y rutas (`/vehiculos/`, `descripcion`, `solucion`) van sin tilde y no se tocan.
+
 ---
 
 ## 🎯 Iconografía
