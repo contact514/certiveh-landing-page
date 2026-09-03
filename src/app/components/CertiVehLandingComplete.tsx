@@ -953,7 +953,7 @@ function Servicios() {
       desc: "Acompañamiento integral para recuperar el IVA ante la DIAN (Concepto DIAN 673/2026). Preparamos el expediente completo, te agendamos la cita y, si nos das poder, firmamos el Formulario 010 por ti y asistimos a la cita.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Preparación integral del expediente", "Te agendamos la cita ante la DIAN", "Con poder: firmamos el Formulario 010 y asistimos a la cita por ti", "Generación documental completa"],
+      features: ["Preparación integral del expediente", "Generación documental completa", "Te agendamos la cita ante la DIAN", "Con poder: firmamos y asistimos a la cita por ti"],
       // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
       // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
       // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el
