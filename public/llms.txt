@@ -20,7 +20,7 @@ CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o po
 
 2. **Acompañamiento en la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh prepara el expediente completo (Formulario 010, relación de facturas, declaración juramentada, certificación bancaria y demás soportes), determina la vía de radicación que corresponde según la seccional del RUT del cliente, y **agenda la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él y asiste a la cita**.
 
-**Con poder, el cliente autentica el poder en notaría, firma la declaración juramentada y reenvía el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** Sin poder, además firma él el Formulario 010 y la declaración juramentada, y atiende la cita. En las dos modalidades el reenvío es suyo. No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
+**Con poder, el cliente autentica el poder en notaría, firma la declaración juramentada y reenvía el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** Sin poder no hay notaría, pero él firma el Formulario 010 además de la declaración juramentada, y atiende la cita. La declaración juramentada y el reenvío del correo son suyos en las dos modalidades. No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
 
 ## Ventana de radicación UPME (actualizado mayo 2026)
 
@@ -28,7 +28,7 @@ La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Cicl
 
 ## Cómo funciona
 
-1. El usuario sube 3 documentos (cédula, tarjeta de propiedad, factura de compra) en la plataforma web portal.certiveh.co.
+1. El usuario sube 4 documentos (cédula, tarjeta de propiedad, factura de compra y RUT) en la plataforma web portal.certiveh.co.
 2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
 3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución 400 de 2026).
 4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
