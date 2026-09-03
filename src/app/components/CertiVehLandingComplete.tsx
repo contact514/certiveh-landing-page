@@ -559,7 +559,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Eléctricos e híbridos (no MHEV)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Acompañamiento en devolución de IVA ante la DIAN"];
+  const items = ["Eléctricos e híbridos (no los ligeros)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Acompañamiento en devolución de IVA ante la DIAN"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -1295,7 +1295,7 @@ function Calculadora() {
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Tipo de vehículo</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (No MHEV)", icon: "battery" }].map(opt => (
+                {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (no ligero)", icon: "battery" }].map(opt => (
                   <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none", lineHeight: 1.3 }}>
                     <Icon name={opt.icon} size={16} color={tipo === opt.value ? "white" : "var(--slate-400)"} />
                     {opt.label}
@@ -1647,7 +1647,7 @@ function WinWin() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." },
