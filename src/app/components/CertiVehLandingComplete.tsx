@@ -942,7 +942,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: "$599.990",
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Radicación aun si tu modelo no está en el listado", "Respuesta a requerimientos UPME", "Certificado + guía técnica para tu contador", "Desbloquea los 3 beneficios tributarios"],
+      features: ["Radicación automática ante la UPME", "Radicación aun si tu modelo no está en el listado", "Respuesta a requerimientos UPME", "Certificado digital, listo para descargar", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
@@ -1156,7 +1156,7 @@ function ComoFunciona() {
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
     { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
     { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
-    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard junto con la guía técnica para tu contador.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
+    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
   ];
   
   useEffect(() => {
