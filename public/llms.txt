@@ -18,9 +18,9 @@ CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o po
 
 1. **Certificado UPME**: CertiVeh tramita ante la UPME el certificado que acredita que el vehículo es elegible para los incentivos tributarios. Es el requisito previo para todo lo demás.
 
-2. **Acompañamiento en la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh prepara el expediente completo (Formulario 010, relación de facturas, declaración juramentada, certificación bancaria y demás soportes), determina la vía de radicación que corresponde según la seccional del RUT del cliente, y **agenda la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él, asiste a la cita y responde a la DIAN**.
+2. **Acompañamiento en la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh prepara el expediente completo (Formulario 010, relación de facturas, declaración juramentada, certificación bancaria y demás soportes), determina la vía de radicación que corresponde según la seccional del RUT del cliente, y **agenda la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él y asiste a la cita**.
 
-**Lo único que hace el cliente en la devolución de IVA es reenviar el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
+**Con poder, lo único que hace el cliente es reenviar el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** Sin poder, además firma él el Formulario 010 y la declaración juramentada, y atiende la cita. En las dos modalidades el reenvío es suyo. No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
 
 ## Ventana de radicación UPME (actualizado mayo 2026)
 
