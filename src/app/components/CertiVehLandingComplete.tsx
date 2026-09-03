@@ -950,11 +950,15 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "Acompañamiento integral para recuperar el IVA ante la DIAN (Concepto DIAN 673/2026). Preparamos todo el expediente y te indicamos exactamente cómo y dónde radicar.",
+      desc: "Acompañamiento integral para recuperar el IVA ante la DIAN (Concepto DIAN 673/2026). Preparamos el expediente completo, te agendamos la cita y, si nos das poder, firmamos el Formulario 010 por ti y asistimos a la cita.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Preparación integral del expediente", "Determinación de la vía de radicación correcta", "Generación documental completa", "Instructivo paso a paso para la radicación"],
-      note: "El instructivo te guía exactamente cómo y dónde radicar ante la DIAN (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades).",
+      features: ["Preparación integral del expediente", "Te agendamos la cita ante la DIAN", "Con poder: firmamos el Formulario 010 y asistimos a la cita por ti", "Generación documental completa"],
+      // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
+      // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
+      // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el
+      // resultado era gente que no reenviaba y cuyo expediente NO SE RADICABA sin enterarse.
+      note: "Si tu seccional exige cita previa, la pedimos nosotros a tu nombre. Lo único que haces tú es reenviar el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
@@ -1650,7 +1654,7 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí. Una vez tienes tu certificado UPME, CertiVeh revisa la documentación y prepara el expediente, determina la vía de radicación correcta (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades), genera todos los documentos necesarios y te entrega un instructivo paso a paso para la radicación ante la DIAN. Todo el proceso de preparación es 100% en línea desde tu dashboard." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, preparamos el expediente completo y determinamos la vía de radicación que te corresponde (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades). Si tu seccional exige cita, la pedimos nosotros a tu nombre. Y si nos das poder, firmamos el Formulario 010 por ti, asistimos a la cita y respondemos a la DIAN si pregunta algo. Lo único que haces tú es reenviar el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por persona, así que ese paso no lo puede dar nadie más." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
