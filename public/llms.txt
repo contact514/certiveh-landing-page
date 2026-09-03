@@ -12,6 +12,16 @@ CertiVeh gestiona ante la UPME el certificado que permite a propietarios de veh�
 
 Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021, la Resolución UPME 135 de 2025 y la Resolución UPME 400 de 2026.
 
+## Los dos servicios de CertiVeh
+
+CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o por separado:
+
+1. **Certificado UPME**: CertiVeh tramita ante la UPME el certificado que acredita que el vehículo es elegible para los incentivos tributarios. Es el requisito previo para todo lo demás.
+
+2. **Acompañamiento en la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh prepara el expediente completo (Formulario 010, relación de facturas, declaración juramentada, certificación bancaria y demás soportes), determina la vía de radicación que corresponde según la seccional del RUT del cliente, y **agenda la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él, asiste a la cita y responde a la DIAN**.
+
+**Lo único que hace el cliente en la devolución de IVA es reenviar el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
+
 ## Ventana de radicación UPME (actualizado mayo 2026)
 
 La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: las solicitudes se radican de inmediato.
@@ -64,6 +74,10 @@ https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME
 - Proceso de certificación UPME: https://certiveh.co/blog/certificacion-upme-proceso-documentos-plazos/
 - Beneficios tributarios para vehículos eléctricos: https://certiveh.co/blog/beneficios-tributarios-vehiculos-electricos-colombia/
 - Devolución de IVA: https://certiveh.co/blog/devolucion-iva-vehiculos-electricos-hibridos-colombia/
+- Cómo recuperar el IVA paso a paso: https://certiveh.co/blog/como-recuperar-iva-carro-electrico-paso-a-paso/
+- Qué hacer después de comprar el vehículo: https://certiveh.co/blog/beneficios-tributarios-vehiculo-electrico-despues-de-comprar/
+- Vehículos eléctricos e híbridos elegibles 2026: https://certiveh.co/blog/vehiculos-electricos-hibridos-elegibles-beneficios-tributarios-2026/
+- Vehículos híbridos elegibles: https://certiveh.co/blog/vehiculos-hibridos-elegibles-incentivos-tributarios-colombia/
 - Deducción en renta: https://certiveh.co/blog/deduccion-renta-vehiculo-electrico-hibrido-colombia/
 - Cuánto ahorro en impuestos: https://certiveh.co/blog/cuanto-ahorro-impuestos-vehiculo-electrico-colombia/
 - Flotas empresariales: https://certiveh.co/blog/flotas-electricas-hibridas-beneficios-tributarios-empresas/

@@ -53,15 +53,78 @@ import '../styles/index.css';
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "¿Qué vehículos califican?", "acceptedAnswer": { "@type": "Answer", "text": "Vehículos eléctricos puros e híbridos registrados en Colombia. No aplica para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT." } },
-      { "@type": "Question", "name": "¿Cuándo puedo radicar mi solicitud?", "acceptedAnswer": { "@type": "Answer", "text": "Solo tienes que entrar al portal, crear tu cuenta y cargar tu solicitud. Tu solicitud se radica de inmediato gracias a la ventana continua de recepción (Resolución UPME 400 de 2026)." } },
-      { "@type": "Question", "name": "¿Qué documentos necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Si eres persona natural: cédula, tarjeta de propiedad y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal, tarjeta de propiedad y factura de compra." } },
-      { "@type": "Question", "name": "¿Cuánto toma el proceso completo?", "acceptedAnswer": { "@type": "Answer", "text": "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME." } },
-      { "@type": "Question", "name": "¿Qué pasa si la UPME rechaza mi solicitud?", "acceptedAnswer": { "@type": "Answer", "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." } },
-      { "@type": "Question", "name": "¿Funciona para empresas e independientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años." } },
-      { "@type": "Question", "name": "¿Cuánto tiempo tengo para reclamar mis beneficios?", "acceptedAnswer": { "@type": "Answer", "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra. Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo. El certificado UPME puede obtenerse después de la compra." } },
-      { "@type": "Question", "name": "¿CertiVeh gestiona la devolución del IVA?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, preparamos el expediente completo y determinamos la vía de radicación que te corresponde (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades). Si tu seccional exige cita, la pedimos nosotros a tu nombre. Y si nos das poder, firmamos el Formulario 010 por ti, asistimos a la cita y respondemos a la DIAN si pregunta algo. Lo único que haces tú es reenviar el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por persona, así que ese paso no lo puede dar nadie más." } },
-      { "@type": "Question", "name": "¿Puedo hacer el trámite a nombre de otra persona o empresa?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." } }
+      {
+        "@type": "Question",
+        "name": "¿Qué vehículos califican?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros (MHEV). El vehículo debe estar a nombre del solicitante en el RUNT."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuándo puedo radicar mi solicitud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué documentos necesito?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si eres persona natural: cédula de ciudadanía (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto toma el proceso completo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué pasa si la UPME rechaza mi solicitud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Funciona para empresas e independientes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tiempo tengo para reclamar mis beneficios?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿CertiVeh gestiona la devolución del IVA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, preparamos el expediente completo y determinamos la vía de radicación que te corresponde (cita virtual en Bogotá, Medellín, Cali y Bucaramanga; buzón electrónico en otras ciudades). Si tu seccional exige cita, la pedimos nosotros a tu nombre. Y si nos das poder, firmamos el Formulario 010 por ti, asistimos a la cita y respondemos a la DIAN si pregunta algo. Lo único que haces tú es reenviar el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por persona, así que ese paso no lo puede dar nadie más."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo hacer el trámite a nombre de otra persona o empresa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad."
+        }
+      }
     ]
   })} />
 
