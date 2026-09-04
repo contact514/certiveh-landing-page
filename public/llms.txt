@@ -28,7 +28,7 @@ La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Cicl
 
 ## Cómo funciona
 
-1. El usuario sube 4 documentos (cédula, tarjeta de propiedad, factura de compra y RUT) en la plataforma web portal.certiveh.co.
+1. El usuario sube 3 documentos (cédula, tarjeta de propiedad y factura de compra) en la plataforma web portal.certiveh.co. El RUT solo hace falta si además pide la devolución del IVA.
 2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
 3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución 400 de 2026).
 4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
