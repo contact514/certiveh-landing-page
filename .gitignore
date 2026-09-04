@@ -38,3 +38,7 @@ pnpm-debug.log*
 .cache/
 .turbo/
 .vercel
+
+# Temporales del CLI de Supabase: estado local de la sesion, no del proyecto.
+# `linked-project.json` ademas lleva el ref del proyecto y el id de la organizacion.
+supabase/.temp/
