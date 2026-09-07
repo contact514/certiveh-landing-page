@@ -1175,7 +1175,13 @@ function ComoFunciona() {
               Así de simple <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>es el trámite.</span>
             </h2>
             <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
-              Del certificado UPME a la devolución de tu IVA. Desde tu teléfono y sin portales gubernamentales.
+              {/* ⚠️ Decía «Del certificado UPME a la devolución de tu IVA», y los cinco pasos de
+                  abajo describen SOLO el certificado: crear la cuenta en la UPME, llenar sus
+                  formularios, radicar y descargar. Con esa promesa encima, el paso 04 —«Tú no
+                  haces nada más»— contradecía la tarjeta de servicio de dos secciones más arriba,
+                  que dice que en el IVA le queda firmar y reenviar un correo. El defecto no está
+                  en el paso: está en el titular que le hace decir algo que no dice. */}
+              Así se obtiene tu certificado UPME: desde tu teléfono y sin portales gubernamentales.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {steps.map((s, i) => (
