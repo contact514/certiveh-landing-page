@@ -793,7 +793,7 @@ function FAQ() {
     { q: "¿El certificado vence?", a: "No. Los certificados emitidos bajo la Resolución UPME 135 de 2025 no tienen límite de vigencia. Pueden modificarse (por ejemplo, para incluir información arancelaria o adicionar solicitantes) dentro de los 2 años siguientes a su expedición." },
     { q: "¿Aplica si la inversión se hizo con leasing?", a: "Sí. El Decreto 895 de 2022 contempla expresamente las inversiones realizadas mediante leasing financiero (art. 1.2.1.18.72). Esto es especialmente relevante para flotas de vehículos y equipos de alto valor." },
     { q: "¿Puedo combinar la deducción de renta con la depreciación acelerada?", a: "Sí. La norma establece que tomar ambos beneficios no se considera concurrencia de beneficios (Decreto 895 de 2022). Cada caso debe validarse con asesoría tributaria." },
-    { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME puede solicitarse la devolución ante la DIAN, presentando el certificado como soporte. Ese trámite lo adelanta el contribuyente: el acompañamiento de CertiVeh en devolución de IVA aplica solo a vehículos eléctricos e híbridos." },
+    { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME puede solicitarse la devolución del IVA ante la DIAN, presentándolo como soporte. Ese trámite lo adelanta el contribuyente: el acompañamiento de CertiVeh en devolución de IVA aplica solo a vehículos eléctricos e híbridos." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
