@@ -38,7 +38,7 @@
 
 3. **Subheadline**
    ```
-   Exención IVA • Deducción en Renta • Exención Arancelaria
+   Devolución IVA • Deducción en Renta • Exención Arancelaria
    ```
    - Tipografía: Inter Medium, 32-36 px
    - Color: Slate 600 (#475569)
@@ -80,7 +80,7 @@ background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
 ```
 ✓ Automatiza tu certificado UPME
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Exención IVA · Deducción 50% en Renta
+Devolución IVA · Deducción 50% en Renta
 Exención Arancelaria
 
 100% en línea · Sin trámites manuales
@@ -99,9 +99,9 @@ certiveh.co
 
 ### Opción 3: Orientada a ROI
 ```
-Recupera hasta
+Deduce hasta
 $75.000.000
-en beneficios tributarios
+de tu base gravable
 
 Automatización del certificado UPME
 certiveh.co
@@ -119,7 +119,7 @@ certiveh.co
 │                                         │
 │     Automatiza tu certificado UPME      │
 │                                         │
-│   Exención IVA • Deducción • Arancel   │
+│   Devolución IVA • Deducción • Arancel   │
 │                                         │
 │     [Escudo Icon]  100% en línea        │
 │                                         │
@@ -137,9 +137,9 @@ certiveh.co
 │  Automatiza tu     │     VEHÍCULO       │
 │  certificado UPME  │     ELÉCTRICO]     │
 │                    │                    │
-│  ✓ Exención IVA    │                    │
+│  ✓ Devolución IVA    │                    │
 │  ✓ Deducción 50%   │                    │
-│  ✓ Reducción       │                    │
+│  ✓ Exención       │                    │
 │                    │                    │
 │  certiveh.co       │                    │
 │                    │                    │
@@ -157,7 +157,7 @@ certiveh.co
 │                                         │
 │    Automatiza tu certificado UPME       │
 │                                         │
-│  [Badge] $75M en beneficios  [Badge]    │
+│  [Badge] $75M de base gravable  [Badge]    │
 │  [Badge] 100% en línea       [Badge]    │
 │                                         │
 │           certiveh.co                   │

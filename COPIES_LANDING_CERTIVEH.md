@@ -20,14 +20,14 @@
 **tiene derecho a** [texto rotativo]
 
 ### Textos Rotativos (FlipWords)
-1. exención de IVA
+1. devolución de IVA
 2. deducción en renta
 3. exención de arancel en importación directa
 4. un certificado UPME
 
 ### Subheadline
 CertiVeh automatiza el trámite ante la UPME de principio a fin.  
-Tú subes tres documentos. Tú subes tus documentos, firmas y reenvías un correo.
+Tú subes tus documentos, firmas y reenvías un correo.
 
 ### CTAs Hero
 - **Primario:** Calcular mi beneficio
@@ -74,7 +74,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Tag:** IVA
 - **Título:** Devolución de IVA
 - **Porcentaje:** 5%
-- **Descripción:** Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $6M que no pagas.
+- **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M que puedes recuperar.
 - **Ejemplo:** $120M → ahorras $6.000.000
 
 ### Card 2: Deducción en Renta
@@ -151,7 +151,7 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 - Labels: "Valor del vehículo"
 
 #### Barras de Desglose
-- Exención IVA
+- Devolución IVA
 - Deducción renta
 - Exención de arancel en importación directa
 
@@ -245,7 +245,7 @@ Por el momento el servicio está disponible para personas naturales. El soporte 
 **te está esperando.**
 
 ### Descripción
-Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
+Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME cierra el 15 de diciembre.
 
 ### CTA Principal
 **Empezar ahora**
@@ -325,8 +325,8 @@ https://portal.certiveh.co
 ### Precisión de la IA
 +90% de los datos extraídos correctamente en el primer intento
 
-### Frecuencia Ventanas UPME
-Dos veces al año
+### Ventana de radicación UPME
+Continua, del 1 de febrero al 15 de diciembre
 
 ---
 

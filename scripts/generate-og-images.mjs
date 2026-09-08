@@ -315,7 +315,7 @@ const pages = [
       { text: "elegibles para beneficios tributarios" },
     ],
     subtitle: "Consulta si tu marca y modelo califica para devolucion de IVA, deduccion en renta y depreciacion acelerada con el certificado UPME.",
-    pills: ["362+ modelos", "51 marcas"],
+    pills: ["498+ modelos", "62 marcas"],
     url: "certiveh.co/vehiculos",
   },
   {
