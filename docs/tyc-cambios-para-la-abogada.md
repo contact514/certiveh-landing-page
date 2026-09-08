@@ -144,9 +144,13 @@ Este es el único de los siete que no afecta al servicio de IVA: está en los T�
 | Avisa, pero deja seguir | — | **4 años y 9 meses** |
 | Bloquea la contratación | **4 años y 6 meses** | **5 años menos un día** |
 
-O sea que hay una franja de **seis meses** —entre los cuatro años y medio y los cinco años— en la que el contrato dice que la plataforma «no habilitará» la contratación y la plataforma la habilita igual. Hoy, 8 de septiembre de 2026, esa franja son las facturas emitidas entre el 8 de marzo y el 8 de septiembre de 2021.
+O sea que hay una franja de **seis meses** —entre los cuatro años y medio y los cinco años— en la que el contrato dice que la plataforma «no habilitará» la contratación y la plataforma la habilita igual. Hoy, 8 de septiembre de 2026, esa franja son las facturas emitidas **entre el 10 de septiembre de 2021 y el 7 de marzo de 2022**.
+
+*(Medido ejecutando el propio `classifyInvoiceAge` con esa fecha: el 9 de septiembre de 2021 sale `blocked`, el 10 sale `warning`, y el 7 de marzo de 2022 sale `ok` — el contrato ya lo prohíbe desde el 8 de marzo. Un borrador anterior de este apartado daba «del 8 de marzo al 8 de septiembre de 2021», que son fechas del lado **bloqueado**: justo el conjunto que la plataforma sí rechaza, o sea lo contrario de lo que aquí se argumenta.)*
 
 **Por qué lo levantamos.** No es cosmético: la cláusula está redactada como una obligación de la Plataforma («no habilitará»), así que un cliente de esa franja habría contratado un servicio que el propio contrato dice que no se le podía ofrecer. Y el motivo que la cláusula se da a sí misma —«asegurar que el trámite completo pueda surtirse dentro del término legal»— es exactamente el argumento que hace que ese margen importe.
+
+**Constancia, para que no parezca que se nos escapó:** la cláusula siguiente ya prevé el caso —«*en el evento en que, por cualquier causa, la Plataforma llegare a habilitar la contratación … respecto de un vehículo cuya factura tenga una antigüedad superior a la permitida … ello no genera responsabilidad alguna*»— y exonera al Operador. Lo que pedimos no es cubrir la responsabilidad, que ya está cubierta, sino que **la obligación de «no habilitar» y el corte real coincidan**: una cláusula que se incumple a diario y se salva por su propia excepción envejece mal.
 
 **Qué les pedimos:** que nos digan cuál de los dos números manda. Si es el del contrato, el cambio es del código y no de la cláusula. Si es el del sistema, la cláusula tiene que decir cinco años y redactar el margen operativo como aviso, no como prohibición. **Es su decisión, no la nuestra**: nosotros solo constatamos que hoy no coinciden.
 

@@ -1,4 +1,4 @@
-# Especificaciones para Imagen Open Graph (og-image.png)
+# Especificaciones para las imágenes Open Graph (`public/og/*.png`)
 **CertiVeh - Social Media Preview Image**
 
 ---
@@ -233,12 +233,18 @@ certiveh.co
 **URL Pública:** `https://certiveh.co/og/<nombre>.png`
 
 ⚠️ **Los PNG llevan el copy anterior al renombrado de septiembre de 2026**: se generan desde el
-script, así que hay que volver a correrlo para que digan «gestión». Ese aviso estaba solo dentro del
+script, así que hay que volver a correrlo para que digan «gestión».
+
+⚠️ **Pero hoy ese script NO se puede reejecutar**: sus siete imágenes de fondo viven en `/tmp` y no
+están en el repo, así que muere con `ENOENT`. Antes de regenerar hay que recuperar los fondos y
+meterlos en el repo. (Esa mitad del aviso también estaba solo dentro del `.mjs`.) Ese aviso estaba solo dentro del
 `.mjs`, o sea invisible para quien abriera este documento — que es justo el que va a decidir si
 hacen falta.
 
-No existe `/public/og-image.png`: esa ruta es la que este documento describía cuando aún no había
-ninguna imagen.
+⚠️ Y `/public/og-image.png` **sí existe**, está trackeado en git y se publica en
+`https://certiveh.co/og-image.png` — un borrador anterior de este apartado decía que no. Lo cierto
+es peor: existe y está **huérfano**, ninguna página lo referencia (`BaseLayout` usa `/og/home.png`
+por defecto). O se borra o se documenta para qué queda.
 
 ---
 
@@ -254,5 +260,5 @@ Asegurar que la imagen se vea bien en:
 
 ---
 
-**Última actualización:** Marzo 16, 2026  
+**Última actualización:** 8 de septiembre de 2026  
 **Status:** Las siete imágenes existen y se sirven. Pendiente: regenerarlas con el copy de «gestión».

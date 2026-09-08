@@ -55,7 +55,7 @@ Tú subes tus documentos, firmas y reenvías un correo.
 - 100% en línea
 - Deduce hasta $75M de tu base gravable
 - IA extrae tus datos
-- Radicación automática
+- Radicación automática ante la UPME
 - Notificaciones WhatsApp
 - Sin cuenta UPME
 
@@ -74,7 +74,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Tag:** IVA
 - **Título:** Devolución de IVA
 - **Porcentaje:** 5%
-- **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M que puedes recuperar.
+- **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M. El reconocimiento y el monto los decide la DIAN.
 - **Ejemplo:** $120M sin IVA → solicitas $6.000.000
 
 ### Card 2: Deducción en Renta
@@ -95,6 +95,28 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 **La ventana de radicación de la UPME va del 1 de febrero al 15 de diciembre.** Si no radicas antes del 15 de diciembre, la siguiente abre el 1 de febrero. (Resolución UPME 400 de 2026: se acabaron los dos ciclos cerrados.)
 
 ---
+
+
+> ⚠️ **LO QUE ESTE DOCUMENTO NO DECÍA, Y HAY QUE DECIR EN CUALQUIER COPY NUEVO DE IVA.**
+>
+> Auditado el 8-sep-2026: `cita`, `poder`, `notaría` y `seccional` salían **cero veces** en todo el
+> fichero. Quien escriba copy nuevo partiendo de aquí reproduce la asimetría que costó tres rondas
+> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos:
+>
+> · **La cita ante la DIAN la pedimos nosotros, en las DOS modalidades** — pero solo la exigen
+>   cinco seccionales (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes), así que va
+>   SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
+>   Y la DIAN concede **una sola por contribuyente**: si la pide el cliente, gasta el cupo.
+> · **La cita NO es presencial.** Nadie va a ninguna oficina: se atiende mandando el correo ese
+>   día, antes de la hora asignada.
+> · **El correo de radicación lo reenvía SIEMPRE el cliente**, desde la dirección inscrita en su
+>   RUT, porque la DIAN exige que la solicitud salga del contribuyente. **También con poder.**
+>   Nunca escribir que radicamos nosotros ante la DIAN. *(Ante la UPME sí radicamos: eso es otra
+>   cosa y sí se puede decir.)*
+> · **Lo único que cambia con poder** es quién firma el Formulario 010. Con poder el cliente
+>   además autentica el poder en **notaría** —presencial, obligatorio y **lo paga él**— y firma la
+>   declaración juramentada.
+
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
 
@@ -165,7 +187,7 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 **BENEFICIO TOTAL ESTIMADO**
 
 #### Label Secundario
-en incentivos tributarios recuperables
+en incentivos tributarios (incluye base gravable en renta)
 
 #### Beneficio Neto
 **BENEFICIO NETO (MENOS HONORARIOS)**
@@ -197,13 +219,13 @@ Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está
 Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros.
 
 ### Card 4: No pierdas la ventana
-Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre.
+La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solicitud se radica de inmediato. Si te registras con la ventana cerrada, entra en cuanto reabra y te avisamos.
 
 ### Card 5: Sin portal gubernamental
 Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto.
 
 ### Card 6: Pago único, sin letra pequeña
-Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo incluido desde el primer día.
+Una sola tarifa de servicio, sin suscripciones. Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría.
 
 ---
 
@@ -214,7 +236,7 @@ Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo inc
 
 ### Pregunta 1
 **¿Qué vehículos califican?**  
-Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos de la Ley 1964 de 2019. El vehículo debe estar a nombre del solicitante en el RUNT.
+Vehículos eléctricos e híbridos NUEVOS registrados en Colombia. **No aplica a híbridos ligeros.** El vehículo debe estar a nombre del solicitante en el RUNT.
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
@@ -230,7 +252,7 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. Nuestra política de garantía está detallada en los términos del servicio.
+Revisamos el motivo del rechazo contigo. Si el error es nuestro, lo corregimos sin costo; si es por datos que aportó el usuario, solo se cobra de nuevo el costo de la radicación ante la UPME. Nuestra política de garantía está detallada en los términos del servicio.
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  

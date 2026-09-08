@@ -89,7 +89,7 @@ https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME
 
 - Digital de punta a punta: todo el trámite se hace en línea, sin visitas a la UPME ni a la DIAN. La única excepción es la autenticación del poder en notaría, y solo si el cliente elige la modalidad con poder. La cita ante la DIAN no es presencial: se atiende enviando un correo el día asignado, antes de la hora.
 - Automatización: un agente de software radica la solicitud directamente en el portal UPME.
-- Precios transparentes: costo publicado en el sitio, sin costos ocultos. Pago único, sin suscripciones.
+- Precios transparentes: costo publicado en el sitio, pago único y sin suscripciones. Aparte van el costo del trámite ante la UPME y, si el cliente elige darnos poder, la notaría.
 - Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 135 de 2025.
 - Radicación inmediata: gracias a la ventana continua (Resolución 400 de 2026), ya no hay que esperar ciclos.
 - Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (498+ modelos).
