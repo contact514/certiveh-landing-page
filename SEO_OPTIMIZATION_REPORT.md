@@ -104,10 +104,18 @@
 }
 ```
 
-> **Nota (8-sep-2026).** Este documento es una foto fechada en abril, y tres de sus datos ya no
-> eran los del sitio: la tarifa del 2.5%, el correo `certiveh.contacto@gmail.com` y el recuento de
-> FAQ. Se han puesto al día contra `dist/index.html` construido. Lo demás sigue siendo la foto de
-> abril: si un dato de aquí abajo contradice al sitio, manda el sitio.
+> **Nota (8-sep-2026).** Este documento es una foto fechada en abril, y **seis** de sus datos ya
+> no eran los del sitio: el H1, el H2 de la Calculadora, el H2 del CTA final, el bloque `offers`
+> (decía «tarifa única del 2.5%» y el sitio sirve `price: 599990`), el correo
+> `certiveh.contacto@gmail.com` y el recuento de FAQ (decía 6, son 9). Se han puesto al día
+> contra `dist/index.html` construido.
+>
+> *(La primera versión de esta nota decía «tres», que era el número de datos que se habían mirado
+> y no el de datos que se tocaron. Un aviso que no cuenta bien sus propias ediciones es la misma
+> clase de defecto que el aviso viene a corregir.)*
+>
+> Lo demás sigue siendo la foto de abril: si un dato de aquí abajo contradice al sitio, manda el
+> sitio.
 
 #### Schema.org - FAQPage
 - ✅ 9 preguntas frecuentes estructuradas

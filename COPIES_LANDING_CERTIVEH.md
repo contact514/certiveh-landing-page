@@ -147,7 +147,7 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
-- **Descripción:** Solo necesitas tus documentos: cédula, tarjeta de propiedad y factura de compra, más el RUT si vas a pedir la devolución del IVA. Si eres empresa, en lugar del RUT va el certificado de Cámara de Comercio vigente. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
+- **Descripción:** Solo necesitas tus documentos: cédula, tarjeta de propiedad y factura de compra, más el RUT si vas a pedir la devolución del IVA. Si eres empresa, además va el certificado de Cámara de Comercio vigente; el RUT lo pide la devolución de IVA, no el certificado UPME. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
 - **Detail:** Sin formularios manuales. Sin errores de digitación.
 
 ### Paso 02: Revisa y confirma

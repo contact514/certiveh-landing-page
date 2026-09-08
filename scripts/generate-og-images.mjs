@@ -38,7 +38,7 @@ function loadImageAsBase64(path) {
 // Para cerrarlo hacen falta las siete imagenes de fondo. Cuando aparezcan: ponerlas en `/tmp/og-bgs`
 // (o mejor, en `assets/og-bgs/` dentro del repo y cambiar esta constante), ejecutar el script y
 // commitear los PNG regenerados.
-const bgDir = process.env.OG_BG_DIR || "/tmp/og-bgs";
+const bgDir = "/tmp/og-bgs";
 const backgrounds = {
   home: loadImageAsBase64(join(bgDir, "hyundai-motor-group-KpsavDr0nmo-unsplash.jpg")),
   "otros-activos": loadImageAsBase64(join(bgDir, "solar.jpg")),

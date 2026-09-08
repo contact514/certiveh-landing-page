@@ -17,6 +17,13 @@ import imgPortalUsuario from '@/assets/portal-dashboard.jpg';
  *
  * Y aunque se hubiera parcheado el hueco, dentro de un mes volvería: unas fechas fijas en un aviso
  * de caducidad envejecen exactamente igual que el plazo del que hablan.
+ *
+ * ⚠️ **El texto va en probabilidad y no en indicativo, a propósito.** Decía «el plazo ya se
+ * venció», que es un veredicto jurídico dado en la home por una función sin tests, y el coste
+ * de un falso positivo es un cliente que se rinde teniendo derecho. Además hay un caso real en
+ * que el indicativo sería falso: una factura del 29 de febrero leída el 1 de marzo cinco años
+ * después —un día cada cuatro años— vence ESE día, no antes. Con «es muy probable» el aviso
+ * empuja igual y deja la última palabra en la fecha exacta, que es lo que se le pide al lector.
  */
 const MESES = [
   "enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -997,7 +1004,7 @@ function Servicios() {
       desc: "La DIAN concede una sola cita por contribuyente, y solo la exigen cinco seccionales: si la pides tú, gastas el cupo y tu trámite se atasca. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 que puedes solicitar (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría: el único paso presencial, y lo pagas tú)"],
+      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría, presencial y a tu costa)"],
       // ⚠️ ESTA NOTA NO SE QUITA. (El aviso estaba pegado al array `features`, cuyo último
       // elemento es el de la notaría; la frase que describe está aquí.) Es la única tarea que le
       // queda al cliente y la DIAN no admite hacerla por él: exige que la radicación salga del
@@ -1710,7 +1717,7 @@ function FAQ() {
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía o de extranjería (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso), factura de compra y tu RUT (el RUT solo si además vas a pedir la devolución del IVA). Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
-    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional, siempre que sigan vigentes los requisitos de la UPME. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
+    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
     { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
@@ -1914,7 +1921,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: 16
           }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es anterior al {corteDeCaducidadIva().dia} de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, el plazo ya se venció; y si es del resto de {corteDeCaducidadIva().anio}, se te vence este año. Escríbenos con la fecha de tu factura y te decimos cuánto te queda.
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es anterior al {corteDeCaducidadIva().dia} de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, es muy probable que el plazo ya se te haya vencido; y si es del resto de {corteDeCaducidadIva().anio}, se te vence este año. Escríbenos con la fecha de tu factura y te decimos cuánto te queda.
           </p>
 
           <p style={{
