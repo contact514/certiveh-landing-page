@@ -215,28 +215,30 @@ certiveh.co
 
 ---
 
-## 📦 Ubicación del Archivo
+## 📦 Ubicación de los Archivos
+
+⚠️ **Esto ya NO está pendiente, y el documento decía que sí.** Hay **siete** PNG servidos hoy en
+`public/og/`, generados por `scripts/generate-og-images.mjs`:
 
 ```
-/public/og-image.png
+/public/og/home.png          → la portada y 20 páginas más (por defecto en BaseLayout)
+/public/og/vehiculos.png     → el catálogo y las fichas
+/public/og/blog.png          → el índice del blog y los artículos
+/public/og/aliados.png       → la página de aliados
+/public/og/nosotros.png      → la página de nosotros
+/public/og/otros-activos.png → GEE / FNCE
+/public/og/portal.png        → los enlaces al portal
 ```
 
-**URL Pública:**
-```
-https://certiveh.co/og-image.png
-```
+**URL Pública:** `https://certiveh.co/og/<nombre>.png`
 
----
+⚠️ **Los PNG llevan el copy anterior al renombrado de septiembre de 2026**: se generan desde el
+script, así que hay que volver a correrlo para que digan «gestión». Ese aviso estaba solo dentro del
+`.mjs`, o sea invisible para quien abriera este documento — que es justo el que va a decidir si
+hacen falta.
 
-## 🔄 Variantes Recomendadas
-
-### Principal (Default)
-- `og-image.png` - Imagen genérica de la marca
-
-### Específicas (Futuro)
-- `og-image-calculator.png` - Para compartir calculadora
-- `og-image-benefits.png` - Para compartir beneficios
-- `og-image-faq.png` - Para compartir FAQ
+No existe `/public/og-image.png`: esa ruta es la que este documento describía cuando aún no había
+ninguna imagen.
 
 ---
 
@@ -253,4 +255,4 @@ Asegurar que la imagen se vea bien en:
 ---
 
 **Última actualización:** Marzo 16, 2026  
-**Status:** Pendiente de creación
+**Status:** Las siete imágenes existen y se sirven. Pendiente: regenerarlas con el copy de «gestión».

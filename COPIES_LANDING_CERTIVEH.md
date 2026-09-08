@@ -92,7 +92,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Ejemplo:** Varía según modelo y origen
 
 ### Callout Informativo (Ventanas UPME)
-**La ventana de radicación de la UPME va del 1 de febrero al 15 de diciembre.** Si no radicas antes del 15 de diciembre, la siguiente abre el 1 de febrero. (Resolución UPME 400 de 2026: se acabaron los dos ciclos cerrados.) CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.
+**La ventana de radicación de la UPME va del 1 de febrero al 15 de diciembre.** Si no radicas antes del 15 de diciembre, la siguiente abre el 1 de febrero. (Resolución UPME 400 de 2026: se acabaron los dos ciclos cerrados.)
 
 ---
 
@@ -107,7 +107,7 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
-- **Descripción:** Solo necesitas tres documentos: tu Cédula, la Tarjeta de Propiedad del vehículo y la Factura de Compra. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
+- **Descripción:** Solo necesitas tus documentos: cédula, tarjeta de propiedad y factura de compra, más el RUT si vas a pedir la devolución del IVA. Si eres empresa, en lugar del RUT va el certificado de Cámara de Comercio vigente. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
 - **Detail:** Sin formularios manuales. Sin errores de digitación.
 
 ### Paso 02: Revisa y confirma
@@ -148,7 +148,7 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 
 #### Valor del vehículo
 - Rango: $40M - $600M
-- Labels: "Valor del vehículo"
+- Labels: "Valor del vehículo (sin IVA)"
 
 #### Barras de Desglose
 - Devolución IVA
@@ -156,7 +156,7 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 - Exención de arancel en importación directa
 
 #### Honorarios
-**Honorarios CertiVeh (5%)**  
+**Honorarios CertiVeh (tarifa fija)**  
 *Estimación referencial. Valor real depende del régimen tributario.
 
 ### Panel de Resultados
@@ -218,15 +218,15 @@ Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
-La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciembre. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación.
+La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciembre. Tu solicitud se radica de inmediato; si te registras con la ventana cerrada, entra en cuanto reabra el 1 de febrero y te avisamos.
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
-Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono.
+Persona natural: cédula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura de compra, más el RUT si vas a pedir la devolución del IVA. Empresa: cédula del representante legal, tarjeta de propiedad, factura de compra y certificado de Cámara de Comercio vigente. Todo se sube en PDF, JPG o PNG desde tu teléfono.
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
-Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME.
+Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
@@ -234,7 +234,7 @@ Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo a
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
-Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026.
+Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido.
 
 ---
 
@@ -276,7 +276,7 @@ Automatización del trámite UPME para certificados de beneficio tributario en C
 © 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia
 
 ### Contacto
-certiveh.contacto@gmail.com
+contacto@certiveh.co
 
 ---
 
@@ -314,13 +314,13 @@ https://portal.certiveh.co
 - Vehículo $150M → Deducción renta: $75.000.000
 
 ### Honorarios CertiVeh
-- 5% del beneficio total
+- Certificado UPME: $599.990 + IVA (tarifa fija). Gestión del IVA: $499.990 contratada junto al certificado, $599.990 por separado, + IVA. Tramo porcentual solo por encima de $200M.
 
 ### Tiempos del Proceso
 - Subir documentos: Menos de 3 minutos
 - Revisar y confirmar: 30 segundos
 - Radicación: Menos de 10 minutos de tu parte
-- Certificado UPME: 4-8 semanas (depende de UPME)
+- Certificado UPME: ~15 días hábiles, máximo legal 30
 
 ### Precisión de la IA
 +90% de los datos extraídos correctamente en el primer intento
@@ -357,7 +357,7 @@ Continua, del 1 de febrero al 15 de diciembre
 
 ### Labels de Formulario
 - Tipo de vehículo
-- Valor del vehículo
+- Valor del vehículo (sin IVA)
 
 ### Mensajes de Garantía
 - Sin riesgo · Si la UPME rechaza, revisamos tu caso

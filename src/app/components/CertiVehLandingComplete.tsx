@@ -950,14 +950,24 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. La pedimos nosotros cuando tu seccional la exige. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
+      // ⚠️ AQUÍ NO SE REPITE NI LA CITA NI EL REENVÍO. Los dos viven abajo: la cita en la segunda
+      // viñeta y el reenvío en la nota, que es la que no se puede quitar. Esta descripción llegó a
+      // decir la cita TRES veces y el reenvío DOS, en un bloque que el lector ve de una sola
+      // ojeada — y ya se había corregido una vez, así que la repetición vuelve sola si no queda
+      // escrito dónde va cada cosa.
+      //
+      // Y «$6.000.000 de vuelta» prometía caja: la DIAN estudia y decide. El mismo verbo se
+      // corrigió en la tarjeta de Beneficios y esta se quedó sin mirar.
+      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 que puedes solicitar (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
       features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría: el único paso presencial, y lo pagas tú)"],
-      // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
-      // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
-      // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el
-      // resultado era gente que no reenviaba y cuyo expediente NO SE RADICABA sin enterarse.
+      // ⚠️ ESTA NOTA NO SE QUITA. (El aviso estaba pegado al array `features`, cuyo último
+      // elemento es el de la notaría; la frase que describe está aquí.) Es la única tarea que le
+      // queda al cliente y la DIAN no admite hacerla por él: exige que la radicación salga del
+      // correo inscrito en SU RUT, y solo concede una cita por contribuyente. Callarla es lo que
+      // hacía el portal hasta el 3-sep, y el resultado era gente que no reenviaba y cuyo
+      // expediente NO SE RADICABA sin enterarse.
       note: "Si tu seccional exige cita previa, la pedimos nosotros a tu nombre. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
@@ -996,8 +1006,15 @@ function Servicios() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
                 {s.features.map((f, j) => (
-                  <div key={j} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5 }}>
-                    <Icon name="checkCircle" size={14} color={s.accentColor}/>{f}
+                  // ⚠️ `flex-start` y `flexShrink: 0`, no `center` sin encoger. La viñeta del
+                  // poder ocupa dos líneas a 1280px y tres a 769px, y con `center` el check queda
+                  // centrado entre líneas en vez de alineado a la primera — y sin `flexShrink` el
+                  // flex se lo come: medido a 769px, se reducía a un punto casi invisible.
+                  <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5 }}>
+                    <span style={{ flexShrink: 0, marginTop: 3, display: "inline-flex" }}>
+                      <Icon name="checkCircle" size={14} color={s.accentColor}/>
+                    </span>
+                    {f}
                   </div>
                 ))}
               </div>
@@ -1428,7 +1445,7 @@ function Calculadora() {
             <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
               {calc.total ? fmt(calc.total) : "-"}
             </div>
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
+            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios (incluye base gravable en renta)</div>
 
             {conIva && calc.iva && (
               <div style={{ width: "100%", padding: "16px 24px", marginBottom: 16, background: "rgba(20,184,166,0.12)", border: "1px solid rgba(20,184,166,0.25)", borderRadius: 12, textAlign: "center" }}>
@@ -1438,7 +1455,7 @@ function Calculadora() {
             )}
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo del servicio</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
             </div>
 
@@ -1470,7 +1487,7 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "Radicación inmediata",        desc: "La UPME recibe solicitudes del 1 de febrero al 15 de diciembre, sin ciclos. Tu trámite se radica de inmediato en esta ventana." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones ni costos ocultos." },
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría. Sin suscripciones." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
@@ -1870,7 +1887,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.4)',
             marginBottom: 32
           }}>
-            Además, la normativa tributaria puede cambiar. Radicar hoy te deja el certificado emitido bajo las reglas vigentes.
+            Además, la normativa tributaria puede cambiar. Empezar hoy te deja el trámite andando bajo las reglas vigentes.
           </p>
 
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>

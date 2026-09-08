@@ -96,7 +96,7 @@ Esto no es un matiz cosmético: es la obligación del Usuario que más fácil se
 
 ### 3.5 · Dos puntos menores, por coherencia
 
-- **Gastos a cargo del Usuario.** La cláusula de la tarifa ya excluye «certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN». Con la modalidad con poder aparece un gasto nuevo y sistemático: **la autenticación del poder ante notaría**. Convendría nombrarla, porque es plata del Usuario y hoy sólo se la advertimos en el portal.
+- **Gastos a cargo del Usuario.** La cláusula de la tarifa ya excluye «certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN». Con la modalidad con poder aparece un gasto nuevo y sistemático: **la autenticación del poder ante notaría**. Convendría nombrarla, porque es plata del Usuario. *(Desde el 8-sep-2026 también se advierte en la landing, en la tarjeta de Servicio 2 —«el único paso presencial, y lo pagas tú»—, pero eso es copy comercial, no una cláusula.)*
 - **Requerimientos posteriores de la DIAN.** Los T&C ya dicen que atenderlos es responsabilidad exclusiva del Usuario, y así se lo decimos en el portal. Sólo queremos confirmar con ustedes que eso **sigue siendo cierto también en la modalidad con poder**, donde el poder podría entenderse como facultad para atenderlos. Si el poder los cubre, hay que decidir si CertiVeh los asume o si el poder los excluye expresamente.
 
 ### 3.6 · La tarifa del contrato no es la que cobramos, y la diferencia es de cinco veces
@@ -131,6 +131,27 @@ En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato 
 
 Este es el único de los siete que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
 
+### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
+
+**Lo que dice hoy** (cláusula de admisibilidad del Servicio de Devolución del IVA):
+
+> «…la Plataforma **no habilitará** la contratación del Servicio de Devolución del IVA respecto de vehículos cuya factura de venta tenga una antigüedad superior a **cuatro (4) años y seis (6) meses** al momento de la solicitud.»
+
+**Lo que hace el sistema**, medido en el código (`invoice-age.ts` del portal):
+
+| | Contrato | Sistema |
+|---|---|---|
+| Avisa, pero deja seguir | — | **4 años y 9 meses** |
+| Bloquea la contratación | **4 años y 6 meses** | **5 años menos un día** |
+
+O sea que hay una franja de **seis meses** —entre los cuatro años y medio y los cinco años— en la que el contrato dice que la plataforma «no habilitará» la contratación y la plataforma la habilita igual. Hoy, 8 de septiembre de 2026, esa franja son las facturas emitidas entre el 8 de marzo y el 8 de septiembre de 2021.
+
+**Por qué lo levantamos.** No es cosmético: la cláusula está redactada como una obligación de la Plataforma («no habilitará»), así que un cliente de esa franja habría contratado un servicio que el propio contrato dice que no se le podía ofrecer. Y el motivo que la cláusula se da a sí misma —«asegurar que el trámite completo pueda surtirse dentro del término legal»— es exactamente el argumento que hace que ese margen importe.
+
+**Qué les pedimos:** que nos digan cuál de los dos números manda. Si es el del contrato, el cambio es del código y no de la cláusula. Si es el del sistema, la cláusula tiene que decir cinco años y redactar el margen operativo como aviso, no como prohibición. **Es su decisión, no la nuestra**: nosotros solo constatamos que hoy no coinciden.
+
+*(Ninguna superficie comercial menciona el corte de cuatro años y medio: la landing, la FAQ y el blog dicen «hasta 5 años», que es el término legal. Si el corte del contrato se confirma, hay que anunciarlo también ahí.)*
+
 ---
 
 ## 4. Resumen
@@ -144,6 +165,7 @@ Este es el único de los siete que no afecta al servicio de IVA: está en los T�
 | 3.5 | Tarifa y requerimientos | Falta nombrar la autenticación notarial; confirmar quién atiende requerimientos con poder |
 | 3.6 | Tarifa del servicio (T&C Generales) | **El contrato dice 2.5% del valor; cobramos tarifa fija.** En el ejemplo de la propia web, $3.000.000 contra $599.990 |
 | 3.7 | Ciclos de recepción UPME (T&C Generales) | Habla de "ciclos"; la Resolución 400 de 2026 los eliminó y puso ventana continua |
+| 3.8 | Antigüedad máxima de la factura | **El contrato dice 4 años y 6 meses y el sistema bloquea a 5 años menos un día.** Franja de seis meses en la que la Plataforma habilita lo que el contrato dice que no habilitará. |
 
 **Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda. **El 3.6 es el segundo en urgencia**: es la cláusula económica, y hoy dice un precio cinco veces mayor que el publicado.
 

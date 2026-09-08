@@ -499,7 +499,7 @@ import {
 ✅ "Tu certificado UPME en 3 pasos simples"
 ❌ "Proceso de tramitación certificatoria UPME"
 
-✅ "Sube tus docs, firma y reenvía un correo"
+✅ "Sube tus docs y nosotros radicamos ante la UPME"
 ❌ "Cargue documentación requerida para inicio de trámite"
 
 ✅ "Deduce hasta $X de tu base gravable en renta"
