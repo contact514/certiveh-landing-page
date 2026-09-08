@@ -6,7 +6,7 @@
 
 CertiVeh gestiona ante la UPME el certificado que permite a propietarios de vehículos eléctricos e híbridos en Colombia acceder a:
 
-- **Devolución del IVA**: la DIAN devuelve el 5% del valor del vehículo.
+- **Devolución del IVA**: la DIAN devuelve el IVA del 5% del valor del vehículo antes de impuestos.
 - **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
 - **Depreciación acelerada**: independientes y empresas pueden depreciar el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.
 

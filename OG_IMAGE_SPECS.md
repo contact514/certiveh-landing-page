@@ -38,7 +38,7 @@
 
 3. **Subheadline**
    ```
-   Exención IVA • Deducción en Renta • Reducción Arancelaria
+   Exención IVA • Deducción en Renta • Exención Arancelaria
    ```
    - Tipografía: Inter Medium, 32-36 px
    - Color: Slate 600 (#475569)
@@ -81,7 +81,7 @@ background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
 ✓ Automatiza tu certificado UPME
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Exención IVA · Deducción 50% en Renta
-Reducción Arancelaria
+Exención Arancelaria
 
 100% en línea · Sin trámites manuales
 certiveh.co

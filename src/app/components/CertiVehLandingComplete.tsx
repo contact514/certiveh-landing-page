@@ -768,7 +768,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y reenvías un correo. Lo demás lo hacemos nosotros.
+        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y reenvías un correo.
       </p>
 
       {/* CTAs */}
@@ -950,10 +950,10 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
+      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. La pedimos nosotros. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría)"],
+      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría, el único paso presencial)"],
       // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
       // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
       // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el

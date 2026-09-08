@@ -27,7 +27,7 @@
 
 ### Subheadline
 CertiVeh automatiza el trámite ante la UPME de principio a fin.  
-Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
+Tú subes tres documentos. Tú subes tus documentos, firmas y reenvías un correo.
 
 ### CTAs Hero
 - **Primario:** Calcular mi beneficio
@@ -40,7 +40,7 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 - ✓ 100% en línea
 
 ### Stat Pills (3 elementos)
-1. **5%** - Exención de IVA
+1. **5%** - Devolución de IVA
 2. **50%** - Deducción renta
 3. **Exención** - Arancel en importación directa
 
@@ -53,7 +53,7 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 - Certificado UPME automático
 - Sin trámites manuales
 - 100% en línea
-- Ahorra hasta $75M en impuestos
+- Deduce hasta $75M de tu base gravable
 - IA extrae tus datos
 - Radicación automática
 - Notificaciones WhatsApp
@@ -70,9 +70,9 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 ### Subtítulo
 El Estado colombiano creó estos incentivos para promover la movilidad eléctrica. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
 
-### Card 1: Exención de IVA
+### Card 1: Devolución de IVA
 - **Tag:** IVA
-- **Título:** Exención de IVA
+- **Título:** Devolución de IVA
 - **Porcentaje:** 5%
 - **Descripción:** Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $6M que no pagas.
 - **Ejemplo:** $120M → ahorras $6.000.000
@@ -87,12 +87,12 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 ### Card 3: Exención de arancel en importación directa
 - **Tag:** ARANCEL
 - **Título:** Exención de arancel en importación directa
-- **Porcentaje:** 5%
+- **Porcentaje:** Exención
 - **Descripción:** Exención de arancel en importación directa para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.
 - **Ejemplo:** Varía según modelo y origen
 
 ### Callout Informativo (Ventanas UPME)
-**La UPME abre ventanas de radicación dos veces al año.** Si pierdes la ventana, esperas hasta el siguiente semestre. CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.
+**La ventana de radicación de la UPME va del 1 de febrero al 15 de diciembre.** Si no radicas antes del 15 de diciembre, la siguiente abre el 1 de febrero. (Resolución UPME 400 de 2026: se acabaron los dos ciclos cerrados.) CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.
 
 ---
 
@@ -218,7 +218,7 @@ Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
-La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación.
+La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciembre. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación.
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
