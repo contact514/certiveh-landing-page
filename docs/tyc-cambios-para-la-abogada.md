@@ -21,8 +21,8 @@ Les pedimos que actualicen el documento y nos lo devuelvan. Abajo va, punto por 
 
 Para que la actualización parta del hecho correcto, éste es el flujo real, confirmado por el asesor tributario:
 
-1. El Usuario contrata el acompañamiento y sube sus documentos.
-2. CertiVeh arma el expediente completo: Formato 010 diligenciado, relación de facturas, declaración juramentada, certificado bancario, certificado UPME, factura y, si es persona jurídica, el certificado de existencia y representación legal.
+1. El Usuario contrata la gestión de la devolución y sube sus documentos.
+2. CertiVeh arma el expediente completo: Formato 010 diligenciado, certificación de IVA bajo gravedad de juramento, poderes cuando aplican, certificado bancario, certificado UPME, factura y, si es persona jurídica, el certificado de existencia y representación legal.
 3. **La cita ante la DIAN la solicita CertiVeh**, en las dos modalidades, cuando la Dirección Seccional del RUT del Usuario la exige. Sólo **5 de las 34 seccionales** la exigen (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes); las demás radican por buzón electrónico.
 4. **La cita NO es presencial.** Se agenda como no presencial y "atenderla" consiste en enviar un correo el día asignado, antes de la hora.
 5. **La radicación la ejecuta materialmente el Usuario**, reenviando desde la dirección de correo inscrita en su RUT el mensaje que CertiVeh le deja redactado. **Esto es así también cuando otorga poder**: la DIAN exige que la solicitud salga del contribuyente.

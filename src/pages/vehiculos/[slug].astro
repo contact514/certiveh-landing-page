@@ -84,7 +84,7 @@ const faqLd = JSON.stringify({
       name: `¿Cuánto me devuelve la DIAN por el IVA de mi ${v.marca} ${v.modelo}?`,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `Con un precio de ${fmt(v.precioCOP)}, el IVA pagado es de ${fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.`,
+        text: `El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de ${fmt(v.precioCOP)} el estimado es de ${fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.`,
       },
     },
     {
@@ -311,7 +311,7 @@ const faqLd = JSON.stringify({
           <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
           <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">Con un precio de {fmt(v.precioCOP)}, el IVA pagado es de {fmt(iva)} (5%). Con el certificado UPME, la DIAN te devuelve el 100% de ese valor.</div>
+        <div class="v-faq-body">El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de {fmt(v.precioCOP)} el estimado es de {fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.</div>
       </div>
 
       <div class="v-faq-item">
