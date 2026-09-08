@@ -953,7 +953,7 @@ function Servicios() {
       desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. La pedimos nosotros cuando tu seccional la exige. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría, el único paso presencial)"],
+      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría: el único paso presencial, y lo pagas tú)"],
       // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
       // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
       // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el
@@ -1480,7 +1480,7 @@ function Confianza() {
             Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Automatización, seguridad y seguimiento en tiempo real. Tú subes tus documentos, nosotros hacemos el resto.
+            Automatización, seguridad y seguimiento en tiempo real. Tú subes tus documentos, firmas y reenvías un correo.
           </p>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>

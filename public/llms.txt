@@ -6,7 +6,7 @@
 
 CertiVeh gestiona ante la UPME el certificado que permite a propietarios de vehículos eléctricos e híbridos en Colombia acceder a:
 
-- **Devolución del IVA**: la DIAN devuelve el IVA del 5% del valor del vehículo antes de impuestos.
+- **Devolución del IVA**: la DIAN devuelve el IVA pagado, que es el 5% del valor del vehículo antes de impuestos.
 - **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
 - **Depreciación acelerada**: independientes y empresas pueden depreciar el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.
 
@@ -18,7 +18,7 @@ CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o po
 
 1. **Certificado UPME**: CertiVeh tramita ante la UPME el certificado que acredita que el vehículo es elegible para los incentivos tributarios. Es el requisito previo para todo lo demás.
 
-2. **Gestión de la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh arma el expediente completo y lo revisa documento contra documento. Genera el Formulario 010 diligenciado, la certificación de IVA bajo gravedad de juramento, los poderes cuando aplican y un instructivo; del trámite UPME copia la identidad, la factura, el certificado UPME y el RUT si el cliente ya lo había subido; si no, el cliente aporta el RUT además de la certificación bancaria. Determina la vía de radicación según la seccional del RUT y **pide la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él**.
+2. **Gestión de la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh arma el expediente completo y lo revisa documento contra documento. Genera el Formulario 010 diligenciado, la certificación de IVA bajo gravedad de juramento, los poderes cuando aplican y un instructivo; del trámite UPME copia la identidad, la factura y el certificado UPME. El cliente aporta la certificación bancaria, y también el RUT si no lo había subido ya. Determina la vía de radicación según la seccional del RUT y **pide la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; en el resto se radica por buzón electrónico). Si el cliente otorga poder, **CertiVeh firma el Formulario 010 por él**.
 
 **Con poder, el cliente autentica el poder en notaría, firma la declaración juramentada y reenvía el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** Sin poder no hay notaría, pero él firma el Formulario 010 además de la declaración juramentada. La confirmación de la cita, con su código, la manda la DIAN al correo del cliente y no al de CertiVeh, así que él tiene que reenviárnosla. La declaración juramentada y el reenvío del correo a la DIAN son suyos en las dos modalidades. No es una limitación de CertiVeh: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por contribuyente, así que ese paso no lo puede dar nadie más.
 
