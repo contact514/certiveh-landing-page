@@ -559,7 +559,7 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
 
 // ── TICKER ────────────────────────────────────────────────────────────────────
 function Ticker() {
-  const items = ["Eléctricos e híbridos (no los ligeros)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Acompañamiento en devolución de IVA ante la DIAN"];
+  const items = ["Eléctricos e híbridos (no los ligeros)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Gestión de la devolución de IVA ante la DIAN"];
   return (
     <div className="ticker-wrap">
       <div className="ticker-inner">
@@ -950,10 +950,10 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. Nosotros la pedimos por ti; a ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
+      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. Nosotros la pedimos por ti cuando tu seccional la exige. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita ante la DIAN", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti"],
+      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti"],
       // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
       // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
       // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el
@@ -972,7 +972,7 @@ function Servicios() {
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Cero burocracia.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            CertiVeh gestiona el certificado UPME y te acompaña paso a paso para recuperar tu IVA ante la DIAN.
+            CertiVeh gestiona el certificado UPME y la devolución de tu IVA ante la DIAN.
           </p>
         </div>
 
@@ -1324,7 +1324,7 @@ function Calculadora() {
 
             <div style={{ marginBottom: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)" }}>Valor del vehículo</div>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)" }}>Valor del vehículo (sin IVA)</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
               </div>
               <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 4, borderRadius: 4, outline: "none", cursor: "pointer", background: `linear-gradient(to right, #059669 0%, #14B8A6 ${((valor-40)/560)*100}%, #E2E8F0 ${((valor-40)/560)*100}%, #E2E8F0 100%)` }}/>
@@ -1357,7 +1357,7 @@ function Calculadora() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
-                    Acompañamiento en devolución de IVA
+                    Gestión de la devolución de IVA
                   </div>
                 </div>
               </label>
@@ -1404,11 +1404,11 @@ function Calculadora() {
                   {conIva && (
                     <>
                       <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--teal-600)" }}>Acompañamiento devolución IVA</span>
+                        <span style={{ color: "var(--teal-600)" }}>Gestión devolución IVA</span>
                         <span style={{ fontWeight: 600, color: "var(--teal-600)" }}>{fmt(calc.honorariosIvaRefund)}</span>
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre acompañamiento)</span>
+                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre la gestión)</span>
                         <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaIvaRefund)}</span>
                       </div>
                     </>
@@ -1660,7 +1660,7 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, te acompañamos en el proceso de corrección y solo se cobra nuevamente el costo de la radicación ante la UPME." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, preparamos el expediente completo y determinamos la vía de radicación que te corresponde (cita virtual en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en otras ciudades). Si tu seccional exige cita, la pedimos nosotros a tu nombre. Y si nos das poder, firmamos el Formulario 010 por ti. Tú autenticas el poder en notaría, firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente y solo concede una cita por persona, así que ese paso no lo puede dar nadie más." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
@@ -1736,7 +1736,7 @@ function Footer() {
           <div>
             <CertiVehLogo variant="light" compact/>
             <p style={{ fontSize: 14, color: "var(--slate-500)", marginTop: 10, maxWidth: 260, lineHeight: 1.5 }}>
-              Certificado UPME y acompañamiento en devolución de IVA para vehículos eléctricos e híbridos en Colombia.
+              Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.
             </p>
           </div>
           <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
@@ -1870,7 +1870,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.4)',
             marginBottom: 32
           }}>
-            Además, la normativa tributaria puede cambiar. Radicar hoy blinda tu beneficio del 50% en renta como un derecho adquirido ante cualquier reforma futura.
+            Además, la normativa tributaria puede cambiar. Además, la normativa tributaria puede cambiar. Radicar hoy te deja el certificado emitido bajo las reglas vigentes.
           </p>
 
           <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>

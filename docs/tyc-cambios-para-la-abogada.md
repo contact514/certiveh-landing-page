@@ -99,6 +99,38 @@ Esto no es un matiz cosmético: es la obligación del Usuario que más fácil se
 - **Gastos a cargo del Usuario.** La cláusula de la tarifa ya excluye «certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN». Con la modalidad con poder aparece un gasto nuevo y sistemático: **la autenticación del poder ante notaría**. Convendría nombrarla, porque es plata del Usuario y hoy sólo se la advertimos en el portal.
 - **Requerimientos posteriores de la DIAN.** Los T&C ya dicen que atenderlos es responsabilidad exclusiva del Usuario, y así se lo decimos en el portal. Sólo queremos confirmar con ustedes que eso **sigue siendo cierto también en la modalidad con poder**, donde el poder podría entenderse como facultad para atenderlos. Si el poder los cubre, hay que decidir si CertiVeh los asume o si el poder los excluye expresamente.
 
+### 3.6 · La tarifa del contrato no es la que cobramos, y la diferencia es de cinco veces
+
+**Lo que dice hoy** (Términos y Condiciones Generales, cláusula de la tarifa):
+
+> «La tarifa del servicio corresponderá al **dos punto cinco por ciento (2.5%)** más el Impuesto sobre las Ventas (IVA), o cualquier otro impuesto aplicable al momento del pago», calculada «con base en el valor de la inversión reportado en la solicitud».
+
+**Por qué está mal.** Los precios publicados no son un porcentaje del valor del vehículo: el certificado UPME tiene una **tarifa fija de $599.990 + IVA**, y la gestión de la devolución de IVA cuesta **$499.990** contratada junto al certificado o **$599.990** por separado, con un tramo porcentual solo por encima de $200.000.000 de valor del vehículo.
+
+En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato dice $3.000.000 y la web dice $599.990**. Es un factor de cinco, en la cláusula económica, y en contra del Usuario.
+
+**Qué proponemos que diga.** Que la tarifa sea la publicada y vigente al momento de contratar, en vez de un porcentaje fijo en el contrato. Así deja de desactualizarse cada vez que cambia una tarifa:
+
+> «La tarifa del servicio será la informada al Usuario en la Plataforma al momento de la contratación, conforme a las condiciones económicas vigentes publicadas en certiveh.co, más el Impuesto sobre las Ventas (IVA) y los demás impuestos aplicables. La tarifa no incluye el costo del trámite ante la UPME, que se liquida en UVT según la resolución vigente.»
+
+**La pregunta para ustedes:** ¿el 2.5% llegó a aplicarse alguna vez? Si hay contratos vivos firmados bajo esa cláusula, hay que decidir qué pasa con ellos antes de cambiarla.
+
+### 3.7 · Los "ciclos" de la UPME ya no existen
+
+**Lo que dice hoy**, en dos sitios:
+
+> «…por los lineamientos que dicha entidad expida para **cada ciclo de recepción de solicitudes**.»
+> «En caso de que la ventana de tiempo para presentar la solicitud haya finalizado, la solicitud será presentada nuevamente **una vez se abra el ciclo siguiente**.»
+
+**Por qué está mal.** La **Resolución UPME 400 de 2026** eliminó el sistema de dos ciclos cerrados y lo reemplazó por una **ventana continua del 1 de febrero al 15 de diciembre**. Todo nuestro material lo dice así desde entonces, y el contrato es el único sitio que sigue hablando de ciclos.
+
+**Qué proponemos que diga:**
+
+> «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
+> «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
+
+Este es el único de los siete que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+
 ---
 
 ## 4. Resumen
@@ -110,7 +142,11 @@ Esto no es un matiz cosmético: es la obligación del Usuario que más fácil se
 | 3.3 | Definición del Servicio y cuerpo del Anexo | Dice que el Operador radica; radica el Usuario desde el correo de su RUT |
 | 3.4 | Plazos de devolución | Los 15 días de la devolución automática conviven con los 50 días hábiles de todo nuestro material |
 | 3.5 | Tarifa y requerimientos | Falta nombrar la autenticación notarial; confirmar quién atiende requerimientos con poder |
+| 3.6 | Tarifa del servicio (T&C Generales) | **El contrato dice 2.5% del valor; cobramos tarifa fija.** En el ejemplo de la propia web, $3.000.000 contra $599.990 |
+| 3.7 | Ciclos de recepción UPME (T&C Generales) | Habla de "ciclos"; la Resolución 400 de 2026 los eliminó y puso ventana continua |
 
-**Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda.
+**Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda. **El 3.6 es el segundo en urgencia**: es la cláusula económica, y hoy dice un precio cinco veces mayor que el publicado.
+
+*(Los puntos 3.6 y 3.7 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
 
 Quedamos atentos al documento actualizado.
