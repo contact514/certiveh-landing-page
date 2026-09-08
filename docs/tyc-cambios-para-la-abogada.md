@@ -129,7 +129,7 @@ En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato 
 > «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
 > «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
 
-Este es uno de los dos —con el 3.9— que no afectan al servicio de IVA: está en los Términos Generales, del certificado UPME: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+Este es uno de los dos —con el 3.9— que no afectan al servicio de IVA: está en los Términos Generales, los del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
 
 ### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
 

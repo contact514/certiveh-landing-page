@@ -6,6 +6,28 @@ import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
 import imgPortalUsuario from '@/assets/portal-dashboard.jpg';
 
+/**
+ * **El corte de caducidad del IVA, calculado y no escrito a mano.**
+ *
+ * El plazo son 5 años desde la factura (Art. 2536 CC · Concepto DIAN 673/2026), así que el mes de
+ * corte se mueve solo cada mes. Estaba escrito a mano —«finales de 2021» / «anterior a septiembre
+ * de 2021»— y eso dejaba **un hueco justo en el mes del corte**: una factura de septiembre de 2021
+ * no era «de finales de 2021» ni «anterior a septiembre de 2021», o sea que la cohorte que vence
+ * ESTE MES, la única a la que de verdad le urge, no se veía nombrada en ninguno de los dos casos.
+ *
+ * Y aunque se hubiera parcheado el hueco, dentro de un mes volvería: unas fechas fijas en un aviso
+ * de caducidad envejecen exactamente igual que el plazo del que hablan.
+ */
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+function corteDeCaducidadIva(hoy = new Date()) {
+  const corte = new Date(hoy.getFullYear() - 5, hoy.getMonth(), 1);
+  return { mes: MESES[corte.getMonth()], anio: corte.getFullYear() };
+}
+
 const PortalUrlContext = createContext("https://portal.certiveh.co");
 const getPortalUrl = () => {
   if (typeof window !== 'undefined' && window.location.hostname === 'exotics.certiveh.co') {
@@ -1882,7 +1904,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: 16
           }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si tu factura es de finales de 2021, el plazo se te vence en los próximos meses; y si es anterior a septiembre de 2021, probablemente ya venció: escríbenos y lo revisamos.
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, se te vence este mes; si es posterior, te quedan meses y no años; y si es anterior, probablemente ya venció: escríbenos y lo revisamos.
           </p>
 
           <p style={{
