@@ -768,7 +768,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios. Tú subes tus documentos. Nosotros nos encargamos de todo lo demás.
+        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y reenvías un correo. Lo demás lo hacemos nosotros.
       </p>
 
       {/* CTAs */}
@@ -887,7 +887,7 @@ function Aliados() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100% de ese IVA pagado.", ejemplo: "$120M → te devuelven $6.000.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME la DIAN te devuelve el 100% de ese IVA pagado.", ejemplo: "$120M sin IVA → te devuelven $6.000.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
     { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
     { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
@@ -950,10 +950,10 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. Nosotros la pedimos por ti cuando tu seccional la exige. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
+      desc: "La DIAN concede una sola cita por contribuyente: si la pides tú, gastas el cupo y tu trámite se atasca. A ti te queda firmar y reenviar un correo. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 de vuelta (Concepto DIAN 673/2026).",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti"],
+      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría)"],
       // ⚠️ LA ÚLTIMA FRASE NO SE QUITA. Es la única tarea que le queda al cliente y la DIAN no
       // admite hacerla por él: exige que la radicación salga del correo inscrito en SU RUT, y solo
       // concede una cita por contribuyente. Callarla es lo que hacía el portal hasta el 3-sep, y el

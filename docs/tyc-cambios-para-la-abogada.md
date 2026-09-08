@@ -2,8 +2,8 @@
 
 **Para:** el equipo jurídico de CertiVeh
 **De:** CertiVeh — operación
-**Fecha:** 7 de septiembre de 2026
-**Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, y el artículo del mandato administrativo)
+**Fecha:** 7 de septiembre de 2026 (puntos 3.6 y 3.7 añadidos el 8 de septiembre)
+**Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, el artículo del mandato administrativo y, en los Términos Generales, la cláusula de la tarifa y las menciones a los ciclos de recepción de la UPME)
 
 ---
 
@@ -11,7 +11,7 @@
 
 Entre el 2 y el 7 de septiembre de 2026 se cerró con el asesor tributario y con la gerencia **cómo funciona de verdad** el trámite de devolución de IVA, y se corrigió en consecuencia todo el material de cara al cliente: el portal, la landing, el agente de WhatsApp e Instagram y las piezas de marketing.
 
-**Los Términos y Condiciones se quedaron describiendo el modelo anterior.** Hoy dicen tres cosas que el servicio ya no hace así, y no contemplan una modalidad que sí estamos ofreciendo y cobrando. No es una cuestión de redacción: como están, el contrato **no respalda** la mitad de lo que vendemos, y en dos puntos **promete al Usuario algo que no ocurre**.
+**Los Términos y Condiciones se quedaron describiendo el modelo anterior.** Hoy dicen varias cosas que el servicio ya no hace así, no contemplan una modalidad que sí estamos ofreciendo y cobrando, y fijan una tarifa que no es la que cobramos. No es una cuestión de redacción: como están, el contrato **no respalda** la mitad de lo que vendemos, y en dos puntos **promete al Usuario algo que no ocurre**.
 
 Les pedimos que actualicen el documento y nos lo devuelvan. Abajo va, punto por punto, qué dice hoy, por qué está mal y qué debería decir. La redacción final es suya.
 

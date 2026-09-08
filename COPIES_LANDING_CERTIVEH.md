@@ -22,7 +22,7 @@
 ### Textos Rotativos (FlipWords)
 1. exención de IVA
 2. deducción en renta
-3. reducción arancelaria
+3. exención de arancel en importación directa
 4. un certificado UPME
 
 ### Subheadline
@@ -42,7 +42,7 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 ### Stat Pills (3 elementos)
 1. **5%** - Exención de IVA
 2. **50%** - Deducción renta
-3. **5%** - Ahorro arancel
+3. **Exención** - Arancel en importación directa
 
 ---
 
@@ -84,11 +84,11 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Descripción:** Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta del año de la compra.
 - **Ejemplo:** $150M → deduces $75.000.000
 
-### Card 3: Reducción Arancelaria
+### Card 3: Exención de arancel en importación directa
 - **Tag:** ARANCEL
-- **Título:** Reducción arancelaria
+- **Título:** Exención de arancel en importación directa
 - **Porcentaje:** 5%
-- **Descripción:** Reducción del arancel de importación para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.
+- **Descripción:** Exención de arancel en importación directa para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.
 - **Ejemplo:** Varía según modelo y origen
 
 ### Callout Informativo (Ventanas UPME)
@@ -153,7 +153,7 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 #### Barras de Desglose
 - Exención IVA
 - Deducción renta
-- Ahorro arancel
+- Exención de arancel en importación directa
 
 #### Honorarios
 **Honorarios CertiVeh (5%)**  
@@ -307,7 +307,7 @@ https://portal.certiveh.co
 ### Porcentajes de Beneficios
 - **IVA:** 5%
 - **Renta:** 50%
-- **Arancel:** 5%
+- **Arancel:** exención en importación directa
 
 ### Ejemplos de Cálculo
 - Vehículo $120M → Ahorro IVA: $6.000.000

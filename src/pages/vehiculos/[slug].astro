@@ -38,7 +38,7 @@ const roi = Math.round(totalBeneficio / costoTotal * 10) / 10;
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
 
 const title = `${v.marca} ${v.modelo}, Certificado UPME y Devolución de IVA | CertiVeh`;
-const description = `¿Tienes un ${v.marca} ${v.modelo}? Recupera ${fmt(iva)} de IVA y deduce ${fmt(renta)} en renta. CertiVeh gestiona tu certificado UPME y la devolución de IVA ante la DIAN. 100% en línea.`;
+const description = `¿Tienes un ${v.marca} ${v.modelo}? Estima cuánto IVA puedes recuperar (aprox. ${fmt(iva)}) y cuánto deducir en renta (aprox. ${fmt(renta)}). CertiVeh gestiona tu certificado UPME y la devolución de IVA ante la DIAN. 100% en línea.`;
 const keywords = `${v.marca} ${v.modelo} certificado UPME, ${v.marca} ${v.modelo} beneficios tributarios, ${v.marca} ${v.modelo} devolución IVA Colombia, gestión IVA DIAN ${v.marca}, ${v.slug.replace(/-/g, ' ')}`;
 
 const breadcrumbLd = JSON.stringify({

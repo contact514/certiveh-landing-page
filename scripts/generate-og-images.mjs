@@ -24,7 +24,21 @@ function loadImageAsBase64(path) {
 }
 
 // Preload background images (pre-cropped to 1200x630)
-const bgDir = "/tmp/og-bgs";
+// ⚠️ **LOS FONDOS VIVEN EN /tmp Y NO ESTAN EN EL REPO, asi que esto NO se puede reejecutar.**
+//
+// Medido el 8-sep-2026: al corregir el copy de los subtitulos, `node scripts/generate-og-images.mjs`
+// muere con ENOENT sobre `/tmp/og-bgs/hyundai-motor-group-...jpg`. Los siete PNG de `public/og/`
+// estan commiteados, pero su FUENTE no.
+//
+// Consecuencia concreta, y no es teorica: `BaseLayout.astro` pone `og:image = /og/home.png` POR
+// DEFECTO en todas las paginas, asi que la tarjeta que se ve al compartir CUALQUIER url del sitio
+// sigue diciendo el copy viejo -«preparamos todo para la devolucion de tu IVA», «CertiVeh se
+// encarga de todo»- aunque este fichero ya diga lo correcto.
+//
+// Para cerrarlo hacen falta las siete imagenes de fondo. Cuando aparezcan: ponerlas en `/tmp/og-bgs`
+// (o mejor, en `assets/og-bgs/` dentro del repo y cambiar esta constante), ejecutar el script y
+// commitear los PNG regenerados.
+const bgDir = process.env.OG_BG_DIR || "/tmp/og-bgs";
 const backgrounds = {
   home: loadImageAsBase64(join(bgDir, "hyundai-motor-group-KpsavDr0nmo-unsplash.jpg")),
   "otros-activos": loadImageAsBase64(join(bgDir, "solar.jpg")),
@@ -267,7 +281,7 @@ const pages = [
       { text: "beneficios tributarios", color: "emerald" },
       { text: "de tu carro electrico o hibrido" },
     ],
-    subtitle: "Tramitamos tu certificado UPME y preparamos todo para la devolucion de tu IVA.",
+    subtitle: "Tramitamos tu certificado UPME y gestionamos tu devolucion de IVA ante la DIAN.",
     pills: ["Devolucion de IVA", "Deduccion en renta", "Depreciacion acelerada"],
     url: "certiveh.co",
   },
@@ -320,7 +334,7 @@ const pages = [
       { text: "Quienes somos" },
       { text: "CertiVeh", color: "emerald" },
     ],
-    subtitle: "Tramitamos tu certificado UPME y preparamos la devolucion de IVA de tu carro electrico o hibrido. 100% en linea.",
+    subtitle: "Tramitamos tu certificado UPME y gestionamos la devolucion de IVA de tu carro electrico o hibrido ante la DIAN.",
     pills: ["Medellin, Colombia"],
     url: "certiveh.co/nosotros",
   },
@@ -331,7 +345,7 @@ const pages = [
       { text: "certificado UPME", color: "emerald" },
       { text: "100% en linea" },
     ],
-    subtitle: "Sube tus documentos, paga una sola vez y CertiVeh se encarga de todo. Seguimiento por WhatsApp.",
+    subtitle: "Sube tus documentos, paga una sola vez y sigue tu tramite en el portal. Avisos por WhatsApp.",
     pills: ["100% en linea", "Pago unico", "Sin portales gubernamentales"],
     url: "portal.certiveh.co",
   },
