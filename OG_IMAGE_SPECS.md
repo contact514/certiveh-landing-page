@@ -119,7 +119,7 @@ certiveh.co
 │                                         │
 │     Automatiza tu certificado UPME      │
 │                                         │
-│   Devolución IVA • Deducción • Arancel   │
+│   Devolución IVA • Deducción • Arancel  │
 │                                         │
 │     [Escudo Icon]  100% en línea        │
 │                                         │
@@ -137,9 +137,9 @@ certiveh.co
 │  Automatiza tu     │     VEHÍCULO       │
 │  certificado UPME  │     ELÉCTRICO]     │
 │                    │                    │
-│  ✓ Devolución IVA    │                    │
+│  ✓ Devolución IVA  │                    │
 │  ✓ Deducción 50%   │                    │
-│  ✓ Exención       │                    │
+│  ✓ Exención        │                    │
 │                    │                    │
 │  certiveh.co       │                    │
 │                    │                    │
@@ -157,7 +157,7 @@ certiveh.co
 │                                         │
 │    Automatiza tu certificado UPME       │
 │                                         │
-│  [Badge] $75M de base gravable  [Badge]    │
+│  [Badge] $75M de base gravable [Badge]  │
 │  [Badge] 100% en línea       [Badge]    │
 │                                         │
 │           certiveh.co                   │
@@ -237,9 +237,8 @@ script, así que hay que volver a correrlo para que digan «gestión».
 
 ⚠️ **Pero hoy ese script NO se puede reejecutar**: sus siete imágenes de fondo viven en `/tmp` y no
 están en el repo, así que muere con `ENOENT`. Antes de regenerar hay que recuperar los fondos y
-meterlos en el repo. (Esa mitad del aviso también estaba solo dentro del `.mjs`.) Ese aviso estaba solo dentro del
-`.mjs`, o sea invisible para quien abriera este documento — que es justo el que va a decidir si
-hacen falta.
+meterlos en el repo. Los dos avisos vivían solo dentro del `.mjs`, o sea invisibles para quien
+abriera este documento — que es justo quien va a decidir si hay que regenerarlas.
 
 ⚠️ Y `/public/og-image.png` **sí existe**, está trackeado en git y se publica en
 `https://certiveh.co/og-image.png` — un borrador anterior de este apartado decía que no. Lo cierto

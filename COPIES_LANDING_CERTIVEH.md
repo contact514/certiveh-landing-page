@@ -1,5 +1,5 @@
 # CertiVeh - Todos los Copies de la Landing Page
-**Versión 1.0 · Marzo 2026**
+**Versión 1.1 · 8 de septiembre de 2026**
 
 ---
 
@@ -85,6 +85,12 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Ejemplo:** $150M → deduces $75.000.000
 
 ### Card 3: Exención de arancel en importación directa
+
+> ⚠️ **En la home servida el tercer titular es «Depreciación acelerada · 3 años», no el arancel.**
+> Auditado el 8-sep-2026: la palabra «arancel» aparece **una sola vez** en toda la home, y está en
+> el JSON-LD de `Organization`, no en la página visible. El arancel sigue siendo un beneficio real
+> y se nombra con esta formulación exacta —«Exención de arancel en importación directa»—, pero como
+> cuarto, no como tercero. Quien copie de aquí sin mirar reintroduce el orden viejo.
 - **Tag:** ARANCEL
 - **Título:** Exención de arancel en importación directa
 - **Porcentaje:** Exención
@@ -113,9 +119,9 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 >   RUT, porque la DIAN exige que la solicitud salga del contribuyente. **También con poder.**
 >   Nunca escribir que radicamos nosotros ante la DIAN. *(Ante la UPME sí radicamos: eso es otra
 >   cosa y sí se puede decir.)*
-> · **Lo único que cambia con poder** es quién firma el Formulario 010. Con poder el cliente
->   además autentica el poder en **notaría** —presencial, obligatorio y **lo paga él**— y firma la
->   declaración juramentada.
+> · **Con poder solo cambia quién firma el Formulario 010**: lo firmamos nosotros. A cambio, el
+>   cliente autentica el poder en **notaría** —presencial, obligatorio y **lo paga él**—. La
+>   declaración juramentada la firma él en las DOS modalidades, igual que el reenvío del correo.
 
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
@@ -139,12 +145,12 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 
 ### Paso 03: Pago único
 - **Subtitle:** Una sola vez
-- **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.
+- **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.
 - **Detail:** Procesado con Wompi · Tarjeta, PSE o Nequi.
 
 ### Paso 04: Nosotros hacemos todo
 - **Subtitle:** Tú no haces nada más
-- **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud en la ventana correspondiente.
+- **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.
 - **Detail:** Sin que tengas que tocar ningún portal gubernamental.
 
 ### Paso 05: Recibe tu certificado
@@ -190,16 +196,16 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 en incentivos tributarios (incluye base gravable en renta)
 
 #### Beneficio Neto
-**BENEFICIO NETO (MENOS HONORARIOS)**
+**BENEFICIO ESTIMADO MENOS EL COSTO DEL SERVICIO**
 
 #### ROI Copy
-Por cada **$1 invertido** en CertiVeh, recibes **$[X]** en beneficios.
+Por cada **$1** que cuesta el servicio, un estimado de **$[X]** en beneficios.
 
 #### CTA
 **Empezar ahora**
 
 #### Microcopy
-Sin riesgo · Si la UPME rechaza, revisamos tu caso
+Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
 
 ---
 
@@ -218,7 +224,7 @@ Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está
 ### Card 3: Tus datos, protegidos
 Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros.
 
-### Card 4: No pierdas la ventana
+### Card 4: Radicación inmediata
 La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solicitud se radica de inmediato. Si te registras con la ventana cerrada, entra en cuanto reabra y te avisamos.
 
 ### Card 5: Sin portal gubernamental
@@ -252,7 +258,7 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Revisamos el motivo del rechazo contigo. Si el error es nuestro, lo corregimos sin costo; si es por datos que aportó el usuario, solo se cobra de nuevo el costo de la radicación ante la UPME. Nuestra política de garantía está detallada en los términos del servicio.
+Revisamos el motivo del rechazo contigo. Si el error es nuestro, lo corregimos sin costo; si es por datos que aportó el usuario, solo se cobra de nuevo el costo de la radicación ante la UPME. 
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
@@ -382,9 +388,9 @@ Continua, del 1 de febrero al 15 de diciembre
 - Valor del vehículo (sin IVA)
 
 ### Mensajes de Garantía
-- Sin riesgo · Si la UPME rechaza, revisamos tu caso
-- Sin suscripciones, sin costos ocultos
-- Todo incluido desde el primer día
+- Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
+- Sin suscripciones
+- Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría
 
 ### Status y Procesos
 - Procesado con Wompi · Tarjeta, PSE o Nequi
@@ -397,4 +403,4 @@ $[número] COP (formato colombiano con puntos de miles)
 ---
 
 **Fin del documento de copies**  
-*Última actualización: Marzo 2026*
+*Última actualización: 8 de septiembre de 2026*

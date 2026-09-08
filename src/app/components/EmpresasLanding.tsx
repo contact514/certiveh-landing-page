@@ -626,7 +626,7 @@ function Calculadora() {
             Calcula tu beneficio y{" "}
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo del servicio</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto cuesta el servicio y cuánto puedes recuperar en incentivos.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto cuesta el servicio y cuánto puedes solicitar en incentivos.</p>
         </div>
 
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
@@ -722,7 +722,7 @@ function Calculadora() {
 
             {calc.costoTotal && calc.totalBeneficio && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, un estimado de{" "}
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> que cuesta el servicio, un estimado de{" "}
                 <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}

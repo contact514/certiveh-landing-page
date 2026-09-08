@@ -129,7 +129,7 @@ En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato 
 > «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
 > «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
 
-Este es el único de los siete que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+Este es el único de los ocho que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
 
 ### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
 
@@ -146,11 +146,11 @@ Este es el único de los siete que no afecta al servicio de IVA: está en los T�
 
 O sea que hay una franja de **seis meses** —entre los cuatro años y medio y los cinco años— en la que el contrato dice que la plataforma «no habilitará» la contratación y la plataforma la habilita igual. Hoy, 8 de septiembre de 2026, esa franja son las facturas emitidas **entre el 10 de septiembre de 2021 y el 7 de marzo de 2022**.
 
-*(Medido ejecutando el propio `classifyInvoiceAge` con esa fecha: el 9 de septiembre de 2021 sale `blocked`, el 10 sale `warning`, y el 7 de marzo de 2022 sale `ok` — el contrato ya lo prohíbe desde el 8 de marzo. Un borrador anterior de este apartado daba «del 8 de marzo al 8 de septiembre de 2021», que son fechas del lado **bloqueado**: justo el conjunto que la plataforma sí rechaza, o sea lo contrario de lo que aquí se argumenta.)*
+*(Medido ejecutando el propio `classifyInvoiceAge` con esa fecha: el 9 de septiembre de 2021 sale `blocked`, el 10 sale `warning`, y el 7 de marzo de 2022 sale `ok` — y el contrato ya lo prohíbe: del 7 de marzo de 2022 hacia atrás la antigüedad supera los cuatro años y medio. Un borrador anterior de este apartado daba «del 8 de marzo al 8 de septiembre de 2021», que son fechas del lado **bloqueado**: justo el conjunto que la plataforma sí rechaza, o sea lo contrario de lo que aquí se argumenta.)*
 
 **Por qué lo levantamos.** No es cosmético: la cláusula está redactada como una obligación de la Plataforma («no habilitará»), así que un cliente de esa franja habría contratado un servicio que el propio contrato dice que no se le podía ofrecer. Y el motivo que la cláusula se da a sí misma —«asegurar que el trámite completo pueda surtirse dentro del término legal»— es exactamente el argumento que hace que ese margen importe.
 
-**Constancia, para que no parezca que se nos escapó:** la cláusula siguiente ya prevé el caso —«*en el evento en que, por cualquier causa, la Plataforma llegare a habilitar la contratación … respecto de un vehículo cuya factura tenga una antigüedad superior a la permitida … ello no genera responsabilidad alguna*»— y exonera al Operador. Lo que pedimos no es cubrir la responsabilidad, que ya está cubierta, sino que **la obligación de «no habilitar» y el corte real coincidan**: una cláusula que se incumple a diario y se salva por su propia excepción envejece mal.
+**Constancia, para que no parezca que se nos escapó:** la cláusula siguiente ya prevé el caso —«*en el evento en que, por cualquier causa, la Plataforma llegare a habilitar la contratación … respecto de un vehículo cuya factura de venta tenga una antigüedad superior a la permitida … ello no genera responsabilidad alguna*»— y exonera al Operador. Lo que pedimos no es cubrir la responsabilidad, que ya está cubierta, sino que **la obligación de «no habilitar» y el corte real coincidan**: una cláusula que se incumple a diario y se salva por su propia excepción envejece mal.
 
 **Qué les pedimos:** que nos digan cuál de los dos números manda. Si es el del contrato, el cambio es del código y no de la cláusula. Si es el del sistema, la cláusula tiene que decir cinco años y redactar el margen operativo como aviso, no como prohibición. **Es su decisión, no la nuestra**: nosotros solo constatamos que hoy no coinciden.
 
@@ -173,6 +173,6 @@ O sea que hay una franja de **seis meses** —entre los cuatro años y medio y l
 
 **Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda. **El 3.6 es el segundo en urgencia**: es la cláusula económica, y hoy dice un precio cinco veces mayor que el publicado.
 
-*(Los puntos 3.6 y 3.7 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
+*(Los puntos 3.6, 3.7 y 3.8 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
 
 Quedamos atentos al documento actualizado.

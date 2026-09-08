@@ -950,11 +950,15 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      // ⚠️ AQUÍ NO SE REPITE NI LA CITA NI EL REENVÍO. Los dos viven abajo: la cita en la segunda
-      // viñeta y el reenvío en la nota, que es la que no se puede quitar. Esta descripción llegó a
-      // decir la cita TRES veces y el reenvío DOS, en un bloque que el lector ve de una sola
-      // ojeada — y ya se había corregido una vez, así que la repetición vuelve sola si no queda
-      // escrito dónde va cada cosa.
+      // ⚠️ **CADA COSA EN UN SITIO, y aquí va la CONDICIÓN de la cita: «solo la exigen cinco
+      // seccionales».** La PROMESA («la pedimos nosotros») vive en la segunda viñeta y el REENVÍO
+      // en la nota, que es la que no se puede quitar.
+      //
+      // Esta descripción llegó a decir la cita TRES veces y el reenvío DOS, en un bloque que el
+      // lector ve de una sola ojeada. Y este mismo aviso ya se escribió una vez diciendo que
+      // «aquí no se repite ni la cita ni el reenvío» — falso sobre su propia línea de debajo, que
+      // sí nombra la cita, y falso sobre la nota, que también la nombraba. Prohibir la palabra no
+      // vale: lo que hay que repartir es qué AFIRMA cada sitio.
       //
       // Y «$6.000.000 de vuelta» prometía caja: la DIAN estudia y decide. El mismo verbo se
       // corrigió en la tarjeta de Beneficios y esta se quedó sin mirar.
@@ -1171,7 +1175,7 @@ function ComoFunciona() {
   const steps = [
     { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
-    { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte van el trámite ante la UPME y, si eliges darnos poder, la notaría. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
+    { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
     { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
     { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
   ];
@@ -1308,7 +1312,7 @@ function Calculadora() {
     <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--white)" }}>
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto puedes recuperar?</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto vale tu beneficio?</h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
         </div>
 
@@ -1461,7 +1465,7 @@ function Calculadora() {
 
             {calc.costoTotal && calc.total && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, un estimado de{" "}
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> que cuesta el servicio, un estimado de{" "}
                 <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
@@ -1471,7 +1475,7 @@ function Calculadora() {
                 Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
               </button>
             </a>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>Si el error es nuestro · Si la UPME rechaza, revisamos tu caso</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</div>
           </div>
         </div>
       </div>
@@ -1497,7 +1501,7 @@ function Confianza() {
             Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Automatización, seguridad y seguimiento en tiempo real. Del certificado UPME nos encargamos nosotros de punta a punta.
+            Automatización, seguridad y seguimiento en tiempo real. Del trámite nos encargamos nosotros; lo tuyo, si además pides el IVA, es firmar y reenviar un correo.
           </p>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
@@ -1878,7 +1882,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: 16
           }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si compraste en 2022, ya estás contra el reloj.
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si tu factura es de finales de 2021, te quedan semanas y estás contra el reloj.
           </p>
 
           <p style={{
