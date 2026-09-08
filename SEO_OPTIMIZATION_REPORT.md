@@ -63,14 +63,14 @@
 
 #### Jerarquía de Headings
 
-- ✅ **H1:** "Tu vehículo eléctrico tiene derecho a..." (Hero - único en la página)
+- ✅ **H1:** "Reclama los beneficios tributarios de tu carro eléctrico o híbrido en Colombia" (H1 real; el de aquí era..." (Hero - único en la página)
 - ✅ **H2:** Títulos de todas las secciones principales
   - Beneficios: "Tres beneficios tributarios. Una sola gestión."
   - Cómo Funciona: "Así de simple es el trámite."
   - Calculadora: "¿Cuánto vale tu beneficio?"
   - Confianza: "Hecho para que no tengas que preocuparte."
   - FAQ: "Todo lo que necesitas saber"
-  - CTA Final: "Tu certificado UPME te está esperando."
+  - CTA Final: "Tus beneficios tributarios te están esperando."
 - ✅ **H3:** Títulos de todas las tarjetas (Beneficios, Confianza, etc.)
 
 ---

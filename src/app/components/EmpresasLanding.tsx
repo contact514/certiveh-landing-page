@@ -624,9 +624,9 @@ function Calculadora() {
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
             Calcula tu beneficio y{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo del servicio</span>
+            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo total</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto cuesta el servicio y cuánto puedes solicitar en incentivos.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
         </div>
 
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
@@ -683,7 +683,7 @@ function Calculadora() {
               <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo del servicio</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo total</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -722,7 +722,7 @@ function Calculadora() {
 
             {calc.costoTotal && calc.totalBeneficio && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, el beneficio estimado es de{" "}
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, un beneficio estimado de{" "}
                 <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}

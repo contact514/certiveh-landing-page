@@ -2,7 +2,7 @@
 
 **Para:** el equipo jurídico de CertiVeh
 **De:** CertiVeh — operación
-**Fecha:** 7 de septiembre de 2026 (puntos 3.6, 3.7, 3.8 y 3.9 añadidos el 8 de septiembre)
+**Fecha:** 7 de septiembre de 2026 (puntos 3.6, 3.7, 3.8 y 3.9 añadidos el 8 de septiembre; el 3.9 toca los Artículos XII y XIV de los Términos Generales)
 **Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, el artículo del mandato administrativo y, en los Términos Generales, la cláusula de la tarifa y las menciones a los ciclos de recepción de la UPME)
 
 ---
@@ -129,7 +129,7 @@ En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato 
 > «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
 > «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
 
-Este es el único de los nueve que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+Este es uno de los dos —con el 3.9— que no afectan al servicio de IVA: está en los Términos Generales, del certificado UPME: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
 
 ### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
 
@@ -158,15 +158,22 @@ O sea que hay una franja de **seis meses** —entre los cuatro años y medio y l
 
 ### 3.9 · La web promete gratis una corrección que el contrato se reserva cobrar
 
-**Lo que dice la web** (FAQ de la home y de `/exotics`, en el texto visible y en el JSON-LD `FAQPage` que Google puede sacar suelto):
+**Lo que decía la web hasta el 8-sep-2026** (FAQ de la home y de `/exotics`, en el texto visible y en el JSON-LD `FAQPage`; el de la home es el que Google puede sacar suelto, porque `/exotics` va con `noindex`):
 
 > «…si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y **solo se cobra nuevamente el costo de la radicación ante la UPME**.»
 
 **Lo que dicen los T&C servidos** (cláusula de rechazo atribuible al Usuario):
 
-> «En estos casos, la gestión de una nueva solicitud **podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite**, la cual será informada previamente al Usuario.»
+> «En estos casos, la gestión de una nueva solicitud **podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite**, la cual será informada previamente al Usuario por parte del Operador de la Plataforma.»
 
-**Por qué lo levantamos.** «Solo el costo de la radicación» afirma que nuestros honorarios son cero cuando el error es del cliente; el contrato se reserva expresamente cobrarlos. La otra rama —error nuestro— sí casa: los T&C dicen que se vuelve a presentar «sin generar costos adicionales», y así lo dice la web.
+**Y hay una segunda cláusula, más dura, que dice otra cosa.** El **Artículo XIV (Política de reembolsos)**, sobre el mismo escenario:
+
+> «Rechazo atribuible al Usuario: … **no habrá lugar a la devolución de los valores pagados**. En estos casos, si el Usuario desea presentar nuevamente la solicitud una vez subsanadas las observaciones formuladas por la UPME, **deberá pagar la tarifa correspondiente a un nuevo trámite**, conforme a las condiciones económicas vigentes al momento de la nueva solicitud.»
+
+**Por qué lo levantamos.** Dos motivos:
+
+1. **La web prometía menos de lo que el contrato cobra.** «Solo el costo de la radicación» afirmaba que nuestros honorarios son cero cuando el error es del cliente. El XII se reserva cobrarlos y el XIV dice que **deberá** pagarse la tarifa de un trámite nuevo entero. La otra rama —error nuestro— sí casa con los dos.
+2. **Y el XII y el XIV no dicen lo mismo entre sí.** «*podrá generar el cobro de una tarifa adicional*» frente a «*deberá pagar la tarifa correspondiente a un nuevo trámite*». Uno es facultativo y parcial; el otro, obligatorio y total. Esa discrepancia es suya, no nuestra, y conviene resolverla en la misma ronda.
 
 Mientras tanto hemos ajustado la FAQ para que no prometa la gratuidad: ahora dice que se vuelve a pagar la radicación y que **se avisa antes** de cualquier cobro por rehacer el expediente, que es lo que la cláusula ya obliga.
 

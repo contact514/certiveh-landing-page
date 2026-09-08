@@ -3,6 +3,16 @@
 
 ---
 
+
+> ⚠️ **ESTE DOCUMENTO VA POR DETRÁS DEL CÓDIGO. Coteja CADA bloque con el `dist` antes de copiarlo.**
+>
+> Auditado el 8-sep-2026: al menos dieciséis bloques describen componentes que ya no se sirven así
+> —el menú, el headline, el CTA del hero, las FlipWords, las Stat Pills, el Ticker, las Cards 1, 2,
+> 4 y 6, el callout de ventanas, el subtítulo de Cómo Funciona, el paso 01, las barras del
+> desglose, la FAQ entera, el CTA final y el footer—. **No es una lista cerrada**: la versión
+> anterior de este aviso nombraba seis y por omisión daba por vigente todo lo demás, incluida una
+> FAQ que prometía algo que los T&C contradicen.
+
 ## 📋 NAVEGACIÓN
 
 ### Menú Principal
@@ -168,7 +178,7 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 **¿Cuánto vale tu beneficio?**
 
 ### Subtítulo
-Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
+Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido.
 
 ### Controles
 
@@ -180,10 +190,6 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 - Rango: $40M - $600M
 - Labels: "Valor del vehículo (sin IVA)"
 
-> ⚠️ **Varios bloques de este fichero describen componentes que ya no existen así.** Auditado el
-> 8-sep-2026 contra el `dist`: las FlipWords, las Stat Pills, el Ticker, las barras del desglose y
-> las Cards 4 y 6 sirven hoy textos distintos de los que están aquí. Antes de copiar cualquier
-> bloque, cotéjalo con lo servido — este documento va por detrás del código, no al revés.
 
 #### Barras de Desglose
 - Devolución IVA
@@ -203,10 +209,10 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 en incentivos tributarios (incluye base gravable en renta)
 
 #### Beneficio Neto
-**BENEFICIO ESTIMADO MENOS EL COSTO DEL SERVICIO**
+**BENEFICIO ESTIMADO MENOS EL COSTO TOTAL**
 
 #### ROI Copy
-Por cada **$1** que cuesta el servicio, un estimado de **$[X]** en beneficios.
+Por cada **$1** de costo total, un beneficio estimado de **$[X]**.
 
 #### CTA
 **Empezar ahora**
@@ -265,7 +271,7 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Revisamos el motivo del rechazo contigo. Si el error es nuestro, lo corregimos sin costo; si es por datos que aportó el usuario, solo se cobra de nuevo el costo de la radicación ante la UPME. 
+Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional, siempre que sigan vigentes los requisitos de la UPME. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. 
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
@@ -382,7 +388,7 @@ Continua, del 1 de febrero al 15 de diciembre
 - Certificado UPME
 - Beneficios tributarios
 - 100% en línea
-- Sin sorpresas
+- Pago único
 - Pago único
 - Ventana de radicación
 
