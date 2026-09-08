@@ -263,7 +263,7 @@ La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciem
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
-Persona natural: cédula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura de compra, más el RUT si vas a pedir la devolución del IVA. Empresa: cédula del representante legal, tarjeta de propiedad, factura de compra y certificado de Cámara de Comercio vigente. Todo se sube en PDF, JPG o PNG desde tu teléfono.
+Persona natural: cédula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura de compra, más el RUT si vas a pedir la devolución del IVA. Empresa: cédula del representante legal, tarjeta de propiedad, factura de compra, certificado de Cámara de Comercio vigente y el RUT de la empresa si vas a pedir la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono.
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
@@ -271,7 +271,7 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional, siempre que sigan vigentes los requisitos de la UPME. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. 
+Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. 
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
