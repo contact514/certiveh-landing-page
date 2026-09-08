@@ -93,7 +93,7 @@ certiveh.co
 15 minutos
 Tu certificado UPME listo
 
-CertiVeh automatiza todo el proceso
+CertiVeh tramita tu certificado ante la UPME
 certiveh.co
 ```
 

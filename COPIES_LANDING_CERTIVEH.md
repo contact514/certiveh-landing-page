@@ -26,7 +26,7 @@
 4. un certificado UPME
 
 ### Subheadline
-CertiVeh automatiza el trámite ante la UPME de principio a fin.  
+CertiVeh tramita tu certificado ante la UPME y gestiona tu devolución de IVA ante la DIAN.  
 Tú subes tus documentos, firmas y reenvías un correo.
 
 ### CTAs Hero
@@ -75,7 +75,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Título:** Devolución de IVA
 - **Porcentaje:** 5%
 - **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M que puedes recuperar.
-- **Ejemplo:** $120M → ahorras $6.000.000
+- **Ejemplo:** $120M sin IVA → solicitas $6.000.000
 
 ### Card 2: Deducción en Renta
 - **Tag:** RENTA
@@ -310,7 +310,7 @@ https://portal.certiveh.co
 - **Arancel:** exención en importación directa
 
 ### Ejemplos de Cálculo
-- Vehículo $120M → Ahorro IVA: $6.000.000
+- Vehículo $120M → Devolución de IVA a solicitar: $6.000.000
 - Vehículo $150M → Deducción renta: $75.000.000
 
 ### Honorarios CertiVeh
