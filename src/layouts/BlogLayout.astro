@@ -7,6 +7,16 @@ interface Props {
   description?: string;
   keywords?: string;
   datePublished?: string;
+  /**
+   * ⚠️ **Sin esto, `dateModified` era `datePublished` y no había forma de moverlo.** El 8-sep-2026
+   * se reescribieron NUEVE de los trece artículos —todo el modelo del servicio de IVA— y los nueve
+   * seguían anunciándole a Google su fecha de publicación, con hasta cinco meses de desfase. La
+   * reescritura entera era invisible para el buscador.
+   *
+   * Si no se pasa, cae en `datePublished`, que es lo correcto para un artículo que no se ha
+   * tocado desde que se publicó.
+   */
+  dateModified?: string;
   isArticle?: boolean;
 }
 
@@ -15,6 +25,7 @@ const {
   description,
   keywords,
   datePublished = '2026-04-01',
+  dateModified = datePublished,
   isArticle = false,
 } = Astro.props;
 
@@ -27,7 +38,7 @@ const jsonLd = isArticle ? JSON.stringify({
   description: description,
   image: 'https://certiveh.co/og/blog.png',
   datePublished: datePublished,
-  dateModified: datePublished,
+  dateModified: dateModified,
   author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
   publisher: {
     '@type': 'Organization',

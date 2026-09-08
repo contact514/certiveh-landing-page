@@ -24,8 +24,16 @@ const MESES = [
 ];
 
 function corteDeCaducidadIva(hoy = new Date()) {
-  const corte = new Date(hoy.getFullYear() - 5, hoy.getMonth(), 1);
-  return { mes: MESES[corte.getMonth()], anio: corte.getFullYear() };
+  // ⚠️ **Al DÍA, no al mes.** La primera versión fijaba el día a 1 y decía «si tu factura es de
+  // {mes}, se te vence este mes». El plazo corre al día, así que a fin de mes **9 de cada 10 de
+  // esa cohorte ya lo tenían vencido** y les decíamos que estaban a tiempo. Medido el 8-sep-2026:
+  // 7 de 30 ya caducados; el día 28 serían 27 de 30.
+  const corte = new Date(hoy.getFullYear() - 5, hoy.getMonth(), hoy.getDate());
+  // Un 29 de febrero no existe cinco años antes y JavaScript lo desborda al 1 de marzo, o sea
+  // ADELANTA el corte y daría por vencido a quien no lo está. `setDate(0)` retrocede al último
+  // día del mes anterior, que es el 28.
+  if (corte.getMonth() !== hoy.getMonth()) corte.setDate(0);
+  return { dia: corte.getDate(), mes: MESES[corte.getMonth()], anio: corte.getFullYear() };
 }
 
 const PortalUrlContext = createContext("https://portal.certiveh.co");
@@ -607,8 +615,10 @@ function VentanaUPME() {
   const day = now.getDate();
   // Window open: Feb 1 (month 1, day 1) to Dec 15 (month 11, day 15)
   const ventanaAbierta =
+    // Enero entero cerrado: la ventana de la UPME va del 1 de febrero al 15 de diciembre.
+    // (Aquí había una rama `(month === 0 && day >= 1 && false)` que no podía ser cierta nunca:
+    // un `&& false` dentro de un `||` no cierra nada, solo hace creer que se contempló el caso.)
     (month > 0 && month < 11) ||
-    (month === 0 && day >= 1 && false) || // Jan is always closed
     (month === 11 && day <= 15);
 
   // Countdown target: next Feb 1
@@ -994,7 +1004,7 @@ function Servicios() {
       // correo inscrito en SU RUT, y solo concede una cita por contribuyente. Callarla es lo que
       // hacía el portal hasta el 3-sep, y el resultado era gente que no reenviaba y cuyo
       // expediente NO SE RADICABA sin enterarse.
-      note: "Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo —con poder y sin poder—, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
+      note: "Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, con poder y sin poder, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
@@ -1703,7 +1713,7 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional, siempre que sigan vigentes los requisitos de la UPME. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo —con poder y sin poder—, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
@@ -1904,7 +1914,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: 16
           }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, se te vence este mes; si es posterior, te quedan meses y no años; y si es anterior, probablemente ya venció: escríbenos y lo revisamos.
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es anterior al {corteDeCaducidadIva().dia} de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, el plazo ya se venció; y si es del resto de {corteDeCaducidadIva().anio}, se te vence este año. Escríbenos con la fecha de tu factura y te decimos cuánto te queda.
           </p>
 
           <p style={{
@@ -1952,7 +1962,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 export default function CertiVehLandingComplete({ portalUrl = "https://portal.certiveh.co" }: { portalUrl?: string } = {}) {
   const [showUrgencyModal, setShowUrgencyModal] = useState(false);
 
-  // Urgency modal logic - shows after 10 seconds, once per session
+  // Urgency modal logic - shows after 45 seconds, once per session
   useEffect(() => {
     const hasSeenModal = sessionStorage.getItem('urgencyModalSeen');
     if (hasSeenModal) return;

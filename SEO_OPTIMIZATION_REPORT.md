@@ -90,20 +90,27 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "COP",
-    "description": "Tarifa única de servicio del 2.5% del valor del vehículo"
+    "price": "599990",
+    "availability": "https://schema.org/InStock",
+    "description": "Certificado UPME desde $599.990 COP + IVA. Gestión de la devolución de IVA desde $499.990 COP + IVA. Más el costo del trámite ante la UPME según resolución vigente."
   },
   "provider": {
     "@type": "Organization",
     "name": "CertiVeh",
     "url": "https://certiveh.co",
-    "email": "certiveh.contacto@gmail.com",
+    "email": "contacto@certiveh.co",
     "areaServed": "CO"
   }
 }
 ```
 
+> **Nota (8-sep-2026).** Este documento es una foto fechada en abril, y tres de sus datos ya no
+> eran los del sitio: la tarifa del 2.5%, el correo `certiveh.contacto@gmail.com` y el recuento de
+> FAQ. Se han puesto al día contra `dist/index.html` construido. Lo demás sigue siendo la foto de
+> abril: si un dato de aquí abajo contradice al sitio, manda el sitio.
+
 #### Schema.org - FAQPage
-- ✅ 6 preguntas frecuentes estructuradas
+- ✅ 9 preguntas frecuentes estructuradas
 - ✅ Formato Question/Answer completo
 - ✅ Optimizado para Rich Snippets en Google
 
