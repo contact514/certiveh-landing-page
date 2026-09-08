@@ -36,7 +36,7 @@ Tú subes tus documentos, firmas y reenvías un correo.
 ### Trust Strip (4 elementos)
 - ✓ Sin cuenta en la UPME
 - ✓ Notificaciones WhatsApp
-- ✓ Pago único, sin sorpresas
+- ✓ Pago único
 - ✓ 100% en línea
 
 ### Stat Pills (3 elementos)
@@ -84,13 +84,15 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Descripción:** Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta del año de la compra.
 - **Ejemplo:** $150M → deduces $75.000.000
 
-### Card 3: Exención de arancel en importación directa
+### Card 3 (histórica): Exención de arancel en importación directa
 
 > ⚠️ **En la home servida el tercer titular es «Depreciación acelerada · 3 años», no el arancel.**
 > Auditado el 8-sep-2026: la palabra «arancel» aparece **una sola vez** en toda la home, y está en
 > el JSON-LD de `Organization`, no en la página visible. El arancel sigue siendo un beneficio real
-> y se nombra con esta formulación exacta —«Exención de arancel en importación directa»—, pero como
-> cuarto, no como tercero. Quien copie de aquí sin mirar reintroduce el orden viejo.
+> y se nombra con esta formulación exacta —«Exención de arancel en importación directa»—, pero **no
+> es una de las tres tarjetas visibles**: el `<h2>` dice «Tres beneficios tributarios» y no hay una
+> cuarta. Su única aparición es el JSON-LD de `Organization`, donde va tercero de tres. Quien copie
+> de aquí sin mirar reintroduce el arancel como tarjeta y se deja fuera la depreciación.
 - **Tag:** ARANCEL
 - **Título:** Exención de arancel en importación directa
 - **Porcentaje:** Exención
@@ -163,7 +165,7 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 ## 🧮 SECCIÓN: CALCULADORA
 
 ### Título
-**¿Cuánto puedes recuperar?**
+**¿Cuánto vale tu beneficio?**
 
 ### Subtítulo
 Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
@@ -177,6 +179,11 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 #### Valor del vehículo
 - Rango: $40M - $600M
 - Labels: "Valor del vehículo (sin IVA)"
+
+> ⚠️ **Varios bloques de este fichero describen componentes que ya no existen así.** Auditado el
+> 8-sep-2026 contra el `dist`: las FlipWords, las Stat Pills, el Ticker, las barras del desglose y
+> las Cards 4 y 6 sirven hoy textos distintos de los que están aquí. Antes de copiar cualquier
+> bloque, cotéjalo con lo servido — este documento va por detrás del código, no al revés.
 
 #### Barras de Desglose
 - Devolución IVA

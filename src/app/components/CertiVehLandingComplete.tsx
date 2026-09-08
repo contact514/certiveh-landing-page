@@ -950,9 +950,9 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      // ⚠️ **CADA COSA EN UN SITIO, y aquí va la CONDICIÓN de la cita: «solo la exigen cinco
-      // seccionales».** La PROMESA («la pedimos nosotros») vive en la segunda viñeta y el REENVÍO
-      // en la nota, que es la que no se puede quitar.
+      // ⚠️ **LO QUE NO SE REPITE ES EL REENVÍO: vive solo en la nota.** La CONDICIÓN de la cita
+      // va aquí Y en la viñeta, porque la viñeta promete —«la pedimos nosotros»— y una promesa sin
+      // condición es falsa: solo la exigen cinco seccionales.
       //
       // Esta descripción llegó a decir la cita TRES veces y el reenvío DOS, en un bloque que el
       // lector ve de una sola ojeada. Y este mismo aviso ya se escribió una vez diciendo que
@@ -972,7 +972,7 @@ function Servicios() {
       // correo inscrito en SU RUT, y solo concede una cita por contribuyente. Callarla es lo que
       // hacía el portal hasta el 3-sep, y el resultado era gente que no reenviaba y cuyo
       // expediente NO SE RADICABA sin enterarse.
-      note: "Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
+      note: "Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo —con poder y sin poder—, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
@@ -1313,7 +1313,7 @@ function Calculadora() {
       <div className="section">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto vale tu beneficio?</h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido.</p>
         </div>
 
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
@@ -1407,7 +1407,7 @@ function Calculadora() {
               <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo del servicio</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo total</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -1459,13 +1459,13 @@ function Calculadora() {
             )}
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo del servicio</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo total</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
             </div>
 
             {calc.costoTotal && calc.total && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> que cuesta el servicio, un estimado de{" "}
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, el beneficio estimado es de{" "}
                 <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
@@ -1501,7 +1501,7 @@ function Confianza() {
             Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Automatización, seguridad y seguimiento en tiempo real. Del trámite nos encargamos nosotros; lo tuyo, si además pides el IVA, es firmar y reenviar un correo.
+            Automatización, seguridad y seguimiento en tiempo real. Del trámite nos encargamos nosotros; si además pides el IVA, lo tuyo es firmar y reenviar un correo, y autenticar el poder en notaría si eliges esa modalidad.
           </p>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
@@ -1678,10 +1678,10 @@ function FAQ() {
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía o de extranjería (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso), factura de compra y tu RUT (el RUT solo si además vas a pedir la devolución del IVA). Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso) y factura de compra. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
-    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y solo se cobra nuevamente el costo de la radicación ante la UPME." },
+    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo; se vuelve a pagar el costo de la radicación ante la UPME y te avisamos antes de cualquier cobro adicional por rehacer el expediente." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo —con poder y sin poder—, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
@@ -1882,7 +1882,7 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: 16
           }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si tu factura es de finales de 2021, te quedan semanas y estás contra el reloj.
+            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si tu factura de compra es de 2021, el plazo se te vence este año: las de septiembre, en cuestión de días.
           </p>
 
           <p style={{

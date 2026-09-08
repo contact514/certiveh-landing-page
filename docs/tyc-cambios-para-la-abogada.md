@@ -2,7 +2,7 @@
 
 **Para:** el equipo jurídico de CertiVeh
 **De:** CertiVeh — operación
-**Fecha:** 7 de septiembre de 2026 (puntos 3.6 y 3.7 añadidos el 8 de septiembre)
+**Fecha:** 7 de septiembre de 2026 (puntos 3.6, 3.7, 3.8 y 3.9 añadidos el 8 de septiembre)
 **Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, el artículo del mandato administrativo y, en los Términos Generales, la cláusula de la tarifa y las menciones a los ciclos de recepción de la UPME)
 
 ---
@@ -129,7 +129,7 @@ En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato 
 > «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
 > «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
 
-Este es el único de los ocho que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+Este es el único de los nueve que no afecta al servicio de IVA: está en los Términos Generales, del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
 
 ### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
 
@@ -156,6 +156,22 @@ O sea que hay una franja de **seis meses** —entre los cuatro años y medio y l
 
 *(Ninguna superficie comercial menciona el corte de cuatro años y medio: la landing, la FAQ y el blog dicen «hasta 5 años», que es el término legal. Si el corte del contrato se confirma, hay que anunciarlo también ahí.)*
 
+### 3.9 · La web promete gratis una corrección que el contrato se reserva cobrar
+
+**Lo que dice la web** (FAQ de la home y de `/exotics`, en el texto visible y en el JSON-LD `FAQPage` que Google puede sacar suelto):
+
+> «…si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y **solo se cobra nuevamente el costo de la radicación ante la UPME**.»
+
+**Lo que dicen los T&C servidos** (cláusula de rechazo atribuible al Usuario):
+
+> «En estos casos, la gestión de una nueva solicitud **podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite**, la cual será informada previamente al Usuario.»
+
+**Por qué lo levantamos.** «Solo el costo de la radicación» afirma que nuestros honorarios son cero cuando el error es del cliente; el contrato se reserva expresamente cobrarlos. La otra rama —error nuestro— sí casa: los T&C dicen que se vuelve a presentar «sin generar costos adicionales», y así lo dice la web.
+
+Mientras tanto hemos ajustado la FAQ para que no prometa la gratuidad: ahora dice que se vuelve a pagar la radicación y que **se avisa antes** de cualquier cobro por rehacer el expediente, que es lo que la cláusula ya obliga.
+
+**Qué les pedimos:** que nos digan cuál es la política real. Si de verdad no cobramos honorarios por rehacer, conviene que la cláusula lo diga en vez de reservarse lo contrario; si sí se cobran, la web no puede volver a insinuar que no.
+
 ---
 
 ## 4. Resumen
@@ -170,9 +186,10 @@ O sea que hay una franja de **seis meses** —entre los cuatro años y medio y l
 | 3.6 | Tarifa del servicio (T&C Generales) | **El contrato dice 2.5% del valor; cobramos tarifa fija.** En el ejemplo de la propia web, $3.000.000 contra $599.990 |
 | 3.7 | Ciclos de recepción UPME (T&C Generales) | Habla de "ciclos"; la Resolución 400 de 2026 los eliminó y puso ventana continua |
 | 3.8 | Antigüedad máxima de la factura | **El contrato dice 4 años y 6 meses y el sistema bloquea a 5 años menos un día.** Franja de seis meses en la que la Plataforma habilita lo que el contrato dice que no habilitará. |
+| 3.9 | Rechazo atribuible al Usuario | **La web promete que solo se cobra la radicación y el contrato se reserva cobrar la gestión.** Ajustada la FAQ mientras se decide la política. |
 
 **Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda. **El 3.6 es el segundo en urgencia**: es la cláusula económica, y hoy dice un precio cinco veces mayor que el publicado.
 
-*(Los puntos 3.6, 3.7 y 3.8 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
+*(Los puntos 3.6, 3.7, 3.8 y 3.9 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
 
 Quedamos atentos al documento actualizado.

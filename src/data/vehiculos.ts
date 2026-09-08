@@ -19,7 +19,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 119_990_000,
-    precioFuente: "Tesla Colombia,agosto 2026",
+    precioFuente: "Tesla Colombia · agosto 2026",
     descripcion: "SUV eléctrico mediano, el más vendido de Colombia con 8.464 unidades en el primer semestre de 2026. Batería de 60 kWh, autonomía de hasta 466 km y 299 HP.",
   },
   {
@@ -30,7 +30,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Híbrido",
     elegible: true,
     precioCOP: 136_200_000,
-    precioFuente: "Toyota Colombia,mayo 2026",
+    precioFuente: "Toyota Colombia · mayo 2026",
     descripcion: "El híbrido más vendido en Colombia. Motor 1.8L combinado con motor eléctrico, 126 HP combinados. Sistema híbrido autorecargable (no necesita enchufe).",
   },
   {
@@ -41,7 +41,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 99_900_000,
-    precioFuente: "BYD Colombia,mayo 2026",
+    precioFuente: "BYD Colombia · mayo 2026",
     descripcion: "SUV eléctrico compacto, el más vendido de BYD en Colombia con 2.899 unidades en el primer semestre de 2026. Batería Blade de 45 kWh, 400 km y 174 HP.",
   },
   {
@@ -52,7 +52,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 114_990_000,
-    precioFuente: "Tesla Colombia,agosto 2026",
+    precioFuente: "Tesla Colombia · agosto 2026",
     descripcion: "Sedán eléctrico de Tesla y referente del segmento. Batería de 60 kWh, autonomía de hasta 520 km y 283 HP. Autopilot de serie y acceso a Superchargers.",
   },
   {
@@ -63,7 +63,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 134_990_000,
-    precioFuente: "Chery Colombia,mayo 2026",
+    precioFuente: "Chery Colombia · mayo 2026",
     descripcion: "SUV eléctrico compacto con diseño futurista. Autonomía competitiva y precio accesible, posicionado como alternativa a los BYD en el segmento de entrada.",
   },
   {
@@ -74,7 +74,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 84_990_000,
-    precioFuente: "BYD Colombia,mayo 2026",
+    precioFuente: "BYD Colombia · mayo 2026",
     descripcion: "City car eléctrico, el segundo más vendido de BYD en Colombia con 1.197 unidades en 2026. Versiones de 300 y 400 km de autonomía. Ideal para ciudad.",
   },
   {
@@ -85,7 +85,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 149_900_000,
-    precioFuente: "BYD Colombia,mayo 2026",
+    precioFuente: "BYD Colombia · mayo 2026",
     descripcion: "SUV eléctrico deportivo con batería Blade de 60,5 kWh, autonomía de hasta 480 km y motor de 204 HP. Diseño premium con pantalla giratoria.",
   },
   {
@@ -96,7 +96,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 89_990_000,
-    precioFuente: "BYD Colombia,agosto 2026",
+    precioFuente: "BYD Colombia · agosto 2026",
     descripcion: "Hatchback eléctrico con batería Blade de 45,12 kWh, autonomía de hasta 397 km y motor de 174 HP. Más espacio y equipamiento que el Dolphin Mini.",
   },
   {
@@ -107,7 +107,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 219_990_000,
-    precioFuente: "BYD Colombia,mayo 2026",
+    precioFuente: "BYD Colombia · mayo 2026",
     descripcion: "SUV eléctrico deportivo de alto rendimiento. Diseño aerodinámico inspirado en el océano, doble motor disponible y tecnología de batería Blade.",
   },
   {
@@ -118,7 +118,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 269_990_000,
-    precioFuente: "Volvo Colombia,mayo 2026",
+    precioFuente: "Volvo Colombia · mayo 2026",
     descripcion: "SUV compacto premium 100% eléctrico. Diseño escandinavo minimalista, materiales sostenibles y los estándares de seguridad Volvo. Autonomía de hasta 480 km.",
   },
   {
@@ -129,7 +129,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 169_990_000,
-    precioFuente: "Kia Colombia,mayo 2026",
+    precioFuente: "Kia Colombia · mayo 2026",
     descripcion: "SUV eléctrico mediano con amplio espacio interior. Batería de 58 kWh en versión Light y hasta 88 kWh en versión Wind. Diseño moderno y tecnología avanzada.",
   },
   {
@@ -140,7 +140,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Híbrido",
     elegible: true,
     precioCOP: 119_900_000,
-    precioFuente: "Toyota Colombia,mayo 2026",
+    precioFuente: "Toyota Colombia · mayo 2026",
     descripcion: "SUV subcompacto híbrido autorecargable. Motor 1.5L con sistema híbrido, ideal para ciudad con bajo consumo de combustible.",
   },
   {
@@ -151,7 +151,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 159_990_000,
-    precioFuente: "Hyundai Colombia,agosto 2026",
+    precioFuente: "Hyundai Colombia · agosto 2026",
     descripcion: "SUV subcompacto eléctrico de segunda generación. Batería de 48,6 kWh, autonomía de hasta 370 km y 133 HP. Carga rápida en corriente directa.",
   },
   {
@@ -162,7 +162,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 79_900_000,
-    precioFuente: "BYD Colombia,mayo 2026",
+    precioFuente: "BYD Colombia · mayo 2026",
     descripcion: "El eléctrico más económico del mercado colombiano. Compacto y ágil para la ciudad, autonomía de hasta 200 km. Perfecto como segundo vehículo urbano.",
   },
   {
@@ -173,7 +173,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 214_990_000,
-    precioFuente: "Kia Colombia,mayo 2026",
+    precioFuente: "Kia Colombia · mayo 2026",
     descripcion: "Crossover 100% eléctrico con batería de 64,8 kWh, autonomía de hasta 460 km y 201 HP. Diseño sostenible con materiales reciclados.",
   },
   {
@@ -184,7 +184,7 @@ export const vehiculos: Vehiculo[] = [
     tipoLabel: "Eléctrico puro",
     elegible: true,
     precioCOP: 184_990_000,
-    precioFuente: "Hyundai Colombia,mayo 2026",
+    precioFuente: "Hyundai Colombia · mayo 2026",
     descripcion: "Crossover eléctrico con diseño retro-futurista. Batería de 72,6 kWh, 218 HP, carga ultra-rápida de 10% a 80% en 18 minutos con cargador de 350 kW.",
   },
 ];

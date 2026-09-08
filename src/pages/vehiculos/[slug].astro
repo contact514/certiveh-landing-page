@@ -108,7 +108,7 @@ const faqLd = JSON.stringify({
       name: '¿Qué documentos necesito?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad, factura de compra y RUT. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.',
+        text: 'Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad y factura de compra. El RUT solo hace falta si además vas a pedir la devolución del IVA; si eres empresa, en lugar del RUT va el certificado de Cámara de Comercio. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.',
       },
     },
   ],
@@ -289,7 +289,7 @@ const faqLd = JSON.stringify({
       </div>
 
       <div class="v-roi" style="margin-top: 20px;">
-        <div class="v-roi-big">Por cada $1 invertido, ${roi} en beneficios</div>
+        <div class="v-roi-big">Por cada $1 de costo total, un estimado de ${roi.toLocaleString('es-CO')} en beneficios</div>
         <div class="v-roi-text">Beneficio estimado menos el costo del servicio (incluye base gravable): {fmt(neto)} COP</div>
       </div>
     </div>
@@ -335,7 +335,7 @@ const faqLd = JSON.stringify({
           <span>¿Qué documentos necesito?</span>
           <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad, factura de compra y RUT. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
+        <div class="v-faq-body">Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad y factura de compra. El RUT solo hace falta si además vas a pedir la devolución del IVA; si eres empresa, en lugar del RUT va el certificado de Cámara de Comercio. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
     </div>
 

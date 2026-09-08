@@ -67,7 +67,7 @@
 - ✅ **H2:** Títulos de todas las secciones principales
   - Beneficios: "Tres beneficios tributarios. Una sola gestión."
   - Cómo Funciona: "Así de simple es el trámite."
-  - Calculadora: "¿Cuánto puedes recuperar?"
+  - Calculadora: "¿Cuánto vale tu beneficio?"
   - Confianza: "Hecho para que no tengas que preocuparte."
   - FAQ: "Todo lo que necesitas saber"
   - CTA Final: "Tu certificado UPME te está esperando."
