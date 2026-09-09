@@ -939,7 +939,7 @@ function Beneficios() {
   // en los agentes, el verbo sigue siendo «solicitar». Si alguna vez se propaga, esto deja de ser
   // un chip y pasa a ser la promesa que el producto no puede cumplir.
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).", ejemplo: "$150M sin IVA → te devuelven $7.500.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).", ejemplo: "$150M → te devuelven $7.500.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
     { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
     { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
@@ -1028,7 +1028,7 @@ function Servicios() {
       // ⚠️ **Y «pedimos la cita» VA CONDICIONADO, SIEMPRE.** Solo la exigen 5 de 34 seccionales:
       // sin la condición, esta frase es falsa para la mayoría de los que la leen. Es el motivo por
       // el que la condición vive aquí Y en la viñeta.
-      desc: "Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN resuelve tu devolución.",
+      desc: "Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN consigna tu devolución.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
       // ⚠️ **LA OBLIGACIÓN SE DESCRIBE POR SU RESULTADO, NO POR EL TRÁMITE.** Decía «(tú autenticas
@@ -1058,7 +1058,7 @@ function Servicios() {
       // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
       // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
       // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Seguimos tu trámite hasta que la DIAN resuelve"],
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
@@ -1322,7 +1322,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el mensaje que te preparamos, desde el correo registrado en tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN resuelve." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el mensaje que te preparamos, desde el correo registrado en tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
   
   useEffect(() => {
@@ -1853,7 +1853,7 @@ function FAQ() {
     // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
     // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
     // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú decides si firmas los documentos o nos entregas un poder y los firmamos nosotros. En las dos opciones hay dos cosas que la DIAN no acepta de nadie más: firmar la declaración juramentada y reenviar el correo que te preparamos. Y seguimos tu trámite hasta que la DIAN resuelve." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú decides si firmas los documentos o nos entregas un poder y los firmamos nosotros. En las dos opciones hay dos cosas que la DIAN no acepta de nadie más: firmar la declaración juramentada y reenviar el correo que te preparamos. Y seguimos tu trámite hasta que la DIAN consigna." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
