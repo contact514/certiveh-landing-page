@@ -925,8 +925,21 @@ function Aliados() {
 
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
+  // ⚠️ **«te devuelven» EN EL EJEMPLO DE LA TARJETA DE IVA ES UNA DECISIÓN EXPLÍCITA DE JULIAN**
+  // (9-sep-2026), reafirmada después de que yo señalara el motivo por el que estaba retirado.
+  //
+  // El motivo sigue siendo cierto y conviene tenerlo escrito: **la DIAN estudia y decide**, y por
+  // encima de 1.000 UVT paga en TIDIS en vez de consignar. Por eso el resto del producto usa
+  // «solicitas» / «puedes solicitar», y por eso el portal tiene una guarda —el barrido del pago de
+  // la DIAN— que prohíbe prometer el depósito en `src/`.
+  //
+  // Aquí se acepta porque es un CHIP de ejemplo aritmético junto al porcentaje, no una promesa de
+  // servicio, y porque el dueño lo pidió sabiendo el motivo. **Lo que NO se puede hacer es
+  // extenderlo**: en la descripción de la tarjeta, en la de Servicio 2, en la FAQ, en el portal o
+  // en los agentes, el verbo sigue siendo «solicitar». Si alguna vez se propaga, esto deja de ser
+  // un chip y pasa a ser la promesa que el producto no puede cumplir.
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).", ejemplo: "$150M sin IVA → solicitas $7.500.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).", ejemplo: "$150M sin IVA → te devuelven $7.500.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
     { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
     { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
