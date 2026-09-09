@@ -7,6 +7,16 @@ interface Props {
   description?: string;
   keywords?: string;
   datePublished?: string;
+  /**
+   * ⚠️ **Sin esto, `dateModified` era `datePublished` y no había forma de moverlo.** El 8-sep-2026
+   * se editaron NUEVE de los doce artículos —siete de ellos por el modelo del servicio de IVA;
+   * los otros dos, una corrección menor— y los nueve seguían anunciándole a Google su fecha de
+   * publicación, con hasta cinco meses de desfase.
+   *
+   * Si no se pasa, cae en `datePublished`, que es lo correcto para un artículo que no se ha
+   * tocado desde que se publicó.
+   */
+  dateModified?: string;
   isArticle?: boolean;
 }
 
@@ -15,6 +25,7 @@ const {
   description,
   keywords,
   datePublished = '2026-04-01',
+  dateModified = datePublished,
   isArticle = false,
 } = Astro.props;
 
@@ -27,7 +38,7 @@ const jsonLd = isArticle ? JSON.stringify({
   description: description,
   image: 'https://certiveh.co/og/blog.png',
   datePublished: datePublished,
-  dateModified: datePublished,
+  dateModified: dateModified,
   author: { '@type': 'Organization', name: 'CertiVeh', url: 'https://certiveh.co' },
   publisher: {
     '@type': 'Organization',
@@ -253,7 +264,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
             </g>
             <text x="65" y="30" fill="#FFFFFF" font-size="28" font-weight="700" font-family="system-ui, -apple-system, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
           </svg>
-          <p>Certificado UPME y acompañamiento en devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
+          <p>Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
         </div>
         <div class="blog-footer-cols">
           <div>

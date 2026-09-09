@@ -63,14 +63,14 @@
 
 #### Jerarquía de Headings
 
-- ✅ **H1:** "Tu vehículo eléctrico tiene derecho a..." (Hero - único en la página)
+- ✅ **H1:** "Reclama los beneficios tributarios de tu carro eléctrico o híbrido en Colombia" (Hero, único en la página)
 - ✅ **H2:** Títulos de todas las secciones principales
   - Beneficios: "Tres beneficios tributarios. Una sola gestión."
   - Cómo Funciona: "Así de simple es el trámite."
-  - Calculadora: "¿Cuánto puedes recuperar?"
+  - Calculadora: "¿Cuánto vale tu beneficio?"
   - Confianza: "Hecho para que no tengas que preocuparte."
   - FAQ: "Todo lo que necesitas saber"
-  - CTA Final: "Tu certificado UPME te está esperando."
+  - CTA Final: "Tus beneficios tributarios te están esperando."
 - ✅ **H3:** Títulos de todas las tarjetas (Beneficios, Confianza, etc.)
 
 ---
@@ -90,20 +90,35 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "COP",
-    "description": "Tarifa única de servicio del 2.5% del valor del vehículo"
+    "price": "599990",
+    "availability": "https://schema.org/InStock",
+    "description": "Certificado UPME desde $599.990 COP + IVA. Gestión de la devolución de IVA desde $499.990 COP + IVA. Más el costo del trámite ante la UPME según resolución vigente."
   },
   "provider": {
     "@type": "Organization",
     "name": "CertiVeh",
     "url": "https://certiveh.co",
-    "email": "certiveh.contacto@gmail.com",
+    "email": "contacto@certiveh.co",
     "areaServed": "CO"
   }
 }
 ```
 
+> **Nota (8-sep-2026).** Este documento es una foto fechada en abril, y **seis** de sus datos ya
+> no eran los del sitio: el H1, el H2 de la Calculadora, el H2 del CTA final, el bloque `offers`
+> (decía «tarifa única del 2.5%» y el sitio sirve `price: 599990`), el correo
+> `certiveh.contacto@gmail.com` y el recuento de FAQ (decía 6, son 9). Se han puesto al día
+> contra `dist/index.html` construido.
+>
+> *(La primera versión de esta nota decía «tres», que era el número de datos que se habían mirado
+> y no el de datos que se tocaron. Un aviso que no cuenta bien sus propias ediciones es la misma
+> clase de defecto que el aviso viene a corregir.)*
+>
+> Lo demás sigue siendo la foto de abril: si un dato de aquí abajo contradice al sitio, manda el
+> sitio.
+
 #### Schema.org - FAQPage
-- ✅ 6 preguntas frecuentes estructuradas
+- ✅ 9 preguntas frecuentes estructuradas
 - ✅ Formato Question/Answer completo
 - ✅ Optimizado para Rich Snippets en Google
 

@@ -2,8 +2,8 @@
 
 **Para:** el equipo jurídico de CertiVeh
 **De:** CertiVeh — operación
-**Fecha:** 7 de septiembre de 2026
-**Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, y el artículo del mandato administrativo)
+**Fecha:** 7 de septiembre de 2026 (puntos 3.6, 3.7, 3.8 y 3.9 añadidos el 8 de septiembre; el 3.9 toca los Artículos XII y XIV de los Términos Generales)
+**Documento afectado:** Términos y Condiciones publicados en certiveh.co (Anexo del Servicio de Devolución del IVA, el artículo del mandato administrativo y, en los Términos Generales, la cláusula de la tarifa y las menciones a los ciclos de recepción de la UPME)
 
 ---
 
@@ -11,7 +11,7 @@
 
 Entre el 2 y el 7 de septiembre de 2026 se cerró con el asesor tributario y con la gerencia **cómo funciona de verdad** el trámite de devolución de IVA, y se corrigió en consecuencia todo el material de cara al cliente: el portal, la landing, el agente de WhatsApp e Instagram y las piezas de marketing.
 
-**Los Términos y Condiciones se quedaron describiendo el modelo anterior.** Hoy dicen tres cosas que el servicio ya no hace así, y no contemplan una modalidad que sí estamos ofreciendo y cobrando. No es una cuestión de redacción: como están, el contrato **no respalda** la mitad de lo que vendemos, y en dos puntos **promete al Usuario algo que no ocurre**.
+**Los Términos y Condiciones se quedaron describiendo el modelo anterior.** Hoy dicen varias cosas que el servicio ya no hace así, no contemplan una modalidad que sí estamos ofreciendo y cobrando, y fijan una tarifa que no es la que cobramos. No es una cuestión de redacción: como están, el contrato **no respalda** la mitad de lo que vendemos, y en dos puntos **promete al Usuario algo que no ocurre**.
 
 Les pedimos que actualicen el documento y nos lo devuelvan. Abajo va, punto por punto, qué dice hoy, por qué está mal y qué debería decir. La redacción final es suya.
 
@@ -21,8 +21,8 @@ Les pedimos que actualicen el documento y nos lo devuelvan. Abajo va, punto por 
 
 Para que la actualización parta del hecho correcto, éste es el flujo real, confirmado por el asesor tributario:
 
-1. El Usuario contrata el acompañamiento y sube sus documentos.
-2. CertiVeh arma el expediente completo: Formato 010 diligenciado, relación de facturas, declaración juramentada, certificado bancario, certificado UPME, factura y, si es persona jurídica, el certificado de existencia y representación legal.
+1. El Usuario contrata la gestión de la devolución y sube sus documentos.
+2. CertiVeh arma el expediente completo: Formato 010 diligenciado, certificación de IVA bajo gravedad de juramento, poderes cuando aplican, certificado bancario, certificado UPME, factura y, si es persona jurídica, el certificado de existencia y representación legal.
 3. **La cita ante la DIAN la solicita CertiVeh**, en las dos modalidades, cuando la Dirección Seccional del RUT del Usuario la exige. Sólo **5 de las 34 seccionales** la exigen (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes); las demás radican por buzón electrónico.
 4. **La cita NO es presencial.** Se agenda como no presencial y "atenderla" consiste en enviar un correo el día asignado, antes de la hora.
 5. **La radicación la ejecuta materialmente el Usuario**, reenviando desde la dirección de correo inscrita en su RUT el mensaje que CertiVeh le deja redactado. **Esto es así también cuando otorga poder**: la DIAN exige que la solicitud salga del contribuyente.
@@ -96,8 +96,88 @@ Esto no es un matiz cosmético: es la obligación del Usuario que más fácil se
 
 ### 3.5 · Dos puntos menores, por coherencia
 
-- **Gastos a cargo del Usuario.** La cláusula de la tarifa ya excluye «certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN». Con la modalidad con poder aparece un gasto nuevo y sistemático: **la autenticación del poder ante notaría**. Convendría nombrarla, porque es plata del Usuario y hoy sólo se la advertimos en el portal.
+- **Gastos a cargo del Usuario.** La cláusula de la tarifa ya excluye «certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN». Con la modalidad con poder aparece un gasto nuevo y sistemático: **la autenticación del poder ante notaría**. Convendría nombrarla, porque es plata del Usuario. *(Desde el 8-sep-2026 también se advierte en la landing, en la tarjeta de Servicio 2 —«el único paso presencial, y lo pagas tú»—, pero eso es copy comercial, no una cláusula.)*
 - **Requerimientos posteriores de la DIAN.** Los T&C ya dicen que atenderlos es responsabilidad exclusiva del Usuario, y así se lo decimos en el portal. Sólo queremos confirmar con ustedes que eso **sigue siendo cierto también en la modalidad con poder**, donde el poder podría entenderse como facultad para atenderlos. Si el poder los cubre, hay que decidir si CertiVeh los asume o si el poder los excluye expresamente.
+
+### 3.6 · La tarifa del contrato no es la que cobramos, y la diferencia es de cinco veces
+
+**Lo que dice hoy** (Términos y Condiciones Generales, cláusula de la tarifa):
+
+> «La tarifa del servicio corresponderá al **dos punto cinco por ciento (2.5%)** más el Impuesto sobre las Ventas (IVA), o cualquier otro impuesto aplicable al momento del pago», calculada «con base en el valor de la inversión reportado en la solicitud».
+
+**Por qué está mal.** Los precios publicados no son un porcentaje del valor del vehículo: el certificado UPME tiene una **tarifa fija de $599.990 + IVA**, y la gestión de la devolución de IVA cuesta **$499.990** contratada junto al certificado o **$599.990** por separado, con un tramo porcentual solo por encima de $200.000.000 de valor del vehículo.
+
+En el vehículo de $120.000.000 que la propia web usa de ejemplo, **el contrato dice $3.000.000 y la web dice $599.990**. Es un factor de cinco, en la cláusula económica, y en contra del Usuario.
+
+**Qué proponemos que diga.** Que la tarifa sea la publicada y vigente al momento de contratar, en vez de un porcentaje fijo en el contrato. Así deja de desactualizarse cada vez que cambia una tarifa:
+
+> «La tarifa del servicio será la informada al Usuario en la Plataforma al momento de la contratación, conforme a las condiciones económicas vigentes publicadas en certiveh.co, más el Impuesto sobre las Ventas (IVA) y los demás impuestos aplicables. La tarifa no incluye el costo del trámite ante la UPME, que se liquida en UVT según la resolución vigente.»
+
+**La pregunta para ustedes:** ¿el 2.5% llegó a aplicarse alguna vez? Si hay contratos vivos firmados bajo esa cláusula, hay que decidir qué pasa con ellos antes de cambiarla.
+
+### 3.7 · Los "ciclos" de la UPME ya no existen
+
+**Lo que dice hoy**, en dos sitios:
+
+> «…por los lineamientos que dicha entidad expida para **cada ciclo de recepción de solicitudes**.»
+> «En caso de que la ventana de tiempo para presentar la solicitud haya finalizado, la solicitud será presentada nuevamente **una vez se abra el ciclo siguiente**.»
+
+**Por qué está mal.** La **Resolución UPME 400 de 2026** eliminó el sistema de dos ciclos cerrados y lo reemplazó por una **ventana continua del 1 de febrero al 15 de diciembre**. Todo nuestro material lo dice así desde entonces, y el contrato es el único sitio que sigue hablando de ciclos.
+
+**Qué proponemos que diga:**
+
+> «…por los lineamientos que dicha entidad expida para la ventana continua de recepción de solicitudes.»
+> «En caso de que la ventana anual de recepción (del 1 de febrero al 15 de diciembre) se encuentre cerrada, la solicitud será presentada nuevamente al reabrirse.»
+
+Este es uno de los dos —con el 3.9— que no afectan al servicio de IVA: está en los Términos Generales, los del certificado UPME. Lo incluimos para que entre en la misma ronda y no haga falta abrir otra.
+
+### 3.8 · El corte de antigüedad del contrato no es el que aplica el sistema, y el del contrato es medio año más estricto
+
+**Lo que dice hoy** (cláusula de admisibilidad del Servicio de Devolución del IVA):
+
+> «…la Plataforma **no habilitará** la contratación del Servicio de Devolución del IVA respecto de vehículos cuya factura de venta tenga una antigüedad superior a **cuatro (4) años y seis (6) meses** al momento de la solicitud.»
+
+**Lo que hace el sistema**, medido en el código (`invoice-age.ts` del portal):
+
+| | Contrato | Sistema |
+|---|---|---|
+| Avisa, pero deja seguir | — | **4 años y 9 meses** |
+| Bloquea la contratación | **4 años y 6 meses** | **5 años menos un día** |
+
+O sea que hay una franja de **seis meses** —entre los cuatro años y medio y los cinco años— en la que el contrato dice que la plataforma «no habilitará» la contratación y la plataforma la habilita igual. Hoy, 8 de septiembre de 2026, esa franja son las facturas emitidas **entre el 10 de septiembre de 2021 y el 7 de marzo de 2022**.
+
+*(Medido ejecutando el propio `classifyInvoiceAge` con esa fecha: el 9 de septiembre de 2021 sale `blocked`, el 10 sale `warning`, y el 7 de marzo de 2022 sale `ok` — y el contrato ya lo prohíbe: del 7 de marzo de 2022 hacia atrás la antigüedad supera los cuatro años y medio. Un borrador anterior de este apartado daba «del 8 de marzo al 8 de septiembre de 2021», que son fechas del lado **bloqueado**: justo el conjunto que la plataforma sí rechaza, o sea lo contrario de lo que aquí se argumenta.)*
+
+**Por qué lo levantamos.** No es cosmético: la cláusula está redactada como una obligación de la Plataforma («no habilitará»), así que un cliente de esa franja habría contratado un servicio que el propio contrato dice que no se le podía ofrecer. Y el motivo que la cláusula se da a sí misma —«asegurar que el trámite completo pueda surtirse dentro del término legal»— es exactamente el argumento que hace que ese margen importe.
+
+**Constancia, para que no parezca que se nos escapó:** la cláusula siguiente ya prevé el caso —«*en el evento en que, por cualquier causa, la Plataforma llegare a habilitar la contratación … respecto de un vehículo cuya factura de venta tenga una antigüedad superior a la permitida … ello no genera responsabilidad alguna*»— y exonera al Operador. Lo que pedimos no es cubrir la responsabilidad, que ya está cubierta, sino que **la obligación de «no habilitar» y el corte real coincidan**: una cláusula que se incumple a diario y se salva por su propia excepción envejece mal.
+
+**Qué les pedimos:** que nos digan cuál de los dos números manda. Si es el del contrato, el cambio es del código y no de la cláusula. Si es el del sistema, la cláusula tiene que decir cinco años y redactar el margen operativo como aviso, no como prohibición. **Es su decisión, no la nuestra**: nosotros solo constatamos que hoy no coinciden.
+
+*(Ninguna superficie comercial menciona el corte de cuatro años y medio: la landing, la FAQ y el blog dicen «hasta 5 años», que es el término legal. Si el corte del contrato se confirma, hay que anunciarlo también ahí.)*
+
+### 3.9 · La web promete gratis una corrección que el contrato se reserva cobrar
+
+**Lo que decía la web hasta el 8-sep-2026** (FAQ de la home y de `/exotics`, en el texto visible y en el JSON-LD `FAQPage`; el de la home es el que Google puede sacar suelto, porque `/exotics` va con `noindex`):
+
+> «…si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y **solo se cobra nuevamente el costo de la radicación ante la UPME**.»
+
+**Lo que dicen los T&C servidos** (cláusula de rechazo atribuible al Usuario):
+
+> «En estos casos, la gestión de una nueva solicitud **podrá generar el cobro de una tarifa adicional por concepto de gestión del trámite**, la cual será informada previamente al Usuario por parte del Operador de la Plataforma.»
+
+**Y hay una segunda cláusula, más dura, que dice otra cosa.** El **Artículo XIV (Política de reembolsos)**, sobre el mismo escenario:
+
+> «Rechazo atribuible al Usuario: … **no habrá lugar a la devolución de los valores pagados**. En estos casos, si el Usuario desea presentar nuevamente la solicitud una vez subsanadas las observaciones formuladas por la UPME, **deberá pagar la tarifa correspondiente a un nuevo trámite**, conforme a las condiciones económicas vigentes al momento de la nueva solicitud.»
+
+**Por qué lo levantamos.** Dos motivos:
+
+1. **La web prometía menos de lo que el contrato cobra.** «Solo el costo de la radicación» afirmaba que nuestros honorarios son cero cuando el error es del cliente. El XII se reserva cobrarlos y el XIV dice que **deberá** pagarse la tarifa de un trámite nuevo entero. La otra rama —error nuestro— sí casa con los dos.
+2. **Y el XII y el XIV no dicen lo mismo entre sí.** «*podrá generar el cobro de una tarifa adicional*» frente a «*deberá pagar la tarifa correspondiente a un nuevo trámite*». Uno es facultativo y parcial; el otro, obligatorio y total. Esa discrepancia es suya, no nuestra, y conviene resolverla en la misma ronda.
+
+Mientras tanto hemos ajustado la FAQ para que no prometa la gratuidad: ahora dice que se vuelve a pagar la radicación y que **se avisa antes** de cualquier cobro por rehacer el expediente, que es lo que la cláusula ya obliga.
+
+**Qué les pedimos:** que nos digan cuál es la política real. Si de verdad no cobramos honorarios por rehacer, conviene que la cláusula lo diga en vez de reservarse lo contrario; si sí se cobran, la web no puede volver a insinuar que no.
 
 ---
 
@@ -110,7 +190,13 @@ Esto no es un matiz cosmético: es la obligación del Usuario que más fácil se
 | 3.3 | Definición del Servicio y cuerpo del Anexo | Dice que el Operador radica; radica el Usuario desde el correo de su RUT |
 | 3.4 | Plazos de devolución | Los 15 días de la devolución automática conviven con los 50 días hábiles de todo nuestro material |
 | 3.5 | Tarifa y requerimientos | Falta nombrar la autenticación notarial; confirmar quién atiende requerimientos con poder |
+| 3.6 | Tarifa del servicio (T&C Generales) | **El contrato dice 2.5% del valor; cobramos tarifa fija.** En el ejemplo de la propia web, $3.000.000 contra $599.990 |
+| 3.7 | Ciclos de recepción UPME (T&C Generales) | Habla de "ciclos"; la Resolución 400 de 2026 los eliminó y puso ventana continua |
+| 3.8 | Antigüedad máxima de la factura | **El contrato dice 4 años y 6 meses y el sistema bloquea a 5 años menos un día.** Franja de seis meses en la que la Plataforma habilita lo que el contrato dice que no habilitará. |
+| 3.9 | Rechazo atribuible al Usuario | **La web promete que solo se cobra la radicación y el contrato se reserva cobrar la gestión.** Ajustada la FAQ mientras se decide la política. |
 
-**Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda.
+**Lo urgente es el 3.1**, porque hoy estamos cobrando una modalidad que el contrato no contempla. El 3.2 y el 3.3 son afirmaciones falsas frente al Usuario y conviene corregirlas en la misma ronda. **El 3.6 es el segundo en urgencia**: es la cláusula económica, y hoy dice un precio cinco veces mayor que el publicado.
+
+*(Los puntos 3.6, 3.7, 3.8 y 3.9 se añadieron el 8-sep-2026, al auditar el copy de IVA de todo el producto contra el alcance real del servicio. Los cinco primeros son del 7-sep y no se han tocado.)*
 
 Quedamos atentos al documento actualizado.

@@ -1,7 +1,17 @@
 # CertiVeh - Todos los Copies de la Landing Page
-**Versión 1.0 · Marzo 2026**
+**Versión 1.1 · 8 de septiembre de 2026**
 
 ---
+
+
+> ⚠️ **ESTE DOCUMENTO VA POR DETRÁS DEL CÓDIGO. Coteja CADA bloque con el `dist` antes de copiarlo.**
+>
+> Auditado el 8-sep-2026: al menos dieciséis bloques describen componentes que ya no se sirven así
+> —el menú, el headline, el CTA del hero, las FlipWords, las Stat Pills, el Ticker, las Cards 1, 2,
+> 4 y 6, el callout de ventanas, el subtítulo de Cómo Funciona, el paso 01, las barras del
+> desglose, la FAQ entera, el CTA final y el footer—. **No es una lista cerrada**: la versión
+> anterior de este aviso nombraba seis y por omisión daba por vigente todo lo demás, incluida una
+> FAQ que prometía algo que los T&C contradicen.
 
 ## 📋 NAVEGACIÓN
 
@@ -20,14 +30,14 @@
 **tiene derecho a** [texto rotativo]
 
 ### Textos Rotativos (FlipWords)
-1. exención de IVA
+1. devolución de IVA
 2. deducción en renta
-3. reducción arancelaria
+3. exención de arancel en importación directa
 4. un certificado UPME
 
 ### Subheadline
-CertiVeh automatiza el trámite ante la UPME de principio a fin.  
-Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
+CertiVeh tramita tu certificado ante la UPME y gestiona tu devolución de IVA ante la DIAN.  
+Tú subes tus documentos, firmas y reenvías un correo.
 
 ### CTAs Hero
 - **Primario:** Calcular mi beneficio
@@ -36,13 +46,13 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 ### Trust Strip (4 elementos)
 - ✓ Sin cuenta en la UPME
 - ✓ Notificaciones WhatsApp
-- ✓ Pago único, sin sorpresas
+- ✓ Pago único
 - ✓ 100% en línea
 
 ### Stat Pills (3 elementos)
-1. **5%** - Exención de IVA
+1. **5%** - Devolución de IVA
 2. **50%** - Deducción renta
-3. **5%** - Ahorro arancel
+3. **Exención** - Arancel en importación directa
 
 ---
 
@@ -53,9 +63,9 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 - Certificado UPME automático
 - Sin trámites manuales
 - 100% en línea
-- Ahorra hasta $75M en impuestos
+- Deduce hasta $75M de tu base gravable
 - IA extrae tus datos
-- Radicación automática
+- Radicación automática ante la UPME
 - Notificaciones WhatsApp
 - Sin cuenta UPME
 
@@ -70,12 +80,12 @@ Tú subes tres documentos. Nosotros nos encargamos de todo lo demás.
 ### Subtítulo
 El Estado colombiano creó estos incentivos para promover la movilidad eléctrica. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
 
-### Card 1: Exención de IVA
+### Card 1: Devolución de IVA
 - **Tag:** IVA
-- **Título:** Exención de IVA
+- **Título:** Devolución de IVA
 - **Porcentaje:** 5%
-- **Descripción:** Los vehículos eléctricos e híbridos están exentos del impuesto al valor agregado. En un vehículo de $120M, son $6M que no pagas.
-- **Ejemplo:** $120M → ahorras $6.000.000
+- **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M. El reconocimiento y el monto los decide la DIAN.
+- **Ejemplo:** $120M sin IVA → solicitas $6.000.000
 
 ### Card 2: Deducción en Renta
 - **Tag:** RENTA
@@ -84,17 +94,47 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Descripción:** Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta del año de la compra.
 - **Ejemplo:** $150M → deduces $75.000.000
 
-### Card 3: Reducción Arancelaria
+### Card 3 (histórica): Exención de arancel en importación directa
+
+> ⚠️ **En la home servida el tercer titular es «Depreciación acelerada · 3 años», no el arancel.**
+> Auditado el 8-sep-2026: la palabra «arancel» aparece **una sola vez** en toda la home, y está en
+> el JSON-LD de `Organization`, no en la página visible. El arancel sigue siendo un beneficio real
+> y se nombra con esta formulación exacta —«Exención de arancel en importación directa»—, pero **no
+> es una de las tres tarjetas visibles**: el `<h2>` dice «Tres beneficios tributarios» y no hay una
+> cuarta. Su única aparición es el JSON-LD de `Organization`, donde va tercero de tres. Quien copie
+> de aquí sin mirar reintroduce el arancel como tarjeta y se deja fuera la depreciación.
 - **Tag:** ARANCEL
-- **Título:** Reducción arancelaria
-- **Porcentaje:** 5%
-- **Descripción:** Reducción del arancel de importación para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.
+- **Título:** Exención de arancel en importación directa
+- **Porcentaje:** Exención
+- **Descripción:** Exención de arancel en importación directa para vehículos eléctricos e híbridos bajo la Ley 1964. Aplica al momento de la importación.
 - **Ejemplo:** Varía según modelo y origen
 
 ### Callout Informativo (Ventanas UPME)
-**La UPME abre ventanas de radicación dos veces al año.** Si pierdes la ventana, esperas hasta el siguiente semestre. CertiVeh monitorea las fechas y radica tu solicitud automáticamente cuando abre el proceso.
+**La ventana de radicación de la UPME va del 1 de febrero al 15 de diciembre.** Si no radicas antes del 15 de diciembre, la siguiente abre el 1 de febrero. (Resolución UPME 400 de 2026: se acabaron los dos ciclos cerrados.)
 
 ---
+
+
+> ⚠️ **LO QUE ESTE DOCUMENTO NO DECÍA, Y HAY QUE DECIR EN CUALQUIER COPY NUEVO DE IVA.**
+>
+> Auditado el 8-sep-2026: `cita`, `poder`, `notaría` y `seccional` salían **cero veces** en todo el
+> fichero. Quien escriba copy nuevo partiendo de aquí reproduce la asimetría que costó tres rondas
+> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos:
+>
+> · **La cita ante la DIAN la pedimos nosotros, en las DOS modalidades** — pero solo la exigen
+>   cinco seccionales (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes), así que va
+>   SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
+>   Y la DIAN concede **una sola por contribuyente**: si la pide el cliente, gasta el cupo.
+> · **La cita NO es presencial.** Nadie va a ninguna oficina: se atiende mandando el correo ese
+>   día, antes de la hora asignada.
+> · **El correo de radicación lo reenvía SIEMPRE el cliente**, desde la dirección inscrita en su
+>   RUT, porque la DIAN exige que la solicitud salga del contribuyente. **También con poder.**
+>   Nunca escribir que radicamos nosotros ante la DIAN. *(Ante la UPME sí radicamos: eso es otra
+>   cosa y sí se puede decir.)*
+> · **Con poder solo cambia quién firma el Formulario 010**: lo firmamos nosotros. A cambio, el
+>   cliente autentica el poder en **notaría** —presencial, obligatorio y **lo paga él**—. La
+>   declaración juramentada la firma él en las DOS modalidades, igual que el reenvío del correo.
+
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
 
@@ -107,7 +147,7 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
-- **Descripción:** Solo necesitas tres documentos: tu Cédula, la Tarjeta de Propiedad del vehículo y la Factura de Compra. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
+- **Descripción:** Solo necesitas tus documentos: cédula, tarjeta de propiedad y factura de compra, más el RUT si vas a pedir la devolución del IVA. Si eres empresa, además va el certificado de Cámara de Comercio vigente; el RUT lo pide la devolución de IVA, no el certificado UPME. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
 - **Detail:** Sin formularios manuales. Sin errores de digitación.
 
 ### Paso 02: Revisa y confirma
@@ -117,12 +157,12 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 
 ### Paso 03: Pago único
 - **Subtitle:** Una sola vez
-- **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones, sin costos ocultos. El pago confirma tu caso y activa el proceso.
+- **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.
 - **Detail:** Procesado con Wompi · Tarjeta, PSE o Nequi.
 
 ### Paso 04: Nosotros hacemos todo
 - **Subtitle:** Tú no haces nada más
-- **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud en la ventana correspondiente.
+- **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.
 - **Detail:** Sin que tengas que tocar ningún portal gubernamental.
 
 ### Paso 05: Recibe tu certificado
@@ -135,10 +175,10 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 ## 🧮 SECCIÓN: CALCULADORA
 
 ### Título
-**¿Cuánto puedes recuperar?**
+**¿Cuánto vale tu beneficio?**
 
 ### Subtítulo
-Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
+Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido.
 
 ### Controles
 
@@ -148,15 +188,16 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 
 #### Valor del vehículo
 - Rango: $40M - $600M
-- Labels: "Valor del vehículo"
+- Labels: "Valor del vehículo (sin IVA)"
+
 
 #### Barras de Desglose
-- Exención IVA
+- Devolución IVA
 - Deducción renta
-- Ahorro arancel
+- Exención de arancel en importación directa
 
 #### Honorarios
-**Honorarios CertiVeh (5%)**  
+**Honorarios CertiVeh (tarifa fija)**  
 *Estimación referencial. Valor real depende del régimen tributario.
 
 ### Panel de Resultados
@@ -165,19 +206,19 @@ Mueve el slider y ve en tiempo real cuánto vale tu beneficio tributario.
 **BENEFICIO TOTAL ESTIMADO**
 
 #### Label Secundario
-en incentivos tributarios recuperables
+en incentivos tributarios (incluye base gravable en renta)
 
 #### Beneficio Neto
-**BENEFICIO NETO (MENOS HONORARIOS)**
+**BENEFICIO ESTIMADO MENOS EL COSTO TOTAL**
 
 #### ROI Copy
-Por cada **$1 invertido** en CertiVeh, recibes **$[X]** en beneficios.
+Por cada **$1** de costo total, un beneficio estimado de **$[X]**.
 
 #### CTA
 **Empezar ahora**
 
 #### Microcopy
-Sin riesgo · Si la UPME rechaza, revisamos tu caso
+Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
 
 ---
 
@@ -196,14 +237,14 @@ Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está
 ### Card 3: Tus datos, protegidos
 Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros.
 
-### Card 4: No pierdas la ventana
-Monitoreamos las fechas de apertura de la UPME. Tu solicitud se radica automáticamente cuando el sistema abre.
+### Card 4: Radicación inmediata
+La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solicitud se radica de inmediato. Si te registras con la ventana cerrada, entra en cuanto reabra y te avisamos.
 
 ### Card 5: Sin portal gubernamental
 Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto.
 
 ### Card 6: Pago único, sin letra pequeña
-Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo incluido desde el primer día.
+Una sola tarifa de servicio, sin suscripciones. Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría.
 
 ---
 
@@ -214,27 +255,27 @@ Una sola tarifa de servicio. Sin suscripciones, sin costos adicionales. Todo inc
 
 ### Pregunta 1
 **¿Qué vehículos califican?**  
-Vehículos eléctricos puros e híbridos registrados en Colombia que cumplan los requisitos de la Ley 1964 de 2019. El vehículo debe estar a nombre del solicitante en el RUNT.
+Vehículos eléctricos e híbridos NUEVOS registrados en Colombia. **No aplica a híbridos ligeros.** El vehículo debe estar a nombre del solicitante en el RUNT.
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
-La UPME abre ventanas de radicación dos veces al año. Si no hay ventana abierta cuando te registras, tu caso queda en cola y lo radicamos automáticamente en la siguiente apertura. Te avisamos con anticipación.
+La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciembre. Tu solicitud se radica de inmediato; si te registras con la ventana cerrada, entra en cuanto reabra el 1 de febrero y te avisamos.
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
-Solo tres: Cédula de ciudadanía (frente y reverso), Tarjeta de Propiedad del vehículo (frente y reverso) y Factura de Compra del vehículo. Todo se sube en PDF, JPG o PNG desde tu teléfono.
+Persona natural: cédula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura de compra, más el RUT si vas a pedir la devolución del IVA. Empresa: cédula del representante legal, tarjeta de propiedad, factura de compra, certificado de Cámara de Comercio vigente y el RUT de la empresa si vas a pedir la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono.
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
-Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: entre 4 y 8 semanas dependiendo de la UPME.
+Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Revisamos el motivo del rechazo contigo y gestionamos la corrección sin costo adicional. Nuestra política de garantía está detallada en los términos del servicio.
+Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. 
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
-Por el momento el servicio está disponible para personas naturales. El soporte para empresas está programado para el segundo semestre de 2026.
+Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido.
 
 ---
 
@@ -245,7 +286,7 @@ Por el momento el servicio está disponible para personas naturales. El soporte 
 **te está esperando.**
 
 ### Descripción
-Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La próxima ventana UPME se abre pronto.
+Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus beneficios. La ventana UPME cierra el 15 de diciembre.
 
 ### CTA Principal
 **Empezar ahora**
@@ -276,7 +317,7 @@ Automatización del trámite UPME para certificados de beneficio tributario en C
 © 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia
 
 ### Contacto
-certiveh.contacto@gmail.com
+contacto@certiveh.co
 
 ---
 
@@ -307,26 +348,26 @@ https://portal.certiveh.co
 ### Porcentajes de Beneficios
 - **IVA:** 5%
 - **Renta:** 50%
-- **Arancel:** 5%
+- **Arancel:** exención en importación directa
 
 ### Ejemplos de Cálculo
-- Vehículo $120M → Ahorro IVA: $6.000.000
+- Vehículo $120M → Devolución de IVA a solicitar: $6.000.000
 - Vehículo $150M → Deducción renta: $75.000.000
 
 ### Honorarios CertiVeh
-- 5% del beneficio total
+- Certificado UPME: $599.990 + IVA (tarifa fija). Gestión del IVA: $499.990 contratada junto al certificado, $599.990 por separado, + IVA. Tramo porcentual solo por encima de $200M.
 
 ### Tiempos del Proceso
 - Subir documentos: Menos de 3 minutos
 - Revisar y confirmar: 30 segundos
 - Radicación: Menos de 10 minutos de tu parte
-- Certificado UPME: 4-8 semanas (depende de UPME)
+- Certificado UPME: ~15 días hábiles, máximo legal 30
 
 ### Precisión de la IA
 +90% de los datos extraídos correctamente en el primer intento
 
-### Frecuencia Ventanas UPME
-Dos veces al año
+### Ventana de radicación UPME
+Continua, del 1 de febrero al 15 de diciembre
 
 ---
 
@@ -347,7 +388,7 @@ Dos veces al año
 - Certificado UPME
 - Beneficios tributarios
 - 100% en línea
-- Sin sorpresas
+- Pago único
 - Pago único
 - Ventana de radicación
 
@@ -357,12 +398,12 @@ Dos veces al año
 
 ### Labels de Formulario
 - Tipo de vehículo
-- Valor del vehículo
+- Valor del vehículo (sin IVA)
 
 ### Mensajes de Garantía
-- Sin riesgo · Si la UPME rechaza, revisamos tu caso
-- Sin suscripciones, sin costos ocultos
-- Todo incluido desde el primer día
+- Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
+- Sin suscripciones
+- Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría
 
 ### Status y Procesos
 - Procesado con Wompi · Tarjeta, PSE o Nequi
@@ -375,4 +416,4 @@ $[número] COP (formato colombiano con puntos de miles)
 ---
 
 **Fin del documento de copies**  
-*Última actualización: Marzo 2026*
+*Última actualización: 8 de septiembre de 2026*

@@ -303,7 +303,7 @@ function Hero() {
         maxWidth: 820, marginBottom: 16, animation: "fadeUp 0.6s 0.08s ease both",
         position: "relative", zIndex: 1
       }}>
-        Recupera hasta el 19% en IVA y deduce{" "}
+        Ahórrate hasta el 19% de IVA y deduce{" "}
         <span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
           el 50% de tu inversión en renta
         </span>
@@ -447,7 +447,7 @@ function Beneficios() {
       pct: "19%",
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
-      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si ya se pagó, puede solicitarse la devolución ante la DIAN con el certificado UPME como soporte.",
+      desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si el IVA ya se pagó, el contribuyente puede solicitar su devolución ante la DIAN presentando el certificado UPME como soporte: ese trámite lo adelanta él, CertiVeh no lo gestiona en esta vertical.",
       norma: "Art. 12, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
@@ -624,9 +624,9 @@ function Calculadora() {
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
             Calcula tu beneficio y{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo del servicio</span>
+            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo total</span>
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve en tiempo real cuánto cuesta el servicio y cuánto puedes recuperar en incentivos.</p>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
         </div>
 
         <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
@@ -683,7 +683,7 @@ function Calculadora() {
               <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo del servicio</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo total</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -713,16 +713,16 @@ function Calculadora() {
             <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
               {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
             </div>
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios</div>
+            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios (incluye base gravable en renta)</div>
 
             <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio neto (menos costo del servicio)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo total</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
             </div>
 
             {calc.costoTotal && calc.totalBeneficio && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1 invertido</span> en CertiVeh, recibes{" "}
+                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, un beneficio estimado de{" "}
                 <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
               </div>
             )}
@@ -793,7 +793,7 @@ function FAQ() {
     { q: "¿El certificado vence?", a: "No. Los certificados emitidos bajo la Resolución UPME 135 de 2025 no tienen límite de vigencia. Pueden modificarse (por ejemplo, para incluir información arancelaria o adicionar solicitantes) dentro de los 2 años siguientes a su expedición." },
     { q: "¿Aplica si la inversión se hizo con leasing?", a: "Sí. El Decreto 895 de 2022 contempla expresamente las inversiones realizadas mediante leasing financiero (art. 1.2.1.18.72). Esto es especialmente relevante para flotas de vehículos y equipos de alto valor." },
     { q: "¿Puedo combinar la deducción de renta con la depreciación acelerada?", a: "Sí. La norma establece que tomar ambos beneficios no se considera concurrencia de beneficios (Decreto 895 de 2022). Cada caso debe validarse con asesoría tributaria." },
-    { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME puede solicitarse la devolución del IVA ante la DIAN, presentándolo como soporte. Ese trámite lo adelanta el contribuyente: el acompañamiento de CertiVeh en devolución de IVA aplica solo a vehículos eléctricos e híbridos." },
+    { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME puede solicitarse la devolución del IVA ante la DIAN, presentándolo como soporte. Ese trámite lo adelanta el contribuyente: el servicio de gestión del IVA de CertiVeh aplica solo a vehículos eléctricos e híbridos." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>

@@ -1,4 +1,4 @@
-# Especificaciones para Imagen Open Graph (og-image.png)
+# Especificaciones para las imágenes Open Graph (`public/og/*.png`)
 **CertiVeh - Social Media Preview Image**
 
 ---
@@ -38,7 +38,7 @@
 
 3. **Subheadline**
    ```
-   Exención IVA • Deducción en Renta • Reducción Arancelaria
+   Devolución IVA • Deducción en Renta • Exención Arancelaria
    ```
    - Tipografía: Inter Medium, 32-36 px
    - Color: Slate 600 (#475569)
@@ -80,8 +80,8 @@ background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
 ```
 ✓ Automatiza tu certificado UPME
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Exención IVA · Deducción 50% en Renta
-Reducción Arancelaria
+Devolución IVA · Deducción 50% en Renta
+Exención Arancelaria
 
 100% en línea · Sin trámites manuales
 certiveh.co
@@ -93,15 +93,15 @@ certiveh.co
 15 minutos
 Tu certificado UPME listo
 
-CertiVeh automatiza todo el proceso
+CertiVeh tramita tu certificado ante la UPME
 certiveh.co
 ```
 
 ### Opción 3: Orientada a ROI
 ```
-Recupera hasta
+Deduce hasta
 $75.000.000
-en beneficios tributarios
+de tu base gravable
 
 Automatización del certificado UPME
 certiveh.co
@@ -119,7 +119,7 @@ certiveh.co
 │                                         │
 │     Automatiza tu certificado UPME      │
 │                                         │
-│   Exención IVA • Deducción • Arancel   │
+│   Devolución IVA • Deducción • Arancel  │
 │                                         │
 │     [Escudo Icon]  100% en línea        │
 │                                         │
@@ -137,9 +137,9 @@ certiveh.co
 │  Automatiza tu     │     VEHÍCULO       │
 │  certificado UPME  │     ELÉCTRICO]     │
 │                    │                    │
-│  ✓ Exención IVA    │                    │
+│  ✓ Devolución IVA  │                    │
 │  ✓ Deducción 50%   │                    │
-│  ✓ Reducción       │                    │
+│  ✓ Exención        │                    │
 │                    │                    │
 │  certiveh.co       │                    │
 │                    │                    │
@@ -157,7 +157,7 @@ certiveh.co
 │                                         │
 │    Automatiza tu certificado UPME       │
 │                                         │
-│  [Badge] $75M en beneficios  [Badge]    │
+│  [Badge] $75M de base gravable [Badge]  │
 │  [Badge] 100% en línea       [Badge]    │
 │                                         │
 │           certiveh.co                   │
@@ -215,28 +215,35 @@ certiveh.co
 
 ---
 
-## 📦 Ubicación del Archivo
+## 📦 Ubicación de los Archivos
+
+⚠️ **Esto ya NO está pendiente, y el documento decía que sí.** Hay **siete** PNG servidos hoy en
+`public/og/`, generados por `scripts/generate-og-images.mjs`:
 
 ```
-/public/og-image.png
+/public/og/home.png          → la portada y 20 páginas más (por defecto en BaseLayout)
+/public/og/vehiculos.png     → el catálogo y las fichas
+/public/og/blog.png          → el índice del blog y los artículos
+/public/og/aliados.png       → la página de aliados
+/public/og/nosotros.png      → la página de nosotros
+/public/og/otros-activos.png → GEE / FNCE
+/public/og/portal.png        → los enlaces al portal
 ```
 
-**URL Pública:**
-```
-https://certiveh.co/og-image.png
-```
+**URL Pública:** `https://certiveh.co/og/<nombre>.png`
 
----
+⚠️ **Los PNG llevan el copy anterior al renombrado de septiembre de 2026**: se generan desde el
+script, así que hay que volver a correrlo para que digan «gestión».
 
-## 🔄 Variantes Recomendadas
+⚠️ **Pero hoy ese script NO se puede reejecutar**: sus siete imágenes de fondo viven en `/tmp` y no
+están en el repo, así que muere con `ENOENT`. Antes de regenerar hay que recuperar los fondos y
+meterlos en el repo. Los dos avisos vivían solo dentro del `.mjs`, o sea invisibles para quien
+abriera este documento — que es justo quien va a decidir si hay que regenerarlas.
 
-### Principal (Default)
-- `og-image.png` - Imagen genérica de la marca
-
-### Específicas (Futuro)
-- `og-image-calculator.png` - Para compartir calculadora
-- `og-image-benefits.png` - Para compartir beneficios
-- `og-image-faq.png` - Para compartir FAQ
+⚠️ Y `/public/og-image.png` **sí existe**, está trackeado en git y se publica en
+`https://certiveh.co/og-image.png` — un borrador anterior de este apartado decía que no. Lo cierto
+es peor: existe y está **huérfano**, ninguna página lo referencia (`BaseLayout` usa `/og/home.png`
+por defecto). O se borra o se documenta para qué queda.
 
 ---
 
@@ -252,5 +259,5 @@ Asegurar que la imagen se vea bien en:
 
 ---
 
-**Última actualización:** Marzo 16, 2026  
-**Status:** Pendiente de creación
+**Última actualización:** 8 de septiembre de 2026  
+**Status:** Las siete imágenes existen y se sirven. Pendiente: regenerarlas con el copy de «gestión».
