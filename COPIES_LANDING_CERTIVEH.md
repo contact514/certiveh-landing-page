@@ -85,7 +85,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Título:** Devolución de IVA
 - **Porcentaje:** 5%
 - **Descripción:** Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).
-- **Ejemplo:** $120M sin IVA → solicitas $6.000.000
+- **Ejemplo:** $150M sin IVA → solicitas $7.500.000  *(estandarizado a $150M el 9-sep-2026, para que las tres tarjetas de Beneficios usen el mismo vehículo de referencia)*
 
 ### Card 2: Deducción en Renta
 - **Tag:** RENTA
