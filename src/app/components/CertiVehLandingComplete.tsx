@@ -870,7 +870,7 @@ function Hero() {
         marginBottom: 48, animation: "fadeUp 0.6s 0.36s ease both",
         position: "relative", zIndex: 1
       }}>
-        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Pago único"],["smartphone","100% en línea"]].map(([ico,txt]) => (
+        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Solo pagas una vez"],["smartphone","100% en línea"]].map(([ico,txt]) => (
           <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "rgba(255,255,255,0.4)", fontWeight: 500, cursor: "default" }}>
             <Icon name={ico as string} size={13} color="#34D399"/>{txt}
           </span>
@@ -926,7 +926,7 @@ function Aliados() {
 // ── BENEFICIOS ────────────────────────────────────────────────────────────────
 function Beneficios() {
   const cards = [
-    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Si pagaste un IVA del 5% en la compra, con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA pagado.", ejemplo: "$120M sin IVA → solicitas $6.000.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
+    { icon: "percent",  tag: "IVA",     title: "Devolución de IVA",        pct: "5%", accentColor: "var(--emerald-600)", iconBg: "rgba(5,150,105,0.1)", bgColor: "var(--emerald-50)", borderColor: "var(--emerald-200)", desc: "Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor antes de impuestos).", ejemplo: "$120M sin IVA → solicitas $6.000.000", norma: "Art. 12, Ley 1715/2014 (mod. art. 9, Ley 2099/2021)" },
     { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
     { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
@@ -1007,7 +1007,15 @@ function Servicios() {
       //
       // Y «$6.000.000 de vuelta» prometía caja: la DIAN estudia y decide. El mismo verbo se
       // corrigió en la tarjeta de Beneficios y esta se quedó sin mirar.
-      desc: "Nos encargamos de tu devolución de punta a punta. La DIAN concede una sola cita por contribuyente y solo la exigen cinco seccionales: cuando la tuya la exige, la pedimos nosotros. En un vehículo de $120M sin IVA, el 5% son $6.000.000 que puedes solicitar.",
+      //
+      // ⚠️ **NI EL EJEMPLO DE $6.000.000 NI LA CIFRA VAN AQUÍ** (Julian, 9-sep-2026). El dinero ya
+      // lo cuenta la sección de Beneficios y la calculadora; en la tarjeta que describe el
+      // servicio, repetirlo robaba las tres líneas que tenía para decir qué hacemos.
+      //
+      // ⚠️ **Y «pedimos la cita» VA CONDICIONADO, SIEMPRE.** Solo la exigen 5 de 34 seccionales:
+      // sin la condición, esta frase es falsa para la mayoría de los que la leen. Es el motivo por
+      // el que la condición vive aquí Y en la viñeta.
+      desc: "Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN resuelve tu devolución.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
       // ⚠️ **LA OBLIGACIÓN SE DESCRIBE POR SU RESULTADO, NO POR EL TRÁMITE.** Decía «(tú autenticas
@@ -1027,18 +1035,33 @@ function Servicios() {
       //
       // Este mismo cambio se aplicó el mismo día a `aviso-de-entrega.ts` del portal, con el mismo
       // razonamiento escrito. Si algún día se revierte uno, hay que revertir el otro.
-      features: ["Generamos tu expediente completo, revisado documento contra documento", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú nos adjuntas el poder autenticado)"],
-      // ⚠️ ESTA NOTA NO SE QUITA. (El aviso estaba pegado al array `features`, cuyo último
-      // elemento es el de la notaría; la frase que describe está aquí.) Es la única tarea que le
-      // queda al cliente y la DIAN no admite hacerla por él: exige que la radicación salga del
-      // correo inscrito en SU RUT, y solo concede una cita por contribuyente. Callarla es lo que
-      // hacía el portal hasta el 3-sep, y el resultado era gente que no reenviaba y cuyo
-      // expediente NO SE RADICABA sin enterarse.
-      note: "Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, con poder y sin poder, desde la dirección registrada en tu RUT: la DIAN exige que la radicación salga del contribuyente.",
+      //
+      // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las cinco caben de una ojeada** (Julian, 9-sep-2026):
+      // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego lo que le queda a él,
+      // luego la elección que hace, y al final lo que dura. Cinco viñetas, las mismas que la
+      // tarjeta del certificado, que es lo que las deja alineadas.
+      //
+      // ⚠️ **LA TERCERA LLEVA «tú lo reenvías» Y ESO NO ES ADORNO.** Antes esa obligación vivía en
+      // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
+      // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
+      // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Seguimos tu trámite hasta que la DIAN resuelve"],
+      // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
+      // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
+      // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
+      // callarla fue el fallo del 3-sep, con gente que no reenviaba y cuyo expediente NO SE
+      // RADICABA sin enterarse.
+      //
+      // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
+      // pasó a la tercera viñeta («tú lo reenvías»), y la declaración juramentada la siguen
+      // diciendo el paso 06 de «Así de simple» y la FAQ de la devolución. **Eran tres y el mismo
+      // día quedaron dos**: el subtítulo de Confianza también la decía y se retiró por largo. Antes
+      // de tocar cualquiera de los que quedan, comprobar que queda otro: el día que no quede
+      // ninguno, la tarjeta vuelve a enumerar solo lo nuestro, que es la asimetría de siempre.
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
-  ] as Array<{ icon: string; tag: string; title: string; desc: string; price: string; priceNote: string; features: string[]; note?: string; accentColor: string; iconBg: string }>;
+  ] as Array<{ icon: string; tag: string; title: string; desc: string; price: string; priceNote: string; features: string[]; accentColor: string; iconBg: string }>;
   return (
     <section id="servicios" aria-label="Servicios CertiVeh" style={{ background: "var(--slate-50)" }}>
       <div className="section">
@@ -1068,9 +1091,19 @@ function Servicios() {
               </div>
 
               <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
-              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 20, flex: 1 }}>{s.desc}</p>
+              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 20 }}>{s.desc}</p>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
+              {/* ⚠️ EL `marginTop: auto` VA AQUÍ, Y ANTES ESTABA EN LA `desc` COMO `flex: 1`.
+                  Con el hueco en la descripción, cada tarjeta lo repartía distinto —la del IVA
+                  tenía debajo una nota que la del certificado no— y las dos listas de checks
+                  empezaban a alturas distintas. Anclando la lista al fondo, las dos quedan
+                  alineadas sea cual sea el largo de su descripción, que es lo que pidió Julian
+                  el 9-sep-2026: «pon los checkboxes alineados abajo como en el certificado UPME».
+
+                  Ojo: eso exige que el `marginTop: "auto"` del bloque de precio se quede también,
+                  o los dos se pelean por el mismo hueco. Hoy no se pelean porque el precio va
+                  después y el hueco ya está consumido aquí. */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24, marginTop: "auto" }}>
                 {s.features.map((f, j) => (
                   // ⚠️ `flex-start` y `flexShrink: 0`, no `center` sin encoger. La viñeta del
                   // poder ocupa dos líneas a 1280px y tres a 769px, y con `center` el check queda
@@ -1084,12 +1117,6 @@ function Servicios() {
                   </div>
                 ))}
               </div>
-
-              {s.note && (
-                <div style={{ background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
-                  <strong style={{ color: "var(--slate-700)", fontWeight: 600 }}>¿Cómo se radica?</strong>{" "}{s.note}
-                </div>
-              )}
 
               <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 20, marginTop: "auto" }}>
                 <div style={{ fontSize: 24, fontWeight: 700, color: s.accentColor, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.price}</div>
@@ -1237,7 +1264,7 @@ function ComoFunciona() {
   const steps = [
     { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
-    { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
+    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
     // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
     // Eran ciertas mientras los cinco pasos describían solo el certificado —ahí, en efecto, no le
     // queda nada—. Desde que la lista llega hasta la devolución de IVA, «todo» y «nada más»
@@ -1608,7 +1635,7 @@ function Confianza() {
     // de la tarjeta de Servicio 1, y el de la notaría vive en `llms.txt` y en el conocimiento de
     // los agentes, que responden si el cliente pregunta. Antes de borrarlo de esos sitios, mirar
     // que quede en pie al menos uno.
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones." },
+    { icon: "checkCircle", title: "Solo pagas una vez",           desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
@@ -1618,7 +1645,15 @@ function Confianza() {
             Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
           </h2>
           <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Automatización, seguridad y seguimiento en tiempo real. Del trámite nos encargamos nosotros; si además pides el IVA, lo tuyo es firmar la declaración juramentada y reenviar el correo de radicación desde el correo de tu RUT; el detalle completo está en la tarjeta de Servicio 2.
+            {/* ⚠️ Este subtítulo llegó a arrastrar el reparto de tareas del IVA entero —la
+                juramentada, el reenvío desde el correo del RUT y un «ver la tarjeta de Servicio
+                2»—. Retirado el 9-sep-2026 (Julian): cuatro líneas de letra pequeña en el
+                subtítulo de una sección que va de tranquilidad.
+
+                Se puede porque la obligación NO se queda sin decir: la sostienen el paso 06 de
+                «Así de simple» y la FAQ de la devolución. Si algún día se recorta alguno de esos
+                dos, hay que mirar si queda el otro antes de tocarlo. */}
+            Automatización, acompañamiento, seguridad y seguimiento en tiempo real.
           </p>
         </div>
         <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
@@ -1805,7 +1840,7 @@ function FAQ() {
     // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
     // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
     // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Generamos y revisamos tu expediente completo, definimos tu vía de radicación y, si tu seccional exige cita, la pedimos nosotros a tu nombre: la DIAN concede una sola por contribuyente. Lo tuyo, en las dos modalidades, es firmar la declaración juramentada y reenviar el correo que te dejamos listo desde la dirección registrada en tu RUT, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además nos adjuntas el poder autenticado y el Formulario 010 lo firmamos nosotros." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú eliges quién firma el Formulario 010: lo firmas tú, o nos entregas un poder y lo firmamos nosotros. Lo tuyo, en las dos modalidades, es firmar la declaración juramentada y reenviar el correo que te dejamos listo desde la dirección de tu RUT, porque la DIAN exige que la radicación salga del contribuyente. Y seguimos tu trámite hasta que la DIAN resuelve." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
@@ -1861,7 +1896,7 @@ function CTAFinal() {
           </button>
         </a>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
-          {["Pago único · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
+          {["Solo pagas una vez · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
             <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
               <Icon name="checkCircle" size={13} color="#34D399"/>{t}
             </span>

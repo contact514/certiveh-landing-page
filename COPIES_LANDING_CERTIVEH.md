@@ -46,7 +46,7 @@ Tú subes tus documentos, firmas y reenvías un correo.
 ### Trust Strip (4 elementos)
 - ✓ Sin cuenta en la UPME
 - ✓ Notificaciones WhatsApp
-- ✓ Pago único
+- ✓ Solo pagas una vez
 - ✓ 100% en línea
 
 ### Stat Pills (3 elementos)
@@ -168,8 +168,8 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 - **Descripción:** Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.
 - **Detail:** La IA extrae +90% de los datos correctamente en el primer intento.
 
-### Paso 03: Pago único
-- **Subtitle:** Una sola vez
+### Paso 03: Solo pagas una vez
+- **Subtitle:** Sin suscripciones
 - **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.
 - **Detail:** Procesado con Wompi · Tarjeta, PSE o Nequi.
 
@@ -272,7 +272,7 @@ La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solic
 ### Card 5: Sin portal gubernamental
 Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto.
 
-### Card 6: Pago único, sin letra pequeña
+### Card 6: Solo pagas una vez
 Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones.
 
 > El desglose de costos ajenos (el trámite ante la UPME y, con poder, la notaría) se retiró de esta
@@ -327,7 +327,7 @@ Miles de propietarios de vehículos eléctricos en Colombia no han reclamado sus
 **Empezar ahora**
 
 ### Trust Elements (3 items)
-- ✓ Pago único · Sin suscripciones
+- ✓ Solo pagas una vez · Sin suscripciones
 - ✓ 100% en línea
 - ✓ Notificaciones por WhatsApp
 
@@ -452,3 +452,31 @@ $[número] COP (formato colombiano con puntos de miles)
 
 **Fin del documento de copies**  
 *Última actualización: 8 de septiembre de 2026*
+
+---
+
+## 🧾 SERVICIO 2 (tarjeta) — reescrito el 9-sep-2026
+
+**Descripción:** Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN resuelve tu devolución.
+
+**Las cinco viñetas, en orden de trámite:**
+1. Generamos tu expediente completo
+2. Pedimos nosotros tu cita, si tu seccional la exige
+3. Correo de radicación redactado y listo, tú lo reenvías
+4. Puedes firmar tú o entregarnos un poder
+5. Seguimos tu trámite hasta que la DIAN resuelve
+
+> ⚠️ **Criterio de esta ronda (Julian): menos carga de lectura, foco en la propuesta de valor, y
+> que el cliente sienta que lo acompañamos y que lo difícil lo hacemos nosotros** — agendar la
+> cita, generar el expediente, redactar el correo.
+>
+> Tres cosas que NO se pueden aflojar al recortar:
+>
+> · **«tú lo reenvías» de la viñeta 3.** Antes vivía en la nota «¿Cómo se radica?», que se retiró.
+>   Si se cae ese trozo, el reenvío desaparece de la tarjeta y vuelve el fallo del 3-sep: gente que
+>   no reenviaba y cuyo expediente no se radicaba sin enterarse.
+> · **La cita va CONDICIONADA** («si tu seccional la exige»): solo la exigen 5 de 34.
+> · **El cierre es «hasta que la DIAN resuelve», no «hasta que el dinero entra a tu cuenta».** La
+>   DIAN estudia y decide, y por encima de 1.000 UVT paga en TIDIS: prometer el giro es falso.
+>   Y tampoco vale «te acompañamos hasta que…», que infra-vende — los T&C llaman al servicio
+>   **gestión** y obligan al seguimiento del trámite. Lo vigila `el-servicio-se-llama-gestion`.
