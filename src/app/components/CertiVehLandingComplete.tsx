@@ -1309,7 +1309,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo desde la dirección de tu RUT.", detail: "Seguimos el trámite hasta que la DIAN responda." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el mensaje que te preparamos, desde el correo registrado en tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN resuelve." },
   ];
   
   useEffect(() => {
@@ -1840,7 +1840,7 @@ function FAQ() {
     // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
     // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
     // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú eliges quién firma el Formulario 010: lo firmas tú, o nos entregas un poder y lo firmamos nosotros. Lo tuyo, en las dos modalidades, es firmar la declaración juramentada y reenviar el correo que te dejamos listo desde la dirección de tu RUT, porque la DIAN exige que la radicación salga del contribuyente. Y seguimos tu trámite hasta que la DIAN resuelve." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú decides si firmas los documentos o nos entregas un poder y los firmamos nosotros. En las dos opciones hay dos cosas que la DIAN no acepta de nadie más: firmar la declaración juramentada y reenviar el correo que te preparamos. Y seguimos tu trámite hasta que la DIAN resuelve." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
