@@ -999,12 +999,35 @@ function Servicios() {
       // sí nombra la cita, y falso sobre la nota, que también la nombraba. Prohibir la palabra no
       // vale: lo que hay que repartir es qué AFIRMA cada sitio.
       //
+      // ⚠️ **Y ABRE POR LO QUE HACEMOS, NO POR LO QUE SALE MAL** (Julian, 9-sep-2026). La versión
+      // anterior arrancaba con «si la pides tú, gastas el cupo y tu trámite se atasca»: tres
+      // líneas de consecuencia y ninguna de servicio, en la tarjeta que existe para describir el
+      // servicio. El hecho de la cita única SE QUEDA —es el argumento y lo exigen las guardas del
+      // portal— pero como razón de que la pidamos nosotros, no como amenaza.
+      //
       // Y «$6.000.000 de vuelta» prometía caja: la DIAN estudia y decide. El mismo verbo se
       // corrigió en la tarjeta de Beneficios y esta se quedó sin mirar.
-      desc: "La DIAN concede una sola cita por contribuyente, y solo la exigen cinco seccionales: si la pides tú, gastas el cupo y tu trámite se atasca. Está en juego el 5% del valor de tu carro sin IVA: en uno de $120M, $6.000.000 que puedes solicitar (Concepto DIAN 673/2026).",
+      desc: "Nos encargamos de tu devolución de punta a punta. La DIAN concede una sola cita por contribuyente y solo la exigen cinco seccionales: cuando la tuya la exige, la pedimos nosotros. En un vehículo de $120M sin IVA, el 5% son $6.000.000 que puedes solicitar.",
       price: "Desde $499.990",
       priceNote: "+ IVA · contratando junto al certificado UPME",
-      features: ["Expediente completo, revisado antes de salir", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú autenticas el poder en notaría, presencial y a tu costa)"],
+      // ⚠️ **LA OBLIGACIÓN SE DESCRIBE POR SU RESULTADO, NO POR EL TRÁMITE.** Decía «(tú autenticas
+      // el poder en notaría, presencial y a tu costa)» y hoy dice «(tú nos adjuntas el poder
+      // autenticado)». Instrucción de Julian, 9-sep-2026, literal: *«no me gusta que se mencione lo
+      // de la notaría, de que el usuario debe ir presencial y pagar; simplemente que debe adjuntar
+      // el poder autenticado bajo esa modalidad»*.
+      //
+      // **LO QUE NO PUEDE PASAR ES QUE LA OBLIGACIÓN DESAPAREZCA.** Sigue siendo suya y sigue
+      // dicha: «nos adjuntas» lo afirma igual de claro que «autenticas en notaría». Borrarla
+      // entera sería la asimetría que esta tarjeta lleva tres rondas corrigiendo — enumerar lo que
+      // hacemos nosotros y callar lo que le toca a él.
+      //
+      // Y los tres hechos que se retiran —notaría, presencial, quién paga— siguen escritos en
+      // `llms.txt` y en el conocimiento de Camila y del agente de WhatsApp, que es donde se
+      // contestan CUANDO PREGUNTA. Son una respuesta, no un argumento de venta.
+      //
+      // Este mismo cambio se aplicó el mismo día a `aviso-de-entrega.ts` del portal, con el mismo
+      // razonamiento escrito. Si algún día se revierte uno, hay que revertir el otro.
+      features: ["Generamos tu expediente completo, revisado documento contra documento", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo", "Con poder: firmamos el Formulario 010 por ti (tú nos adjuntas el poder autenticado)"],
       // ⚠️ ESTA NOTA NO SE QUITA. (El aviso estaba pegado al array `features`, cuyo último
       // elemento es el de la notaría; la frase que describe está aquí.) Es la única tarea que le
       // queda al cliente y la DIAN no admite hacerla por él: exige que la radicación salga del
@@ -1215,8 +1238,32 @@ function ComoFunciona() {
     { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
     { num: "03", icon: "lock",        title: "Pago único",             subtitle: "Una sola vez",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
-    { num: "04", icon: "zap",         title: "Nosotros hacemos todo",  subtitle: "Tú no haces nada más",    desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
+    // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
+    // Eran ciertas mientras los cinco pasos describían solo el certificado —ahí, en efecto, no le
+    // queda nada—. Desde que la lista llega hasta la devolución de IVA, «todo» y «nada más»
+    // contradicen al 06, que le pide firmar la juramentada y reenviar un correo. Es el defecto que
+    // el aviso del subtítulo de la sección documenta, movido un renglón: el paso no miente, miente
+    // lo que lo rodea.
+    //
+    // Se corrigen LOS DOS, y el título también, porque arreglar solo el subtítulo deja «Nosotros
+    // hacemos todo» cuatro renglones por encima de un paso que reparte tareas. Ahora los dos van
+    // acotados al certificado, que es lo que este paso describe de verdad.
+    //
+    // ⚠️ Y el subtítulo NO puede ser «Sin portales gubernamentales»: eso es, palabra por palabra,
+    // lo que ya dice el `detail` de esta misma tarjeta, y las dos se pintan juntas. Se probó y se
+    // retiró el mismo día.
+    { num: "04", icon: "zap",         title: "Nosotros hacemos el trámite", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
     { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
+    // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
+    // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
+    // gestionamos nosotros. Tres cosas que no se pueden aflojar al retocarlo:
+    //   · «Gestionamos», NUNCA «radicamos»: ante la DIAN no radicamos: el correo lo reenvía
+    //     siempre el cliente desde la dirección de su RUT, también con poder. (Ante la UPME sí
+    //     radicamos, y por eso el paso 04 sí puede decirlo.)
+    //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
+    //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
+    //     certificado lo incluye.
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo desde la dirección de tu RUT.", detail: "Seguimos el trámite hasta que la DIAN responda." },
   ];
   
   useEffect(() => {
@@ -1236,12 +1283,18 @@ function ComoFunciona() {
             </h2>
             <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
               {/* ⚠️ Decía «Del certificado UPME a la devolución de tu IVA», y los cinco pasos de
-                  abajo describen SOLO el certificado: crear la cuenta en la UPME, llenar sus
+                  abajo describían SOLO el certificado: crear la cuenta en la UPME, llenar sus
                   formularios, radicar y descargar. Con esa promesa encima, el paso 04 —«Tú no
                   haces nada más»— contradecía la tarjeta de servicio de dos secciones más arriba,
-                  que dice que en el IVA le queda firmar y reenviar un correo. El defecto no está
-                  en el paso: está en el titular que le hace decir algo que no dice. */}
-              Así se obtiene tu certificado UPME: desde tu teléfono y sin portales gubernamentales.
+                  que dice que en el IVA le queda firmar y reenviar un correo. El defecto no estaba
+                  en el paso: estaba en el titular que le hacía decir algo que no decía.
+
+                  El 9-sep-2026 se añadió el paso 06, que sí cubre la devolución, así que el
+                  titular vuelve a nombrarla — y a la vez se corrigió el subtítulo del 04, que es
+                  la otra mitad de esa misma lección. LA REGLA SIGUE EN PIE: este texto solo puede
+                  prometer hasta donde lleguen los pasos. Si algún día se quita el 06, esta línea
+                  vuelve a hablar solo del certificado. */}
+              Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {steps.map((s, i) => (
@@ -1530,7 +1583,13 @@ function Confianza() {
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros." },
     { icon: "calendar",    title: "Radicación inmediata",        desc: "La UPME recibe solicitudes del 1 de febrero al 15 de diciembre, sin ciclos. Tu trámite se radica de inmediato en esta ventana." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
-    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría. Sin suscripciones." },
+    // ⚠️ El desglose de costos ajenos («aparte van el trámite ante la UPME y, si das poder, la
+    // notaría») se retiró de AQUÍ el 9-sep-2026 por decisión de Julian. NO se ha quedado sin
+    // decir: el costo del trámite UPME sigue en el paso 03 de «Así de simple» y en el `priceNote`
+    // de la tarjeta de Servicio 1, y el de la notaría vive en `llms.txt` y en el conocimiento de
+    // los agentes, que responden si el cliente pregunta. Antes de borrarlo de esos sitios, mirar
+    // que quede en pie al menos uno.
+    { icon: "checkCircle", title: "Pago único, sin letra pequeña",desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones." },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
@@ -1720,7 +1779,14 @@ function FAQ() {
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, y de punta a punta. Una vez tienes tu certificado UPME, revisamos tu documentación, armamos el expediente completo y determinamos la vía de radicación que te corresponde (cita previa en Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes; buzón electrónico en las demás seccionales). Si tu seccional exige cita, la pedimos nosotros a tu nombre: no la solicites tú, porque la DIAN concede una sola por contribuyente. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo, desde la dirección registrada en tu RUT, y eso es tuyo en las dos modalidades, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además autenticas el poder en notaría y el Formulario 010 lo firmamos nosotros: eso es lo único que cambia." },
+    // ⚠️ Esta respuesta medía 780 caracteres, el triple que cualquier otra de la lista, y la
+    // enumeración de las cinco seccionales se llevaba una línea entera para un dato que el cliente
+    // no puede usar todavía (su vía se la decimos nosotros al leer su RUT). Acortada el
+    // 9-sep-2026. Los cuatro hechos que NO se pueden perder al recortarla, y siguen todos:
+    // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
+    // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
+    // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Generamos y revisamos tu expediente completo, definimos tu vía de radicación y, si tu seccional exige cita, la pedimos nosotros a tu nombre: la DIAN concede una sola por contribuyente. Lo tuyo, en las dos modalidades, es firmar la declaración juramentada y reenviar el correo que te dejamos listo desde la dirección registrada en tu RUT, porque la DIAN exige que la radicación salga del contribuyente. Con poder, además nos adjuntas el poder autenticado y el Formulario 010 lo firmamos nosotros." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (

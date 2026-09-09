@@ -132,8 +132,15 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 >   Nunca escribir que radicamos nosotros ante la DIAN. *(Ante la UPME sí radicamos: eso es otra
 >   cosa y sí se puede decir.)*
 > · **Con poder solo cambia quién firma el Formulario 010**: lo firmamos nosotros. A cambio, el
->   cliente autentica el poder en **notaría** —presencial, obligatorio y **lo paga él**—. La
->   declaración juramentada la firma él en las DOS modalidades, igual que el reenvío del correo.
+>   cliente autentica el poder en **notaría** —presencial y obligatorio—. La declaración juramentada
+>   la firma él en las DOS modalidades, igual que el reenvío del correo.
+>
+> ⚠️ **Y EL COSTO DE ESA NOTARÍA NO SE ENUNCIA EN COPY** (Julian, 9-sep-2026). Lo paga él, es
+> verdad, y por eso sigue escrito en `llms.txt` y en el conocimiento de Camila y del agente de
+> WhatsApp: **es una respuesta, no un argumento**. Se dice cuando el cliente pregunta por costos o
+> por la notaría, no de oficio en una viñeta de venta. La distinción es entre el PASO —que sí se
+> nombra siempre, porque es una obligación suya y callarla sería la asimetría de siempre— y quién
+> lo PAGA, que solo se cuenta a quien lo pregunta.
 
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
@@ -143,7 +150,13 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 **es el trámite.**
 
 ### Subtítulo
-De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún portal gubernamental.
+Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.
+
+> ⚠️ Este subtítulo solo puede prometer **hasta donde lleguen los pasos**. Nombra la devolución de
+> IVA porque existe el paso 06; si algún día se quita, vuelve a hablar solo del certificado. Y por
+> lo mismo el paso 04 dejó de decir «Nosotros hacemos todo / Tú no haces nada más»: con el 06 en
+> la lista las dos son falsas, así que se acotaron **las dos** al certificado. Y su subtítulo no
+> puede ser «Sin portales gubernamentales», que es palabra por palabra lo que ya dice su `Detail`.
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
@@ -160,8 +173,8 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 - **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.
 - **Detail:** Procesado con Wompi · Tarjeta, PSE o Nequi.
 
-### Paso 04: Nosotros hacemos todo
-- **Subtitle:** Tú no haces nada más
+### Paso 04: Nosotros hacemos el trámite
+- **Subtitle:** Tú no entras a la UPME
 - **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.
 - **Detail:** Sin que tengas que tocar ningún portal gubernamental.
 
@@ -169,6 +182,16 @@ De tu teléfono al certificado UPME. Sin que tengas que interactuar con ningún 
 - **Subtitle:** Lo descargas desde tu panel
 - **Descripción:** Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas directamente desde tu dashboard.
 - **Detail:** Seguimiento en tiempo real. Nunca te dejamos sin información.
+
+### Paso 06: Gestionamos tu devolución de IVA
+- **Subtitle:** Servicio aparte, ante la DIAN
+- **Descripción:** Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo desde la dirección de tu RUT.
+- **Detail:** Seguimos el trámite hasta que la DIAN responda.
+
+> ⚠️ **«Gestionamos», nunca «radicamos».** Ante la DIAN no radicamos: el correo lo reenvía siempre
+> el cliente desde la dirección de su RUT, también con poder. Ante la UPME sí radicamos, y por eso
+> el paso 04 sí puede decirlo. La cita va **condicionada** («si tu seccional la exige»), y el paso
+> dice que es un servicio **aparte**: sin eso, la lista se lee como que el certificado lo incluye.
 
 ---
 
@@ -244,7 +267,13 @@ La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solic
 Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto.
 
 ### Card 6: Pago único, sin letra pequeña
-Una sola tarifa de servicio, sin suscripciones. Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría.
+Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones.
+
+> El desglose de costos ajenos (el trámite ante la UPME y, con poder, la notaría) se retiró de esta
+> tarjeta el 9-sep-2026. **No desapareció del producto:** el del trámite UPME sigue en el paso 03 y
+> en el precio de la tarjeta de Servicio 1, y el de la notaría se contesta cuando el cliente
+> pregunta (`llms.txt`, conocimiento de Camila y del agente de WhatsApp). Antes de quitarlo de esos
+> sitios, comprobar que queda en pie al menos uno.
 
 ---
 
@@ -403,7 +432,7 @@ Continua, del 1 de febrero al 15 de diciembre
 ### Mensajes de Garantía
 - Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
 - Sin suscripciones
-- Aparte van el costo del trámite ante la UPME y, si eliges darnos poder, la notaría
+- Aparte va el costo del trámite ante la UPME *(el de la notaría, con poder, ya no se enuncia en copy: se responde si preguntan)*
 
 ### Status y Procesos
 - Procesado con Wompi · Tarjeta, PSE o Nequi
