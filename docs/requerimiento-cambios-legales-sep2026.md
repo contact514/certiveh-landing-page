@@ -36,20 +36,24 @@ Esto importa para la redacción, porque acota el tratamiento:
 
 **No se captura:**
 
-- El **texto** de la pantalla: va enmascarado en su totalidad.
 - El **contenido de los campos** que el usuario diligencia.
 - Los **documentos** que sube (cédula, RUT, tarjeta de propiedad, factura): los selectores de archivo están bloqueados.
+- El **nombre, la cédula, el NIT, el teléfono, el correo, la placa o el número de cuenta**, aparezcan donde aparezcan en la pantalla. Se ocultan por tres vías independientes: los bloques marcados como sensibles, cualquier texto con forma de dato (un correo, o una secuencia de siete o más dígitos) y cualquier texto que contenga el nombre o la razón social del propio titular o de sus personas asociadas.
+- El **chat de soporte** completo, la **carta a la DIAN** (que contiene dirección, teléfono, VIN y número de cuenta bancaria) y las **contraseñas UPME** que el usuario haya probado: esos tres bloques se ocultan enteros.
 - El **contenido de las peticiones** al servidor.
 - Los **mensajes de consola** del navegador.
 - El **lienzo gráfico** (`canvas`).
-- El **correo, nombre o teléfono** del usuario: a PostHog solo se le envía el identificador interno (UUID).
+- El **correo, nombre o teléfono** del usuario hacia PostHog: solo se le envía el identificador interno (UUID).
 
 **Sí se captura:**
 
+- El **texto de la interfaz**: títulos de cada paso, etiquetas de los campos, instrucciones, mensajes de error y botones. Es decir, **lo que el usuario está leyendo**, no lo que escribe ni sus datos.
 - La **secuencia de interacción**: pasos, clics, desplazamientos, tiempos.
 - La **ruta** de las páginas visitadas.
 - **Datos técnicos** del navegador y del dispositivo.
 - La **dirección IP**, tratada por PostHog como dato de conexión.
+
+> **Nota de transparencia.** Hasta el 8 de septiembre de 2026 el texto de la pantalla se ocultaba **en su totalidad**. Ese mismo día se cambió, deliberadamente, para poder ver qué está leyendo el usuario cuando abandona el trámite, que es el problema que motivó instalar la herramienta. Los datos personales siguen ocultos por las tres vías descritas arriba. Se lo señalamos porque cambia el alcance de lo que ustedes van a autorizar.
 
 ### Por qué se lo traemos
 
