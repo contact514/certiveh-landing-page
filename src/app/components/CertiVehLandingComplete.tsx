@@ -1049,18 +1049,23 @@ function Servicios() {
       // Este mismo cambio se aplicó el mismo día a `aviso-de-entrega.ts` del portal, con el mismo
       // razonamiento escrito. Si algún día se revierte uno, hay que revertir el otro.
       //
-      // ⚠️ **LA SEXTA VIÑETA NO DICE «respondemos a los requerimientos de la DIAN», Y NO ES UN
-      // DESCUIDO.** Julian la pidió así —«un check que diga algo como Respuesta a requerimientos
-      // DIAN o algo así»— y la forma literal no se puede publicar: **los T&C asignan esa atención
-      // AL USUARIO**, y está registrado como punto abierto para la abogada en
-      // `docs/decisiones-abiertas-para-julian.md` §4 del repo del portal. Anunciar en la landing lo
-      // que el contrato niega es la clase de promesa que este fichero lleva el día entero quitando.
+      // ⚠️ **«Respuesta a requerimientos DIAN», Y ESTUVO MAL ESCRITA DOS VECES ANTES DE ACERTAR.**
       //
-      // Lo que SÍ es cierto y es lo que se promete: vigilamos el trámite y le avisamos. Eso lo
-      // hacen de verdad `avisos-por-tiempo-iva`, `aviso-de-etapa-iva` y las plantillas
-      // `iva_seguimiento_*`. Y ojo con la tarjeta hermana: en el CERTIFICADO sí ponemos «Respuesta
-      // a requerimientos UPME», porque ahí sí los atendemos nosotros. La asimetría entre las dos
-      // tarjetas es real y refleja el contrato, no una redacción descuidada.
+      // Primero no se puso, alegando que los T&C asignan esa atención al usuario. Después se puso
+      // como «Te avisamos si la DIAN pide algo más», que es **falso**: Julian lo corrigió el
+      // 9-sep-2026 con el dato que faltaba —«los requerimientos llegan al USUARIO, no a nosotros,
+      // por lo tanto nosotros no somos los que avisamos; pero sí les ayudamos a solucionar esos
+      // requerimientos o subsanaciones»—. O sea que la versión «prudente» inventaba un aviso que
+      // no existe, que es peor que la que se quería evitar.
+      //
+      // Lo cierto, y lo que dice la viñeta: el requerimiento le llega a él y nosotros le ayudamos
+      // a resolverlo. Por eso hace juego con «Respuesta a requerimientos UPME» de la tarjeta
+      // hermana, y por eso NO dice «te avisamos».
+      //
+      // Sigue en pie que los T&C redactan esa atención como responsabilidad del Usuario: es el
+      // §4 de `docs/decisiones-abiertas-para-julian.md`, un punto ya abierto para la abogada.
+      // Ayudar a resolverlo no lo contradice; lo que lo contradiría es prometer que respondemos
+      // nosotros en su nombre.
       //
       // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las seis caben de una ojeada** (Julian, 9-sep-2026):
       // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego lo que le queda a él,
@@ -1072,7 +1077,7 @@ function Servicios() {
       // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
       // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
       // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Te avisamos si la DIAN pide algo más", "Seguimos tu trámite hasta que la DIAN consigna"],
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
