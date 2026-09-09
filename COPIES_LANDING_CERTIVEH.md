@@ -173,8 +173,14 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 - **Descripción:** Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.
 - **Detail:** Procesado con Wompi · Tarjeta, PSE o Nequi.
 
-### Paso 04: Nosotros hacemos el trámite
+### Paso 04: Hacemos el trámite por ti
 - **Subtitle:** Tú no entras a la UPME
+
+> ⚠️ **El título NO puede terminar en «el trámite».** Estuvo en «Nosotros hacemos el trámite» y el
+> build inyectaba un **byte NUL dentro de la palabra** (`Nosotros hacemos el tr\0ámite`), que se
+> sirvió así en producción. Colisiona con el `es el trámite.` del titular de esta misma sección:
+> con las dos apariciones juntas aparece el NUL, y quitando cualquiera de las dos desaparece.
+> Antes de tocar este título, construir y contar NULs con Node — `grep` no los ve.
 - **Descripción:** Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.
 - **Detail:** Sin que tengas que tocar ningún portal gubernamental.
 

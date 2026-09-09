@@ -1252,7 +1252,26 @@ function ComoFunciona() {
     // ⚠️ Y el subtítulo NO puede ser «Sin portales gubernamentales»: eso es, palabra por palabra,
     // lo que ya dice el `detail` de esta misma tarjeta, y las dos se pintan juntas. Se probó y se
     // retiró el mismo día.
-    { num: "04", icon: "zap",         title: "Nosotros hacemos el trámite", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
+    //
+    // ⚠️⚠️ **Y EL TÍTULO NO PUEDE TERMINAR EN «el trámite». ROMPE EL BUILD, EN SILENCIO.** Estuvo
+    // en «Nosotros hacemos el trámite» y el HTML generado salía con un **byte NUL dentro de la
+    // palabra**: `Nosotros hacemos el tr\0ámite`. Se sirvió así en producción.
+    //
+    // Es la trampa que este repo ya tiene fichada: un NUL pasa el build sin un aviso, pasa el
+    // typecheck, y **vuelve el fichero binario para `grep`** — por eso toda comprobación con
+    // `grep` sobre `dist/` salía vacía, incluidas las que decían que todo estaba bien.
+    //
+    // Acotado por bisección, cuatro builds: el NUL aparece solo cuando este título **termina** en
+    // «el trámite», porque el titular de esta misma sección ya acaba en «es el trámite.». Con
+    // «Nosotros hacemos la gestión» → limpio. Con «Hacemos el trámite por ti» → limpio, porque no
+    // termina ahí. Y quitando el «el trámite.» del titular, el título viejo también sale limpio:
+    // son las DOS apariciones juntas las que colisionan.
+    //
+    // La fuente está bien —los bytes son `c3 a1`, idénticos al «trámite» que sí funciona—, así
+    // que el defecto es del pipeline de Astro/Vite. **Antes de tocar este título, construir y
+    // contar NULs con Node**, que es lo único que los ve:
+    //   node -e 'const b=require("fs").readFileSync("dist/index.html");console.log([...b].filter(x=>x===0).length)'
+    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
     { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
