@@ -84,7 +84,7 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 - **Tag:** IVA
 - **Título:** Devolución de IVA
 - **Porcentaje:** 5%
-- **Descripción:** Los vehículos eléctricos e híbridos pagan un IVA reducido del 5%, y con el certificado UPME puedes solicitar a la DIAN su devolución. En un vehículo de $120M sin IVA, son $6M. El reconocimiento y el monto los decide la DIAN.
+- **Descripción:** Con el certificado UPME puedes solicitar a la DIAN la devolución del 100% del IVA pagado en la compra (5% del valor).
 - **Ejemplo:** $120M sin IVA → solicitas $6.000.000
 
 ### Card 2: Deducción en Renta
