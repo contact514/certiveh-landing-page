@@ -470,7 +470,14 @@ $[número] COP (formato colombiano con puntos de miles)
 2. Pedimos nosotros tu cita, si tu seccional la exige
 3. Correo de radicación redactado y listo, tú lo reenvías
 4. Puedes firmar tú o entregarnos un poder
-5. Seguimos tu trámite hasta que la DIAN resuelve
+5. Te avisamos si la DIAN pide algo más
+6. Seguimos tu trámite hasta que la DIAN consigna
+
+> ⚠️ **La quinta NO dice «respondemos a los requerimientos de la DIAN».** Julian la pidió así y la
+> forma literal no se puede publicar: **los T&C asignan esa atención al usuario** (punto abierto
+> para la abogada, §4 de `decisiones-abiertas-para-julian.md`). Lo que sí hacemos y sí se promete
+> es vigilar el trámite y avisarle. En la tarjeta del CERTIFICADO sí ponemos «Respuesta a
+> requerimientos UPME», porque ahí sí los atendemos: la asimetría refleja el contrato.
 
 > ⚠️ **Criterio de esta ronda (Julian): menos carga de lectura, foco en la propuesta de valor, y
 > que el cliente sienta que lo acompañamos y que lo difícil lo hacemos nosotros** — agendar la

@@ -1049,16 +1049,30 @@ function Servicios() {
       // Este mismo cambio se aplicó el mismo día a `aviso-de-entrega.ts` del portal, con el mismo
       // razonamiento escrito. Si algún día se revierte uno, hay que revertir el otro.
       //
-      // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las cinco caben de una ojeada** (Julian, 9-sep-2026):
+      // ⚠️ **LA SEXTA VIÑETA NO DICE «respondemos a los requerimientos de la DIAN», Y NO ES UN
+      // DESCUIDO.** Julian la pidió así —«un check que diga algo como Respuesta a requerimientos
+      // DIAN o algo así»— y la forma literal no se puede publicar: **los T&C asignan esa atención
+      // AL USUARIO**, y está registrado como punto abierto para la abogada en
+      // `docs/decisiones-abiertas-para-julian.md` §4 del repo del portal. Anunciar en la landing lo
+      // que el contrato niega es la clase de promesa que este fichero lleva el día entero quitando.
+      //
+      // Lo que SÍ es cierto y es lo que se promete: vigilamos el trámite y le avisamos. Eso lo
+      // hacen de verdad `avisos-por-tiempo-iva`, `aviso-de-etapa-iva` y las plantillas
+      // `iva_seguimiento_*`. Y ojo con la tarjeta hermana: en el CERTIFICADO sí ponemos «Respuesta
+      // a requerimientos UPME», porque ahí sí los atendemos nosotros. La asimetría entre las dos
+      // tarjetas es real y refleja el contrato, no una redacción descuidada.
+      //
+      // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las seis caben de una ojeada** (Julian, 9-sep-2026):
       // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego lo que le queda a él,
-      // luego la elección que hace, y al final lo que dura. Cinco viñetas, las mismas que la
-      // tarjeta del certificado, que es lo que las deja alineadas.
+      // luego la elección que hace, y al final la vigilancia y lo que dura. Seis viñetas; la
+      // alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no que
+      // haya el mismo numero.
       //
       // ⚠️ **LA TERCERA LLEVA «tú lo reenvías» Y ESO NO ES ADORNO.** Antes esa obligación vivía en
       // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
       // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
       // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Seguimos tu trámite hasta que la DIAN consigna"],
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Te avisamos si la DIAN pide algo más", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
