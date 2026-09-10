@@ -121,6 +121,62 @@ Ninguna de estas se descubre leyendo código. Se descubren midiendo mal y creyé
 
 - **`vercel ls` escribe la tabla por stderr**: con `2>/dev/null` un sondeo no ve nada y gira en vacío.
 
+## Cómo fallan las guardas, que es distinto de cómo fallan los tests
+
+Doce rondas sobre una misma función dejaron una lección incómoda: **cuatro de los defectos cerrados
+los introdujo el arreglo anterior**. No porque la idea fuera mala, sino por dónde se ancló.
+
+- **El defecto vive en el ANCLA, no en la idea.** Tres arreglos seguidos necesitaron un segundo
+  arreglo, y las tres veces falló la clave, la subcadena o el fragmento: una clave que no existía
+  (`ocr['cedula-frente']` sobre un índice por tipo de caso), un `includes` donde «Ruiz Ana» casa
+  dentro de «Ruizmoreno Mariana», y una transcripción de un **sufijo** que sobrevivía a cambiar la
+  fuente. La idea se piensa despacio; el ancla se escribe rápido, casi como sintaxis.
+- **Y el test hereda el ancla.** Si el fixture usa la misma clave equivocada, el test pasa en verde
+  y **consagra el error**. Comprueba el ancla **contra la realidad y aparte del test**:
+  `select type, count(*)` en producción, un `node -e` con el caso adversario.
+- **El mutante que lo caza siempre es el mismo:** devolver el ancla a su forma equivocada. Si no
+  pone nada en rojo, el arreglo no está cableado.
+
+**Una guarda por fragmentos suelta un eslabón cada ronda.** Fijar `.eq("storage_path", …)` sobrevive
+a **invertir el ternario** —las dos cadenas siguen ahí, en el lado contrario—; fijar el ternario
+entero sobrevive a **construirlo sin aplicarlo**; fijar que se aplique sobrevive a quitarle el
+`.select("id")`. Por eso, para algo irreversible, se transcribe **el bloque entero con su condición,
+su operador y su estado**.
+
+**Un test puede consagrar el defecto.** Dos tests exigían que un botón **no tuviera nombre
+accesible** (`getByRole('button', { name: '' })`): habían tomado el síntoma del defecto como la
+definición del contrato. Arreglar el defecto los puso en rojo. Un test que se apoya en un efecto
+secundario en vez de en la garantía real no protege nada.
+
+**Elige el ejemplo por cobertura, no por disponibilidad.** Una guarda de privacidad se pinchó en la
+rama que apareció primera —la del fixture que ya estaba abierto—. El dato salía por **tres** sitios y
+la que faltaba era **29 de 34 casos**. Con la fuga puesta a mano, 442 ficheros y 6.095 tests pasaron
+en verde. Un ejemplo por rama *parece* exhaustivo cuando lo escribes, porque las ramas se ven todas
+desde el código; lo que no se ve es la que falta.
+
+**Una guarda que bloquea necesita quien la suelte.** Poner una que espera a un proceso que puede no
+volver nunca cambia un dato malo por un trámite parado para siempre. Antes de bloquear, pregunta
+quién libera.
+
+**Y busca TODAS las copias antes de relajar una regla.** Una misma guarda estaba escrita en dos
+triggers distintos: parchear uno no cambiaba nada observable, y la premisa de «ya está arreglado»
+sobrevivía intacta.
+
+## Medir la interfaz sin engañarse
+
+- **Redimensionar la ventana NO cambia el viewport** a efectos de las media queries que importan; un
+  `iframe` sí. Y sin un **control** —una medida que sabes que debe salir bien— se acusa al
+  sospechoso equivocado.
+- **En una pestaña oculta `requestAnimationFrame` no dispara**, así que `AnimatePresence` no monta
+  nunca el hijo nuevo y cualquier cosa que dependa de una animación se queda a medias. Un
+  navegador en segundo plano no es un navegador lento: es otro entorno.
+- **Un `useRef` que evita repetir una llamada cara no sirve si el componente se monta
+  condicionalmente**: vuelve a `false` en cada «Atrás». La guarda tiene que vivir fuera de lo que se
+  desmonta.
+- **Restar dos ejes de fecha distintos no es una partición.** Una barra apilada cuyas mitades se
+  cuentan por campos de fecha diferentes sale negativa, y «pagado» no significa lo mismo para dinero
+  que para conteo.
+
 ## Al integrar
 
 - **Con merges en squash, contar commits pinta ramas pendientes que no lo están.** `rev-list
