@@ -1864,6 +1864,12 @@ function FAQ() {
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
+    // ⚠️ La DIAN NEGÓ este beneficio a las personas naturales en el Concepto 012101 del 5-ago-2025
+    // y se retractó un mes después en el 013853 del 5-sep-2025. Quien llega diciendo «esto es solo
+    // para empresas» casi siempre viene citando el concepto derogado, así que la respuesta nombra
+    // los dos: sin la fecha de la reconsideración, el cliente cree que le estamos discutiendo su
+    // fuente. Ratificado después en los conceptos 14611/2025, 146/2026, 673/2026 y 3086/2026.
+    { q: "¿La devolución del IVA solo aplica a empresas?", a: "No. También aplica a personas naturales que compran para uso personal. La DIAN lo había negado en el Concepto 012101 de agosto de 2025, pero reconsideró esa posición un mes después en el Concepto 013853 del 5 de septiembre de 2025, que es el que está vigente. El Concepto 673 de 2026 incluso previó el caso de quien no lleva contabilidad: puede reemplazar las certificaciones de contador por una declaración juramentada." },
     { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
     // ⚠️ Esta respuesta medía 780 caracteres, el triple que cualquier otra de la lista, y la
     // enumeración de las cinco seccionales se llevaba una línea entera para un dato que el cliente
@@ -1873,6 +1879,18 @@ function FAQ() {
     // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
     // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
     { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú decides si firmas los documentos o nos entregas un poder y los firmamos nosotros. En las dos opciones hay dos cosas que la DIAN no acepta de nadie más: firmar la declaración juramentada y reenviar el correo que te preparamos. Y seguimos tu trámite hasta que la DIAN consigna." },
+    // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
+    // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
+    // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días
+    // ante indicios, y el 684 conserva las facultades generales. Lo defendible es lo que dice esta
+    // respuesta: no se abre revisión de la declaración de renta ni del historial del contribuyente.
+    { q: "¿Pedir la devolución me expone a una auditoría de la DIAN?", a: "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud y tiene 50 días para resolverla (artículos 855 y 860 del Estatuto Tributario). No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable." },
+    // ⚠️ La regla de restitución del art. 1.2.1.18.76 aplica SOLO a los artículos 11 y 14 de la Ley
+    // 1715 (deducción en renta y depreciación acelerada). NO al 12 (IVA) ni al 13 (arancel), y su
+    // propio texto lo dice. Confundirlos es el mito que más trámites frena: el cliente cree que
+    // vender el carro le obliga a devolver el IVA. Si se recorta esta respuesta, lo que no se puede
+    // perder es la separación entre los dos beneficios.
+    { q: "¿Tengo que quedarme con el vehículo para conservar mis beneficios?", a: "Para la devolución del IVA, no: ninguna norma la condiciona a que conserves el vehículo. Lo único que debes conservar es el certificado UPME y los soportes, por si la DIAN te los pide. La deducción en renta funciona distinto: si vendes antes de que termine el periodo de depreciación del vehículo, lo que ya dedujiste se reversa como recuperación de deducciones (Decreto 1625 de 2016, artículo 1.2.1.18.76)." },
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
