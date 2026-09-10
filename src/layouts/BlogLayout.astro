@@ -154,6 +154,55 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .lead { font-size: 18px !important; color: var(--slate) !important; line-height: 1.75 !important; font-weight: 500; border-left: 3px solid; border-image: linear-gradient(90deg, #059669, #14B8A6) 1; padding-left: 20px; margin-bottom: 32px !important; }
     .article-body h2 { font-size: 24px; font-weight: 700; color: var(--dark); letter-spacing: -.02em; margin: 48px 0 18px; padding-bottom: 0; border-bottom: none; }
     .article-body h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 28px 0 10px; }
+    /* ⚠️ No había regla para los enlaces del cuerpo, así que cada post dependía de que su autor se
+       acordara del `style` en línea. Los que no lo llevaban salían en `rgb(0,0,238)`, el azul por
+       defecto del navegador: cuatro en `que-es-certificado-upme` y uno en `resolucion-upme-400`,
+       servidos así en producción.
+
+       EL COLOR ES `#047857`, NO `var(--green)`. Son los dos verdes de la marca y no se
+       intercambian: el primario `#059669` da 3,77:1 sobre blanco y **no cumple AA** para letra;
+       `#047857` da 5,48:1. El primario es para rellenos. Este mismo fichero ya usa `#047857` para
+       texto en `.page-intro .label`. Una primera versión de esta regla usaba `var(--green)` y era
+       exactamente el defecto que el manual del repo lleva escrito.
+
+       NO SE QUITA EL SUBRAYADO EN PROSA, y esto tampoco es estético. `#047857` contra el
+       `#475569` del cuerpo da 1,38:1, muy por debajo del 3:1 que exige la WCAG 1.4.1 para
+       distinguir un enlace SOLO por color. Sin subrayado, un enlace en mitad de un párrafo deja de
+       ser identificable. En las tablas de modelos sí se quita, que es donde estaba puesto a
+       propósito: los 11 enlaces con `text-decoration: none` del código anterior estaban TODOS
+       dentro de un `<td>`, comprobado uno a uno.
+
+       El `:not(.cta-btn)` NO es decorativo. `.article-cta` vive DENTRO de `.article-body`, así que
+       sin la exclusión un `.article-body a` (0,1,1) le ganaría por especificidad a `.cta-btn`
+       (0,1,0) y los 13 botones de cierre perderían su texto blanco sobre el gradiente. */
+    .article-body a:not(.cta-btn) { color: #047857; font-weight: 600; text-decoration: underline; }
+    /* Tablas: sin subrayado a propósito. La pista aparece al pasar por encima.
+       Lleva el `:not(.cta-btn)` para igualar la especificidad de la regla base (0,2,2 frente a
+       0,2,1): sin él, `.article-body td a` es (0,1,2) y PIERDE, así que el `underline` de arriba se
+       colaría en las tablas. */
+    .article-body :is(td, th) a:not(.cta-btn) { text-decoration: none; }
+    .article-body :is(td, th) a:not(.cta-btn):hover { text-decoration: underline; }
+    /* La cabecera de la tabla es el OTRO fondo oscuro del cuerpo (`.data-table th` va sobre
+       `#0F172A`), así que le pasa lo mismo que al CTA: el verde de letra ahí da 3,26:1. Hoy no hay
+       ni un enlace en un `<th>`, y esta regla existe para que siga sin importar cuando lo haya.
+       VA ANCLADA A `.data-table`, no a `th` a secas: quien justifica el verde menta es ESE fondo
+       oscuro. Un `<th>` de una tabla sin esa clase tiene fondo blanco, y ahí `#34D399` da 1,92:1,
+       o sea ilegible. El ancla floja fue el primer intento de esta regla. */
+    .data-table th a:not(.cta-btn) { color: #34D399; }
+    /* Índice interno (`resolucion-upme-400`): el enlace envuelve el título y hereda su color y su
+       peso del `<strong>` que lo contiene. Antes era un `style` en línea, que ganaba también al
+       `:hover` y dejaba los seis enlaces sin ninguna señal de ser pulsables.
+       Va anclado a `.step-content` para subir a (0,3,1): con `.article-body a.toc-link` empataba a
+       (0,2,1) con la regla base y solo ganaba por orden de aparición en el fichero. */
+    .article-body .step-content a.toc-link { color: inherit; font-weight: inherit; text-decoration: none; }
+    .article-body .step-content a.toc-link:hover { text-decoration: underline; }
+    /* ⚠️ EL CTA DE CIERRE VA SOBRE `#0F172A`, Y AHÍ EL VERDE DE LETRA NO SIRVE. `#047857` sobre ese
+       fondo da 3,26:1 y falla AA; el `#059669` que había antes daba 4,74:1, así que la primera
+       versión de este arreglo MEJORABA el fondo claro y EMPEORABA el oscuro. Sobre oscuro va el
+       verde claro `#34D399`, que da 9,29:1. Es regla y no `style` en línea a propósito: hay 13
+       bloques `.article-cta` y son justo donde se añaden enlaces, así que quien meta uno nuevo lo
+       recibe bien sin tener que acordarse. */
+    .article-body .article-cta a:not(.cta-btn) { color: #34D399; font-weight: inherit; }
     .cite { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--green); background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 4px; padding: 1px 6px; vertical-align: super; line-height: 1; white-space: nowrap; cursor: default; }
     .callout { border-radius: 12px; padding: 20px 24px; margin: 24px 0; font-size: 15px; line-height: 1.75; }
     .callout.green  { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
@@ -194,8 +243,16 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--slate); vertical-align: top; }
     .data-table tr:last-child td { border-bottom: none; }
     .data-table tr:nth-child(even) td { background: #F8FAFC; }
-    .data-table .hl  { color: var(--green); font-weight: 700; }
-    .data-table .hl2 { color: var(--amber); font-weight: 700; }
+    .data-table .hl  { color: #047857; font-weight: 700; }  /* letra: el verde de relleno da 3,77:1 y ademas chocaba con el #047857 del enlace de la misma fila (1,46:1 de separacion) */
+    /* Ámbar de TEXTO, igual que el verde: `--amber` (#D97706) es el paso 600 y da 3,19:1 sobre
+       blanco y 3,04:1 sobre las filas pares, o sea falla AA en las 15 celdas que lo usan. El resto
+       de la landing ya escribe texto ámbar en #B45309 (`api-docs.astro:462`), que da 5,02 y 4,80.
+       Se cambia aquí y NO en el token, para no arrastrar el cambio a donde el contraste da igual.
+       OJO, y este comentario decía antes lo contrario: tras este cambio `--amber` se queda con CERO
+       usos de `var()`. El gradiente de `.article-banner.b-amber` (línea 144) lleva el literal
+       `#D97706`, no el token. Se deja declarado a propósito, pero que nadie lo busque esperando
+       encontrarlo en uso. */
+    .data-table .hl2 { color: #B45309; font-weight: 700; }
     .footnotes { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); }
     .footnotes h4 { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
     .footnotes ol { padding-left: 18px; }
