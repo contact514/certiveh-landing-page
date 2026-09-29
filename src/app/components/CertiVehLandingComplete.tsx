@@ -807,7 +807,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y reenvías un correo.
+        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y, según tu seccional, reenvías un correo.
       </p>
 
       {/* CTAs */}
@@ -1077,7 +1077,7 @@ function Servicios() {
       // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
       // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
       // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación redactado y listo, tú lo reenvías", "Puedes firmar tú o entregarnos un poder", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Fuera de Bogotá, correo de radicación listo para reenviar", "En Bogotá, firmas tú o nos das un poder", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
@@ -1341,7 +1341,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el mensaje que te preparamos, desde el correo registrado en tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas y, si tu seccional radica por buzón, reenvías el mensaje que te preparamos desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
   
   useEffect(() => {
@@ -1878,13 +1878,13 @@ function FAQ() {
     // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
     // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
     // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú decides si firmas los documentos o nos entregas un poder y los firmamos nosotros. En las dos opciones hay dos cosas que la DIAN no acepta de nadie más: firmar la declaración juramentada y reenviar el correo que te preparamos. Y seguimos tu trámite hasta que la DIAN consigna." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas la declaración juramentada y el Formulario 010 y, fuera de Bogotá, reenvías el correo que te preparamos desde el correo de tu RUT. En Bogotá se radica en una videollamada: te conectas tú, o nos das un poder, firmamos el 010 y entramos nosotros. Y seguimos tu trámite hasta que la DIAN consigna." },
     // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
     // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
     // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días
     // ante indicios, y el 684 conserva las facultades generales. Lo defendible es lo que dice esta
     // respuesta: no se abre revisión de la declaración de renta ni del historial del contribuyente.
-    { q: "¿Pedir la devolución me expone a una auditoría de la DIAN?", a: "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud y tiene 50 días para resolverla (artículos 855 y 860 del Estatuto Tributario). No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable." },
+    { q: "¿Pedir la devolución me expone a una auditoría de la DIAN?", a: "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud y tiene 50 días hábiles para resolverla (artículos 855 y 860 del Estatuto Tributario). No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable." },
     // ⚠️ La regla de restitución del art. 1.2.1.18.76 aplica SOLO a los artículos 11 y 14 de la Ley
     // 1715 (deducción en renta y depreciación acelerada). NO al 12 (IVA) ni al 13 (arancel), y su
     // propio texto lo dice. Confundirlos es el mito que más trámites frena: el cliente cree que
