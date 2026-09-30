@@ -1088,10 +1088,10 @@ function Servicios() {
       // RADICABA sin enterarse.
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
-      // pasó a la tercera viñeta («Fuera de Bogotá, correo de radicación listo para reenviar»), y la declaración juramentada la siguen
-      // diciendo el paso 06 de «Así de simple» y la FAQ de la devolución. **Eran tres y el mismo
-      // día quedaron dos**: el subtítulo de Confianza también la decía y se retiró por largo. Antes
-      // de tocar cualquiera de los que quedan, comprobar que queda otro: el día que no quede
+      // pasó a la tercera viñeta («Fuera de Bogotá, correo de radicación listo para reenviar»), y la declaración juramentada ya solo
+      // la dice la FAQ de la devolución. **Eran tres y quedó una**: el subtítulo de Confianza se
+      // retiró por largo el mismo día, y el paso 06 dejó de nombrarla al acotar el reenvío a fuera
+      // de Bogotá (29-sep-2026). Antes de tocar la FAQ, comprobar que queda otra: el día que no quede
       // ninguno, la tarjeta vuelve a enumerar solo lo nuestro, que es la asimetría de siempre.
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
