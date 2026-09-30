@@ -1073,19 +1073,22 @@ function Servicios() {
       // alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no que
       // haya el mismo numero.
       //
-      // ⚠️ **LA TERCERA LLEVA «tú lo reenvías» Y ESO NO ES ADORNO.** Antes esa obligación vivía en
-      // la nota de abajo, que se retiró. Si alguien recorta ese trozo, el reenvío desaparece de la
-      // tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
+      // ⚠️ **LA TERCERA LLEVA EL REENVÍO («Fuera de Bogotá, correo de radicación listo para
+      // reenviar») Y ESO NO ES ADORNO.** Antes esa obligación vivía en la nota de abajo, que se
+      // retiró. Desde el 29-sep-2026 va acotada a fuera de Bogotá, donde sí hay correo (en Bogotá se
+      // radica en una videollamada, y el poder solo existe allí: la cuarta viñeta). Si alguien recorta
+      // ese trozo, el reenvío desaparece de la tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
       // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
       features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Fuera de Bogotá, correo de radicación listo para reenviar", "En Bogotá, firmas tú o nos das un poder", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
-      // admite hacer por él —exige que la radicación salga del correo inscrito en SU RUT— y
+      // admite hacer por él fuera de Bogotá —exige que la radicación salga del correo inscrito en SU
+      // RUT; en Bogotá no hay correo, se radica en una videollamada— y
       // callarla fue el fallo del 3-sep, con gente que no reenviaba y cuyo expediente NO SE
       // RADICABA sin enterarse.
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
-      // pasó a la tercera viñeta («tú lo reenvías»), y la declaración juramentada la siguen
+      // pasó a la tercera viñeta («Fuera de Bogotá, correo de radicación listo para reenviar»), y la declaración juramentada la siguen
       // diciendo el paso 06 de «Así de simple» y la FAQ de la devolución. **Eran tres y el mismo
       // día quedaron dos**: el subtítulo de Confianza también la decía y se retiró por largo. Antes
       // de tocar cualquiera de los que quedan, comprobar que queda otro: el día que no quede
@@ -1335,13 +1338,14 @@ function ComoFunciona() {
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
     // gestionamos nosotros. Tres cosas que no se pueden aflojar al retocarlo:
-    //   · «Gestionamos», NUNCA «radicamos»: ante la DIAN no radicamos: el correo lo reenvía
-    //     siempre el cliente desde la dirección de su RUT, también con poder. (Ante la UPME sí
-    //     radicamos, y por eso el paso 04 sí puede decirlo.)
+    //   · «Gestionamos», NUNCA «radicamos»: fuera de Bogotá el correo lo reenvía siempre el cliente
+    //     desde la dirección de su RUT, y en Bogotá la videollamada la atiende él o, solo allí y con
+    //     poder, nosotros (decisión 3 de Julian, 29-sep-2026). (Ante la UPME sí radicamos, y por eso
+    //     el paso 04 sí puede decirlo.)
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas y, si tu seccional radica por buzón, reenvías el mensaje que te preparamos desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas y, fuera de Bogotá, reenvías el mensaje que te preparamos desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
   
   useEffect(() => {
@@ -1875,9 +1879,10 @@ function FAQ() {
     // enumeración de las cinco seccionales se llevaba una línea entera para un dato que el cliente
     // no puede usar todavía (su vía se la decimos nosotros al leer su RUT). Acortada el
     // 9-sep-2026. Los cuatro hechos que NO se pueden perder al recortarla, y siguen todos:
-    // la cita la pedimos NOSOTROS y va condicionada a la seccional · la DIAN concede UNA por
-    // contribuyente · la juramentada y el reenvío desde el correo del RUT son del cliente EN LAS
-    // DOS modalidades · con poder cambia quién firma el 010, y él nos aporta el poder autenticado.
+    // la cita la pedimos NOSOTROS y va condicionada a la seccional · la juramentada es siempre del
+    // cliente · fuera de Bogotá el reenvío desde el correo del RUT es suyo · en Bogotá se radica
+    // en una videollamada, y solo allí existe el poder (decisión 3 de Julian, 29-sep-2026). «Una
+    // cita por contribuyente» se retiró el 16-sep: no tiene fuente oficial.
     { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas la declaración juramentada y el Formulario 010 y, fuera de Bogotá, reenvías el correo que te preparamos desde el correo de tu RUT. En Bogotá se radica en una videollamada: te conectas tú, o nos das un poder, firmamos el 010 y entramos nosotros. Y seguimos tu trámite hasta que la DIAN consigna." },
     // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
     // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
