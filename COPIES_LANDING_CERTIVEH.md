@@ -36,8 +36,11 @@
 4. un certificado UPME
 
 ### Subheadline
-CertiVeh tramita tu certificado ante la UPME y gestiona tu devolución de IVA ante la DIAN.  
-Tú subes tus documentos, firmas y reenvías un correo.
+Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas en línea y reenvías un correo ya redactado.
+
+> Puesto al día el 6-oct-2026 con el texto que se sirve. La última frase mide 75 caracteres y
+> sustituye a una de 74: el párrafo conserva sus renglones de 320 a 1920 px (con «ya listo», 71
+> caracteres, perdía un renglón en escritorio).
 
 ### CTAs Hero
 - **Primario:** Calcular mi beneficio
@@ -125,28 +128,29 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 >
 > Auditado el 8-sep-2026: `cita`, `poder`, `notaría` y `seccional` salían **cero veces** en todo el
 > fichero. Quien escriba copy nuevo partiendo de aquí reproduce la asimetría que costó tres rondas
-> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos:
+> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos (puestos al día el 6-oct-2026):
 >
-> · **La cita ante la DIAN la pedimos nosotros, en las DOS modalidades** — pero solo la exigen
->   cinco seccionales (Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes), así que va
->   SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
->   Y la DIAN concede **una sola por contribuyente**: si la pide el cliente, gasta el cupo.
-> · **La cita NO es presencial.** Nadie va a ninguna oficina: se atiende mandando el correo ese
->   día, antes de la hora asignada.
+> · **La cita ante la DIAN la pedimos nosotros**, pero solo la exigen cinco seccionales (Bogotá,
+>   Medellín, Cali, Bucaramanga y Grandes Contribuyentes), así que va SIEMPRE condicionada: «si
+>   tu seccional la exige». Sin condicionar es falso para la mayoría. *(«Una sola cita por
+>   contribuyente» se retiró el 16-sep-2026: no tiene fuente oficial.)*
+> · **La cita NO es presencial ni es una videollamada.** Nadie va a ninguna oficina ni se conecta
+>   a nada: se atiende mandando el correo ese día, antes de la hora asignada. **Bogotá incluida**:
+>   desde el 6-oct-2026 radica igual que las demás seccionales con cita.
 > · **El correo de radicación lo reenvía SIEMPRE el cliente**, desde la dirección inscrita en su
->   RUT, porque la DIAN exige que la solicitud salga del contribuyente. **También con poder.**
+>   RUT, porque la DIAN exige que la solicitud salga del contribuyente. En todas las seccionales.
 >   Nunca escribir que radicamos nosotros ante la DIAN. *(Ante la UPME sí radicamos: eso es otra
 >   cosa y sí se puede decir.)*
-> · **Con poder solo cambia quién firma el Formulario 010**: lo firmamos nosotros. A cambio, el
->   cliente autentica el poder en **notaría** —presencial y obligatorio—. La declaración juramentada
->   la firma él en las DOS modalidades, igual que el reenvío del correo.
+> · **El Formulario 010 y la declaración juramentada los firma SIEMPRE el cliente, en línea.** El
+>   poder a CertiVeh («firmas tú o nos das un poder») **dejó de ofrecerse el 6-oct-2026** y no se
+>   nombra en ningún copy. El único poder que se sigue pidiendo es el del **copropietario**,
+>   cuando la factura tiene varios compradores, y ese sí se autentica en **notaría**: por eso
+>   ningún copy puede decir «sin notaría».
 >
 > ⚠️ **Y EL COSTO DE ESA NOTARÍA NO SE ENUNCIA EN COPY** (Julian, 9-sep-2026). Lo paga él, es
 > verdad, y por eso sigue escrito en `llms.txt` y en el conocimiento de Camila y del agente de
 > WhatsApp: **es una respuesta, no un argumento**. Se dice cuando el cliente pregunta por costos o
-> por la notaría, no de oficio en una viñeta de venta. La distinción es entre el PASO —que sí se
-> nombra siempre, porque es una obligación suya y callarla sería la asimetría de siempre— y quién
-> lo PAGA, que solo se cuenta a quien lo pregunta.
+> por la notaría, no de oficio en una viñeta de venta.
 
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
@@ -197,11 +201,11 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 
 ### Paso 06: Gestionamos tu devolución de IVA
 - **Subtitle:** Servicio aparte, ante la DIAN
-- **Descripción:** Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas la declaración juramentada y reenvías el correo que te dejamos listo desde la dirección de tu RUT.
-- **Detail:** Seguimos el trámite hasta que la DIAN responda.
+- **Descripción:** Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas en línea y reenvías el mensaje que te dejamos preparado, desde el correo de tu RUT.
+- **Detail:** Seguimos tu trámite hasta que la DIAN consigna.
 
 > ⚠️ **«Gestionamos», nunca «radicamos».** Ante la DIAN no radicamos: el correo lo reenvía siempre
-> el cliente desde la dirección de su RUT, también con poder. Ante la UPME sí radicamos, y por eso
+> el cliente desde la dirección de su RUT, en todas las seccionales. Ante la UPME sí radicamos, y por eso
 > el paso 04 sí puede decirlo. La cita va **condicionada** («si tu seccional la exige»), y el paso
 > dice que es un servicio **aparte**: sin eso, la lista se lee como que el certificado lo incluye.
 
@@ -444,7 +448,7 @@ Continua, del 1 de febrero al 15 de diciembre
 ### Mensajes de Garantía
 - Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo
 - Sin suscripciones
-- Aparte va el costo del trámite ante la UPME *(el de la notaría, con poder, ya no se enuncia en copy: se responde si preguntan)*
+- Aparte va el costo del trámite ante la UPME *(el de la notaría del poder del copropietario no se enuncia en copy: se responde si preguntan)*
 
 ### Status y Procesos
 - Procesado con Wompi · Tarjeta, PSE o Nequi
@@ -468,10 +472,15 @@ $[número] COP (formato colombiano con puntos de miles)
 **Las cinco viñetas, en orden de trámite:**
 1. Generamos tu expediente completo
 2. Pedimos nosotros tu cita, si tu seccional la exige
-3. Correo de radicación redactado y listo, tú lo reenvías
-4. Puedes firmar tú o entregarnos un poder
+3. Correo de radicación ya redactado y listo, tú lo reenvías
+4. Tú firmas en línea el 010 y la declaración
 5. Te avisamos si la DIAN pide algo más
 6. Seguimos tu trámite hasta que la DIAN consigna
+
+> ⚠️ **Las viñetas 3 y 4 se pusieron al día el 6-oct-2026** (57 y 42 caracteres, frente a 57 y 39 de
+> las que sustituyen: parten línea igual de 320 a 1920 px). El poder a CertiVeh ya no se ofrece: el Formulario 010 y la
+> declaración juramentada los firma el cliente, en línea. La viñeta 5 y su nota de abajo NO se
+> revisaron en esa ronda: la página sirve «Respuesta a requerimientos DIAN».
 
 > ⚠️ **La quinta NO dice «respondemos a los requerimientos de la DIAN».** Julian la pidió así y la
 > forma literal no se puede publicar: **los T&C asignan esa atención al usuario** (punto abierto

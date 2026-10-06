@@ -807,7 +807,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y, según tu seccional, reenvías un correo.
+        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas en línea y reenvías un correo ya redactado.
       </p>
 
       {/* CTAs */}
@@ -1049,6 +1049,13 @@ function Servicios() {
       // Este mismo cambio se aplicó el mismo día a `aviso-de-entrega.ts` del portal, con el mismo
       // razonamiento escrito. Si algún día se revierte uno, hay que revertir el otro.
       //
+      // ⚠️ **TODO LO ANTERIOR ES HISTORIA DESDE EL 6-OCT-2026.** El poder a CertiVeh dejó de
+      // ofrecerse (decisiones 110, 111 y 146 de Julian): el Formulario 010 lo firma siempre el
+      // cliente, en línea, y Bogotá radica igual que las demás seccionales con cita. Ningún copy
+      // de esta tarjeta nombra ya ese poder. El único poder que se sigue pidiendo es el del
+      // copropietario, cuando la factura tiene varios compradores, y ese sí se autentica en
+      // notaría: por eso ningún copy dice «sin notaría».
+      //
       // ⚠️ **«Respuesta a requerimientos DIAN», Y ESTUVO MAL ESCRITA DOS VECES ANTES DE ACERTAR.**
       //
       // Primero no se puso, alegando que los T&C asignan esa atención al usuario. Después se puso
@@ -1068,31 +1075,43 @@ function Servicios() {
       // nosotros en su nombre.
       //
       // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las seis caben de una ojeada** (Julian, 9-sep-2026):
-      // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego lo que le queda a él,
-      // luego la elección que hace, y al final la vigilancia y lo que dura. Seis viñetas; la
+      // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego las dos cosas que le
+      // quedan a él (reenviar y firmar), y al final la vigilancia y lo que dura. Seis viñetas; la
       // alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no que
       // haya el mismo numero.
       //
-      // ⚠️ **LA TERCERA LLEVA EL REENVÍO («Fuera de Bogotá, correo de radicación listo para
-      // reenviar») Y ESO NO ES ADORNO.** Antes esa obligación vivía en la nota de abajo, que se
-      // retiró. Desde el 29-sep-2026 va acotada a fuera de Bogotá, donde sí hay correo (en Bogotá se
-      // radica en una videollamada, y el poder solo existe allí: la cuarta viñeta). Si alguien recorta
-      // ese trozo, el reenvío desaparece de la tarjeta entera y volvemos al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO
-      // SE RADICABA sin enterarse. Puede moverse de sitio; no puede desaparecer.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Fuera de Bogotá, correo de radicación listo para reenviar", "En Bogotá, firmas tú o nos das un poder", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      // ⚠️ **LA TERCERA LLEVA EL REENVÍO («Correo de radicación ya redactado y listo, tú lo
+      // reenvías») Y ESO NO ES ADORNO.** Antes esa obligación vivía en la nota de abajo, que se
+      // retiró. Si alguien recorta ese trozo, el reenvío desaparece de la tarjeta entera y volvemos
+      // al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO SE RADICABA sin enterarse.
+      // Puede moverse de sitio; no puede desaparecer.
+      //
+      // ⚠️ **EL REENVÍO VALE PARA TODAS LAS SECCIONALES, BOGOTÁ INCLUIDA (6-oct-2026).** Del 29-sep
+      // al 6-oct la tercera decía «Fuera de Bogotá…» y la cuarta «En Bogotá, firmas tú o nos das un
+      // poder», porque Bogotá radicaba por videoatención. Ya no: no hay videoatención, Bogotá
+      // radica como las demás seccionales con cita y el poder a CertiVeh no se ofrece (decisiones
+      // 110, 111 y 146). La cuarta dice ahora lo que firma el cliente: el Formulario 010 y la
+      // declaración juramentada, en línea.
+      //
+      // ⚠️ **LAS DOS MIDEN CASI LO MISMO QUE LAS QUE SUSTITUYEN (57 y 42 caracteres, frente a 57
+      // y 39) Y NO ES CASUALIDAD:** medidas de 320 a 1920 px, parten línea igual que las de
+      // antes y la tarjeta conserva su alto. Con 39 caracteres («Firmas en línea el 010…») la
+      // cuarta cabía en un renglón a 390 px y la tarjeta perdía 21 px. Quien las retoque, que
+      // cuente los renglones a varios anchos antes y después.
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación ya redactado y listo, tú lo reenvías", "Tú firmas en línea el 010 y la declaración", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
-      // admite hacer por él fuera de Bogotá —exige que la radicación salga del correo inscrito en SU
-      // RUT; en Bogotá no hay correo, se radica en una videollamada— y
-      // callarla fue el fallo del 3-sep, con gente que no reenviaba y cuyo expediente NO SE
-      // RADICABA sin enterarse.
+      // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
+      // todas las seccionales) y callarla fue el fallo del 3-sep, con gente que no reenviaba y
+      // cuyo expediente NO SE RADICABA sin enterarse.
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
-      // pasó a la tercera viñeta («Fuera de Bogotá, correo de radicación listo para reenviar»), y la declaración juramentada ya solo
-      // la dice la FAQ de la devolución. **Eran tres y quedó una**: el subtítulo de Confianza se
-      // retiró por largo el mismo día, y el paso 06 dejó de nombrarla al acotar el reenvío a fuera
-      // de Bogotá (29-sep-2026). Antes de tocar la FAQ, comprobar que queda otra: el día que no quede
-      // ninguno, la tarjeta vuelve a enumerar solo lo nuestro, que es la asimetría de siempre.
+      // pasó a la tercera viñeta («Correo de radicación ya redactado y listo, tú lo reenvías»), y
+      // la declaración juramentada la dicen la cuarta viñeta («Firmas en línea el 010 y la
+      // declaración», desde el 6-oct-2026) y la FAQ de la devolución. El subtítulo de Confianza
+      // se retiró por largo el 9-sep y el paso 06 no la nombra. Antes de tocar la viñeta o la FAQ,
+      // comprobar que queda la otra: el día que no quede ninguna, la tarjeta vuelve a enumerar
+      // solo lo nuestro, que es la asimetría de siempre.
       accentColor: "var(--teal-500)",
       iconBg: "rgba(20,184,166,0.1)",
     },
@@ -1140,8 +1159,9 @@ function Servicios() {
                   después y el hueco ya está consumido aquí. */}
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24, marginTop: "auto" }}>
                 {s.features.map((f, j) => (
-                  // ⚠️ `flex-start` y `flexShrink: 0`, no `center` sin encoger. La viñeta del
-                  // poder ocupa dos líneas a 1280px y tres a 769px, y con `center` el check queda
+                  // ⚠️ `flex-start` y `flexShrink: 0`, no `center` sin encoger. La viñeta que
+                  // entonces era la del poder (hoy retirada; las de ahora también parten línea en
+                  // móvil) ocupaba dos líneas a 1280px y tres a 769px, y con `center` el check queda
                   // centrado entre líneas en vez de alineado a la primera — y sin `flexShrink` el
                   // flex se lo come: medido a 769px, se reducía a un punto casi invisible.
                   <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5 }}>
@@ -1338,14 +1358,14 @@ function ComoFunciona() {
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
     // gestionamos nosotros. Tres cosas que no se pueden aflojar al retocarlo:
-    //   · «Gestionamos», NUNCA «radicamos»: fuera de Bogotá el correo lo reenvía siempre el cliente
-    //     desde la dirección de su RUT, y en Bogotá la videollamada la atiende él o, solo allí y con
-    //     poder, nosotros (decisión 3 de Julian, 29-sep-2026). (Ante la UPME sí radicamos, y por eso
-    //     el paso 04 sí puede decirlo.)
+    //   · «Gestionamos», NUNCA «radicamos»: el correo lo reenvía siempre el cliente desde la
+    //     dirección de su RUT, en todas las seccionales. Desde el 6-oct-2026 Bogotá radica igual
+    //     que las demás con cita: no hay videoatención ni poder a CertiVeh (decisiones 110, 111 y
+    //     146 de Julian). (Ante la UPME sí radicamos, y por eso el paso 04 sí puede decirlo.)
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas y, fuera de Bogotá, reenvías el mensaje que te preparamos desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas en línea y reenvías el mensaje que te dejamos preparado, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
   
   useEffect(() => {
@@ -1879,11 +1899,18 @@ function FAQ() {
     // enumeración de las cinco seccionales se llevaba una línea entera para un dato que el cliente
     // no puede usar todavía (su vía se la decimos nosotros al leer su RUT). Acortada el
     // 9-sep-2026. Los cuatro hechos que NO se pueden perder al recortarla, y siguen todos:
-    // la cita la pedimos NOSOTROS y va condicionada a la seccional · la juramentada es siempre del
-    // cliente · fuera de Bogotá el reenvío desde el correo del RUT es suyo · en Bogotá se radica
-    // en una videollamada, y solo allí existe el poder (decisión 3 de Julian, 29-sep-2026). «Una
-    // cita por contribuyente» se retiró el 16-sep: no tiene fuente oficial.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas la declaración juramentada y el Formulario 010 y, fuera de Bogotá, reenvías el correo que te preparamos desde el correo de tu RUT. En Bogotá se radica en una videollamada: te conectas tú, o nos das un poder, firmamos el 010 y entramos nosotros. Y seguimos tu trámite hasta que la DIAN consigna." },
+    // la cita la pedimos NOSOTROS y va condicionada a la seccional · la juramentada y el
+    // Formulario 010 los firma siempre el cliente, en línea · el reenvío desde el correo del RUT
+    // es suyo, en todas las seccionales · la cita no es presencial: se atiende enviando ese
+    // correo el día de la cita, antes de la hora. «Una cita por contribuyente» se retiró el
+    // 16-sep: no tiene fuente oficial.
+    //
+    // ⚠️ Del 29-sep al 6-oct-2026 esta respuesta contaba que en Bogotá se radicaba en una
+    // videollamada y que allí existía un poder. Las dos cosas dejaron de ser verdad (decisiones
+    // 110, 111 y 146 de Julian) y NO vuelven: Bogotá radica igual que las demás seccionales con
+    // cita. Y esta respuesta está duplicada, letra por letra, en el JSON-LD `FAQPage` de
+    // `src/pages/index.astro` y `src/pages/exotics.astro`: se cambian las tres a la vez.
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el mismo día, antes de tu hora. Y seguimos tu trámite hasta que la DIAN consigna." },
     // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
     // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
     // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días
