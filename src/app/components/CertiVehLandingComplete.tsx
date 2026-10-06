@@ -807,7 +807,7 @@ function Hero() {
         marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
         position: "relative", zIndex: 1
       }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas en línea y reenvías un correo ya redactado.
+        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y reenvías un correo que te dejamos listo.
       </p>
 
       {/* CTAs */}
@@ -1054,7 +1054,10 @@ function Servicios() {
       // cliente, en línea, y Bogotá radica igual que las demás seccionales con cita. Ningún copy
       // de esta tarjeta nombra ya ese poder. El único poder que se sigue pidiendo es el del
       // copropietario, cuando la factura tiene varios compradores, y ese sí se autentica en
-      // notaría: por eso ningún copy dice «sin notaría».
+      // notaría: por eso ningún copy dice «sin notaría», y por eso «en línea» solo se dice de lo
+      // que de verdad se firma en línea (el 010 y la declaración juramentada), nunca de «tus
+      // documentos» en general: con copropietario, el mandato lo firman a mano él y el titular.
+      // El hero, el paso 06 y la meta descripción dicen «firmas» a secas por eso mismo.
       //
       // ⚠️ **«Respuesta a requerimientos DIAN», Y ESTUVO MAL ESCRITA DOS VECES ANTES DE ACERTAR.**
       //
@@ -1107,7 +1110,7 @@ function Servicios() {
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
       // pasó a la tercera viñeta («Correo de radicación ya redactado y listo, tú lo reenvías»), y
-      // la declaración juramentada la dicen la cuarta viñeta («Firmas en línea el 010 y la
+      // la declaración juramentada la dicen la cuarta viñeta («Tú firmas en línea el 010 y la
       // declaración», desde el 6-oct-2026) y la FAQ de la devolución. El subtítulo de Confianza
       // se retiró por largo el 9-sep y el paso 06 no la nombra. Antes de tocar la viñeta o la FAQ,
       // comprobar que queda la otra: el día que no quede ninguna, la tarjeta vuelve a enumerar
@@ -1365,7 +1368,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas en línea y reenvías el mensaje que te dejamos preparado, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
   
   useEffect(() => {
@@ -1910,7 +1913,7 @@ function FAQ() {
     // 110, 111 y 146 de Julian) y NO vuelven: Bogotá radica igual que las demás seccionales con
     // cita. Y esta respuesta está duplicada, letra por letra, en el JSON-LD `FAQPage` de
     // `src/pages/index.astro` y `src/pages/exotics.astro`: se cambian las tres a la vez.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el mismo día, antes de tu hora. Y seguimos tu trámite hasta que la DIAN consigna." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el día de tu cita, antes de la hora. Y seguimos tu trámite hasta que la DIAN consigna." },
     // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
     // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
     // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días

@@ -36,11 +36,12 @@
 4. un certificado UPME
 
 ### Subheadline
-Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas en línea y reenvías un correo ya redactado.
+Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y reenvías un correo que te dejamos listo.
 
-> Puesto al día el 6-oct-2026 con el texto que se sirve. La última frase mide 75 caracteres y
-> sustituye a una de 74: el párrafo conserva sus renglones de 320 a 1920 px (con «ya listo», 71
-> caracteres, perdía un renglón en escritorio).
+> Puesto al día el 6-oct-2026 con el texto que se sirve. La última frase mide 74 caracteres, los
+> mismos que la que sustituye, y el párrafo conserva sus renglones de 360 a 1440 px. Dice
+> «firmas» a secas y no «firmas en línea»: con copropietario, el mandato se firma a mano y va a
+> notaría.
 
 ### CTAs Hero
 - **Primario:** Calcular mi beneficio
@@ -150,7 +151,15 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 > ⚠️ **Y EL COSTO DE ESA NOTARÍA NO SE ENUNCIA EN COPY** (Julian, 9-sep-2026). Lo paga él, es
 > verdad, y por eso sigue escrito en `llms.txt` y en el conocimiento de Camila y del agente de
 > WhatsApp: **es una respuesta, no un argumento**. Se dice cuando el cliente pregunta por costos o
-> por la notaría, no de oficio en una viñeta de venta.
+> por la notaría, no de oficio en una viñeta de venta. La distinción es entre el PASO —que sí se
+> nombra siempre, porque es una obligación suya y callarla sería la asimetría de siempre— y quién
+> lo PAGA, que solo se cuenta a quien lo pregunta.
+>
+> ⚠️ **Nota del 6-oct-2026, PENDIENTE DE JULIAN.** Esa regla se escribió para el poder a CertiVeh,
+> que ya no se ofrece. El paso de notaría sigue existiendo para el poder del copropietario, y hoy
+> ningún copy de la home lo nombra (sí lo nombran `llms.txt` y el artículo paso a paso del blog).
+> Si la regla «el PASO se nombra siempre» sigue viva para ese poder es una pregunta abierta para
+> Julian: no está decidida, y no se añadió copy a la home por ello.
 
 
 ## ⚙️ SECCIÓN: CÓMO FUNCIONA
@@ -201,7 +210,7 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 
 ### Paso 06: Gestionamos tu devolución de IVA
 - **Subtitle:** Servicio aparte, ante la DIAN
-- **Descripción:** Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas en línea y reenvías el mensaje que te dejamos preparado, desde el correo de tu RUT.
+- **Descripción:** Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.
 - **Detail:** Seguimos tu trámite hasta que la DIAN consigna.
 
 > ⚠️ **«Gestionamos», nunca «radicamos».** Ante la DIAN no radicamos: el correo lo reenvía siempre
