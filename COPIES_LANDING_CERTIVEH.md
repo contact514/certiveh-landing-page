@@ -482,7 +482,7 @@ $[número] COP (formato colombiano con puntos de miles)
 1. Generamos tu expediente completo
 2. Pedimos nosotros tu cita, si tu seccional la exige
 3. Correo de radicación ya redactado y listo, tú lo reenvías
-4. Tú firmas en línea el 010 y la declaración
+4. Firmas en línea, sin papeleo
 5. Te avisamos si la DIAN pide algo más
 6. Seguimos tu trámite hasta que la DIAN consigna
 
@@ -490,6 +490,9 @@ $[número] COP (formato colombiano con puntos de miles)
 > las que sustituyen: parten línea igual de 320 a 1920 px). El poder a CertiVeh ya no se ofrece: el Formulario 010 y la
 > declaración juramentada los firma el cliente, en línea. La viñeta 5 y su nota de abajo NO se
 > revisaron en esa ronda: la página sirve «Respuesta a requerimientos DIAN».
+>
+> 🔁 **8-oct-2026 (Julian):** la viñeta 4 pasa a «Firmas en línea, sin papeleo» porque «el 010 y la
+> declaración» no se entiende. Qué se firma lo explica la FAQ de la devolución.
 
 > ⚠️ **La quinta NO dice «respondemos a los requerimientos de la DIAN».** Julian la pidió así y la
 > forma literal no se puede publicar: **los T&C asignan esa atención al usuario** (punto abierto

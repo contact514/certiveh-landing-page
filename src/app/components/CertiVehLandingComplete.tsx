@@ -1093,15 +1093,15 @@ function Servicios() {
       // al 6-oct la tercera decía «Fuera de Bogotá…» y la cuarta «En Bogotá, firmas tú o nos das un
       // poder», porque Bogotá radicaba por videoatención. Ya no: no hay videoatención, Bogotá
       // radica como las demás seccionales con cita y el poder a CertiVeh no se ofrece (decisiones
-      // 110, 111 y 146). La cuarta dice ahora lo que firma el cliente: el Formulario 010 y la
-      // declaración juramentada, en línea.
+      // 110, 111 y 146). La cuarta dice desde el 8-oct-2026 «Firmas en línea, sin papeleo» (Julian: la gente no sabe
+      // qué es el 010 ni la declaración). El detalle de qué se firma lo da la FAQ de la devolución.
       //
       // ⚠️ **LAS DOS MIDEN CASI LO MISMO QUE LAS QUE SUSTITUYEN (57 y 42 caracteres, frente a 57
       // y 39) Y NO ES CASUALIDAD:** medidas de 320 a 1920 px, parten línea igual que las de
       // antes y la tarjeta conserva su alto. Con 39 caracteres («Firmas en línea el 010…») la
       // cuarta cabía en un renglón a 390 px y la tarjeta perdía 21 px. Quien las retoque, que
       // cuente los renglones a varios anchos antes y después.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación ya redactado y listo, tú lo reenvías", "Tú firmas en línea el 010 y la declaración", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación ya redactado y listo, tú lo reenvías", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
@@ -1110,8 +1110,9 @@ function Servicios() {
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
       // pasó a la tercera viñeta («Correo de radicación ya redactado y listo, tú lo reenvías»), y
-      // la declaración juramentada la dicen la cuarta viñeta («Tú firmas en línea el 010 y la
-      // declaración», desde el 6-oct-2026) y la FAQ de la devolución. El subtítulo de Confianza
+      // la declaración juramentada la dice la FAQ de la devolución («Tú firmas en línea la
+      // declaración juramentada y el Formulario 010…»); la cuarta viñeta solo dice «Firmas en
+      // línea, sin papeleo» desde el 8-oct-2026. El subtítulo de Confianza
       // se retiró por largo el 9-sep y el paso 06 no la nombra. Antes de tocar la viñeta o la FAQ,
       // comprobar que queda la otra: el día que no quede ninguna, la tarjeta vuelve a enumerar
       // solo lo nuestro, que es la asimetría de siempre.
