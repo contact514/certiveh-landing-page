@@ -1920,7 +1920,7 @@ function FAQ() {
     // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días
     // ante indicios, y el 684 conserva las facultades generales. Lo defendible es lo que dice esta
     // respuesta: no se abre revisión de la declaración de renta ni del historial del contribuyente.
-    { q: "¿Pedir la devolución me expone a una auditoría de la DIAN?", a: "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud y tiene 50 días hábiles para resolverla (artículos 855 y 860 del Estatuto Tributario). No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable." },
+    { q: "¿Pedir la devolución me expone a una auditoría de la DIAN?", a: "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud, responde en 15 días hábiles y, si aprueba, paga en 50 (artículos 855 y 860 del Estatuto Tributario). No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable." },
     // ⚠️ La regla de restitución del art. 1.2.1.18.76 aplica SOLO a los artículos 11 y 14 de la Ley
     // 1715 (deducción en renta y depreciación acelerada). NO al 12 (IVA) ni al 13 (arancel), y su
     // propio texto lo dice. Confundirlos es el mito que más trámites frena: el cliente cree que
