@@ -61,7 +61,7 @@ export function loQueDiceUnHtml(html) {
 
 const CINCUENTA = /\b(?:50|cincuenta(?:\s*\(\s*50\s*\))?)\s+(?:d[ií]as|para\b)/i;
 const QUINCE = /\b(?:15|quince(?:\s*\(\s*15\s*\))?)\s+d[ií]as/i;
-const RESPONDER = /respond|resolv|contest|decid|pronunci|(?:dar(?:te|le|nos)?|en dar(?:te|le|nos)?) (?:una )?respuesta|una respuesta|estudiar|aprob|rechaz|revis/i;
+const RESPONDER = /respond|resolv|contest|decid|pronunci|(?:dar(?:te|le|nos)?|en dar(?:te|le|nos)?) (?:una )?respuesta|una respuesta|estudiar|aprob|rechaz|revis|evalu|(?:dar(?:te|le|nos)?|en dar(?:te|le|nos)?) tr[aá]mite/i;
 const DESDE_EL_ENVIO = /radica|desde que (?:se )?(?:re)?env[ií]|desde el env[ií]o|a partir del env[ií]o|desde que (?:la )?present/i;
 
 export function plazoMalDicho(frase) {
@@ -96,15 +96,15 @@ const PATRONES_QUE_INVIERTEN = [
   /\bte (?:avisamos|avisaremos|contamos|contaremos|escribimos|escribiremos|informamos|informaremos|notificamos|notificaremos|confirmamos) (?:apenas|cuando|en cuanto|tan pronto(?: como)?|una vez(?: que)?) la dian\b(?![^.;]{0,60}\b(?:cita|asign|agend))/,
   /\b(?:avisamos|avisaremos|contamos|contaremos|escribimos|escribiremos|informamos|informaremos) (?:apenas|cuando|en cuanto|tan pronto(?: como)?) (?:sepamos|tengamos|nos llegue|recibamos) (?:algo|noticias|novedades|respuesta|la respuesta)\b/,
   /\bseguimos (?:nosotros )?desde ahi\b/,
-  /\b(?:te|lo) (?:mantenemos|mantendremos|tenemos|tendremos) (?:al tanto|informad[oa]) de lo que (?:diga|responda|decida|resuelva|conteste) la dian\b/,
-  /\b(?:cuando|apenas|en cuanto|tan pronto(?: como)?) la dian (?:responda|conteste|decida|resuelva|apruebe|rechace|se pronuncie|diga algo)\b[^.;]{0,40}\b(?:te|se) lo (?:contamos|contaremos|avisamos|avisaremos|decimos|diremos|informamos|informaremos|hacemos saber)\b/,
+  /\b(?:te|lo) (?:mantenemos|mantendremos|tenemos|tendremos) (?:al tanto|informad[oa]) (?:de|sobre) (?:lo que (?:diga|responda|decida|resuelva|conteste) la dian|la respuesta de la dian|lo que pase con la dian)\b/,
+  /\b(?:cuando|apenas|en cuanto|tan pronto(?: como)?) la dian (?:responda|conteste|decida|resuelva|apruebe|rechace|se pronuncie|diga algo)\b[^.;]{0,40}\b(?:te|se) (?:lo )?(?:contamos|contaremos|avisamos|avisaremos|decimos|diremos|informamos|informaremos|escribimos|escribiremos|hacemos saber)\b/,
 ];
 
 export function invierteQuienHaceQue(frase) {
   const f = sinTildes(plano(frase));
   if (PATRONES_QUE_INVIERTEN.some((p) => p.test(f))) return true;
-  if (!/\b(?:(?:nosotros )?nos (?:encargamos|ocupamos|encargaremos) de radicar|nosotros (?:la |lo |te (?:la|lo) )?radicamos|radicamos (?:tu|la|su) (?:solicitud|devolucion)|(?:la|lo) radicamos (?:nosotros|por ti|ante|en la dian)|radicamos (?:ante|en) la dian|radicaremos (?:tu|la|su) (?:solicitud|devolucion))/.test(f)) return false;
-  if (/\bno (?:la |lo |te (?:la|lo) )?radicamos\b|\bnunca radicamos\b|\bni radicamos\b/.test(f)) return false;
+  if (!/\b(?:(?:nosotros )?nos (?:encargamos|ocupamos|encargaremos) de (?:radicar|presentar)|nosotros (?:la |lo )?presentamos|presentamos (?:tu|la|su) (?:solicitud|devolucion)|nosotros (?:la |lo |te (?:la|lo) )?radicamos|radicamos (?:tu|la|su) (?:solicitud|devolucion)|(?:la|lo) radicamos (?:nosotros|por ti|ante|en la dian)|radicamos (?:ante|en) la dian|radicaremos (?:tu|la|su) (?:solicitud|devolucion))/.test(f)) return false;
+  if (/\bno (?:la |lo |te (?:la|lo) )?(?:radicamos|presentamos)\b|\bnunca radicamos\b|\bni radicamos\b/.test(f)) return false;
   if (/\bupme\b|certificad/.test(f)) return false;
   // (En la landing «radicamos tu solicitud» sin nombrar la entidad SÍ aparece, y es la UPME: la ficha
   // del servicio «Certificado UPME». Aquí, sin fichero que dé contexto, sólo cuenta con la DIAN o el IVA.)
@@ -132,6 +132,8 @@ function control() {
     'La DIAN se demora hasta 50 días hábiles en darte una respuesta.',
     'La DIAN tiene 50 días hábiles para aprobar o rechazar.',
     'La DIAN tiene 50 días hábiles para revisar tu solicitud.',
+    'La DIAN tarda hasta 50 días hábiles en darle trámite.',
+    'La DIAN se toma hasta 50 días hábiles para evaluar.',
   ]) debe(plazoMalDicho(mal), `plazoMalDicho no caza: ${mal}`);
   for (const bien of [
     'tiene hasta 15 días hábiles para responder y, si la aprueba, hasta 50 días hábiles para pagar.',
@@ -144,10 +146,10 @@ function control() {
   debe(!citaUnArticuloParaElPlazo('Estatuto Tributario, Arts. 855 y 857. Procedimiento de devolución, plazos y causales de rechazo.'), 'marca una lista de fuentes sin plazo');
   debe(!citaUnArticuloParaElPlazo('para los casos que cumplen el mecanismo de devolución automática, conforme al parágrafo 5 del artículo 855 del Estatuto Tributario, la devolución tendrá lugar dentro de los quince (15) días siguientes.'), 'marca la devolución automática de los Términos');
   debe(prometeUnTotal('En total suele tomar unos tres meses y medio.'), 'no caza el total a ojo');
-  for (const mal of ['Te avisamos cuando la DIAN responda.', 'Te contamos apenas la DIAN nos diga algo.', 'Nosotros radicamos tu solicitud ante la DIAN.', 'Te avisamos en cuanto sepamos algo.', 'Te mantenemos al tanto de lo que diga la DIAN.', 'Cuando la DIAN responda, te lo contamos.', 'Nosotros nos encargamos de radicar tu solicitud ante la DIAN.']) {
+  for (const mal of ['Te avisamos cuando la DIAN responda.', 'Te contamos apenas la DIAN nos diga algo.', 'Nosotros radicamos tu solicitud ante la DIAN.', 'Te avisamos en cuanto sepamos algo.', 'Te mantenemos al tanto de lo que diga la DIAN.', 'Cuando la DIAN responda, te lo contamos.', 'Nosotros nos encargamos de radicar tu solicitud ante la DIAN.', 'Te mantendremos informado de la respuesta de la DIAN.', 'Apenas la DIAN conteste, te escribimos.', 'Nosotros presentamos tu solicitud de devolución ante la DIAN.']) {
     debe(invierteQuienHaceQue(mal), `invierteQuienHaceQue no caza: ${mal}`);
   }
-  for (const bien of ['Te avisamos en cuanto la DIAN nos asigne tu cita.', 'Te escribimos cuando la DIAN nos confirme el día de tu cita.', 'Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud.', 'Nosotros radicamos tu solicitud ante la UPME.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.', 'Te avisamos cuando tu certificado esté emitido.']) {
+  for (const bien of ['Te avisamos en cuanto la DIAN nos asigne tu cita.', 'Te escribimos cuando la DIAN nos confirme el día de tu cita.', 'Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud.', 'Nosotros radicamos tu solicitud ante la UPME.', 'Nosotros presentamos tu solicitud ante la UPME.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.', 'Te avisamos cuando tu certificado esté emitido.']) {
     debe(!invierteQuienHaceQue(bien), `invierteQuienHaceQue marca una frase cierta: ${bien}`);
   }
   // El lector: ve el texto visible y el JSON-LD, y no los comentarios ni los scripts.
