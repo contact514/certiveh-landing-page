@@ -36,7 +36,7 @@
 4. un certificado UPME
 
 ### Subheadline
-Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos, firmas y reenvías un correo que te dejamos listo.
+Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.
 
 > Puesto al día el 6-oct-2026 con el texto que se sirve. La última frase mide 74 caracteres, los
 > mismos que la que sustituye, y el párrafo conserva sus renglones de 360 a 1440 px. Dice
