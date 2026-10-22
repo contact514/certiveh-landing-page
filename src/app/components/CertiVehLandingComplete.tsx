@@ -134,8 +134,8 @@ const CSS = `
     0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2); }
     50% { box-shadow: 0 4px 24px rgba(37,211,102,0.6), 0 2px 8px rgba(0,0,0,0.2); transform: scale(1.05); }
   }
-  /* El punto que late en la píldora de la ventana UPME y el esqueleto de las cifras del hero
-     usaban «pulse» sin que esta hoja lo declarara: solo latían si otra isla lo traía. */
+  /* El esqueleto de las cifras del hero usaba «pulse» sin que esta hoja lo declarara: solo
+     latía si otra isla lo traía. */
   @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
@@ -688,23 +688,21 @@ function VentanaUPME() {
   return (
     <section id="ventana-upme" aria-labelledby="ventana-upme-titulo" style={{ background: "var(--grad-subtle)", borderBottom: "1px solid var(--slate-200)" }}>
       <div className="section" style={{ textAlign: "center" }}>
-        <span className="badge" style={{ marginBottom: 16, ...(cerrada ? { background: "var(--slate-100)", color: "var(--slate-600)", borderColor: "var(--slate-200)" } : {}) }}>
-          <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: cerrada ? "var(--slate-400)" : "var(--emerald-500)", animation: estado?.abierta ? "pulse 2s infinite" : "none" }} />
-          {estado === null ? "Ventana de radicación UPME" : estado.abierta ? "Ventana de radicación abierta" : "Ventana de radicación cerrada"}
-        </span>
-
-        <h2 id="ventana-upme-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
+        {/* Sin píldora sobre el título, como el resto de secciones de la landing. */}
+        <div style={{ marginBottom: 56 }}>
+          <h2 id="ventana-upme-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
           {cerrada
             ? <>La UPME vuelve a recibir solicitudes el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>1 de febrero</span></>
             : <>La UPME recibe solicitudes hasta el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>15 de diciembre</span></>}
-        </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 640, margin: "0 auto 28px" }}>
+          </h2>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
           {cerrada
             ? "La UPME recibe solicitudes de certificado del 1 de febrero al 15 de diciembre de cada año. Puedes preparar tu trámite desde ahora y lo radicamos apenas se abra la ventana."
             : "Después de esa fecha, la UPME no recibe más solicitudes de certificado hasta el 1 de febrero. Tú subes tus documentos y nosotros radicamos tu solicitud ante la UPME."}
-        </p>
+          </p>
+        </div>
 
-        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--slate-500)", marginBottom: 12 }}>
+        <div style={{ fontSize: 14, fontWeight: 500, color: "var(--slate-600)", marginBottom: 12 }}>
           {cerrada ? "La ventana abre en" : "La ventana cierra en"}
         </div>
         <div role="timer" aria-label={cerrada ? "Tiempo para que abra la ventana de radicación" : "Tiempo para que cierre la ventana de radicación"} style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 28 }}>
@@ -725,7 +723,8 @@ function VentanaUPME() {
         </a>
 
         <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6, marginTop: 16 }}>
-          Resolución UPME 563 de 2026 · Hora de Colombia ·{" "}
+          Resolución UPME 563 de 2026 · Hora de Colombia
+          <br/>
           <a href="/blog/cierre-ventana-upme-15-diciembre-2026" style={{ color: "var(--emerald-700)", fontWeight: 600, textDecoration: "underline" }}>
             Qué pasa si no alcanzas a radicar
           </a>
@@ -1866,7 +1865,7 @@ function TarjetaDePrensa({ m, copia }: { m: Medio; copia: boolean }) {
       </div>
     </>
   );
-  const estilo: React.CSSProperties = { width: 320, flexShrink: 0, padding: 24, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" };
+  const estilo: React.CSSProperties = { width: 320, flexShrink: 0, padding: 28, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" };
   return (
     <a className="card prensa-card" href={m.url} target="_blank" rel="noopener noreferrer" style={estilo}
       aria-hidden={copia || undefined} tabIndex={copia ? -1 : undefined}
@@ -1880,11 +1879,11 @@ function Prensa() {
   return (
     <section id="prensa" aria-labelledby="prensa-titulo" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
       <div className="section" style={{ paddingBottom: 0 }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2 id="prensa-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
             CertiVeh en los medios
           </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 640, margin: "0 auto" }}>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
             Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.
           </p>
         </div>
