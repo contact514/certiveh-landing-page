@@ -134,6 +134,12 @@ const CSS = `
     0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2); }
     50% { box-shadow: 0 4px 24px rgba(37,211,102,0.6), 0 2px 8px rgba(0,0,0,0.2); transform: scale(1.05); }
   }
+  /* El punto que late en la píldora de la ventana UPME y el esqueleto de las cifras del hero
+     usaban «pulse» sin que esta hoja lo declarara: solo latían si otra isla lo traía. */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
   @keyframes ticker {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -224,6 +230,31 @@ const CSS = `
     background: var(--white); border: 1px solid var(--slate-200);
     border-radius: 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  /* ── PRENSA ── tarjetas en carril continuo. Se pausa al pasar el ratón o al llegar con el
+     teclado, y con «reducir movimiento» deja de moverse y se recorre deslizando. */
+  .prensa-carril {
+    overflow: hidden; position: relative;
+    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  }
+  .prensa-pista { display: flex; gap: 16px; width: max-content; padding: 0 8px; animation: ticker 70s linear infinite; }
+  .prensa-carril:hover .prensa-pista, .prensa-carril:focus-within .prensa-pista { animation-play-state: paused; }
+  .prensa-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+  a.prensa-card:hover, a.prensa-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: var(--emerald-200); }
+  a.prensa-card:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: 2px; }
+  .prensa-logo { filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s, opacity 0.3s; }
+  a.prensa-card:hover .prensa-logo, a.prensa-card:focus-visible .prensa-logo { filter: grayscale(0%); opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .prensa-carril { overflow-x: auto; scroll-snap-type: x mandatory; mask-image: none; -webkit-mask-image: none; }
+    .prensa-pista { animation: none; padding: 0 24px; }
+    /* !important porque la tarjeta lleva display:flex en línea, que si no gana a esta regla. */
+    .prensa-pista > [aria-hidden="true"] { display: none !important; }
+    .prensa-card { scroll-snap-align: start; }
+  }
+  @media (max-width: 768px) {
+    .prensa-card { width: 280px !important; padding: 20px !important; }
   }
 
   .ticker-wrap { overflow: hidden; background: var(--grad-primary); padding: 12px 0; }
@@ -608,97 +639,97 @@ function Ticker() {
   );
 }
 
-// ── VENTANA UPME (Resolución 400 de 2026 – ventana continua) ─────────────────
+// ── VENTANA UPME (Resolución UPME 563 de 2026, art. 6.1) ─────────────────────
+// ⚠️ La 563 (5-ago-2026) DEROGÓ la 400 de 2026 y la 135 de 2025 y mantuvo la misma ventana. Citar
+// la 400 como vigente es citar una norma derogada.
+// La UPME recibe solicitudes del 1 de febrero al 15 de diciembre de cada año; las que llegan
+// fuera de ese plazo «se entienden como no presentadas». La cuenta regresiva va contra el fin
+// del 15 de diciembre mientras está abierta, y contra el 1 de febrero mientras está cerrada.
+//
+// ⚠️ **Las fechas se cuentan en hora de Colombia, no en la del navegador.** Con `new Date(año,
+// 11, 15)` un visitante en Madrid veía cerrar la ventana seis horas antes que la UPME. Colombia
+// no tiene horario de verano, así que es UTC-5 todo el año y basta con un desfase fijo.
+const DESFASE_BOGOTA_MS = 5 * 3_600_000;
+
+function estadoVentanaUpme(ahoraMs: number) {
+  const anio = new Date(ahoraMs - DESFASE_BOGOTA_MS).getUTCFullYear();
+  const abre = Date.UTC(anio, 1, 1) + DESFASE_BOGOTA_MS;    // 1 de febrero, 00:00 en Bogotá
+  const cierra = Date.UTC(anio, 11, 16) + DESFASE_BOGOTA_MS; // fin del 15 de diciembre en Bogotá
+  if (ahoraMs >= abre && ahoraMs < cierra) return { abierta: true, objetivo: cierra };
+  const reabre = ahoraMs < abre ? abre : Date.UTC(anio + 1, 1, 1) + DESFASE_BOGOTA_MS;
+  return { abierta: false, objetivo: reabre };
+}
+
 function VentanaUPME() {
   const portalUrl = usePortalUrl();
 
-  const [now, setNow] = useState(new Date());
+  // ⚠️ **`null` hasta montar, a propósito.** La landing se prerenderiza en el build: con la
+  // hora del servidor en el HTML, cada visita hidrataría una cuenta distinta de la que el
+  // navegador calcula (y un despliegue de noviembre seguiría diciendo «abierta» en enero).
+  // Antes de montar se pinta el texto que es cierto todo el año y los dígitos en «--».
+  const [ahora, setAhora] = useState<number | null>(null);
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 60000);
+    setAhora(Date.now());
+    const t = setInterval(() => setAhora(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
 
-  const month = now.getMonth(); // 0-indexed
-  const day = now.getDate();
-  // Window open: Feb 1 (month 1, day 1) to Dec 15 (month 11, day 15)
-  const ventanaAbierta =
-    // Enero entero cerrado: la ventana de la UPME va del 1 de febrero al 15 de diciembre.
-    // (Aquí había una rama `(month === 0 && day >= 1 && false)` que no podía ser cierta nunca:
-    // un `&& false` dentro de un `||` no cierra nada, solo hace creer que se contempló el caso.)
-    (month > 0 && month < 11) ||
-    (month === 11 && day <= 15);
-
-  // Countdown target: next Feb 1
-  const nextYear = month === 0 ? now.getFullYear() : now.getFullYear() + 1;
-  const target = new Date(nextYear, 1, 1);
-  const diff = Math.max(0, target.getTime() - now.getTime());
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const pad = (n: number) => String(n).padStart(2, "0");
+  const estado = ahora === null ? null : estadoVentanaUpme(ahora);
+  const resta = estado && ahora !== null ? Math.max(0, estado.objetivo - ahora) : null;
+  const unidades = [
+    { val: resta === null ? null : Math.floor(resta / 86_400_000), label: "Días" },
+    { val: resta === null ? null : Math.floor((resta % 86_400_000) / 3_600_000), label: "Horas" },
+    { val: resta === null ? null : Math.floor((resta % 3_600_000) / 60_000), label: "Min" },
+    { val: resta === null ? null : Math.floor((resta % 60_000) / 1000), label: "Seg" },
+  ];
+  const pad = (n: number | null) => (n === null ? "--" : String(n).padStart(2, "0"));
+  const cerrada = estado?.abierta === false;
 
   return (
-    <section aria-label="Ventana de radicación UPME" style={{ background: ventanaAbierta ? "var(--emerald-600)" : "var(--slate-800)", padding: "28px 20px", position: "relative", overflow: "hidden" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", borderRadius: 9999, padding: "5px 14px", marginBottom: 14 }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: ventanaAbierta ? "#4ADE80" : "#FBBF24", animation: "pulse 2s infinite" }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: "white", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            {ventanaAbierta ? "Ventana de radicación abierta" : "Ventana cerrada"}
-          </span>
+    <section id="ventana-upme" aria-labelledby="ventana-upme-titulo" style={{ background: "var(--grad-subtle)", borderBottom: "1px solid var(--slate-200)" }}>
+      <div className="section" style={{ textAlign: "center" }}>
+        <span className="badge" style={{ marginBottom: 16, ...(cerrada ? { background: "var(--slate-100)", color: "var(--slate-600)", borderColor: "var(--slate-200)" } : {}) }}>
+          <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: cerrada ? "var(--slate-400)" : "var(--emerald-500)", animation: estado?.abierta ? "pulse 2s infinite" : "none" }} />
+          {estado === null ? "Ventana de radicación UPME" : estado.abierta ? "Ventana de radicación abierta" : "Ventana de radicación cerrada"}
+        </span>
+
+        <h2 id="ventana-upme-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
+          {cerrada
+            ? <>La UPME vuelve a recibir solicitudes el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>1 de febrero</span></>
+            : <>La UPME recibe solicitudes hasta el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>15 de diciembre</span></>}
+        </h2>
+        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 640, margin: "0 auto 28px" }}>
+          {cerrada
+            ? "La UPME recibe solicitudes de certificado del 1 de febrero al 15 de diciembre de cada año. Puedes preparar tu trámite desde ahora y lo radicamos apenas se abra la ventana."
+            : "Después de esa fecha, la UPME no recibe más solicitudes de certificado hasta el 1 de febrero. Tú subes tus documentos y nosotros radicamos tu solicitud ante la UPME."}
+        </p>
+
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--slate-500)", marginBottom: 12 }}>
+          {cerrada ? "La ventana abre en" : "La ventana cierra en"}
+        </div>
+        <div role="timer" aria-label={cerrada ? "Tiempo para que abra la ventana de radicación" : "Tiempo para que cierre la ventana de radicación"} style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 28 }}>
+          {unidades.map((u) => (
+            <div key={u.label} className="card" style={{ minWidth: "clamp(64px, 16vw, 88px)", padding: "14px 8px 12px", textAlign: "center" }}>
+              <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+                {pad(u.val)}
+              </div>
+              <div style={{ fontSize: 12, fontWeight: 500, color: "var(--slate-500)", marginTop: 8 }}>{u.label}</div>
+            </div>
+          ))}
         </div>
 
-        {ventanaAbierta ? (
-          <>
-            <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 20, lineHeight: 1.5 }}>
-              La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre. Radica en cualquier momento.
-            </div>
+        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+          <button className="btn-primary btn-primary-lg" style={{ background: "var(--grad-primary)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
+            {cerrada ? "Preparar mi trámite ahora" : "Empezar mi trámite ahora"} <Icon name="arrowRight" size={18} color="white" />
+          </button>
+        </a>
 
-            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-              <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
-                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
-              </button>
-            </a>
-
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginTop: 14 }}>
-              Resolución UPME 400 de 2026
-            </div>
-          </>
-        ) : (
-          <>
-            <div style={{ fontSize: "clamp(14px, 2vw, 16px)", color: "rgba(255,255,255,0.85)", marginBottom: 16, lineHeight: 1.5 }}>
-              La próxima ventana de radicación abre en:
-            </div>
-
-            <div style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 20 }}>
-              {[
-                { val: days, label: "Días" },
-                { val: hours, label: "Horas" },
-                { val: mins, label: "Min" },
-              ].map((u, i) => (
-                <div key={i} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "white", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums", background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: "12px 16px", minWidth: "clamp(56px, 8vw, 72px)" }}>
-                    {pad(u.val)}
-                  </div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginTop: 6, letterSpacing: "0.06em" }}>{u.label}</div>
-                </div>
-              ))}
-            </div>
-
-            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-              <button className="btn-primary btn-primary-lg" style={{ background: "white", color: "var(--emerald-700)" }}>
-                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="var(--emerald-700)" />
-              </button>
-            </a>
-
-            <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 14, lineHeight: 1.6, maxWidth: 480, margin: "14px auto 0" }}>
-              No tienes que esperar. Carga tu solicitud ahora y nosotros la radicamos automáticamente el 1 de febrero. Tu lugar queda asegurado.
-            </div>
-
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginTop: 10 }}>
-              Resolución UPME 400 de 2026
-            </div>
-          </>
-        )}
+        <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6, marginTop: 16 }}>
+          Resolución UPME 563 de 2026 · Hora de Colombia ·{" "}
+          <a href="/blog/cierre-ventana-upme-15-diciembre-2026" style={{ color: "var(--emerald-700)", fontWeight: 600, textDecoration: "underline" }}>
+            Qué pasa si no alcanzas a radicar
+          </a>
+        </p>
       </div>
     </section>
   );
@@ -1776,54 +1807,94 @@ function Testimonios() {
 }
 
 // ── PRENSA ──────────────────────────────────────────────────────────────────
-function Prensa() {
-  const medios = [
-    { name: "Revista Semana", logo: "/prensa-semana.png", url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/", maxH: 26, maxW: 130 },
-    { name: "Valora Analitik", logo: "/prensa-valora.png", url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/", maxH: 28, maxW: 95 },
-    { name: "Portafolio", logo: "/prensa-portafolio.png", url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545", maxH: 26, maxW: 130 },
-    { name: "Infobae", logo: "/prensa-infobae.png", url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/", maxH: 24, maxW: 110 },
-    { name: "Revista C-Level", logo: "/prensa-clevel.png", url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de", maxH: 26, maxW: 105 },
-    { name: "Ultima Hora", logo: "/prensa-ultimahora.png", url: "https://www.instagram.com/p/DaqeIT9D-ai/", maxH: 22, maxW: 130 },
-    { name: "Yahoo Finance", logo: "/prensa-yahoo.png", url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html", maxH: 28, maxW: 105 },
-  ];
-  const track = [...medios, ...medios];
-  return (
-    <section aria-label="CertiVeh en los medios" style={{
-      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
-      borderBottom: "1px solid var(--slate-200)", padding: "40px 0",
-    }}>
-      <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
-        letterSpacing: "1.5px", marginBottom: 32,
-      }}>
-        CertiVeh en los medios
+// Cada tarjeta lleva el TITULAR TEXTUAL que publicó el medio, entre comillas porque son sus
+// palabras y no las nuestras. Verificados contra cada página el 22-oct-2026 (og:title o el
+// título del video). No se parafrasean: un titular «mejorado» deja de ser una cita.
+//
+// `maxH`/`maxW` igualan el peso óptico de logos con proporciones muy distintas (Portafolio es
+// 5,4:1 y Valora 1,6:1). Conservan los valores del carrusel anterior salvo Valora: apilado, a 28 px
+// quedaba con la mitad de área que el resto, así que va a 36 px, el alto de la caja del logo.
+type Medio = {
+  name: string; logo: string; maxH: number; maxW: number;
+  titular: string; formato: "Artículo" | "Video" | "Publicación";
+  fecha: string; url: string; accion: string;
+};
+const MEDIOS: Medio[] = [
+  { name: "Negocios Ditu", logo: "/prensa-negociosditu.png", maxH: 30, maxW: 80, formato: "Video", fecha: "Septiembre 2026", accion: "Ver entrevista",
+    titular: "¿Tienes un carro eléctrico o híbrido? Podrías estar perdiendo beneficios",
+    url: "https://www.youtube.com/watch?v=MUugrTUv-Zg" },
+  { name: "Revista Semana", logo: "/prensa-semana.png", maxH: 26, maxW: 130, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Buenas noticias para conductores de carros eléctricos en Colombia: podrían recuperar millones de pesos con este beneficio",
+    url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/" },
+  { name: "Valora Analitik", logo: "/prensa-valora.png", maxH: 36, maxW: 95, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Compradores de vehículos eléctricos podrían recuperar millones de pesos con este beneficio",
+    url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/" },
+  { name: "Portafolio", logo: "/prensa-portafolio.png", maxH: 26, maxW: 130, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Una empresa colombiana lleva a WhatsApp el trámite para acceder a beneficios tributarios de vehículos eléctricos",
+    url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545" },
+  { name: "Infobae", logo: "/prensa-infobae.png", maxH: 24, maxW: 110, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Dueños de carros eléctricos podrían recuperar millones por IVA: así funciona el beneficio",
+    url: "https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/" },
+  { name: "Revista C-Level", logo: "/prensa-clevel.png", maxH: 26, maxW: 105, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Empresa colombiana tramitó más de $17.000 millones en beneficios tributarios para compradores de vehículos eléctricos",
+    url: "https://revistaclevel.com/empresa-colombiana-tramito-mas-de-17000-millones-en-beneficios-tributarios-para-compradores-de" },
+  { name: "Yahoo", logo: "/prensa-yahoo.png", maxH: 28, maxW: 105, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
+    titular: "Compradores de vehículos eléctricos aún no reclaman un beneficio que puede devolverles millones de pesos",
+    url: "https://es-us.noticias.yahoo.com/compradores-veh%C3%ADculos-el%C3%A9ctricos-reclaman-beneficio-160000527.html" },
+  // Publicación patrocinada en Instagram (11-jul-2026). Va la primera frase del texto del post y NO
+  // el titular de su portada («Un auto de 120 millones costaría hasta 66 millones menos»), que
+  // promete como dinero en caja lo que son beneficios tributarios: la regla del 55% del CLAUDE.md.
+  { name: "Última Hora", logo: "/prensa-ultimahora.png", maxH: 22, maxW: 130, formato: "Publicación", fecha: "Julio 2026", accion: "Ver publicación",
+    titular: "Un vehículo de 120 millones de pesos podría representar hasta 66 millones en beneficios tributarios",
+    url: "https://www.instagram.com/p/DaqeIT9D-ai/" },
+];
+
+function TarjetaDePrensa({ m, copia }: { m: Medio; copia: boolean }) {
+  const contenido = (
+    <>
+      <div style={{ height: 36, display: "flex", alignItems: "center" }}>
+        <img className="prensa-logo" src={m.logo} alt={m.name} loading="lazy" style={{ maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain" }} />
+      </div>
+      <p style={{ fontSize: 16, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.5, letterSpacing: "-0.01em", flex: 1 }}>
+        «{m.titular}»
       </p>
-      <div style={{
-        overflow: "hidden", position: "relative",
-        maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-      }}>
-        <div style={{
-          display: "flex", alignItems: "center",
-          animation: "ticker 18s linear infinite",
-          width: "max-content",
-        }}
-          onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.animationPlayState = "paused"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.animationPlayState = "running"; }}
-        >
-          {track.map((m, i) => (
-            <a key={i} href={m.url} target="_blank" rel="noopener noreferrer"
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 56, padding: "0 40px", textDecoration: "none", flexShrink: 0 }}
-            >
-              <img src={m.logo} alt={m.name} loading="lazy" style={{
-                maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain",
-                filter: "grayscale(100%)", opacity: 0.35, transition: "opacity 0.3s, filter 0.3s",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.filter = "grayscale(0%)"; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = "0.35"; e.currentTarget.style.filter = "grayscale(100%)"; }}
-              />
-            </a>
-          ))}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 8 }}>
+        <span style={{ fontSize: 13, color: "var(--slate-500)" }}>{m.formato} · {m.fecha}</span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 600, color: "var(--emerald-700)" }}>
+          {m.accion} <Icon name="arrowRight" size={14} color="var(--emerald-700)" />
+        </span>
+      </div>
+    </>
+  );
+  const estilo: React.CSSProperties = { width: 320, flexShrink: 0, padding: 24, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" };
+  return (
+    <a className="card prensa-card" href={m.url} target="_blank" rel="noopener noreferrer" style={estilo}
+      aria-hidden={copia || undefined} tabIndex={copia ? -1 : undefined}
+      aria-label={copia ? undefined : `${m.name}: ${m.titular} (se abre en una pestaña nueva)`}>
+      {contenido}
+    </a>
+  );
+}
+
+function Prensa() {
+  return (
+    <section id="prensa" aria-labelledby="prensa-titulo" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
+      <div className="section" style={{ paddingBottom: 0 }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <h2 id="prensa-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
+            CertiVeh en los medios
+          </h2>
+          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 640, margin: "0 auto" }}>
+            Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.
+          </p>
+        </div>
+      </div>
+      {/* El carril se duplica para que el desplazamiento no tenga costura (la animación `ticker`
+          mueve -50 %). La segunda copia es decorativa: fuera del árbol de accesibilidad y del
+          orden de tabulación, para que un lector de pantalla no oiga nueve titulares dos veces. */}
+      <div className="prensa-carril" style={{ padding: "8px 0 96px" }}>
+        <div className="prensa-pista">
+          {[false, true].map((copia) => MEDIOS.map((m) => <TarjetaDePrensa key={`${copia}-${m.name}`} m={m} copia={copia} />))}
         </div>
       </div>
     </section>
@@ -1887,7 +1958,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
-    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. Gracias a la Resolución UPME 400 de 2026, la ventana de radicación ahora es continua (del 1 de febrero al 15 de diciembre). Tu solicitud se radica de inmediato, sin esperar ciclos." },
+    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana tu solicitud se radica de inmediato. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: cédula de ciudadanía o de extranjería (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso), factura de compra y tu RUT (el RUT solo si además vas a pedir la devolución del IVA). Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), tarjeta de propiedad del vehículo (frente y reverso), factura de compra y el RUT de la empresa si vas a pedir la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
@@ -2191,10 +2262,16 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
 
   return (
     <PortalUrlContext.Provider value={portalUrl}>
-      <style>{CSS}</style>
+      {/* ⚠️ **Como HTML crudo, no como hijo de texto.** Con `<style>{CSS}</style>` React escapa el
+          texto en el HTML prerenderizado (`>` sale como `&gt;`, las comillas como `&#x27;`): los
+          selectores con `>` y la fuente `Inter` no valían hasta hidratar, y al hidratar el texto no
+          coincidía (errores #425 y #423), así que React tiraba el HTML del servidor y repintaba la
+          landing entera. */}
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar />
       <main>
         <Hero/>
+        <VentanaUPME/>
         <Aliados/>
         <Beneficios/>
         <Servicios/>

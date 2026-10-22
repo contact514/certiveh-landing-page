@@ -10,7 +10,7 @@ CertiVeh gestiona ante la UPME el certificado que permite a propietarios de veh�
 - **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
 - **Depreciación acelerada**: independientes y empresas pueden depreciar el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.
 
-Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021, la Resolución UPME 135 de 2025 y la Resolución UPME 400 de 2026.
+Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021 y la Resolución UPME 563 de 2026, que desde agosto de 2026 reemplaza a las Resoluciones UPME 135 de 2025 y 400 de 2026.
 
 ## Los dos servicios de CertiVeh
 
@@ -24,15 +24,15 @@ CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o po
 
 Este servicio de devolución de IVA aplica únicamente a vehículos eléctricos e híbridos, y no a los híbridos ligeros. Para vehículos a gas natural (GNV) CertiVeh tramita el certificado UPME, pero no gestiona la devolución del IVA: su tasa es del 19% y no del 5%, y los formatos del expediente están escritos para la devolución de eléctricos e híbridos.
 
-## Ventana de radicación UPME (actualizado mayo 2026)
+## Ventana de radicación UPME (actualizado octubre 2026)
 
-La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: las solicitudes se radican de inmediato.
+La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: las solicitudes se radican de inmediato. La Resolución UPME 563 de 2026 (expedida el 5 de agosto de 2026) derogó la 400 y la 135 y mantuvo esa misma ventana: las solicitudes radicadas fuera del 1 de febrero al 15 de diciembre se entienden como no presentadas.
 
 ## Cómo funciona
 
 1. El usuario sube 3 documentos (cédula, tarjeta de propiedad y factura de compra) en la plataforma web portal.certiveh.co. El RUT solo hace falta si además pide la devolución del IVA.
 2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
-3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución 400 de 2026).
+3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución UPME 563 de 2026).
 4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
 
 ## Datos clave
@@ -40,7 +40,7 @@ La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Cicl
 - Sitio web: https://certiveh.co
 - Portal de trámite: https://portal.certiveh.co
 - Cobertura: 498+ modelos de 62 marcas certificadas por la UPME
-- Marco legal: Ley 1715/2014, Ley 2099/2021, Resolución UPME 135/2025, Resolución UPME 400/2026
+- Marco legal: Ley 1715/2014, Ley 2099/2021, Resolución UPME 563/2026
 - Registro mercantil: Cámara de Comercio de Medellín
 - Contacto: contacto@certiveh.co
 - País: Colombia
@@ -83,6 +83,8 @@ https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME
 - Deducción en renta: https://certiveh.co/blog/deduccion-renta-vehiculo-electrico-hibrido-colombia/
 - Cuánto ahorro en impuestos: https://certiveh.co/blog/cuanto-ahorro-impuestos-vehiculo-electrico-colombia/
 - Flotas empresariales: https://certiveh.co/blog/flotas-electricas-hibridas-beneficios-tributarios-empresas/
+- Cierre de la ventana UPME el 15 de diciembre de 2026: https://certiveh.co/blog/cierre-ventana-upme-15-diciembre-2026/
+- Cita en la DIAN para la devolución del IVA: https://certiveh.co/blog/cita-dian-devolucion-iva-carro-electrico-hibrido/
 - Resolución UPME 400 de 2026 (ventana continua): https://certiveh.co/blog/resolucion-upme-400-2026-ventana-continua-certificado/
 
 ## Diferenciadores
@@ -90,7 +92,7 @@ https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME
 - Digital de punta a punta: todo el trámite se hace en línea, sin visitas a la UPME ni a la DIAN. La excepción es el poder del copropietario, cuando la factura tiene varios compradores, que se autentica en notaría. La cita ante la DIAN no es presencial ni es una videollamada: se atiende con un correo el día asignado, antes de la hora.
 - Automatización: un agente de software radica la solicitud directamente en el portal UPME.
 - Precios transparentes: costo publicado en el sitio, pago único y sin suscripciones. Aparte van el costo del trámite ante la UPME y, cuando hay copropietarios, la notaría de su poder.
-- Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 135 de 2025.
-- Radicación inmediata: gracias a la ventana continua (Resolución 400 de 2026), ya no hay que esperar ciclos.
+- Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 563 de 2026.
+- Radicación inmediata: gracias a la ventana continua (Resolución UPME 563 de 2026), ya no hay que esperar ciclos.
 - Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (498+ modelos).
 - Seguimiento: el usuario recibe notificaciones por WhatsApp en cada etapa del trámite.
