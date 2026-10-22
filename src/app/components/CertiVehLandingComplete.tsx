@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, createContext, useContext } from "react";
 import { Navbar } from "./Navbar";
 import { AnimatePresence, motion } from "motion/react";
+import useEmblaCarousel from "embla-carousel-react";
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
@@ -232,29 +233,38 @@ const CSS = `
     box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   }
 
-  /* ── PRENSA ── tarjetas en carril continuo. Se pausa al pasar el ratón o al llegar con el
-     teclado, y con «reducir movimiento» deja de moverse y se recorre deslizando. */
+  /* ── PRENSA ── carrusel controlable (Embla). El viewport recorta, así que lleva aire arriba y
+     abajo para que el levantamiento y la sombra de la tarjeta al pasar el ratón no se corten. */
   .prensa-carril {
-    overflow: hidden; position: relative;
+    overflow: hidden; padding: 8px 0 40px; cursor: grab; /* 40 = 12 de desplazamiento + 32 de difuminado de la sombra */
     mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
   }
-  .prensa-pista { display: flex; gap: 16px; width: max-content; padding: 0 8px; animation: ticker 70s linear infinite; }
-  .prensa-carril:hover .prensa-pista, .prensa-carril:focus-within .prensa-pista { animation-play-state: paused; }
+  .prensa-carril:active { cursor: grabbing; }
+  .prensa-pista { display: flex; touch-action: pan-y pinch-zoom; }
+  .prensa-slide { flex: 0 0 auto; padding-left: 16px; min-width: 0; }
   .prensa-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
   a.prensa-card:hover, a.prensa-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: var(--emerald-200); }
   a.prensa-card:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: 2px; }
   .prensa-logo { filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s, opacity 0.3s; }
   a.prensa-card:hover .prensa-logo, a.prensa-card:focus-visible .prensa-logo { filter: grayscale(0%); opacity: 1; }
-  @media (prefers-reduced-motion: reduce) {
-    .prensa-carril { overflow-x: auto; scroll-snap-type: x mandatory; mask-image: none; -webkit-mask-image: none; }
-    .prensa-pista { animation: none; padding: 0 24px; }
-    /* !important porque la tarjeta lleva display:flex en línea, que si no gana a esta regla. */
-    .prensa-pista > [aria-hidden="true"] { display: none !important; }
-    .prensa-card { scroll-snap-align: start; }
+  /* Flechas: el mismo borde y el mismo hover que .btn-secondary, en círculo de 44 px (área táctil). */
+  .prensa-flecha {
+    width: 44px; height: 44px; border-radius: 9999px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--white); border: 1.5px solid var(--slate-300); cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
   }
+  .prensa-flecha:hover { border-color: var(--slate-400); background: var(--slate-50); }
+  .prensa-flecha:focus-visible, .prensa-punto:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: 2px; }
+  /* Puntos: 24 px de área pulsable aunque el punto mida 8; el actual se alarga en el verde de relleno. */
+  .prensa-punto { width: 24px; height: 24px; padding: 0; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 9999px; }
+  .prensa-punto span { display: block; width: 8px; height: 8px; border-radius: 9999px; background: var(--slate-300); transition: width 0.2s, background 0.2s; }
+  .prensa-punto:hover span { background: var(--slate-400); }
+  .prensa-punto[aria-current="true"] span { width: 20px; background: var(--emerald-600); }
   @media (max-width: 768px) {
     .prensa-card { width: 280px !important; padding: 20px !important; }
+    .prensa-slide { padding-left: 12px; }
   }
 
   .ticker-wrap { overflow: hidden; background: var(--grad-primary); padding: 12px 0; }
@@ -525,6 +535,7 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
     checkCircle: <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></>,
     upload:      <><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></>,
     arrowRight:  <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
+    arrowLeft:   <><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>,
     clock:       <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
     bell:        <><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></>,
     lock:        <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
@@ -1848,11 +1859,13 @@ const MEDIOS: Medio[] = [
     url: "https://www.instagram.com/p/DaqeIT9D-ai/" },
 ];
 
-function TarjetaDePrensa({ m, copia }: { m: Medio; copia: boolean }) {
-  const contenido = (
-    <>
+function TarjetaDePrensa({ m }: { m: Medio }) {
+  return (
+    <a className="card prensa-card" href={m.url} target="_blank" rel="noopener noreferrer"
+      aria-label={`${m.name}: ${m.titular} (se abre en una pestaña nueva)`}
+      style={{ width: 320, height: "100%", padding: 28, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" }}>
       <div style={{ height: 36, display: "flex", alignItems: "center" }}>
-        <img className="prensa-logo" src={m.logo} alt={m.name} loading="lazy" style={{ maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain" }} />
+        <img className="prensa-logo" src={m.logo} alt={m.name} loading="lazy" draggable={false} style={{ maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain" }} />
       </div>
       <p style={{ fontSize: 16, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.5, letterSpacing: "-0.01em", flex: 1 }}>
         «{m.titular}»
@@ -1863,19 +1876,48 @@ function TarjetaDePrensa({ m, copia }: { m: Medio; copia: boolean }) {
           {m.accion} <Icon name="arrowRight" size={14} color="var(--emerald-700)" />
         </span>
       </div>
-    </>
-  );
-  const estilo: React.CSSProperties = { width: 320, flexShrink: 0, padding: 28, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" };
-  return (
-    <a className="card prensa-card" href={m.url} target="_blank" rel="noopener noreferrer" style={estilo}
-      aria-hidden={copia || undefined} tabIndex={copia ? -1 : undefined}
-      aria-label={copia ? undefined : `${m.name}: ${m.titular} (se abre en una pestaña nueva)`}>
-      {contenido}
     </a>
   );
 }
 
+// El carrusel lo maneja quien lo mira: flechas, puntos y arrastre (Embla, la misma librería de
+// `ui/carousel.tsx`). Avanza solo una tarjeta cada 5 s, pero se detiene mientras el ratón o el
+// foco están dentro, y DEJA de avanzar para siempre en cuanto el usuario lo mueve: quien ya está
+// leyendo no quiere que la tarjeta se le vaya. Con «reducir movimiento» no avanza nunca.
+const PRENSA_AVANCE_MS = 5000;
+
 function Prensa() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
+  const [actual, setActual] = useState(0);
+  const [tocado, setTocado] = useState(false);
+  const [encima, setEncima] = useState(false);
+  const [quieto, setQuieto] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setQuieto(mq.matches);
+    const cambio = () => setQuieto(mq.matches);
+    mq.addEventListener("change", cambio);
+    return () => mq.removeEventListener("change", cambio);
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const alSeleccionar = () => setActual(emblaApi.selectedScrollSnap());
+    const alArrastrar = () => setTocado(true);
+    alSeleccionar();
+    emblaApi.on("select", alSeleccionar).on("reInit", alSeleccionar).on("pointerDown", alArrastrar);
+    return () => { emblaApi.off("select", alSeleccionar).off("reInit", alSeleccionar).off("pointerDown", alArrastrar); };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi || tocado || encima || quieto) return;
+    const t = setInterval(() => { if (!document.hidden) emblaApi.scrollNext(); }, PRENSA_AVANCE_MS);
+    return () => clearInterval(t);
+  }, [emblaApi, tocado, encima, quieto]);
+
+  const ir = (fn: () => void) => { setTocado(true); fn(); };
+
   return (
     <section id="prensa" aria-labelledby="prensa-titulo" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
       <div className="section" style={{ paddingBottom: 0 }}>
@@ -1888,12 +1930,36 @@ function Prensa() {
           </p>
         </div>
       </div>
-      {/* El carril se duplica para que el desplazamiento no tenga costura (la animación `ticker`
-          mueve -50 %). La segunda copia es decorativa: fuera del árbol de accesibilidad y del
-          orden de tabulación, para que un lector de pantalla no oiga nueve titulares dos veces. */}
-      <div className="prensa-carril" style={{ padding: "8px 0 96px" }}>
-        <div className="prensa-pista">
-          {[false, true].map((copia) => MEDIOS.map((m) => <TarjetaDePrensa key={`${copia}-${m.name}`} m={m} copia={copia} />))}
+
+      <div role="region" aria-roledescription="carrusel" aria-label="Artículos y entrevistas sobre CertiVeh"
+        onMouseEnter={() => setEncima(true)} onMouseLeave={() => setEncima(false)}
+        onFocus={() => setEncima(true)} onBlur={() => setEncima(false)}
+        style={{ paddingBottom: 96 }}>
+        <div className="prensa-carril" ref={emblaRef}>
+          <div className="prensa-pista">
+            {MEDIOS.map((m, i) => (
+              <div key={m.name} className="prensa-slide" role="group" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${MEDIOS.length}: ${m.name}`}>
+                <TarjetaDePrensa m={m} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+          <button type="button" className="prensa-flecha" aria-label="Medio anterior" onClick={() => emblaApi && ir(() => emblaApi.scrollPrev())}>
+            <Icon name="arrowLeft" size={18} color="var(--slate-700)" />
+          </button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {MEDIOS.map((m, i) => (
+              <button key={m.name} type="button" className="prensa-punto" aria-label={`Ir a ${m.name}`} aria-current={i === actual ? "true" : undefined}
+                onClick={() => emblaApi && ir(() => emblaApi.scrollTo(i))}>
+                <span />
+              </button>
+            ))}
+          </div>
+          <button type="button" className="prensa-flecha" aria-label="Medio siguiente" onClick={() => emblaApi && ir(() => emblaApi.scrollNext())}>
+            <Icon name="arrowRight" size={18} color="var(--slate-700)" />
+          </button>
         </div>
       </div>
     </section>
