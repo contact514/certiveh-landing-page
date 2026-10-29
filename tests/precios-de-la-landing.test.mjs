@@ -8,7 +8,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync, existsSync } from 'node:fs';
 import { tarifaPorId, TARIFAS } from '../src/lib/tipos-de-activo.ts';
 import { cotizacionDeLaHome, cotizacionDeGas, preciosDesde, descripcionDeGas, tasaUpme } from '../src/lib/precios-de-la-landing.ts';
-import { SHA_TIPOS_DE_ACTIVO, preciosProhibidos, preciosViejosEn, preciosDeLosOffers } from '../scripts/guarda-de-la-tarifa.mjs';
+import { SHA_TIPOS_DE_ACTIVO, preciosProhibidos, preciosViejosEn, preciosDeLosOffers, derivadasProhibidas, derivadasViejasEn } from '../scripts/guarda-de-la-tarifa.mjs';
+import * as MODULO from '../src/lib/tipos-de-activo.ts';
 
 const T2 = tarifaPorId('desde-2026-08-04');
 const T3 = tarifaPorId('ajuste-oct-2026');
@@ -46,7 +47,7 @@ test('las cifras «desde» y la descripción de gas con T3 no dicen nada de T2',
   assert.deepEqual(d.pesos, { certificado: '$494.000', ivaPaquete: '$606.000', ivaSuelto: '$796.000', gas: '$880.000' });
   const textos = JSON.stringify(d) + descripcionDeGas(T3);
   for (const v of VIEJAS) assert.ok(!textos.includes(v), v);
-  assert.match(descripcionDeGas(T3), /^Desde \$880\.000 COP \+ IVA para inversiones de hasta \$150M\. Si vale más, a esos \$880\.000 se le suma el 0,6% de la parte entre \$150M y \$300M/);
+  assert.match(descripcionDeGas(T3), /^Desde \$880\.000 COP \+ IVA para inversiones de hasta \$150M\. Si vale más, a esos \$880\.000 se les suma el 0,6% de la parte entre \$150M y \$300M/);
   assert.ok(!descripcionDeGas(T3).includes('vehículo'));
 });
 
@@ -71,3 +72,16 @@ test('la quinta copia es la de los repos, y la guarda tiene su huella', () => {
     if (existsSync(p)) { assert.equal(readFileSync(p, 'utf8'), texto, otra); return; }
   }
 });
+
+test('la guarda caza las cifras DERIVADAS de otra tarifa (AUDITORIA-LOTE4-R1, M1) y no las de la vigente', () => {
+  const conT3 = derivadasProhibidas(TARIFAS, T3, MODULO);
+  const html = '<p>IVA $113.998, total $713.988, ~$595K, el 0,25 % del valor, y 0,3% del gas</p>';
+  assert.deepEqual(derivadasViejasEn(html, conT3).sort(), ['0,25%', '113.998', '595K', '713.988'].sort());
+  // Lo de la tarifa vigente pasa: su IVA, su total, «~$721K» y sus porcentajes (el 0,3 % de gas es de T3 también).
+  assert.deepEqual(derivadasViejasEn('<p>IVA $93.860, $587.860, ~$721K, el 0,303% y el 0,3%</p>', conT3), []);
+  // Y antes de T, al revés: lo de la nueva no puede salir.
+  const conT2 = derivadasProhibidas(TARIFAS, T2, MODULO);
+  assert.deepEqual(derivadasViejasEn('<p>$587.860, ~$721K, 0,303%</p>', conT2).sort(), ['0,303%', '587.860', '721K'].sort());
+  assert.deepEqual(derivadasViejasEn('<p>$713.988, ~$595K, 0,25%</p>', conT2), []);
+});
+

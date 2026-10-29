@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Navbar } from '../../app/components/Navbar';
 import { vehiculos } from '../../data/vehiculos';
 import { honorariosCertivehSinEscalar, tarifaVigente } from '../../lib/tipos-de-activo.ts';
+import { tasaUpme } from '../../lib/precios-de-la-landing.ts';
 
 export async function getStaticPaths() {
   return vehiculos.map(v => ({
@@ -13,18 +14,8 @@ export async function getStaticPaths() {
 
 const { vehiculo: v } = Astro.props;
 
-const UVT = 52_374;
-const invUVT = v.precioCOP / UVT;
-let pagoUVT: number;
-if (invUVT < 275)        pagoUVT = 1.2;
-else if (invUVT < 826)   pagoUVT = 3.4;
-else if (invUVT < 1_652) pagoUVT = 6.7;
-else if (invUVT < 3_305) pagoUVT = 13.4;
-else {
-  const beneficio = (invUVT - 3_305) * 0.405;
-  pagoUVT = Math.min(13.4 + beneficio * 0.005, 275);
-}
-const costoUPME = Math.round(pagoUVT * UVT);
+// La tasa UPME con la misma fórmula de la calculadora y del portal: una sola fuente, `precios-de-la-landing.ts`.
+const costoUPME = tasaUpme(v.precioCOP);
 // Los honorarios de la tarifa vigente EN EL INSTANTE DEL BUILD (ajuste de precios, lote 4). La ficha es estática:
 // tras T cambia con el rebuild de T+1 min.
 const honorarios = honorariosCertivehSinEscalar('veh', v.precioCOP, tarifaVigente(new Date()));

@@ -21,13 +21,13 @@
 import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const COPIA = join(RAIZ, 'src/lib/tipos-de-activo.ts');
 
 /** La huella de las cinco copias. La reescribe el script de la vigencia del portal; nunca a mano. */
-export const SHA_TIPOS_DE_ACTIVO = 'e445283b4d141348f52de47a6f56f901e9fcc86e4b1178fdf611950180774243';
+export const SHA_TIPOS_DE_ACTIVO = '91fc5cd8f2d8d4117fca0eb07442068a0a2541c1f8b88cc8b4dad4bcc75b4c43';
 
 const sha = (texto) => createHash('sha256').update(texto).digest('hex');
 
@@ -63,6 +63,50 @@ export function preciosViejosEn(html, prohibidos) {
   return hallados;
 }
 
+/** Los porcentajes con que se escribe una regla, como los escribe `textoDeLaRegla` («0,25%», «0,303%»). */
+export function porcentajesDeLaRegla(regla, m) {
+  if (regla.modo === 'fijo_y_porcentaje') return [m.porcentajeDeFactores(regla.factores)];
+  if (regla.modo === 'fijo_y_tramos') return regla.tramos.map((tr) => m.porcentajeDePpm(tr.ppm));
+  return [];
+}
+const reglasDe = (t) => [t.honorarios.veh, t.honorarios.gnv, t.ivaPaquete, t.ivaSuelto];
+
+/**
+ * **Las cifras DERIVADAS de otra tarifa** (AUDITORIA-LOTE4-R1, M1): el IVA del 19 % y el total con IVA de cada precio
+ * prohibido (113.998, 713.988…), su resumen en miles («~$595K») y los porcentajes de sus reglas que la vigente no usa
+ * («0,25%»). Nada de esto puede reaparecer escrito a mano. Se quitan las que coinciden con una de la vigente.
+ */
+export function derivadasProhibidas(tarifas, vigente, m) {
+  const conIva = (p) => [Math.round(p * 0.19), p + Math.round(p * 0.19)];
+  const deLaVigente = new Set(preciosDeLista(vigente).flatMap(conIva));
+  const milesDeLaVigente = new Set(preciosDeLista(vigente).map((p) => Math.round(conIva(p)[1] / 1000)));
+  const pctDeLaVigente = new Set(reglasDe(vigente).flatMap((r) => porcentajesDeLaRegla(r, m)));
+  const numeros = new Set(), miles = new Set(), porcentajes = new Set();
+  for (const p of preciosProhibidos(tarifas, vigente)) {
+    for (const n of conIva(p)) if (!deLaVigente.has(n)) numeros.add(n);
+    const k = Math.round(conIva(p)[1] / 1000);
+    if (!milesDeLaVigente.has(k)) miles.add(k);
+  }
+  for (const t of tarifas) if (t.id !== vigente.id) {
+    for (const pct of reglasDe(t).flatMap((r) => porcentajesDeLaRegla(r, m))) if (!pctDeLaVigente.has(pct)) porcentajes.add(pct);
+  }
+  return { numeros: [...numeros], miles: [...miles], porcentajes: [...porcentajes] };
+}
+
+/** Las apariciones de cifras derivadas de otra tarifa en un HTML. */
+export function derivadasViejasEn(html, d) {
+  const hallados = [...preciosViejosEn(html, d.numeros)];
+  for (const k of d.miles) {
+    const f = `${conPuntos(k)}K`;
+    if (new RegExp(`(?<![\\d.,])${f.replace(/\./g, '\\.')}(?![\\w])`).test(html)) hallados.push(f);
+  }
+  for (const pct of d.porcentajes) {
+    const [ent, dec] = pct.replace('%', '').split(',');
+    if (new RegExp(`(?<![\\d.,])${ent},${dec}\\s?%`).test(html)) hallados.push(pct);
+  }
+  return hallados;
+}
+
 /** Los `"price"` de los Offer JSON-LD de un HTML. */
 export function preciosDeLosOffers(html) {
   const precios = [];
@@ -81,6 +125,11 @@ function htmlDe(dir) {
 }
 
 async function main() {
+  // Node lee la copia `.ts` quitándole los tipos (desde 22.18 / 23.6, sin bandera). Vercel usa la 24.x (`engines`).
+  if (!process.features?.typescript) {
+    console.error(`[guarda-de-la-tarifa] Node ${process.version} no lee TypeScript sin bandera (hace falta ≥ 22.18; Vercel usa la 24.x, ver "engines")`);
+    process.exit(1);
+  }
   const fallos = [];
   const modulo = await import(new URL('../src/lib/tipos-de-activo.ts', import.meta.url).href);
   const { TARIFAS, tarifaVigente } = modulo;
@@ -101,6 +150,15 @@ async function main() {
   if (preciosViejosEn(malo, prohibidos).length === 0) control.push('el barrido no caza un precio de otra tarifa');
   const bueno = `<p>Desde $${conPuntos(preciosDeLista(vigente)[0])} + IVA, IVA $1.234.567, ref 12599990123</p>`;
   if (preciosViejosEn(bueno, prohibidos).length > 0) control.push('el barrido acusa a un HTML limpio');
+  const derivadas = derivadasProhibidas(TARIFAS, vigente, modulo);
+  if (!derivadas.numeros.length || !derivadas.miles.length || !derivadas.porcentajes.length) control.push('no hay cifras derivadas que buscar');
+  for (const [n, html] of [
+    ['IVA', `<p>IVA $${conPuntos(derivadas.numeros[0] ?? 1)}</p>`],
+    ['miles', `<p>~$${conPuntos(derivadas.miles[0] ?? 1)}K</p>`],
+    ['porcentaje', `<p>el ${derivadas.porcentajes[0] ?? '9,99%'} del valor</p>`],
+  ]) if (derivadasViejasEn(html, derivadas).length === 0) control.push(`el barrido no caza una cifra derivada de otra tarifa (${n})`);
+  const vigentePct = reglasDe(vigente).flatMap((r) => porcentajesDeLaRegla(r, modulo))[0];
+  if (derivadasViejasEn(`${bueno}<p>${vigentePct ?? ''} del valor, 10,25 % de algo, 1.250K</p>`, derivadas).length > 0) control.push('el barrido de derivadas acusa a un HTML limpio');
   if (control.length) {
     console.error(`[guarda-de-la-tarifa] FALLA EL CONTROL DEL INSTRUMENTO: ${control.join('; ')}`);
     process.exit(1);
@@ -118,7 +176,7 @@ async function main() {
   for (const p of paginas) {
     const html = readFileSync(p, 'utf8');
     const rel = relative(dist, p);
-    const viejos = preciosViejosEn(html, prohibidos);
+    const viejos = [...preciosViejosEn(html, prohibidos), ...derivadasViejasEn(html, derivadas)];
     if (viejos.length) fallos.push(`${rel}: cita precios de otra tarifa (${[...new Set(viejos)].join(', ')}); la vigente es ${vigente.id}`);
     for (const precio of preciosDeLosOffers(html)) {
       if (permitidosEnOffers.has(precio)) continue;
@@ -143,4 +201,6 @@ async function main() {
   console.log(`[guarda-de-la-tarifa] copia ${SHA_TIPOS_DE_ACTIVO.slice(0, 12)}… ok; ${paginas.length} páginas y ${fichas} fichas con la tarifa ${vigente.id}; ninguna cita ${prohibidos.map(conPuntos).join(', ')}.`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) await main();
+// `pathToFileURL`: con espacios u otros caracteres que se codifican en una URL, la comparación literal con
+// `file://${argv[1]}` no casaba y la guarda terminaba en silencio sin barrer nada (AUDITORIA-LOTE4-R1, M2).
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main();

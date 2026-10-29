@@ -389,7 +389,7 @@ export function textoDeLaRegla(regla: ReglaDePrecio): string {
   const lista = partes.length === 1 ? partes[0]
     : `${partes.slice(0, -1).join(', ')} y ${partes[partes.length - 1]}`;
   return regla.combina === 'suma'
-    ? `${fijo} ${hasta}. Si vale más, a esos ${pesosDeLaTarifa(regla.fijo)} se le suma ${lista}`
+    ? `${fijo} ${hasta}. Si vale más, a esos ${pesosDeLaTarifa(regla.fijo)} se les suma ${lista}`
     : `${fijo} ${hasta}. Si vale más, ${lista}, y nunca menos de ${pesosDeLaTarifa(regla.fijo)}`;
 }
 
