@@ -2042,15 +2042,16 @@ function FAQ() {
     // la cita la pedimos NOSOTROS y va condicionada a la seccional · la juramentada y el
     // Formulario 010 los firma siempre el cliente, en línea · el reenvío desde el correo del RUT
     // es suyo, en todas las seccionales · la cita no es presencial: se atiende enviando ese
-    // correo el día de la cita, antes de la hora. «Una cita por contribuyente» se retiró el
-    // 16-sep: no tiene fuente oficial.
+    // correo el día de la cita, a la hora exacta o dentro de los 5 minutos siguientes (la DIAN,
+    // 29-oct-2026, y su Abecé: «no antes y tampoco después»; antes decía «antes de la hora»).
+    // «Una cita por contribuyente» se retiró el 16-sep: no tiene fuente oficial.
     //
     // ⚠️ Del 29-sep al 6-oct-2026 esta respuesta contaba que en Bogotá se radicaba en una
     // videollamada y que allí existía un poder. Las dos cosas dejaron de ser verdad (decisiones
     // 110, 111 y 146 de Julian) y NO vuelven: Bogotá radica igual que las demás seccionales con
     // cita. Y esta respuesta está duplicada, letra por letra, en el JSON-LD `FAQPage` de
     // `src/pages/index.astro` y `src/pages/exotics.astro`: se cambian las tres a la vez.
-    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el día de tu cita, antes de la hora. Y seguimos tu trámite hasta que la DIAN consigna." },
+    { q: "¿CertiVeh gestiona la devolución del IVA?", a: "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el día de tu cita, a la hora exacta o dentro de los 5 minutos siguientes, ni antes ni después. Y seguimos tu trámite hasta que la DIAN consigna." },
     // ⚠️ «No es una auditoría» es cierto; «no proceden auditorías» NO lo es y no se puede publicar.
     // El procedimiento DIAN PR-COT-0128 contempla que una solicitud se seleccione para los programas
     // de fiscalización AD, DI o PD, el art. 857-1 del ET permite suspender el término hasta 90 días

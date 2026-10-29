@@ -136,7 +136,8 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 >   tu seccional la exige». Sin condicionar es falso para la mayoría. *(«Una sola cita por
 >   contribuyente» se retiró el 16-sep-2026: no tiene fuente oficial.)*
 > · **La cita NO es presencial ni es una videollamada.** Nadie va a ninguna oficina ni se conecta
->   a nada: se atiende mandando el correo ese día, antes de la hora asignada. **Bogotá incluida**:
+>   a nada: se atiende mandando el correo ese día, a la hora exacta de la cita o dentro de los
+>   5 minutos siguientes, ni antes ni después (la DIAN, 29-oct-2026). **Bogotá incluida**:
 >   desde el 6-oct-2026 radica igual que las demás seccionales con cita.
 > · **El correo de radicación lo reenvía SIEMPRE el cliente**, desde la dirección inscrita en su
 >   RUT, porque la DIAN exige que la solicitud salga del contribuyente. En todas las seccionales.
