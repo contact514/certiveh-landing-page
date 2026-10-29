@@ -46,8 +46,10 @@ const { useTarifaDeLaIsla } = await import('../src/app/components/la-tarifa-de-l
 const { VIGENCIA_DEL_AJUSTE_OCT_2026 } = await import('../src/lib/tipos-de-activo.ts');
 
 test('🔴 build de agosto y reloj DESPUÉS de T: pinta agosto en el HTML y, al hidratar, la nueva (494.000)', () => {
-  // La vigencia real de la tabla es 2099-01-01 hasta el commit de publicación: el 1-jun-2099 rige la nueva sea cual sea T.
-  mock.timers.enable({ apis: ['Date'], now: new Date('2099-06-01T05:00:30Z') });
+  // Una hora después de la vigencia del ajuste (2099-01-01 hasta el commit de publicación; el día de T después): rige el
+  // ajuste también si detrás hay una vuelta atrás, que siempre empieza después (R5-K1). El 1-jun-2099 de antes caía en
+  // ella.
+  mock.timers.enable({ apis: ['Date'], now: new Date(Date.parse(VIGENCIA_DEL_AJUSTE_OCT_2026) + 3_600_000) });
   try {
     const [html, hidratada] = R.montar(() => useTarifaDeLaIsla('desde-2026-08-04'));
     assert.equal(html.id, 'desde-2026-08-04');
