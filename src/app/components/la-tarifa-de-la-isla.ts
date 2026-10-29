@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { tarifaPorId, tarifaVigente, type Tarifa } from '@/lib/tipos-de-activo.ts';
+// Ruta relativa (no el alias `@/`): así el test de `node --test` carga el hook real (ajuste de precios, ronda 4).
+import { tarifaPorId, tarifaVigente, type Tarifa } from '../../lib/tipos-de-activo.ts';
 
 /**
  * **La tarifa de una isla React** (ajuste de precios, lote 4; ESPEC §5.1).

@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/quitar-nul-del-html.mjs && node scripts/guarda-de-textos.mjs && node scripts/guarda-de-la-tarifa.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test --experimental-test-module-mocks tests/*.test.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
