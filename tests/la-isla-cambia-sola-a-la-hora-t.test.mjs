@@ -43,6 +43,7 @@ function reactDePrueba() {
 const R = reactDePrueba();
 mock.module('react', { namedExports: R.namedExports });
 const { useTarifaDeLaIsla } = await import('../src/app/components/la-tarifa-de-la-isla.ts');
+const { VIGENCIA_DEL_AJUSTE_OCT_2026 } = await import('../src/lib/tipos-de-activo.ts');
 
 test('🔴 build de agosto y reloj DESPUÉS de T: pinta agosto en el HTML y, al hidratar, la nueva (494.000)', () => {
   // La vigencia real de la tabla es 2099-01-01 hasta el commit de publicación: el 1-jun-2099 rige la nueva sea cual sea T.
@@ -68,3 +69,19 @@ test('build de agosto y reloj ANTES de T: se queda en agosto (no cambia antes de
     mock.timers.reset();
   }
 });
+
+test('🔴 en el borde: un minuto DESPUÉS de T ya hidrata la nueva, y un minuto ANTES sigue en agosto (un reloj desplazado se ve)', () => {
+  // La vigencia real de la tabla (2099-01-01 hasta el commit de publicación; el día de T después). Un efecto que
+  // mirara «ayer» o «mañana» en vez de ahora (AUDITORIA-CRUZADA-R4, mutante Y1) cambiaría tarde o temprano: aquí no pasa.
+  const T = Date.parse(VIGENCIA_DEL_AJUSTE_OCT_2026);
+  for (const [desfase, esperada] of [[60_000, 'ajuste-oct-2026'], [-60_000, 'desde-2026-08-04']]) {
+    mock.timers.enable({ apis: ['Date'], now: new Date(T + desfase) });
+    try {
+      const [, hidratada] = R.montar(() => useTarifaDeLaIsla('desde-2026-08-04'));
+      assert.equal(hidratada.id, esperada, `a T ${desfase > 0 ? '+' : '-'} 1 min`);
+    } finally {
+      mock.timers.reset();
+    }
+  }
+});
+
