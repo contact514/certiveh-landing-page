@@ -113,7 +113,7 @@ export function invierteQuienHaceQue(frase) {
 
 /**
  * 🔴 29-oct-2026 (la DIAN, de primera mano, y su Abecé): el correo de la cita se envía a la hora EXACTA de la cita o
- * dentro de los 15 minutos siguientes, «no antes y tampoco después». Antes decíamos «el día de la cita, antes de la hora»
+ * dentro de los 30 minutos siguientes (mejor en los primeros 10), «no antes y tampoco después». Antes decíamos «el día de la cita, antes de la hora»
  * y «unos 5 minutos antes», que es justo lo que la DIAN da por no recibido.
  */
 export function laVentanaMalDicha(frase) {
@@ -127,7 +127,7 @@ const REGLAS = [
   [citaUnArticuloParaElPlazo, 'se cita un artículo (855/860) para un plazo que no dice'],
   [prometeUnTotal, '«tres meses y medio» no tiene fuente'],
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
-  [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 15 minutos siguientes, no antes'],
+  [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 30 minutos siguientes (mejor en los primeros 10), no antes'],
 ];
 
 // ── El control: cada regla caza lo suyo y deja pasar lo cierto ─────────────────────────────────
@@ -167,7 +167,7 @@ function control() {
   for (const mal of ['Si hay cita, envías ese correo el día de tu cita, antes de la hora.', 'se atiende con un correo el día asignado, antes de la hora.', 'Reenvía el correo unos 5 minutos antes de la hora de tu cita.', 'se atiende mandando el correo ese día, antes de la hora asignada.']) {
     debe(laVentanaMalDicha(mal), `laVentanaMalDicha no caza: ${mal}`);
   }
-  for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 15 minutos siguientes, ni antes ni después.', 'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
+  for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.', 'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
     debe(!laVentanaMalDicha(bien), `laVentanaMalDicha marca una frase cierta: ${bien}`);
   }
   // El lector: ve el texto visible y el JSON-LD, y no los comentarios ni los scripts.
