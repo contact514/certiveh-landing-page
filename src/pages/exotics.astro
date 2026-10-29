@@ -1,11 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CertiVehLandingComplete from '../app/components/CertiVehLandingComplete';
+import { tarifaVigente } from '../lib/tipos-de-activo.ts';
+import { preciosDesde, descripcionDeGas } from '../lib/precios-de-la-landing.ts';
+// La tarifa vigente EN EL INSTANTE DEL BUILD (ajuste de precios, lote 4): las cifras del JSON-LD salen de ella y la
+// isla la recibe por su id. Tras T, el rebuild de T+1 min cambia el HTML; la isla ya cambia sola al hidratar.
+const tarifa = tarifaVigente(new Date());
+const desde = preciosDesde(tarifa);
 import '../styles/index.css';
 ---
 
 <BaseLayout robots="noindex, nofollow">
-  <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" />
+  <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" tarifaDelBuild={tarifa.id} />
 
   <!-- Exotics: rewrite all portal links -->
   <script is:inline>
@@ -32,9 +38,9 @@ import '../styles/index.css';
     "offers": {
       "@type": "Offer",
       "priceCurrency": "COP",
-      "price": "599990",
+      "price": String(desde.certificado),
       "availability": "https://schema.org/InStock",
-      "description": "Certificado UPME desde $599.990 COP + IVA. Gestión de la devolución de IVA desde $499.990 COP + IVA. Más el costo del trámite ante la UPME según resolución vigente."
+      "description": `Certificado UPME desde ${desde.pesos.certificado} COP + IVA. Gestión de la devolución de IVA desde ${desde.pesos.ivaPaquete} COP + IVA. Más el costo del trámite ante la UPME según resolución vigente.`
     },
     "author": {
       "@type": "Organization",
@@ -157,8 +163,8 @@ import '../styles/index.css';
     "offers": {
       "@type": "Offer",
       "priceCurrency": "COP",
-      "price": "499990",
-      "description": "Desde $499.990 COP + IVA (precio preferencial contratando junto al certificado UPME). Sin el certificado, desde $599.990 COP + IVA."
+      "price": String(desde.ivaPaquete),
+      "description": `Desde ${desde.pesos.ivaPaquete} COP + IVA (precio preferencial contratando junto al certificado UPME). Sin el certificado, desde ${desde.pesos.ivaSuelto} COP + IVA.`
     }
   })} />
 

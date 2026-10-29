@@ -293,7 +293,9 @@ La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solic
 Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto.
 
 ### Card 6: Solo pagas una vez
-Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones.
+Certificado UPME {tramitación de la tarifa vigente} + IVA. Devolución de IVA desde {IVA en paquete de la tarifa vigente} + IVA. Sin suscripciones.
+
+*(Las cifras salen de la tarifa vigente, `src/lib/tipos-de-activo.ts`; no se escriben. Con la de agosto de 2026: $599.990 y $499.990. Desde el ajuste de octubre: $494.000 y $606.000.)*
 
 > El desglose de costos ajenos (el trámite ante la UPME y, con poder, la notaría) se retiró de esta
 > tarjeta el 9-sep-2026. **No desapareció del producto:** el del trámite UPME sigue en el paso 03 y
@@ -410,7 +412,9 @@ https://portal.certiveh.co
 - Vehículo $150M → Deducción renta: $75.000.000
 
 ### Honorarios CertiVeh
-- Certificado UPME: $599.990 + IVA (tarifa fija). Gestión del IVA: $499.990 contratada junto al certificado, $599.990 por separado, + IVA. Tramo porcentual solo por encima de $200M.
+- Los precios salen de la tarifa vigente (`src/lib/tipos-de-activo.ts`), con la frase de cada regla de `textoDeLaRegla`. No se escriben a mano en ningún texto.
+- Desde el ajuste de octubre de 2026: certificado UPME $494.000 + IVA (tarifa fija). Gestión del IVA: $606.000 contratada junto al certificado y $796.000 por separado, + IVA, para vehículos de hasta $200M (valor sin IVA); por encima, la regla por tramos de la tarifa. En gas natural, $880.000 + IVA hasta $150M y por tramos encima.
+- Hasta el ajuste (tarifa de agosto de 2026): $599.990, $499.990 y $599.990, con el 0,25% y el 0,3% por encima de $200M.
 
 ### Tiempos del Proceso
 - Subir documentos: Menos de 3 minutos

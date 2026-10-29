@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Navbar } from '../../app/components/Navbar';
 import { vehiculos } from '../../data/vehiculos';
+import { honorariosCertivehSinEscalar, tarifaVigente } from '../../lib/tipos-de-activo.ts';
 
 export async function getStaticPaths() {
   return vehiculos.map(v => ({
@@ -24,7 +25,9 @@ else {
   pagoUVT = Math.min(13.4 + beneficio * 0.005, 275);
 }
 const costoUPME = Math.round(pagoUVT * UVT);
-const honorarios = 599_990;
+// Los honorarios de la tarifa vigente EN EL INSTANTE DEL BUILD (ajuste de precios, lote 4). La ficha es estática:
+// tras T cambia con el rebuild de T+1 min.
+const honorarios = honorariosCertivehSinEscalar('veh', v.precioCOP, tarifaVigente(new Date()));
 const subtotal = costoUPME + honorarios;
 const ivaServicio = Math.round(honorarios * 0.19);
 const costoTotal = costoUPME + honorarios + ivaServicio;
@@ -100,7 +103,7 @@ const faqLd = JSON.stringify({
       name: `¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?`,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `El costo total para un ${v.marca} ${v.modelo} es de ${fmt(costoTotal)} COP (incluye trámite UPME ${fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA sobre honorarios). Es un pago único, sin suscripciones.`,
+        text: `El costo total para un ${v.marca} ${v.modelo} es de ${fmt(costoTotal)} COP (incluye trámite UPME ${fmt(costoUPME)} + honorarios CertiVeh ${fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.`,
       },
     },
     {
@@ -327,7 +330,7 @@ const faqLd = JSON.stringify({
           <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
           <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh $599.990 + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
+        <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh {fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
       </div>
 
       <div class="v-faq-item">

@@ -25,8 +25,22 @@ lleva un bloque `pnpm.overrides` que fija `react` y `react-dom` a `18.3.1`, más
 otras versiones de React sin decir nada y dejaría un `package-lock.json` compitiendo con el
 lockfile bueno. Si `pnpm` no está, actívalo con `corepack`; no lo sustituyas.
 
-No hay suite de tests ni `tsconfig.json` raíz en este repo: la comprobación real es `pnpm build`
-limpio y mirar la página.
+No hay `tsconfig.json` raíz en este repo. La comprobación real es `pnpm build` limpio (con sus dos guardas) y
+mirar la página, más `pnpm test` (`node --test`, sin dependencias), que fija las cifras de las calculadoras.
+
+## Los precios salen de la tarifa, nunca se escriben
+
+`src/lib/tipos-de-activo.ts` es la QUINTA copia, byte a byte, de la tarifa versionada del portal y del panel. No
+se edita aquí: se copia desde el portal, y la vigencia la fija `scripts/fijar-la-vigencia-de-la-tarifa.sh` del
+portal (que también rehace la huella de la guarda). `src/lib/precios-de-la-landing.ts` compone esa tarifa con la
+tasa de la UPME para las calculadoras, las tarjetas, las fichas y los JSON-LD.
+
+- **En el build** (frontmatter de Astro) se usa `tarifaVigente(new Date())`: las fichas, el blog y los JSON-LD
+  cambian de tarifa con un rebuild. Tras el cambio de tarifa hay que reconstruir (el guion lo pide a T+1 min).
+- **En el navegador** las islas pintan con la del build y, tras hidratar, pasan a la vigente con el reloj del
+  cliente (`la-tarifa-de-la-isla.ts`).
+- **`scripts/guarda-de-la-tarifa.mjs`**, en `pnpm build`: comprueba la huella de la copia y barre `dist/` contra
+  la tarifa vigente en el instante del build. Un precio de lista de otra fila hace fallar el build.
 
 ## No quites el paso de limpieza del build
 

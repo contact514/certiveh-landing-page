@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EmpresasLanding from '../app/components/EmpresasLanding';
+import { tarifaVigente } from '../lib/tipos-de-activo.ts';
+import { preciosDesde, descripcionDeGas } from '../lib/precios-de-la-landing.ts';
+// La tarifa vigente EN EL INSTANTE DEL BUILD (ajuste de precios, lote 4): las cifras del JSON-LD salen de ella y la
+// isla la recibe por su id. Tras T, el rebuild de T+1 min cambia el HTML; la isla ya cambia sola al hidratar.
+const tarifa = tarifaVigente(new Date());
+const desde = preciosDesde(tarifa);
 import '../styles/index.css';
 ---
 
@@ -10,7 +16,7 @@ import '../styles/index.css';
   keywords="certificado UPME, incentivos tributarios GEE, beneficios tributarios energía solar Colombia, exclusión de IVA cargadores eléctricos, deducción de renta Ley 1715, certificación UPME empresas, GEE FNCE Colombia, depreciación acelerada energía, cargadores vehículos eléctricos UPME, camiones GNV beneficios tributarios"
   ogImage="https://certiveh.co/og/otros-activos.png"
 >
-  <EmpresasLanding client:load />
+  <EmpresasLanding client:load tarifaDelBuild={tarifa.id} />
 
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify({
@@ -28,8 +34,8 @@ import '../styles/index.css';
     "offers": {
       "@type": "Offer",
       "priceCurrency": "COP",
-      "price": "899990",
-      "description": "Desde $899.990 COP + IVA para inversiones hasta $150M. 0,6% del valor del activo + IVA para inversiones mayores. Más el costo del trámite ante la UPME según resolución vigente."
+      "price": String(desde.gas),
+      "description": descripcionDeGas(tarifa)
     }
   })} />
 
