@@ -111,11 +111,23 @@ export function invierteQuienHaceQue(frase) {
   return /\bdian\b|\biva\b|devolucion/.test(f);
 }
 
+/**
+ * 🔴 29-oct-2026 (la DIAN, de primera mano, y su Abecé): el correo de la cita se envía a la hora EXACTA de la cita o
+ * dentro de los 5 minutos siguientes, «no antes y tampoco después». Antes decíamos «el día de la cita, antes de la hora»
+ * y «unos 5 minutos antes», que es justo lo que la DIAN da por no recibido.
+ */
+export function laVentanaMalDicha(frase) {
+  const f = sinTildes(plano(frase));
+  if (!/\b(?:cita|correo)\b/.test(f)) return false;
+  return /\bantes de (?:la|tu|su) hora\b|\bminutos antes\b|\bantes de la hora (?:asignada|de (?:la|tu|su) cita)\b/.test(f);
+}
+
 const REGLAS = [
   [plazoMalDicho, 'los 50 días son para PAGAR tras aprobar, no para responder ni desde el envío'],
   [citaUnArticuloParaElPlazo, 'se cita un artículo (855/860) para un plazo que no dice'],
   [prometeUnTotal, '«tres meses y medio» no tiene fuente'],
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
+  [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 5 minutos siguientes, no antes'],
 ];
 
 // ── El control: cada regla caza lo suyo y deja pasar lo cierto ─────────────────────────────────
@@ -151,6 +163,12 @@ function control() {
   }
   for (const bien of ['Te avisamos en cuanto la DIAN nos asigne tu cita.', 'Te escribimos cuando la DIAN nos confirme el día de tu cita.', 'Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud.', 'Nosotros radicamos tu solicitud ante la UPME.', 'Nosotros presentamos tu solicitud ante la UPME.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.', 'Te avisamos cuando tu certificado esté emitido.']) {
     debe(!invierteQuienHaceQue(bien), `invierteQuienHaceQue marca una frase cierta: ${bien}`);
+  }
+  for (const mal of ['Si hay cita, envías ese correo el día de tu cita, antes de la hora.', 'se atiende con un correo el día asignado, antes de la hora.', 'Reenvía el correo unos 5 minutos antes de la hora de tu cita.', 'se atiende mandando el correo ese día, antes de la hora asignada.']) {
+    debe(laVentanaMalDicha(mal), `laVentanaMalDicha no caza: ${mal}`);
+  }
+  for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 5 minutos siguientes, ni antes ni después.', 'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
+    debe(!laVentanaMalDicha(bien), `laVentanaMalDicha marca una frase cierta: ${bien}`);
   }
   // El lector: ve el texto visible y el JSON-LD, y no los comentarios ni los scripts.
   const html = '<!-- 50 días hábiles para responder --><script>var x = "50 días hábiles para responder";</script>'
