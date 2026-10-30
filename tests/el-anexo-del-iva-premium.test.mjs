@@ -75,7 +75,7 @@ test('el anexo de IVA (30-oct-2026, Julian): los requerimientos y las subsanacio
   for (const frase of [
     'preparará y gestionará la respuesta o la subsanación y, cuando se requiera, la nueva radicación de la solicitud una vez subsanada',
     'sin costo adicional para el Usuario',
-    'firmar y remitir desde sus propios canales lo que le corresponda, toda vez que la DIAN solo los recibe del contribuyente',
+    'firmar y remitir desde sus propios canales lo que le corresponda, toda vez que la DIAN solo lo recibe del contribuyente',
     'por la naturaleza fiscal del Usuario o por las particularidades de su caso, incluido el incumplimiento de los requisitos legales del beneficio',
     'salvo que se derive de errores u omisiones imputables al Operador de la Plataforma',
     'este reconocerá la devolución del cinco por ciento (5%) del valor pagado',
