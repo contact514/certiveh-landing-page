@@ -226,7 +226,7 @@ export interface Tarifa {
 }
 
 /** Instante en que rige el ajuste de octubre de 2026. `2099-01-01` = todavía no publicado. */
-export const VIGENCIA_DEL_AJUSTE_OCT_2026 = '2026-11-01T00:00:00-05:00';
+export const VIGENCIA_DEL_AJUSTE_OCT_2026 = '2026-10-31T00:00:00-05:00';
 
 export const TARIFAS: readonly Tarifa[] = [
   { // Antes del 4-ago-2026 (era `calcStandaloneIvaListPriceLegacy`). Gas no existía: copia la siguiente.

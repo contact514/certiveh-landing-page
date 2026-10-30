@@ -27,7 +27,7 @@ const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const COPIA = join(RAIZ, 'src/lib/tipos-de-activo.ts');
 
 /** La huella de las cinco copias. La reescribe el script de la vigencia del portal; nunca a mano. */
-export const SHA_TIPOS_DE_ACTIVO = '160c4e42e02d5fa96db467727f6bf3b0b4a3023271732b7e36f0be73fe58c181';
+export const SHA_TIPOS_DE_ACTIVO = '48345060460928081ae2773a29f56c9c93247c458a77754d0ffa3dee413a8c5b';
 
 const sha = (texto) => createHash('sha256').update(texto).digest('hex');
 
