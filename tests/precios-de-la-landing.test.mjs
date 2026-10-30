@@ -5,7 +5,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { tarifaPorId, TARIFAS } from '../src/lib/tipos-de-activo.ts';
 import { cotizacionDeLaHome, cotizacionDeGas, preciosDesde, descripcionDeGas, tasaUpme } from '../src/lib/precios-de-la-landing.ts';
 import { SHA_TIPOS_DE_ACTIVO, preciosProhibidos, preciosViejosEn, preciosDeLosOffers, derivadasProhibidas, derivadasViejasEn } from '../scripts/guarda-de-la-tarifa.mjs';
@@ -63,14 +66,51 @@ test('la guarda del build: con T2 vigente prohíbe las cifras de T3 y al revés,
   assert.deepEqual(preciosDeLosOffers('<script type="application/ld+json">{"offers":{"price":"494000"}}</script>'), [494_000]);
 });
 
+/**
+ * El portal contra el que se compara la quinta copia: el de la PUNTA de la cadena de precios, nunca un worktree intermedio
+ * (l3, l4…), que se queda con la vigencia vieja cuando el paso E del guion la fija solo en la punta. Medido el 30-oct-2026:
+ * buscaba primero `../../l4` y E salía rojo con l4 en 2099 y l5 bien fijado. Orden: `PORTAL_HERMANO` (lo fija el guion),
+ * `<wt>/l5` (la punta), y `certiveh-portal-login` al lado de la landing (el checkout de main). Si `PORTAL_HERMANO` está
+ * puesto y no tiene la copia, es un fallo, no un «se salta».
+ */
+export function elPortalHermano(landing, env = process.env) {
+  const copia = (raiz) => join(raiz, 'src/lib/tipos-de-activo.ts');
+  if (env.PORTAL_HERMANO) {
+    const p = copia(resolve(env.PORTAL_HERMANO));
+    if (!existsSync(p)) throw new Error(`PORTAL_HERMANO=${env.PORTAL_HERMANO} no tiene src/lib/tipos-de-activo.ts`);
+    return p;
+  }
+  for (const raiz of [resolve(landing, '../l5'), resolve(landing, '../certiveh-portal-login')]) if (existsSync(copia(raiz))) return copia(raiz);
+  return null;
+}
+const LA_LANDING = resolve(fileURLToPath(new URL('..', import.meta.url)));
+
 test('la quinta copia es la de los repos, y la guarda tiene su huella', () => {
   const texto = readFileSync(new URL('../src/lib/tipos-de-activo.ts', import.meta.url), 'utf8');
   assert.equal(createHash('sha256').update(texto).digest('hex'), SHA_TIPOS_DE_ACTIVO);
-  // Si el portal está clonado al lado (worktrees de la tanda: <x>landing junto a <x>), byte a byte igual.
-  for (const otra of ['../../l4/src/lib/tipos-de-activo.ts', '../../l3/src/lib/tipos-de-activo.ts', '../../../certiveh-portal-login/src/lib/tipos-de-activo.ts']) {
-    const p = new URL(otra, import.meta.url);
-    if (existsSync(p)) { assert.equal(readFileSync(p, 'utf8'), texto, otra); return; }
-  }
+  // Si el portal de la punta está al lado, byte a byte igual.
+  const p = elPortalHermano(LA_LANDING);
+  if (p) assert.equal(readFileSync(p, 'utf8'), texto, p);
+});
+
+test('el portal hermano es el de la PUNTA (l5) y no un worktree intermedio (l4): con l4 en 2099 y l5 fijado, pasa; con l5 distinto, falla', () => {
+  const wt = mkdtempSync(join(tmpdir(), 'portal-hermano-'));
+  try {
+    const escribir = (dir, t) => { mkdirSync(join(wt, dir, 'src/lib'), { recursive: true }); writeFileSync(join(wt, dir, 'src/lib/tipos-de-activo.ts'), t); };
+    const FIJADA = "export const VIGENCIA_DEL_AJUSTE_OCT_2026 = '2026-11-01T00:00:00-05:00';\n";
+    escribir('l4landing', FIJADA);
+    escribir('l4', "export const VIGENCIA_DEL_AJUSTE_OCT_2026 = '2099-01-01T00:00:00-05:00';\n");
+    escribir('l5', FIJADA);
+    const landing = join(wt, 'l4landing');
+    const igual = (env = {}) => readFileSync(elPortalHermano(landing, env), 'utf8') === FIJADA;
+    assert.equal(elPortalHermano(landing, {}), join(wt, 'l5', 'src/lib/tipos-de-activo.ts'));
+    assert.ok(igual(), 'con l4 en 2099 y l5 fijado tiene que pasar');
+    escribir('l5', "export const VIGENCIA_DEL_AJUSTE_OCT_2026 = '2099-01-01T00:00:00-05:00';\n");
+    assert.ok(!igual(), 'con l5 distinto tiene que fallar');
+    // PORTAL_HERMANO manda, y si apunta a un sitio sin la copia, es un fallo.
+    assert.equal(elPortalHermano(landing, { PORTAL_HERMANO: join(wt, 'l4') }), join(wt, 'l4', 'src/lib/tipos-de-activo.ts'));
+    assert.throws(() => elPortalHermano(landing, { PORTAL_HERMANO: join(wt, 'no-hay') }), /no tiene/);
+  } finally { rmSync(wt, { recursive: true, force: true }); }
 });
 
 test('la guarda caza las cifras DERIVADAS de otra tarifa (AUDITORIA-LOTE4-R1, M1) y no las de la vigente', () => {
