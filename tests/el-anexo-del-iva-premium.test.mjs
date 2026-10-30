@@ -31,19 +31,25 @@ test('las siete secciones, con el marcado del anexo de IVA', () => {
   assert.deepEqual(nums, ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']);
 });
 
-test('dice las decisiones de Julian: llamada por video, expediente con nota y «un detalle de bienvenida», línea de 7 a 10 todos los días, reembolso del valor adicional efectivamente pagado, al aliado si pagó él', () => {
+test('dice las decisiones de Julian: llamada por video (dudas o su caso puntual), expediente con nota y «un detalle de bienvenida», reembolso de la mitad del valor adicional efectivamente pagado, al aliado si pagó él', () => {
   for (const frase of [
     'Llamada por video con un especialista',
+    'para resolver dudas sobre su solicitud de devolución o revisar su caso puntual',
     'en una carpeta del Operador de la Plataforma, con una nota y un detalle de bienvenida',
-    'todos los días de 7:00 a. m. a 10:00 p. m. (hora de Colombia)',
     'Se entiende por «valor adicional efectivamente pagado»',
     'por causa que le sea imputable, o si la gestión de la devolución termina antes de poder prestarlo',
-    'reembolsará la tercera parte del valor adicional efectivamente pagado por cada servicio no prestado, con su IVA',
+    'reembolsará la mitad del valor adicional efectivamente pagado por cada servicio no prestado, con su IVA',
     'cuando la pagó un aliado comercial, a ese aliado',
     'ni el envío para el que no indique la dirección',
     'no supera la devolución estimada del vehículo',
-    'Versión del 29 de octubre de 2026',
+    'Versión del 30 de octubre de 2026',
   ]) assert.ok(ANEXO.includes(frase), frase);
+});
+
+test('DOS servicios complementarios y ninguna «línea directa» (decisión de Julian, 30-oct-2026: el WhatsApp es de todos los clientes)', () => {
+  const iii = FUENTE.slice(FUENTE.indexOf('<div class="tc-section-num">III</div>', inicio), FUENTE.indexOf('<div class="tc-section-num">IV</div>', inicio));
+  assert.equal(iii.split('<li>').length - 1, 2, 'dos servicios en la sección III');
+  assert.doesNotMatch(ANEXO, /l[ií]nea directa|tercera parte|7:00 a\. m\./i);
 });
 
 test('no promete lo que no se presta ni usa palabras prohibidas', () => {
