@@ -1,5 +1,11 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
+import { costoIvaBundled, tarifaVigente, textoDeLaRegla } from '../../lib/tipos-de-activo.ts';
+
+// Las tarifas de la gestión del IVA, de la tarifa vigente AL CONSTRUIR (ajuste de precios, lote 4): la frase de cada
+// regla es la de `textoDeLaRegla` y el ejemplo de $120M se calcula. Tras T cambia con el rebuild de T+1 min.
+const tarifa = tarifaVigente(new Date());
+const ejemploConIvaMiles = Math.round(costoIvaBundled(120_000_000, tarifa) * 1.19 / 1000);
 ---
 
 <BlogLayout
@@ -160,12 +166,12 @@ import BlogLayout from '../../layouts/BlogLayout.astro';
             <tbody>
               <tr>
                 <td><strong>Junto al certificado UPME</strong></td>
-                <td class="hl">$499.990 + IVA (≤$200M)<br/>0,25% del valor + IVA (>$200M)</td>
+                <td class="hl">{textoDeLaRegla(tarifa.ivaPaquete)}</td>
                 <td>Lo contratas al momento del checkout del UPME</td>
               </tr>
               <tr>
                 <td><strong>Solo la devolución</strong> (ya tienes el certificado)</td>
-                <td>$599.990 + IVA (≤$200M)<br/>0,3% del valor + IVA (>$200M)</td>
+                <td>{textoDeLaRegla(tarifa.ivaSuelto)}</td>
                 <td>Ya gestionaste el UPME y solo quieres la devolución</td>
               </tr>
             </tbody>
@@ -173,7 +179,7 @@ import BlogLayout from '../../layouts/BlogLayout.astro';
         </div>
 
         <div class="callout slate">
-          <strong>Costo y beneficio:</strong> Si tu vehículo costó $120M sin IVA, pagaste $6M de IVA. Con la tarifa contratada junto al certificado, CertiVeh cobra ~$595K (con IVA) por generar y revisar el expediente completo, pedir tu cita cuando tu seccional la exige y dejarte listo el correo de radicación. Es un servicio de medio: el reconocimiento, el monto y la forma de pago los decide la DIAN.
+          <strong>Costo y beneficio:</strong> Si tu vehículo costó $120M sin IVA, pagaste $6M de IVA. Con la tarifa contratada junto al certificado, CertiVeh cobra ~${ejemploConIvaMiles}K (con IVA) por generar y revisar el expediente completo, pedir tu cita cuando tu seccional la exige y dejarte listo el correo de radicación. Es un servicio de medio: el reconocimiento, el monto y la forma de pago los decide la DIAN.
         </div>
 
         <h2>¿Qué pasa si ya tengo mi certificado UPME y quiero solo la devolución?</h2>

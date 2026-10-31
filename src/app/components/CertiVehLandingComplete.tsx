@@ -5,6 +5,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { BGPattern } from './ui/bg-pattern';
 import { cn } from '@/lib/utils';
+import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
+import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 import imgPortalUsuario from '@/assets/portal-dashboard.jpg';
 
 /**
@@ -1027,13 +1029,15 @@ function Beneficios() {
 // ── SERVICIOS ────────────────────────────────────────────────────────────────
 function Servicios() {
   const portalUrl = usePortalUrl();
+  // Las cifras de las tarjetas salen de la tarifa (ajuste de precios, lote 4).
+  const desde = preciosDesde(useTarifa());
   const servicios = [
     {
       icon: "shield",
       tag: "Servicio 1",
       title: "Certificado UPME",
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
-      price: "$599.990",
+      price: desde.pesos.certificado,
       priceNote: "+ IVA + costo trámite UPME",
       features: ["Radicación automática ante la UPME", "Radicación aun si tu modelo no está en el listado", "Respuesta a requerimientos UPME", "Certificado digital, listo para descargar", "Desbloquea los 3 beneficios tributarios"],
       accentColor: "var(--emerald-600)",
@@ -1070,7 +1074,7 @@ function Servicios() {
       // sin la condición, esta frase es falsa para la mayoría de los que la leen. Es el motivo por
       // el que la condición vive aquí Y en la viñeta.
       desc: "Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN consigna tu devolución.",
-      price: "Desde $499.990",
+      price: `Desde ${desde.pesos.ivaPaquete}`,
       priceNote: "+ IVA · contratando junto al certificado UPME",
       // ⚠️ **LA OBLIGACIÓN SE DESCRIBE POR SU RESULTADO, NO POR EL TRÁMITE.** Decía «(tú autenticas
       // el poder en notaría, presencial y a tu costa)» y hoy dice «(tú nos adjuntas el poder
@@ -1499,6 +1503,7 @@ function ComoFunciona() {
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
 function Calculadora() {
   const portalUrl = usePortalUrl();
+  const tarifa = useTarifa();
   const [valor, setValor] = useState(120);
   const [tipo, setTipo] = useState("electrico");
   const [perfil, setPerfil] = useState("natural");
@@ -1512,36 +1517,12 @@ function Calculadora() {
     const renta = v * 0.50;
     const total = iva + renta;
 
-    // Trámite UPME — Resolución UPME No. 135 de 2025
-    const UVT = 52_374;
-    const invUVT = v / UVT;
-    let pagoUVT: number;
-    if (invUVT < 275)        pagoUVT = 1.2;
-    else if (invUVT < 826)   pagoUVT = 3.4;
-    else if (invUVT < 1_652) pagoUVT = 6.7;
-    else if (invUVT < 3_305) pagoUVT = 13.4;
-    else {
-      const beneficio = (invUVT - 3_305) * 0.405;
-      pagoUVT = Math.min(13.4 + beneficio * 0.005, 275);
-    }
-    const costoUPME = Math.round(pagoUVT * UVT);
-
-    // Honorarios CertiVeh — Certificado UPME
-    const honorariosBase = 599_990;
-    const ivaServicio = Math.round(honorariosBase * 0.19);
-
-    // Honorarios devolución IVA (bundled pricing)
-    let honorariosIvaRefund = 0;
-    let ivaIvaRefund = 0;
-    if (conIva) {
-      honorariosIvaRefund = v <= 200_000_000 ? 499_990 : Math.round(v * 0.0025);
-      ivaIvaRefund = Math.round(honorariosIvaRefund * 0.19);
-    }
-
-    const costoTotal = costoUPME + honorariosBase + ivaServicio + honorariosIvaRefund + ivaIvaRefund;
+    // La tasa UPME (en UVT) y los honorarios de la tarifa: `cotizacionDeLaHome` (ajuste de precios, lote 4).
+    const { costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal } =
+      cotizacionDeLaHome(v, conIva, tarifa);
 
     setCalc({ iva, renta, total, costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal, neto: total - costoTotal });
-  }, [valor, tipo, perfil, conIva]);
+  }, [valor, tipo, perfil, conIva, tarifa]);
 
   const bars = [
     { label: "Devolución IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
@@ -1724,6 +1705,7 @@ function Calculadora() {
 
 // ── CONFIANZA ─────────────────────────────────────────────────────────────────
 function Confianza() {
+  const desde = preciosDesde(useTarifa());
   const puntos = [
     { icon: "zap",         title: "Agente automatizado",          desc: "Nuestra tecnología navega el portal UPME por ti, llena todos los formularios y radica la solicitud sin que tengas que hacer nada." },
     { icon: "smartphone",  title: "Actualización en tiempo real", desc: "Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está tu trámite, en todo momento." },
@@ -1736,7 +1718,7 @@ function Confianza() {
     // de la tarjeta de Servicio 1, y el de la notaría vive en `llms.txt` y en el conocimiento de
     // los agentes, que responden si el cliente pregunta. Antes de borrarlo de esos sitios, mirar
     // que quede en pie al menos uno.
-    { icon: "checkCircle", title: "Solo pagas una vez",           desc: "Certificado UPME $599.990 + IVA. Devolución de IVA desde $499.990 + IVA. Sin suscripciones." },
+    { icon: "checkCircle", title: "Solo pagas una vez",           desc: `Certificado UPME ${desde.pesos.certificado} + IVA. Devolución de IVA desde ${desde.pesos.ivaPaquete} + IVA. Sin suscripciones.` },
   ];
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
@@ -2309,7 +2291,9 @@ function UrgencyModal({ onClose }: { onClose: () => void }) {
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
-export default function CertiVehLandingComplete({ portalUrl = "https://portal.certiveh.co" }: { portalUrl?: string } = {}) {
+export default function CertiVehLandingComplete({ portalUrl = "https://portal.certiveh.co", tarifaDelBuild }: { portalUrl?: string; tarifaDelBuild?: string } = {}) {
+  // La tarifa del build al pintar y, tras hidratar, la vigente con el reloj del cliente (lote 4).
+  const tarifa = useTarifaDeLaIsla(tarifaDelBuild);
   const [showUrgencyModal, setShowUrgencyModal] = useState(false);
 
   // Urgency modal logic - shows after 45 seconds, once per session
@@ -2328,6 +2312,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
 
   return (
     <PortalUrlContext.Provider value={portalUrl}>
+    <TarifaDeLaIsla.Provider value={tarifa}>
       {/* ⚠️ **Como HTML crudo, no como hijo de texto.** Con `<style>{CSS}</style>` React escapa el
           texto en el HTML prerenderizado (`>` sale como `&gt;`, las comillas como `&#x27;`): los
           selectores con `>` y la fuente `Inter` no valían hasta hidratar, y al hidratar el texto no
@@ -2378,6 +2363,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
       {showUrgencyModal && <UrgencyModal onClose={() => { setShowUrgencyModal(false); document.body.style.overflow = ''; }} />}
 
       {/* Structured Data moved to index.astro for SSR */}
+    </TarifaDeLaIsla.Provider>
     </PortalUrlContext.Provider>
   );
 }

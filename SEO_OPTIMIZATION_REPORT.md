@@ -90,7 +90,7 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "COP",
-    "price": "599990",
+    "price": "599990",  // histórico: tarifa anterior al ajuste de octubre de 2026; hoy sale de la tarifa vigente
     "availability": "https://schema.org/InStock",
     "description": "Certificado UPME desde $599.990 COP + IVA. Gestión de la devolución de IVA desde $499.990 COP + IVA. Más el costo del trámite ante la UPME según resolución vigente."
   },

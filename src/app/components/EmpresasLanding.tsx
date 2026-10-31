@@ -3,6 +3,8 @@ import { Navbar } from "./Navbar";
 import { AnimatePresence, motion } from "motion/react";
 import { AnimatedGridPattern } from './ui/animated-grid-pattern';
 import { cn } from '@/lib/utils';
+import { cotizacionDeGas } from '@/lib/precios-de-la-landing.ts';
+import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh — Landing Empresas
@@ -578,6 +580,7 @@ function ComoFunciona() {
 
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
 function Calculadora() {
+  const tarifa = useTarifa();
   const [valor, setValor] = useState(200);
   const [perfil, setPerfil] = useState("empresa");
   const [calc, setCalc] = useState<any>({});
@@ -590,33 +593,11 @@ function Calculadora() {
     const renta = v * 0.50;
     const totalBeneficio = iva + renta;
 
-    // Trámite UPME - Resolución UPME No. 135 de 2025
-    const UVT = 52_374;
-    const invUVT = v / UVT;
-    let pagoUVT: number;
-    if (invUVT < 275)        pagoUVT = 1.2;
-    else if (invUVT < 826)   pagoUVT = 3.4;
-    else if (invUVT < 1_652) pagoUVT = 6.7;
-    else if (invUVT < 3_305) pagoUVT = 13.4;
-    else {
-      const beneficio = (invUVT - 3_305) * 0.405;
-      pagoUVT = Math.min(13.4 + beneficio * 0.005, 275);
-    }
-    const costoUPME = Math.round(pagoUVT * UVT);
-
-    // Honorarios CertiVeh - GEE/FNCE
-    let honorariosBase: number;
-    if (v <= 150_000_000) {
-      honorariosBase = 899_990;
-    } else {
-      honorariosBase = Math.round(v * 0.006);
-    }
-    const ivaServicio = Math.round(honorariosBase * 0.19);
-
-    const costoTotal = costoUPME + honorariosBase + ivaServicio;
+    // La tasa UPME (en UVT) y los honorarios de gas de la tarifa: `cotizacionDeGas` (ajuste de precios, lote 4).
+    const { costoUPME, honorariosBase, ivaServicio, costoTotal } = cotizacionDeGas(v, tarifa);
 
     setCalc({ iva, renta, totalBeneficio, costoUPME, honorariosBase, ivaServicio, costoTotal, neto: totalBeneficio - costoTotal });
-  }, [valor, perfil]);
+  }, [valor, perfil, tarifa]);
 
   return (
     <section id="calculadora" aria-label="Calculadora de costos" style={{ background: "var(--white)" }}>
@@ -933,9 +914,11 @@ function WhatsAppFAB() {
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
-export default function EmpresasLanding() {
+export default function EmpresasLanding({ tarifaDelBuild }: { tarifaDelBuild?: string } = {}) {
+  // La tarifa del build al pintar y, tras hidratar, la vigente con el reloj del cliente (lote 4).
+  const tarifa = useTarifaDeLaIsla(tarifaDelBuild);
   return (
-    <>
+    <TarifaDeLaIsla.Provider value={tarifa}>
       {/* Como HTML crudo: con <style>{CSS}</style> React escapa el CSS prerenderizado y la hidratación no coincide (ver CertiVehLandingComplete). */}
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar isHome={false} darkHero vertical="otros-activos" localSections={["#beneficios", "#como-funciona", "#calculadora"]} />
@@ -951,6 +934,6 @@ export default function EmpresasLanding() {
       </main>
       <Footer/>
       <WhatsAppFAB/>
-    </>
+    </TarifaDeLaIsla.Provider>
   );
 }

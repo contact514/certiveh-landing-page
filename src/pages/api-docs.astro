@@ -1,5 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { tarifaVigente } from '../lib/tipos-de-activo.ts';
+import { cotizacionDeLaHome } from '../lib/precios-de-la-landing.ts';
+
+// El ejemplo de la respuesta (un eléctrico de $100M sin la gestión del IVA), con la tarifa vigente al construir
+// (ajuste de precios, lote 4): así la documentación no cita un precio que ya no se cobra.
+const ejemplo = cotizacionDeLaHome(100_000_000, false, tarifaVigente(new Date()));
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -868,14 +874,14 @@ const webPageLd = JSON.stringify({
         </div>
         <pre class="code-block">&#123;
   <span class="ck">"case_id"</span>: <span class="cs">"uuid-del-tramite"</span>,
-  <span class="ck">"amount_cop"</span>: <span class="cn">1415800</span>,
-  <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">{ejemplo.costoTotal}</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">{ejemplo.costoTotal * 100}</span>,
   <span class="ck">"breakdown"</span>: &#123;
-    <span class="ck">"costo_upme"</span>: <span class="cn">701812</span>,
-    <span class="ck">"honorarios"</span>: <span class="cn">599990</span>,
-    <span class="ck">"iva"</span>: <span class="cn">113998</span>,
+    <span class="ck">"costo_upme"</span>: <span class="cn">{ejemplo.costoUPME}</span>,
+    <span class="ck">"honorarios"</span>: <span class="cn">{ejemplo.honorariosBase}</span>,
+    <span class="ck">"iva"</span>: <span class="cn">{ejemplo.ivaServicio}</span>,
     <span class="ck">"discount"</span>: <span class="cn">0</span>,
-    <span class="ck">"total"</span>: <span class="cn">1415800</span>
+    <span class="ck">"total"</span>: <span class="cn">{ejemplo.costoTotal}</span>
   &#125;
 &#125;</pre>
       </div>
@@ -1021,7 +1027,7 @@ const webPageLd = JSON.stringify({
   ],
   <span class="ck">"payment"</span>: &#123;
     <span class="ck">"status"</span>: <span class="cs">"APPROVED"</span>,
-    <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
+    <span class="ck">"amount_cents"</span>: <span class="cn">{ejemplo.costoTotal * 100}</span>,
     <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>,
     <span class="ck">"created_at"</span>: <span class="cs">"2026-05-20T14:00:00Z"</span>
   &#125;
@@ -1093,8 +1099,8 @@ const webPageLd = JSON.stringify({
         </div>
         <pre class="code-block">&#123;
   <span class="ck">"reference"</span>: <span class="cs">"CERTIVEH-xxx-xxx"</span>,
-  <span class="ck">"amount_cents"</span>: <span class="cn">141580000</span>,
-  <span class="ck">"amount_cop"</span>: <span class="cn">1415800</span>,
+  <span class="ck">"amount_cents"</span>: <span class="cn">{ejemplo.costoTotal * 100}</span>,
+  <span class="ck">"amount_cop"</span>: <span class="cn">{ejemplo.costoTotal}</span>,
   <span class="ck">"currency"</span>: <span class="cs">"COP"</span>,
   <span class="ck">"public_key"</span>: <span class="cs">"pub_prod_xxx"</span>,
   <span class="ck">"signature"</span>: <span class="cs">"sha256-hash"</span>,
