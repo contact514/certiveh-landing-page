@@ -31,9 +31,11 @@ test('las siete secciones, con el marcado del anexo de IVA', () => {
   assert.deepEqual(nums, ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']);
 });
 
-test('dice las decisiones de Julian: llamada por video (revisar su caso y sus dudas), expediente impreso en carpeta, reembolso de la mitad del valor adicional efectivamente pagado, al aliado si pagó él', () => {
+test('dice las decisiones de Julian: hasta 3 videollamadas (revisar su caso y sus dudas), expediente impreso en carpeta, reembolso de la mitad del valor adicional efectivamente pagado, al aliado si pagó él', () => {
   for (const frase of [
-    'Llamada por video con un especialista',
+    'Videollamadas con un especialista',
+    'hasta tres (3) videollamadas entre el Usuario y un especialista del Operador de la Plataforma, a solicitud del Usuario mientras la solicitud de devolución esté en trámite',
+    'Las videollamadas que el Usuario no utilice por decisión propia no dan lugar a reembolso',
     'para revisar su caso y resolver sus dudas sobre la solicitud de devolución',
     'en una carpeta del Operador de la Plataforma, enviada a la dirección en Colombia',
     'Se entiende por «valor adicional efectivamente pagado»',
@@ -49,7 +51,7 @@ test('dice las decisiones de Julian: llamada por video (revisar su caso y sus du
 test('DOS servicios complementarios y ninguna «línea directa» (decisión de Julian, 30-oct-2026: el WhatsApp es de todos los clientes)', () => {
   const iii = FUENTE.slice(FUENTE.indexOf('<div class="tc-section-num">III</div>', inicio), FUENTE.indexOf('<div class="tc-section-num">IV</div>', inicio));
   assert.equal(iii.split('<li>').length - 1, 2, 'dos servicios en la sección III');
-  assert.doesNotMatch(ANEXO, /l[ií]nea directa|tercera parte|7:00 a\. m\.|bienvenida|obsequio|regalo|una nota/i);
+  assert.doesNotMatch(ANEXO, /l[ií]nea directa|tercera parte|7:00 a\. m\.|bienvenida|obsequio|regalo|una nota|llamada por video/i);
   assert.doesNotMatch(ANEXO, /mejor resultado|mayor probabilidad/i, 'el premium no promete resultado');
 });
 
