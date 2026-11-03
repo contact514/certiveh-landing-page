@@ -5,6 +5,8 @@ import { SiteFooter } from '../../app/components/SiteFooter';
 import { vehiculos } from '../../data/vehiculos';
 import { honorariosCertivehSinEscalar, tarifaVigente } from '../../lib/tipos-de-activo.ts';
 import { tasaUpme } from '../../lib/precios-de-la-landing.ts';
+// La calculadora de la home (`.calc`): la ficha pinta el desglose del modelo con su mismo CSS (DESIGN_SYSTEM.md §0.5).
+import { CSS_CALC, CSS_CALC_MOVIL } from '../../app/components/piezas-de-la-marca.ts';
 
 export async function getStaticPaths() {
   return vehiculos.map(v => ({
@@ -31,6 +33,10 @@ const neto = totalBeneficio - costoTotal;
 const roi = Math.round(totalBeneficio / costoTotal * 10) / 10;
 
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
+// El ancho de cada barra del desglose: su parte del beneficio total, como en la calculadora de la home.
+const pctIva = (iva / totalBeneficio) * 100;
+const pctRenta = (renta / totalBeneficio) * 100;
+const CSS_FICHA_CALC = `${CSS_CALC}\n  @media (max-width: 900px) {\n${CSS_CALC_MOVIL}\n  }`;
 
 const title = `${v.marca} ${v.modelo}, Certificado UPME y Devolución de IVA | CertiVeh`;
 const description = `¿Tienes un ${v.marca} ${v.modelo}? Estima cuánto IVA puedes solicitar (aprox. ${fmt(iva)}) y cuánto deducir en renta (aprox. ${fmt(renta)}). CertiVeh gestiona tu certificado UPME y la devolución de IVA ante la DIAN.`;
@@ -115,69 +121,63 @@ const faqLd = JSON.stringify({
   <script slot="head" type="application/ld+json" set:html={productLd} />
   <script slot="head" type="application/ld+json" set:html={faqLd} />
 
+  <style is:inline set:html={CSS_FICHA_CALC}></style>
   <style is:inline>
-    /* Ficha de modelo · estándar visual 2026-11 (DESIGN_SYSTEM.md §0). Variables --cv-* de marca.css.
-       Las cifras van en baldosas de tono y el resultado en el campo oscuro con el verde legible, como la
-       calculadora de la home. Las preguntas, como en la home: tono que al abrirse pasa a verde. */
+    /* Ficha de modelo · estándar visual 2026-11 (DESIGN_SYSTEM.md §0) con los patrones de la home (§0.5): la portada con
+       el texto a la izquierda y, encima, la calculadora de la home (`.calc`) con el desglose de ESTE modelo; debajo, las
+       preguntas en baldosas con el titular fijo a la izquierda. Las cifras salen de la tarifa vigente en el build. */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; background: var(--cv-bg); color: var(--cv-ink); -webkit-font-smoothing: antialiased; }
+    .v-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
+    .v-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
 
-    /* ── HERO: el fotograma del video de la home con el mismo velo neutro ── */
-    .v-hero { position: relative; color: #fff; padding: calc(64px + clamp(48px, 7vw, 110px)) var(--cv-m) clamp(48px, 6vw, 96px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
-    .v-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
-    .v-hero-inner { position: relative; max-width: 960px; margin: 0 auto; }
+    /* ── PORTADA: el fotograma del video de la home con su velo, el texto a la izquierda y el desglose encima ── */
+    .v-hero { position: relative; color: #fff; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
+    .v-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
+    .v-hero .v-grid { position: relative; align-items: center; }
+    .v-hero-copy { grid-column: 1 / span 6; padding-bottom: 40px; }
     .v-breadcrumb { font-size: var(--cv-small); color: #cbd5e1; margin-bottom: 22px; }
     .v-breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
     .v-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
-    .v-breadcrumb a:focus-visible { outline-color: var(--cv-mint); }
-    .v-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
-    .v-desc { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 48ch; margin-top: 20px; }
+    .v-breadcrumb a:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
+    .v-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
+    .v-desc { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+    .v-stage { grid-column: 8 / span 5; }
 
-    /* ── CONTENIDO: una columna de lectura, las secciones separadas por aire ── */
-    .v-container { max-width: calc(960px + 2 * var(--cv-m)); margin: 0 auto; padding: clamp(48px, 6vw, 88px) var(--cv-m) 0; display: flex; flex-direction: column; gap: clamp(56px, 7vw, 96px); }
-    .v-card { min-width: 0; }
-    .v-card-title { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; text-wrap: balance; margin-bottom: 14px; }
-    .v-ref { font-size: var(--cv-small); color: var(--cv-soft); margin-bottom: 24px; }
+    /* El desglose del modelo en la calculadora de la home */
+    .calc .v-ref { color: var(--cv-soft); font-size: .9375rem; margin-top: 8px; }
+    .calc .bars { margin-top: 24px; gap: 16px; }
+    .calc .brow b { white-space: nowrap; }
+    .calc .brow { gap: 12px; }
+    .v-bnote { font-size: .8125rem; color: var(--cv-soft); margin-top: 6px; }
+    .calc .cost h2.h { font-size: .875rem; font-weight: 700; letter-spacing: normal; line-height: 1.5; margin-bottom: 8px; }
+    .calc .cost > div > :last-child { white-space: nowrap; }
+    .calc .cost .m, .calc .cost .m span { color: var(--cv-soft); }
+    .calc .res .row .k { display: block; }
+    .calc .res .row b { font-size: 1.25rem; line-height: 1.25; }
+    .calc .res .cv-btn:focus-visible { outline-color: var(--cv-mint); }
 
-    .v-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .v-benefit { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(20px, 2.6vw, 32px); }
-    /* La cifra primero y debajo qué es, como en la calculadora */
-    .v-benefit-value { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; color: var(--cv-accent); font-variant-numeric: tabular-nums; }
-    .v-benefit-label { font-weight: 700; color: var(--cv-ink); margin-top: 8px; }
-    .v-benefit-note { font-size: var(--cv-small); color: var(--cv-soft); margin-top: 6px; }
-
-    /* El resultado, en el campo oscuro (como el de la calculadora de la home) */
-    .v-roi { background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: clamp(20px, 2.6vw, 32px); margin-top: 8px; }
-    .v-roi-big { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; color: var(--cv-mint); font-variant-numeric: tabular-nums; }
-    .v-roi-text { font-size: var(--cv-small); color: var(--cv-field-soft); margin-top: 8px; max-width: 60ch; }
-    .v-roi-sub .v-roi-big { font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); line-height: 1.25; }
-
-    .v-cost { background: var(--cv-tone); border-radius: var(--cv-r); padding: 8px clamp(20px, 2.6vw, 32px); }
-    .v-cost-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; font-variant-numeric: tabular-nums; }
-    .v-cost-label { color: var(--cv-ink); }
-    .v-cost-value { font-weight: 600; white-space: nowrap; }
-    .v-cost-row-minor { font-size: var(--cv-small); color: var(--cv-soft); }
-    .v-cost-row-minor .v-cost-label { color: var(--cv-soft); }
-    .v-cost-row-total { font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; box-shadow: inset 0 3px 0 var(--cv-tone-2); padding-top: 18px; } /* taste-skill-ignore: la raya del total de una cuenta, no un borde de caja */
-
-    /* ── PREGUNTAS: como las de la home ── */
-    .v-faq-item { background: var(--cv-tone); border-radius: var(--cv-r); margin-top: 6px; transition: background-color .15s, color .15s; }
+    /* ── PREGUNTAS: las de la home, el titular fijo a la izquierda ── */
+    .v-faq { padding-top: var(--cv-gap-sec); align-items: start; }
+    .v-faq > h2 { grid-column: 1 / span 4; position: sticky; top: 96px; font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .v-qs { grid-column: 5 / span 8; display: grid; gap: 8px; }
+    .v-faq-item { background: var(--cv-tone); border-radius: var(--cv-r); transition: background-color .15s, color .15s; }
     .v-faq-item.open { background: var(--cv-accent); color: #fff; }
-    .v-faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px; padding: 18px 22px; background: none; border: 0; color: inherit; cursor: pointer; text-align: left; font: 600 1.125rem/1.3 var(--cv-font); letter-spacing: -0.02em; }
+    .v-faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 72px; padding: 18px 24px; background: none; border: 0; color: inherit; cursor: pointer; text-align: left; font: 600 1.1875rem/1.3 var(--cv-font); letter-spacing: -0.02em; }
     .v-faq-btn:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; border-radius: var(--cv-r); }
     .v-faq-icon { flex: none; display: grid; place-items: center; width: 28px; height: 28px; transition: transform .2s; }
     .v-faq-item.open .v-faq-icon { transform: rotate(45deg); }
-    .v-faq-body { display: none; padding: 0 22px 22px; max-width: 64ch; font-size: 1.0625rem; color: #fff; }
+    .v-faq-body { display: none; padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #eafaf2; }
     .v-faq-item.open .v-faq-body { display: block; }
+    .v-disclaimer { grid-column: 5 / span 8; font-size: 1rem; color: var(--cv-soft); line-height: 1.6; max-width: 66ch; margin: 40px 0 var(--cv-gap-sec); }
 
-    /* ── CIERRE ── */
-    .v-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-    .v-cta-note { font-size: var(--cv-small); color: var(--cv-soft); }
-    .v-disclaimer { font-size: 1rem; color: var(--cv-soft); line-height: 1.6; max-width: 66ch; margin-bottom: var(--cv-gap-sec); }
-
-    @media (max-width: 640px) {
-      .v-benefits { grid-template-columns: 1fr; gap: 6px; }
-      .v-cta { width: 100%; }
+    @media (max-width: 900px) {
+      .v-hero::before { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
+      .v-hero-copy, .v-stage, .v-faq > h2, .v-qs, .v-disclaimer { grid-column: 1 / -1; }
+      .v-faq > h2 { position: static; margin-bottom: 28px; }
+      .v-faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
+      .v-faq-body { padding: 0 18px 20px; font-size: 1rem; }
+      .calc .res .cv-btn { width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
       .v-faq-item, .v-faq-icon { transition: none; }
@@ -190,76 +190,78 @@ const faqLd = JSON.stringify({
   <!-- HERO -->
   <main id="main-content">
   <div class="v-hero">
-    <div class="v-hero-inner">
-      <nav class="v-breadcrumb" aria-label="Migas de pan">
-        <a href="/">Inicio</a> → <a href="/vehiculos/">Vehículos</a> → {v.marca} {v.modelo}
-      </nav>
-      <h1 class="v-title">{v.marca} <span>{v.modelo}</span></h1>
-      <p class="v-desc">{v.descripcion}</p>
+    <div class="v-wrap v-grid">
+      <div class="v-hero-copy">
+        <nav class="v-breadcrumb" aria-label="Migas de pan">
+          <a href="/">Inicio</a> → <a href="/vehiculos/">Vehículos</a> → {v.marca} {v.modelo}
+        </nav>
+        <h1 class="v-title">{v.marca} <span>{v.modelo}</span></h1>
+        <p class="v-desc">{v.descripcion}</p>
+      </div>
+
+      <!-- BENEFICIOS Y COSTO: la calculadora de la home con el desglose de este modelo -->
+      <div class="v-stage">
+        <div class="calc">
+          <h2>Beneficios tributarios para tu {v.marca} {v.modelo}</h2>
+          <p class="v-ref">
+            Precio de referencia: {fmt(v.precioCOP)} COP · Fuente: {v.precioFuente}
+          </p>
+
+          <div class="bars">
+            <div>
+              <div class="brow"><span>Devolución de IVA</span><b>{fmt(iva)}</b></div>
+              <div class="btrack"><i style={`width:${pctIva}%`}></i></div>
+              <p class="v-bnote">5% del valor sin IVA, estimado</p>
+            </div>
+            <div>
+              <div class="brow"><span>Deducción en renta</span><b>{fmt(renta)}</b></div>
+              <div class="btrack b2"><i style={`width:${pctRenta}%`}></i></div>
+              <p class="v-bnote">50% del valor, reduce tu base gravable</p>
+            </div>
+          </div>
+
+          <div class="cost">
+            <h2 class="h">Costo total del trámite</h2>
+            <div>
+              <span>Trámite ante UPME</span>
+              <b>{fmt(costoUPME)} COP</b>
+            </div>
+            <div>
+              <span>Honorarios CertiVeh</span>
+              <b>{fmt(honorarios)} COP</b>
+            </div>
+            <div class="m">
+              <span>IVA (19% sobre honorarios)</span>
+              <span>{fmt(ivaServicio)} COP</span>
+            </div>
+            <div class="t">
+              <span>Total</span>
+              <span>{fmt(costoTotal)} COP</span>
+            </div>
+          </div>
+
+          <div class="res" data-ui>
+            <div class="big">{fmt(totalBeneficio)}</div>
+            <div class="s">Beneficio total estimado para tu {v.marca} {v.modelo} (incluye base gravable en renta)</div>
+            <div class="row">
+              <b>Por cada $1 de costo total, un beneficio estimado de ${roi.toLocaleString('es-CO')}</b>
+              <span class="k">Beneficio estimado menos el costo total (incluye base gravable): {fmt(neto)} COP</span>
+            </div>
+            <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="v-cta cv-btn cv-btn-w">
+              Empezar mi trámite ahora
+              <span class="cv-arr" aria-hidden="true">→</span>
+            </a>
+            <p class="note">Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- CONTENT -->
-  <div class="v-container">
-
-    <!-- BENEFITS CARD -->
-    <div class="v-card">
-      <h2 class="v-card-title">Beneficios tributarios para tu {v.marca} {v.modelo}</h2>
-      <p class="v-ref">
-        Precio de referencia: {fmt(v.precioCOP)} COP · Fuente: {v.precioFuente}
-      </p>
-
-      <div class="v-benefits">
-        <div class="v-benefit">
-          <div class="v-benefit-value">{fmt(iva)}</div>
-          <div class="v-benefit-label">Devolución de IVA</div>
-          <div class="v-benefit-note">5% del valor sin IVA, estimado</div>
-        </div>
-        <div class="v-benefit">
-          <div class="v-benefit-value">{fmt(renta)}</div>
-          <div class="v-benefit-label">Deducción en renta</div>
-          <div class="v-benefit-note">50% del valor, reduce tu base gravable</div>
-        </div>
-      </div>
-
-      <div class="v-roi">
-        <div class="v-roi-big">{fmt(totalBeneficio)}</div>
-        <div class="v-roi-text">Beneficio total estimado para tu {v.marca} {v.modelo} (incluye base gravable en renta)</div>
-      </div>
-    </div>
-
-    <!-- COST CARD -->
-    <div class="v-card">
-      <h2 class="v-card-title">Costo total del trámite</h2>
-      <div class="v-cost">
-      <div class="v-cost-row">
-        <span class="v-cost-label">Trámite ante UPME</span>
-        <span class="v-cost-value">{fmt(costoUPME)} COP</span>
-      </div>
-      <div class="v-cost-row">
-        <span class="v-cost-label">Honorarios CertiVeh</span>
-        <span class="v-cost-value">{fmt(honorarios)} COP</span>
-      </div>
-      <div class="v-cost-row v-cost-row-minor">
-        <span class="v-cost-label">IVA (19% sobre honorarios)</span>
-        <span class="v-cost-value">{fmt(ivaServicio)} COP</span>
-      </div>
-      <div class="v-cost-row v-cost-row-total">
-        <span>Total</span>
-        <span>{fmt(costoTotal)} COP</span>
-      </div>
-      </div>
-
-      <div class="v-roi v-roi-sub">
-        <div class="v-roi-big">Por cada $1 de costo total, un beneficio estimado de ${roi.toLocaleString('es-CO')}</div>
-        <div class="v-roi-text">Beneficio estimado menos el costo total (incluye base gravable): {fmt(neto)} COP</div>
-      </div>
-    </div>
-
-    <!-- FAQ -->
-    <div class="v-card">
-      <h2 class="v-card-title">Preguntas frecuentes, {v.marca} {v.modelo}</h2>
-
+  <!-- FAQ -->
+  <div class="v-wrap v-grid v-faq">
+    <h2>Preguntas frecuentes, {v.marca} {v.modelo}</h2>
+    <div class="v-qs">
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿El {v.marca} {v.modelo} aplica para el certificado UPME?</span>
@@ -267,7 +269,6 @@ const faqLd = JSON.stringify({
         </button>
         <div class="v-faq-body">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
       </div>
-
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
@@ -275,7 +276,6 @@ const faqLd = JSON.stringify({
         </button>
         <div class="v-faq-body">El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de {fmt(v.precioCOP)} el estimado es de {fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.</div>
       </div>
-
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
@@ -283,7 +283,6 @@ const faqLd = JSON.stringify({
         </button>
         <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
       </div>
-
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
@@ -291,7 +290,6 @@ const faqLd = JSON.stringify({
         </button>
         <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh {fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
       </div>
-
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Qué documentos necesito?</span>
@@ -299,15 +297,6 @@ const faqLd = JSON.stringify({
         </button>
         <div class="v-faq-body">Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad y factura de compra. El RUT solo hace falta si además vas a pedir la devolución del IVA, y en ese caso también si eres empresa. Si eres empresa, en vez de tu cédula va la del representante legal y el certificado de Cámara de Comercio vigente. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="v-cta-wrap">
-      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="v-cta cv-btn cv-btn-a">
-        Empezar mi trámite ahora
-        <span class="cv-arr" aria-hidden="true">→</span>
-      </a>
-      <div class="v-cta-note">Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</div>
     </div>
 
     <p class="v-disclaimer">* Los valores de devolución de IVA, deducción en renta y beneficio total son estimaciones basadas en el precio de referencia público del {v.marca} {v.modelo}. Los montos exactos dependen del precio registrado en tu factura de compra. El costo del trámite UPME se calcula según la tabla de tarifas vigente de la UPME en UVT. CertiVeh no garantiza valores específicos, el beneficio final lo determina la DIAN.</p>

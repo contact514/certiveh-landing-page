@@ -80,7 +80,7 @@ const itemListLd = JSON.stringify({
     /* ── LOS MODELOS CON FICHA: baldosas de tono ── */
     .vh-container { max-width: 1520px; margin: 0 auto; padding: clamp(48px, 6vw, 96px) var(--cv-m) 0; }
     .vh-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-    .vh-card { background: var(--cv-tone); border-radius: var(--cv-r); padding: 24px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--cv-ink); transition: background-color .15s; }
+    .vh-card { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(22px, 2.2vw, 28px); min-height: 360px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--cv-ink); transition: background-color .15s; }
     .vh-card:hover { background: var(--cv-tone-2); }
     .vh-card:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
     .vh-card-name { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
@@ -88,8 +88,11 @@ const itemListLd = JSON.stringify({
     .vh-card-price { font-size: 1rem; color: var(--cv-soft); margin-bottom: 14px; }
     .vh-card-benefit { display: flex; justify-content: space-between; gap: 12px; font-size: 1rem; padding: 4px 0; font-variant-numeric: tabular-nums; }
     .vh-card-benefit-value { font-weight: 600; }
-    .vh-card-total { font-weight: 700; margin-top: 4px; }
-    .vh-card-total span:last-child { color: var(--cv-accent); }
+    /* El beneficio total, la cifra de la tarjeta: grande y en verde, como la cifra de las baldosas de la home */
+    .vh-card-benefit.vh-card-total { display: flex; flex-direction: column; gap: 2px; order: -1; margin: 18px 0 12px; padding: 0; font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
+    .vh-card-total span:last-child { order: -1; font-size: clamp(2rem, 1.5rem + 1.4vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; color: var(--cv-accent); }
+    .vh-card-figs { display: flex; flex-direction: column; }
+    .vh-card-figs .vh-card-benefit:not(.vh-card-total) { font-size: .9375rem; }
     .vh-card-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; font-weight: 700; color: var(--cv-accent); }
     .vh-card-cta .cv-arr { transition: transform .15s; }
     .vh-card:hover .vh-card-cta .cv-arr { transform: translateX(4px); }
@@ -124,17 +127,14 @@ const itemListLd = JSON.stringify({
     .vh-model-tag-linked:hover { background: var(--cv-accent-hover); }
     .vh-model-tag-linked:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 2px; }
 
-    /* ── CIERRE DEL DIRECTORIO: campo verde, como el del resto del sitio ── */
-    .vh-directory-cta { margin: var(--cv-gap-sec) 0; background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
-    .vh-directory-cta > * { grid-column: 1 / span 7; }
-    .vh-directory-cta-title { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; max-width: 20ch; }
-    .vh-directory-cta-desc { margin-top: 18px; max-width: 56ch; }
-    .vh-directory-cta .vh-directory-cta-btn { grid-column: 9 / span 4; grid-row: 1 / span 2; align-self: end; }
-    .vh-directory-cta-note { grid-row: 3; }
-    .vh-directory-cta-btn:focus-visible { outline-color: #fff; }
-    .vh-directory-cta-note { margin-top: 24px; font-size: 1rem; max-width: 64ch; }
-    .vh-directory-cta-note a { color: #fff; font-weight: 700; text-underline-offset: 3px; }
-    .vh-directory-cta-note a:focus-visible { outline-color: #fff; }
+    /* ── CIERRE DEL DIRECTORIO: el de la home, el titular grande a la izquierda y la acción a la derecha ── */
+    .vh-directory-cta { margin: var(--cv-gap-sec) 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
+    .vh-directory-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 3; align-self: end; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .vh-directory-cta-desc, .vh-directory-cta .vh-directory-cta-btn, .vh-directory-cta-note { grid-column: 8 / span 5; }
+    .vh-directory-cta-desc { max-width: 52ch; }
+    .vh-directory-cta .vh-directory-cta-btn { margin-top: 30px; justify-self: start; }
+    .vh-directory-cta-note { margin-top: 26px; font-size: var(--cv-small); color: var(--cv-soft); max-width: 56ch; }
+    .vh-directory-cta-note a { color: var(--cv-accent); font-weight: 700; text-underline-offset: 3px; }
 
     @media (max-width: 1100px) { .vh-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     @media (max-width: 860px) {
@@ -142,7 +142,7 @@ const itemListLd = JSON.stringify({
       .vh-brand-group { grid-template-columns: 1fr; row-gap: 12px; }
       .vh-brand-name { flex-direction: row; align-items: baseline; gap: 12px; }
       .vh-directory-cta > *, .vh-directory-cta .vh-directory-cta-btn { grid-column: 1 / -1; grid-row: auto; }
-      .vh-directory-cta .vh-directory-cta-btn { margin-top: 28px; justify-self: start; }
+      .vh-directory-cta-desc { margin-top: 24px; }
     }
     @media (max-width: 560px) {
       .vh-grid { grid-template-columns: 1fr; gap: 6px; }
@@ -177,6 +177,7 @@ const itemListLd = JSON.stringify({
               {v.tipoLabel}
             </div>
             <div class="vh-card-price">Desde {fmt(v.precioCOP)} COP</div>
+            <div class="vh-card-figs">
             <div class="vh-card-benefit">
               <span class="vh-card-benefit-label">Devolución IVA</span>
               <span class="vh-card-benefit-value">{fmt(iva)}</span>
@@ -188,6 +189,7 @@ const itemListLd = JSON.stringify({
             <div class="vh-card-benefit vh-card-total">
               <span>Beneficio total</span>
               <span>{fmt(total)}</span>
+            </div>
             </div>
             <div class="vh-card-cta">
               Ver detalle y calcular
@@ -251,7 +253,7 @@ const itemListLd = JSON.stringify({
     <div class="vh-directory-cta">
       <div class="vh-directory-cta-title">¿Tu vehículo está en la lista?</div>
       <p class="vh-directory-cta-desc">Si tu vehículo eléctrico o híbrido aparece en este directorio, eres elegible para el certificado UPME. Tramítalo 100% en línea con CertiVeh.</p>
-      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="vh-directory-cta-btn cv-btn cv-btn-w">
+      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="vh-directory-cta-btn cv-btn cv-btn-a">
         Empezar mi trámite ahora
         <span class="cv-arr" aria-hidden="true">→</span>
       </a>
