@@ -53,14 +53,23 @@ componente se cambia en todos los sitios donde aparece.
 
 ## 3. Escala de texto
 
-1. Cinco pasos: `display` (h1), `head` (h2), `lead` (entradilla), `body` (17-19 px), `small` (14-15 px).
+1. Seis pasos: `display` (h1), `head` (h2), `lead` (entradilla), `intro` (introducción de sección, 19 / 17 px),
+   `body` (17-19 px), `small` (14-15 px).
    Los `clamp()` exactos están en `tokens.json`.
 2. **Portada: titular y entradilla son UNA regla** (`.cv-hero-title` / `.cv-hero-sub`). Titular `display`
    (64 px escritorio, 34 px celular), 700, interlineado .96, tracking -0.03em. Entradilla `lead` (26 / 20 px),
    interlineado 1.4, `#DBE3EE` sobre oscuro, 24 px bajo el titular, máximo 46ch. Una pantalla solo decide el
    ancho de su columna. Vale para la landing, el portal (la cabecera del campo de cada pantalla) y las maquetas.
    Excepción: los documentos de lectura (artículos del blog, /api-docs) tienen su escala.
-3. **Mínimo legible:** 13 px en pantalla y en correo; 9 pt en PDF. Nada que se lea por debajo.
+3. **Secciones de una página: también UNA regla** (`.cv-sec-title` / `.cv-sec-intro` / `.cv-close-title`).
+   Título de sección `head` (56 px escritorio, ~29 px celular), 700, interlineado .98, tracking -0.03em.
+   Introducción de sección `intro` (19 / 17 px), interlineado 1.5, máximo 58ch, 18 px bajo el título; un
+   subtítulo corto de sección (p. ej. «Refiere amigos y gana dinero») es introducción, con su peso y color, nunca
+   el tamaño de la entradilla de portada. Título del cierre («¿Listo…?») `display`, interlineado .96. Una página
+   solo fija ancho, columna y color sobre oscuro. Los componentes tienen su escala de componente (calculadora
+   36 / 26 px, tarjeta de listado 30 / 22 px, rótulo de bloque 14 px 700); en el portal, el título de baldosa va de
+   22 a 30 px. No se mezclan más tamaños que estos.
+4. **Mínimo legible:** 13 px en pantalla y en correo; 9 pt en PDF. Nada que se lea por debajo.
 
 ## 4. Prohibido en todos los medios (cada uno delata «hecho con IA»)
 

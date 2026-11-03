@@ -10,8 +10,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const SHA = {
-  'SISTEMA.md': '7cdab3a2f9757190ea5d089eaa76daf46c0398837f6187da66ecac5840a26b6b',
-  'tokens.json': '01ba1cb2cd4491ebb4a10c721bdb8839aa84e513026c2bce6a765fc1a67a8ad8',
+  'SISTEMA.md': '3b59f0cbaa3879ea4908c3314ad71ae76afe97408ddd0d7240a54eb45f6393b3',
+  'tokens.json': 'a09cb00751d4b3b40477e33481cd49d8a732154163543bd07cf5f6aaa3f48260',
 };
 const leer = (p) => readFileSync(new URL(`../${p}`, import.meta.url));
 
@@ -48,7 +48,7 @@ test('marca.css lleva la fuente, el radio y la escala de los tokens', () => {
   assert.equal(v('--cv-trk'), tokens.fuente.trackingTitulo);
   assert.equal(v('--cv-wh'), String(tokens.fuente.pesoTitulo));
   assert.equal(v('--cv-r'), `${tokens.forma.radioPx}px`);
-  for (const paso of ['display', 'head', 'lead', 'body', 'small']) assert.equal(v(`--cv-${paso}`), tokens.tipo[paso].css, `--cv-${paso}`);
+  for (const paso of ['display', 'head', 'lead', 'intro', 'body', 'small']) assert.equal(v(`--cv-${paso}`), tokens.tipo[paso].css, `--cv-${paso}`);
 });
 
 test('la regla de portada (.cv-hero-title / .cv-hero-sub) es la de los tokens', () => {
@@ -60,4 +60,19 @@ test('la regla de portada (.cv-hero-title / .cv-hero-sub) es la de los tokens', 
   assert.match(s, new RegExp(`color:\\s*${p.entradilla.colorSobreOscuro}`, 'i'));
   assert.match(s, new RegExp(`margin-top:\\s*${p.entradilla.separacionPx}px`));
   assert.match(s, new RegExp(`max-width:\\s*${p.entradilla.anchoMaxCh}ch`));
+});
+
+test('la regla de secciones (.cv-sec-title / .cv-sec-intro / .cv-close-title) es la de los tokens', () => {
+  const sec = tokens.tipo.seccion;
+  const lh = (n) => new RegExp(`line-height:\\s*\\.?${String(n).replace(/^0/, '')}`);
+  const t = regla('.cv-sec-title'), i = regla('.cv-sec-intro'), c = regla('.cv-close-title');
+  assert.match(t, new RegExp(`font-size:\\s*var\\(--cv-${sec.titulo.tamano}\\)`));
+  assert.match(t, lh(sec.titulo.interlineado));
+  assert.match(t, /font-weight:\s*var\(--cv-wh\)/);
+  assert.match(i, new RegExp(`font-size:\\s*var\\(--cv-${sec.introduccion.tamano}\\)`));
+  assert.match(i, lh(sec.introduccion.interlineado));
+  assert.match(i, new RegExp(`max-width:\\s*${sec.introduccion.anchoMaxCh}ch`));
+  assert.match(i, new RegExp(`margin-top:\\s*${sec.introduccion.separacionPx}px`));
+  assert.match(c, new RegExp(`font-size:\\s*var\\(--cv-${sec.cierre.tamano}\\)`));
+  assert.match(c, lh(sec.cierre.interlineado));
 });
