@@ -58,12 +58,22 @@ ${CSS_CALC}
   .emp { margin-top: 12px; }
 
   /* ── ACTIVOS: tres baldosas con su foto ── */
-  .oa-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
-  .oa-asset { background: var(--cv-tone); border-radius: var(--cv-r); overflow: hidden; display: flex; flex-direction: column; }
-  .oa-asset-img { aspect-ratio: 16 / 10; overflow: hidden; }
-  .oa-asset-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .oa-asset-body { padding: clamp(22px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 10px; }
-  .oa-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
+  /* Mosaico de fotos a sangre (como las baldosas escalonadas de la home): los cargadores, la categoría que más se
+     pide, ocupan la baldosa grande; el camión y el solar se apilan a su lado. El texto va sobre la foto con el velo
+     neutro de las portadas. En el celular, carrusel horizontal con la siguiente asomando. */
+  .oa-board { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(300px, 1fr)); gap: 8px; margin-top: 56px; }
+  .oa-asset { position: relative; border-radius: var(--cv-r); overflow: hidden; color: #fff; background: var(--cv-field); display: flex; align-items: flex-end; min-height: 300px; }
+  .oa-asset:nth-child(1) { grid-column: 1 / span 7; grid-row: 1 / span 2; min-height: 616px; }
+  .oa-asset:nth-child(2), .oa-asset:nth-child(3) { grid-column: 8 / span 5; }
+  .oa-asset-img { position: absolute; inset: 0; }
+  .oa-asset-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .oa-asset:hover .oa-asset-img img { transform: scale(1.04); }
+  .oa-asset-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,14,26,.2) 0%, rgba(9,14,26,.55) 45%, rgba(9,14,26,.92) 100%); } /* taste-skill-ignore: velo neutro sobre la foto, el mismo de las portadas */
+  .oa-asset:nth-child(n+2) .oa-asset-img::after { background: linear-gradient(180deg, rgba(9,14,26,.6) 0%, rgba(9,14,26,.92) 100%); } /* taste-skill-ignore: velo neutro; en las baldosas bajas el texto ocupa casi toda la foto */
+  .oa-asset-body { position: relative; padding: clamp(22px, 2.4vw, 36px); display: flex; flex-direction: column; gap: 10px; max-width: 34rem; }
+  .oa-asset-body p { color: #e2e8f0; }
+  .oa-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-mint); }
+  .oa-asset:nth-child(1) h3 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem); }
   .oa-asset h3 { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
 
   /* ── BENEFICIOS: baldosas escalonadas (las de la home), la cifra enorme ── */
@@ -143,7 +153,9 @@ ${CSS_UI}
     .oa-hero-copy, .oa-stage, .oa-intro, .oa-why-copy, .oa-why-list { grid-column: 1 / -1; }
     .oa-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
 ${CSS_CALC_MOVIL}
-    .oa-board { grid-template-columns: 1fr; gap: 6px; }
+    .oa-board { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); scrollbar-width: none; }
+    .oa-board::-webkit-scrollbar { display: none; }
+    .oa-asset, .oa-asset:nth-child(1) { flex: 0 0 84%; min-height: 440px; scroll-snap-align: start; }
     .bt.a, .bstack { grid-column: 1 / -1; }
     .bstack { grid-template-columns: 1fr; gap: 6px; }
     .steps4 { gap: 6px; }
@@ -297,9 +309,9 @@ function Activos() {
           </div>
         </div>
 
-        <div className="oa-board">
+        <div className="oa-board" role="list" aria-label="Activos que certificamos">
           {activos.map((a, i) => (
-            <div key={i} className="oa-asset rv">
+            <div key={i} className="oa-asset rv" role="listitem">
               <div className="oa-asset-img">
                 <img src={a.img} alt={a.title} loading="lazy" />
               </div>
