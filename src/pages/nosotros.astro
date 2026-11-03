@@ -75,8 +75,7 @@ const foundersLd = JSON.stringify([
     .nos-hero > * { position: relative; }
     .nos-hero .nos-grid { align-items: center; }
     .nos-hero-copy { grid-column: 1 / span 6; }
-    .nos-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; max-width: 18ch; }
-    .nos-hero-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 44ch; margin-top: 24px; }
+    .nos-hero-title { max-width: 18ch; }
     .nos-photo { grid-column: 8 / span 5; border-radius: var(--cv-r); overflow: hidden; background: var(--cv-field-2); aspect-ratio: 4 / 5; max-height: calc(100svh - 160px); justify-self: end; width: 100%; }
     .nos-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
@@ -145,8 +144,8 @@ const foundersLd = JSON.stringify([
   <section class="nos-hero cv-hero-full">
     <div class="nos-wrap nos-grid">
       <div class="nos-hero-copy">
-        <h1 class="nos-hero-title">El equipo detrás de <span>CertiVeh</span></h1>
-        <p class="nos-hero-subtitle">
+        <h1 class="nos-hero-title cv-hero-title">El equipo detrás de <span>CertiVeh</span></h1>
+        <p class="nos-hero-subtitle cv-hero-sub">
           Tecnología, experiencia en energía y respaldo experto al servicio de los propietarios de vehículos eléctricos e híbridos en Colombia.
         </p>
       </div>

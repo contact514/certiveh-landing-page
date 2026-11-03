@@ -95,10 +95,9 @@ const CSS = `
   .h-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
   .h-hero .h-grid { position: relative; z-index: 1; align-items: start; }
   .h-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
-  .h-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; }
   .h-hero-lead { font-size: var(--cv-lead); font-weight: 600; margin-top: 28px; letter-spacing: -0.02em; }
   .h-hero-lead .flip { color: var(--cv-mint); }
-  .h-hero-sup { margin-top: 14px; max-width: 46ch; color: #dbe3ee; }
+  .h-hero-lead + .h-hero-sup { margin-top: 10px; }
   .h-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
   .h-figs { margin-top: 44px; display: grid; gap: 4px; }
   .h-fig { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: baseline; gap: 16px; background: rgba(9,14,26,.62); border-radius: var(--cv-r); padding: 16px 18px; }
@@ -554,9 +553,9 @@ function Hero() {
       </div>
       <div className="h-wrap h-grid">
         <div className="h-hero-copy">
-          <h1>Reclama los beneficios tributarios de tu carro eléctrico o híbrido en Colombia</h1>
+          <h1 className="cv-hero-title">Reclama los beneficios tributarios de tu carro eléctrico o híbrido en Colombia</h1>
           <p className="h-hero-lead">Accede a <span style={{ position: "relative", display: "inline-block" }}><FlipWords words={flipWords} duration={2800}/></span></p>
-          <p className="h-hero-sup">Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.</p>
+          <p className="h-hero-sup cv-hero-sub">Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.</p>
           <div className="h-acts">
             {/* «Calcular mi beneficio» solo lleva a la calculadora: en escritorio ya está al lado y se oculta;
                 en el celular queda debajo de las cifras y el botón ahorra el scroll. Entonces, en escritorio,

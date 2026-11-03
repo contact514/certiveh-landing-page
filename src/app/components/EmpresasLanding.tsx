@@ -38,8 +38,7 @@ const CSS = `
   .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
   .oa-hero .oa-grid { position: relative; z-index: 1; align-items: start; }
   .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; position: sticky; top: 104px; } /* acompaña al bajar por la calculadora, como en las fichas */
-  .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; max-width: 18ch; }
-  .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+  .oa-hero h1 { max-width: 18ch; }
   .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
   .oa-trust { list-style: none; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; max-width: 560px; font-size: var(--cv-small); font-weight: 600; }
   .oa-hero .cv-sq::before { background: var(--cv-mint); }
@@ -243,14 +242,14 @@ function Hero() {
 
       <div className="oa-wrap oa-grid">
         <div className="oa-hero-copy">
-          <h1>
+          <h1 className="cv-hero-title">
             Ahórrate hasta el 19% de IVA y deduce{" "}
             <span>
               el 50% de tu inversión en renta
             </span>
           </h1>
 
-          <p className="oa-hero-sub">
+          <p className="oa-hero-sub cv-hero-sub">
             CertiVeh gestiona tu certificado UPME de principio a fin para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE).
           </p>
 

@@ -66,6 +66,14 @@ El verde `#059669` tampoco se usa en texto (3,87:1); solo puede ser relleno deco
   `--cv-mint`).
 - **Lo único que flota y lleva sombra**: el menú del celular, los modales y el botón de WhatsApp.
 
+**Portada de página: titular y entradilla son UNA regla** (`.cv-hero-title` y `.cv-hero-sub` en `marca.css`).
+Toda portada (home, otros activos, aliados, nosotros, vehículos, fichas, índice del blog) usa las dos clases:
+titular `--cv-display` 700, interlineado .96, tracking -0.03em; entradilla `--cv-lead` (26 px en escritorio,
+20 px en celular), interlineado 1.4, `#dbe3ee`, 24 px bajo el titular, máx. 46ch. Una página solo puede fijar el
+ancho de su columna (`max-width` del titular); nunca tamaño, peso, color ni separación propios. La home lleva
+antes de la entradilla su línea animada («Accede a…», `--cv-lead` 600), y por eso la entradilla queda a 10 px
+de esa línea. La cabecera de los artículos del blog y /api-docs son documentos, no portadas: tienen su escala.
+
 ### 0.4 Lo que NO se usa (cada uno era un rasgo de página generada)
 
 1. Degradados de marca en botones, textos, logo, banners o fondos. Única excepción: el velo neutro

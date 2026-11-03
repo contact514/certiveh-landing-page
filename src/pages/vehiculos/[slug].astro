@@ -140,8 +140,6 @@ const faqLd = JSON.stringify({
     .v-breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
     .v-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
     .v-breadcrumb a:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
-    .v-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
-    .v-desc { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
     .v-stage { grid-column: 8 / span 5; }
 
     /* El desglose del modelo en la calculadora de la home */
@@ -196,8 +194,8 @@ const faqLd = JSON.stringify({
         <nav class="v-breadcrumb" aria-label="Migas de pan">
           <a href="/">Inicio</a> → <a href="/vehiculos/">Vehículos</a> → {v.marca} {v.modelo}
         </nav>
-        <h1 class="v-title">{v.marca} <span>{v.modelo}</span></h1>
-        <p class="v-desc">{v.descripcion}</p>
+        <h1 class="v-title cv-hero-title">{v.marca} <span>{v.modelo}</span></h1>
+        <p class="v-desc cv-hero-sub">{v.descripcion}</p>
       </div>
 
       <!-- BENEFICIOS Y COSTO: la calculadora de la home con el desglose de este modelo -->

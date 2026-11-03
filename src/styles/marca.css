@@ -60,6 +60,12 @@
 .cv-hero-full { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
 .cv-hero-full > * { width: 100%; }
 
+/* El titular y la entradilla de TODA portada de página (home, otros activos, aliados, nosotros, vehículos y
+   fichas): mismo tamaño, peso, interlineado, color y separación en todas. Las páginas solo deciden el ancho de
+   su columna. Ver DESIGN_SYSTEM.md §0.3. */
+.cv-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
+.cv-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+
 /* Viñeta cuadrada en lugar de iconos en las listas */
 .cv-sq { position: relative; padding-left: 16px; }
 .cv-sq::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; background: var(--cv-accent); }

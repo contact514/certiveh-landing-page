@@ -74,8 +74,7 @@ const itemListLd = JSON.stringify({
     .vh-hero { position: relative; color: #fff; padding: calc(64px + clamp(64px, 9vw, 140px)) max(var(--cv-m), calc((100vw - 1424px) / 2)) clamp(56px, 7vw, 110px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
     .vh-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .vh-hero > * { position: relative; }
-    .vh-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; max-width: 20ch; }
-    .vh-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 46ch; margin-top: 22px; }
+    .vh-title { max-width: 20ch; }
 
     /* ── LOS MODELOS CON FICHA: baldosas de tono ── */
     .vh-container { max-width: 1520px; margin: 0 auto; padding: clamp(48px, 6vw, 96px) var(--cv-m) 0; }
@@ -159,8 +158,8 @@ const itemListLd = JSON.stringify({
   <!-- HERO -->
   <main id="main-content">
   <div class="vh-hero">
-    <h1 class="vh-title">Vehículos elegibles para el <span>certificado UPME</span></h1>
-    <p class="vh-subtitle">Listado oficial completo de vehículos eléctricos e híbridos que aplican para beneficios tributarios en Colombia. Consulta tu marca y modelo.</p>
+    <h1 class="vh-title cv-hero-title">Vehículos elegibles para el <span>certificado UPME</span></h1>
+    <p class="vh-subtitle cv-hero-sub">Listado oficial completo de vehículos eléctricos e híbridos que aplican para beneficios tributarios en Colombia. Consulta tu marca y modelo.</p>
   </div>
 
   <!-- GRID -->

@@ -83,8 +83,6 @@ const webPageLd = JSON.stringify({
     .ui .qr { display: grid; grid-template-columns: repeat(7, 6px); gap: 1px; padding: 4px; background: #fff; box-shadow: inset 0 0 0 1px var(--cv-tone-2); border-radius: 4px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
     .ui .qr i { width: 6px; height: 6px; background: var(--cv-ink); }
     .ui .qr i.o { background: transparent; }
-    .al-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
-    .al-hero-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 40ch; margin-top: 22px; }
     .al-hero .cv-btn { margin-top: 34px; }
     .al-hero-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 30px; font-size: var(--cv-small); font-weight: 600; }
     .al-hero-trust .cv-sq::before { background: var(--cv-mint); }
@@ -183,8 +181,8 @@ const webPageLd = JSON.stringify({
   <section class="al-hero cv-hero-full">
     <div class="al-wrap al-grid">
       <div class="al-hero-copy">
-        <h1 class="al-hero-title">Programa de Aliados <span>CertiVeh</span></h1>
-        <p class="al-hero-subtitle">
+        <h1 class="al-hero-title cv-hero-title">Programa de Aliados <span>CertiVeh</span></h1>
+        <p class="al-hero-subtitle cv-hero-sub">
           Genera ingresos adicionales ayudando a tus clientes a obtener su certificado UPME.
           Sin inversión, sin riesgo.
         </p>
