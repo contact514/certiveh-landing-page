@@ -10,8 +10,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const SHA = {
-  'SISTEMA.md': '3b59f0cbaa3879ea4908c3314ad71ae76afe97408ddd0d7240a54eb45f6393b3',
-  'tokens.json': 'a09cb00751d4b3b40477e33481cd49d8a732154163543bd07cf5f6aaa3f48260',
+  'SISTEMA.md': 'fec70bab40e89c354e58d18795b6df29a048e19edaf11d1f6f039ef912927a04',
+  'tokens.json': 'f0703f2b483136ee780122f7115ed429c111b3125efb430e3589587fdae632e5',
 };
 const leer = (p) => readFileSync(new URL(`../${p}`, import.meta.url));
 

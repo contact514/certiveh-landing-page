@@ -70,6 +70,28 @@ componente se cambia en todos los sitios donde aparece.
    36 / 26 px, tarjeta de listado 30 / 22 px, rótulo de bloque 14 px 700); en el portal, el título de baldosa va de
    22 a 30 px. No se mezclan más tamaños que estos.
 4. **Mínimo legible:** 13 px en pantalla y en correo; 9 pt en PDF. Nada que se lea por debajo.
+5. **Escala por medio** (medida en el código el 3-nov-2026; mismos papeles que la web: título, entradilla o
+   bajada, cuerpo, rótulo, dato, nota o pie, mínimo). Cada medio usa SOLO estos tamaños:
+
+   | Papel | Web / app | Correo (px, ancho 600) | PDF de lectura (pt) | PDF de datos (pt) | Redes 1080×1350 (px) | Impreso 13×21 cm (px de lienzo, 10 px = 1 mm) |
+   |---|---|---|---|---|---|---|
+   | Título | 64 / 34 (portada), 56 / 29 (sección) | 20, 700 | 17, 700 (titular); 13 (título de documento) | 26 (portada), 17 | 72 a 84, 700 | 86 (frente), 58 (dorso), 700 |
+   | Entradilla / bajada | 26 / 20 | 13, `#B6C2D1` | — | — | — | — |
+   | Sección | 56 / 29 | 14, 700 (título de bloque) | 12,5 | 12 (11 subtítulo) | — | 34, 700 |
+   | Cuerpo | 17 a 19 | 15, interlineado 1,7 | 11 (interlínea 15) | 9,5 | 30, 400 | 32, 400 |
+   | Rótulo / etiqueta | 14 a 15, 600 | 13, 600, menta | — | — | 30, 600, menta | 34, 600, menta |
+   | Dato / cifra | según componente | 13, 600 (valor de tarjeta) | — | — | — | 58, 700 |
+   | Botón | 17, 600 | 15, 600 | 11,5 | — | 30, 600 | 32, 600 |
+   | Nota / pie | 14 a 15 | 13, `#64748B` | 9 | 9 | 24, `#B6C2D1` | 32 (ver abajo) |
+   | **Mínimo** | 13 | 13 | 9 | 9 | 24 | 32 (= 9 pt impreso) |
+
+   «PDF de lectura» = instructivo, instrucciones de reenvío y guías (`_shared/documento-generar.ts` del portal).
+   «PDF de datos» = cotización, reporte de aliado, one pager, liquidación (`TAMANO` de `marca-del-portal.ts` del
+   panel): más densos, por eso su cuerpo es 9,5. Pendientes de igualar: (a) dos párrafos de cuerpo de correo
+   siguen a 14 px (`recordar-al-contable.ts` ×2, `aviso-de-firma-al-dueno.ts`), deben ir a 15 por la tanda
+   contada; (b) la sección del PDF de datos va a 12 y la de lectura a 12,5; (c) en el flyer de 13×21 las notas
+   (`.note`, `.prensa-label`, `.ctaband .cs`) van a 25 px, unos 7 pt impresos: deben subir a 32 (9 pt).
+   LinkedIn usa la escala de redes reducida a su lienzo.
 
 ## 4. Prohibido en todos los medios (cada uno delata «hecho con IA»)
 
@@ -132,8 +154,13 @@ legítimo lleva `taste-skill-ignore: motivo`) e `inspect.mjs <url>` en la págin
 4. Celular: orden por prioridad (avisos → trámite y su acción → IVA → resto); riel vertical; barra inferior
    que no tapa contenido; botones principales a todo el ancho, 48 px.
 5. Win Win = el módulo `.ww-mod` de la landing, idéntico.
-6. Los portales de aliado conservan sus colores, fuente y radio (`applyPartnerTheme`) y heredan la forma:
-   plano, sin sombras, sin degradados.
+6. Los portales de aliado conservan sus colores, fuente, radio **y forma de botón (hoy píldora)**: el design
+   system de cada aliado manda en eso (decisión de Julian, 3-nov-2026; `applyPartnerTheme`). La estructura 2026-11
+   (campo, pieza, baldosas) y lo plano (sin sombras ni degradados) se mantienen.
+7. **La interfaz del panel interno** (admin.certiveh.co) **SÍ se rediseña** con este sistema (decisión de Julian,
+   3-nov-2026): rediseño completo **sin romper nada, sin ocultar información relevante y sin cambiar
+   funcionalidades, secciones ni copies**. Hasta que se haga, su estándar vigente es
+   `docs/estandar-visual-del-panel.md` del repo del panel.
 
 ### 6.3 Correo
 
@@ -147,7 +174,11 @@ legítimo lleva `taste-skill-ignore: motivo`) e `inspect.mjs <url>` en la págin
 4. Tarjetas de datos y avisos sin borde (el tono las separa); números de pasos en verde 700 sin caja.
 5. Botón: verde plano, radio 6, en Outlook `v:roundrect` con `arcsize` 12 %.
 6. Letra mínima 13 px; grises de letra pequeña `#64748B`. El sobre común es `_shared/layout-de-correo.ts`.
-7. No se rediseñan: el correo que el cliente reenvía a la DIAN, los avisos internos, Alegra, WhatsApp.
+7. **Los avisos internos al equipo llevan el sobre completo** (decisión de Julian, 3-nov-2026): cabecera oscura
+   con el logo, glifo ámbar, el asunto de título, el rótulo «Aviso al equipo» y el pie con sus enlaces, aunque eso
+   añada texto que antes no tenían; **el mensaje de cada aviso no cambia**. Rótulos en mayúscula inicial, mínimo
+   13 px. En el portal lo hace `_shared/sobre-de-aviso-interno.ts`. No se rediseñan: el correo que el cliente
+   reenvía a la DIAN, Alegra y WhatsApp.
 
 ### 6.4 PDF propios
 
