@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Navbar } from '../app/components/Navbar';
 import { SiteFooter } from '../app/components/SiteFooter';
+// El riel de pasos y las piezas de interfaz de la home (DESIGN_SYSTEM.md §0.5).
+import { CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI, JS_RIEL } from '../app/components/piezas-de-la-marca.ts';
+const CSS_PIEZAS = `${CSS_RIEL}\n${CSS_UI}\n  @media (max-width: 900px) {\n${CSS_RIEL_MOVIL}\n  }`;
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -48,6 +51,7 @@ const webPageLd = JSON.stringify({
   <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   <script slot="head" type="application/ld+json" set:html={webPageLd} />
 
+  <style is:inline set:html={CSS_PIEZAS}></style>
   <style is:inline>
     /* Programa de Aliados · estándar visual 2026-11 (DESIGN_SYSTEM.md §0). Colores, tipo y radio salen de
        las variables --cv-* de src/styles/marca.css. Sin degradados, sin sombras, sin vidrio, sin iconos
@@ -68,7 +72,17 @@ const webPageLd = JSON.stringify({
     .al-hero { position: relative; color: #fff; padding: calc(64px + clamp(64px, 9vw, 140px)) 0 clamp(56px, 7vw, 110px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
     .al-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .al-hero > * { position: relative; }
-    .al-hero-copy { max-width: 760px; }
+    /* Como la home: el texto a la izquierda y, a la derecha, la pieza del portal del aliado */
+    .al-hero .al-grid { align-items: center; }
+    .al-hero-copy { grid-column: 1 / span 7; }
+    .al-stage { grid-column: 8 / span 5; display: grid; place-items: center; }
+    .al-stage .ui { width: min(460px, 100%); }
+    .ui .r b { font-weight: 600; white-space: nowrap; }
+    .ui .r.st { display: grid; gap: 2px; justify-content: stretch; }
+    .ui .r.st b { white-space: normal; overflow-wrap: anywhere; }
+    .ui .qr { display: grid; grid-template-columns: repeat(7, 6px); gap: 1px; padding: 4px; background: #fff; box-shadow: inset 0 0 0 1px var(--cv-tone-2); border-radius: 4px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+    .ui .qr i { width: 6px; height: 6px; background: var(--cv-ink); }
+    .ui .qr i.o { background: transparent; }
     .al-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
     .al-hero-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 40ch; margin-top: 22px; }
     .al-hero .cv-btn { margin-top: 34px; }
@@ -90,15 +104,16 @@ const webPageLd = JSON.stringify({
     .al-benefit-link:hover svg { transform: translateX(4px); }
     .al-benefit-link:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; border-radius: 2px; }
 
-    /* ── CÓMO FUNCIONA: el riel del portal (línea de 3 px, puntos de 25 px) ── */
-    /* El rótulo de la sección titula el riel, como el título de una pieza del portal */
-    .al-rail { grid-column: 8 / span 5; align-self: start; padding-top: 8px; }
-    .al-steps { list-style: none; padding-left: 44px; position: relative; display: grid; gap: 36px; margin-top: 20px; }
-    .al-steps::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 3px; background: var(--cv-tone-2); }
-    .al-step { position: relative; }
-    .al-step-num { position: absolute; left: -44px; top: 0; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-accent); color: #fff; font-size: .8125rem; font-weight: 700; display: grid; place-items: center; line-height: 1; }
-    .al-step-title { font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
-    .al-step-desc { margin-top: 8px; max-width: 46ch; }
+    /* ── CÓMO FUNCIONA: el riel de la home (avanza con el scroll) y la pieza de cada paso a la derecha ── */
+    .flow-steps > li > .al-step-title { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; transition: color .25s; }
+    .flow-steps > li > .al-step-desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
+    .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: #94a3b8; }
+    /* El número del paso va dentro del punto del riel */
+    .flow-steps > li > .al-step-num { position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; display: grid; place-items: center; font-size: .75rem; font-weight: 700; color: #94a3b8; z-index: 1; }
+    /* Con número dentro, el paso activo va relleno (como el paso actual del riel del portal) */
+    .flow-steps > li.on::before { background: var(--cv-accent); box-shadow: 0 0 0 4px #d5efe3; } /* taste-skill-ignore: el paso actual del riel, como RielDelTramite del portal */
+    .flow-steps > li.on > .al-step-num { color: #fff; }
+    .flow-steps > li.done > .al-step-num { color: #fff; }
 
     /* ── PARA QUIÉN ES: campo oscuro plano, la lista con viñeta cuadrada ── */
     .al-who { margin-top: var(--cv-gap-sec); background: var(--cv-field); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
@@ -109,27 +124,27 @@ const webPageLd = JSON.stringify({
     .al-who-item { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 22px 22px 22px 40px; font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
     .al-who-item.cv-sq::before { left: 22px; top: calc(22px + .55em); background: var(--cv-mint); }
 
-    /* ── CTA FINAL: campo verde ── */
+    /* ── CTA FINAL: el cierre de la home, el titular grande a la izquierda y la acción a la derecha ── */
     .al-cta { padding-block: var(--cv-gap-sec); }
-    .al-cta-box { background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
+    .al-cta-box { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
     .al-cta-copy { grid-column: 1 / span 7; }
-    .al-cta-title { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; }
-    .al-cta-subtitle { margin-top: 18px; color: #fff; max-width: 52ch; }
-    .al-cta-act { grid-column: 9 / span 4; display: grid; gap: 16px; }
-    .al-cta-act .cv-btn { width: 100%; }
-    .al-cta-act .cv-btn:focus-visible { outline-color: #fff; }
-    .al-cta-note { display: flex; flex-wrap: wrap; gap: 4px 0; font-size: var(--cv-small); color: #fff; }
-    .al-cta-note span::before { content: '·'; margin: 0 6px; }
-    .al-cta-note span:first-child::before { display: none; }
+    .al-cta-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .al-cta-act { grid-column: 8 / span 5; display: grid; gap: 0; justify-items: start; }
+    .al-cta-subtitle { max-width: 52ch; }
+    .al-cta-act .cv-btn { margin-top: 30px; }
+    .al-cta-note { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font-size: var(--cv-small); font-weight: 600; list-style: none; }
+    .al-cta-note span { position: relative; padding-left: 16px; }
+    .al-cta-note span::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; background: var(--cv-accent); }
 
     @media (max-width: 1100px) {
       .al-tile { grid-column: span 6; }
       .al-tile.al-head { grid-column: 1 / -1; min-height: 0; }
     }
     @media (max-width: 900px) {
-      .al-intro, .al-rail, .al-cta-copy, .al-cta-act { grid-column: 1 / -1; }
-      .al-rail { margin-top: 40px; }
-      .al-cta-act { margin-top: 32px; }
+      .al-intro, .al-hero-copy, .al-stage, .al-cta-copy, .al-cta-act { grid-column: 1 / -1; }
+      .al-stage { margin-top: 40px; }
+      .al-cta-act { margin-top: 24px; }
+      .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: var(--cv-ink); }
       .al-who-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
@@ -149,7 +164,7 @@ const webPageLd = JSON.stringify({
   <!-- HERO -->
   <main id="main-content">
   <section class="al-hero cv-hero-full">
-    <div class="al-wrap">
+    <div class="al-wrap al-grid">
       <div class="al-hero-copy">
         <h1 class="al-hero-title">Programa de Aliados <span>CertiVeh</span></h1>
         <p class="al-hero-subtitle">
@@ -165,6 +180,18 @@ const webPageLd = JSON.stringify({
           <li class="cv-sq">Comisiones inmediatas</li>
           <li class="cv-sq">Dashboard en tiempo real</li>
         </ul>
+      </div>
+      <!-- La pieza del portal del aliado, con los rótulos de los beneficios de abajo -->
+      <div class="al-stage" aria-hidden="true">
+        <div class="ui" data-ui>
+          <div class="t">Tu portal de aliado</div>
+          <div class="r st"><span>Subdominio personalizado</span><b>tu-negocio.portal.certiveh.co</b></div>
+          <div class="r"><span>Código QR personalizado</span><span class="qr">{[1,1,1,0,1,1,1, 1,0,1,0,1,0,1, 1,1,1,0,1,1,1, 0,0,0,1,0,0,0, 1,1,1,0,1,0,1, 1,0,1,1,0,1,0, 1,1,1,0,1,1,1].map(k => <i class={k ? '' : 'o'}></i>)}</span></div>
+          <div class="r"><span>Comisión por trámite</span><span class="ok">Automática</span></div>
+          <div class="r"><span>Descuento para tus clientes</span><span class="ok">Activo</span></div>
+          <span class="btnui">Dashboard con reportes</span>
+          <p class="ej">Datos de ejemplo</p>
+        </div>
       </div>
     </div>
   </section>
@@ -248,34 +275,44 @@ const webPageLd = JSON.stringify({
           El proceso de onboarding toma menos de 24 horas. Sin burocracia, sin costos ocultos.
         </p>
       </div>
-      <div class="al-rail">
-      <span class="al-lab">Cómo funciona</span>
-      <ol class="al-steps">
-        <li class="al-step">
+      <span class="al-lab" style="grid-column: 1 / -1; margin: 40px 0 0;">Cómo funciona</span>
+      <div class="flow" style="grid-column: 1 / -1;">
+      <ol class="flow-steps al-steps">
+        <li class="al-step on" data-i="0" aria-current="step">
           <span class="al-step-num" aria-hidden="true">1</span>
           <div class="al-step-title">Aplica en línea</div>
           <p class="al-step-desc">
             Completa el formulario de aplicación en menos de 2 minutos.
             Solo necesitamos información básica de tu negocio.
           </p>
+          <div class="frag" aria-hidden="true"><div class="ui" data-ui><div class="t">Aplicar ahora</div><div class="fld"><span>Negocio</span><b>Concesionario de vehículos eléctricos e híbridos</b></div><div class="fld sel"><span>Ciudad</span><b>Medellín</b></div><span class="btnui">Aplicar ahora</span><p class="ej">Datos de ejemplo</p></div></div>
         </li>
-        <li class="al-step">
+        <li class="al-step" data-i="1">
           <span class="al-step-num" aria-hidden="true">2</span>
           <div class="al-step-title">Recibe tu kit de aliado</div>
           <p class="al-step-desc">
             Subdominio personalizado, código QR único y acceso al dashboard.
             Todo listo para operar el mismo día.
           </p>
+          <div class="frag" aria-hidden="true"><div class="ui" data-ui><div class="t">Tu kit de aliado</div><div class="r st"><span>Subdominio personalizado</span><b>tu-negocio.portal.certiveh.co</b></div><div class="r"><span>Código QR único</span><span class="ok">Listo</span></div><div class="r"><span>Acceso al dashboard</span><span class="ok">Activo</span></div><p class="ej">Datos de ejemplo</p></div></div>
         </li>
-        <li class="al-step">
+        <li class="al-step" data-i="2">
           <span class="al-step-num" aria-hidden="true">3</span>
           <div class="al-step-title">Empieza a ganar</div>
           <p class="al-step-desc">
             Comparte tu enlace con tus clientes y gana comisiones por cada trámite pagado.
             Sin límite de ingresos.
           </p>
+          <div class="frag" aria-hidden="true"><div class="ui" data-ui><div class="t">Dashboard con reportes</div><div class="r"><span>Trámites</span><b>12</b></div><div class="r"><span>Comisiones</span><span class="ok">En tiempo real</span></div><div class="r"><span>Liquidaciones</span><span class="ok">Automáticas</span></div><p class="ej">Datos de ejemplo</p></div></div>
         </li>
       </ol>
+      <div class="flow-panel" aria-hidden="true">
+        <div class="flow-sticky">
+          <div data-pieza="0"><div class="ui" data-ui><div class="t">Aplicar ahora</div><div class="fld"><span>Negocio</span><b>Concesionario de vehículos eléctricos e híbridos</b></div><div class="fld sel"><span>Ciudad</span><b>Medellín</b></div><span class="btnui">Aplicar ahora</span><p class="ej">Datos de ejemplo</p></div></div>
+          <div data-pieza="1" hidden><div class="ui" data-ui><div class="t">Tu kit de aliado</div><div class="r st"><span>Subdominio personalizado</span><b>tu-negocio.portal.certiveh.co</b></div><div class="r"><span>Código QR único</span><span class="ok">Listo</span></div><div class="r"><span>Acceso al dashboard</span><span class="ok">Activo</span></div><p class="ej">Datos de ejemplo</p></div></div>
+          <div data-pieza="2" hidden><div class="ui" data-ui><div class="t">Dashboard con reportes</div><div class="r"><span>Trámites</span><b>12</b></div><div class="r"><span>Comisiones</span><span class="ok">En tiempo real</span></div><div class="r"><span>Liquidaciones</span><span class="ok">Automáticas</span></div><p class="ej">Datos de ejemplo</p></div></div>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -309,13 +346,13 @@ const webPageLd = JSON.stringify({
       <div class="al-cta-box">
         <div class="al-cta-copy">
           <h2 class="al-cta-title">¿Listo para ser <span>aliado</span>?</h2>
+        </div>
+        <div class="al-cta-act">
           <p class="al-cta-subtitle">
             Únete a la red de aliados CertiVeh y empieza a generar ingresos adicionales
             ofreciendo beneficios tributarios reales a tus clientes.
           </p>
-        </div>
-        <div class="al-cta-act">
-          <a href="https://aliado.certiveh.co/" class="cv-btn cv-btn-w" target="_blank" rel="noopener">
+          <a href="https://aliado.certiveh.co/" class="cv-btn cv-btn-a" target="_blank" rel="noopener">
             Aplicar ahora
             <span class="cv-arr" aria-hidden="true">→</span>
           </a>
@@ -328,6 +365,8 @@ const webPageLd = JSON.stringify({
     </div>
   </section>
   </main>
+
+  <script is:inline set:html={JS_RIEL}></script>
 
   <!-- FOOTER: el pie compartido de todo el sitio -->
   <SiteFooter />

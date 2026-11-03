@@ -131,3 +131,24 @@ export function useRielPorScroll(selector: string) {
   }, [selector]);
   return [active, setActive] as const;
 }
+
+/**
+ * El mismo riel en una página ESTÁTICA de Astro (sin isla de React): se monta con
+ * `<script is:inline set:html={JS_RIEL}>`. Cada `.flow` lleva sus `<li data-i>` y, en el panel, una pieza por paso
+ * con `data-pieza="<i>"`: el paso que cruza el centro de la pantalla (o el que se toca) se marca `on`, los anteriores
+ * `done`, y en el panel solo se ve su pieza. Sin JavaScript, el riel queda con el primer paso activo y todo el texto.
+ */
+export const JS_RIEL = `(function(){
+  document.querySelectorAll('.flow').forEach(function(flow){
+    var items = flow.querySelectorAll('.flow-steps > li');
+    var piezas = flow.querySelectorAll('.flow-sticky [data-pieza]');
+    function activar(n){
+      items.forEach(function(li, k){ li.classList.toggle('on', k === n); li.classList.toggle('done', k < n); if (k === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      piezas.forEach(function(p){ p.hidden = Number(p.getAttribute('data-pieza')) !== n; });
+    }
+    items.forEach(function(li, k){ li.addEventListener('click', function(){ activar(k); }); });
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) activar(Number(e.target.getAttribute('data-i'))); }); }, { rootMargin: '-45% 0px -50% 0px' });
+    items.forEach(function(li){ io.observe(li); });
+  });
+})();`;
