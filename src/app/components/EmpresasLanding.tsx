@@ -106,13 +106,15 @@ ${CSS_UI}
 
   /* ── POR QUÉ: campo oscuro, el texto a la izquierda y cuatro razones en baldosas ── */
   .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: 64px; }
-  .oa-why-copy { grid-column: 1 / span 6; }
+  .oa-why-copy { grid-column: 1 / span 5; position: sticky; top: 104px; align-self: start; }
   .oa-why-copy p { margin-top: 18px; max-width: 58ch; color: #e2e8f0; }
   .oa-why-copy p + p { color: var(--cv-field-soft); }
-  .oa-why-list { grid-column: 7 / span 6; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-self: start; }
-  .oa-why-list li { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 24px; min-height: 200px; display: flex; flex-direction: column; }
-  .oa-why-list .t { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
-  .oa-why-list .d { font-size: .9375rem; margin-top: auto; padding-top: 16px; color: #e2e8f0; }
+  /* Las cuatro razones como filas de definición (titular grande, explicación al lado), no una rejilla de 2x2 cajas iguales. */
+  .oa-why-list { grid-column: 7 / span 6; list-style: none; margin: 0; padding: 0; align-self: start; }
+  .oa-why-list li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 8px 28px; padding: 26px 0; border-top: 1px solid rgba(255,255,255,.14); } /* taste-skill-ignore: separador de filas de una lista, no una caja */
+  .oa-why-list li:first-child { border-top: 0; padding-top: 4px; }
+  .oa-why-list .t { font-size: clamp(1.5rem, 1.1rem + 1.1vw, 2.125rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; }
+  .oa-why-list .d { font-size: 1rem; line-height: 1.5; color: #e2e8f0; }
 
   /* ── PREGUNTAS: baldosas que se abren (las de la home) ── */
   .faq-grid { align-items: start; }
@@ -146,8 +148,7 @@ ${CSS_UI}
   .rv.pend { opacity: 0; transform: translateY(24px); }
 
   @media (max-width: 1100px) {
-    .oa-why-list { grid-template-columns: 1fr; }
-    .oa-why-list li { min-height: 0; }
+    .oa-why-copy { position: static; }
   }
   @media (max-width: 900px) {
     .oa-hero-copy, .oa-stage, .oa-intro, .oa-why-copy, .oa-why-list { grid-column: 1 / -1; }
@@ -161,7 +162,8 @@ ${CSS_CALC_MOVIL}
     .steps4 { gap: 6px; }
     .bt.a, .bt.b, .bt.c, .bt.d { min-height: 0; margin-top: 0; }
 ${CSS_RIEL_MOVIL}
-    .oa-why-list { margin-top: 32px; grid-template-columns: 1fr; gap: 6px; }
+    .oa-why-list { margin-top: 32px; }
+    .oa-why-list li { grid-template-columns: 1fr; padding: 20px 0; }
     .faq-grid > h2 { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
     .qs { grid-column: 1 / -1; }
     .faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
