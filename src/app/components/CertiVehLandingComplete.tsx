@@ -642,7 +642,7 @@ function Hero() {
   }, []);
 
   return (
-    <section id="hero" aria-label="Portada - CertiVeh" className="h-hero">
+    <section id="hero" aria-label="Portada - CertiVeh" className="h-hero cv-hero-full">
       <div className="h-hero-media" aria-hidden="true">
         <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster="/hero-bg-poster.webp">
           <source src="/hero-bg.mp4" type="video/mp4" />

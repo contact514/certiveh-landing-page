@@ -53,6 +53,13 @@
 .cv-btn .cv-arr { transition: transform .15s; }
 .cv-btn:hover .cv-arr { transform: translateX(4px); }
 
+/* La portada de una página de venta (home, otros activos, aliados, nosotros) ocupa la pantalla entera al cargar,
+   con el contenido centrado en vertical: sin franja blanca debajo. 100vh de respaldo; 100svh es la altura con la
+   barra del navegador del celular desplegada, para que no quede tapado nada al cargar. El catálogo, el blog y los
+   legales NO la llevan: allí la cabecera es corta para llegar antes al buscador o al texto. */
+.cv-hero-full { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.cv-hero-full > * { width: 100%; }
+
 /* Viñeta cuadrada en lugar de iconos en las listas */
 .cv-sq { position: relative; padding-left: 16px; }
 .cv-sq::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; background: var(--cv-accent); }

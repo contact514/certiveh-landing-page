@@ -216,7 +216,7 @@ const Arr = () => <span className="cv-arr" aria-hidden="true">→</span>;
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="oa-hero">
+    <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="oa-hero cv-hero-full">
       {/* Background video, con el velo neutro de la home */}
       <div className="oa-hero-media" aria-hidden="true">
         <video

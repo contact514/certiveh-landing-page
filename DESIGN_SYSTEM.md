@@ -90,6 +90,11 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
 
 ### 0.5 Patrones de sección
 
+- **Portada a pantalla completa** (`.cv-hero-full` en `marca.css`): la portada de una página de venta (home,
+  otros activos, aliados, nosotros) ocupa al cargar toda la pantalla (`100svh`, con `100vh` de respaldo) y su
+  contenido va centrado en vertical: nunca una franja blanca debajo. Si el contenido es más alto (la home con la
+  calculadora), crece. El catálogo de vehículos, el blog, las fichas y los legales llevan cabecera corta a
+  propósito: allí el visitante viene al buscador o al texto.
 - **Barra de navegación** (`Navbar`): en las páginas que EMPIEZAN con una cabecera oscura (home y las que
   pasan `darkHero`: aliados, nosotros, vehículos y fichas, otros activos, índice del blog, términos y privacidad)
   arranca transparente con texto y escudo en blanco, y al bajar 40 px o al abrir el menú del celular pasa a la
