@@ -7,6 +7,11 @@
 > tarjetas, iconos en cuadritos, badges en mayúsculas—, **gana esta sección**. Lo de abajo se conserva
 > como referencia de componentes de formulario y tablas, que siguen valiendo en lo que no contradigan.
 
+> **La regla común de TODOS los proyectos es `docs/marca-2026-11/SISTEMA.md`** (copia idéntica del original
+> `~/certiveh/marca-2026-11/SISTEMA.md`, con sus valores en `tokens.json`). Esta sección es cómo se aplica en la
+> landing; si chocan, gana SISTEMA.md. La guarda `tests/el-sistema-de-marca-es-uno.test.mjs` (en `pnpm test`)
+> falla si la copia se aparta del original o si `marca.css` se aparta de los tokens.
+
 **Por qué existe.** En noviembre de 2026 nos dijeron que la web, el portal y el logo «se veían hechos
 con IA». Lo auditamos con `design-taste-frontend` (taste skill) y `web-design-guidelines`: la home
 sacaba 18 fallos y usaba casi todos los recursos que hoy delatan una página generada. Este sistema es
