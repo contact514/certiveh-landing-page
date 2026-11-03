@@ -95,6 +95,26 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
   contenido va centrado en vertical: nunca una franja blanca debajo. Si el contenido es más alto (la home con la
   calculadora), crece. El catálogo de vehículos, el blog, las fichas y los legales llevan cabecera corta a
   propósito: allí el visitante viene al buscador o al texto.
+- **Las piezas de la home son las de todo el sitio** (`src/app/components/piezas-de-la-marca.ts`). La calculadora
+  (`.calc`: blanca, esquina recortada, controles en tono, resultado en el campo oscuro), el riel de pasos que avanza
+  con el scroll con la pieza de producto de cada paso a la derecha (`.flow`, `useRielPorScroll`) y las piezas de
+  interfaz (`.ui`, `.plate`) viven en ese módulo y las montan la home, `/otros-activos` y las fichas de vehículos.
+  La home las interpola en su hoja y su CSS compilado es byte a byte el de antes de extraerlas. Reglas:
+  - **Si una página tiene calculadora, va en la portada**, a la derecha del texto (debajo en el celular, con
+    «Calcular mi beneficio» como atajo solo en el celular). Las fichas de vehículos llevan ahí el desglose de su
+    modelo con la misma pieza.
+  - **Un «paso a paso» es el riel**, nunca una lista con una tarjeta que cambia sola: cada paso a la vista con su
+    texto completo, el activo marcado al pasar por el centro de la pantalla, y su pieza (un fragmento real del
+    trámite con los datos que el propio paso enuncia, marcado «Datos de ejemplo») a la derecha; en el celular, debajo
+    de cada paso.
+  - **Las cifras de beneficio van en baldosas escalonadas**: la mayor en el campo verde a media página, las demás
+    apiladas al lado y una en el campo oscuro. En las tarjetas de un listado, la cifra principal grande y en verde
+    arriba, el desglose debajo.
+  - **Preguntas**: baldosas de tono que al abrirse pasan a verde, titular fijo a la izquierda en escritorio. **La
+    respuesta está siempre en el HTML** y cerrada solo lleva `hidden` (lectores, buscadores y sin JavaScript la
+    tienen); el botón lleva `aria-expanded` y `aria-controls`.
+  - **El cierre**: titular a tamaño de portada a la izquierda y, a la derecha, el texto, la acción en verde y sus
+    viñetas. Sin caja de color alrededor.
 - **Barra de navegación** (`Navbar`): en las páginas que EMPIEZAN con una cabecera oscura (home y las que
   pasan `darkHero`: aliados, nosotros, vehículos y fichas, otros activos, índice del blog, términos y privacidad)
   arranca transparente con texto y escudo en blanco, y al bajar 40 px o al abrir el menú del celular pasa a la

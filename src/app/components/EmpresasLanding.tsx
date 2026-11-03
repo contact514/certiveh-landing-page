@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Navbar } from "./Navbar";
 import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
 import { cotizacionDeGas } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
+import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI, useRielPorScroll } from './piezas-de-la-marca.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh — Landing Empresas
 // Certificación UPME para GEE y FNCE
 //
-// Estándar visual 2026-11 (DESIGN_SYSTEM.md §0): las variables --cv-* de src/styles/marca.css y las clases
-// .cv-btn / .cv-sq. Sin degradados (salvo el velo neutro sobre el video), sin sombras en reposo, sin vidrio,
-// sin iconos en cuadritos, sin la rejilla animada ni los números 01/02/03 a la vista. Los textos, enlaces y
-// datos de cada sección son los de siempre.
+// Estándar visual 2026-11 (DESIGN_SYSTEM.md §0) y los MISMOS patrones de la home (§0.5): el video a pantalla
+// completa con la calculadora encima (`.calc`), los beneficios en baldosas escalonadas, el riel de pasos que avanza
+// con el scroll con una pieza de producto a la derecha (`.flow`, `.ui`), las preguntas en baldosas y el cierre a
+// lo ancho. El CSS de la calculadora, del riel y de las piezas sale de `piezas-de-la-marca.ts`, el mismo que monta
+// la home. Los textos, enlaces y datos de cada sección son los de siempre.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const WHATSAPP_URL = "https://wa.me/573151298420?text=Hola%2C%20quiero%20información%20sobre%20la%20certificación%20UPME%20para%20mi%20empresa";
@@ -24,24 +26,36 @@ const CSS = `
   .oa-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
   .oa-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
   .oa-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
-  .oa-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
+  .oa-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
   .oa-intro { grid-column: 1 / span 7; }
   .oa-intro p { margin-top: 18px; max-width: 58ch; }
+  [hidden] { display: none !important; }
 
-  @keyframes oaUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-
-  /* ── HERO: el video con el velo neutro de la home, el texto a la izquierda ── */
-  .oa-hero { position: relative; color: #fff; background: var(--cv-field); overflow: hidden; padding: calc(64px + clamp(72px, 10vw, 160px)) 0 clamp(56px, 7vw, 110px); scroll-margin-top: 64px; }
+  /* ── HERO: el video a pantalla completa, el texto a la izquierda y la calculadora encima (como la home) ── */
+  .oa-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: var(--cv-field); overflow: hidden; scroll-margin-top: 64px; }
   .oa-hero-media { position: absolute; inset: 0; }
   .oa-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-  .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
-  .oa-hero-copy { position: relative; }
-  .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; max-width: 18ch; animation: oaUp .6s .05s ease-out both; }
-  .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 46ch; margin-top: 22px; animation: oaUp .6s .12s ease-out both; }
-  .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; animation: oaUp .6s .2s ease-out both; }
-  .oa-acts .cv-btn-w:focus-visible { outline-color: var(--cv-mint); }
-  .oa-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 30px; font-size: var(--cv-small); font-weight: 600; animation: oaUp .6s .28s ease-out both; }
-  .oa-trust .cv-sq::before, .oa-dark .cv-sq::before { background: var(--cv-mint); }
+  .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
+  .oa-hero .oa-grid { position: relative; z-index: 1; align-items: center; }
+  .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
+  .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; max-width: 18ch; }
+  .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+  .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+  .oa-trust { list-style: none; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; max-width: 560px; font-size: var(--cv-small); font-weight: 600; }
+  .oa-hero .cv-sq::before { background: var(--cv-mint); }
+  .oa-stage { grid-column: 8 / span 5; }
+  @media (min-width: 901px) {
+    /* «Calcular mi beneficio» solo lleva a la calculadora, que en escritorio ya está al lado */
+    .oa-solo-movil { display: none; }
+    .oa-asesor { background: var(--cv-accent); color: #fff; }
+    .oa-asesor:hover { background: var(--cv-accent-hover); }
+  }
+
+${CSS_CALC}
+  .cost .m, .cost .m span { color: var(--cv-soft); }
+  .cost > div > :last-child, .brow b { white-space: nowrap; }
+  .brow { gap: 12px; }
+  .emp { margin-top: 12px; }
 
   /* ── ACTIVOS: tres baldosas con su foto ── */
   .oa-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
@@ -52,99 +66,43 @@ const CSS = `
   .oa-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
   .oa-asset h3 { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
 
-  /* ── BENEFICIOS: cuatro baldosas, la cifra en verde ── */
-  .oa-ben { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
-  .oa-b { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(22px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 10px; }
-  .oa-b h3 { font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; line-height: 1.2; }
-  .oa-b .pct { font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; color: var(--cv-accent); }
-  .oa-b p { font-size: 1rem; }
-  .oa-b .norma { margin-top: auto; padding-top: 10px; font-size: var(--cv-small); color: var(--cv-soft); }
+  /* ── BENEFICIOS: baldosas escalonadas (las de la home), la cifra enorme ── */
+  .steps4 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; margin-top: 56px; align-items: start; }
+  .bt { border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; background: var(--cv-tone); }
+  .bt .fig { font-size: clamp(3.5rem, 2.2rem + 4.4vw, 7rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .85; color: var(--cv-accent); }
+  .bt h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; margin-top: 8px; }
+  .bt .law { font-size: var(--cv-small); color: var(--cv-soft); margin-top: auto; padding-top: 8px; }
+  .bt.a { grid-column: 1 / span 6; min-height: 72vh; background: var(--cv-accent); color: #fff; }
+  .bt.a .fig { color: #fff; }
+  .bt.a .law { color: #e6f8f0; }
+  .bstack { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bt.b { grid-column: 1 / -1; min-height: 36vh; }
+  .bt.c { min-height: 34vh; background: var(--cv-field); color: #fff; margin-top: 24px; }
+  .bt.c .fig { color: var(--cv-mint); }
+  .bt.c .law { color: var(--cv-field-soft); }
+  .bt.d { min-height: 34vh; margin-top: 24px; }
+  .bt.c .fig, .bt.d .fig { font-size: clamp(2.75rem, 1.9rem + 2.8vw, 4.5rem); }
 
-  /* ── CÓMO FUNCIONA: campo oscuro y el riel del portal ── */
+  /* ── EL PROCESO: el riel de la home (avanza con el scroll) y la pieza de cada paso a la derecha ── */
+${CSS_RIEL}
+${CSS_UI}
+  .flow-steps .step-num { display: none; }
+  .ui .r b { font-weight: 600; white-space: nowrap; }
+  .ui .r.st { display: grid; gap: 2px; justify-content: stretch; }
+  .ui .r.st b { white-space: normal; }
+  .ui .rk { font-size: 12px; color: var(--cv-soft); font-weight: 600; margin-top: 2px; }
+  .ui .cert { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
+  .ui .cert i { flex: none; width: 40px; height: 40px; border-radius: 6px; background: #ecfdf5; color: var(--cv-accent); display: grid; place-items: center; font-style: normal; }
+
+  /* ── POR QUÉ: campo oscuro, el texto a la izquierda y cuatro razones en baldosas ── */
   .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: 64px; }
-  .oa-dark .oa-intro p { color: #e2e8f0; }
-  .oa-steps-col { grid-column: 1 / span 6; }
-  .oa-steps-lead { margin-top: 18px; max-width: 52ch; color: #e2e8f0; }
-  .oa-rail { list-style: none; margin-top: 40px; padding-left: 40px; position: relative; display: grid; gap: 4px; }
-  .oa-rail::before { content: ""; position: absolute; left: 11px; top: 22px; bottom: 22px; width: 3px; background: rgba(255,255,255,.18); }
-  .oa-rail li { position: relative; }
-  .oa-rail li::before { content: ""; position: absolute; left: -40px; top: 15px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-field); box-shadow: inset 0 0 0 3px rgba(255,255,255,.35); transition: background-color .25s, box-shadow .25s; } /* taste-skill-ignore: anillo del punto del riel, como RielDelTramite del portal */
-  .oa-rail li.done::before { background: var(--cv-mint); box-shadow:none; }
-  .oa-rail li.on::before { background: var(--cv-field); box-shadow: inset 0 0 0 7px var(--cv-mint); } /* taste-skill-ignore: el paso actual, anillo verde del riel */
-  .step-tab { width: 100%; display: block; text-align: left; background: none; border: 0; color: inherit; cursor: pointer; font-family: var(--cv-font); padding: 12px 14px; border-radius: var(--cv-r); transition: background-color .15s; }
-  .step-tab:hover { background: var(--cv-field-2); }
-  .step-tab.active { background: var(--cv-field-2); }
-  .step-tab:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
-  /* El número del paso (01, 02…) se conserva en el documento pero no se pinta: el orden lo dice el riel */
-  .step-num { display: none; }
-  .step-t { display: block; font-size: 1.1875rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: var(--cv-field-soft); }
-  .step-s { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-field-soft); margin-top: 2px; }
-  .step-tab.active .step-t { color: #fff; }
-  .step-tab.active .step-s { color: var(--cv-mint); }
-  .oa-step-card { grid-column: 8 / span 5; align-self: center; background: var(--cv-field-2); border-radius: var(--cv-r); padding: clamp(28px, 3.5vw, 48px); min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-  .oa-step-card .wm { display: none; }
-  .oa-step-card h3 { font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
-  .oa-step-card p { margin-top: 14px; color: #e2e8f0; max-width: 48ch; }
-  .oa-step-card .det { margin-top: 20px; font-weight: 600; color: var(--cv-mint); }
-  .oa-dots { display: flex; gap: 2px; margin-top: 28px; margin-left: -9px; }
-  .oa-dots button { width: 32px; height: 32px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; padding: 0; border-radius: var(--cv-r); }
-  .oa-dots button i { display: block; height: 6px; width: 6px; border-radius: 3px; background: rgba(255,255,255,.3); transition: width .25s, background-color .25s; }
-  .oa-dots button[aria-current="step"] i { width: 22px; background: var(--cv-mint); }
-  .oa-dots button:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 0; }
-
-  /* ── CALCULADORA: controles en tono, resultado en el campo oscuro (como la de la home) ── */
-  .oa-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 56px; }
-  .oa-ctrl { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(24px, 3.5vw, 48px); }
-  .oa-lab { font-size: .9375rem; font-weight: 600; color: var(--cv-soft); margin-bottom: 10px; }
-  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #fff; border-radius: var(--cv-r); padding: 4px; }
-  .seg button { font: 600 .9375rem/1.25 var(--cv-font); color: var(--cv-soft); background: transparent; border: 0; border-radius: 4px; padding: 12px 8px; min-height: 44px; cursor: pointer; transition: background-color .15s, color .15s; }
-  .seg button[aria-pressed="true"] { background: var(--cv-accent); color: #fff; }
-  .seg button:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 1px; }
-  .oa-val { display: flex; justify-content: space-between; align-items: baseline; margin-top: 28px; }
-  .oa-val .oa-lab { margin: 0; }
-  .oa-val output { font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); color: var(--cv-accent); }
-  .oa-ctrl input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin-top: 4px; cursor: pointer; touch-action: pan-y; }
-  .oa-ctrl input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(var(--cv-accent), var(--cv-accent)) 0 / var(--p, 10%) 100% no-repeat, var(--cv-tone-2); } /* taste-skill-ignore: relleno plano del avance del deslizador */
-  .oa-ctrl input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: var(--cv-tone-2); }
-  .oa-ctrl input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--cv-accent); }
-  .oa-ctrl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--cv-accent); margin-top: -10px; border: 4px solid #fff; }
-  .oa-ctrl input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--cv-accent); border: 4px solid #fff; }
-  .oa-ctrl input[type=range]:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 2px; border-radius: 4px; }
-  .oa-ends { display: flex; justify-content: space-between; font-size: .875rem; color: var(--cv-soft); }
-  .oa-bars { display: grid; gap: 14px; margin-top: 22px; }
-  .oa-brow { display: flex; justify-content: space-between; gap: 12px; font-size: .9375rem; }
-  .oa-brow b { font-weight: 700; white-space: nowrap; }
-  .oa-track { height: 6px; background: var(--cv-tone-2); border-radius: 3px; margin-top: 6px; overflow: hidden; }
-  .oa-track i { display: block; height: 100%; background: var(--cv-accent); transition: width .4s; }
-  .oa-track.b2 i { background: var(--cv-ink); }
-  .oa-emp { margin-top: 16px; font-size: .9375rem; background: #fff; border-radius: var(--cv-r); padding: 12px 14px; }
-  .oa-cost { margin-top: 16px; background: #fff; border-radius: var(--cv-r); padding: 14px 16px; font-size: .9375rem; }
-  .oa-cost .h { font-weight: 700; margin-bottom: 8px; }
-  .oa-cost > div:not(.h) { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; }
-  .oa-cost > div > span:last-child { white-space: nowrap; }
-  .oa-cost .m { font-size: .875rem; color: var(--cv-soft); }
-  .oa-cost .t { font-weight: 700; font-size: 1rem; padding-top: 10px !important; margin-top: 6px; box-shadow: inset 0 2px 0 var(--cv-tone-2); } /* taste-skill-ignore: la raya del total de una cuenta */
-  .oa-res { background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: clamp(24px, 3.5vw, 48px); display: flex; flex-direction: column; justify-content: center; }
-  .oa-res .k { font-size: .9375rem; color: var(--cv-mint); font-weight: 600; }
-  .oa-res .big { font-size: clamp(2rem, 1.4rem + 2vw, 3rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; margin-top: 6px; font-variant-numeric: tabular-nums; }
-  .oa-res .s { font-size: .9375rem; color: var(--cv-field-soft); margin-top: 6px; }
-  .oa-res .row { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 16px 18px; margin-top: 22px; }
-  .oa-res .row b { display: block; font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); margin-top: 4px; font-variant-numeric: tabular-nums; }
-  .oa-res .per { font-size: .9375rem; color: var(--cv-field-soft); margin-top: 16px; }
-  .oa-res .per b { color: #fff; }
-  .oa-res .per em { font-style: normal; color: var(--cv-mint); font-weight: 700; }
-  .oa-res .cv-btn { width: 100%; margin-top: 22px; }
-  .oa-res .cv-btn:focus-visible { outline-color: var(--cv-mint); }
-  .oa-res .note { font-size: .875rem; color: var(--cv-field-soft); margin-top: 12px; }
-
-  /* ── POR QUÉ: el texto a la izquierda, cuatro razones en baldosas ── */
   .oa-why-copy { grid-column: 1 / span 6; }
-  .oa-why-copy p { margin-top: 18px; max-width: 58ch; }
-  .oa-why-copy p + p { color: var(--cv-soft); }
+  .oa-why-copy p { margin-top: 18px; max-width: 58ch; color: #e2e8f0; }
+  .oa-why-copy p + p { color: var(--cv-field-soft); }
   .oa-why-list { grid-column: 7 / span 6; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-self: start; }
-  .oa-why-list li { background: var(--cv-tone); border-radius: var(--cv-r); padding: 22px; }
-  .oa-why-list .t { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; }
-  .oa-why-list .d { font-size: .9375rem; margin-top: 8px; }
+  .oa-why-list li { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 24px; min-height: 200px; display: flex; flex-direction: column; }
+  .oa-why-list .t { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .oa-why-list .d { font-size: .9375rem; margin-top: auto; padding-top: 16px; color: #e2e8f0; }
 
   /* ── PREGUNTAS: baldosas que se abren (las de la home) ── */
   .faq-grid { align-items: start; }
@@ -158,43 +116,55 @@ const CSS = `
   .pm::before, .pm::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 16px; height: 3px; background: currentColor; transition: transform .2s; }
   .pm::after { transform: rotate(90deg); }
   .faq-item.open .pm::after { transform: rotate(0); }
-  .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #fff; }
+  .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #eafaf2; }
 
-  /* ── CIERRE: campo verde, como el del resto del sitio ── */
-  .oa-close { padding-block: var(--cv-gap-sec); }
-  .oa-close-box { background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
-  .oa-close-copy { grid-column: 1 / span 7; }
-  .oa-close-copy h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
-  .oa-close-copy p { margin-top: 18px; max-width: 54ch; }
-  .oa-close-act { grid-column: 9 / span 4; }
-  .oa-close-act .cv-btn { width: 100%; }
-  .oa-close-act .cv-btn:focus-visible { outline-color: #fff; }
-  .oa-close-act ul { list-style: none; display: grid; gap: 8px; margin-top: 22px; font-size: var(--cv-small); font-weight: 600; }
-  .oa-close-act .cv-sq::before { background: #fff; }
+  /* ── CIERRE: el de la home, el titular grande a la izquierda y la acción a la derecha ── */
+  .close { padding-block: var(--cv-gap-sec); }
+  .close-grid { align-items: end; }
+  .close h2 { grid-column: 1 / span 7; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
+  .close-r { grid-column: 8 / span 5; }
+  .close-r p { max-width: 52ch; }
+  .close-r .cv-btn { margin-top: 30px; }
+  .close-r ul { list-style: none; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: var(--cv-small); font-weight: 600; }
+
+  /* ── WhatsApp: el único botón que flota (el de la home) ── */
+  .whatsapp-fab { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 90; width: 56px; height: 56px; border-radius: 50%; background: #1f9d55; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(15,23,42,.25); } /* taste-skill-ignore: elemento que flota (modal o botón fijo) */
+  .whatsapp-fab:focus-visible { outline: 3px solid var(--cv-ink); outline-offset: 3px; }
+
+  /* ── entrada al aparecer: solo lo que está fuera del primer pantallazo ── */
+  .rv { transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); }
+  .rv.pend { opacity: 0; transform: translateY(24px); }
 
   @media (max-width: 1100px) {
-    .oa-ben { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .oa-why-list { grid-template-columns: 1fr; }
+    .oa-why-list li { min-height: 0; }
   }
   @media (max-width: 900px) {
-    .oa-intro, .oa-steps-col, .oa-step-card, .oa-why-copy, .oa-why-list, .oa-close-copy, .oa-close-act { grid-column: 1 / -1; }
-    .oa-step-card { margin-top: 32px; min-height: 0; }
+    .oa-hero-copy, .oa-stage, .oa-intro, .oa-why-copy, .oa-why-list { grid-column: 1 / -1; }
+    .oa-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
+${CSS_CALC_MOVIL}
     .oa-board { grid-template-columns: 1fr; gap: 6px; }
-    .oa-calc { grid-template-columns: 1fr; gap: 6px; }
-    .oa-why-list { margin-top: 32px; }
+    .bt.a, .bstack { grid-column: 1 / -1; }
+    .bstack { grid-template-columns: 1fr; gap: 6px; }
+    .steps4 { gap: 6px; }
+    .bt.a, .bt.b, .bt.c, .bt.d { min-height: 0; margin-top: 0; }
+${CSS_RIEL_MOVIL}
+    .oa-why-list { margin-top: 32px; grid-template-columns: 1fr; gap: 6px; }
     .faq-grid > h2 { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
     .qs { grid-column: 1 / -1; }
     .faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
     .faq-body { padding: 0 18px 20px; font-size: 1rem; }
-    .oa-close-act { margin-top: 32px; }
+    .close h2, .close-r { grid-column: 1 / -1; }
+    .close-r { margin-top: 24px; }
     h1 br, h2 br { display: none; }
   }
   @media (max-width: 560px) {
-    .oa-ben, .oa-why-list { grid-template-columns: 1fr; gap: 6px; }
-    .oa-acts .cv-btn { width: 100%; }
+    .oa-trust { grid-template-columns: 1fr; }
+    .oa-acts .cv-btn, .close-r .cv-btn { width: 100%; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .oa-hero h1, .oa-hero-sub, .oa-acts, .oa-trust { animation: none; }
-    .oa-rail li::before, .oa-dots button i, .oa-track i, .pm::before, .pm::after { transition: none; }
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    .rv.pend { opacity: 1; transform: none; }
   }
 `;
 
@@ -202,6 +172,7 @@ const CSS = `
 function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: string; size?: number; color?: string; style?: React.CSSProperties }) {
   const paths: Record<string, JSX.Element> = {
     messageCircle: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>,
+    award: <><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></>,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"
@@ -213,48 +184,77 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: s
 
 const Arr = () => <span className="cv-arr" aria-hidden="true">→</span>;
 
+// ── Entrada de cada pieza: solo lo que está fuera del primer pantallazo, y nunca se queda oculto (el de la home) ──
+function useEntradas() {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const vh = window.innerHeight;
+    const pend: Element[] = [];
+    document.querySelectorAll(".rv").forEach(el => { if (el.getBoundingClientRect().top > vh) { el.classList.add("pend"); pend.push(el); } });
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const t = e.target as HTMLElement;
+      const i = Array.prototype.indexOf.call(t.parentElement?.children ?? [], t);
+      t.style.transitionDelay = Math.min(Math.max(i, 0), 5) * 75 + "ms";
+      t.classList.remove("pend"); io.unobserve(t);
+    }), { rootMargin: "0px 0px -8% 0px" });
+    pend.forEach(el => io.observe(el));
+    const red = setTimeout(() => pend.forEach(el => el.classList.remove("pend")), 6000);
+    return () => { io.disconnect(); clearTimeout(red); };
+  }, []);
+}
+
 // ── HERO ──────────────────────────────────────────────────────────────────────
+// Como en la home: el video ocupa el primer pantallazo y la calculadora, que es lo único que el visitante puede
+// HACER en la página, va encima. En el celular queda debajo del texto y «Calcular mi beneficio» ahorra el scroll.
 function Hero() {
+  const videoRef = useCallback((el: HTMLVideoElement | null) => {
+    if (!el) return;
+    el.muted = true;
+    el.setAttribute("playsinline", "");
+    const tryPlay = () => { el.play().catch(() => {}); };
+    tryPlay();
+    el.addEventListener("canplay", tryPlay, { once: true });
+    document.addEventListener("touchstart", tryPlay, { once: true });
+  }, []);
   return (
     <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="oa-hero cv-hero-full">
       {/* Background video, con el velo neutro de la home */}
       <div className="oa-hero-media" aria-hidden="true">
-        <video
-          ref={el => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
-          autoPlay muted loop playsInline
-          preload="auto"
-          poster="/otros-activos-poster.webp"
-        >
+        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster="/otros-activos-poster.webp">
           <source src="/otros-activos-hero.mp4" type="video/mp4" />
         </video>
       </div>
 
-      <div className="oa-wrap oa-hero-copy">
-        <h1>
-          Ahórrate hasta el 19% de IVA y deduce{" "}
-          <span>
-            el 50% de tu inversión en renta
-          </span>
-        </h1>
+      <div className="oa-wrap oa-grid">
+        <div className="oa-hero-copy">
+          <h1>
+            Ahórrate hasta el 19% de IVA y deduce{" "}
+            <span>
+              el 50% de tu inversión en renta
+            </span>
+          </h1>
 
-        <p className="oa-hero-sub">
-          CertiVeh gestiona tu certificado UPME de principio a fin para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE).
-        </p>
+          <p className="oa-hero-sub">
+            CertiVeh gestiona tu certificado UPME de principio a fin para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE).
+          </p>
 
-        <div className="oa-acts">
-          <a href="#calculadora" className="cv-btn cv-btn-a">
-            Calcular mi beneficio <Arr/>
-          </a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w">
-            Hablar con un asesor <Icon name="messageCircle" size={18}/>
-          </a>
+          <div className="oa-acts">
+            <a href="#calculadora" className="cv-btn cv-btn-a oa-solo-movil">
+              Calcular mi beneficio <Arr/>
+            </a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w oa-asesor">
+              Hablar con un asesor <Icon name="messageCircle" size={18}/>
+            </a>
+          </div>
+
+          <ul className="oa-trust">
+            {["Certificado oficial UPME","Cuatro beneficios tributarios","Gestión integral","Personas naturales y jurídicas"].map(txt => (
+              <li key={txt} className="cv-sq">{txt}</li>
+            ))}
+          </ul>
         </div>
-
-        <ul className="oa-trust">
-          {["Certificado oficial UPME","Cuatro beneficios tributarios","Gestión integral","Personas naturales y jurídicas"].map(txt => (
-            <li key={txt} className="cv-sq">{txt}</li>
-          ))}
-        </ul>
+        <div className="oa-stage"><Calculadora /></div>
       </div>
     </section>
   );
@@ -264,30 +264,21 @@ function Hero() {
 function Activos() {
   const activos = [
     {
-      icon: "battery",
       tag: "GEE - Anexo 2",
       title: "Cargadores de vehículos eléctricos y electrolineras",
       desc: "Infraestructura de carga para movilidad eléctrica. Cargadores AC, DC y sistemas de gestión de carga.",
-      accentColor: "var(--emerald-600)",
-      iconBg: "rgba(5,150,105,0.1)",
       img: "/activo-cargador.webp",
     },
     {
-      icon: "truck",
       tag: "GEE - Anexo 2",
       title: "Camiones y flotas a gas natural vehicular (GNV)",
       desc: "Vehículos nuevos de bajas emisiones dedicados a gas natural para transporte de carga o uso corporativo.",
-      accentColor: "var(--teal-500)",
-      iconBg: "rgba(20,184,166,0.1)",
       img: "/activo-camion.webp",
     },
     {
-      icon: "sun",
       tag: "FNCE - Anexo 1",
       title: "Proyectos de energía solar",
       desc: "Autogeneración, techos solares y granjas solares. Paneles, inversores, estructuras y servicios de instalación.",
-      accentColor: "var(--emerald-600)",
-      iconBg: "rgba(5,150,105,0.1)",
       img: "/activo-solar.webp",
     },
   ];
@@ -295,7 +286,7 @@ function Activos() {
     <section id="activos" aria-label="Activos que certificamos" className="oa-sec">
       <div className="oa-wrap">
         <div className="oa-grid">
-          <div className="oa-intro">
+          <div className="oa-intro rv">
             <h2 className="oa-h2">
               Activos que{" "}
               <span>certificamos</span>
@@ -308,7 +299,7 @@ function Activos() {
 
         <div className="oa-board">
           {activos.map((a, i) => (
-            <div key={i} className="oa-asset">
+            <div key={i} className="oa-asset rv">
               <div className="oa-asset-img">
                 <img src={a.img} alt={a.title} loading="lazy" />
               </div>
@@ -328,50 +319,49 @@ function Activos() {
 }
 
 // ── BENEFICIOS TRIBUTARIOS ────────────────────────────────────────────────────
+// Las baldosas escalonadas de la home: la deducción en renta (la cifra más grande) en el campo verde, y las otras
+// tres a su lado, una de ellas en el campo oscuro.
 function Beneficios() {
   const cards = [
     {
-      icon: "percent",
       title: "Deducción en renta",
       pct: "50%",
-      accentColor: "var(--emerald-600)",
-      iconBg: "rgba(5,150,105,0.1)",
       desc: "Deducción del 50% del valor total de la inversión, aplicable en un periodo de hasta 15 años. El tope anual no puede exceder el 50% de la renta líquida.",
       norma: "Art. 11, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
-      icon: "dollarSign",
       title: "Exclusión de IVA",
       pct: "19%",
-      accentColor: "var(--teal-500)",
-      iconBg: "rgba(20,184,166,0.1)",
       desc: "Equipos, maquinaria y servicios destinados al proyecto excluidos de IVA (19%). Si el IVA ya se pagó, el contribuyente puede solicitar su devolución ante la DIAN presentando el certificado UPME como soporte: ese trámite lo adelanta él, CertiVeh no lo gestiona en esta vertical.",
       norma: "Art. 12, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
-      icon: "shield",
       title: "Exención arancelaria",
       pct: "0%",
-      accentColor: "var(--emerald-600)",
-      iconBg: "rgba(5,150,105,0.1)",
       desc: "Exención del pago de derechos arancelarios en la importación de maquinaria, equipos, materiales e insumos destinados al proyecto.",
       norma: "Art. 13, Ley 1715/2014 (mod. Ley 2099/2021)",
     },
     {
-      icon: "zap",
       title: "Depreciación acelerada",
       pct: "~3 años",
-      accentColor: "var(--teal-500)",
-      iconBg: "rgba(20,184,166,0.1)",
       desc: "Tasa anual de hasta el 33,33%, permitiendo la recuperación contable y fiscal del activo en aproximadamente 3 años en lugar del periodo convencional.",
       norma: "Art. 14, Ley 1715/2014 (mod. Ley 2099/2021) y Decreto 895/2022",
     },
   ];
+  const [renta, iva, arancel, dep] = cards;
+  const Baldosa = ({ c, cls }: { c: typeof cards[number]; cls: string }) => (
+    <article className={`bt ${cls} rv`}>
+      <div className="fig">{c.pct}</div>
+      <h3>{c.title}</h3>
+      <p>{c.desc}</p>
+      <p className="law">{c.norma}</p>
+    </article>
+  );
   return (
     <section id="beneficios" aria-label="Beneficios tributarios" className="oa-sec">
       <div className="oa-wrap">
         <div className="oa-grid">
-          <div className="oa-intro">
+          <div className="oa-intro rv">
             <h2 className="oa-h2">
               Cuatro beneficios tributarios. <br/>
               <span>Un solo certificado.</span>
@@ -382,82 +372,115 @@ function Beneficios() {
           </div>
         </div>
 
-        <div className="oa-ben">
-          {cards.map((c, i) => (
-            <div key={i} className="oa-b">
-              <h3>{c.title}</h3>
-              <div className="pct">{c.pct}</div>
-              <p>{c.desc}</p>
-              <div className="norma">
-                <span>{c.norma}</span>
-              </div>
-            </div>
-          ))}
+        <div className="steps4">
+          <Baldosa c={renta} cls="a" />
+          <div className="bstack">
+            <Baldosa c={iva} cls="b" />
+            <Baldosa c={arancel} cls="c" />
+            <Baldosa c={dep} cls="d" />
+          </div>
         </div>
-
       </div>
     </section>
   );
 }
 
 // ── COMO FUNCIONA ────────────────────────────────────────────────────────────
-function ComoFunciona() {
-  const [active, setActive] = useState(0);
-  const steps = [
-    { num: "01", icon: "upload",      title: "Recopilación de documentos",  subtitle: "Fichas técnicas y facturas",      desc: "Nos envías las fichas técnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolución UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
-    { num: "02", icon: "fileText",    title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a través del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolución UPME 400 de 2026, ventana continua." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
-    { num: "03", icon: "clock",       title: "Evaluación técnica",          subtitle: "FNCE: 20 días / GEE: 30 días",  desc: "La UPME verifica completitud en 10 días hábiles. Luego evalúa: hasta 20 días hábiles para proyectos FNCE (solar) o hasta 30 días hábiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
-    { num: "04", icon: "award",       title: "Emisión del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto técnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen límite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin límite de vigencia." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
-    { num: "05", icon: "dollarSign",  title: "Aplicación de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolución de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
-  ];
+// El riel de la home: avanza con el scroll (o al tocar un paso) y a la derecha va la pieza de ESE paso, armada como
+// un fragmento real del trámite con los datos que el propio paso enuncia. En el celular cada paso lleva su pieza debajo.
+function PiezaDelPaso({ i }: { i: number }) {
+  switch (i) {
+    case 0: return (
+      <div className="ui" data-ui>
+        <div className="t">Documentos del proyecto</div>
+        <div className="r"><span>Fichas técnicas de los equipos</span><span className="ok">Leída</span></div>
+        <div className="r"><span>Facturas o cotizaciones</span><span className="ok">Leída</span></div>
+        <div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>Información del proyecto</span><span className="wait">Subiendo</span></div><div className="prog"><i /></div></div>
+        <p className="ej">Resolución UPME 135 de 2025 · Datos de ejemplo</p>
+      </div>
+    );
+    case 1: return (
+      <div className="ui" data-ui>
+        <div className="t">Radicación ante la UPME</div>
+        <div className="r"><span>Sistema Único de Usuarios (SUU)</span><span className="ok">Radicada</span></div>
+        <div className="r"><span>Formatos oficiales</span><span className="ok">Completos</span></div>
+        <div className="r st"><span>Ventana continua</span><b>1 de febrero al 15 de diciembre</b></div>
+        <p className="ej">Datos de ejemplo</p>
+      </div>
+    );
+    case 2: return (
+      <div className="ui" data-ui>
+        <div className="t">Evaluación técnica</div>
+        <div className="r"><span>Completitud</span><span className="ok">10 días hábiles</span></div>
+        <div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>FNCE (solar)</span><span className="wait">Hasta 20 días hábiles</span></div><div className="prog"><i /></div></div>
+        <div className="r st"><span>GEE (cargadores, GNV)</span><b>Hasta 30 días hábiles</b></div>
+        <p className="ej">CertiVeh gestiona los requerimientos de la UPME.</p>
+      </div>
+    );
+    case 3: return (
+      <div className="ui" data-ui>
+        <div className="cert"><i><Icon name="award" size={22} /></i><div><div className="t">Certificado oficial UPME</div><div className="rk">Notificado por el SUU</div></div></div>
+        <div className="r"><span>Concepto técnico</span><span className="ok">Favorable</span></div>
+        <div className="r"><span>Vigencia</span><b>Sin límite de vigencia</b></div>
+        <span className="btnui">Descargar certificado</span>
+        <p className="ej">Datos de ejemplo</p>
+      </div>
+    );
+    default: return (
+      <div className="ui" data-ui>
+        <div className="t">Aplicación de beneficios</div>
+        <div className="r"><span>Exclusión/devolución de IVA (19%)</span><span className="ok">Soportada</span></div>
+        <div className="r"><span>Deducción en renta (50%)</span><span className="ok">Soportada</span></div>
+        <div className="r"><span>Exención arancelaria</span><span className="ok">Soportada</span></div>
+        <div className="r"><span>Depreciación acelerada</span><span className="ok">Soportada</span></div>
+        <p className="ej">Cuatro beneficios con un solo certificado.</p>
+      </div>
+    );
+  }
+}
 
-  // Avanza solo cada 5 s, salvo con «reducir movimiento»: ahí no se mueve nada que el visitante no toque.
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % steps.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [steps.length]);
+function ComoFunciona() {
+  const steps = [
+    { num: "01", title: "Recopilación de documentos",  subtitle: "Fichas técnicas y facturas",      desc: "Nos envías las fichas técnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolución UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "02", title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a través del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolución UPME 400 de 2026, ventana continua." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "03", title: "Evaluación técnica",          subtitle: "FNCE: 20 días / GEE: 30 días",  desc: "La UPME verifica completitud en 10 días hábiles. Luego evalúa: hasta 20 días hábiles para proyectos FNCE (solar) o hasta 30 días hábiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "04", title: "Emisión del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto técnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen límite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin límite de vigencia." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "05", title: "Aplicación de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolución de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+  ];
+  const [active, setActive] = useRielPorScroll("#como-funciona .flow-steps > li");
 
   return (
-    <section id="como-funciona" aria-label="Cómo funciona" className="oa-dark">
-      <div className="oa-wrap oa-grid">
-        <div className="oa-steps-col">
+    <section id="como-funciona" aria-label="Cómo funciona" className="oa-sec">
+      <div className="oa-wrap">
+        <div className="oa-grid"><div className="oa-intro rv">
           <h2 className="oa-h2">
             El proceso de <br/><span>certificación.</span>
           </h2>
-          <p className="oa-steps-lead">
+          <p>
             De la documentación al certificado UPME. CertiVeh gestiona todo el trámite por ti.
           </p>
-          <ol className="oa-rail">
+        </div></div>
+        <div className="flow">
+          <ol className="flow-steps">
             {steps.map((s, i) => (
-              <li key={i} className={i < active ? "done" : i === active ? "on" : ""}>
-                <button className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)} aria-current={active === i ? "step" : undefined}>
-                  <span className="step-num" aria-hidden="true">{s.num}</span>
-                  <span className="step-t">{s.title}</span>
-                  <span className="step-s">{s.subtitle}</span>
-                </button>
+              <li key={s.num} data-i={i} className={i === active ? "on" : i < active ? "done" : ""} aria-current={i === active ? "step" : undefined} onClick={() => setActive(i)}>
+                <span className="step-num" aria-hidden="true">{s.num}</span>
+                <h3>{s.title}</h3>
+                <p className="subt">{s.subtitle}</p>
+                <p className="desc">{s.desc}</p>
+                <p className="det">{s.detail}</p>
+                <div className="frag" aria-hidden="true"><PiezaDelPaso i={i} /></div>
               </li>
             ))}
           </ol>
-        </div>
-
-        <div className="oa-step-card" aria-live="polite">
-          <div className="wm" aria-hidden="true">{steps[active].num}</div>
-          <AnimatePresence mode="wait">
-            <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
-              <h3>{steps[active].title}</h3>
-              <p>{steps[active].desc}</p>
-              <div className="det cv-sq">
-                {steps[active].detail}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-          <div className="oa-dots">
-            {steps.map((s, i) => (
-              <button key={i} onClick={() => setActive(i)} aria-label={s.title} aria-current={i === active ? "step" : undefined}><i/></button>
-            ))}
+          <div className="flow-panel" aria-hidden="true">
+            <div className="flow-sticky">
+              <AnimatePresence mode="wait">
+                <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} style={{ width: "100%", display: "grid", placeItems: "center" }}>
+                  <PiezaDelPaso i={active} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
@@ -466,6 +489,7 @@ function ComoFunciona() {
 }
 
 // ── CALCULADORA ───────────────────────────────────────────────────────────────
+// La de la home (`.calc`), montada en el hero. La lógica es la de siempre: `cotizacionDeGas` con la tarifa vigente.
 function Calculadora() {
   const tarifa = useTarifa();
   const [valor, setValor] = useState(200);
@@ -487,115 +511,103 @@ function Calculadora() {
   }, [valor, perfil, tarifa]);
 
   return (
-    <section id="calculadora" aria-label="Calculadora de costos" className="oa-sec">
-      <div className="oa-wrap">
-        <div className="oa-grid">
-          <div className="oa-intro">
-            <h2 className="oa-h2">
-              Calcula tu beneficio y{" "}
-              <span>el costo total</span>
-            </h2>
-            <p>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
+    <section id="calculadora" aria-label="Calculadora de costos" className="calc">
+      <h2>
+        Calcula tu beneficio y{" "}
+        <span>el costo total</span>
+      </h2>
+      <p className="sub">Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
+
+      <p className="lab" id="oa-calc-perfil">Perfil tributario</p>
+      <div className="seg" role="group" aria-labelledby="oa-calc-perfil">
+        {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Empresa" }].map(opt => (
+          <button key={opt.value} type="button" onClick={() => setPerfil(opt.value)} aria-pressed={perfil === opt.value}>
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="val">
+        <label className="lab" htmlFor="oa-calc-valor">Valor de la inversión</label>
+        <output htmlFor="oa-calc-valor">${valor}M</output>
+      </div>
+      <input id="oa-calc-valor" type="range" min="10" max="2000" step="10" value={valor} onChange={e => setValor(Number(e.target.value))} aria-label="Valor de la inversión" aria-valuetext={`${valor} millones de pesos`} style={{ ["--p" as string]: `${((valor-10)/1990)*100}%` }}/>
+      <div className="ends">
+        <span>$10M</span><span>$2.000M</span>
+      </div>
+
+      {/* Benefit bars */}
+      <div className="bars">
+        {[
+          { label: "Exclusión/devolución de IVA (19%)", value: calc.iva, pct: calc.iva / (calc.totalBeneficio || 1) },
+          { label: "Deducción en renta (50%)", value: calc.renta, pct: calc.renta / (calc.totalBeneficio || 1) },
+        ].map((b, i) => (
+          <div key={i}>
+            <div className="brow">
+              <span>{b.label}</span>
+              <b>{b.value ? fmt(b.value) : "-"}</b>
+            </div>
+            <div className={`btrack${i ? " b2" : ""}`}>
+              <i style={{ width: `${(b.pct || 0) * 100}%` }}/>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {perfil === "empresa" && (
+        <p className="emp">
+          Depreciación acelerada a ~3 años (tasa anual hasta 33,33%), más exención arancelaria si los equipos son importados.
+        </p>
+      )}
+
+      {calc.costoUPME != null && (
+        <div className="cost" aria-live="polite">
+          <div className="h">
+            <span>Costo total</span>
+          </div>
+          <div>
+            <span>Trámite ante UPME</span>
+            <b>{fmt(calc.costoUPME)}</b>
+          </div>
+          <div>
+            <span>Servicio de tramitación CertiVeh</span>
+            <b>{fmt(calc.honorariosBase)}</b>
+          </div>
+          <div className="m">
+            <span>IVA (19% sobre tramitación)</span>
+            <span>{fmt(calc.ivaServicio)}</span>
+          </div>
+          <div className="t">
+            <span>Total</span>
+            <span>{fmt(calc.costoTotal)}</span>
           </div>
         </div>
+      )}
 
-        <div className="oa-calc">
-          {/* Controls */}
-          <div className="oa-ctrl">
-            <div className="oa-lab">Perfil tributario</div>
-            <div className="seg">
-              {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Empresa" }].map(opt => (
-                <button key={opt.value} onClick={() => setPerfil(opt.value)} aria-pressed={perfil === opt.value}>
-                  {opt.label}
-                </button>
-              ))}
-            </div>
+      {/* Result */}
+      <div className="res" aria-live="polite" data-ui>
+        <div className="k">Beneficio total estimado</div>
+        <div className="big">
+          {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
+        </div>
+        <div className="s">en incentivos tributarios (incluye base gravable en renta)</div>
 
-            <div className="oa-val">
-              <div className="oa-lab">Valor de la inversión</div>
-              <output>${valor}M</output>
-            </div>
-            <input type="range" min="10" max="2000" step="10" value={valor} onChange={e => setValor(Number(e.target.value))} aria-label="Valor de la inversión" style={{ ["--p" as string]: `${((valor-10)/1990)*100}%` }}/>
-            <div className="oa-ends">
-              <span>$10M</span><span>$2.000M</span>
-            </div>
-
-            {/* Benefit bars */}
-            <div className="oa-bars">
-              {[
-                { label: "Exclusión/devolución de IVA (19%)", value: calc.iva, pct: calc.iva / (calc.totalBeneficio || 1) },
-                { label: "Deducción en renta (50%)", value: calc.renta, pct: calc.renta / (calc.totalBeneficio || 1) },
-              ].map((b, i) => (
-                <div key={i}>
-                  <div className="oa-brow">
-                    <span>{b.label}</span>
-                    <b>{b.value ? fmt(b.value) : "-"}</b>
-                  </div>
-                  <div className={`oa-track${i ? " b2" : ""}`}>
-                    <i style={{ width: `${(b.pct || 0) * 100}%` }}/>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {perfil === "empresa" && (
-              <div className="oa-emp">
-                Depreciación acelerada a ~3 años (tasa anual hasta 33,33%), más exención arancelaria si los equipos son importados.
-              </div>
-            )}
-
-            {calc.costoUPME != null && (
-              <div className="oa-cost">
-                <div className="h">
-                  <span>Costo total</span>
-                </div>
-                <div>
-                  <span>Trámite ante UPME</span>
-                  <span>{fmt(calc.costoUPME)}</span>
-                </div>
-                <div>
-                  <span>Servicio de tramitación CertiVeh</span>
-                  <span>{fmt(calc.honorariosBase)}</span>
-                </div>
-                <div className="m">
-                  <span>IVA (19% sobre tramitación)</span>
-                  <span>{fmt(calc.ivaServicio)}</span>
-                </div>
-                <div className="t">
-                  <span>Total</span>
-                  <span>{fmt(calc.costoTotal)}</span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Result */}
-          <div className="oa-res" aria-live="polite" data-ui>
-            <div className="k">Beneficio total estimado</div>
-            <div className="big">
-              {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
-            </div>
-            <div className="s">en incentivos tributarios (incluye base gravable en renta)</div>
-
-            <div className="row">
-              <div className="k">Beneficio estimado menos el costo total</div>
-              <b>{calc.neto ? fmt(calc.neto) : "-"}</b>
-            </div>
-
-            {calc.costoTotal && calc.totalBeneficio && (
-              <div className="per">
-                Por cada <b>$1</b> de costo total, un beneficio estimado de{" "}
-                <em>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</em> en beneficios.
-              </div>
-            )}
-
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-a">
-              Solicitar cotización <Arr/>
-            </a>
-            <div className="note">Certificación UPME para GEE y FNCE</div>
-          </div>
+        <div className="row">
+          <div className="k">Beneficio estimado menos el costo total</div>
+          <b>{calc.neto ? fmt(calc.neto) : "-"}</b>
         </div>
 
+        {calc.costoTotal && calc.totalBeneficio && (
+          <div className="per">
+            Por cada <b>$1</b> de costo total, un beneficio estimado de{" "}
+            <em>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</em> en beneficios.
+          </div>
+        )}
+
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w">
+          Solicitar cotización <Arr/>
+        </a>
+        <div className="note">Certificación UPME para GEE y FNCE</div>
       </div>
     </section>
   );
@@ -604,9 +616,9 @@ function Calculadora() {
 // ── POR QUE EL CERTIFICADO UPME ──────────────────────────────────────────────
 function PorQueCertificado() {
   return (
-    <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" className="oa-sec">
+    <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" className="oa-dark">
       <div className="oa-wrap oa-grid">
-        <div className="oa-why-copy">
+        <div className="oa-why-copy rv">
           <h2 className="oa-h2">
             Por qué el certificado UPME es{" "}
             <span>indispensable</span>
@@ -620,12 +632,12 @@ function PorQueCertificado() {
         </div>
         <ul className="oa-why-list">
             {[
-              { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversión es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
-              { icon: "clock", title: "Sin límite de vigencia", desc: "Los certificados bajo la Resolución UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años después de su expedición." },
-              { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones vía leasing financiero." },
-              { icon: "checkCircle", title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 563/2026)." },
+              { title: "Documento oficial", desc: "Acredita que tu inversión es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
+              { title: "Sin límite de vigencia", desc: "Los certificados bajo la Resolución UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años después de su expedición." },
+              { title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones vía leasing financiero." },
+              { title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 563/2026)." },
             ].map((item, i) => (
-            <li key={i}>
+            <li key={i} className="rv">
               <div className="t">{item.title}</div>
               <div className="d">{item.desc}</div>
             </li>
@@ -655,14 +667,14 @@ function FAQ() {
         <div className="qs">
           {items.map((item, i) => (
             <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
-              <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
+              <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i} aria-controls={`oa-faq-${i}`}>
                 <span>{item.q}</span><span className="pm" aria-hidden="true"/>
+
               </button>
-              {open === i && (
-                <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
-                  {item.a}
-                </motion.div>
-              )}
+              {/* La respuesta está SIEMPRE en el HTML (lectores, buscadores, sin JavaScript); cerrada solo se oculta. */}
+              <div className="faq-body" id={`oa-faq-${i}`} hidden={open !== i}>
+                {item.a}
+              </div>
             </div>
           ))}
         </div>
@@ -672,29 +684,26 @@ function FAQ() {
 }
 
 // ── CTA FINAL ─────────────────────────────────────────────────────────────────
+// El cierre de la home: el titular a tamaño de portada a la izquierda y la acción a la derecha.
 function CTAFinal() {
   return (
-    <section id="cta-final" aria-label="Comenzar" className="oa-close">
-      <div className="oa-wrap">
-        <div className="oa-close-box">
-          <div className="oa-close-copy">
-            <h2>
-              Tus incentivos tributarios <br/><span>te están esperando.</span>
-            </h2>
-            <p>
-              Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
-            </p>
-          </div>
-          <div className="oa-close-act">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w">
-              Hablar con un asesor <Icon name="messageCircle" size={18}/>
-            </a>
-            <ul>
-              {["Gestión integral del trámite","Personas naturales y jurídicas","Leasing financiero elegible"].map(t => (
-                <li key={t} className="cta-feature cv-sq">{t}</li>
-              ))}
-            </ul>
-          </div>
+    <section id="cta-final" aria-label="Comenzar" className="close oa-wrap">
+      <div className="oa-grid close-grid">
+        <h2 className="rv">
+          Tus incentivos tributarios <br/><span>te están esperando.</span>
+        </h2>
+        <div className="close-r rv">
+          <p>
+            Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
+          </p>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-a">
+            Hablar con un asesor <Icon name="messageCircle" size={18}/>
+          </a>
+          <ul>
+            {["Gestión integral del trámite","Personas naturales y jurídicas","Leasing financiero elegible"].map(t => (
+              <li key={t} className="cta-feature cv-sq">{t}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -721,25 +730,11 @@ function Footer() {
 }
 
 // ── WhatsApp FAB ─────────────────────────────────────────────────────────────
-// Flota sobre la página: es uno de los tres elementos del sitio que llevan sombra (DESIGN_SYSTEM.md §0.3).
+// El de la home: es uno de los tres elementos del sitio que llevan sombra (DESIGN_SYSTEM.md §0.3).
 function WhatsAppFAB() {
   return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Contactar por WhatsApp"
-      style={{
-        position: "fixed", bottom: 24, right: 20, zIndex: 90,
-        width: 56, height: 56, borderRadius: "50%",
-        background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",
-        boxShadow: "0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2)", // taste-skill-ignore: el botón flotante de WhatsApp
-        transition: "transform 0.2s",
-      }}
-      onMouseEnter={e => e.currentTarget.style.transform = "scale(1.08)"}
-      onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
-    >
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" className="whatsapp-fab">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
       </svg>
     </a>
@@ -750,6 +745,7 @@ function WhatsAppFAB() {
 export default function EmpresasLanding({ tarifaDelBuild }: { tarifaDelBuild?: string } = {}) {
   // La tarifa del build al pintar y, tras hidratar, la vigente con el reloj del cliente (lote 4).
   const tarifa = useTarifaDeLaIsla(tarifaDelBuild);
+  useEntradas();
   return (
     <TarifaDeLaIsla.Provider value={tarifa}>
       {/* Como HTML crudo: con <style>{CSS}</style> React escapa el CSS prerenderizado y la hidratación no coincide (ver CertiVehLandingComplete). */}
@@ -760,7 +756,6 @@ export default function EmpresasLanding({ tarifaDelBuild }: { tarifaDelBuild?: s
         <Activos/>
         <Beneficios/>
         <ComoFunciona/>
-        <Calculadora/>
         <PorQueCertificado/>
         <FAQ/>
         <CTAFinal/>
