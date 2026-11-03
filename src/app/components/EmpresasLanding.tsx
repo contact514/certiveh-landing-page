@@ -32,12 +32,12 @@ const CSS = `
   [hidden] { display: none !important; }
 
   /* ── HERO: el video a pantalla completa, el texto a la izquierda y la calculadora encima (como la home) ── */
-  .oa-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: var(--cv-field); overflow: hidden; scroll-margin-top: 64px; }
+  .oa-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: var(--cv-field); overflow: clip; scroll-margin-top: 64px; }
   .oa-hero-media { position: absolute; inset: 0; }
   .oa-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
   .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
   .oa-hero .oa-grid { position: relative; z-index: 1; align-items: start; }
-  .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
+  .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; position: sticky; top: 104px; } /* acompaña al bajar por la calculadora, como en las fichas */
   .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; max-width: 18ch; }
   .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
   .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
@@ -152,6 +152,7 @@ ${CSS_UI}
   }
   @media (max-width: 900px) {
     .oa-hero-copy, .oa-stage, .oa-intro, .oa-why-copy, .oa-why-list { grid-column: 1 / -1; }
+    .oa-hero-copy { position: static; }
     .oa-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
 ${CSS_CALC_MOVIL}
     .oa-board { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); scrollbar-width: none; }

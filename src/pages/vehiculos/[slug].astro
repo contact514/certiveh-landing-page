@@ -135,7 +135,7 @@ const faqLd = JSON.stringify({
     .v-hero { position: relative; color: #fff; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
     .v-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .v-hero .v-grid { position: relative; align-items: start; }
-    .v-hero-copy { grid-column: 1 / span 6; padding-bottom: 40px; }
+    .v-hero-copy { grid-column: 1 / span 6; padding-bottom: 40px; position: sticky; top: 104px; } /* acompaña al bajar por la calculadora, que es más alta: sin hueco a la izquierda */
     .v-breadcrumb { font-size: var(--cv-small); color: #cbd5e1; margin-bottom: 22px; }
     .v-breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
     .v-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -174,6 +174,7 @@ const faqLd = JSON.stringify({
     @media (max-width: 900px) {
       .v-hero::before { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
       .v-hero-copy, .v-stage, .v-faq > h2, .v-qs, .v-disclaimer { grid-column: 1 / -1; }
+      .v-hero-copy { position: static; }
       .v-faq > h2 { position: static; margin-bottom: 28px; }
       .v-faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
       .v-faq-body { padding: 0 18px 20px; font-size: 1rem; }
