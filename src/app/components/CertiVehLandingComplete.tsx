@@ -91,7 +91,7 @@ const CSS = `
   .h-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: #0b1220; overflow: hidden; }
   .h-hero-media { position: absolute; inset: 0; }
   .h-hero-media video, .h-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .h-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* velo neutro sobre el video, para leer */
+  .h-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
   .h-hero .h-grid { position: relative; z-index: 1; align-items: start; }
   .h-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
   .h-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; }
@@ -121,7 +121,7 @@ const CSS = `
   .val .lab { margin: 0; }
   .val output { font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); color: var(--cv-accent); }
   .calc input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin-top: 4px; cursor: pointer; touch-action: pan-y; }
-  .calc input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(var(--cv-accent), var(--cv-accent)) 0 / var(--p, 14%) 100% no-repeat, var(--cv-tone-2); } /* relleno plano del avance */
+  .calc input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(var(--cv-accent), var(--cv-accent)) 0 / var(--p, 14%) 100% no-repeat, var(--cv-tone-2); } /* taste-skill-ignore: relleno plano del avance del control */
   .calc input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: var(--cv-tone-2); }
   .calc input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--cv-accent); }
   .calc input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--cv-accent); margin-top: -10px; border: 4px solid #fff; }
@@ -233,9 +233,9 @@ const CSS = `
   .flow-steps::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 3px; background: var(--cv-tone-2); }
   .flow-steps > li { position: relative; min-height: 46vh; padding-bottom: 40px; cursor: pointer; }
   .flow-steps > li:last-child { min-height: auto; }
-  .flow-steps > li::before { content: ""; position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-bg); box-shadow: inset 0 0 0 3px var(--cv-tone-2); transition: background-color .25s, box-shadow .25s; }
-  .flow-steps > li.done::before { background: var(--cv-accent); box-shadow: none; }
-  .flow-steps > li.on::before { box-shadow: inset 0 0 0 7px var(--cv-accent); }
+  .flow-steps > li::before { content: ""; position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-bg); box-shadow: inset 0 0 0 3px var(--cv-tone-2); transition: background-color .25s, box-shadow .25s; } /* taste-skill-ignore: punto y anillo del riel de pasos */
+  .flow-steps > li.done::before { background: var(--cv-accent); box-shadow: none; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .flow-steps > li.on::before { box-shadow: inset 0 0 0 7px var(--cv-accent); } /* taste-skill-ignore: punto y anillo del riel de pasos */
   .flow-steps > li > h3 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; transition: color .25s; }
   .flow-steps > li > .subt { font-weight: 600; color: var(--cv-accent); margin-top: 6px; }
   .flow-steps > li > .desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
@@ -249,7 +249,7 @@ const CSS = `
   /* piezas del portal (data-ui): sus propias convenciones de interfaz */
   .ui { font-family: var(--cv-font); background: #fff; border-radius: 6px; border: 1px solid var(--cv-tone-2); width: min(440px, 100%); padding: 20px; font-size: 14px; color: var(--cv-ink); letter-spacing: -0.005em; }
   .ui .t { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
-  .ui .r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #edf1ef; }
+  .ui .r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #edf1ef; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .r:last-child { border-bottom: 0; }
   .ui .ok { font-size: 12px; font-weight: 600; color: var(--cv-accent); background: #e3f4ec; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
   .ui .wait { font-size: 12px; font-weight: 600; color: #7c5a00; background: #fdf3d0; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
@@ -257,8 +257,8 @@ const CSS = `
   .ui .prog i { display: block; height: 100%; width: 72%; background: var(--cv-accent); }
   .ui .fld { display: grid; gap: 4px; padding: 8px 0; }
   .ui .fld span { font-size: 12px; color: var(--cv-soft); font-weight: 600; }
-  .ui .fld b { font-weight: 600; border: 1px solid #8792a2; border-radius: 6px; padding: 9px 10px; font-size: 14px; }
-  .ui .fld.sel b { border-color: var(--cv-accent); box-shadow: 0 0 0 3px #d5efe3; }
+  .ui .fld b { font-weight: 600; border: 1px solid #8792a2; border-radius: 6px; padding: 9px 10px; font-size: 14px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ui .fld.sel b { border-color: var(--cv-accent); box-shadow: 0 0 0 3px #d5efe3; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .btnui { display: block; text-align: center; background: var(--cv-accent); color: #fff; font-weight: 600; border-radius: 6px; padding: 11px; margin-top: 14px; }
   .ui .btnui.g { background: #eef2f0; color: var(--cv-ink); margin-top: 8px; }
   .ui .ej { font-size: 12px; color: #64748b; margin-top: 8px; }
@@ -266,9 +266,9 @@ const CSS = `
   .ui .rail li { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
   .ui .rail li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; flex: none; background: var(--cv-accent); }
   .ui .rail li.now { font-weight: 700; }
-  .ui .rail li.now::before { background: #fff; box-shadow: inset 0 0 0 3px var(--cv-accent), 0 0 0 4px #d5efe3; }
+  .ui .rail li.now::before { background: #fff; box-shadow: inset 0 0 0 3px var(--cv-accent), 0 0 0 4px #d5efe3; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .rail li.next { color: #94a3b8; }
-  .ui .rail li.next::before { background: #fff; box-shadow: inset 0 0 0 2px #cbd5d1; }
+  .ui .rail li.next::before { background: #fff; box-shadow: inset 0 0 0 2px #cbd5d1; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   /* La placa: idéntica a PlacaDelVehiculo del portal (amarilla, borde de 2 px en tinta, 800, 13 px). */
   .plate { display: inline-flex; align-items: center; white-space: nowrap; background: var(--cv-plate); color: var(--cv-ink); border: 2px solid var(--cv-ink); border-radius: 3px; padding: 0 6px; font-weight: 800; font-size: 13px; line-height: 1.35; letter-spacing: .04em; }
   /* La tarjeta del trámite: la misma estructura y medidas que TramiteWidget + RielDelTramite del portal. */
@@ -277,7 +277,7 @@ const CSS = `
   .tc-img { width: 40px; height: 40px; flex: none; border-radius: 6px; background: var(--cv-tone); display: grid; place-items: center; color: #475569; }
   .tc-who { min-width: 0; flex: 1; }
   .tc-id { font-size: 13px; font-weight: 500; color: #475569; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .tc-chip { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 999px; color: var(--cv-accent); background: #ecfdf5; border: 1px solid #a7f3d0; white-space: nowrap; }
+  .tc-chip { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 999px; color: var(--cv-accent); background: #ecfdf5; border: 1px solid #a7f3d0; white-space: nowrap; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
   .tc-pl { font-size: 14px; color: #475569; margin-top: 4px; display: flex; align-items: center; gap: 8px; }
   .tc-pct { text-align: right; flex: none; align-self: flex-start; }
@@ -293,15 +293,15 @@ const CSS = `
   .tc-rail .ln i.no { background: transparent; }
   .tc-rail .dot { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--cv-tone); color: #475569; }
   .tc-rail .done .dot { background: var(--cv-accent); color: #fff; }
-  .tc-rail .now .dot { background: var(--cv-accent); color: #fff; box-shadow: 0 0 0 4px #d5efe3; }
+  .tc-rail .now .dot { background: var(--cv-accent); color: #fff; box-shadow: 0 0 0 4px #d5efe3; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-rail small { font-size: 10px; line-height: 1.2; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
   .tc-rail .now small { color: var(--cv-accent); font-weight: 600; }
-  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px; border-radius: 6px; background: #eef7f2; border: 1px solid rgba(4,120,87,.4); }
+  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px; border-radius: 6px; background: #eef7f2; border: 1px solid rgba(4,120,87,.4); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-iva b { display: block; font-size: 14px; }
   .tc-iva span { font-size: 12px; color: #475569; }
   .tc-iva .go { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--cv-accent); color: #fff; display: grid; place-items: center; font-weight: 700; }
-  .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); }
-  .tc-st { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; }
+  .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .tc-st { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-st.ok { color: var(--cv-accent); background: #ecfdf5; border-color: #a7f3d0; }
   .tc-acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .tc-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
@@ -322,7 +322,7 @@ const CSS = `
   .pcase { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(20px, 2.4vw, 32px); }
   .pcase h3 { font-size: clamp(1.25rem, 1.05rem + .6vw, 1.5rem); font-weight: var(--cv-wh); letter-spacing: -0.02em; line-height: 1.2; }
   .pcase .pq { margin-top: 8px; color: var(--cv-soft); max-width: 56ch; }
-  .pfix { background: #fff; border-radius: var(--cv-r); padding: 16px 18px 16px 22px; margin-top: 18px; box-shadow: inset 5px 0 0 var(--cv-accent); } /* barra de acento de la respuesta */
+  .pfix { background: #fff; border-radius: var(--cv-r); padding: 16px 18px 16px 22px; margin-top: 18px; box-shadow: inset 5px 0 0 var(--cv-accent); } /* taste-skill-ignore: barra de acento de la respuesta */
   .pfix span { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
   .pfix p { margin-top: 2px; font-weight: 600; }
 
@@ -352,7 +352,7 @@ const CSS = `
   .ww-ui { grid-column: 8 / span 5; display: grid; place-items: center; }
   /* El módulo Win Win del portal (WinWinModule.tsx): cabecera en el verde de la marca con el código, y las cifras debajo.
      Sobre el campo verde de la sección lleva un filo blanco translúcido para separarse. */
-  .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; }
+  .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
   .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
   .ww-mod-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
@@ -364,10 +364,10 @@ const CSS = `
   .ww-mod-n div { text-align: center; padding: 12px 6px; border-radius: 6px; background: var(--cv-tone); }
   .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
   .ww-mod-n span { font-size: 11px; color: #475569; }
-  .ww-mod-n .sal { background: #ecfdf5; box-shadow: inset 0 0 0 1px #a7f3d0; }
+  .ww-mod-n .sal { background: #ecfdf5; box-shadow: inset 0 0 0 1px #a7f3d0; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-n .sal b { color: var(--cv-accent); font-size: 17px; }
   .ww-mod-n .sal span { color: var(--cv-accent); }
-  .ww-mod-btn { display: block; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; }
+  .ww-mod-btn { display: block; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
 
   /* ── PREGUNTAS: baldosas que se abren ── */
   .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
@@ -394,7 +394,7 @@ const CSS = `
 
   /* ── MODAL DE PLAZO ── */
   .urgency-modal-overlay { position: fixed; inset: 0; background: rgba(9,14,26,.72); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; overscroll-behavior: contain; }
-  .urgency-modal { position: relative; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); box-shadow: 0 24px 80px rgba(0,0,0,.5); max-width: 520px; width: 100%; padding: 44px; }
+  .urgency-modal { position: relative; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); box-shadow: 0 24px 80px rgba(0,0,0,.5); max-width: 520px; width: 100%; padding: 44px; } /* taste-skill-ignore: elemento que flota (modal o botón fijo) */
   .urgency-modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: var(--cv-r); background: var(--cv-field-2); border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #cbd5e1; }
   .urgency-modal-close:hover { color: #fff; }
   .urgency-k { font-size: var(--cv-small); font-weight: 600; color: #fca5a5; }
@@ -406,7 +406,7 @@ const CSS = `
   .urgency-modal .cv-btn { width: 100%; margin-top: 16px; }
 
   /* ── WhatsApp: el único botón que flota ── */
-  .whatsapp-fab { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: #1f9d55; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(15,23,42,.25); }
+  .whatsapp-fab { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: #1f9d55; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(15,23,42,.25); } /* taste-skill-ignore: elemento que flota (modal o botón fijo) */
   .whatsapp-fab:focus-visible { outline: 3px solid var(--cv-ink); outline-offset: 3px; }
 
   /* ── entrada al aparecer: solo lo que está fuera del primer pantallazo ── */
@@ -416,7 +416,7 @@ const CSS = `
   /* ── celular ── */
   @media (max-width: 900px) {
     .h-hero-copy, .h-stage, .h-intro { grid-column: 1 / -1; }
-    .h-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); }
+    .h-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
     .calc { padding: 26px 18px 20px; clip-path: polygon(36px 0, 100% 0, 100% 100%, 0 100%, 0 36px); }
     .board, .board.five { grid-template-columns: 1fr 1fr; gap: 6px; }
     .tile { min-height: 150px; padding: 18px; }
@@ -565,7 +565,7 @@ function VentanaUPME() {
     { val: resta === null ? null : Math.floor((resta % 3_600_000) / 60_000), label: "Min" },
     { val: resta === null ? null : Math.floor((resta % 60_000) / 1000), label: "Seg" },
   ];
-  const pad = (n: number | null) => (n === null ? "--" : String(n).padStart(2, "0"));
+  const pad = (n: number | null) => (n === null ? "--" : String(n).padStart(2, "0")); // taste-skill-ignore: dígitos de un reloj
   const cerrada = estado?.abierta === false;
   return (
     <section id="ventana-upme" className="win" aria-labelledby="ventana-upme-titulo">
@@ -909,31 +909,31 @@ function Servicios() {
 function PorQueNoSolo() {
   const items = [
     {
-      num: "01",
+      num: "01", // taste-skill-ignore: clave interna del dato, no se pinta
       title: "Tu vehículo no aparece en el listado",
       problema: "Si la línea o modelo no está en el listado de la UPME, la solicitud requiere documentación técnica adicional para poder radicarse.",
       solucion: "Gestionamos la documentación técnica para radicar aunque tu modelo no aparezca en el listado.",
     },
     {
-      num: "02",
+      num: "02", // taste-skill-ignore: clave interna del dato, no se pinta
       title: "Referencia equivocada en el certificado",
       problema: "Una diferencia mínima en la denominación puede invalidar el certificado. Versiones que parecen iguales se registran como referencias distintas.",
       solucion: "Verificamos la referencia exacta y reunimos la documentación adicional si no aparece en la base.",
     },
     {
-      num: "03",
+      num: "03", // taste-skill-ignore: clave interna del dato, no se pinta
       title: "El valor debe registrarse antes de impuestos",
       problema: "El valor en el certificado debe ser antes de impuestos y descuentos. Registrar el total de la factura puede impedir la aplicación de los beneficios.",
       solucion: "Validamos todos los valores antes de radicar para que el certificado sea coherente con la DIAN.",
     },
     {
-      num: "04",
+      num: "04", // taste-skill-ignore: clave interna del dato, no se pinta
       title: "Leasing, prenda o copropiedad",
       problema: "La UPME no tiene un proceso estándar documentado para estos escenarios. Sin experiencia previa, los errores son difíciles de corregir una vez radicados.",
       solucion: "Gestionamos estos escenarios con el proceso correcto para que el certificado quede bien emitido.",
     },
     {
-      num: "05",
+      num: "05", // taste-skill-ignore: clave interna del dato, no se pinta
       title: "Certificado correcto hoy, auditoría después",
       problema: "El certificado recoge lo que registras sin verificar que los valores y referencias sean correctos. Un error es difícil de corregir una vez emitido.",
       solucion: "Revisamos que el certificado quede perfectamente emitido para que resista una eventual auditoría.",
@@ -986,7 +986,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
           {RIEL_PORTAL.map((s, k) => {
             const n = k + 1, estado = n < paso || emitido ? "done" : n === paso ? "now" : "";
             return (<li key={s} className={estado}>
-              <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? "✓" : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
+              <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
               <small>{s}</small>
             </li>);
           })}
@@ -1018,9 +1018,9 @@ function PiezaDelPaso({ i }: { i: number }) {
 
 function ComoFunciona() {
   const steps = [
-    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
-    { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
-    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." },
+    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
     // Eran ciertas mientras los cinco pasos describían solo el certificado —ahí, en efecto, no le
     // queda nada—. Desde que la lista llega hasta la devolución de IVA, «todo» y «nada más»
@@ -1054,8 +1054,8 @@ function ComoFunciona() {
     // que el defecto es del pipeline de Astro/Vite. **Antes de tocar este título, construir y
     // contar NULs con Node**, que es lo único que los ve:
     //   node -e 'const b=require("fs").readFileSync("dist/index.html");console.log([...b].filter(x=>x===0).length)'
-    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." },
-    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." },
+    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu dashboard.", detail: "Seguimiento en tiempo real por WhatsApp y correo." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
     // gestionamos nosotros. Tres cosas que no se pueden aflojar al retocarlo:
@@ -1066,7 +1066,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -1320,9 +1320,9 @@ function Prensa() {
 function WinWin() {
   const portalUrl = usePortalUrl();
   const steps = [
-    { num: "01", icon: "award", title: "Crea tu cuenta", desc: "Regístrate en portal.certiveh.co, sube tus documentos y completa tu trámite para desbloquear tu código de referido." },
-    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento en su trámite." },
-    { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo solicite su trámite, tú ganas $75.000 que puedes acumular o retirar cuando quieras." },
+    { num: "01", icon: "award", title: "Crea tu cuenta", desc: "Regístrate en portal.certiveh.co, sube tus documentos y completa tu trámite para desbloquear tu código de referido." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento en su trámite." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo solicite su trámite, tú ganas $75.000 que puedes acumular o retirar cuando quieras." }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   return (
     <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" className="ww">
@@ -1499,7 +1499,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
   return (
     <PortalUrlContext.Provider value={portalUrl}>
     <TarifaDeLaIsla.Provider value={tarifa}>
-      {/* ⚠️ **Como HTML crudo, no como hijo de texto.** Con `<style>{CSS}</style>` React escapa el
+      {/* ⚠️ **Como HTML crudo, no como hijo de texto.** Con `<style>{CSS}</style>` React escapa el // taste-skill-ignore: signo de aviso dentro de un comentario
           texto en el HTML prerenderizado (`>` sale como `&gt;`, las comillas como `&#x27;`): los
           selectores con `>` y la fuente no valían hasta hidratar, y al hidratar el texto no
           coincidía (errores #425 y #423), así que React tiraba el HTML del servidor y repintaba la
