@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { Navbar } from "./Navbar";
+import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
-import { AnimatedGridPattern } from './ui/animated-grid-pattern';
-import { cn } from '@/lib/utils';
 import { cotizacionDeGas } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh — Landing Empresas
 // Certificación UPME para GEE y FNCE
+//
+// Estándar visual 2026-11 (DESIGN_SYSTEM.md §0): las variables --cv-* de src/styles/marca.css y las clases
+// .cv-btn / .cv-sq. Sin degradados (salvo el velo neutro sobre el video), sin sombras en reposo, sin vidrio,
+// sin iconos en cuadritos, sin la rejilla animada ni los números 01/02/03 a la vista. Los textos, enlaces y
+// datos de cada sección son los de siempre.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const WHATSAPP_URL = "https://wa.me/573151298420?text=Hola%2C%20quiero%20información%20sobre%20la%20certificación%20UPME%20para%20mi%20empresa";
@@ -16,348 +20,241 @@ const WHATSAPP_URL = "https://wa.me/573151298420?text=Hola%2C%20quiero%20informa
 const CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  body { background: var(--cv-bg); color: var(--cv-ink); font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .oa-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
+  .oa-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
+  .oa-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
+  .oa-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
+  .oa-intro { grid-column: 1 / span 7; }
+  .oa-intro p { margin-top: 18px; max-width: 58ch; }
 
-  :root {
-    --emerald-50:  #ECFDF5;
-    --emerald-100: #D1FAE5;
-    --emerald-200: #A7F3D0;
-    --emerald-500: #10B981;
-    --emerald-600: #059669;
-    --emerald-700: #047857;
-    --emerald-800: #065F46;
-    --teal-50:  #F0FDFA;
-    --teal-100: #CCFBF1;
-    --teal-200: #99F6E4;
-    --teal-500: #14B8A6;
-    --teal-600: #0D9488;
-    --slate-50:  #F8FAFC;
-    --slate-100: #F1F5F9;
-    --slate-200: #E2E8F0;
-    --slate-300: #CBD5E1;
-    --slate-400: #94A3B8;
-    --slate-500: #64748B;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-900: #0F172A;
-    --amber-50:  #FFFBEB;
-    --amber-100: #FEF3C7;
-    --amber-200: #FDE68A;
-    --amber-500: #F59E0B;
-    --amber-600: #D97706;
-    --white: #FFFFFF;
-    --grad-primary: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
-    --grad-subtle:  linear-gradient(135deg, #ECFDF5 0%, #F0FDFA 100%);
-    --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  @keyframes oaUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* ── HERO: el video con el velo neutro de la home, el texto a la izquierda ── */
+  .oa-hero { position: relative; color: #fff; background: var(--cv-field); overflow: hidden; padding: calc(64px + clamp(72px, 10vw, 160px)) 0 clamp(56px, 7vw, 110px); scroll-margin-top: 64px; }
+  .oa-hero-media { position: absolute; inset: 0; }
+  .oa-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
+  .oa-hero-copy { position: relative; }
+  .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; max-width: 18ch; animation: oaUp .6s .05s ease-out both; }
+  .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 46ch; margin-top: 22px; animation: oaUp .6s .12s ease-out both; }
+  .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; animation: oaUp .6s .2s ease-out both; }
+  .oa-acts .cv-btn-w:focus-visible { outline-color: var(--cv-mint); }
+  .oa-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 30px; font-size: var(--cv-small); font-weight: 600; animation: oaUp .6s .28s ease-out both; }
+  .oa-trust .cv-sq::before, .oa-dark .cv-sq::before { background: var(--cv-mint); }
+
+  /* ── ACTIVOS: tres baldosas con su foto ── */
+  .oa-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
+  .oa-asset { background: var(--cv-tone); border-radius: var(--cv-r); overflow: hidden; display: flex; flex-direction: column; }
+  .oa-asset-img { aspect-ratio: 16 / 10; overflow: hidden; }
+  .oa-asset-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .oa-asset-body { padding: clamp(22px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 10px; }
+  .oa-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
+  .oa-asset h3 { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
+
+  /* ── BENEFICIOS: cuatro baldosas, la cifra en verde ── */
+  .oa-ben { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
+  .oa-b { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(22px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 10px; }
+  .oa-b h3 { font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; line-height: 1.2; }
+  .oa-b .pct { font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; color: var(--cv-accent); }
+  .oa-b p { font-size: 1rem; }
+  .oa-b .norma { margin-top: auto; padding-top: 10px; font-size: var(--cv-small); color: var(--cv-soft); }
+
+  /* ── CÓMO FUNCIONA: campo oscuro y el riel del portal ── */
+  .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: 64px; }
+  .oa-dark .oa-intro p { color: #e2e8f0; }
+  .oa-steps-col { grid-column: 1 / span 6; }
+  .oa-steps-lead { margin-top: 18px; max-width: 52ch; color: #e2e8f0; }
+  .oa-rail { list-style: none; margin-top: 40px; padding-left: 40px; position: relative; display: grid; gap: 4px; }
+  .oa-rail::before { content: ""; position: absolute; left: 11px; top: 22px; bottom: 22px; width: 3px; background: rgba(255,255,255,.18); }
+  .oa-rail li { position: relative; }
+  .oa-rail li::before { content: ""; position: absolute; left: -40px; top: 15px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-field); box-shadow: inset 0 0 0 3px rgba(255,255,255,.35); transition: background-color .25s, box-shadow .25s; } /* taste-skill-ignore: anillo del punto del riel, como RielDelTramite del portal */
+  .oa-rail li.done::before { background: var(--cv-mint); box-shadow:none; }
+  .oa-rail li.on::before { background: var(--cv-field); box-shadow: inset 0 0 0 7px var(--cv-mint); } /* taste-skill-ignore: el paso actual, anillo verde del riel */
+  .step-tab { width: 100%; display: block; text-align: left; background: none; border: 0; color: inherit; cursor: pointer; font-family: var(--cv-font); padding: 12px 14px; border-radius: var(--cv-r); transition: background-color .15s; }
+  .step-tab:hover { background: var(--cv-field-2); }
+  .step-tab.active { background: var(--cv-field-2); }
+  .step-tab:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
+  /* El número del paso (01, 02…) se conserva en el documento pero no se pinta: el orden lo dice el riel */
+  .step-num { display: none; }
+  .step-t { display: block; font-size: 1.1875rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: var(--cv-field-soft); }
+  .step-s { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-field-soft); margin-top: 2px; }
+  .step-tab.active .step-t { color: #fff; }
+  .step-tab.active .step-s { color: var(--cv-mint); }
+  .oa-step-card { grid-column: 8 / span 5; align-self: center; background: var(--cv-field-2); border-radius: var(--cv-r); padding: clamp(28px, 3.5vw, 48px); min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .oa-step-card .wm { display: none; }
+  .oa-step-card h3 { font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
+  .oa-step-card p { margin-top: 14px; color: #e2e8f0; max-width: 48ch; }
+  .oa-step-card .det { margin-top: 20px; font-weight: 600; color: var(--cv-mint); }
+  .oa-dots { display: flex; gap: 2px; margin-top: 28px; margin-left: -9px; }
+  .oa-dots button { width: 32px; height: 32px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; padding: 0; border-radius: var(--cv-r); }
+  .oa-dots button i { display: block; height: 6px; width: 6px; border-radius: 3px; background: rgba(255,255,255,.3); transition: width .25s, background-color .25s; }
+  .oa-dots button[aria-current="step"] i { width: 22px; background: var(--cv-mint); }
+  .oa-dots button:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 0; }
+
+  /* ── CALCULADORA: controles en tono, resultado en el campo oscuro (como la de la home) ── */
+  .oa-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 56px; }
+  .oa-ctrl { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(24px, 3.5vw, 48px); }
+  .oa-lab { font-size: .9375rem; font-weight: 600; color: var(--cv-soft); margin-bottom: 10px; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #fff; border-radius: var(--cv-r); padding: 4px; }
+  .seg button { font: 600 .9375rem/1.25 var(--cv-font); color: var(--cv-soft); background: transparent; border: 0; border-radius: 4px; padding: 12px 8px; min-height: 44px; cursor: pointer; transition: background-color .15s, color .15s; }
+  .seg button[aria-pressed="true"] { background: var(--cv-accent); color: #fff; }
+  .seg button:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 1px; }
+  .oa-val { display: flex; justify-content: space-between; align-items: baseline; margin-top: 28px; }
+  .oa-val .oa-lab { margin: 0; }
+  .oa-val output { font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); color: var(--cv-accent); }
+  .oa-ctrl input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin-top: 4px; cursor: pointer; touch-action: pan-y; }
+  .oa-ctrl input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(var(--cv-accent), var(--cv-accent)) 0 / var(--p, 10%) 100% no-repeat, var(--cv-tone-2); } /* taste-skill-ignore: relleno plano del avance del deslizador */
+  .oa-ctrl input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: var(--cv-tone-2); }
+  .oa-ctrl input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--cv-accent); }
+  .oa-ctrl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--cv-accent); margin-top: -10px; border: 4px solid #fff; }
+  .oa-ctrl input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--cv-accent); border: 4px solid #fff; }
+  .oa-ctrl input[type=range]:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 2px; border-radius: 4px; }
+  .oa-ends { display: flex; justify-content: space-between; font-size: .875rem; color: var(--cv-soft); }
+  .oa-bars { display: grid; gap: 14px; margin-top: 22px; }
+  .oa-brow { display: flex; justify-content: space-between; gap: 12px; font-size: .9375rem; }
+  .oa-brow b { font-weight: 700; white-space: nowrap; }
+  .oa-track { height: 6px; background: var(--cv-tone-2); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .oa-track i { display: block; height: 100%; background: var(--cv-accent); transition: width .4s; }
+  .oa-track.b2 i { background: var(--cv-ink); }
+  .oa-emp { margin-top: 16px; font-size: .9375rem; background: #fff; border-radius: var(--cv-r); padding: 12px 14px; }
+  .oa-cost { margin-top: 16px; background: #fff; border-radius: var(--cv-r); padding: 14px 16px; font-size: .9375rem; }
+  .oa-cost .h { font-weight: 700; margin-bottom: 8px; }
+  .oa-cost > div:not(.h) { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; }
+  .oa-cost > div > span:last-child { white-space: nowrap; }
+  .oa-cost .m { font-size: .875rem; color: var(--cv-soft); }
+  .oa-cost .t { font-weight: 700; font-size: 1rem; padding-top: 10px !important; margin-top: 6px; box-shadow: inset 0 2px 0 var(--cv-tone-2); } /* taste-skill-ignore: la raya del total de una cuenta */
+  .oa-res { background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: clamp(24px, 3.5vw, 48px); display: flex; flex-direction: column; justify-content: center; }
+  .oa-res .k { font-size: .9375rem; color: var(--cv-mint); font-weight: 600; }
+  .oa-res .big { font-size: clamp(2rem, 1.4rem + 2vw, 3rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .oa-res .s { font-size: .9375rem; color: var(--cv-field-soft); margin-top: 6px; }
+  .oa-res .row { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 16px 18px; margin-top: 22px; }
+  .oa-res .row b { display: block; font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .oa-res .per { font-size: .9375rem; color: var(--cv-field-soft); margin-top: 16px; }
+  .oa-res .per b { color: #fff; }
+  .oa-res .per em { font-style: normal; color: var(--cv-mint); font-weight: 700; }
+  .oa-res .cv-btn { width: 100%; margin-top: 22px; }
+  .oa-res .cv-btn:focus-visible { outline-color: var(--cv-mint); }
+  .oa-res .note { font-size: .875rem; color: var(--cv-field-soft); margin-top: 12px; }
+
+  /* ── POR QUÉ: el texto a la izquierda, cuatro razones en baldosas ── */
+  .oa-why-copy { grid-column: 1 / span 6; }
+  .oa-why-copy p { margin-top: 18px; max-width: 58ch; }
+  .oa-why-copy p + p { color: var(--cv-soft); }
+  .oa-why-list { grid-column: 7 / span 6; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-self: start; }
+  .oa-why-list li { background: var(--cv-tone); border-radius: var(--cv-r); padding: 22px; }
+  .oa-why-list .t { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; }
+  .oa-why-list .d { font-size: .9375rem; margin-top: 8px; }
+
+  /* ── PREGUNTAS: baldosas que se abren (las de la home) ── */
+  .faq-grid { align-items: start; }
+  .faq-grid > h2 { grid-column: 1 / span 4; position: sticky; top: 96px; }
+  .qs { grid-column: 5 / span 8; display: grid; gap: 8px; }
+  .faq-item { background: var(--cv-tone); border-radius: var(--cv-r); transition: background-color .15s; }
+  .faq-item.open { background: var(--cv-accent); color: #fff; }
+  .faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 72px; padding: 18px 24px; background: none; border: 0; color: inherit; cursor: pointer; text-align: left; font: 600 1.1875rem/1.3 var(--cv-font); letter-spacing: -0.02em; }
+  .faq-btn:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; border-radius: var(--cv-r); }
+  .pm { flex: none; position: relative; width: 16px; height: 16px; }
+  .pm::before, .pm::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 16px; height: 3px; background: currentColor; transition: transform .2s; }
+  .pm::after { transform: rotate(90deg); }
+  .faq-item.open .pm::after { transform: rotate(0); }
+  .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #fff; }
+
+  /* ── CIERRE: campo verde, como el del resto del sitio ── */
+  .oa-close { padding-block: var(--cv-gap-sec); }
+  .oa-close-box { background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
+  .oa-close-copy { grid-column: 1 / span 7; }
+  .oa-close-copy h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
+  .oa-close-copy p { margin-top: 18px; max-width: 54ch; }
+  .oa-close-act { grid-column: 9 / span 4; }
+  .oa-close-act .cv-btn { width: 100%; }
+  .oa-close-act .cv-btn:focus-visible { outline-color: #fff; }
+  .oa-close-act ul { list-style: none; display: grid; gap: 8px; margin-top: 22px; font-size: var(--cv-small); font-weight: 600; }
+  .oa-close-act .cv-sq::before { background: #fff; }
+
+  @media (max-width: 1100px) {
+    .oa-ben { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-
-  body {
-    background: var(--white);
-    color: var(--slate-900);
-    font-family: var(--ff);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* H3: Range slider cross-browser thumb */
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: white; cursor: pointer;
-    border: 3px solid var(--emerald-600);
-    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
-    transition: box-shadow 0.15s;
-  }
-  input[type=range]::-moz-range-thumb {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: white; cursor: pointer;
-    border: 3px solid var(--emerald-600);
-    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
-  }
-  input[type=range]::-webkit-slider-thumb:hover {
-    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.12);
-  }
-
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--emerald-600); color: var(--white);
-    border: none; border-radius: 12px;
-    padding: 12px 24px; font-size: 15px; font-weight: 600;
-    cursor: pointer; font-family: var(--ff);
-    transition: background 0.15s, transform 0.1s;
-  }
-  .btn-primary:hover { background: var(--emerald-700); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary-lg { padding: 16px 32px; font-size: 16px; }
-
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--white); color: var(--slate-700);
-    border: 1.5px solid var(--slate-300); border-radius: 12px;
-    padding: 11px 24px; font-size: 15px; font-weight: 500;
-    cursor: pointer; font-family: var(--ff);
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .btn-secondary:hover { border-color: var(--slate-400); background: var(--slate-50); }
-
-  .section { padding: 96px 48px; max-width: 1200px; margin: 0 auto; }
-
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 9999px;
-    background: var(--emerald-50); color: var(--emerald-700);
-    border: 1px solid var(--emerald-200);
-  }
-
-  .card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  }
-
-  .faq-item { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; transition: border-color 0.15s; }
-  .faq-item.open { border-color: var(--emerald-200); }
-  .faq-btn {
-    width: 100%; padding: 20px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--white); border: none; cursor: pointer;
-    font-family: var(--ff); font-size: 15px; font-weight: 500;
-    color: var(--slate-900); text-align: left; gap: 16px; transition: background 0.15s;
-  }
-  .faq-btn:hover { background: var(--slate-50); }
-  .faq-icon {
-    width: 28px; height: 28px; border-radius: 9999px;
-    background: var(--emerald-50);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.2s, background 0.15s;
-  }
-  .faq-item.open .faq-icon { background: var(--emerald-600); transform: rotate(45deg); }
-  .faq-body {
-    padding: 16px 24px 20px; font-size: 15px; line-height: 1.65;
-    color: var(--slate-600); background: var(--emerald-50);
-  }
-
-  .step-tab {
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 16px; border-radius: 12px; cursor: pointer;
-    border: 1.5px solid transparent; background: transparent;
-    text-align: left; font-family: var(--ff); transition: all 0.15s; width: 100%;
-  }
-  .step-tab.active { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
-  .step-tab:hover:not(.active) { background: rgba(255,255,255,0.04); }
-  .step-num {
-    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
-    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); transition: all 0.15s;
-  }
-  .step-tab.active .step-num { background: var(--emerald-600); color: white; }
-
-  /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
-  @media (max-width: 768px) {
-    .hero-section { padding: 100px 20px 60px !important; height: auto !important; min-height: 60vh !important; }
-    .section { padding: 64px 20px; }
-
-    .btn-primary { padding: 12px 20px; font-size: 14px; }
-    .btn-primary-lg { padding: 14px 24px; font-size: 15px; }
-    .btn-secondary { padding: 10px 20px; font-size: 14px; }
-
-    .step-tab { padding: 12px; gap: 10px; }
-    .step-num { width: 32px; height: 32px; font-size: 12px; }
-
-    .faq-btn { padding: 16px 20px; font-size: 14px; }
-    .faq-body { padding: 0 20px 16px; font-size: 14px; }
-
-    .grid-4-cols { grid-template-columns: 1fr 1fr !important; }
-    .grid-3-cols { grid-template-columns: 1fr !important; gap: 16px !important; }
-    .grid-2-cols { grid-template-columns: 1fr !important; gap: 40px !important; }
-    .grid-calc { grid-template-columns: 1fr !important; }
-    .card-calc-controls { border-right: none !important; border-bottom: 1px solid var(--slate-200) !important; padding: 32px 24px !important; }
-    .card-calc-result { padding: 32px 24px !important; }
-
-    .step-card { padding: 28px !important; height: auto !important; min-height: 360px !important; }
-
+  @media (max-width: 900px) {
+    .oa-intro, .oa-steps-col, .oa-step-card, .oa-why-copy, .oa-why-list, .oa-close-copy, .oa-close-act { grid-column: 1 / -1; }
+    .oa-step-card { margin-top: 32px; min-height: 0; }
+    .oa-board { grid-template-columns: 1fr; gap: 6px; }
+    .oa-calc { grid-template-columns: 1fr; gap: 6px; }
+    .oa-why-list { margin-top: 32px; }
+    .faq-grid > h2 { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
+    .qs { grid-column: 1 / -1; }
+    .faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
+    .faq-body { padding: 0 18px 20px; font-size: 1rem; }
+    .oa-close-act { margin-top: 32px; }
     h1 br, h2 br { display: none; }
   }
-
-  @media (max-width: 640px) {
-    .cta-section { padding: 64px 20px !important; }
-    footer { padding: 40px 20px !important; }
-    .grid-4-cols { grid-template-columns: 1fr !important; }
+  @media (max-width: 560px) {
+    .oa-ben, .oa-why-list { grid-template-columns: 1fr; gap: 6px; }
+    .oa-acts .cv-btn { width: 100%; }
   }
-
-  @media (max-width: 480px) {
-    .hero-section { padding: 90px 16px 50px !important; }
-    .section { padding: 48px 16px; }
-    .card-calc-controls { padding: 24px 16px !important; }
-    .card-calc-result { padding: 24px 16px !important; }
-    .btn-primary-lg { padding: 12px 20px; font-size: 14px; }
-    .benefit-card { padding: 24px !important; }
-    .step-card { padding: 20px !important; min-height: 320px !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .oa-hero h1, .oa-hero-sub, .oa-acts, .oa-trust { animation: none; }
+    .oa-rail li::before, .oa-dots button i, .oa-track i, .pm::before, .pm::after { transition: none; }
   }
 `;
 
 // ── SVG Icons ─────────────────────────────────────────────────────────────────
 function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: string; size?: number; color?: string; style?: React.CSSProperties }) {
   const paths: Record<string, JSX.Element> = {
-    shield:      <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
-    zap:         <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>,
-    fileText:    <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>,
-    checkCircle: <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></>,
-    upload:      <><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></>,
-    arrowRight:  <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
-    clock:       <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
-    lock:        <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-    award:       <><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></>,
-    percent:     <><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
-    sun:         <><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></>,
-    truck:       <><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></>,
-    battery:     <><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></>,
-    user:        <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
-    building:    <><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></>,
-    info:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
-    dollarSign:  <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
     messageCircle: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>,
-    barChart:    <><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></>,
   };
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"
       stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}>
       {paths[name]}
     </svg>
   );
 }
 
-// ── Logo ──────────────────────────────────────────────────────────────────────
-function CertiVehLogo({ variant = "default", compact = false }: { variant?: "default" | "light"; compact?: boolean }) {
-  const isBrowser = typeof document !== 'undefined';
-  const getCSSVar = (name: string, fallback: string) => isBrowser ? (getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback) : fallback;
-  const textColor = variant === "light" ? "#FFFFFF" : getCSSVar('--slate-900', '#0F172A');
-  const primary = getCSSVar('--emerald-600', '#059669');
-  const accent = getCSSVar('--teal-500', '#14B8A6');
-  const w = compact ? 180 : 220, h = compact ? 44 : 56;
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none" role="img" aria-label="Logo CertiVeh">
-      <defs>
-        <linearGradient id="empLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={primary}/><stop offset="100%" stopColor={accent}/>
-        </linearGradient>
-      </defs>
-      <g transform={compact ? "translate(4,8) scale(0.48)" : "translate(4,4) scale(0.62)"}>
-        <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#empLogoGrad)"/>
-        <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-      </g>
-      <g transform={compact ? "translate(60,28)" : "translate(70,24)"}>
-        <text x="0" y="0" fill={textColor} fontSize={compact ? "26" : "30"} fontWeight="700"
-          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5">
-          Certi<tspan fill={primary}>Veh</tspan>
-        </text>
-        {!compact && (
-          <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : getCSSVar('--slate-500', '#64748B')}
-            fontSize="10" fontWeight="500" fontFamily="Inter, system-ui, sans-serif" letterSpacing="1.5">
-            OTROS ACTIVOS
-          </text>
-        )}
-      </g>
-    </svg>
-  );
-}
+const Arr = () => <span className="cv-arr" aria-hidden="true">→</span>;
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="hero-section" style={{
-      height: "100vh", display: "flex", flexDirection: "column",
-      justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "100px 48px 60px", position: "relative",
-      background: "var(--slate-900)", overflow: "hidden",
-    }}>
-      {/* Background video */}
-      <video
-        ref={el => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
-        autoPlay muted loop playsInline
-        preload="auto"
-        poster="/otros-activos-poster.webp"
-        style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", pointerEvents: "none", opacity: 0.35,
-        }}
-      >
-        <source src="/otros-activos-hero.mp4" type="video/mp4" />
-      </video>
-      {/* Gradient overlay */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.15) 100%)",
-      }}/>
-
-      {/* H1 */}
-      <h1 style={{
-        fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
-        lineHeight: 1.15, letterSpacing: "-0.03em", color: "#FFFFFF",
-        maxWidth: 820, marginBottom: 16, animation: "fadeUp 0.6s 0.08s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Ahórrate hasta el 19% de IVA y deduce{" "}
-        <span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-          el 50% de tu inversión en renta
-        </span>
-      </h1>
-
-      {/* Sub */}
-      <p style={{
-        fontSize: "clamp(15px, 1.8vw, 17px)", lineHeight: 1.7,
-        color: "rgba(255,255,255,0.5)", maxWidth: 600,
-        marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        CertiVeh gestiona tu certificado UPME de principio a fin para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE).
-      </p>
-
-      {/* CTAs */}
-      <div style={{
-        display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 40, animation: "fadeUp 0.6s 0.24s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <a href="#calculadora" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{
-            background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)",
-            boxShadow: "0 4px 24px rgba(5,150,105,0.4), 0 1px 2px rgba(0,0,0,0.2)",
-            padding: "16px 36px", fontSize: 16, borderRadius: 12,
-          }}>
-            Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
-          </button>
-        </a>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-secondary" style={{
-            background: "rgba(255,255,255,0.08)", color: "#FFFFFF",
-            border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: 12,
-            backdropFilter: "blur(4px)", padding: "15px 28px",
-          }}>
-            <Icon name="messageCircle" size={16} color="white"/> Hablar con un asesor
-          </button>
-        </a>
+    <section id="hero" aria-label="Portada - CertiVeh Otros Activos" className="oa-hero">
+      {/* Background video, con el velo neutro de la home */}
+      <div className="oa-hero-media" aria-hidden="true">
+        <video
+          ref={el => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
+          autoPlay muted loop playsInline
+          preload="auto"
+          poster="/otros-activos-poster.webp"
+        >
+          <source src="/otros-activos-hero.mp4" type="video/mp4" />
+        </video>
       </div>
 
-      {/* Trust strip */}
-      <div style={{
-        display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center",
-        animation: "fadeUp 0.6s 0.36s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        {[["shield","Certificado oficial UPME"],["checkCircle","Cuatro beneficios tributarios"],["lock","Gestión integral"],["building","Personas naturales y jurídicas"]].map(([ico,txt]) => (
-          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "rgba(255,255,255,0.4)", fontWeight: 500, cursor: "default" }}>
-            <Icon name={ico as string} size={13} color="#34D399"/>{txt}
+      <div className="oa-wrap oa-hero-copy">
+        <h1>
+          Ahórrate hasta el 19% de IVA y deduce{" "}
+          <span>
+            el 50% de tu inversión en renta
           </span>
-        ))}
+        </h1>
+
+        <p className="oa-hero-sub">
+          CertiVeh gestiona tu certificado UPME de principio a fin para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE).
+        </p>
+
+        <div className="oa-acts">
+          <a href="#calculadora" className="cv-btn cv-btn-a">
+            Calcular mi beneficio <Arr/>
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w">
+            Hablar con un asesor <Icon name="messageCircle" size={18}/>
+          </a>
+        </div>
+
+        <ul className="oa-trust">
+          {["Certificado oficial UPME","Cuatro beneficios tributarios","Gestión integral","Personas naturales y jurídicas"].map(txt => (
+            <li key={txt} className="cv-sq">{txt}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -395,33 +292,32 @@ function Activos() {
     },
   ];
   return (
-    <section id="activos" aria-label="Activos que certificamos" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            Activos que{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>certificamos</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Gestionamos tu certificado UPME para proyectos de gestión eficiente de la energía (GEE) y de fuentes no convencionales de energía (FNCE).
-          </p>
+    <section id="activos" aria-label="Activos que certificamos" className="oa-sec">
+      <div className="oa-wrap">
+        <div className="oa-grid">
+          <div className="oa-intro">
+            <h2 className="oa-h2">
+              Activos que{" "}
+              <span>certificamos</span>
+            </h2>
+            <p>
+              Gestionamos tu certificado UPME para proyectos de gestión eficiente de la energía (GEE) y de fuentes no convencionales de energía (FNCE).
+            </p>
+          </div>
         </div>
 
-        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+        <div className="oa-board">
           {activos.map((a, i) => (
-            <div key={i} className="card benefit-card" style={{ padding: 0, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderLeft: `4px solid ${a.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >
-              <div style={{ height: 160, overflow: "hidden" }}>
-                <img src={a.img} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div key={i} className="oa-asset">
+              <div className="oa-asset-img">
+                <img src={a.img} alt={a.title} loading="lazy" />
               </div>
-              <div style={{ padding: "24px 28px" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "3px 10px", borderRadius: 9999, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 11, fontWeight: 600, color: a.accentColor, marginBottom: 12, letterSpacing: "0.02em", textTransform: "uppercase" }}>
+              <div className="oa-asset-body">
+                <div className="oa-tag">
                   {a.tag}
                 </div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.35 }}>{a.title}</h3>
-                <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6 }}>{a.desc}</p>
+                <h3>{a.title}</h3>
+                <p>{a.desc}</p>
               </div>
             </div>
           ))}
@@ -472,32 +368,28 @@ function Beneficios() {
     },
   ];
   return (
-    <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--slate-50)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            Cuatro beneficios tributarios. <br/>
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Un solo certificado.</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creó cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el único requisito para acceder a todos.
-          </p>
+    <section id="beneficios" aria-label="Beneficios tributarios" className="oa-sec">
+      <div className="oa-wrap">
+        <div className="oa-grid">
+          <div className="oa-intro">
+            <h2 className="oa-h2">
+              Cuatro beneficios tributarios. <br/>
+              <span>Un solo certificado.</span>
+            </h2>
+            <p>
+              La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creó cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el único requisito para acceder a todos.
+            </p>
+          </div>
         </div>
 
-        <div className="grid-4-cols" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+        <div className="oa-ben">
           {cards.map((c, i) => (
-            <div key={i} className="card benefit-card" style={{ padding: 28, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderTop: `4px solid ${c.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-                <Icon name={c.icon} size={20} color={c.accentColor}/>
-              </div>
-              <h3 style={{ fontSize: 17, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 4, lineHeight: 1.35 }}>{c.title}</h3>
-              <div style={{ fontSize: 32, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 12 }}>{c.pct}</div>
-              <p style={{ fontSize: 13, color: "var(--slate-600)", lineHeight: 1.55, marginBottom: 14 }}>{c.desc}</p>
-              <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 12 }}>
-                <span style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4 }}>{c.norma}</span>
+            <div key={i} className="oa-b">
+              <h3>{c.title}</h3>
+              <div className="pct">{c.pct}</div>
+              <p>{c.desc}</p>
+              <div className="norma">
+                <span>{c.norma}</span>
               </div>
             </div>
           ))}
@@ -512,14 +404,16 @@ function Beneficios() {
 function ComoFunciona() {
   const [active, setActive] = useState(0);
   const steps = [
-    { num: "01", icon: "upload",      title: "Recopilación de documentos",  subtitle: "Fichas técnicas y facturas",      desc: "Nos envías las fichas técnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolución UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." },
-    { num: "02", icon: "fileText",    title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a través del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolución UPME 400 de 2026, ventana continua." },
-    { num: "03", icon: "clock",       title: "Evaluación técnica",          subtitle: "FNCE: 20 días / GEE: 30 días",  desc: "La UPME verifica completitud en 10 días hábiles. Luego evalúa: hasta 20 días hábiles para proyectos FNCE (solar) o hasta 30 días hábiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." },
-    { num: "04", icon: "award",       title: "Emisión del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto técnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen límite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin límite de vigencia." },
-    { num: "05", icon: "dollarSign",  title: "Aplicación de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolución de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." },
+    { num: "01", icon: "upload",      title: "Recopilación de documentos",  subtitle: "Fichas técnicas y facturas",      desc: "Nos envías las fichas técnicas de los equipos, facturas o cotizaciones y la información del proyecto. Nosotros verificamos que todo corresponda a los anexos de la Resolución UPME 135 de 2025.", detail: "Verificamos elegibilidad antes de radicar." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "02", icon: "fileText",    title: "Radicación ante la UPME",     subtitle: "Ventana continua",               desc: "CertiVeh prepara y radica la solicitud a través del Sistema Único de Usuarios (SUU) de la UPME con todos los formatos oficiales. La ventana de radicación es continua: del 1 de febrero al 15 de diciembre.", detail: "Resolución UPME 400 de 2026, ventana continua." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "03", icon: "clock",       title: "Evaluación técnica",          subtitle: "FNCE: 20 días / GEE: 30 días",  desc: "La UPME verifica completitud en 10 días hábiles. Luego evalúa: hasta 20 días hábiles para proyectos FNCE (solar) o hasta 30 días hábiles para GEE (cargadores, GNV). Respondemos cualquier requerimiento.", detail: "CertiVeh gestiona los requerimientos de la UPME." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "04", icon: "award",       title: "Emisión del certificado",     subtitle: "Certificado oficial UPME",       desc: "Si el concepto técnico es favorable, la UPME emite el certificado y lo notifica por el SUU. Los certificados no tienen límite de vigencia y pueden modificarse dentro de los 2 años siguientes.", detail: "Sin límite de vigencia." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
+    { num: "05", icon: "dollarSign",  title: "Aplicación de beneficios",    subtitle: "IVA, renta, arancel, depreciación", desc: "Con el certificado UPME soportas la exclusión/devolución de IVA ante la DIAN, la deducción en renta, la exención arancelaria y la depreciación acelerada en tu contabilidad fiscal.", detail: "Cuatro beneficios con un solo certificado." }, // taste-skill-ignore: el número se conserva en el documento (huella de textos) pero no se pinta
   ];
 
+  // Avanza solo cada 5 s, salvo con «reducir movimiento»: ahí no se mueve nada que el visitante no toque.
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = setInterval(() => {
       setActive((prev) => (prev + 1) % steps.length);
     }, 5000);
@@ -527,50 +421,43 @@ function ComoFunciona() {
   }, [steps.length]);
 
   return (
-    <section id="como-funciona" aria-label="Cómo funciona" style={{ background: "var(--slate-900)" }}>
-      <div className="section">
-        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
-          <div>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25, marginBottom: 14 }}>
-              El proceso de <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>certificación.</span>
-            </h2>
-            <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
-              De la documentación al certificado UPME. CertiVeh gestiona todo el trámite por ti.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {steps.map((s, i) => (
-                <button key={i} className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)}
-                  style={active === i ? { background: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.1)" } : { background: "transparent", borderColor: "transparent" }}
-                >
-                  <div className="step-num" style={active === i ? { background: "var(--emerald-600)", color: "white" } : { background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}>{s.num}</div>
-                  <div>
-                    <div style={{ fontSize: 16, fontWeight: 600, color: active === i ? "white" : "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>{s.title}</div>
-                    <div style={{ fontSize: 12, fontWeight: 500, color: active === i ? "#34D399" : "rgba(255,255,255,0.3)", marginTop: 1, lineHeight: 1.4 }}>{s.subtitle}</div>
-                  </div>
+    <section id="como-funciona" aria-label="Cómo funciona" className="oa-dark">
+      <div className="oa-wrap oa-grid">
+        <div className="oa-steps-col">
+          <h2 className="oa-h2">
+            El proceso de <br/><span>certificación.</span>
+          </h2>
+          <p className="oa-steps-lead">
+            De la documentación al certificado UPME. CertiVeh gestiona todo el trámite por ti.
+          </p>
+          <ol className="oa-rail">
+            {steps.map((s, i) => (
+              <li key={i} className={i < active ? "done" : i === active ? "on" : ""}>
+                <button className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)} aria-current={active === i ? "step" : undefined}>
+                  <span className="step-num" aria-hidden="true">{s.num}</span>
+                  <span className="step-t">{s.title}</span>
+                  <span className="step-s">{s.subtitle}</span>
                 </button>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: -8, right: 16, fontSize: 140, fontWeight: 700, color: "rgba(255,255,255,0.03)", lineHeight: 1, pointerEvents: "none" }}>{steps[active].num}</div>
-            <AnimatePresence mode="wait">
-              <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
-                <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, border: "1px solid rgba(255,255,255,0.1)" }}>
-                  <Icon name={steps[active].icon} size={24} color="#34D399"/>
-                </div>
-                <h3 style={{ fontSize: 24, fontWeight: 600, color: "white", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
-                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontSize: 14, fontWeight: 500, color: "#34D399" }}>
-                  <Icon name="checkCircle" size={14} color="#34D399"/>{steps[active].detail}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-            <div style={{ display: "flex", gap: 6, marginTop: 28 }}>
-              {steps.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)} style={{ height: 6, width: i === active ? 24 : 6, borderRadius: 3, background: i === active ? "var(--emerald-500)" : "rgba(255,255,255,0.15)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.25s" }}/>
-              ))}
-            </div>
+        <div className="oa-step-card" aria-live="polite">
+          <div className="wm" aria-hidden="true">{steps[active].num}</div>
+          <AnimatePresence mode="wait">
+            <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
+              <h3>{steps[active].title}</h3>
+              <p>{steps[active].desc}</p>
+              <div className="det cv-sq">
+                {steps[active].detail}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          <div className="oa-dots">
+            {steps.map((s, i) => (
+              <button key={i} onClick={() => setActive(i)} aria-label={s.title} aria-current={i === active ? "step" : undefined}><i/></button>
+            ))}
           </div>
         </div>
       </div>
@@ -600,120 +487,112 @@ function Calculadora() {
   }, [valor, perfil, tarifa]);
 
   return (
-    <section id="calculadora" aria-label="Calculadora de costos" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            Calcula tu beneficio y{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>el costo total</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
+    <section id="calculadora" aria-label="Calculadora de costos" className="oa-sec">
+      <div className="oa-wrap">
+        <div className="oa-grid">
+          <div className="oa-intro">
+            <h2 className="oa-h2">
+              Calcula tu beneficio y{" "}
+              <span>el costo total</span>
+            </h2>
+            <p>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido, y cuánto puedes solicitar en incentivos.</p>
+          </div>
         </div>
 
-        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
+        <div className="oa-calc">
           {/* Controls */}
-          <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Perfil tributario</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Empresa", icon: "building" }].map(opt => (
-                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
-                    <Icon name={opt.icon} size={16} color={perfil === opt.value ? "white" : "var(--slate-400)"} />
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
+          <div className="oa-ctrl">
+            <div className="oa-lab">Perfil tributario</div>
+            <div className="seg">
+              {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Empresa" }].map(opt => (
+                <button key={opt.value} onClick={() => setPerfil(opt.value)} aria-pressed={perfil === opt.value}>
+                  {opt.label}
+                </button>
+              ))}
             </div>
 
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)" }}>Valor de la inversión</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
-              </div>
-              <input type="range" min="10" max="2000" step="10" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 4, borderRadius: 4, outline: "none", cursor: "pointer", background: `linear-gradient(to right, #059669 0%, #14B8A6 ${((valor-10)/1990)*100}%, #E2E8F0 ${((valor-10)/1990)*100}%, #E2E8F0 100%)` }}/>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
-                <span>$10M</span><span>$2.000M</span>
-              </div>
+            <div className="oa-val">
+              <div className="oa-lab">Valor de la inversión</div>
+              <output>${valor}M</output>
+            </div>
+            <input type="range" min="10" max="2000" step="10" value={valor} onChange={e => setValor(Number(e.target.value))} aria-label="Valor de la inversión" style={{ ["--p" as string]: `${((valor-10)/1990)*100}%` }}/>
+            <div className="oa-ends">
+              <span>$10M</span><span>$2.000M</span>
             </div>
 
             {/* Benefit bars */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
+            <div className="oa-bars">
               {[
-                { label: "Exclusión/devolución de IVA (19%)", value: calc.iva, color: "var(--emerald-600)", pct: calc.iva / (calc.totalBeneficio || 1) },
-                { label: "Deducción en renta (50%)", value: calc.renta, color: "var(--teal-500)", pct: calc.renta / (calc.totalBeneficio || 1) },
+                { label: "Exclusión/devolución de IVA (19%)", value: calc.iva, pct: calc.iva / (calc.totalBeneficio || 1) },
+                { label: "Deducción en renta (50%)", value: calc.renta, pct: calc.renta / (calc.totalBeneficio || 1) },
               ].map((b, i) => (
                 <div key={i}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-                    <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>{b.label}</span>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5, whiteSpace: "nowrap" }}>{b.value ? fmt(b.value) : "-"}</span>
+                  <div className="oa-brow">
+                    <span>{b.label}</span>
+                    <b>{b.value ? fmt(b.value) : "-"}</b>
                   </div>
-                  <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
-                    <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct || 0) * 100}%`, transition: "width 0.4s ease" }}/>
+                  <div className={`oa-track${i ? " b2" : ""}`}>
+                    <i style={{ width: `${(b.pct || 0) * 100}%` }}/>
                   </div>
                 </div>
               ))}
             </div>
 
             {perfil === "empresa" && (
-              <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5, marginBottom: 16 }}>
+              <div className="oa-emp">
                 Depreciación acelerada a ~3 años (tasa anual hasta 33,33%), más exención arancelaria si los equipos son importados.
               </div>
             )}
 
             {calc.costoUPME != null && (
-              <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
-                  <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo total</span>
+              <div className="oa-cost">
+                <div className="h">
+                  <span>Costo total</span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Trámite ante UPME</span>
-                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Servicio de tramitación CertiVeh</span>
-                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitación)</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
-                  </div>
-                  <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>Total</span>
-                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>{fmt(calc.costoTotal)}</span>
-                  </div>
+                <div>
+                  <span>Trámite ante UPME</span>
+                  <span>{fmt(calc.costoUPME)}</span>
+                </div>
+                <div>
+                  <span>Servicio de tramitación CertiVeh</span>
+                  <span>{fmt(calc.honorariosBase)}</span>
+                </div>
+                <div className="m">
+                  <span>IVA (19% sobre tramitación)</span>
+                  <span>{fmt(calc.ivaServicio)}</span>
+                </div>
+                <div className="t">
+                  <span>Total</span>
+                  <span>{fmt(calc.costoTotal)}</span>
                 </div>
               </div>
             )}
           </div>
 
           {/* Result */}
-          <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
-            <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
+          <div className="oa-res" aria-live="polite" data-ui>
+            <div className="k">Beneficio total estimado</div>
+            <div className="big">
               {calc.totalBeneficio ? fmt(calc.totalBeneficio) : "-"}
             </div>
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios (incluye base gravable en renta)</div>
+            <div className="s">en incentivos tributarios (incluye base gravable en renta)</div>
 
-            <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo total</div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
+            <div className="row">
+              <div className="k">Beneficio estimado menos el costo total</div>
+              <b>{calc.neto ? fmt(calc.neto) : "-"}</b>
             </div>
 
             {calc.costoTotal && calc.totalBeneficio && (
-              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, un beneficio estimado de{" "}
-                <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
+              <div className="per">
+                Por cada <b>$1</b> de costo total, un beneficio estimado de{" "}
+                <em>${(Math.round(calc.totalBeneficio / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</em> en beneficios.
               </div>
             )}
 
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
-              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
-                Solicitar cotización <Icon name="arrowRight" size={18} color="white"/>
-              </button>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-a">
+              Solicitar cotización <Arr/>
             </a>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>Certificación UPME para GEE y FNCE</div>
+            <div className="note">Certificación UPME para GEE y FNCE</div>
           </div>
         </div>
 
@@ -725,40 +604,33 @@ function Calculadora() {
 // ── POR QUE EL CERTIFICADO UPME ──────────────────────────────────────────────
 function PorQueCertificado() {
   return (
-    <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" style={{ background: "var(--slate-50)" }}>
-      <div className="section">
-        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
-          <div>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-              Por qué el certificado UPME es{" "}
-              <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>indispensable</span>
-            </h2>
-            <p style={{ fontSize: "clamp(15px, 2vw, 17px)", color: "var(--slate-600)", lineHeight: 1.7, marginBottom: 24 }}>
-              Según la UPME, para acceder a los beneficios de exclusión de IVA, deducción de renta, depreciación acelerada y exención arancelaria, "lo único que se requiere es tener el certificado de la UPME como soporte".
-            </p>
-            <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "var(--slate-500)", lineHeight: 1.7 }}>
-              Sin certificado UPME no hay acceso a ninguno de los cuatro beneficios. Es el requisito habilitante que acredita que tu inversión es elegible para los incentivos de la Ley 1715 de 2014.
-            </p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+    <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" className="oa-sec">
+      <div className="oa-wrap oa-grid">
+        <div className="oa-why-copy">
+          <h2 className="oa-h2">
+            Por qué el certificado UPME es{" "}
+            <span>indispensable</span>
+          </h2>
+          <p>
+            Según la UPME, para acceder a los beneficios de exclusión de IVA, deducción de renta, depreciación acelerada y exención arancelaria, "lo único que se requiere es tener el certificado de la UPME como soporte".
+          </p>
+          <p>
+            Sin certificado UPME no hay acceso a ninguno de los cuatro beneficios. Es el requisito habilitante que acredita que tu inversión es elegible para los incentivos de la Ley 1715 de 2014.
+          </p>
+        </div>
+        <ul className="oa-why-list">
             {[
               { icon: "shield", title: "Documento oficial", desc: "Acredita que tu inversión es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
               { icon: "clock", title: "Sin límite de vigencia", desc: "Los certificados bajo la Resolución UPME 135 de 2025 no vencen. Pueden modificarse hasta 2 años después de su expedición." },
               { icon: "building", title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones vía leasing financiero." },
               { icon: "checkCircle", title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 563/2026)." },
             ].map((item, i) => (
-              <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Icon name={item.icon} size={20} color="var(--emerald-600)"/>
-                </div>
-                <div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-900)", marginBottom: 2, lineHeight: 1.4 }}>{item.title}</div>
-                  <div style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.5 }}>{item.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+            <li key={i}>
+              <div className="t">{item.title}</div>
+              <div className="d">{item.desc}</div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -777,26 +649,22 @@ function FAQ() {
     { q: "¿Qué pasa con el IVA que ya pagué?", a: "Con el certificado UPME puede solicitarse la devolución del IVA ante la DIAN, presentándolo como soporte. Ese trámite lo adelanta el contribuyente: el servicio de gestión del IVA de CertiVeh aplica solo a vehículos eléctricos e híbridos." },
   ];
   return (
-    <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ maxWidth: 680, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>Todo lo que necesitas saber</h2>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {items.map((item, i) => (
-              <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
-                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
-                  <span>{item.q}</span><div className="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={open === i ? "white" : "var(--emerald-600)"} strokeWidth="2" strokeLinecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
-                </button>
-                {open === i && (
-                  <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
-                    {item.a}
-                  </motion.div>
-                )}
-              </div>
-            ))}
-          </div>
+    <section id="faq" aria-label="Preguntas frecuentes" className="oa-sec">
+      <div className="oa-wrap oa-grid faq-grid">
+        <h2 className="oa-h2">Todo lo que necesitas saber</h2>
+        <div className="qs">
+          {items.map((item, i) => (
+            <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
+              <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
+                <span>{item.q}</span><span className="pm" aria-hidden="true"/>
+              </button>
+              {open === i && (
+                <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
+                  {item.a}
+                </motion.div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -806,28 +674,27 @@ function FAQ() {
 // ── CTA FINAL ─────────────────────────────────────────────────────────────────
 function CTAFinal() {
   return (
-    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, color: "rgba(0,0,0,0.4)" }}>
-        <AnimatedGridPattern numSquares={50} maxOpacity={0.6} duration={4} repeatDelay={0.5} />
-      </div>
-      <div style={{ position: "relative", pointerEvents: "none" }}>
-        <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tus incentivos tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te están esperando.</span>
-        </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto 36px" }}>
-          Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
-        </p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
-            Hablar con un asesor <Icon name="messageCircle" size={18} color="white"/>
-          </button>
-        </a>
-        <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
-          {["Gestión integral del trámite","Personas naturales y jurídicas","Leasing financiero elegible"].map(t => (
-            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
-              <Icon name="checkCircle" size={13} color="#34D399"/>{t}
-            </span>
-          ))}
+    <section id="cta-final" aria-label="Comenzar" className="oa-close">
+      <div className="oa-wrap">
+        <div className="oa-close-box">
+          <div className="oa-close-copy">
+            <h2>
+              Tus incentivos tributarios <br/><span>te están esperando.</span>
+            </h2>
+            <p>
+              Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
+            </p>
+          </div>
+          <div className="oa-close-act">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-w">
+              Hablar con un asesor <Icon name="messageCircle" size={18}/>
+            </a>
+            <ul>
+              {["Gestión integral del trámite","Personas naturales y jurídicas","Leasing financiero elegible"].map(t => (
+                <li key={t} className="cta-feature cv-sq">{t}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -835,60 +702,26 @@ function CTAFinal() {
 }
 
 // ── FOOTER ────────────────────────────────────────────────────────────────────
+// El pie compartido (SiteFooter) con el contenido propio de esta vertical: su frase, sus tres columnas
+// con anclas locales y sin el botón del portal de vehículos. Textos y enlaces, los de siempre.
+const FOOTER_COLUMNAS = [
+  { label: "Secciones", links: [{ text: "Activos", href: "#activos" }, { text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
+  { label: "CertiVeh", links: [{ text: "Eléctricos e híbridos", href: "/" }, { text: "Blog", href: "/blog" }, { text: "Quiénes somos", href: "/nosotros/" }] },
+  { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
+];
+
 function Footer() {
   return (
-    <>
-      <footer aria-label="Pie de página" style={{ background: "var(--slate-900)", color: "var(--slate-400)", padding: "48px 48px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 40 }}>
-            <div>
-              <CertiVehLogo variant="light" compact/>
-              <p style={{ fontSize: 14, color: "var(--slate-500)", marginTop: 10, maxWidth: 280, lineHeight: 1.5 }}>
-                Certificación UPME para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE) en Colombia.
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
-              {[
-                { label: "Secciones", links: [{ text: "Activos", href: "#activos" }, { text: "Beneficios", href: "#beneficios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
-                { label: "CertiVeh", links: [{ text: "Eléctricos e híbridos", href: "/" }, { text: "Blog", href: "/blog" }, { text: "Quiénes somos", href: "/nosotros/" }] },
-                { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
-              ].map(col => (
-                <div key={col.label}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14 }}>{col.label}</div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {col.links.map(l => (
-                      <a key={l.text} href={l.href} style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
-                        onMouseEnter={e => e.currentTarget.style.color = "white"}
-                        onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}
-                      >{l.text}</a>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-            <span style={{ fontSize: 12, lineHeight: 1.4 }}>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <span style={{ fontSize: 12, lineHeight: 1.4 }}>contacto@certiveh.co</span>
-              <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-              </a>
-              <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </>
+    <SiteFooter
+      tagline="Certificación UPME para proyectos de gestión eficiente de la energía (GEE) y fuentes no convencionales de energía (FNCE) en Colombia."
+      columns={FOOTER_COLUMNAS}
+      cta={null}
+    />
   );
 }
 
 // ── WhatsApp FAB ─────────────────────────────────────────────────────────────
+// Flota sobre la página: es uno de los tres elementos del sitio que llevan sombra (DESIGN_SYSTEM.md §0.3).
 function WhatsAppFAB() {
   return (
     <a
@@ -900,7 +733,7 @@ function WhatsAppFAB() {
         position: "fixed", bottom: 24, right: 20, zIndex: 90,
         width: 56, height: 56, borderRadius: "50%",
         background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",
-        boxShadow: "0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2)",
+        boxShadow: "0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2)", // taste-skill-ignore: el botón flotante de WhatsApp
         transition: "transform 0.2s",
       }}
       onMouseEnter={e => e.currentTarget.style.transform = "scale(1.08)"}

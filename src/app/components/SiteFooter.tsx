@@ -11,6 +11,10 @@
  * que usaban esas páginas. No los «normalices»: cambiarlos es cambiar URLs que Google ya tiene.
  *
  * Se monta sin `client:*`: es HTML estático, no necesita JavaScript.
+ *
+ * **La variante de otra vertical** (`/otros-activos`, la isla `EmpresasLanding`) tiene su propio contenido —otra
+ * frase, tres columnas con anclas locales y sin el «Empezar ahora» del portal de vehículos—. Lo pasa por props
+ * (`tagline`, `columns`, `cta={null}`) y conserva el mismo estilo; sus textos y enlaces no se tocan.
  */
 const CSS = `
   .sf { padding: 8px; font-family: var(--cv-font); }
@@ -37,12 +41,16 @@ const CSS = `
   .sf-social { display: flex; gap: 8px; }
   .sf-social a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--cv-r); background: var(--cv-bg); color: var(--cv-ink); }
   .sf-social a:hover { color: var(--cv-accent); }
+  /* tres columnas: la frase ocupa la mitad; sin el botón del portal, la palabra va a todo el ancho */
+  .sf-c3 .sf-st { grid-column: span 6; }
+  .sf-nogo .sf-word { grid-column: span 12; }
   @media (max-width: 900px) {
     .sf-board { gap: 6px; }
     .sf-word { grid-column: 1 / -1; min-height: 170px; order: -2; }
     .sf-go { grid-column: 1 / -1; min-height: 150px; order: -1; }
     .sf-st, .sf-contact { grid-column: 1 / -1; min-height: 0; }
     .sf-n { grid-column: span 6; }
+    .sf-c3 .sf-st, .sf-nogo .sf-word { grid-column: 1 / -1; }
   }
 `;
 
@@ -69,26 +77,44 @@ const ENLACES = (isHome: boolean) => [
   ] },
 ];
 
-export function SiteFooter({ isHome = false, portalUrl = "https://portal.certiveh.co" }: { isHome?: boolean; portalUrl?: string }) {
+type Columna = { label: string; links: { text: string; href: string }[] };
+
+export function SiteFooter({
+  isHome = false,
+  portalUrl = "https://portal.certiveh.co",
+  tagline = "Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.",
+  columns,
+  cta = { href: portalUrl, label: "Empezar ahora" },
+}: {
+  isHome?: boolean;
+  portalUrl?: string;
+  tagline?: string;
+  columns?: Columna[];
+  cta?: { href: string; label: string } | null;
+}) {
+  const cols = columns ?? ENLACES(isHome);
+  const board = ["sf-board", cols.length === 3 ? "sf-c3" : "", cta ? "" : "sf-nogo"].filter(Boolean).join(" ");
   return (
     <footer className="sf" aria-label="Pie de página">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className="sf-board">
+      <div className={board}>
         <div className="sf-t sf-st">
-          <p>Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
+          <p>{tagline}</p>
           <small>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</small>
         </div>
-        {ENLACES(isHome).map(col => (
+        {cols.map(col => (
           <nav key={col.label} className="sf-t sf-n" aria-label={col.label}>
             <p className="sf-h">{col.label}</p>
             <ul>{col.links.map(l => <li key={l.text}><a href={l.href}>{l.text}</a></li>)}</ul>
           </nav>
         ))}
         <div className="sf-t sf-word" aria-label="CertiVeh"><span aria-hidden="true">CertiVeh</span></div>
-        <a className="sf-go" href={portalUrl} target="_blank" rel="noopener noreferrer">
-          <b>Empezar ahora</b>
-          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth="4" aria-hidden="true"><path d="M14 42 42 14M20 14h22v22" /></svg>
-        </a>
+        {cta && (
+          <a className="sf-go" href={cta.href} target="_blank" rel="noopener noreferrer">
+            <b>{cta.label}</b>
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth="4" aria-hidden="true"><path d="M14 42 42 14M20 14h22v22" /></svg>
+          </a>
+        )}
         <div className="sf-t sf-contact">
           <a className="mail" href="mailto:contacto@certiveh.co">contacto@certiveh.co</a>
           <div className="sf-social">
