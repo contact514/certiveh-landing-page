@@ -4,18 +4,24 @@ import { readFileSync, mkdirSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
+// Imágenes sociales de certiveh.co (1200x630) con satori. Estándar visual 2026-11 (DESIGN_SYSTEM.md §0):
+// Albert Sans (OFL, los TTF y su licencia en scripts/fonts/), el escudo en un solo verde plano, el titular en una
+// sola tinta, sin degradados de marca ni píldoras. Lo único en degradado es el velo neutro oscuro sobre la foto,
+// que es la excepción que permite §0.4 para poder leer encima.
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fontRegular = readFileSync(join(__dirname, "fonts/Inter-Regular.ttf"));
-const fontSemiBold = readFileSync(join(__dirname, "fonts/Inter-SemiBold.ttf"));
-const fontBold = readFileSync(join(__dirname, "fonts/Inter-Bold.ttf"));
+const fontRegular = readFileSync(join(__dirname, "fonts/AlbertSans-Regular.ttf"));
+const fontSemiBold = readFileSync(join(__dirname, "fonts/AlbertSans-SemiBold.ttf"));
+const fontBold = readFileSync(join(__dirname, "fonts/AlbertSans-Bold.ttf"));
 const outDir = join(__dirname, "../public/og");
 mkdirSync(outDir, { recursive: true });
 
-const EMERALD = "#34D399";
-const EMERALD_DARK = "#059669";
-const TEAL = "#14B8A6";
+const MINT = "#A7F3D0";   // --cv-mint: el verde legible sobre fondo oscuro
+const FIELD = "#0F172A";  // --cv-field
 
-const logoBase64 = `data:image/png;base64,${readFileSync(join(__dirname, "fonts/logo.png")).toString("base64")}`;
+// El escudo sale del favicon (un solo verde, rayo blanco), rasterizado aquí mismo: ya no depende de un PNG aparte.
+const logoPng = new Resvg(readFileSync(join(__dirname, "../public/favicon.svg"), "utf8"), { fitTo: { mode: "width", value: 96 } }).render().asPng();
+const logoBase64 = `data:image/png;base64,${logoPng.toString("base64")}`;
 
 function loadImageAsBase64(path) {
   const buf = readFileSync(path);
@@ -23,48 +29,33 @@ function loadImageAsBase64(path) {
   return `data:image/${ext};base64,${buf.toString("base64")}`;
 }
 
-// Preload background images (pre-cropped to 1200x630)
-// ⚠️ **LOS FONDOS VIVEN EN /tmp Y NO ESTAN EN EL REPO, asi que esto NO se puede reejecutar.**
-//
-// Medido el 8-sep-2026: al corregir el copy de los subtitulos, `node scripts/generate-og-images.mjs`
-// muere con ENOENT sobre `/tmp/og-bgs/hyundai-motor-group-...jpg`. Los siete PNG de `public/og/`
-// estan commiteados, pero su FUENTE no.
-//
-// Consecuencia concreta, y no es teorica: `BaseLayout.astro` pone `og:image = /og/home.png` POR
-// DEFECTO en todas las paginas, asi que la tarjeta que se ve al compartir CUALQUIER url del sitio
-// sigue diciendo el copy viejo -«preparamos todo para la devolucion de tu IVA», «CertiVeh se
-// encarga de todo»- aunque este fichero ya diga lo correcto.
-//
-// Para cerrarlo hacen falta las siete imagenes de fondo. Cuando aparezcan: ponerlas en `/tmp/og-bgs`
-// (o mejor, en `assets/og-bgs/` dentro del repo y cambiar esta constante), ejecutar el script y
-// commitear los PNG regenerados.
-const bgDir = "/tmp/og-bgs";
+// Fondos: VIVEN EN EL REPO (scripts/og-bgs/, ya recortados a 1200x630), así que el guion se puede reejecutar.
+// Hasta noviembre de 2026 eran siete fotos de banco que estaban en /tmp y no en el repo: el guion moría con
+// ENOENT. Ahora son las piezas reales del sitio: el fotograma del video de la home (público en
+// /hero-bg-poster.webp, el mismo de las cabeceras de las páginas interiores) y el del video de /otros-activos.
+// Para cambiar uno: recortarlo a 1200x630 en JPEG, dejarlo en scripts/og-bgs/ y reejecutar.
+const bgDir = join(__dirname, "og-bgs");
+const poster = loadImageAsBase64(join(bgDir, "hero-bg-poster.jpg"));
 const backgrounds = {
-  home: loadImageAsBase64(join(bgDir, "hyundai-motor-group-KpsavDr0nmo-unsplash.jpg")),
-  "otros-activos": loadImageAsBase64(join(bgDir, "solar.jpg")),
-  blog: loadImageAsBase64(join(bgDir, "kelly-sikkema-SiOW0btU0zk-unsplash.jpg")),
-  vehiculos: loadImageAsBase64(join(bgDir, "unsplash-community-ZmP1lmbfl70-unsplash.jpg")),
-  aliados: loadImageAsBase64(join(bgDir, "towfiqu-barbhuiya-jpqyfK7GB4w-unsplash.jpg")),
-  nosotros: loadImageAsBase64(join(bgDir, "jakub-zerdzicki-8wLZi9OhsWU-unsplash.jpg")),
-  portal: loadImageAsBase64(join(bgDir, "portal-dashboard.jpg")),
+  home: poster,
+  "otros-activos": loadImageAsBase64(join(bgDir, "otros-activos-poster.jpg")),
+  blog: poster,
+  vehiculos: poster,
+  aliados: poster,
+  nosotros: poster, // la foto de los fundadores quedaba debajo del titular, con el texto sobre las caras
+  portal: poster,
 };
 
-function Pill({ text }) {
+// Lo que antes eran píldoras: texto con la viñeta cuadrada de la marca.
+function Item({ text }) {
   return {
     type: "div",
     props: {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        padding: "6px 16px",
-        borderRadius: 9999,
-        background: "rgba(5,150,105,0.2)",
-        border: "1px solid rgba(52,211,153,0.35)",
-        fontSize: 14,
-        fontWeight: 600,
-        color: EMERALD,
-      },
-      children: text,
+      style: { display: "flex", alignItems: "center", gap: 10, fontSize: 19, fontWeight: 600, color: "white" },
+      children: [
+        { type: "div", props: { style: { width: 9, height: 9, background: MINT } } },
+        { type: "div", props: { children: text } },
+      ],
     },
   };
 }
@@ -80,28 +71,23 @@ function createOGImage({ title, subtitle, pills = [], url = "certiveh.co", bg })
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "56px 64px",
-        fontFamily: "Inter",
+        fontFamily: "Albert Sans",
         position: "relative",
         overflow: "hidden",
-        background: "#0F172A",
+        background: FIELD,
       },
       children: [
-        // Background image (pre-cropped to 1200x630)
+        // La foto, a todo color
         {
           type: "img",
           props: {
             src: bg,
             width: 1200,
             height: 630,
-            style: {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              opacity: 0.25,
-            },
+            style: { position: "absolute", top: 0, left: 0 },
           },
         },
-        // Dark overlay with gradient
+        // Velo neutro oscuro sobre la foto (el mismo de los heros del sitio), para leer encima
         {
           type: "div",
           props: {
@@ -111,122 +97,67 @@ function createOGImage({ title, subtitle, pills = [], url = "certiveh.co", bg })
               left: 0,
               width: 1200,
               height: 630,
-              background: "linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.12) 100%)",
+              background: "linear-gradient(90deg, rgba(9,14,26,0.92) 0%, rgba(9,14,26,0.8) 55%, rgba(9,14,26,0.55) 100%)",
             },
           },
         },
-        // Gradient accent line at top
+        // Arriba: el escudo y la palabra en una sola tinta
         {
           type: "div",
           props: {
-            style: {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: 1200,
-              height: 4,
-              background: `linear-gradient(90deg, ${EMERALD_DARK}, ${TEAL})`,
-            },
-          },
-        },
-        // Top: Logo
-        {
-          type: "div",
-          props: {
-            style: {
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              position: "relative",
-            },
+            style: { display: "flex", alignItems: "center", gap: 14, position: "relative" },
             children: [
-              // Shield logo PNG
-              {
-                type: "img",
-                props: {
-                  src: logoBase64,
-                  width: 40,
-                  height: 40,
-                },
-              },
-              // Brand name
+              { type: "img", props: { src: logoBase64, width: 44, height: 44 } },
               {
                 type: "div",
                 props: {
-                  style: { display: "flex" },
-                  children: [
-                    {
-                      type: "span",
-                      props: {
-                        style: { fontSize: 36, fontWeight: 700, color: "white" },
-                        children: "Certi",
-                      },
-                    },
-                    {
-                      type: "span",
-                      props: {
-                        style: { fontSize: 36, fontWeight: 700, color: EMERALD_DARK },
-                        children: "Veh",
-                      },
-                    },
-                  ],
+                  style: { display: "flex", fontSize: 38, fontWeight: 700, letterSpacing: "-0.03em", color: "white" },
+                  children: "CertiVeh",
                 },
               },
             ],
           },
         },
-        // Middle: Title + Subtitle
+        // En medio: el titular (una tinta) y la entradilla
         {
           type: "div",
           props: {
             style: {
               display: "flex",
               flexDirection: "column",
-              gap: 16,
+              gap: 20,
               flex: 1,
               justifyContent: "center",
               position: "relative",
             },
             children: [
-              // Title with colored keywords
               {
                 type: "div",
                 props: {
                   style: {
-                    fontSize: 48,
+                    fontSize: 58,
                     fontWeight: 700,
-                    lineHeight: 1.2,
+                    lineHeight: 1.04,
                     letterSpacing: "-0.03em",
-                    maxWidth: 900,
+                    maxWidth: 940,
                     color: "white",
                     display: "flex",
                     flexWrap: "wrap",
                   },
-                  children: title.flatMap((line, i) => {
-                    const words = line.text.split(" ");
-                    return words.map((word, j) => ({
+                  // Las palabras que antes iban en verde van en la misma tinta: un titular, un color.
+                  children: title.flatMap((line) =>
+                    line.text.split(" ").map((word) => ({
                       type: "span",
-                      props: {
-                        style: {
-                          color: line.color === "emerald" ? EMERALD : "white",
-                          marginRight: 14,
-                        },
-                        children: word,
-                      },
-                    }));
-                  }),
+                      props: { style: { marginRight: 15 }, children: word },
+                    })),
+                  ),
                 },
               },
               subtitle
                 ? {
                     type: "div",
                     props: {
-                      style: {
-                        fontSize: 21,
-                        color: "rgba(255,255,255,0.55)",
-                        lineHeight: 1.5,
-                        maxWidth: 700,
-                      },
+                      style: { fontSize: 24, color: "#E2E8F0", lineHeight: 1.4, maxWidth: 760 },
                       children: subtitle,
                     },
                   }
@@ -234,7 +165,7 @@ function createOGImage({ title, subtitle, pills = [], url = "certiveh.co", bg })
             ].filter(Boolean),
           },
         },
-        // Bottom: Pills + URL
+        // Abajo: los puntos y la dirección
         {
           type: "div",
           props: {
@@ -249,19 +180,15 @@ function createOGImage({ title, subtitle, pills = [], url = "certiveh.co", bg })
                 ? {
                     type: "div",
                     props: {
-                      style: { display: "flex", gap: 10 },
-                      children: pills.map((p) => Pill({ text: p })),
+                      style: { display: "flex", gap: 28 },
+                      children: pills.map((p) => Item({ text: p })),
                     },
                   }
                 : { type: "div", props: { children: "" } },
               {
                 type: "div",
                 props: {
-                  style: {
-                    fontSize: 17,
-                    fontWeight: 600,
-                    color: EMERALD,
-                  },
+                  style: { fontSize: 20, fontWeight: 600, color: MINT },
                   children: url,
                 },
               },
@@ -360,9 +287,9 @@ async function generate() {
       width: 1200,
       height: 630,
       fonts: [
-        { name: "Inter", data: fontRegular, weight: 400, style: "normal" },
-        { name: "Inter", data: fontSemiBold, weight: 600, style: "normal" },
-        { name: "Inter", data: fontBold, weight: 700, style: "normal" },
+        { name: "Albert Sans", data: fontRegular, weight: 400, style: "normal" },
+        { name: "Albert Sans", data: fontSemiBold, weight: 600, style: "normal" },
+        { name: "Albert Sans", data: fontBold, weight: 700, style: "normal" },
       ],
     });
 
@@ -376,4 +303,4 @@ async function generate() {
   }
 }
 
-generate().catch(console.error);
+generate().catch((e) => { console.error(e); process.exit(1); });

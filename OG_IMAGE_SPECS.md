@@ -19,151 +19,46 @@
 
 ---
 
-## 🎨 Contenido de la Imagen
+## 🎨 Cómo son hoy (marca 2026-11)
 
-### Elementos Principales
+> **Manda `DESIGN_SYSTEM.md` §0** (el sistema visual 2026-11) y `src/styles/marca.css`. Lo que este
+> documento decía antes —Inter, el degradado esmeralda → turquesa, píldoras, palabras del titular en
+> otro color— quedó retirado en noviembre de 2026 y no se vuelve a usar.
 
-1. **Logo CertiVeh**
-   - Ubicación: Esquina superior izquierda o centro superior
-   - Tamaño: ~100-120 px de alto
-   - Con escudo verde esmeralda y rayo eléctrico
+Las siete imágenes las pinta `scripts/generate-og-images.mjs` con satori, todas con la misma
+composición, a 1200 x 630:
 
-2. **Headline Principal**
-   ```
-   Automatiza tu certificado UPME
-   ```
-   - Tipografía: Inter Bold, 64-72 px
-   - Color: Slate 900 (#0F172A)
-   - Alineación: Centro o izquierda
+1. **Fondo:** una foto real del sitio a todo color con el **velo neutro oscuro** encima
+   (`rgba(9,14,26,.92)` a la izquierda → `.55` a la derecha), el mismo de las cabeceras del sitio. Es el
+   único degradado permitido (§0.4.1): sirve para leer encima, no es un color de marca.
+   - `scripts/og-bgs/hero-bg-poster.jpg`: el fotograma del video de la home (público en
+     `/hero-bg-poster.webp`). Lo usan home, blog, vehículos, aliados, nosotros y portal.
+   - `scripts/og-bgs/otros-activos-poster.jpg`: el del video de `/otros-activos`.
+   - La foto de los fundadores se probó para `nosotros` y se descartó: el titular caía sobre las caras.
+2. **Logo:** el escudo en **un solo verde plano `#047857`** con el rayo blanco (sale de
+   `public/favicon.svg`, rasterizado por el propio guion) y la palabra «CertiVeh» en **una sola tinta**
+   (blanco), Albert Sans 700, 38 px.
+3. **Titular:** Albert Sans 700, 58 px, interlineado 1,04, tracking -0.03em, **blanco entero**. Las
+   palabras que antes iban en verde (`color: "emerald"` en los datos) van en la misma tinta: un titular,
+   un color.
+4. **Entradilla:** Albert Sans 400, 24 px, `#E2E8F0`.
+5. **Puntos clave** (lo que antes eran píldoras): texto blanco 600 a 19 px con la viñeta cuadrada de
+   9 px en el verde legible sobre oscuro `#A7F3D0`. Sin caja, sin borde.
+6. **URL:** abajo a la derecha, 600, 20 px, en `#A7F3D0`.
 
-3. **Subheadline**
-   ```
-   Devolución IVA • Deducción en Renta • Exención Arancelaria
-   ```
-   - Tipografía: Inter Medium, 32-36 px
-   - Color: Slate 600 (#475569)
+Los textos de cada imagen (titular, entradilla, puntos y URL) viven en el array `pages` del guion y
+no se cambiaron con el rediseño.
 
-4. **Beneficio Visual**
-   - Icono de escudo con checkmark
-   - Pill badge: "100% en línea"
-   - Visual de vehículo eléctrico (opcional)
+**Tipografía:** Albert Sans 400/600/700 en TTF, en `scripts/fonts/` con su licencia
+(`OFL-AlbertSans.txt`, SIL Open Font License 1.1). Se descargaron de Google Fonts.
 
-5. **CTA Visual**
-   ```
-   certiveh.co
-   ```
-   - Tipografía: Inter SemiBold, 28-32 px
-   - Color: Emerald 600 (#059669)
-   - Ubicación: Parte inferior
+## 🎨 Paleta
 
----
-
-## 🎨 Paleta de Colores
-
-### Colores de Marca
-- **Fondo:** White (#FFFFFF) o Slate 50 (#F8FAFC)
-- **Primario:** Emerald 600 (#059669)
-- **Acento:** Teal 500 (#14B8A6)
-- **Texto:** Slate 900 (#0F172A)
-- **Texto Secundario:** Slate 600 (#475569)
-
-### Gradiente (Opcional)
-```css
-background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
-```
-
----
-
-## 📝 Texto Recomendado
-
-### Opción 1: Orientada a Beneficio
-```
-✓ Automatiza tu certificado UPME
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Devolución IVA · Deducción 50% en Renta
-Exención Arancelaria
-
-100% en línea · Sin trámites manuales
-certiveh.co
-```
-
-### Opción 2: Orientada a Proceso
-```
-3 documentos
-15 minutos
-Tu certificado UPME listo
-
-CertiVeh tramita tu certificado ante la UPME
-certiveh.co
-```
-
-### Opción 3: Orientada a ROI
-```
-Deduce hasta
-$75.000.000
-de tu base gravable
-
-Automatización del certificado UPME
-certiveh.co
-```
-
----
-
-## 🖼️ Layout Sugerido
-
-### Layout A: Hero Centrado
-```
-┌─────────────────────────────────────────┐
-│                                         │
-│            [LOGO CERTIVEH]              │
-│                                         │
-│     Automatiza tu certificado UPME      │
-│                                         │
-│   Devolución IVA • Deducción • Arancel  │
-│                                         │
-│     [Escudo Icon]  100% en línea        │
-│                                         │
-│            certiveh.co                  │
-│                                         │
-└─────────────────────────────────────────┘
-```
-
-### Layout B: Split Screen
-```
-┌────────────────────┬────────────────────┐
-│                    │                    │
-│  [LOGO CERTIVEH]   │                    │
-│                    │    [VISUAL DE      │
-│  Automatiza tu     │     VEHÍCULO       │
-│  certificado UPME  │     ELÉCTRICO]     │
-│                    │                    │
-│  ✓ Devolución IVA  │                    │
-│  ✓ Deducción 50%   │                    │
-│  ✓ Exención        │                    │
-│                    │                    │
-│  certiveh.co       │                    │
-│                    │                    │
-└────────────────────┴────────────────────┘
-```
-
-### Layout C: Badge Style
-```
-┌─────────────────────────────────────────┐
-│  [Gradient Background Emerald → Teal]   │
-│                                         │
-│         [ESCUDO GRANDE - BLANCO]        │
-│                                         │
-│          CertiVeh                       │
-│                                         │
-│    Automatiza tu certificado UPME       │
-│                                         │
-│  [Badge] $75M de base gravable [Badge]  │
-│  [Badge] 100% en línea       [Badge]    │
-│                                         │
-│           certiveh.co                   │
-│                                         │
-└─────────────────────────────────────────┘
-```
+- **Campo oscuro:** `#0F172A` (debajo de la foto)
+- **Texto:** `#FFFFFF` y `#E2E8F0`
+- **Verde sobre oscuro:** `#A7F3D0` (viñetas y URL)
+- **Escudo:** `#047857`
+- El turquesa `#14B8A6` **no se usa**. Tampoco hay degradados de marca.
 
 ---
 
@@ -179,7 +74,7 @@ certiveh.co
 ### Diseño
 - [ ] Contraste suficiente (WCAG AA mínimo)
 - [ ] Tipografía legible en tamaños pequeños
-- [ ] Colores de marca consistentes
+- [ ] Colores de marca consistentes (DESIGN_SYSTEM.md §0: sin degradados, titular en una tinta)
 - [ ] Balance visual equilibrado
 - [ ] No elementos importantes en zona de recorte
 
@@ -217,8 +112,8 @@ certiveh.co
 
 ## 📦 Ubicación de los Archivos
 
-⚠️ **Esto ya NO está pendiente, y el documento decía que sí.** Hay **siete** PNG servidos hoy en
-`public/og/`, generados por `scripts/generate-og-images.mjs`:
+Siete PNG en `public/og/`, generados por `scripts/generate-og-images.mjs`
+(`node scripts/generate-og-images.mjs`):
 
 ```
 /public/og/home.png          → la portada y 20 páginas más (por defecto en BaseLayout)
@@ -232,18 +127,18 @@ certiveh.co
 
 **URL Pública:** `https://certiveh.co/og/<nombre>.png`
 
-⚠️ **Los PNG llevan el copy anterior al renombrado de septiembre de 2026**: se generan desde el
-script, así que hay que volver a correrlo para que digan «gestión».
+✅ **El guion ya se puede reejecutar** (noviembre de 2026). Antes sus siete fondos —fotos de banco—
+vivían en `/tmp` y no en el repo, y moría con `ENOENT`. Ahora los fondos están en `scripts/og-bgs/`
+(ya recortados a 1200 x 630) y las fuentes en `scripts/fonts/`; el escudo sale de `public/favicon.svg`.
+Las siete imágenes se regeneraron el 3-nov-2026 con el copy vigente del guion.
 
-⚠️ **Pero hoy ese script NO se puede reejecutar**: sus siete imágenes de fondo viven en `/tmp` y no
-están en el repo, así que muere con `ENOENT`. Antes de regenerar hay que recuperar los fondos y
-meterlos en el repo. Los dos avisos vivían solo dentro del `.mjs`, o sea invisibles para quien
-abriera este documento — que es justo quien va a decidir si hay que regenerarlas.
+⚠️ **Pesan unos 500 KB cada una**, por encima de los 300 KB recomendados arriba: es una foto en PNG.
+Los nombres de fichero son `.png` y las páginas los citan así, por eso no se pasaron a JPEG.
 
 ⚠️ Y `/public/og-image.png` **sí existe**, está trackeado en git y se publica en
-`https://certiveh.co/og-image.png` — un borrador anterior de este apartado decía que no. Lo cierto
-es peor: existe y está **huérfano**, ninguna página lo referencia (`BaseLayout` usa `/og/home.png`
-por defecto). O se borra o se documenta para qué queda.
+`https://certiveh.co/og-image.png`, pero está **huérfano**: ninguna página lo referencia (`BaseLayout`
+usa `/og/home.png` por defecto) y el guion **no** lo genera, así que sigue con la marca anterior. O se
+borra o se documenta para qué queda.
 
 ---
 
@@ -259,5 +154,5 @@ Asegurar que la imagen se vea bien en:
 
 ---
 
-**Última actualización:** 8 de septiembre de 2026  
-**Status:** Las siete imágenes existen y se sirven. Pendiente: regenerarlas con el copy de «gestión».
+**Última actualización:** 3 de noviembre de 2026  
+**Status:** Las siete imágenes, regeneradas con la marca 2026-11 (Albert Sans, escudo plano, sin degradados).
