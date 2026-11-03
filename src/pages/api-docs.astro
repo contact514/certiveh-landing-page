@@ -39,563 +39,165 @@ const webPageLd = JSON.stringify({
   <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   <script slot="head" type="application/ld+json" set:html={webPageLd} />
   <style is:inline>
+    /* Documentación de la API · estándar visual 2026-11 (DESIGN_SYSTEM.md §0). Variables --cv-* de marca.css.
+       Es una herramienta: barra blanca como la del sitio, índice lateral en tono, tablas y bloques de código
+       con sus líneas. Lo único en monoespaciada es el código literal: los bloques <pre> y el <code> en línea.
+       Métodos, rutas, campos y códigos de estado van en la fuente de la marca con cifras tabulares. Sin degradados, sin sombras y sin rayas de 1 px fuera de las tablas. */
     :root {
-      --emerald-600: #059669;
-      --emerald-500: #10B981;
-      --emerald-400: #34D399;
-      --emerald-50:  #ECFDF5;
-      --blue-500:    #3B82F6;
-      --blue-50:     #EFF6FF;
-      --amber-400:   #FBBF24;
-      --cyan-400:    #22D3EE;
-      --green-400:   #4ADE80;
-      --red-500:     #EF4444;
-      --red-50:      #FEF2F2;
-      --slate-900:   #0F172A;
-      --slate-800:   #1E293B;
-      --slate-700:   #334155;
-      --slate-600:   #475569;
-      --slate-500:   #64748B;
-      --slate-400:   #94A3B8;
-      --slate-300:   #CBD5E1;
-      --slate-200:   #E2E8F0;
-      --slate-100:   #F1F5F9;
-      --slate-50:    #F8FAFC;
-      --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; /* taste-skill-ignore: solo para código literal */
+      --side: 280px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: var(--slate-50); color: var(--slate-700); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--cv-font); background: var(--cv-bg); color: var(--cv-ink); line-height: 1.5; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
 
-    /* NAV */
-    .api-nav {
-      background: var(--slate-900);
-      padding: 0 48px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .api-nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 12px;
-    }
-    .api-nav-logo-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--emerald-400);
-      background: rgba(5,150,105,0.15);
-      border: 1px solid rgba(5,150,105,0.25);
-      padding: 3px 10px;
-      border-radius: 100px;
-      letter-spacing: 0.05em;
-    }
-    .api-nav-back {
-      font-size: 14px;
-      color: var(--slate-400);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .api-nav-back:hover { color: white; }
+    /* NAV: sólida y blanca, como la del resto del sitio */
+    .api-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 64px; padding: 0 var(--cv-m); display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--cv-bg); }
+    .api-nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--cv-ink); min-width: 0; }
+    .api-nav-logo svg { flex: none; width: 150px; height: auto; }
+    .api-nav-logo-badge { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); white-space: nowrap; }
+    .api-nav-back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: var(--cv-r); background: var(--cv-tone); color: var(--cv-ink); font-size: .9375rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background-color .15s; }
+    .api-nav-back:hover { background: var(--cv-tone-2); }
 
     /* LAYOUT */
-    .api-layout {
-      display: flex;
-      margin-top: 64px;
-      min-height: calc(100vh - 64px);
-    }
+    .api-layout { display: flex; margin-top: 64px; min-height: calc(100vh - 64px); }
 
-    /* SIDEBAR */
-    .api-sidebar {
-      width: 280px;
-      min-width: 280px;
-      background: var(--slate-900);
-      position: fixed;
-      top: 64px;
-      left: 0;
-      bottom: 0;
-      overflow-y: auto;
-      padding: 24px 0;
-      border-right: 1px solid rgba(255,255,255,0.06);
-      z-index: 100;
-    }
-    .api-sidebar::-webkit-scrollbar { width: 4px; }
-    .api-sidebar::-webkit-scrollbar-track { background: transparent; }
-    .api-sidebar::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 4px; }
+    /* ÍNDICE LATERAL: en tono, el enlace actual en verde */
+    .api-sidebar { position: fixed; top: 64px; left: 0; bottom: 0; width: var(--side); overflow-y: auto; padding: 20px 12px 32px; background: var(--cv-tone); z-index: 100; }
+    .sidebar-section-title { font-size: var(--cv-small); font-weight: 700; color: var(--cv-ink); padding: 18px 12px 6px; }
+    .sidebar-link { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 12px; border-radius: var(--cv-r); font-size: .9375rem; font-weight: 500; color: var(--cv-ink); text-decoration: none; transition: background-color .15s, color .15s; }
+    .sidebar-link:hover { background: var(--cv-tone-2); }
+    .sidebar-link.active { background: var(--cv-accent); color: #fff; }
+    .sidebar-link:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 0; }
+    .sidebar-link .method-badge-sm { font-size: .8125rem; font-weight: 700; color: var(--cv-accent); }
+    .sidebar-link .method-get { color: #1d4ed8; }
+    .sidebar-link.active .method-badge-sm { color: #fff; }
+    .sidebar-endpoint-path { font-size: .875rem; overflow-wrap: anywhere; }
 
-    .sidebar-section-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--slate-500);
-      padding: 16px 24px 8px;
-    }
-    .sidebar-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 24px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--slate-400);
-      text-decoration: none;
-      transition: all 0.15s;
-      border-left: 2px solid transparent;
-    }
-    .sidebar-link:hover {
-      color: white;
-      background: rgba(255,255,255,0.04);
-    }
-    .sidebar-link.active {
-      color: var(--emerald-400);
-      border-left-color: var(--emerald-500);
-      background: rgba(5,150,105,0.08);
-    }
-    .sidebar-link .method-badge-sm {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 3px;
-      letter-spacing: 0.03em;
-      font-family: var(--mono);
-    }
-    .sidebar-link .method-post { background: rgba(5,150,105,0.2); color: var(--emerald-400); }
-    .sidebar-link .method-get { background: rgba(59,130,246,0.2); color: var(--blue-500); }
-    .sidebar-endpoint-path {
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-    .sidebar-sub {
-      padding-left: 40px;
-    }
+    /* CONTENIDO */
+    .api-main { margin-left: var(--side); flex: 1; min-width: 0; max-width: calc(860px + 2 * clamp(20px, 5vw, 72px)); padding: 48px clamp(20px, 5vw, 72px) 96px; }
 
-    /* MAIN CONTENT */
-    .api-main {
-      margin-left: 280px;
-      flex: 1;
-      padding: 48px 64px 80px;
-      max-width: 900px;
-    }
-
-    /* MOBILE NAV */
-    .api-mobile-nav {
-      display: none;
-      background: var(--slate-900);
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 0 20px;
-      gap: 4px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: sticky;
-      top: 64px;
-      z-index: 99;
-      -webkit-overflow-scrolling: touch;
-    }
+    /* MOBILE NAV: pestañas que se desplazan */
+    .api-mobile-nav { display: none; position: sticky; top: 64px; z-index: 99; overflow-x: auto; white-space: nowrap; gap: 2px; padding: 0 var(--cv-m); background: var(--cv-tone); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .api-mobile-nav::-webkit-scrollbar { display: none; }
-    .api-mobile-nav a {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--slate-400);
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: all 0.15s;
-      flex-shrink: 0;
-    }
-    .api-mobile-nav a:hover { color: white; }
-    .api-mobile-nav a.active {
-      color: var(--emerald-400);
-      border-bottom-color: var(--emerald-500);
-    }
-
+    .api-mobile-nav a { display: inline-flex; align-items: center; flex-shrink: 0; min-height: 48px; padding: 0 12px; font-size: .9375rem; font-weight: 600; color: var(--cv-ink); text-decoration: none; border-bottom: 3px solid transparent; transition: color .15s, border-color .15s; }
+    .api-mobile-nav a.active { color: var(--cv-accent); border-bottom-color: var(--cv-accent); }
     @media (max-width: 768px) {
       .api-sidebar { display: none; }
       .api-mobile-nav { display: flex; }
-      .api-main {
-        margin-left: 0;
-        padding: 32px 20px 60px;
-        max-width: 100%;
-      }
-      .api-nav { padding: 0 20px; }
+      .api-main { margin-left: 0; padding: 32px var(--cv-m) 64px; max-width: 100%; }
+      .api-nav-logo-badge { display: none; }
+      .api-footer { margin-left: 8px !important; }
     }
     @media (min-width: 769px) and (max-width: 1100px) {
-      .api-sidebar { width: 240px; min-width: 240px; }
-      .api-main { margin-left: 240px; padding: 40px 40px 80px; }
+      :root { --side: 240px; }
     }
 
-    /* TYPOGRAPHY */
-    .section-anchor {
-      scroll-margin-top: 80px;
-    }
-    .api-main h2 {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--slate-900);
-      margin: 56px 0 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--slate-200);
-      letter-spacing: -0.02em;
-    }
-    .api-main h2:first-child { margin-top: 0; }
-    .api-main h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--slate-900);
-      margin: 40px 0 12px;
-    }
-    .api-main h4 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--slate-700);
-      margin: 24px 0 8px;
-    }
-    .api-main p {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--slate-600);
-      margin-bottom: 16px;
-    }
-    .api-main ul, .api-main ol {
-      padding-left: 20px;
-      margin-bottom: 16px;
-    }
-    .api-main li {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--slate-600);
-      margin-bottom: 4px;
-    }
+    /* TIPOGRAFÍA */
+    .section-anchor { scroll-margin-top: 96px; }
+    .api-main h1 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; margin-bottom: 20px; }
+    .api-main h2 { font-size: clamp(1.625rem, 1.3rem + 1.1vw, 2.125rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; margin: 72px 0 16px; }
+    .api-main h3 { font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; margin: 40px 0 12px; }
+    .api-main h4 { font-size: 1.0625rem; font-weight: 700; margin: 24px 0 8px; }
+    .api-main p { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 16px; max-width: 62ch; }
+    .api-main ul, .api-main ol { padding-left: 22px; margin-bottom: 16px; }
+    .api-main li { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 4px; max-width: 66ch; }
+    .api-main a:not(.sidebar-link) { color: var(--cv-accent); font-weight: 600; text-underline-offset: 3px; }
+    .api-note { margin-top: 12px; font-size: var(--cv-small) !important; color: var(--cv-soft); }
 
-    /* ENDPOINT HEADER */
-    .endpoint-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 40px 0 12px;
-      flex-wrap: wrap;
-    }
-    .method-badge {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-family: var(--mono);
-      letter-spacing: 0.03em;
-      flex-shrink: 0;
-    }
-    .method-badge.post { background: var(--emerald-600); color: white; }
-    .method-badge.get { background: var(--blue-500); color: white; }
-    .endpoint-path {
-      font-family: var(--mono);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--slate-900);
-    }
-    .endpoint-desc {
-      font-size: 14px;
-      color: var(--slate-500);
-      margin-bottom: 20px;
-    }
+    /* CABECERA DE CADA ENDPOINT */
+    .endpoint-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 80px 0 12px; scroll-margin-top: 96px; }
+    .method-badge { flex-shrink: 0; font-size: .875rem; font-weight: 700; padding: 5px 10px; border-radius: 4px; color: #fff; }
+    .method-badge.post { background: var(--cv-accent); }
+    .method-badge.get { background: #1d4ed8; }
+    .endpoint-path { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--cv-ink); overflow-wrap: anywhere; }
+    .endpoint-desc { font-size: 1.0625rem; color: var(--cv-soft); margin-bottom: 20px; }
 
-    /* CODE BLOCKS */
-    .code-block-wrapper {
-      position: relative;
-      margin-bottom: 24px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .code-block-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 16px;
-      background: #151D2E;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .code-block-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--slate-500);
-      letter-spacing: 0.05em;
-    }
-    .copy-btn {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--slate-500);
-      background: none;
-      border: 1px solid var(--slate-700);
-      border-radius: 4px;
-      padding: 3px 10px;
-      cursor: pointer;
-      font-family: var(--ff);
-      transition: all 0.15s;
-    }
-    .copy-btn:hover { color: white; border-color: var(--slate-500); }
-    .code-block {
-      background: var(--slate-800);
-      padding: 20px;
-      overflow-x: auto;
-      font-family: var(--mono);
-      font-size: 13px;
-      line-height: 1.7;
-      color: #E2E8F0;
-      -webkit-overflow-scrolling: touch;
-    }
+    /* BLOQUES DE CÓDIGO: el campo oscuro de la marca */
+    .code-block-wrapper { position: relative; margin-bottom: 24px; border-radius: var(--cv-r); overflow: hidden; background: var(--cv-field); }
+    .code-block-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 8px 6px 16px; background: var(--cv-field-2); }
+    .code-block-label { font-size: .875rem; font-weight: 600; color: var(--cv-field-soft); }
+    .copy-btn { font: 600 .8125rem/1 var(--cv-font); color: #fff; background: rgba(255,255,255,.1); border: 0; border-radius: 4px; padding: 8px 12px; min-height: 32px; cursor: pointer; transition: background-color .15s; }
+    .copy-btn:hover { background: rgba(255,255,255,.18); }
+    .copy-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
+    .copy-btn.copied { background: var(--cv-accent); }
+    .code-block { display: block; padding: 18px 20px; overflow-x: auto; font-family: var(--mono); font-size: .875rem; line-height: 1.7; color: #e2e8f0; background: var(--cv-field); -webkit-overflow-scrolling: touch; } /* taste-skill-ignore: bloque de código */
     .code-block::-webkit-scrollbar { height: 6px; }
-    .code-block::-webkit-scrollbar-track { background: transparent; }
-    .code-block::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 3px; }
-
-    /* SYNTAX COLORS */
-    .ck { color: var(--cyan-400); }     /* key */
-    .cs { color: var(--green-400); }    /* string */
-    .cn { color: var(--amber-400); }    /* number */
-    .cp { color: var(--slate-500); }    /* punctuation */
-    .cc { color: var(--slate-500); }    /* comment */
-    .cm { color: #C084FC; }            /* method */
-
-    /* INLINE CODE */
-    code {
-      font-family: var(--mono);
-      font-size: 13px;
-      background: var(--slate-100);
-      color: var(--slate-700);
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid var(--slate-200);
-    }
-
-    /* TABLES */
-    .table-wrapper {
-      overflow-x: auto;
-      margin-bottom: 24px;
-      border-radius: 12px;
-      border: 1px solid var(--slate-200);
-      -webkit-overflow-scrolling: touch;
-    }
-    .api-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      min-width: 540px;
-    }
-    .api-table th {
-      background: var(--slate-100);
-      font-weight: 600;
-      color: var(--slate-700);
-      text-align: left;
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--slate-200);
-      white-space: nowrap;
-    }
-    .api-table td {
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--slate-100);
-      color: var(--slate-600);
-      vertical-align: top;
-    }
-    .api-table tr:nth-child(even) td { background: var(--slate-50); }
-    .api-table tr:last-child td { border-bottom: none; }
-    .api-table .field-name {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--slate-800);
-    }
-    .api-table .required {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--red-500);
-      background: var(--red-50);
-      padding: 1px 6px;
-      border-radius: 3px;
-      letter-spacing: 0.05em;
-      margin-left: 6px;
-    }
-    .api-table .optional {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--slate-500);
-      background: var(--slate-100);
-      padding: 1px 6px;
-      border-radius: 3px;
-      margin-left: 6px;
-    }
-    .api-table .type-badge {
-      font-size: 11px;
-      font-family: var(--mono);
-      color: var(--slate-500);
-    }
-
-    /* STATUS LIST */
-    .status-list {
-      list-style: none;
-      padding: 0;
-    }
-    .status-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--slate-100);
-    }
-    .status-list li:last-child { border-bottom: none; }
-    .status-code {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      min-width: 56px;
-      text-align: center;
-    }
-    .status-code.s2 { background: var(--emerald-50); color: var(--emerald-600); }
-    .status-code.s4 { background: #FEF3C7; color: #B45309; }
-    .status-code.s5 { background: var(--red-50); color: var(--red-500); }
-
-    /* CALLOUT */
-    .callout {
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      font-size: 14px;
-      line-height: 1.6;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .callout-info {
-      background: var(--blue-50);
-      border: 1px solid rgba(59,130,246,0.2);
-      color: #1E40AF;
-    }
-    .callout-warn {
-      background: #FFFBEB;
-      border: 1px solid rgba(245,158,11,0.2);
-      color: #92400E;
-    }
-    .callout-icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
-
-    /* FLOW STEPS */
-    .flow-steps {
-      list-style: none;
-      padding: 0;
-      counter-reset: flow;
-    }
-    .flow-steps li {
-      display: flex;
-      gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--slate-100);
-      align-items: flex-start;
-    }
-    .flow-steps li:last-child { border-bottom: none; }
-    .flow-steps li::before {
-      counter-increment: flow;
-      content: counter(flow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      border-radius: 50%;
-      background: var(--emerald-50);
-      color: var(--emerald-600);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .flow-step-content {
-      flex: 1;
-    }
-    .flow-step-content strong {
-      color: var(--slate-900);
-      display: block;
-      margin-bottom: 2px;
-    }
-    .flow-step-content code {
-      font-size: 12px;
-    }
-
-    /* FOOTER */
-    .api-footer {
-      background: var(--slate-900);
-      padding: 32px 48px;
-      text-align: center;
-      color: var(--slate-500);
-      font-size: 13px;
-    }
-    .api-footer a {
-      color: var(--emerald-400);
-      text-decoration: none;
-    }
-    .api-footer a:hover { text-decoration: underline; }
-
-    /* DIVIDER */
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--slate-200);
-      margin: 48px 0;
-    }
-
-    /* Copy button for code blocks */
+    .code-block::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    /* El guion de abajo envuelve cada <pre> y le añade un segundo «Copiar». En los bloques con cabecera ya hay
+       uno («Copy»): el segundo se oculta para no tener dos botones que hacen lo mismo. */
     .code-block-wrap { position: relative; }
-    .copy-btn {
-      position: absolute; top: 8px; right: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: var(--slate-400);
-      font-size: 11px; font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: var(--ff);
-      transition: background 0.15s, color 0.15s;
-      z-index: 2;
-    }
-    .copy-btn:hover { background: rgba(255,255,255,0.2); color: white; }
-    .copy-btn.copied { background: var(--emerald-600); color: white; border-color: var(--emerald-600); }
+    .code-block-wrap > .copy-btn { position: absolute; top: 8px; right: 8px; z-index: 2; }
+    .code-block-wrapper .code-block-wrap > .copy-btn { display: none; }
+
+    /* COLORES DE SINTAXIS (sobre el campo oscuro, todos por encima de 4,5:1) */
+    .ck { color: #67e8f9; }  /* clave */
+    .cs { color: var(--cv-mint); }  /* cadena */
+    .cn { color: #fcd34d; }  /* número */
+    .cp { color: #94a3b8; }  /* puntuación */
+    .cc { color: #94a3b8; }  /* comentario */
+    .cm { color: #93c5fd; }  /* método */
+
+    /* CÓDIGO EN LÍNEA */
+    code { font-family: var(--mono); font-size: .875em; background: var(--cv-tone); color: var(--cv-ink); padding: 2px 6px; border-radius: 4px; overflow-wrap: anywhere; } /* taste-skill-ignore: código en línea */
+
+    /* TABLAS: son tablas de datos de verdad, así que llevan sus líneas */
+    .table-wrapper { overflow-x: auto; margin-bottom: 24px; border-radius: var(--cv-r); background: var(--cv-bg); box-shadow: inset 0 0 0 1.5px var(--cv-tone-2); -webkit-overflow-scrolling: touch; } /* taste-skill-ignore: el contorno de una tabla de datos */
+    .api-table { width: 100%; border-collapse: collapse; font-size: .9375rem; min-width: 560px; }
+    .api-table th { background: var(--cv-tone); font-weight: 700; color: var(--cv-ink); text-align: left; padding: 12px 16px; white-space: nowrap; }
+    .api-table td { padding: 12px 16px; border-bottom: 1px solid var(--cv-tone-2); color: var(--cv-ink); vertical-align: top; } /* taste-skill-ignore: línea de fila en una tabla de datos */
+    .api-table tr:last-child td { border-bottom: none; }
+    .api-table .field-name { font-size: .9375rem; font-weight: 700; color: var(--cv-ink); }
+    .api-table .required { margin-left: 8px; font-size: .8125rem; font-weight: 700; color: #b91c1c; }
+    .api-table .optional { margin-left: 8px; font-size: .8125rem; font-weight: 600; color: var(--cv-soft); }
+    .api-table .type-badge { font-size: .875rem; color: var(--cv-soft); }
+
+    /* LISTA DE ESTADOS */
+    .status-list { list-style: none; padding: 0 !important; display: grid; gap: 4px; }
+    .status-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 12px; margin: 0 !important; background: var(--cv-tone); border-radius: var(--cv-r); }
+    .status-code { flex-shrink: 0; min-width: 52px; text-align: center; font-size: .875rem; font-weight: 700; font-variant-numeric: tabular-nums; padding: 3px 8px; border-radius: 4px; background: #fff; }
+    .status-code.s2 { color: var(--cv-accent); }
+    .status-code.s4 { color: #92400e; }
+    .status-code.s5 { color: #b91c1c; }
+
+    /* NOTAS: por tono, sin borde */
+    .callout { max-width: 760px; display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; margin-bottom: 24px; border-radius: var(--cv-r); font-size: 1rem; line-height: 1.6; background: var(--cv-tone); color: var(--cv-ink); }
+    .callout-warn { background: #fdf3e1; color: #713f12; }
+    .callout-icon { flex-shrink: 0; width: 1.2em; font-weight: 700; color: var(--cv-accent); line-height: 1.6; text-align: center; }
+    .callout-warn .callout-icon { color: #92400e; }
+
+    /* FLUJO: los pasos en el riel, con el número en el punto (el orden es real) */
+    .flow-steps { list-style: none; padding: 0 !important; counter-reset: flow; display: grid; gap: 4px; }
+    .flow-steps li { display: flex; gap: 14px; align-items: flex-start; padding: 12px 14px; margin: 0 !important; background: var(--cv-tone); border-radius: var(--cv-r); }
+    .flow-steps li::before { counter-increment: flow; content: counter(flow); flex: none; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-accent); color: #fff; font-size: .8125rem; font-weight: 700; margin-top: 2px; }
+    .flow-step-content { flex: 1; min-width: 0; }
+    .flow-step-content strong { display: block; color: var(--cv-ink); margin-bottom: 2px; }
+    .flow-step-content code { font-size: .8125rem; }
+
+    /* PIE: el texto propio de la documentación, en la baldosa de contacto del pie del sitio */
+    .api-footer { margin: 0 8px 8px calc(var(--side) + 8px); padding: 24px; border-radius: var(--cv-r); background: var(--cv-tone); color: var(--cv-ink); font-size: 1rem; line-height: 2; }
+    .api-footer a { color: var(--cv-accent); font-weight: 600; text-decoration: none; }
+    .api-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .api-footer a[aria-label] { display: inline-grid; place-items: center; width: 44px; height: 44px; vertical-align: middle; border-radius: var(--cv-r); background: var(--cv-bg); color: var(--cv-ink); }
+    .api-footer a[aria-label]:hover { color: var(--cv-accent); }
   </style>
 
   <!-- NAV -->
   <nav class="api-nav">
     <a href="/" class="api-nav-logo" aria-label="CertiVeh - inicio">
       <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-        <defs>
-          <linearGradient id="apiLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(4,8) scale(0.48)">
-          <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#apiLogoGrad)"/>
-          <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
+        <!-- El escudo en un solo verde plano y la palabra en una tinta (marca 2026-11) -->
+        <g transform="translate(2,4) scale(0.8)">
+          <path d="M32 4 L56 16 L56 36 C56 50 46 60 32 64 C18 60 8 50 8 36 L8 16 Z" fill="#047857"/>
+          <path d="M36 18 L26 38 L32 38 L28 56 L42 36 L36 36 Z" fill="#FFFFFF"/>
         </g>
-        <g transform="translate(60,28)">
-          <text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700"
-            font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
-            Certi<tspan fill="#059669">Veh</tspan>
-          </text>
-        </g>
+        <text x="60" y="40" fill="#0F172A" font-size="30" font-weight="700"
+          font-family="'Albert Sans', 'Helvetica Neue', Arial, sans-serif" letter-spacing="-0.9">CertiVeh</text>
       </svg>
       <span class="api-nav-logo-badge">API Docs for Developers</span>
     </a>
     <a href="/" class="api-nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       Volver al inicio
     </a>
   </nav>
@@ -676,7 +278,7 @@ const webPageLd = JSON.stringify({
         Esta API REST permite crear usuarios, iniciar tramites de certificacion UPME, subir documentos, procesar pagos y consultar el estado de cada tramite de forma programatica.
       </p>
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Flujo tipico:</strong> Tu plataforma recopila los datos del usuario y su vehiculo, los envia a la API, sube los documentos, y procesa el pago via Wompi. Desde ese momento, CertiVeh gestiona todo el tramite ante la UPME de forma automatizada. Tu plataforma puede consultar el estado en cualquier momento via polling o recibir notificaciones via webhook.
         </span>
@@ -695,7 +297,7 @@ const webPageLd = JSON.stringify({
         <pre class="code-block">X-API-Key: pk_live_xxxxxxxxxxxxx</pre>
       </div>
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>Contacta <strong>contacto@certiveh.co</strong> para solicitar tu API key.</span>
       </div>
 
@@ -708,8 +310,6 @@ const webPageLd = JSON.stringify({
         </div>
         <pre class="code-block">https://ykolfdgnlaxahtbuurgj.supabase.co/functions/v1/partner-api</pre>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- POST /users -->
       <div class="endpoint-header" id="post-users">
@@ -797,13 +397,11 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Idempotente:</strong> Si el email ya existe en CertiVeh, la API retorna el <code>user_id</code> existente y actualiza el perfil con los datos enviados. No se crea un usuario duplicado. Esto permite reintentos seguros.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- POST /tramites -->
       <div class="endpoint-header" id="post-tramites">
@@ -886,8 +484,6 @@ const webPageLd = JSON.stringify({
 &#125;</pre>
       </div>
 
-      <hr class="section-divider" />
-
       <!-- POST /tramites/:id/documents -->
       <div class="endpoint-header" id="post-documents">
         <span class="method-badge post section-anchor">POST</span>
@@ -896,7 +492,7 @@ const webPageLd = JSON.stringify({
       <p class="endpoint-desc">Sube documentos requeridos. Cada documento se procesa automaticamente con IA.</p>
 
       <div class="callout callout-warn">
-        <span class="callout-icon">!</span>
+        <span class="callout-icon" aria-hidden="true">!</span>
         <span>Content-Type debe ser <code>multipart/form-data</code>. Archivos soportados: JPG, PNG o PDF, max 10 MB.</span>
       </div>
 
@@ -931,7 +527,7 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Documentos obligatorios:</strong> Para que el tramite avance despues del pago, se necesitan minimo 5 documentos: <code>cedula-frente</code>, <code>cedula-reverso</code>, <code>tarjeta-propiedad-frente</code>, <code>tarjeta-propiedad-reverso</code> y <code>factura</code>. El <code>rut</code> es opcional pero recomendado.
         </span>
@@ -972,13 +568,11 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Procesamiento OCR asincrono:</strong> Cada documento se procesa automaticamente con IA para extraer datos. El campo <code>ocr_status</code> inicia en <code>"pending"</code> y cambia a <code>"done"</code> cuando la extraccion finaliza (normalmente 5-15 segundos). Puedes verificar el estado consultando <code>GET /tramites/:id</code> y revisando el array <code>documents</code>.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- GET /tramites/:id -->
       <div class="endpoint-header" id="get-tramite">
@@ -1071,8 +665,6 @@ const webPageLd = JSON.stringify({
         </table>
       </div>
 
-      <hr class="section-divider" />
-
       <!-- POST /tramites/:id/payment -->
       <div class="endpoint-header" id="post-payment">
         <span class="method-badge post section-anchor">POST</span>
@@ -1127,20 +719,18 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Despues del pago:</strong> Cuando el usuario completa el pago en Wompi, CertiVeh recibe un webhook automatico de Wompi y cambia el estado del tramite de <code>DRAFT</code> a <code>DOCUMENT_REVIEW</code>. No necesitas hacer nada adicional. Tu plataforma puede confirmar el pago consultando <code>GET /tramites/:id</code> y verificando que <code>payment.status</code> sea <code>"APPROVED"</code> y que <code>paid_at</code> no sea null.
         </span>
       </div>
 
       <div class="callout callout-warn">
-        <span class="callout-icon">!</span>
+        <span class="callout-icon" aria-hidden="true">!</span>
         <span>
           <strong>redirect_url:</strong> Despues del pago, Wompi redirige al usuario a <code>portal.certiveh.co</code>. Si necesitas redirigir a una URL propia de tu plataforma, contacta al equipo para configurarlo.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- SIMULATE PAYMENT -->
       <div class="endpoint-header" id="post-simulate-payment">
@@ -1150,7 +740,7 @@ const webPageLd = JSON.stringify({
       <p class="endpoint-desc">Simula la aprobacion de un pago sin realizar un cobro real. <strong>Solo disponible en modo sandbox.</strong></p>
 
       <div class="callout callout-warn">
-        <span class="callout-icon">!</span>
+        <span class="callout-icon" aria-hidden="true">!</span>
         <span>
           <strong>Solo sandbox:</strong> Este endpoint solo funciona con tu API key de sandbox (<code>sk_sandbox_xxx</code>). Retorna <code>403</code> si se usa con la API key de produccion.
         </span>
@@ -1184,13 +774,11 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Requisito previo:</strong> Debes haber llamado <code>POST /tramites/:id/payment</code> antes para crear el registro de pago PENDING. Este endpoint toma ese pago pendiente y lo marca como APPROVED, avanzando el caso a <code>DOCUMENT_REVIEW</code>. Si tienes un webhook URL configurado, recibiras la notificacion <code>tramite.payment_confirmed</code> con <code>sandbox: true</code>.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- WEBHOOKS -->
       <h2 id="webhooks" class="section-anchor">Webhooks</h2>
@@ -1231,13 +819,11 @@ const webPageLd = JSON.stringify({
       </div>
 
       <div class="callout callout-warn">
-        <span class="callout-icon">!</span>
+        <span class="callout-icon" aria-hidden="true">!</span>
         <span>
           <strong>Recomendacion:</strong> Aunque los webhooks notifican los cambios de estado, te recomendamos implementar un polling periodico con <code>GET /tramites/:id</code> como respaldo en caso de que un webhook falle.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- ERRORS -->
       <h2 id="errors" class="section-anchor">Errores</h2>
@@ -1280,8 +866,6 @@ const webPageLd = JSON.stringify({
         </li>
       </ul>
 
-      <hr class="section-divider" />
-
       <!-- RATE LIMITING -->
       <h2 id="rate-limiting" class="section-anchor">Limite de tasa</h2>
       <p>Todos los endpoints estan limitados a <strong>100 solicitudes por minuto</strong> por API key.</p>
@@ -1296,23 +880,17 @@ const webPageLd = JSON.stringify({
           </tbody>
         </table>
       </div>
-      <p style="margin-top: 12px; font-size: 14px; color: var(--slate-500);">Cuando se excede el limite, la API retorna <code>429 Too Many Requests</code>. Espera a que la ventana se reinicie antes de reintentar.</p>
-
-      <hr class="section-divider" />
+      <p class="api-note">Cuando se excede el limite, la API retorna <code>429 Too Many Requests</code>. Espera a que la ventana se reinicie antes de reintentar.</p>
 
       <!-- SECURITY -->
       <h2 id="security" class="section-anchor">Seguridad</h2>
       <p>Todas las solicitudes a la API se registran automaticamente incluyendo direccion IP, user-agent y codigo de respuesta para auditoria y seguridad.</p>
-
-      <hr class="section-divider" />
 
       <!-- PARTNER DISCOUNTS -->
       <h2 id="partner-discounts" class="section-anchor">Descuentos de partner</h2>
       <p>
         Los precios retornados por <code>POST /tramites</code> y <code>POST /tramites/:id/payment</code> aplican automaticamente cualquier descuento configurado para tu cuenta de partner. El campo <code>breakdown.discount</code> refleja el monto del descuento aplicado. No se necesitan parametros adicionales.
       </p>
-
-      <hr class="section-divider" />
 
       <!-- SANDBOX -->
       <h2 id="sandbox" class="section-anchor">Ambiente de pruebas (Sandbox)</h2>
@@ -1375,13 +953,11 @@ const webPageLd = JSON.stringify({
       </ol>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Wompi sandbox:</strong> Si prefieres probar con el widget real de Wompi (tarjetas de prueba), el endpoint <code>POST /tramites/:id/payment</code> en sandbox retorna la llave publica de Wompi sandbox automaticamente. Usa las <a href="https://docs.wompi.co/docs/en/pruebas-de-tarjetas" target="_blank" rel="noopener">tarjetas de prueba de Wompi</a> para simular pagos.
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- INTEGRATION FLOW -->
       <h2 id="integration-flow" class="section-anchor">Flujo de integracion</h2>
@@ -1426,13 +1002,11 @@ const webPageLd = JSON.stringify({
       </ol>
 
       <div class="callout callout-info">
-        <span class="callout-icon">i</span>
+        <span class="callout-icon" aria-hidden="true">i</span>
         <span>
           <strong>Nota:</strong> Los pasos 3 y 4 pueden ejecutarse en cualquier orden. Puedes subir documentos antes o despues del pago. El tramite avanza cuando ambos estan completos (pago aprobado + documentos subidos).
         </span>
       </div>
-
-      <hr class="section-divider" />
 
       <!-- CONTACT -->
       <h2 id="contact" class="section-anchor">Contacto</h2>
@@ -1452,7 +1026,7 @@ const webPageLd = JSON.stringify({
 
   <!-- FOOTER -->
   <footer class="api-footer">
-    CertiVeh Partner API · <a href="/">certiveh.co</a> · <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a> · <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style="color:inherit;transition:color 0.15s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a> · <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style="color:inherit;transition:color 0.15s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a> · <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style="color:inherit;transition:color 0.15s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+    CertiVeh Partner API · <a href="/">certiveh.co</a> · <a href="mailto:contacto@certiveh.co">contacto@certiveh.co</a> · <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a> · <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a> · <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
   </footer>
 
   <!-- SCRIPTS -->
