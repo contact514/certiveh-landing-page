@@ -113,12 +113,18 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
   - **Preguntas**: baldosas de tono que al abrirse pasan a verde, titular fijo a la izquierda en escritorio. **La
     respuesta está siempre en el HTML** y cerrada solo lleva `hidden` (lectores, buscadores y sin JavaScript la
     tienen); el botón lleva `aria-expanded` y `aria-controls`.
+  - **Las demás portadas siguen la de la home**: texto a la izquierda y, a la derecha, lo real de esa página (la
+    calculadora, la pieza del portal del aliado, la foto de los fundadores). Un listado (blog, vehículos) destaca
+    su primer elemento en el campo verde y el segundo en el oscuro; los artículos llevan los pasos en el riel (línea
+    y punto con su número) y el aviso rojo en el campo oscuro.
   - **El cierre**: titular a tamaño de portada a la izquierda y, a la derecha, el texto, la acción en verde y sus
     viñetas. Sin caja de color alrededor.
 - **Barra de navegación** (`Navbar`): en las páginas que EMPIEZAN con una cabecera oscura (home y las que
-  pasan `darkHero`: aliados, nosotros, vehículos y fichas, otros activos, índice del blog, términos y privacidad)
+  pasan `darkHero`: aliados, nosotros, vehículos y fichas, otros activos, índice del blog, términos y privacidad, y
+  los artículos del blog, que `BlogLayout` marca solos con `isArticle`)
   arranca transparente con texto y escudo en blanco, y al bajar 40 px o al abrir el menú del celular pasa a la
-  barra blanca sólida. En las que empiezan en blanco (artículos del blog, API) es sólida desde el principio.
+  barra blanca sólida. En las que empiezan en blanco (la API, que tiene su propia barra de documentación) es sólida
+  desde el principio. En un artículo, «Volver al Blog» va dentro de la cabecera, alineado con el titular.
   Una página nueva con cabecera oscura pasa `darkHero` y su cabecera sube hasta el borde de arriba (sin
   espaciador blanco), o el texto blanco quedaría sobre blanco.
 - **Hero**: video a pantalla completa con velo neutro oscuro, texto blanco a la izquierda y la
