@@ -58,6 +58,11 @@ const NAV_CSS = `
     transition: background-color 0.15s;
   }
   .shared-nav-btn:hover { background: var(--cv-accent-hover, #036B4E); }
+  /* Es un enlace (antes un <button> dentro de un <a>: HTML inválido y dos paradas de teclado). Gana a los estilos de
+     enlace de la barra y del menú, que lo pintarían en tinta. */
+  .shared-nav-links a.shared-nav-btn, .shared-mobile-menu a.shared-nav-btn { color: #fff; text-decoration: none; }
+  .shared-nav-links a.shared-nav-btn:hover, .shared-mobile-menu a.shared-nav-btn:hover { color: #fff; background: var(--cv-accent-hover, #036B4E); }
+  .shared-mobile-menu a.shared-nav-btn-full { display: flex; width: 100%; justify-content: center; padding: 12px 20px; margin-top: 8px; }
   .shared-nav-btn:focus-visible, .shared-nav a:focus-visible, .shared-mobile-btn:focus-visible { outline: 3px solid var(--cv-accent, #047857); outline-offset: 3px; }
   .shared-mobile-btn {
     display: none; background: var(--cv-tone, #F0F4F2); border: none; border-radius: 6px;
@@ -164,10 +169,8 @@ export function Navbar({ isHome = true, darkHero = false, localSections = [], ve
           <a href="/aliados">Aliados</a>
           <a href={otherVertical.href} className={vertical === "otros-activos" ? "nav-vertical" : undefined}>{otherVertical.text}</a>
           <a href="/api-docs">API</a>
-          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="shared-nav-btn">
-              Empezar ahora <Icon name="arrowRight" size={15} color="white" />
-            </button>
+          <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" className="shared-nav-btn">
+            Empezar ahora <Icon name="arrowRight" size={15} color="white" />
           </a>
         </div>
       </nav>
@@ -183,11 +186,9 @@ export function Navbar({ isHome = true, darkHero = false, localSections = [], ve
         <a href="/aliados" onClick={() => setMobileOpen(false)}>Aliados</a>
         <a href={otherVertical.href} className={vertical === "otros-activos" ? "nav-vertical" : undefined} onClick={() => setMobileOpen(false)}>{otherVertical.text}</a>
         <a href="/api-docs" onClick={() => setMobileOpen(false)}>API</a>
-        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="shared-nav-btn" style={{ width: "100%", justifyContent: "center", padding: "12px 20px" }}
-            onClick={() => setMobileOpen(false)}>
-            Empezar ahora <Icon name="arrowRight" size={15} color="white" />
-          </button>
+        <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" className="shared-nav-btn shared-nav-btn-full"
+          onClick={() => setMobileOpen(false)}>
+          Empezar ahora <Icon name="arrowRight" size={15} color="white" />
         </a>
       </div>
     </>
