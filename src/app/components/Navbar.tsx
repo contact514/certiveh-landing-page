@@ -26,7 +26,19 @@ const NAV_CSS = `
     box-sizing: border-box;
     font-family: var(--cv-font, 'Albert Sans', 'Helvetica Neue', Arial, sans-serif);
     -webkit-font-smoothing: antialiased;
+    transition: background-color .2s ease;
   }
+  /* Arriba del todo, en las páginas que empiezan con una cabecera oscura (home y las que pasan darkHero),
+     la barra es transparente y su texto blanco: se ve el video o la foto entera. Al bajar 40 px, o al abrir
+     el menú del celular, vuelve a ser la barra blanca sólida. */
+  .shared-nav:not(.scrolled) { background: transparent; }
+  .shared-nav:not(.scrolled) .shared-nav-logo, .shared-nav:not(.scrolled) .shared-nav-links a:not(:last-child) { color: #fff; }
+  .shared-nav:not(.scrolled) .shared-nav-links a.nav-vertical { color: var(--cv-mint, #A7F3D0); }
+  .shared-nav:not(.scrolled) .shared-nav-links a:not(:last-child):hover { color: var(--cv-mint, #A7F3D0); }
+  .shared-nav:not(.scrolled) .shared-mobile-btn { background: rgba(255,255,255,.14); color: #fff; }
+  .shared-nav:not(.scrolled) .shared-nav-logo svg path:first-child { fill: #fff; }
+  .shared-nav:not(.scrolled) .shared-nav-logo svg path:last-child { fill: var(--cv-accent, #047857); }
+  .shared-nav:not(.scrolled) a:focus-visible, .shared-nav:not(.scrolled) .shared-mobile-btn:focus-visible { outline-color: #fff; }
   .shared-nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; color: var(--cv-ink, #0F172A); }
   .shared-nav-logo span { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
   .shared-nav-links { display: flex; align-items: center; gap: 26px; }
@@ -56,7 +68,7 @@ const NAV_CSS = `
     position: fixed; top: 64px; left: 0; right: 0;
     background: var(--cv-bg, #ffffff);
     padding: 12px 20px 20px; z-index: 99;
-    box-shadow: 0 18px 40px rgba(15,23,42,0.16);
+    box-shadow: 0 18px 40px rgba(15,23,42,0.16); /* taste-skill-ignore: el menú del celular flota sobre la página */
     transform: translateY(-100%); opacity: 0; visibility: hidden;
     transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
     pointer-events: none;
@@ -134,7 +146,7 @@ export function Navbar({ isHome = true, darkHero = false, localSections = [], ve
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: NAV_CSS }} />
-      <nav className={`shared-nav${scrolled ? " scrolled" : ""}`} aria-label="Navegación principal">
+      <nav className={`shared-nav${scrolled || mobileOpen ? " scrolled" : ""}`} aria-label="Navegación principal">
         <a href={link("#hero")} className="shared-nav-logo" aria-label="CertiVeh - inicio">
           <Logo scrolled={scrolled} />
         </a>

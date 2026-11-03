@@ -173,7 +173,7 @@ const articles = [
 <BlogLayout
   title="Blog CertiVeh | Incentivos Tributarios Vehículos Eléctricos e Híbridos Colombia"
   description="Guías rigurosas sobre los beneficios tributarios para vehículos eléctricos e híbridos en Colombia: deducción en renta, gestión de la devolución de IVA ante la DIAN, proceso UPME y estrategias para flotas empresariales."
->
+ darkHero={true}>
   <style>
     /* Índice del blog · estándar visual 2026-11 (DESIGN_SYSTEM.md §0): la cabecera en el campo oscuro, como
        la de cada artículo, y cada artículo en una baldosa de tono. Sin banners en degradado, sin el número
@@ -182,7 +182,7 @@ const articles = [
     /* La cabecera lleva el fotograma del video de la home con el mismo velo oscuro: el blog se reconoce como
        parte de la misma casa y el primer pantallazo no queda con un bloque vacío. */
     .blog-home-intro { position: relative; width: 100vw; margin-left: calc(50% - 50vw); color: #fff; margin-bottom: 48px;
-      padding: clamp(72px, 10vw, 140px) max(var(--cv-m), calc((100vw - 1240px) / 2));
+      padding: calc(64px + clamp(72px, 10vw, 140px)) max(var(--cv-m), calc((100vw - 1240px) / 2)) clamp(72px, 10vw, 140px); /* sube bajo la barra transparente */
       background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
     .blog-home-intro::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .blog-home-intro > * { position: relative; }

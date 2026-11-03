@@ -19,6 +19,8 @@ interface Props {
    */
   dateModified?: string;
   isArticle?: boolean;
+  /** La página empieza con una cabecera oscura (el índice): la barra arranca transparente y no hay espaciador blanco. */
+  darkHero?: boolean;
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   datePublished = '2026-04-01',
   dateModified = datePublished,
   isArticle = false,
+  darkHero = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -247,9 +250,9 @@ const breadcrumbLd = isArticle ? JSON.stringify({
   </style>
 
   <!-- NAV — mismo componente React que la landing -->
-  <Navbar isHome={false} client:load />
+  <Navbar isHome={false} darkHero={darkHero} client:load />
 
-  <div class="page-top"></div>
+  {!darkHero && <div class="page-top"></div>}
 
   <!-- CONTENT -->
   <main id="main-content">

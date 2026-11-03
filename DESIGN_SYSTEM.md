@@ -90,6 +90,12 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
 
 ### 0.5 Patrones de sección
 
+- **Barra de navegación** (`Navbar`): en las páginas que EMPIEZAN con una cabecera oscura (home y las que
+  pasan `darkHero`: aliados, nosotros, vehículos y fichas, otros activos, índice del blog, términos y privacidad)
+  arranca transparente con texto y escudo en blanco, y al bajar 40 px o al abrir el menú del celular pasa a la
+  barra blanca sólida. En las que empiezan en blanco (artículos del blog, API) es sólida desde el principio.
+  Una página nueva con cabecera oscura pasa `darkHero` y su cabecera sube hasta el borde de arriba (sin
+  espaciador blanco), o el texto blanco quedaría sobre blanco.
 - **Hero**: video a pantalla completa con velo neutro oscuro, texto blanco a la izquierda y la
   calculadora encima a la derecha en una ficha blanca con la esquina superior izquierda recortada
   (`clip-path`). En el celular, el texto y debajo la calculadora.
