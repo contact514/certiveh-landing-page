@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { Navbar } from '../app/components/Navbar';
+import { SiteFooter } from '../app/components/SiteFooter';
 
 interface Props {
   title?: string;
@@ -69,91 +70,52 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   )}
   <style is:global>
-    /* ── RESET & BASE ──────────────────────────────────────────────────── */
+    /* ── BLOG · estándar visual 2026-11 (DESIGN_SYSTEM.md §0) ─────────────────
+       Una sola hoja para el índice y los 15 artículos. Las clases son las de siempre (los artículos
+       no se tocan); lo que cambia es cómo se pintan: sin degradados, sin sombras, sin el número
+       gigante del banner, sin píldoras ni mayúsculas espaciadas, cuerpo a 18 px y líneas de ~68
+       caracteres. Colores y tipo salen de las variables --cv-* de src/styles/marca.css. */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green:  #059669;
-      --teal:   #14B8A6;
-      --dark:   #0F172A;
-      --slate:  #1E293B;
-      --muted:  #64748B;
-      --border: #E2E8F0;
-      --light:  #F8FAFC;
-      --amber:  #D97706;
+      /* alias de las variables antiguas, por si algún artículo las usa en línea */
+      --green: var(--cv-accent); --teal: var(--cv-accent); --dark: var(--cv-ink); --slate: var(--cv-ink);
+      --muted: var(--cv-soft); --border: var(--cv-tone-2); --light: var(--cv-tone); --amber: #B45309;
     }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #FFFFFF; color: var(--dark); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--cv-font); background: var(--cv-bg); color: var(--cv-ink); line-height: 1.6; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
 
     /* ── PAGE SPACER ──────────────────────────────────────────────────── */
     .page-top { height: 64px; }
 
-    /* ── FOOTER ───────────────────────────────────────────────────────── */
-    .blog-footer {
-      background: var(--dark); color: #94A3B8;
-      padding: 48px 48px;
-      margin-top: 80px;
-    }
-    .blog-footer-inner { max-width: 1200px; margin: 0 auto; }
-    .blog-footer-top {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; flex-wrap: wrap; gap: 32px;
-      margin-bottom: 40px;
-    }
-    .blog-footer-brand p {
-      font-size: 14px; color: #64748B; margin-top: 10px;
-      max-width: 260px; line-height: 1.5;
-    }
-    .blog-footer-cols {
-      display: flex; gap: 48px; flex-wrap: wrap;
-    }
-    .blog-footer-col-label {
-      font-size: 12px; font-weight: 700; color: #CBD5E1;
-      letter-spacing: 0.08em; margin-bottom: 14px;
-    }
-    .blog-footer-col-links {
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .blog-footer-col-links a {
-      font-size: 14px; color: #64748B; text-decoration: none;
-      transition: color 0.15s;
-    }
-    .blog-footer-col-links a:hover { color: #fff; }
-    .blog-footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 24px;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-    }
-    .blog-footer-bottom span { font-size: 12px; line-height: 1.4; }
-    @media (max-width: 640px) {
-      .blog-footer { padding: 40px 20px; }
-    }
+    /* ── ESTRUCTURA ───────────────────────────────────────────────────── */
+    .blog-wrapper { max-width: 760px; margin: 0 auto; padding: 28px var(--cv-m) 120px; display: flex; flex-direction: column; gap: 56px; }
+    .page-intro { padding-bottom: 8px; }
+    .page-intro .label { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); margin-bottom: 14px; }
+    .page-intro h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); color: var(--cv-ink); letter-spacing: var(--cv-trk); margin-bottom: 18px; line-height: 1; text-wrap: balance; }
+    .page-intro p { font-size: var(--cv-lead); color: var(--cv-ink); line-height: 1.4; }
+    article { background: transparent; }
 
-    /* ── ARTICLE SHARED STYLES ────────────────────────────────────────── */
-    .blog-wrapper { max-width: 820px; margin: 0 auto; padding: 60px 24px 100px; display: flex; flex-direction: column; gap: 80px; }
-    .page-intro { text-align: center; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
-    .page-intro .label {
-      display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-      color: #047857; background: #ECFDF5;
-      border: 1px solid #A7F3D0; border-radius: 9999px; padding: 4px 12px; margin-bottom: 14px;
-    }
-    .page-intro h1 { font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: var(--dark); letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15; }
-    .page-intro p { font-size: 16px; color: var(--muted); }
-    article { background: #fff; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
-    .article-banner { min-height: 220px; display: flex; align-items: flex-end; padding: 32px 40px; position: relative; overflow: hidden; }
-    .article-banner.b-green  { background: linear-gradient(135deg,#065F46 0%,#059669 60%,#14B8A6 100%); }
-    .article-banner.b-navy   { background: linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%); }
-    .article-banner.b-amber  { background: linear-gradient(135deg,#78350F 0%,#D97706 60%,#059669 100%); }
-    .banner-bg-num { position: absolute; right: 32px; top: 50%; transform: translateY(-50%); font-size: 140px; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; letter-spacing: -.05em; user-select: none; }
-    .banner-inner { position: relative; z-index: 1; }
-    .banner-tag { font-size: 10px; font-weight: 700; letter-spacing: .16em; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
-    .banner-title { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: -.02em; line-height: 1.2; max-width: 600px; margin: 0; }
-    .banner-subtitle { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 10px; max-width: 600px; line-height: 1.5; }
-    .article-meta { display: flex; align-items: center; gap: 24px; padding: 16px 40px; background: #F8FAFC; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-    .meta-pill { display: flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); border-radius: 9999px; padding: 3px 10px; }
-    .article-body { padding: 48px 48px 56px; }
-    .article-body > p { font-size: 16px; color: #475569; line-height: 1.85; margin-bottom: 22px; }
-    .lead { font-size: 18px !important; color: var(--slate) !important; line-height: 1.75 !important; font-weight: 500; border-left: 3px solid; border-image: linear-gradient(90deg, #059669, #14B8A6) 1; padding-left: 20px; margin-bottom: 32px !important; }
-    .article-body h2 { font-size: 24px; font-weight: 700; color: var(--dark); letter-spacing: -.02em; margin: 48px 0 18px; padding-bottom: 0; border-bottom: none; }
-    .article-body h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 28px 0 10px; }
+    /* Cabecera del artículo: un campo de color a todo el ancho, el h1 grande. Sin degradado ni número
+       de fondo. Verde en los artículos marcados b-green; el campo oscuro en el resto. */
+    .article-banner { position: relative; width: 100vw; margin-left: calc(50% - 50vw); padding: clamp(48px, 7vw, 96px) var(--cv-m); background: var(--cv-field); color: #fff; }
+    .article-banner.b-green { background: var(--cv-accent); }
+    .article-banner.b-navy, .article-banner.b-amber { background: var(--cv-field); }
+    .banner-bg-num { display: none; }
+    .banner-inner { max-width: calc(760px - 2 * var(--cv-m)); margin: 0 auto; } /* el mismo borde izquierdo que el cuerpo */
+    .banner-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-mint); margin-bottom: 18px; }
+    .article-banner.b-green .banner-tag { color: #d6f5e8; }
+    .banner-title { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem); font-weight: var(--cv-wh); color: #fff; letter-spacing: var(--cv-trk); line-height: 1.04; margin: 0; text-wrap: balance; }
+    .banner-subtitle { font-size: var(--cv-lead); color: #e2e8f0; margin-top: 18px; line-height: 1.4; max-width: 46ch; }
+    .article-banner.b-green .banner-subtitle { color: #effaf5; }
+    .article-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 22px 0 0; font-size: var(--cv-small); color: var(--cv-soft); }
+    .meta-pill { position: relative; padding-left: 14px; }
+    .meta-pill::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--cv-accent); }
+
+    /* ── CUERPO ───────────────────────────────────────────────────────── */
+    .article-body { padding: 36px 0 0; max-width: 68ch; }
+    .article-body > p { font-size: 1.125rem; color: var(--cv-ink); line-height: 1.65; margin-bottom: 22px; }
+    .lead { font-size: var(--cv-lead) !important; color: var(--cv-ink) !important; line-height: 1.45 !important; font-weight: 500; padding-left: 20px; box-shadow: inset 4px 0 0 var(--cv-accent); margin-bottom: 36px !important; } /* taste-skill-ignore: barra de acento de la entradilla */
+    .article-body h2 { font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.125rem); font-weight: var(--cv-wh); color: var(--cv-ink); letter-spacing: var(--cv-trk); line-height: 1.1; margin: 56px 0 18px; text-wrap: balance; scroll-margin-top: 88px; }
+    .article-body h3 { font-size: 1.25rem; font-weight: var(--cv-wh); color: var(--cv-ink); letter-spacing: -0.015em; margin: 32px 0 10px; }
     /* ⚠️ No había regla para los enlaces del cuerpo, así que cada post dependía de que su autor se
        acordara del `style` en línea. Los que no lo llevaban salían en `rgb(0,0,238)`, el azul por
        defecto del navegador: cuatro en `que-es-certificado-upme` y uno en `resolucion-upme-400`,
@@ -175,7 +137,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
        El `:not(.cta-btn)` NO es decorativo. `.article-cta` vive DENTRO de `.article-body`, así que
        sin la exclusión un `.article-body a` (0,1,1) le ganaría por especificidad a `.cta-btn`
        (0,1,0) y los 13 botones de cierre perderían su texto blanco sobre el gradiente. */
-    .article-body a:not(.cta-btn) { color: #047857; font-weight: 600; text-decoration: underline; }
+    .article-body a:not(.cta-btn) { color: var(--cv-accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
     /* Tablas: sin subrayado a propósito. La pista aparece al pasar por encima.
        Lleva el `:not(.cta-btn)` para igualar la especificidad de la regla base (0,2,2 frente a
        0,2,1): sin él, `.article-body td a` es (0,1,2) y PIERDE, así que el `underline` de arriba se
@@ -188,7 +150,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
        VA ANCLADA A `.data-table`, no a `th` a secas: quien justifica el verde menta es ESE fondo
        oscuro. Un `<th>` de una tabla sin esa clase tiene fondo blanco, y ahí `#34D399` da 1,92:1,
        o sea ilegible. El ancla floja fue el primer intento de esta regla. */
-    .data-table th a:not(.cta-btn) { color: #34D399; }
+    .data-table th a:not(.cta-btn) { color: var(--cv-mint); }
     /* Índice interno (`resolucion-upme-400`): el enlace envuelve el título y hereda su color y su
        peso del `<strong>` que lo contiene. Antes era un `style` en línea, que ganaba también al
        `:hover` y dejaba los seis enlaces sin ninguna señal de ser pulsables.
@@ -202,48 +164,49 @@ const breadcrumbLd = isArticle ? JSON.stringify({
        verde claro `#34D399`, que da 9,29:1. Es regla y no `style` en línea a propósito: hay 13
        bloques `.article-cta` y son justo donde se añaden enlaces, así que quien meta uno nuevo lo
        recibe bien sin tener que acordarse. */
-    .article-body .article-cta a:not(.cta-btn) { color: #34D399; font-weight: inherit; }
-    .cite { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--green); background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 4px; padding: 1px 6px; vertical-align: super; line-height: 1; white-space: nowrap; cursor: default; }
-    .callout { border-radius: 12px; padding: 20px 24px; margin: 24px 0; font-size: 15px; line-height: 1.75; }
-    .callout.green  { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
-    .callout.amber  { background: #F8FAFC; border: 1px solid var(--border); color: var(--slate); }
-    .callout.slate  { background: #F8FAFC; border: 1px solid var(--border); color: var(--slate); }
-    .callout.red    { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
+    .article-body .article-cta a:not(.cta-btn) { color: var(--cv-mint); font-weight: inherit; }
+    /* Citas [1], [2]: superíndice verde, sin cajita. */
+    .cite { display: inline-block; font-size: .75rem; font-weight: 700; color: var(--cv-accent); vertical-align: super; line-height: 1; white-space: nowrap; margin-left: 2px; cursor: default; }
+    /* Recuadros: por tono, sin borde. El rojo queda para lo que es advertencia. */
+    .callout { border-radius: var(--cv-r); padding: 20px 24px; margin: 28px 0; font-size: 1.0625rem; line-height: 1.6; background: var(--cv-tone); color: var(--cv-ink); }
+    .callout.green { background: #e6f4ec; color: #064e3b; }
+    .callout.amber, .callout.slate { background: var(--cv-tone); color: var(--cv-ink); }
+    .callout.red { background: #fdecea; color: #7f1d1d; }
     .callout strong { font-weight: 700; }
-    .callout p { font-size: 15px !important; color: inherit !important; margin-bottom: 8px !important; line-height: 1.75 !important; }
+    .callout p { font-size: 1.0625rem !important; color: inherit !important; margin-bottom: 8px !important; line-height: 1.6 !important; }
     .callout p:last-child { margin-bottom: 0 !important; }
-    .legal-ref { background: #F8FAFC; border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; margin: 20px 0; font-size: 13px; color: var(--slate); line-height: 1.65; }
-    .legal-ref .ref-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--green); margin-bottom: 6px; }
-    .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 24px 0; }
-    @media(max-width:620px){ .benefits-grid { grid-template-columns: 1fr; } }
-    .benefit-card { border-radius: 16px; padding: 22px; border: 1px solid var(--border); background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; }
-    .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-    .benefit-card .pct { font-size: 34px; font-weight: 900; letter-spacing: -.04em; margin-bottom: 4px; line-height: 1; }
-    .benefit-card.c-green .pct { color: var(--green); }
-    .benefit-card.c-teal  .pct { color: var(--teal); }
-    .benefit-card.c-amber .pct { color: var(--teal); }
-    .benefit-card .bc-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
-    .benefit-card .bc-norm  { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 10px; }
-    .benefit-card p { font-size: 13px !important; color: var(--muted) !important; margin-bottom: 0 !important; line-height: 1.55 !important; }
-    .steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
-    .step-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--border); }
-    .step-item:last-child { border-bottom: none; }
-    .step-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,var(--green),var(--teal)); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-    .step-content strong { display: block; font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
-    .step-content span   { font-size: 14px; color: #475569; line-height: 1.6; }
-    .timeline { padding-left: 24px; border-left: 2px solid var(--border); margin: 20px 0; display: flex; flex-direction: column; gap: 22px; }
-    .tl-item  { position: relative; }
-    .tl-item::before { content: ''; position: absolute; left: -31px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--green); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--green); }
-    .tl-label { font-size: 11px; font-weight: 700; letter-spacing: .09em; color: var(--green); margin-bottom: 3px; }
-    .tl-item > p { font-size: 14px !important; color: var(--slate) !important; margin-bottom: 0 !important; line-height: 1.65 !important; }
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; margin: 20px 0; }
+    .legal-ref { background: var(--cv-tone); border-radius: var(--cv-r); padding: 18px 22px; margin: 24px 0; font-size: .9375rem; color: var(--cv-ink); line-height: 1.6; }
+    .legal-ref .ref-title { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-accent); margin-bottom: 6px; }
+    /* Las tres cifras de beneficio: baldosas en tono, sin borde, sombra ni salto al pasar el ratón. */
+    .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 28px 0; }
+    .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); }
+    .benefit-card .pct { font-size: 2.5rem; font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); margin-bottom: 6px; line-height: 1; color: var(--cv-accent); }
+    .benefit-card.c-green .pct, .benefit-card.c-teal .pct, .benefit-card.c-amber .pct { color: var(--cv-accent); }
+    .benefit-card .bc-label { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 8px; }
+    .benefit-card .bc-norm { font-size: .8125rem; color: var(--cv-soft); font-weight: 600; margin-top: 10px; }
+    .benefit-card p { font-size: .9375rem !important; color: var(--cv-ink) !important; margin-bottom: 0 !important; line-height: 1.5 !important; }
+    /* Pasos de un procedimiento: el orden es real, así que el número se queda, en un punto plano. */
+    .steps { display: flex; flex-direction: column; gap: 6px; margin: 24px 0; }
+    .step-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 18px; background: var(--cv-tone); border-radius: var(--cv-r); }
+    .step-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--cv-accent); color: #fff; font-size: .875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .step-content strong { display: block; font-size: 1.0625rem; font-weight: 700; color: var(--cv-ink); margin-bottom: 3px; }
+    .step-content span { font-size: 1rem; color: var(--cv-ink); line-height: 1.55; }
+    /* Línea de tiempo: el riel de la marca (3 px y puntos verdes). */
+    .timeline { padding-left: 28px; margin: 24px 0; display: flex; flex-direction: column; gap: 22px; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 3px; background: var(--cv-tone-2); }
+    .tl-item { position: relative; }
+    .tl-item::before { content: ""; position: absolute; left: -28px; top: 4px; width: 15px; height: 15px; border-radius: 50%; background: var(--cv-accent); }
+    .tl-label { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-accent); margin-bottom: 3px; }
+    .tl-item > p { font-size: 1rem !important; color: var(--cv-ink) !important; margin-bottom: 0 !important; line-height: 1.6 !important; }
+    /* Tablas de datos: sí llevan sus líneas (son tablas de verdad). */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; margin: 24px 0; }
     .table-wrap .data-table { margin: 0; }
-    .data-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
-    .data-table th { background: #0F172A; color: #fff; padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
-    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--slate); vertical-align: top; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: .9375rem; margin: 24px 0; border-radius: var(--cv-r); overflow: hidden; font-variant-numeric: tabular-nums; }
+    .data-table th { background: var(--cv-field); color: #fff; padding: 12px 16px; text-align: left; font-size: .875rem; font-weight: 700; letter-spacing: normal; }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--cv-tone-2); color: var(--cv-ink); vertical-align: top; }
     .data-table tr:last-child td { border-bottom: none; }
-    .data-table tr:nth-child(even) td { background: #F8FAFC; }
-    .data-table .hl  { color: #047857; font-weight: 700; }  /* letra: el verde de relleno da 3,77:1 y ademas chocaba con el #047857 del enlace de la misma fila (1,46:1 de separacion) */
+    .data-table tr:nth-child(even) td { background: var(--cv-tone); }
+    .data-table .hl { color: var(--cv-accent); font-weight: 700; }
     /* Ámbar de TEXTO, igual que el verde: `--amber` (#D97706) es el paso 600 y da 3,19:1 sobre
        blanco y 3,04:1 sobre las filas pares, o sea falla AA en las 15 celdas que lo usan. El resto
        de la landing ya escribe texto ámbar en #B45309 (`api-docs.astro:462`), que da 5,02 y 4,80.
@@ -253,43 +216,33 @@ const breadcrumbLd = isArticle ? JSON.stringify({
        `#D97706`, no el token. Se deja declarado a propósito, pero que nadie lo busque esperando
        encontrarlo en uso. */
     .data-table .hl2 { color: #B45309; font-weight: 700; }
-    .footnotes { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); }
-    .footnotes h4 { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
+    .footnotes { margin-top: 48px; padding: 24px; background: var(--cv-tone); border-radius: var(--cv-r); }
+    .footnotes h4 { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 12px; }
     .footnotes ol { padding-left: 18px; }
-    .footnotes li { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 6px; }
+    .footnotes li { font-size: .875rem; color: var(--cv-soft); line-height: 1.6; margin-bottom: 6px; }
     .footnotes li em { font-style: italic; }
-    .article-cta { margin-top: 44px; padding: 28px 32px; background: #0F172A; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .article-cta p { font-size: 15px !important; color: #fff !important; margin-bottom: 0 !important; font-weight: 500; max-width: 500px; }
+    .article-cta { margin-top: 48px; padding: 28px 32px; background: var(--cv-field); border-radius: var(--cv-r); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .article-cta p { font-size: 1.0625rem !important; color: #fff !important; margin-bottom: 0 !important; font-weight: 500; max-width: 46ch; }
     .article-cta p strong { font-weight: 700; color: #fff; }
-    .cta-btn { display: inline-block; background: linear-gradient(135deg, #059669, #14B8A6); color: #fff; font-size: 16px; font-weight: 600; padding: 16px 32px; border-radius: 12px; text-decoration: none; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 24px rgba(5,150,105,0.4); transition: background 0.15s, transform 0.1s, box-shadow 0.15s; }
-    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.35); }
-    .article-number { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .15em; color: var(--muted); display: flex; align-items: center; gap: 12px; }
-    .article-number::before, .article-number::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    @media(max-width:640px){
-      .article-body { padding: 32px 24px 40px; }
-      .article-banner { padding: 24px; min-height: 170px; }
-      .banner-title { font-size: 20px; }
-      .article-meta { padding: 14px 24px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: #fff; color: var(--cv-ink); font-size: 1.0625rem; font-weight: 600; padding: 16px 20px; border-radius: var(--cv-r); text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background-color .15s; }
+    .cta-btn:hover { background: var(--cv-tone); }
+    .cta-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; }
+    .article-number { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
+    @media (max-width: 640px) {
+      .article-body > p { font-size: 1.0625rem; }
       .benefits-grid { grid-template-columns: 1fr; }
-      .data-table { font-size: 13px; }
+      .data-table { font-size: .875rem; }
       .data-table th, .data-table td { padding: 10px 12px; }
+      .article-cta { padding: 24px 20px; }
+      .cta-btn { white-space: normal; }
     }
-    /* ── BACK BREADCRUMB ──────────────────────────────────────────────── */
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500; color: var(--muted);
-      text-decoration: none; margin-bottom: 28px;
-      transition: color 0.15s, gap 0.15s;
-    }
-    .back-link:hover { color: var(--green); gap: 8px; }
-    .back-link svg { width: 14px; height: 14px; }
-    .article-breadcrumb {
-      font-size: 13px; color: var(--muted); margin-bottom: 24px;
-    }
-    .article-breadcrumb a {
-      color: var(--muted); text-decoration: none; transition: color 0.15s;
-    }
-    .article-breadcrumb a:hover { color: var(--green); }
+    /* ── VOLVER Y MIGAS ───────────────────────────────────────────────── */
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: var(--cv-small); font-weight: 600; color: var(--cv-ink); text-decoration: none; align-self: flex-start; transition: color .15s, gap .15s; }
+    .back-link:hover { color: var(--cv-accent); gap: 10px; }
+    .back-link svg { width: 15px; height: 15px; }
+    .article-breadcrumb { font-size: var(--cv-small); color: var(--cv-soft); margin-bottom: 24px; }
+    .article-breadcrumb a { color: var(--cv-soft); text-decoration: none; transition: color .15s; }
+    .article-breadcrumb a:hover { color: var(--cv-accent); }
     .article-breadcrumb span { margin: 0 6px; }
   </style>
 
@@ -303,76 +256,6 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     <slot />
   </main>
 
-  <!-- FOOTER -->
-  <footer class="blog-footer" aria-label="Pie de página">
-    <div class="blog-footer-inner">
-      <div class="blog-footer-top">
-        <div class="blog-footer-brand">
-          <svg width="140" height="36" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CertiVeh">
-            <defs>
-              <linearGradient id="sg-footer" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#059669"/>
-                <stop offset="100%" stop-color="#14B8A6"/>
-              </linearGradient>
-            </defs>
-            <g transform="translate(5, 10) scale(0.5)">
-              <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#sg-footer)"/>
-              <path d="M55 30 L42 52 L50 52 L45 70 L62 44 L53 44 L58 30 Z" fill="white"/>
-            </g>
-            <text x="65" y="30" fill="#FFFFFF" font-size="28" font-weight="700" font-family="system-ui, -apple-system, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text>
-          </svg>
-          <p>Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
-        </div>
-        <div class="blog-footer-cols">
-          <div>
-            <div class="blog-footer-col-label">Plataforma</div>
-            <div class="blog-footer-col-links">
-              <a href="/#beneficios">Beneficios</a>
-              <a href="/#servicios">Servicios</a>
-              <a href="/#como-funciona">Cómo funciona</a>
-              <a href="/#calculadora">Calculadora</a>
-            </div>
-          </div>
-          <div>
-            <div class="blog-footer-col-label">Recursos</div>
-            <div class="blog-footer-col-links">
-              <a href="/vehiculos/">Vehículos</a>
-              <a href="/blog/">Blog</a>
-              <a href="/api-docs/">API</a>
-            </div>
-          </div>
-          <div>
-            <div class="blog-footer-col-label">Empresa</div>
-            <div class="blog-footer-col-links">
-              <a href="/nosotros/">Quiénes somos</a>
-              <a href="/aliados/">Programa de Aliados</a>
-              <a href="/otros-activos">Otros activos (GEE/FNCE)</a>
-            </div>
-          </div>
-          <div>
-            <div class="blog-footer-col-label">Legal</div>
-            <div class="blog-footer-col-links">
-              <a href="/terminos-y-condiciones">Términos y Condiciones</a>
-              <a href="/politica-de-privacidad">Política de Privacidad</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="blog-footer-bottom">
-        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <div style="display:flex;align-items:center;gap:16px">
-          <span>contacto@certiveh.co</span>
-          <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER: el pie compartido de todo el sitio -->
+  <SiteFooter />
 </BaseLayout>

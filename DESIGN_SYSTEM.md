@@ -1,6 +1,123 @@
 # CertiVeh - Design System UI
 
+## 0. Sistema visual 2026-11 (manda sobre todo lo de abajo)
+
+> **Esta sección es la fuente de verdad desde noviembre de 2026.** Donde el resto del documento
+> (escrito en marzo de 2026) diga otra cosa —degradados, Inter, radios de 12 a 16 px, sombras en
+> tarjetas, iconos en cuadritos, badges en mayúsculas—, **gana esta sección**. Lo de abajo se conserva
+> como referencia de componentes de formulario y tablas, que siguen valiendo en lo que no contradigan.
+
+**Por qué existe.** En noviembre de 2026 nos dijeron que la web, el portal y el logo «se veían hechos
+con IA». Lo auditamos con `design-taste-frontend` (taste skill) y `web-design-guidelines`: la home
+sacaba 18 fallos y usaba casi todos los recursos que hoy delatan una página generada. Este sistema es
+el resultado, aprobado por Julian tras cuatro rondas sobre una vista previa. Cada regla de §0.4 es un
+rasgo concreto que se quitó; si vuelve, la página vuelve a parecer plantilla.
+
+**La idea:** «el producto en acción». Donde otra landing pondría tarjetas con iconos, CertiVeh muestra
+piezas reales de su trámite: la calculadora con la tarifa vigente, el riel de pasos del portal, el
+módulo Win Win, la placa del vehículo. Pulcro, tecnológico y cercano.
+
+### 0.1 Dónde vive
+
+- `src/styles/marca.css`: las variables `--cv-*` y las clases compartidas (`.cv-btn`, `.cv-sq`). Se
+  carga una sola vez en `BaseLayout.astro`, así que toda página la tiene.
+- `src/app/components/Navbar.tsx`: la barra. Una para todo el sitio.
+- `src/app/components/SiteFooter.tsx`: el pie. Uno para todo el sitio (antes había nueve copias).
+- Las páginas componen sus secciones con esas variables. **Ninguna página escribe un color, una
+  fuente o un radio sueltos.** Si hace falta uno nuevo, se añade a `marca.css` y a esta sección.
+
+### 0.2 Tokens
+
+| Variable | Valor | Uso |
+|---|---|---|
+| `--cv-bg` | `#ffffff` | Suelo |
+| `--cv-ink` | `#0f172a` | Todo el texto corrido |
+| `--cv-soft` | `#475569` | Texto secundario (7,2:1). Nunca más claro que esto para algo que se lee |
+| `--cv-tone` / `--cv-tone-2` | `#f0f4f2` / `#e1e9e5` | Un paso de tono: separa superficies sin línea ni sombra |
+| `--cv-accent` | `#047857` | La acción y el verde del texto. Blanco encima: 5,48:1 |
+| `--cv-accent-hover` | `#036b4e` | Al tocar se **oscurece**, nunca se aclara |
+| `--cv-mint` | `#a7f3d0` | El verde legible sobre fondos oscuros |
+| `--cv-field` / `--cv-field-2` | `#0f172a` / `#1b2537` | Campo oscuro plano |
+| `--cv-field-soft` | `#b6c2d1` | Texto secundario sobre el campo oscuro |
+| `--cv-plate` | `#f5c518` | La placa colombiana (solo en piezas del portal) |
+| `--cv-r` | `6px` | El único radio. Las píldoras (999px) solo para estados |
+| `--cv-m` | `clamp(20px, 4vw, 48px)` | Margen lateral de página |
+| `--cv-gap-sec` | `clamp(96px, 12vw, 200px)` | Aire entre secciones |
+
+El turquesa `#14b8a6` **se retiró**: como texto da 2,4:1 y solo existía como final del degradado.
+El verde `#059669` tampoco se usa en texto (3,87:1); solo puede ser relleno decorativo.
+
+### 0.3 Tipografía y componentes
+
+- **Albert Sans**, pesos 400, 600 y 700, cargada en `BaseLayout.astro` con precarga y `display=swap`.
+  Títulos a 700 con `letter-spacing: -0.03em` (`--cv-trk`).
+- **Cinco pasos de tamaño**: `--cv-display` (h1), `--cv-head` (h2), `--cv-lead` (entradilla y
+  subtítulos), `--cv-body` (17 a 19 px; todo el texto corrido) y `--cv-small` (14 a 15 px).
+  **Nada que se lea por debajo de 13 px.**
+- **Botones** (`.cv-btn` + `.cv-btn-a` principal verde, `.cv-btn-b` secundario en tono, `.cv-btn-w`
+  blanco sobre fondo oscuro): planos, un color, 6 px, flecha `→` que se desplaza al pasar el ratón.
+  Sin degradado, sin brillo, sin sombra.
+- **Listas**: viñeta cuadrada de 7 px (`.cv-sq`), nunca checks ni iconos por ítem.
+- **Superficies**: una baldosa es un relleno `--cv-tone` con 6 px de radio, **sin borde y sin sombra**.
+  Las piezas destacadas van en `--cv-accent` (texto blanco) o en `--cv-field` (texto blanco, cifras en
+  `--cv-mint`).
+- **Lo único que flota y lleva sombra**: el menú del celular, los modales y el botón de WhatsApp.
+
+### 0.4 Lo que NO se usa (cada uno era un rasgo de página generada)
+
+1. Degradados de marca en botones, textos, logo, banners o fondos. Única excepción: el velo neutro
+   oscuro sobre una foto o un video para poder leer encima.
+2. Texto en degradado o una palabra del titular en otro color. Un titular, una tinta.
+3. Sombras y brillos en reposo (`box-shadow` en tarjetas, botones, cajas).
+4. Desenfoque tipo vidrio (`backdrop-filter`). La barra es sólida.
+5. Iconos dentro de un cuadrito o círculo de color encima de una tarjeta.
+6. Números decorativos 01 / 02 / 03. Si el orden importa, se usa `<ol>` y la posición lo dice.
+7. Cifras o letras gigantes en marca de agua detrás del contenido.
+8. Etiquetas en mayúsculas pequeñas con letra espaciada, y píldoras encima de los títulos. El texto se
+   escribe en minúscula inicial a tamaño legible (y en la fuente ya va así: la mayúscula era CSS).
+9. Cajas con borde de 1 px y la franja de color al costado de las tarjetas. Los campos de formulario y
+   las tablas de datos sí llevan su línea.
+10. Radios de 12 a 16 px en todo. Un radio: 6 px.
+11. Fotos de banco de personas con portátil. Se muestran piezas reales del producto o fotos reales.
+12. Estrellas de valoración y comillas gigantes decorativas.
+
+Para comprobarlo: `node ~/.claude/skills/design-taste-frontend/scripts/lint.mjs <fichero>` en el
+código y `inspect.mjs <url>` en la página servida (`astro preview`). Una línea que deba conservar uno
+de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` con el motivo.
+
+### 0.5 Patrones de sección
+
+- **Hero**: video a pantalla completa con velo neutro oscuro, texto blanco a la izquierda y la
+  calculadora encima a la derecha en una ficha blanca con la esquina superior izquierda recortada
+  (`clip-path`). En el celular, el texto y debajo la calculadora.
+- **Intro de sección**: `h2` a `--cv-head` y un párrafo, alineados a la izquierda en 7 de 12 columnas.
+- **Baldosas** (aliados, prensa): rejilla de rellenos `--cv-tone` con 8 px de separación; la primera es
+  el título en `--cv-accent`. Los logos en gris, grandes.
+- **Riel de pasos**: el mismo aspecto que `RielDelTramite` del portal: línea de 3 px, puntos de 25 px,
+  el actual con anillo verde. En «Así de simple» avanza con el scroll y la pieza del portal acompaña a
+  la derecha.
+- **Piezas del portal** (`data-ui`): se construyen en HTML con los rótulos reales del portal. Dentro de
+  una pieza valen las convenciones de interfaz (bordes de campo, sombra del panel). Si llevan cifras
+  inventadas, la pieza dice «Datos de ejemplo».
+- **Problema y solución**: ficha en tono con el problema y, dentro, la solución en blanco con una
+  barra verde de 5 px a la izquierda.
+- **Preguntas**: baldosas en tono que al abrirse pasan a `--cv-accent` con texto blanco.
+- **Pie**: `SiteFooter`, de baldosas.
+
+### 0.6 Reglas que no cambian con el estilo
+
+- **Textos, encabezados, URLs, `<head>`, JSON-LD, `alt` y enlaces no se tocan** al cambiar el estilo.
+  Se puede reordenar, nunca reescribir ni quitar. La comprobación es una huella del `dist/` antes y
+  después (texto visible, encabezados, enlaces, `alt` y `<head>` de las 41 páginas).
+- Celular primero: toda sección tiene su composición a 390 px.
+- `prefers-reduced-motion`: nada se mueve y nada se queda oculto.
+- Contraste AA en todo texto. El foco del teclado se ve (3 px en `--cv-accent`).
+
+---
+
+
 ## 📋 Índice
+0. [Sistema visual 2026-11](#0-sistema-visual-2026-11-manda-sobre-todo-lo-de-abajo) (manda sobre lo demás)
 1. [Foundations](#foundations)
 2. [Typography Tokens](#typography-tokens)
 3. [Core Components](#core-components)

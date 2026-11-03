@@ -175,122 +175,47 @@ const articles = [
   description="Guías rigurosas sobre los beneficios tributarios para vehículos eléctricos e híbridos en Colombia: deducción en renta, gestión de la devolución de IVA ante la DIAN, proceso UPME y estrategias para flotas empresariales."
 >
   <style>
-    .blog-home-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 24px 100px;
-    }
-    .blog-home-intro {
-      text-align: center;
-      padding-bottom: 48px;
-      border-bottom: none;
-      margin-bottom: 56px;
-      position: relative;
-    }
-    .blog-home-intro::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #059669, #14B8A6);
-      margin: 32px auto 0;
-      border-radius: 2px;
-    }
-    .blog-home-intro .label {
-      display: inline-block;
-      font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-      color: #047857; background: #ECFDF5;
-      border: 1px solid #A7F3D0; border-radius: 9999px; padding: 4px 12px;
-      margin-bottom: 16px;
-    }
-    .blog-home-intro h1 {
-      font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: #0F172A;
-      letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15;
-    }
-    .blog-home-intro p { font-size: 16px; color: #475569; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+    /* Índice del blog · estándar visual 2026-11 (DESIGN_SYSTEM.md §0): la cabecera en el campo oscuro, como
+       la de cada artículo, y cada artículo en una baldosa de tono. Sin banners en degradado, sin el número
+       gigante de fondo, sin píldoras y sin el botón en degradado repetido quince veces. */
+    .blog-home-wrapper { max-width: calc(1240px + 2 * var(--cv-m)); margin: 0 auto; padding: 0 var(--cv-m) 120px; }
+    /* La cabecera lleva el fotograma del video de la home con el mismo velo oscuro: el blog se reconoce como
+       parte de la misma casa y el primer pantallazo no queda con un bloque vacío. */
+    .blog-home-intro { position: relative; width: 100vw; margin-left: calc(50% - 50vw); color: #fff; margin-bottom: 48px;
+      padding: clamp(72px, 10vw, 140px) max(var(--cv-m), calc((100vw - 1240px) / 2));
+      background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
+    .blog-home-intro::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
+    .blog-home-intro > * { position: relative; }
+    .blog-home-intro .label { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-mint); margin-bottom: 16px; }
+    .blog-home-intro h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); color: #fff; letter-spacing: var(--cv-trk); line-height: 1; margin-bottom: 20px; text-wrap: balance; max-width: 22ch; }
+    .blog-home-intro p { font-size: var(--cv-lead); color: #e2e8f0; line-height: 1.4; max-width: 46ch; }
 
-    .articles-grid {
-      display: flex; flex-direction: column; gap: 32px;
-    }
+    .articles-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .article-card { background: var(--cv-tone); border-radius: var(--cv-r); text-decoration: none; color: var(--cv-ink); display: flex; flex-direction: column; padding: clamp(22px, 2.6vw, 36px); gap: 14px; transition: background-color .15s; }
+    .article-card:hover { background: var(--cv-tone-2); }
+    .article-card:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
+    .card-banner, .card-banner.b-green, .card-banner.b-navy, .card-banner.b-amber { background: none; min-height: 0; padding: 0; }
+    .card-banner-num { display: none; }
+    .card-banner-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); margin-bottom: 10px; }
+    .card-banner-title { font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); font-weight: var(--cv-wh); color: var(--cv-ink); letter-spacing: var(--cv-trk); line-height: 1.12; margin: 0; text-wrap: balance; }
+    .card-body { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .card-body-left { flex: 1; }
+    .card-subtitle { font-size: 1.0625rem; color: var(--cv-ink); line-height: 1.55; margin-bottom: 14px; }
+    .card-meta { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+    .card-meta-pill { position: relative; padding-left: 13px; font-size: var(--cv-small); color: var(--cv-soft); }
+    .card-meta-pill::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--cv-accent); }
+    .card-read-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 1.0625rem; font-weight: 700; color: var(--cv-accent); align-self: flex-start; }
+    .card-read-btn svg { width: 15px; height: 15px; transition: transform .15s; }
+    .article-card:hover .card-read-btn svg { transform: translateX(4px); }
 
-    .article-card {
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #E2E8F0;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      text-decoration: none;
-      display: block;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .article-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
-    }
-    .card-banner {
-      min-height: 160px;
-      display: flex; align-items: flex-end;
-      padding: 28px 36px;
-      position: relative; overflow: hidden;
-    }
-    .card-banner.b-green { background: linear-gradient(135deg,#065F46 0%,#059669 60%,#14B8A6 100%); }
-    .card-banner.b-navy  { background: linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%); }
-    .card-banner.b-amber { background: linear-gradient(135deg,#78350F 0%,#D97706 60%,#059669 100%); }
-    .card-banner-num {
-      position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
-      font-size: 110px; font-weight: 900; color: rgba(255,255,255,0.03);
-      line-height: 1; letter-spacing: -.05em; user-select: none;
-    }
-    .card-banner-inner { position: relative; z-index: 1; }
-    .card-banner-tag {
-      font-size: 10px; font-weight: 700; letter-spacing: .14em;
-      color: rgba(255,255,255,0.55); margin-bottom: 8px;
-    }
-    .card-banner-title {
-      font-size: 20px; font-weight: 700; color: #fff;
-      letter-spacing: -.02em; line-height: 1.25; max-width: 580px; margin: 0;
-    }
-
-    .card-body {
-      padding: 24px 36px 28px;
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-    }
-    .card-body-left { flex: 1; min-width: 200px; }
-    .card-subtitle {
-      font-size: 14px; color: #475569; line-height: 1.7; margin-bottom: 16px;
-    }
-    .card-meta {
-      display: flex; gap: 10px; flex-wrap: wrap;
-    }
-    .card-meta-pill {
-      font-size: 12px; color: #64748B;
-      background: #F8FAFC; border: 1px solid #E2E8F0;
-      border-radius: 9999px; padding: 4px 12px;
-    }
-    .card-read-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, #059669, #14B8A6); color: #fff;
-      font-size: 15px; font-weight: 600;
-      padding: 12px 24px; border-radius: 12px;
-      white-space: nowrap; flex-shrink: 0; align-self: flex-end;
-      box-shadow: 0 4px 24px rgba(5,150,105,0.4);
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-    }
-    .article-card:hover .card-read-btn { background: linear-gradient(135deg, #047857, #0D9488); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(5,150,105,0.3); }
-    .card-read-btn svg { width: 13px; height: 13px; }
-
-    @media (max-width: 640px) {
-      .blog-home-intro h1 { font-size: 32px; }
-      .card-banner { padding: 24px; min-height: 130px; }
-      .card-banner-title { font-size: 17px; }
-      .card-body { padding: 20px 24px 24px; }
-      .card-read-btn { width: 100%; justify-content: center; }
+    @media (max-width: 760px) {
+      .articles-grid { grid-template-columns: 1fr; gap: 6px; }
     }
   </style>
 
   <div class="blog-home-wrapper">
     <div class="blog-home-intro">
-      <h1>Guía completa de <span style="background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">beneficios tributarios</span> para vehículos eléctricos e híbridos en Colombia</h1>
+      <h1>Guía completa de beneficios tributarios para vehículos eléctricos e híbridos en Colombia</h1>
       <p>Información basada en la normativa vigente: Ley 1715 de 2014, Ley 2099 de 2021 y Resolución UPME 563 de 2026.</p>
     </div>
 
