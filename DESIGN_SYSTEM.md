@@ -23,6 +23,9 @@ módulo Win Win, la placa del vehículo. Pulcro, tecnológico y cercano.
   carga una sola vez en `BaseLayout.astro`, así que toda página la tiene.
 - `src/app/components/Navbar.tsx`: la barra. Una para todo el sitio.
 - `src/app/components/SiteFooter.tsx`: el pie. Uno para todo el sitio (antes había nueve copias).
+  Las páginas con un pie de contenido distinto lo montan con props y el mismo estilo: `/otros-activos`
+  (`tagline`, `columns`, `cta={null}`) y los dos legales (`homeLink`, que conserva su enlace del logo a la
+  home). La documentación de la API conserva su propio pie de una línea, en la baldosa de contacto.
 - Las páginas componen sus secciones con esas variables. **Ninguna página escribe un color, una
   fuente o un radio sueltos.** Si hace falta uno nuevo, se añade a `marca.css` y a esta sección.
 

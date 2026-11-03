@@ -1,5 +1,11 @@
 # CertiVeh - Manual de Marca 2026
 
+> **Desde noviembre de 2026 manda `DESIGN_SYSTEM.md` §0** («Sistema visual 2026-11») y las variables de
+> `src/styles/marca.css`. Las decisiones fijas de la marca están en esa sección: Albert Sans, el verde
+> plano `#047857`, un solo radio de 6 px, sin degradados, sin turquesa, sin sombras ni vidrio, sin iconos en
+> cuadritos, sin rótulos en mayúsculas espaciadas. Donde este manual diga otra cosa, gana §0. Este documento
+> conserva la voz, la ortografía y las reglas de uso del logo.
+
 ## 📋 Índice
 1. [Logo e Identidad Visual](#logo-e-identidad-visual)
 2. [Paleta de Color](#paleta-de-color)
@@ -18,12 +24,28 @@
 El logo de CertiVeh combina un escudo con un rayo eléctrico, simbolizando:
 - **Escudo**: Protección, confianza, certificación oficial
 - **Rayo**: Energía eléctrica, velocidad, tecnología
-- **Gradiente**: Modernidad, innovación, dinamismo
+- **Un solo verde plano** (`#047857`): sin degradado. El degradado esmeralda → turquesa se retiró en
+  noviembre de 2026: era uno de los rasgos que hacían que la marca «se viera hecha con IA».
+
+### Construcción (marca 2026-11)
+
+- **Escudo** (viewBox `0 0 64 64`): `M32 4 L56 16 L56 36 C56 50 46 60 32 64 C18 60 8 50 8 36 L8 16 Z`,
+  relleno `#047857` plano.
+- **Rayo**: `M36 18 L26 38 L32 38 L28 56 L42 36 L36 36 Z`, blanco.
+- **Palabra «CertiVeh»**: Albert Sans 700, tracking -0.03em, **en una sola tinta**: `#0F172A` sobre claro,
+  `#FFFFFF` sobre oscuro. Ya **no** va «Veh» en verde ni la bajada «CERTIFICACIÓN VEHICULAR» en mayúsculas
+  espaciadas.
+- **Sobre el verde `#047857`**: escudo blanco con el rayo verde, palabra blanca.
+- **Ícono, favicon y avatar**: el escudo solo (`public/favicon.svg`). Avatar de redes: escudo blanco centrado
+  sobre un cuadrado `#047857` (o escudo verde sobre blanco), con aire: el escudo ocupa ~56% del lado.
+
+En el sitio, el logo de la barra vive en `src/app/components/Navbar.tsx` (función `Logo`): el escudo en SVG y
+la palabra como texto HTML.
 
 ### Componente Logo (React)
 
 ```tsx
-// CertiVehLogo.tsx
+// CertiVehLogo.tsx — marca 2026-11: un verde plano, la palabra en una tinta
 interface CertiVehLogoProps {
   width?: number;
   height?: number;
@@ -32,96 +54,33 @@ interface CertiVehLogoProps {
   compact?: boolean;
 }
 
-export function CertiVehLogo({ 
-  width = 200, 
-  height = 50, 
-  variant = 'default',
-  iconOnly = false,
-  compact = false
-}: CertiVehLogoProps) {
-  const textColor = variant === 'light' ? '#FFFFFF' : '#0F172A';
-  const primaryColor = '#059669'; // emerald-600
-  const accentColor = '#14B8A6'; // teal-500
-  
+const SHIELD = "M32 4 L56 16 L56 36 C56 50 46 60 32 64 C18 60 8 50 8 36 L8 16 Z";
+const BOLT = "M36 18 L26 38 L32 38 L28 56 L42 36 L36 36 Z";
+
+export function CertiVehLogo({ width = 200, height = 50, variant = 'default', iconOnly = false, compact = false }: CertiVehLogoProps) {
+  const ink = variant === 'light' ? '#FFFFFF' : '#0F172A';
+
   if (iconOnly) {
     return (
-      <svg width={width} height={height} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={primaryColor} />
-            <stop offset="100%" stopColor={accentColor} />
-          </linearGradient>
-        </defs>
-        
-        {/* Shield Badge */}
-        <path 
-          d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" 
-          fill="url(#shieldGradient)"
-        />
-        
-        {/* Electric Bolt */}
-        <path 
-          d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" 
-          fill="white"
-        />
+      <svg width={width} height={height} viewBox="0 0 64 64" fill="none" role="img" aria-label="CertiVeh">
+        <path d={SHIELD} fill="#047857" />
+        <path d={BOLT} fill="#FFFFFF" />
       </svg>
     );
   }
 
-  const logoWidth = compact ? 240 : 320;
-  const logoHeight = compact ? 60 : 80;
-
+  const w = compact ? 240 : 320;
+  const h = compact ? 60 : 80;
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${logoWidth} ${logoHeight}`} fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id={`shieldGrad-${variant}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={primaryColor} />
-          <stop offset="100%" stopColor={accentColor} />
-        </linearGradient>
-      </defs>
-      
-      {/* Icon/Badge */}
-      <g transform={compact ? "translate(5, 10) scale(0.5)" : "translate(5, 5) scale(0.65)"}>
-        {/* Shield Badge */}
-        <path 
-          d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" 
-          fill={`url(#shieldGrad-${variant})`}
-        />
-        
-        {/* Electric Bolt */}
-        <path 
-          d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" 
-          fill="white"
-        />
+    <svg width={width} height={height} viewBox={`0 0 ${w} ${h}`} fill="none" role="img" aria-label="CertiVeh">
+      <g transform={compact ? "translate(4,4) scale(0.82)" : "translate(4,6) scale(1.06)"}>
+        <path d={SHIELD} fill="#047857" />
+        <path d={BOLT} fill="#FFFFFF" />
       </g>
-      
-      {/* Wordmark */}
-      <g transform={compact ? "translate(65, 30)" : "translate(75, 28)"}>
-        <text 
-          x="0" 
-          y="0" 
-          fill={textColor} 
-          fontSize={compact ? "28" : "32"} 
-          fontWeight="700" 
-          fontFamily="system-ui, -apple-system, sans-serif"
-          letterSpacing="-0.5"
-        >
-          Certi<tspan fill={primaryColor}>Veh</tspan>
-        </text>
-        {!compact && (
-          <text 
-            x="0" 
-            y="20" 
-            fill={variant === 'light' ? 'rgba(255,255,255,0.7)' : '#64748B'} 
-            fontSize="11" 
-            fontWeight="500" 
-            fontFamily="system-ui, -apple-system, sans-serif"
-            letterSpacing="1.5"
-          >
-            CERTIFICACIÓN VEHICULAR
-          </text>
-        )}
-      </g>
+      <text x={compact ? 64 : 84} y={compact ? 40 : 52} fill={ink} fontSize={compact ? 30 : 40} fontWeight="700"
+        fontFamily="'Albert Sans', 'Helvetica Neue', Arial, sans-serif" letterSpacing="-0.03em">
+        CertiVeh
+      </text>
     </svg>
   );
 }
@@ -166,96 +125,44 @@ export function CertiVehLogo({
 
 ## 🎨 Paleta de Color
 
-### Colores Principales
+Fuente de verdad: `src/styles/marca.css` y `DESIGN_SYSTEM.md` §0.2. Las páginas usan las variables `--cv-*`;
+no escriben colores sueltos.
 
-#### Verde Esmeralda (Primary)
-- **HEX**: `#059669`
-- **RGB**: `5, 150, 105`
-- **Tailwind**: `emerald-600`
-- **Uso**: Color de marca principal, CTAs, elementos interactivos
+### Colores de marca
 
-#### Teal (Accent)
-- **HEX**: `#14B8A6`
-- **RGB**: `20, 184, 166`
-- **Tailwind**: `teal-500`
-- **Uso**: Acentos, gradientes, estados hover
+| Variable | HEX | Uso |
+|---|---|---|
+| `--cv-accent` | `#047857` | **El verde de la marca**: la acción (botones), el escudo y el verde del texto. Blanco encima: 5,48:1 |
+| `--cv-accent-hover` | `#036B4E` | Al tocar, el verde **se oscurece**, nunca se aclara |
+| `--cv-ink` | `#0F172A` | Todo el texto corrido |
+| `--cv-soft` | `#475569` | Texto secundario (7,2:1). Nunca más claro que esto para algo que se lee |
+| `--cv-tone` / `--cv-tone-2` | `#F0F4F2` / `#E1E9E5` | Un paso de tono: separa superficies sin línea ni sombra |
+| `--cv-mint` | `#A7F3D0` | El verde legible sobre fondos oscuros |
+| `--cv-field` / `--cv-field-2` | `#0F172A` / `#1B2537` | Campo oscuro plano |
+| `--cv-field-soft` | `#B6C2D1` | Texto secundario sobre el campo oscuro |
+| `--cv-plate` | `#F5C518` | La placa colombiana (solo en piezas del portal) |
 
-#### Gris Pizarra (Neutral)
-- **HEX**: `#0F172A`
-- **RGB**: `15, 23, 42`
-- **Tailwind**: `slate-900`
-- **Uso**: Texto principal, fondos oscuros
+- **El turquesa `#14B8A6` se retiró.** Como texto daba 2,4:1 y solo existía como final del degradado.
+- **`#059669` nunca como color de texto** (3,87:1 sobre blanco, no cumple AA). Puede quedar como relleno
+  decorativo; para todo lo que se lee va `#047857`.
 
-#### Dorado (Premium)
-- **HEX**: `#F59E0B`
-- **RGB**: `245, 158, 11`
-- **Tailwind**: `amber-500`
-- **Uso**: Características premium, destacados de valor
+### Colores de estado
 
-### Escala Completa de Colores
+| Propósito | Hex | Uso |
+|-----------|-----|-----|
+| Éxito | `#047857` | Confirmaciones, completado |
+| Advertencia | `#92400E` sobre `#FDF3E1` | Avisos que piden atención |
+| Error | `#B91C1C` sobre `#FDECEA` | Errores, acciones destructivas |
 
-#### Emerald (Primary Scale)
-```
-emerald-50:  #ECFDF5
-emerald-100: #D1FAE5
-emerald-200: #A7F3D0
-emerald-500: #10B981
-emerald-600: #059669 ⭐ Principal
-emerald-700: #047857
-emerald-800: #065F46
-```
+### No usamos degradados
 
-#### Teal (Accent Scale)
-```
-teal-50:  #F0FDFA
-teal-100: #CCFBF1
-teal-200: #99F6E4
-teal-500: #14B8A6 ⭐ Acento
-teal-600: #0D9488
-teal-700: #0F766E
-teal-800: #115E59
-```
-
-#### Slate (Neutral Scale)
-```
-slate-50:  #F8FAFC
-slate-100: #F1F5F9
-slate-200: #E2E8F0
-slate-500: #64748B
-slate-700: #334155
-slate-900: #0F172A ⭐ Texto/Fondos
-slate-950: #020617
-```
-
-#### Amber (Premium Scale)
-```
-amber-100: #FEF3C7
-amber-400: #FBBF24
-amber-500: #F59E0B ⭐ Premium
-amber-600: #D97706
-```
-
-### Colores Semánticos
-
-| Propósito | Color | Hex | Uso |
-|-----------|-------|-----|-----|
-| Success | emerald-600 | #059669 | Confirmaciones, completado |
-| Info | blue-600 | #2563EB | Información, enlaces |
-| Warning | orange-500 | #F97316 | Advertencias, precaución |
-| Error | red-600 | #DC2626 | Errores, acciones destructivas |
-| Premium | amber-500 | #F59E0B | Features premium |
-
-### Gradientes
+Ni en botones, ni en textos, ni en el logo, ni en banners ni fondos. Un titular va en una sola tinta (tampoco
+una palabra en otro color). **La única excepción** es el velo neutro oscuro sobre una foto o un video, para
+poder leer encima:
 
 ```css
-/* Gradiente Principal */
-background: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
-
-/* Gradiente Sutil */
-background: linear-gradient(135deg, #ECFDF5 0%, #F0FDFA 100%);
-
-/* Gradiente Premium */
-background: linear-gradient(135deg, #059669 0%, #F59E0B 100%);
+/* el velo de las cabeceras del sitio, sobre el fotograma del video */
+background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%);
 ```
 
 ---
@@ -264,66 +171,34 @@ background: linear-gradient(135deg, #059669 0%, #F59E0B 100%);
 
 ### Fuentes del Sistema
 
-**Familia Principal**: Inter (Google Fonts)
-**Fallback**: `-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif`
+**Familia única**: **Albert Sans** (Google Fonts, licencia OFL), pesos **400, 600 y 700**. Se carga una vez en
+`BaseLayout.astro` con precarga y `display=swap`.
+**Fallback**: `'Helvetica Neue', Arial, sans-serif` (variable `--cv-font`).
+
+Se descartaron Inter y Schibsted Grotesk. Las imágenes sociales usan los mismos TTF, guardados en
+`scripts/fonts/`.
 
 ### Jerarquía Tipográfica
 
-```tsx
-// Títulos Display
-<h1 className="text-5xl font-bold text-slate-900">
-  // 48px, Bold, -0.02em letter-spacing
-</h1>
+Cinco pasos, como variables de `marca.css`. **Nada que se lea por debajo de 13 px.**
 
-// Títulos H1
-<h1 className="text-4xl font-bold text-slate-900">
-  // 36px, Bold
-</h1>
+| Variable | Tamaño | Uso |
+|---|---|---|
+| `--cv-display` | 34 → 64 px | h1 |
+| `--cv-head` | 28 → 56 px | h2 |
+| `--cv-lead` | 20 → 26 px | Entradillas y subtítulos |
+| `--cv-body` | 17 → 19 px | Todo el texto corrido |
+| `--cv-small` | 14 → 15 px | Notas y datos secundarios |
 
-// Títulos H2
-<h2 className="text-3xl font-bold text-slate-900">
-  // 30px, Bold
-</h2>
-
-// Títulos H3
-<h3 className="text-2xl font-semibold text-slate-900">
-  // 24px, Semibold
-</h3>
-
-// Títulos H4
-<h4 className="text-xl font-semibold text-slate-900">
-  // 20px, Semibold
-</h4>
-
-// Body Large
-<p className="text-lg text-slate-700">
-  // 18px, Regular, 1.5 line-height
-</p>
-
-// Body Default
-<p className="text-base text-slate-700">
-  // 16px, Regular, 1.5 line-height
-</p>
-
-// Body Small
-<p className="text-sm text-slate-600">
-  // 14px, Regular, 1.5 line-height
-</p>
-
-// Caption
-<span className="text-xs text-slate-500">
-  // 12px, Regular
-</span>
-```
+Títulos a 700 con `letter-spacing: -0.03em` (`--cv-trk`) e interlineado cerrado (~1).
 
 ### Pesos de Fuente
 
 | Peso | Valor | Uso |
 |------|-------|-----|
 | Regular | 400 | Texto de cuerpo |
-| Medium | 500 | Énfasis sutil, labels |
-| Semibold | 600 | Subtítulos, botones |
-| Bold | 700 | Títulos principales |
+| Semibold | 600 | Botones, etiquetas, entradillas destacadas |
+| Bold | 700 | Títulos y cifras |
 
 ### Capitalización y ortografía
 
@@ -351,27 +226,14 @@ consistencia entre verticales.
 
 #### Dónde sí van mayúsculas
 
-**Las píldoras van en mayúsculas** (siempre por CSS). Una píldora es un tag con
-fondo, borde, `border-radius: 9999px` y `letter-spacing` ≥ 0.04em:
+**En casi ningún sitio.** Desde la marca 2026-11 (DESIGN_SYSTEM.md §0.4.8) ya no hay rótulos en mayúsculas
+pequeñas con letra espaciada ni píldoras encima de los títulos: las que existían (`.tc-badge`, `.badge`,
+`.al-section-label`, `.label` del blog, `.vh-card-badge`, `.vh-directory-badge`) se pintan hoy en minúscula
+inicial, a tamaño legible y sin caja. Las píldoras (radio 999 px) quedan **solo para estados**.
 
-| Clase | Página | Ejemplo |
-|-------|--------|---------|
-| `.tc-badge` | Términos, Privacidad | DOCUMENTO LEGAL |
-| `.badge` | Landings principal y otros activos | EL PROCESO |
-| `.al-section-label` / `-dark` | Aliados | CÓMO FUNCIONA |
-| `.label` (en `.page-intro` / `.blog-home-intro`) | Blog | BLOG |
-| `.vh-card-badge`, `.vh-directory-badge` | Directorio de vehículos | ELÉCTRICO |
-
-**No son píldoras** (van en sentence case): los labels de las calculadoras
-(`Beneficio total estimado`, `Perfil tributario`), los títulos de columna del
-footer, `.tc-anexo-label`, `.bc-label`, `.tl-label` y `.banner-tag`.
-
-Tampoco se ponen en mayúsculas las píldoras **sin** tracking, porque llevan
-nombres propios o datos: `.nos-tag-green` / `.nos-tag-slate` (Stanford GSB Alumni),
-`.vh-brand-pill` (BYD, Tesla), `.card-meta-pill`.
-
-Otras excepciones: el lockup del logo (`CERTIFICACIÓN VEHICULAR`, `OTROS ACTIVOS`),
-los numerales romanos de las páginas legales y los verbos HTTP de la API (`POST`, `GET`).
+Se conservan en mayúsculas porque así se escriben: los numerales romanos de las páginas legales, los verbos
+HTTP de la API (`POST`, `GET`) y las siglas (UPME, DIAN, IVA, GEE, FNCE). El lockup del logo ya no lleva
+bajada en mayúsculas.
 
 **Ortografía:** todo el copy visible lleva tildes y signos de apertura (`¿`, `¡`),
 incluidos los textos dentro de bloques JSON-LD. Los identificadores de código,
@@ -380,6 +242,10 @@ slugs y rutas (`/vehiculos/`, `descripcion`, `solucion`) van sin tilde y no se t
 ---
 
 ## 🎯 Iconografía
+
+> Marca 2026-11: **nunca un ícono dentro de un cuadrito o círculo de color** encima de una tarjeta, y en las
+> listas va la viñeta cuadrada de 7 px (`.cv-sq`), no un check por ítem. Los íconos quedan para controles
+> (menú, cerrar, redes, flechas de los botones).
 
 ### Librería: Lucide React
 
@@ -425,43 +291,12 @@ import {
 ## 🎨 Ilustración
 
 ### Estilo Visual
-- **Estilo**: Flat design con gradientes sutiles
-- **Colores**: Paleta de marca (emerald, teal, amber)
-- **Elementos**: Iconográficos, modernos, limpios
-- **Contexto**: Vehículos eléctricos, tecnología, certificación
-
-### Patrones de Ilustración
-
-```tsx
-// Patrón de fondo - Puntos sutiles
-<div className="relative">
-  <div className="absolute inset-0 opacity-5">
-    <div className="h-full w-full" style={{
-      backgroundImage: 'radial-gradient(circle, #059669 1px, transparent 1px)',
-      backgroundSize: '24px 24px'
-    }}></div>
-  </div>
-</div>
-
-// Patrón de fondo - Grid
-<div className="relative">
-  <div className="absolute inset-0 opacity-5">
-    <div className="h-full w-full" style={{
-      backgroundImage: 'linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)',
-      backgroundSize: '32px 32px'
-    }}></div>
-  </div>
-</div>
-```
-
-### Elementos Decorativos
-
-```tsx
-// Blob/Shape decorativo
-<svg viewBox="0 0 200 200" className="w-64 h-64 text-emerald-100">
-  <path fill="currentColor" d="M40,-65C52,-58,62,-48,68,-36C74,-24,76,-10,75,4C74,18,70,32,62,43C54,54,42,62,29,66C16,70,2,70,-12,67C-26,64,-40,58,-51,48C-62,38,-70,24,-73,9C-76,-6,-74,-22,-68,-36C-62,-50,-52,-62,-40,-68C-28,-74,-14,-74,0,-73C14,-72,28,-71,40,-65Z" transform="translate(100 100)" />
-</svg>
-```
+- **No hacemos ilustración decorativa.** Donde otra marca pondría un dibujo, CertiVeh muestra **piezas reales
+  de su producto**: la calculadora con la tarifa vigente, el riel de pasos del portal, el módulo Win Win, la
+  placa del vehículo (DESIGN_SYSTEM.md §0.5, «piezas del portal»).
+- **Colores**: los de `marca.css`, planos.
+- **Fuera** (eran rasgos de página generada): los patrones de puntos, la rejilla de fondo, las manchas
+  («blobs») decorativas, las cifras en marca de agua y los números 01 / 02 / 03.
 
 ---
 
@@ -541,7 +376,8 @@ import {
 ## 📸 Fotografía
 
 ### Estilo Fotográfico
-- **Tipo**: Fotografía real, natural, con personas reales
+- **Tipo**: Fotografía real, natural, con personas reales. **Nada de fotos de banco de gente con portátil**:
+  se muestran fotos propias (los fundadores, los videos del sitio) o piezas reales del producto
 - **Iluminación**: Natural, cálida, acogedora
 - **Composición**: Limpia, con espacio negativo
 - **Tratamiento**: Colores vibrantes pero naturales, ligero boost a verdes
@@ -554,21 +390,14 @@ import {
 
 ### Procesamiento de Imágenes
 
-```tsx
-// Overlay verde sutil sobre imágenes
-<div className="relative">
-  <img src="..." alt="..." />
-  <div className="absolute inset-0 bg-emerald-600 mix-blend-multiply opacity-10"></div>
-</div>
+Sin tinte verde ni filtros. Para leer encima de una foto o un video, el **velo neutro oscuro** (es el único
+degradado permitido):
 
-// Gradiente overlay para legibilidad de texto
-<div className="relative">
-  <img src="..." alt="..." />
-  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-  <div className="relative z-10">
-    {/* Contenido aquí */}
-  </div>
-</div>
+```css
+.hero::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%);
+}
 ```
 
 ---
@@ -588,18 +417,20 @@ import {
 1. **No estirar o distorsionar** el logo
 2. **No rotar** el logo
 3. **No cambiar los colores** del logo
-4. **No agregar efectos** (sombras, brillos, 3D)
-5. **No colocar sobre fondos con bajo contraste**
-6. **No usar versiones de baja resolución**
-7. **No reconstruir o recrear** el logo
+4. **No agregar efectos** (sombras, brillos, 3D, degradados)
+5. **No poner «Veh» en otro color** ni añadir la bajada en mayúsculas
+6. **No colocar sobre fondos con bajo contraste**
+7. **No usar versiones de baja resolución**
+8. **No reconstruir o recrear** el logo
+9. **No usar la placa como logo** (se probó y se descartó)
 
 ### Fondos Permitidos
 
 #### ✅ Fondos Aprobados
 - Blanco (#FFFFFF)
-- Gris muy claro (slate-50: #F8FAFC)
-- Gris muy oscuro (slate-900: #0F172A)
-- Gradiente verde-teal oficial
+- Tono (`#F0F4F2`)
+- Campo oscuro (`#0F172A`)
+- Verde de marca `#047857` plano (con el escudo blanco y el rayo verde)
 - Negro (#000000)
 
 #### ⚠️ Fondos con Precaución
@@ -610,7 +441,7 @@ import {
 - Colores brillantes o saturados
 - Fotografías sin overlay
 - Patrones complejos
-- Gradientes no oficiales
+- Cualquier degradado
 
 ---
 
@@ -642,14 +473,14 @@ certiveh-icon-{size}x{size}.png
 ## 📱 Aplicaciones del Sistema
 
 ### Tarjetas de Presentación
-- Logo en versión light sobre gradiente verde-teal
+- Logo en versión light sobre el verde `#047857` plano
 - Tipografía clara y legible
 - Información de contacto estructurada
 
 ### Headers Web
-- Logo a 160px de ancho
-- Navegación con fuente medium
-- Fondo blanco con border sutil
+- Escudo de 28 px y la palabra a 22 px
+- Navegación en Albert Sans 600
+- Barra blanca sólida, sin borde, sin sombra y sin desenfoque
 
 ### App Móvil
 - Versión compacta del logo a 120px
@@ -674,7 +505,7 @@ npm install lucide-react
 # Fuentes (agregar a index.html o _document.tsx)
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 ```
 
 ### Configuración de Tailwind (Opcional)
@@ -686,14 +517,17 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          primary: '#059669',
-          accent: '#14B8A6',
-          dark: '#0F172A',
-          premium: '#F59E0B',
+          accent: '#047857',       // --cv-accent
+          'accent-hover': '#036B4E',
+          ink: '#0F172A',          // --cv-ink
+          soft: '#475569',         // --cv-soft
+          tone: '#F0F4F2',         // --cv-tone
+          mint: '#A7F3D0',         // --cv-mint
         }
       },
+      borderRadius: { DEFAULT: '6px' },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Albert Sans', 'Helvetica Neue', 'Arial', 'sans-serif'],
       }
     }
   }

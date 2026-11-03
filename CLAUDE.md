@@ -64,17 +64,22 @@ mantiene limpio y profesional. Hoy el repo la respeta: cero apariciones en `src/
 
 ## Marca y diseño
 
+**Manda `DESIGN_SYSTEM.md` §0 (sistema visual 2026-11) con las variables y clases de `src/styles/marca.css`**
+(Albert Sans, verde plano `#047857`, un radio de 6 px, sin degradados ni turquesa; `Navbar` y `SiteFooter`
+únicos para todo el sitio). Donde los demás documentos digan otra cosa, gana §0.
+
 Antes de tocar un color, una tipografía o un espaciado, **abre y lee** el que corresponda. Están en
 la raíz y son la fuente de verdad. No se importan aquí a propósito: entre los cuatro suman más de
 2.400 líneas y cargarlos en cada sesión desplazaría al resto de las instrucciones.
 
-- `BRAND_MANUAL.md` — identidad, logo, voz (713 líneas).
-- `DESIGN_SYSTEM.md` — tokens, componentes, escalas (1.276 líneas).
+- `BRAND_MANUAL.md` — identidad, logo, voz (~550 líneas).
+- `DESIGN_SYSTEM.md` — §0 primero; tokens, componentes, escalas (~1.390 líneas).
 - `OG_IMAGE_SPECS.md` — especificación de las imágenes sociales.
 - `COPIES_LANDING_CERTIVEH.md` — los textos aprobados de la landing.
 
-⚠️ **Hay dos verdes y no son intercambiables.** El primario `#059669` da 3.87:1 sobre blanco, que
-**no cumple AA para texto**. Para letra se usa `#047857`. El primario es para rellenos. Es el
+⚠️ **Hay dos verdes y no son intercambiables.** Desde la marca 2026-11 el verde de la marca es
+`#047857` (`--cv-accent`), para la acción y para la letra. El antiguo primario `#059669` da 3.87:1
+sobre blanco, que **no cumple AA para texto**: solo puede quedar como relleno decorativo. Es el
 defecto que no se ve en pantalla y sí al imprimir.
 
 ## Los datos tributarios son la parte cara de equivocarse
