@@ -99,7 +99,7 @@ estas, y no las deduzcas del código de otro repo:**
   en cada bloque: «eléctrico puro (BEV)», «híbrido (HEV)», «híbrido enchufable (PHEV)», «híbrido ligero (MHEV)»,
   «eléctrico (EV)». Nunca la sigla sola. Decisión de Julian del 3-nov-2026, por SEO. **Fuera del blog** (landing,
   fichas, legales, componentes), sigue la regla de siempre: sin siglas, solo palabras.
-- **Ventana UPME:** Resolución 400 de 2026, ventana continua del 1 de febrero al 15 de diciembre.
+- **Ventana UPME:** Resolución UPME 563 de 2026 (que derogó la 400 de 2026), ventana continua del 1 de febrero al 15 de diciembre.
   Ya no hay ciclos; si un texto habla de «ciclos de recepción», está caducado.
 - **Ante la UPME sí radicamos nosotros. Ante la DIAN no.** Son entidades distintas y la frase no se
   puede generalizar en ninguna de las dos direcciones.
