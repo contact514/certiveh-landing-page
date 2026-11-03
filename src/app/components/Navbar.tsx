@@ -16,109 +16,88 @@ function Icon({ name, size = 20, color = "currentColor" }: { name: string; size?
 }
 
 const NAV_CSS = `
+  /* Barra sólida y plana (estándar visual 2026-11, DESIGN_SYSTEM.md §0): sin transparencia sobre el hero,
+     sin desenfoque, sin sombra. La misma en todas las páginas. */
   .shared-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: transparent;
-    backdrop-filter: none;
-    border-bottom: 1px solid transparent;
+    background: var(--cv-bg, #ffffff);
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
     box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--cv-font, 'Albert Sans', 'Helvetica Neue', Arial, sans-serif);
     -webkit-font-smoothing: antialiased;
-    transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
   }
-  .shared-nav.scrolled {
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom-color: #E2E8F0;
-  }
-  .shared-nav-logo { text-decoration: none; display: flex; align-items: center; }
-  .shared-nav-links { display: flex; align-items: center; gap: 32px; }
+  .shared-nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; color: var(--cv-ink, #0F172A); }
+  .shared-nav-logo span { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
+  .shared-nav-links { display: flex; align-items: center; gap: 26px; }
   .shared-nav-links a {
-    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75);
-    text-decoration: none; transition: color 0.3s;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px; font-weight: 600; color: var(--cv-ink, #0F172A);
+    text-decoration: none; transition: color 0.15s;
   }
-  .shared-nav-links a:hover { color: #34D399; }
-  .shared-nav.scrolled .shared-nav-links a { color: #475569; }
-  .shared-nav.scrolled .shared-nav-links a:hover { color: #059669; }
+  .shared-nav-links a:hover { color: var(--cv-accent, #047857); }
   /* link de retorno a la otra vertical: acentuado para que se lea como salida */
-  .shared-nav-links a.nav-vertical { color: #34D399; font-weight: 600; }
-  .shared-nav.scrolled .shared-nav-links a.nav-vertical { color: #059669; font-weight: 600; }
+  .shared-nav-links a.nav-vertical, .shared-mobile-menu a.nav-vertical { color: var(--cv-accent, #047857); }
   .shared-nav-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, #059669 0%, #14B8A6 100%); color: #fff;
-    border: none; border-radius: 12px;
-    padding: 10px 22px; font-size: 14px; font-weight: 600;
-    cursor: pointer;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    transition: transform 0.1s, box-shadow 0.2s;
-    line-height: normal;
-    box-shadow: 0 2px 10px rgba(5,150,105,0.25);
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--cv-accent, #047857); color: #fff;
+    border: none; border-radius: 6px;
+    padding: 12px 16px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em;
+    cursor: pointer; font-family: inherit; line-height: 1;
+    transition: background-color 0.15s;
   }
-  .shared-nav-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(5,150,105,0.35); }
+  .shared-nav-btn:hover { background: var(--cv-accent-hover, #036B4E); }
+  .shared-nav-btn:focus-visible, .shared-nav a:focus-visible, .shared-mobile-btn:focus-visible { outline: 3px solid var(--cv-accent, #047857); outline-offset: 3px; }
   .shared-mobile-btn {
-    display: none; background: none; border: none;
-    cursor: pointer; padding: 8px; color: rgba(255,255,255,0.8);
-    transition: color 0.3s;
+    display: none; background: var(--cv-tone, #F0F4F2); border: none; border-radius: 6px;
+    cursor: pointer; padding: 10px; color: var(--cv-ink, #0F172A);
   }
-  .shared-nav.scrolled .shared-mobile-btn { color: #334155; }
+  /* El menú del celular SÍ flota sobre la página: es el único sitio de la barra con sombra. */
   .shared-mobile-menu {
     position: fixed; top: 64px; left: 0; right: 0;
-    background: white; border-bottom: 1px solid #E2E8F0;
-    padding: 20px; z-index: 99;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transform: translateY(-100%); opacity: 0;
-    transition: transform 0.25s ease, opacity 0.2s ease;
+    background: var(--cv-bg, #ffffff);
+    padding: 12px 20px 20px; z-index: 99;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.16);
+    transform: translateY(-100%); opacity: 0; visibility: hidden;
+    transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
     pointer-events: none;
-    display: flex; flex-direction: column; gap: 4px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    display: flex; flex-direction: column; gap: 2px;
+    font-family: var(--cv-font, 'Albert Sans', 'Helvetica Neue', Arial, sans-serif);
   }
-  .shared-mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  /* cerrado = oculto de verdad (visibility): sus enlaces no se alcanzan con el teclado ni los lee un lector */
+  .shared-mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; transition: transform 0.25s ease, opacity 0.2s ease; }
   .shared-mobile-menu a {
-    padding: 12px 8px; font-size: 15px; font-weight: 500;
-    color: #334155; text-decoration: none; border-radius: 8px;
-    transition: background 0.15s; display: block;
+    padding: 13px 10px; font-size: 16px; font-weight: 600;
+    color: var(--cv-ink, #0F172A); text-decoration: none; border-radius: 6px;
+    transition: background-color 0.15s; display: block;
   }
-  .shared-mobile-menu a:hover { background: #F8FAFC; }
-  .shared-mobile-menu a.nav-vertical { color: #059669; font-weight: 600; }
+  .shared-mobile-menu a:hover { background: var(--cv-tone, #F0F4F2); }
   .shared-mobile-overlay {
     display: none; position: fixed; inset: 0; z-index: 98;
   }
-  /* 9 links + CTA + logo no caben con gap 32 por debajo de ~1400px */
+  /* 9 links + CTA + logo no caben con gap 26 por debajo de ~1400px */
   @media (max-width: 1400px) {
     .shared-nav { padding: 0 32px; }
-    .shared-nav-links { gap: 22px; }
+    .shared-nav-links { gap: 20px; }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     .shared-nav { padding: 0 20px; }
     .shared-nav-links { display: none; }
     .shared-mobile-btn { display: flex; }
     .shared-mobile-overlay { display: block; }
   }
+  @media (prefers-reduced-motion: reduce) { .shared-mobile-menu { transition: none; } }
 `;
 
-// Logo SVG identical to CertiVehLogo compact
-function Logo({ scrolled }: { scrolled: boolean }) {
+// Logo: escudo en un solo verde (sin degradado) y la palabra en la fuente de la marca, en una sola tinta.
+function Logo(_: { scrolled: boolean }) {
   return (
-    <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh" style={{ transition: "all 0.3s" }}>
-      <defs>
-        <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#059669"/><stop offset="100%" stopColor="#14B8A6"/>
-        </linearGradient>
-      </defs>
-      <g transform="translate(4,8) scale(0.48)">
-        <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#navLogoGrad)"/>
-        <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-      </g>
-      <g transform="translate(60,28)">
-        <text x="0" y="0" fill={scrolled ? "#0F172A" : "#FFFFFF"} fontSize="26" fontWeight="700"
-          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5" style={{ transition: "fill 0.3s" }}>
-          Certi<tspan fill="#059669">Veh</tspan>
-        </text>
-      </g>
-    </svg>
+    <>
+      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 4 L56 16 L56 36 C56 50 46 60 32 64 C18 60 8 50 8 36 L8 16 Z" fill="#047857"/>
+        <path d="M36 18 L26 38 L32 38 L28 56 L42 36 L36 36 Z" fill="white"/>
+      </svg>
+      <span>CertiVeh</span>
+    </>
   );
 }
 

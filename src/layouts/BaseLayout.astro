@@ -1,4 +1,7 @@
 ---
+// El estándar visual 2026-11 (tokens y clases de marca) para todas las páginas: DESIGN_SYSTEM.md §0.
+import '../styles/marca.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -27,15 +30,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#059669" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <!-- Google Fonts preconnect (performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600;700&display=swap" />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -158,16 +161,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
       body { margin: 0; }
       .skip-link {
         position: absolute; top: -100%; left: 16px;
-        background: #059669; color: #fff; padding: 12px 24px;
-        border-radius: 0 0 8px 8px; font-size: 14px; font-weight: 600;
+        background: var(--cv-accent); color: #fff; padding: 12px 24px;
+        border-radius: 0 0 6px 6px; font-size: 15px; font-weight: 600;
         text-decoration: none; z-index: 9999;
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: var(--cv-font);
       }
       .skip-link:focus { top: 0; }
       /* G1: Global focus-visible for keyboard accessibility */
       a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
-        outline: 2px solid #059669;
-        outline-offset: 2px;
+        outline: 3px solid var(--cv-accent);
+        outline-offset: 3px;
       }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {

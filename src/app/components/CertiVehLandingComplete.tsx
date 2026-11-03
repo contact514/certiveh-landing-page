@@ -1,13 +1,9 @@
 import { useState, useEffect, useCallback, createContext, useContext } from "react";
 import { Navbar } from "./Navbar";
+import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
-import useEmblaCarousel from "embla-carousel-react";
-import { AnimatedGridPattern } from './ui/animated-grid-pattern';
-import { BGPattern } from './ui/bg-pattern';
-import { cn } from '@/lib/utils';
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
-import imgPortalUsuario from '@/assets/portal-dashboard.jpg';
 
 /**
  * **El corte de caducidad del IVA, calculado y no escrito a mano.**
@@ -67,540 +63,381 @@ const usePortalUrl = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CertiVeh, Landing Page
-// Brand Manual v1.0 · Marzo 2026
+// CertiVeh, Landing Page · estándar visual 2026-11 (DESIGN_SYSTEM.md §0)
 //
-// Colores:
-//   Primary   emerald-600  #059669
-//   Accent    teal-500     #14B8A6
-//   Neutral   slate-900    #0F172A
-//   Premium   amber-500    #F59E0B
-//   BG light  slate-50     #F8FAFC
-//   BG white  #FFFFFF
+// Dirección: «el producto en acción». Lo que en otras landings son tarjetas con iconos aquí son piezas
+// del trámite de verdad: la calculadora con la tarifa vigente en el primer pantallazo, el riel de pasos
+// del portal en «Así de simple», el módulo Win Win del portal. Colores, tipo y forma salen de
+// `src/styles/marca.css` (variables --cv-*); esta hoja solo compone las secciones de la home.
 //
-// Tipografía: Inter · 400 / 500 / 600 / 700
-// Iconos: Lucide (SVG inline, sin dependencias extra)
-// Border-radius: sm=8px, md=12px, lg=16px, full=9999px, modal=20px
+// Lo que esta página NO usa, a propósito: degradados de marca, texto en degradado, sombras y brillos en
+// reposo, vidrio, iconos en cuadritos, números 01/02/03, cifras en marca de agua, mayúsculas espaciadas.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  body { background: var(--cv-bg); color: var(--cv-ink); font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .h-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
+  .h-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
+  .h-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
+  .h-intro { grid-column: 1 / span 7; }
+  .h-intro p { margin-top: 18px; max-width: 58ch; }
+  .h-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
+  .h-num { font-variant-numeric: normal; }
+  [hidden] { display: none !important; }
 
-  :root {
-    --emerald-50:  #ECFDF5;
-    --emerald-100: #D1FAE5;
-    --emerald-200: #A7F3D0;
-    --emerald-500: #10B981;
-    --emerald-600: #059669;
-    --emerald-700: #047857;
-    --emerald-800: #065F46;
-    --teal-50:  #F0FDFA;
-    --teal-100: #CCFBF1;
-    --teal-200: #99F6E4;
-    --teal-500: #14B8A6;
-    --teal-600: #0D9488;
-    --slate-50:  #F8FAFC;
-    --slate-100: #F1F5F9;
-    --slate-200: #E2E8F0;
-    --slate-300: #CBD5E1;
-    --slate-400: #94A3B8;
-    --slate-500: #64748B;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-900: #0F172A;
-    --amber-50:  #FFFBEB;
-    --amber-100: #FEF3C7;
-    --amber-200: #FDE68A;
-    --amber-500: #F59E0B;
-    --amber-600: #D97706;
-    --white: #FFFFFF;
-    --grad-primary: linear-gradient(135deg, #059669 0%, #14B8A6 100%);
-    --grad-subtle:  linear-gradient(135deg, #ECFDF5 0%, #F0FDFA 100%);
-    --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  }
+  /* ── HERO: el video a pantalla completa, el texto a la izquierda y la calculadora encima ── */
+  .h-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: #0b1220; overflow: hidden; }
+  .h-hero-media { position: absolute; inset: 0; }
+  .h-hero-media video, .h-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .h-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* velo neutro sobre el video, para leer */
+  .h-hero .h-grid { position: relative; z-index: 1; align-items: start; }
+  .h-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
+  .h-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; }
+  .h-hero-lead { font-size: var(--cv-lead); font-weight: 600; margin-top: 28px; letter-spacing: -0.02em; }
+  .h-hero-lead .flip { color: var(--cv-mint); }
+  .h-hero-sup { margin-top: 14px; max-width: 46ch; color: #dbe3ee; }
+  .h-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+  .h-figs { margin-top: 44px; display: grid; gap: 4px; }
+  .h-fig { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: baseline; gap: 16px; background: rgba(9,14,26,.62); border-radius: var(--cv-r); padding: 16px 18px; }
+  .h-fig dt { font-size: var(--cv-small); color: #cbd5e1; }
+  .h-fig dd { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.125rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); color: var(--cv-mint); }
+  .h-fig-wait { display: inline-block; width: 120px; height: 28px; border-radius: 4px; background: rgba(255,255,255,.12); }
+  .h-trust { list-style: none; margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: var(--cv-small); font-weight: 600; }
+  .h-hero .cv-sq::before { background: var(--cv-mint); }
+  .h-stage { grid-column: 8 / span 5; }
 
-  body {
-    background: var(--white);
-    color: var(--slate-900);
-    font-family: var(--ff);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
+  /* ── CALCULADORA ── */
+  .calc { background: #fff; color: var(--cv-ink); border-radius: 0 var(--cv-r) var(--cv-r) var(--cv-r); clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%, 0 48px); padding: 32px 28px 28px; scroll-margin-top: 80px; }
+  .calc h2 { font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; }
+  .calc .sub { color: var(--cv-soft); font-size: .9375rem; margin-top: 8px; }
+  .calc .lab { font-size: .875rem; font-weight: 600; color: var(--cv-soft); margin: 22px 0 8px; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--cv-tone); border-radius: var(--cv-r); padding: 4px; }
+  .seg button { font: 600 .9375rem/1.25 var(--cv-font); color: var(--cv-soft); background: transparent; border: 0; border-radius: 4px; padding: 12px 8px; cursor: pointer; transition: background-color .15s, color .15s; }
+  .seg button[aria-pressed="true"] { background: #fff; color: var(--cv-ink); }
+  .seg button:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 1px; }
+  .val { display: flex; justify-content: space-between; align-items: baseline; margin-top: 22px; }
+  .val .lab { margin: 0; }
+  .val output { font-size: 1.75rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); color: var(--cv-accent); }
+  .calc input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin-top: 4px; cursor: pointer; touch-action: pan-y; }
+  .calc input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(var(--cv-accent), var(--cv-accent)) 0 / var(--p, 14%) 100% no-repeat, var(--cv-tone-2); } /* relleno plano del avance */
+  .calc input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: var(--cv-tone-2); }
+  .calc input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--cv-accent); }
+  .calc input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--cv-accent); margin-top: -10px; border: 4px solid #fff; }
+  .calc input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--cv-accent); border: 4px solid #fff; }
+  .calc input[type=range]:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 2px; border-radius: 4px; }
+  .ends { display: flex; justify-content: space-between; font-size: .8125rem; color: var(--cv-soft); }
+  .sw { display: flex; align-items: center; gap: 12px; margin-top: 18px; padding: 14px; background: var(--cv-tone); border-radius: var(--cv-r); cursor: pointer; font-weight: 600; font-size: .9375rem; }
+  .sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .sw i { flex: none; width: 44px; height: 26px; border-radius: 13px; background: #b9c6c0; position: relative; transition: background-color .15s; }
+  .sw i::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .18s; }
+  .sw input:checked + i { background: var(--cv-accent); }
+  .sw input:checked + i::after { transform: translateX(18px); }
+  .sw input:focus-visible + i { outline: 3px solid var(--cv-accent); outline-offset: 2px; }
+  .bars { display: grid; gap: 12px; margin-top: 20px; }
+  .brow { display: flex; justify-content: space-between; font-size: .9375rem; }
+  .brow b { font-weight: 700; }
+  .btrack { height: 6px; background: var(--cv-tone-2); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .btrack i { display: block; height: 100%; background: var(--cv-accent); transition: width .4s; }
+  .btrack.b2 i { background: var(--cv-ink); }
+  .emp { margin-top: 12px; font-size: .875rem; background: var(--cv-tone); border-radius: var(--cv-r); padding: 10px 12px; }
+  .cost { margin-top: 20px; background: var(--cv-tone); border-radius: var(--cv-r); padding: 14px 16px; font-size: .875rem; }
+  .cost .h { font-weight: 700; margin-bottom: 8px; }
+  .cost > div:not(.h) { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; }
+  .cost .t { font-weight: 700; font-size: 1rem; padding-top: 10px; margin-top: 6px; }
+  .res { margin-top: 16px; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: 20px; }
+  .res .k { font-size: .875rem; color: var(--cv-mint); font-weight: 600; }
+  .res .big { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; margin-top: 4px; }
+  .res .s { font-size: .875rem; color: var(--cv-field-soft); margin-top: 4px; }
+  .res .row { display: grid; gap: 2px; background: var(--cv-field-2); border-radius: 4px; padding: 12px 14px; margin-top: 10px; }
+  .res .row b { font-size: 1.375rem; font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); }
+  .res .per { font-size: .875rem; color: var(--cv-field-soft); margin-top: 12px; }
+  .res .per b { color: #fff; }
+  .res .per em { font-style: normal; color: var(--cv-mint); font-weight: 700; }
+  .res .cv-btn { width: 100%; margin-top: 14px; }
+  .res .note { font-size: .8125rem; color: var(--cv-field-soft); margin-top: 10px; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes waPulse {
-    0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2); }
-    50% { box-shadow: 0 4px 24px rgba(37,211,102,0.6), 0 2px 8px rgba(0,0,0,0.2); transform: scale(1.05); }
-  }
-  /* El esqueleto de las cifras del hero usaba «pulse» sin que esta hoja lo declarara: solo
-     latía si otra isla lo traía. */
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .pqns-row { display: grid; grid-template-columns: 3fr 2fr; }
-  @media (max-width: 640px) {
-    .pqns-row { grid-template-columns: 1fr !important; }
-    .pqns-row > div:last-child { border-top: 1px solid var(--slate-200); }
-  }
+  /* ── FRANJA DE LO QUE CUBRIMOS (carrusel continuo) ── */
+  .cover { background: var(--cv-tone); overflow: hidden; }
+  .cover-track { display: flex; width: max-content; animation: cvMarquee 48s linear infinite; }
+  .cover:hover .cover-track { animation-play-state: paused; }
+  .cover ul { list-style: none; display: flex; gap: 0 28px; padding: 22px 14px; font-size: var(--cv-small); font-weight: 600; }
+  .cover li { white-space: nowrap; }
+  @keyframes cvMarquee { to { transform: translateX(-50%); } }
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--slate-100); }
-  ::-webkit-scrollbar-thumb { background: var(--emerald-600); border-radius: 3px; }
+  /* ── BALDOSAS (aliados y prensa) ── */
+  .board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .board.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .tile { background: var(--cv-tone); border-radius: var(--cv-r); padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; text-decoration: none; color: var(--cv-ink); transition: background-color .15s; }
+  a.tile:hover { background: var(--cv-tone-2); }
+  a.tile:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
+  .tile.head { grid-column: span 2; background: var(--cv-accent); color: #fff; }
+  .tile.head h2, .tile.head .tile-h { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.02; }
+  .tile.head p { color: #d6f5e8; max-width: 48ch; }
+  .tile .mark { height: 72px; display: flex; align-items: center; }
+  .tile .mark img { max-height: 56px; max-width: 78%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); }
+  .tile .note { font-size: .8125rem; color: var(--cv-soft); }
+  .tile .quote { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
+  .tile .meta { font-size: .875rem; color: var(--cv-soft); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .tile .meta b { color: var(--cv-accent); font-weight: 700; }
 
-  /* H3: Range slider cross-browser thumb */
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: white; cursor: pointer;
-    border: 3px solid var(--emerald-600);
-    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
-    transition: box-shadow 0.15s;
-  }
-  input[type=range]::-moz-range-thumb {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: white; cursor: pointer;
-    border: 3px solid var(--emerald-600);
-    box-shadow: 0 2px 8px rgba(5,150,105,0.3), 0 0 0 4px rgba(5,150,105,0.08);
-  }
-  input[type=range]::-webkit-slider-thumb:hover {
-    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.12);
-  }
-  input[type=range]:focus-visible::-webkit-slider-thumb {
-    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.15);
-  }
-  input[type=range]:focus-visible::-moz-range-thumb {
-    box-shadow: 0 2px 12px rgba(5,150,105,0.4), 0 0 0 6px rgba(5,150,105,0.15);
-  }
+  /* ── VENTANA UPME: campo oscuro plano (la sección es temporal; el video vive en el hero) ── */
+  .win { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); scroll-margin-top: 64px; }
+  .win .h-wrap { padding-block: clamp(56px, 8vw, 110px); }
+  .win h2 { max-width: 22ch; }
+  .win p.s { max-width: 56ch; margin-top: 18px; color: #e2e8f0; }
+  .win .clock-k { margin-top: 40px; font-weight: 600; color: #cbd5e1; }
+  .clock { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: clamp(18px, 4vw, 64px); margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .clock b { display: block; font-size: clamp(3.5rem, 2rem + 7vw, 9.5rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .9; }
+  .clock span { font-size: var(--cv-small); color: #cbd5e1; font-weight: 600; }
+  .win .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin-top: 40px; }
+  .win .fine { font-size: var(--cv-small); color: #cbd5e1; }
+  .win .link, .h-link { font-weight: 600; color: #fff; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 1px; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--slate-200);
-    padding: 0 48px; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-links { display: flex; align-items: center; gap: 32px; }
-  .nav-links a {
-    font-size: 14px; font-weight: 500;
-    color: var(--slate-600); text-decoration: none; transition: color 0.15s;
-  }
-  .nav-links a:hover { color: var(--emerald-600); }
+  /* ── BENEFICIOS: baldosas escalonadas ── */
+  .steps3 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; margin-top: 56px; align-items: start; }
+  .bt { border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; background: var(--cv-tone); }
+  .bt .fig { font-size: clamp(3.5rem, 2.2rem + 4.4vw, 7rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .85; color: var(--cv-accent); }
+  .bt h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); margin-top: 8px; }
+  .bt .law { font-size: var(--cv-small); color: var(--cv-soft); }
+  .bt .ex { font-weight: 700; font-size: 1.125rem; margin-top: auto; padding-top: 8px; }
+  .bt.a { grid-column: 1 / span 6; min-height: 72vh; background: var(--cv-accent); color: #fff; }
+  .bt.a .fig { color: #fff; }
+  .bt.a .law { color: #e6f8f0; }
+  .bstack { grid-column: 7 / span 6; display: grid; gap: 8px; }
+  .bt.b { min-height: 44vh; }
+  .bt.c { min-height: 28vh; background: var(--cv-field); color: #fff; margin-top: 24px; }
+  .bt.c .fig { color: var(--cv-mint); }
+  .bt.c .law { color: var(--cv-field-soft); }
 
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--emerald-600); color: var(--white);
-    border: none; border-radius: 12px;
-    padding: 12px 24px; font-size: 15px; font-weight: 600;
-    cursor: pointer; font-family: var(--ff);
-    transition: background 0.15s, transform 0.1s;
-  }
-  .btn-primary:hover { background: var(--emerald-700); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary-lg { padding: 16px 32px; font-size: 16px; }
+  /* ── SERVICIOS: los dos a la vista ── */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 56px; }
+  .svc-col { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(28px, 3.4vw, 52px); display: flex; flex-direction: column; }
+  .svc-col.dark { background: var(--cv-field); color: #fff; }
+  .svc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .svc-col h3 { font-size: clamp(2rem, 1.3rem + 2.4vw, 3.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; }
+  .svc-col .kick { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
+  .svc-col .price { font-size: clamp(2.5rem, 1.7rem + 2.6vw, 4.25rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .95; margin-top: 28px; color: var(--cv-accent); }
+  .svc-col .per { font-size: var(--cv-small); color: var(--cv-soft); margin-top: 10px; }
+  .svc-col.dark .kick, .svc-col.dark .per { color: var(--cv-field-soft); }
+  .svc-col.dark .price { color: var(--cv-mint); }
+  .svc-col .d { margin-top: 22px; max-width: 46ch; }
+  .svc-col ul { list-style: none; margin: 18px 0 30px; display: grid; gap: 8px; font-size: 1rem; }
+  .svc-col.dark .cv-sq::before { background: var(--cv-mint); }
+  .svc-col .cv-btn { margin-top: auto; }
 
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--white); color: var(--slate-700);
-    border: 1.5px solid var(--slate-300); border-radius: 12px;
-    padding: 11px 24px; font-size: 15px; font-weight: 500;
-    cursor: pointer; font-family: var(--ff);
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .btn-secondary:hover { border-color: var(--slate-400); background: var(--slate-50); }
+  /* ── CÓMO FUNCIONA: el riel avanza con el scroll y la pieza del portal acompaña ── */
+  .flow { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); margin-top: 48px; }
+  .flow-steps { grid-column: 1 / span 6; list-style: none; padding-left: 40px; position: relative; }
+  .flow-steps::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 3px; background: var(--cv-tone-2); }
+  .flow-steps > li { position: relative; min-height: 46vh; padding-bottom: 40px; cursor: pointer; }
+  .flow-steps > li:last-child { min-height: auto; }
+  .flow-steps > li::before { content: ""; position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-bg); box-shadow: inset 0 0 0 3px var(--cv-tone-2); transition: background-color .25s, box-shadow .25s; }
+  .flow-steps > li.done::before { background: var(--cv-accent); box-shadow: none; }
+  .flow-steps > li.on::before { box-shadow: inset 0 0 0 7px var(--cv-accent); }
+  .flow-steps > li > h3 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; transition: color .25s; }
+  .flow-steps > li > .subt { font-weight: 600; color: var(--cv-accent); margin-top: 6px; }
+  .flow-steps > li > .desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
+  .flow-steps > li > .det { font-weight: 600; margin-top: 10px; }
+  .flow-steps > li:not(.on) > h3, .flow-steps > li:not(.on) > .desc, .flow-steps > li:not(.on) > .det { color: #94a3b8; }
+  .flow-steps > li:not(.on) > .subt { color: #7aa894; }
+  .flow-steps .frag { display: none; }
+  .flow-panel { grid-column: 8 / span 5; }
+  .flow-sticky { position: sticky; top: 120px; background: var(--cv-tone); border-radius: var(--cv-r); min-height: 420px; display: grid; place-items: center; padding: clamp(20px, 3vw, 40px); }
 
-  .section { padding: 96px 48px; max-width: 1200px; margin: 0 auto; }
+  /* piezas del portal (data-ui): sus propias convenciones de interfaz */
+  .ui { font-family: var(--cv-font); background: #fff; border-radius: 8px; box-shadow: 0 0 0 1px #d9e2dd, 0 24px 48px -24px rgba(15,23,42,.25); width: min(440px, 100%); padding: 22px; font-size: 14px; color: var(--cv-ink); letter-spacing: -0.005em; }
+  .ui .t { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+  .ui .r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #edf1ef; }
+  .ui .r:last-child { border-bottom: 0; }
+  .ui .ok { font-size: 12px; font-weight: 600; color: var(--cv-accent); background: #e3f4ec; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+  .ui .wait { font-size: 12px; font-weight: 600; color: #7c5a00; background: #fdf3d0; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+  .ui .prog { height: 6px; background: #edf1ef; border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .ui .prog i { display: block; height: 100%; width: 72%; background: var(--cv-accent); }
+  .ui .fld { display: grid; gap: 4px; padding: 8px 0; }
+  .ui .fld span { font-size: 12px; color: var(--cv-soft); font-weight: 600; }
+  .ui .fld b { font-weight: 600; border: 1px solid #cfd9d4; border-radius: 4px; padding: 9px 10px; font-size: 14px; }
+  .ui .fld.sel b { border-color: var(--cv-accent); box-shadow: 0 0 0 3px #d5efe3; }
+  .ui .btnui { display: block; text-align: center; background: var(--cv-accent); color: #fff; font-weight: 600; border-radius: 4px; padding: 11px; margin-top: 14px; }
+  .ui .btnui.g { background: #eef2f0; color: var(--cv-ink); margin-top: 8px; }
+  .ui .ej { font-size: 12px; color: #64748b; margin-top: 8px; }
+  .ui .rail { list-style: none; margin-top: 14px; }
+  .ui .rail li { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+  .ui .rail li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; flex: none; background: var(--cv-accent); }
+  .ui .rail li.now { font-weight: 700; }
+  .ui .rail li.now::before { background: #fff; box-shadow: inset 0 0 0 3px var(--cv-accent), 0 0 0 4px #d5efe3; }
+  .ui .rail li.next { color: #94a3b8; }
+  .ui .rail li.next::before { background: #fff; box-shadow: inset 0 0 0 2px #cbd5d1; }
+  .plate { display: inline-flex; align-items: center; background: var(--cv-plate); color: #111; border-radius: 3px; box-shadow: inset 0 0 0 2px #111; padding: 3px 8px; font-weight: 800; font-size: 13px; letter-spacing: .08em; }
 
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 9999px;
-    background: var(--emerald-50); color: var(--emerald-700);
-    border: 1px solid var(--emerald-200);
-  }
+  /* ── CONFIANZA: tres columnas livianas ── */
+  .poster { list-style: none; margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px clamp(20px, 3vw, 48px); }
+  .poster li::before { content: ""; display: block; width: 28px; height: 4px; background: var(--cv-accent); margin-bottom: 18px; }
+  .poster h3 { font-size: 1.375rem; font-weight: var(--cv-wh); letter-spacing: -0.015em; line-height: 1.2; }
+  .poster p { color: var(--cv-soft); margin-top: 8px; max-width: 40ch; }
 
-  .card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  }
+  /* ── ASÍ PROTEGEMOS: cada problema con su solución dentro ── */
+  .prot-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
+  .prot-head { grid-column: 1 / span 4; }
+  .prot-head p { margin-top: 18px; max-width: 34ch; }
+  .prot-list { grid-column: 6 / span 7; display: grid; gap: 8px; }
+  .prot-k { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); margin-bottom: 4px; }
+  .pcase { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(20px, 2.4vw, 32px); }
+  .pcase h3 { font-size: clamp(1.25rem, 1.05rem + .6vw, 1.5rem); font-weight: var(--cv-wh); letter-spacing: -0.02em; line-height: 1.2; }
+  .pcase .pq { margin-top: 8px; color: var(--cv-soft); max-width: 56ch; }
+  .pfix { background: #fff; border-radius: var(--cv-r); padding: 16px 18px 16px 22px; margin-top: 18px; box-shadow: inset 5px 0 0 var(--cv-accent); } /* barra de acento de la respuesta */
+  .pfix span { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
+  .pfix p { margin-top: 2px; font-weight: 600; }
 
-  /* ── PRENSA ── carrusel controlable (Embla). El viewport recorta, así que lleva aire arriba y
-     abajo para que el levantamiento y la sombra de la tarjeta al pasar el ratón no se corten. */
-  .prensa-carril {
-    overflow: hidden; padding: 8px 0 40px; cursor: grab; /* 40 = 12 de desplazamiento + 32 de difuminado de la sombra */
-    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-  }
-  .prensa-carril:active { cursor: grabbing; }
-  .prensa-pista { display: flex; touch-action: pan-y pinch-zoom; }
-  .prensa-slide { flex: 0 0 auto; padding-left: 16px; min-width: 0; }
-  .prensa-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
-  a.prensa-card:hover, a.prensa-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: var(--emerald-200); }
-  a.prensa-card:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: 2px; }
-  .prensa-logo { filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s, opacity 0.3s; }
-  a.prensa-card:hover .prensa-logo, a.prensa-card:focus-visible .prensa-logo { filter: grayscale(0%); opacity: 1; }
-  /* Flechas: el mismo borde y el mismo hover que .btn-secondary, en círculo de 44 px (área táctil). */
-  .prensa-flecha {
-    width: 44px; height: 44px; border-radius: 9999px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--white); border: 1.5px solid var(--slate-300); cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .prensa-flecha:hover { border-color: var(--slate-400); background: var(--slate-50); }
-  .prensa-flecha:focus-visible, .prensa-punto:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: 2px; }
-  /* Puntos: 24 px de área pulsable aunque el punto mida 8; el actual se alarga en el verde de relleno. */
-  .prensa-punto { width: 24px; height: 24px; padding: 0; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 9999px; }
-  .prensa-punto span { display: block; width: 8px; height: 8px; border-radius: 9999px; background: var(--slate-300); transition: width 0.2s, background 0.2s; }
-  .prensa-punto:hover span { background: var(--slate-400); }
-  .prensa-punto[aria-current="true"] span { width: 20px; background: var(--emerald-600); }
-  @media (max-width: 768px) {
-    .prensa-card { width: 280px !important; padding: 20px !important; }
-    .prensa-slide { padding-left: 12px; }
-  }
+  /* ── TESTIMONIOS: una cita principal y dos al lado, rectas ── */
+  .vgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); margin-top: 40px; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: clamp(32px, 5vw, 80px) clamp(20px, 4vw, 64px); }
+  .vlead { grid-column: 1 / span 7; padding-right: clamp(0px, 3vw, 48px); }
+  .vlead blockquote { font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem); line-height: 1.25; letter-spacing: -0.02em; font-weight: 600; }
+  .vside { grid-column: 8 / span 5; display: grid; gap: 36px; align-content: start; }
+  .vq blockquote { font-size: 1.0625rem; line-height: 1.5; color: #e2e8f0; }
+  .vgrid figcaption { margin-top: 16px; }
+  .vgrid figcaption b { display: block; font-weight: 700; }
+  .vgrid figcaption span { display: block; font-size: .9375rem; color: var(--cv-field-soft); margin-top: 2px; }
 
-  .ticker-wrap { overflow: hidden; background: var(--grad-primary); padding: 12px 0; }
-  .ticker-inner { display: flex; animation: ticker 30s linear infinite; width: max-content; }
-  .ticker-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9);
-    padding: 0 36px; white-space: nowrap; letter-spacing: 0.02em;
-  }
-  .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
+  /* ── WIN WIN: campo verde con el módulo real del portal ── */
+  .ww { margin-top: var(--cv-gap-sec); background: var(--cv-accent); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
+  .ww .h-grid { align-items: center; }
+  .ww-copy { grid-column: 1 / span 6; }
+  .ww-copy .sub { font-size: var(--cv-lead); font-weight: 600; margin-top: 12px; color: var(--cv-mint); }
+  .ww-steps { list-style: none; margin-top: 36px; padding-left: 36px; position: relative; display: grid; gap: 24px; }
+  .ww-steps::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 3px; background: rgba(255,255,255,.28); }
+  .ww-steps li { position: relative; }
+  .ww-steps li::before { content: ""; position: absolute; left: -36px; top: 4px; width: 21px; height: 21px; border-radius: 50%; background: var(--cv-mint); }
+  .ww-steps h3 { font-size: 1.3125rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; }
+  .ww-steps p { margin-top: 4px; color: #dff5ea; max-width: 48ch; }
+  .ww .fine { font-size: var(--cv-small); color: #c9ecdc; margin-top: 26px; }
+  .ww .cv-btn { margin-top: 20px; }
+  .ww-ui { grid-column: 8 / span 5; display: grid; place-items: center; }
+  .wwp { width: min(400px, 100%); }
+  .wwsaldo { background: #eef7f2; border-radius: 6px; padding: 16px; margin-top: 16px; }
+  .wwsaldo span { display: block; font-size: 13px; color: #475569; font-weight: 600; }
+  .wwsaldo b { display: block; font-size: 40px; letter-spacing: -0.04em; color: var(--cv-accent); line-height: 1.1; }
+  .wwnums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .wwnums div { background: #f1f4f2; border-radius: 6px; padding: 12px 14px; }
+  .wwnums span { display: block; font-size: 12px; color: #475569; font-weight: 600; }
+  .wwnums b { font-size: 22px; }
 
-  .faq-item { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; transition: border-color 0.15s; }
-  .faq-item.open { border-color: var(--emerald-200); }
-  .faq-btn {
-    width: 100%; padding: 20px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--white); border: none; cursor: pointer;
-    font-family: var(--ff); font-size: 15px; font-weight: 500;
-    color: var(--slate-900); text-align: left; gap: 16px; transition: background 0.15s;
-  }
-  .faq-btn:hover { background: var(--slate-50); }
-  .faq-icon {
-    width: 28px; height: 28px; border-radius: 9999px;
-    background: var(--emerald-50);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.2s, background 0.15s;
-  }
-  .faq-item.open .faq-icon { background: var(--emerald-600); transform: rotate(45deg); }
-  .faq-body {
-    padding: 16px 24px 20px; font-size: 15px; line-height: 1.65;
-    color: var(--slate-600); background: var(--emerald-50);
-  }
+  /* ── PREGUNTAS: baldosas que se abren ── */
+  .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
+  .faq-grid > h2 { grid-column: 1 / span 4; position: sticky; top: 96px; }
+  .qs { grid-column: 5 / span 8; display: grid; gap: 8px; }
+  .faq-item { background: var(--cv-tone); border-radius: var(--cv-r); transition: background-color .15s; }
+  .faq-item.open { background: var(--cv-accent); color: #fff; }
+  .faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 72px; padding: 18px 24px; background: none; border: 0; color: inherit; cursor: pointer; text-align: left; font: 600 1.1875rem/1.3 var(--cv-font); letter-spacing: -0.02em; }
+  .faq-btn:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; border-radius: var(--cv-r); }
+  .pm { flex: none; position: relative; width: 16px; height: 16px; }
+  .pm::before, .pm::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 16px; height: 3px; background: currentColor; transition: transform .2s; }
+  .pm::after { transform: rotate(90deg); }
+  .faq-item.open .pm::after { transform: rotate(0); }
+  .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #eafaf2; }
 
-  .step-tab {
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 16px; border-radius: 12px; cursor: pointer;
-    border: 1.5px solid transparent; background: transparent;
-    text-align: left; font-family: var(--ff); transition: all 0.15s; width: 100%;
-  }
-  .step-tab.active { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
-  .step-tab:hover:not(.active) { background: rgba(255,255,255,0.04); }
-  .step-num {
-    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
-    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); transition: all 0.15s;
-  }
-  .step-tab.active .step-num { background: var(--emerald-600); color: white; }
+  /* ── CIERRE ── */
+  .close { padding-block: var(--cv-gap-sec); }
+  .close-grid { align-items: end; }
+  .close h2 { grid-column: 1 / span 7; font-size: var(--cv-display); }
+  .close-r { grid-column: 8 / span 5; }
+  .close-r p { max-width: 52ch; }
+  .close-r .cv-btn { margin-top: 30px; }
+  .close-r ul { list-style: none; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: var(--cv-small); font-weight: 600; }
 
-  /* ── URGENCY MODAL ──────────────────────────────────────────────────────── */
-  .urgency-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
+  /* ── MODAL DE PLAZO ── */
+  .urgency-modal-overlay { position: fixed; inset: 0; background: rgba(9,14,26,.72); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; overscroll-behavior: contain; }
+  .urgency-modal { position: relative; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); box-shadow: 0 24px 80px rgba(0,0,0,.5); max-width: 520px; width: 100%; padding: 44px; }
+  .urgency-modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: var(--cv-r); background: var(--cv-field-2); border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #cbd5e1; }
+  .urgency-modal-close:hover { color: #fff; }
+  .urgency-k { font-size: var(--cv-small); font-weight: 600; color: #fca5a5; }
+  .urgency-modal h2 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem); font-weight: 400; color: #cbd5e1; line-height: 1.2; margin-top: 18px; letter-spacing: var(--cv-trk); }
+  .urgency-modal h3 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem); font-weight: var(--cv-wh); color: var(--cv-mint); line-height: 1.2; margin: 4px 0 22px; letter-spacing: var(--cv-trk); }
+  .urgency-modal p { line-height: 1.6; color: #e2e8f0; margin-bottom: 14px; }
+  .urgency-modal p strong { color: var(--cv-mint); }
+  .urgency-modal .fine { font-size: var(--cv-small); color: var(--cv-field-soft); }
+  .urgency-modal .cv-btn { width: 100%; margin-top: 16px; }
 
-  .urgency-modal {
-    position: relative;
-    background: #0F172A;
-    border-radius: 20px;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(5,150,105,0.08);
-    max-width: 520px;
-    width: 100%;
-    padding: 44px;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
+  /* ── WhatsApp: el único botón que flota ── */
+  .whatsapp-fab { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: #1f9d55; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(15,23,42,.25); }
+  .whatsapp-fab:focus-visible { outline: 3px solid var(--cv-ink); outline-offset: 3px; }
 
-  .urgency-modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s;
-    color: rgba(255,255,255,0.5);
-  }
+  /* ── entrada al aparecer: solo lo que está fuera del primer pantallazo ── */
+  .rv { transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); }
+  .rv.pend { opacity: 0; transform: translateY(24px); }
 
-  .urgency-modal-close:hover {
-    background: rgba(255,255,255,0.12);
-    color: white;
+  /* ── celular ── */
+  @media (max-width: 900px) {
+    .h-hero-copy, .h-stage, .h-intro { grid-column: 1 / -1; }
+    .h-hero-media::after { background: linear-gradient(180deg, rgba(9,14,26,.82) 0%, rgba(9,14,26,.7) 60%, rgba(9,14,26,.85) 100%); }
+    .calc { padding: 26px 18px 20px; clip-path: polygon(36px 0, 100% 0, 100% 100%, 0 100%, 0 36px); }
+    .board, .board.five { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .tile { min-height: 150px; padding: 18px; }
+    .tile.head { grid-column: 1 / -1; }
+    .tile .mark { height: 44px; }
+    .tile .mark img { max-height: 38px; }
+    .bt.a, .bstack { grid-column: 1 / -1; }
+    .bt.a, .bt.b, .bt.c { min-height: 0; }
+    .duo { grid-template-columns: 1fr; }
+    .flow-steps { grid-column: 1 / -1; }
+    .flow-panel { display: none; }
+    .flow-steps > li { min-height: 0; padding-bottom: 36px; cursor: default; }
+    .flow-steps > li:not(.on) > h3, .flow-steps > li:not(.on) > .desc, .flow-steps > li:not(.on) > .det { color: var(--cv-ink); }
+    .flow-steps > li:not(.on) > .subt { color: var(--cv-accent); }
+    .flow-steps .frag { display: block; margin-top: 18px; }
+    .flow-steps .frag .ui { width: 100%; }
+    .poster { grid-template-columns: 1fr; gap: 30px; }
+    .prot-head, .prot-list { grid-column: 1 / -1; }
+    .prot-head { margin-bottom: 28px; }
+    .vlead, .vside { grid-column: 1 / -1; }
+    .vside { margin-top: 36px; }
+    .vlead { padding-right: 0; }
+    .ww-copy, .ww-ui { grid-column: 1 / -1; }
+    .ww-ui { margin-top: 40px; }
+    .faq-grid > h2 { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
+    .qs { grid-column: 1 / -1; }
+    .faq-btn { min-height: 64px; font-size: 1.0625rem; padding: 16px 18px; }
+    .faq-body { padding: 0 18px 20px; font-size: 1rem; }
+    .close h2, .close-r { grid-column: 1 / -1; }
+    .close-r { margin-top: 24px; }
+    .clock { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .urgency-modal { padding: 32px 22px; }
   }
-
-  /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--slate-700);
-  }
-  
-  .mobile-menu {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: white;
-    border-bottom: 1px solid var(--slate-200);
-    padding: 20px;
-    z-index: 99;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.2s ease;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .mobile-menu.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
-  }
-  
-  .mobile-menu a {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--slate-700);
-    text-decoration: none;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--slate-100);
-  }
-  
-  .mobile-menu a:last-child {
-    border-bottom: none;
-  }
-  
-  .mobile-menu-overlay {
-    display: none;
-    position: fixed;
-    top: 64px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 98;
-    backdrop-filter: blur(2px);
-  }
-  
-  .mobile-menu-overlay.open {
-    display: block;
-  }
-  
-  .hero-video { display: block; object-position: center 25%; }
-  .hero-video::-webkit-media-controls { display: none !important; }
-  .hero-video::-webkit-media-controls-start-playback-button { display: none !important; }
-  .hero-poster { display: none; }
-
-  @media (max-width: 768px) {
-    .hero-video { width: 100% !important; height: 100% !important; left: 0 !important; top: 0 !important; object-fit: cover !important; object-position: center center; opacity: 0.35 !important; }
-    .hero-poster { display: none !important; }
-    .hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.4) 50%, rgba(5,150,105,0.15) 100%) !important; }
-
-    nav { padding: 0 20px; height: 64px; }
-    .nav-links { display: none; }
-    .mobile-menu-btn { display: flex; }
-
-    .hero-section { padding: 100px 20px 60px !important; height: auto !important; min-height: 60vh !important; }
-    .section { padding: 64px 20px; }
-    
-    .btn-primary { padding: 12px 20px; font-size: 14px; }
-    .btn-primary-lg { padding: 14px 24px; font-size: 15px; }
-    .btn-secondary { padding: 10px 20px; font-size: 14px; }
-    
-    .step-tab { padding: 12px; gap: 10px; }
-    .step-num { width: 32px; height: 32px; font-size: 12px; }
-    
-    .faq-btn { padding: 16px 20px; font-size: 14px; }
-    .faq-body { padding: 0 20px 16px; font-size: 14px; }
-    
-    .grid-3-cols { grid-template-columns: 1fr !important; gap: 16px !important; }
-    .grid-2-cols { grid-template-columns: 1fr !important; gap: 40px !important; }
-    .grid-calc { grid-template-columns: 1fr !important; }
-    .card-calc-controls { border-right: none !important; border-bottom: 1px solid var(--slate-200) !important; padding: 32px 24px !important; }
-    .card-calc-result { padding: 32px 24px !important; }
-    
-    .step-card { padding: 28px !important; height: auto !important; min-height: 360px !important; }
-    
-    .ticker-item { padding: 0 24px; font-size: 12px; }
-
-    /* Urgency modal responsive */
-    .urgency-modal {
-      padding: 32px 24px;
-      margin: 16px;
-    }
-    
-    /* Ajustes de texto para mobile */
-    h1 br, h2 br { display: none; }
-  }
-  
-  @media (max-width: 640px) {
-    /* CTA final responsive */
-    .cta-section { padding: 64px 20px !important; }
-    .cta-button { padding: 14px 28px !important; font-size: 15px !important; }
-    
-    /* Footer responsive */
-    footer { padding: 40px 20px !important; }
-    
-    /* Ajustar márgenes en móviles pequeños */
-    .grid-2-cols { gap: 32px !important; }
-  }
-  
-  @media (max-width: 400px) {
-    /* Ajustes para móviles muy pequeños */
-    .trust-item { font-size: 11px !important; }
-    .cta-feature { font-size: 12px !important; gap: 4px !important; }
-    .cta-button { padding: 12px 24px !important; font-size: 14px !important; }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-section { padding: 90px 16px 50px !important; }
-    .section { padding: 48px 16px; }
-    .card-calc-controls { padding: 24px 16px !important; }
-    .card-calc-result { padding: 24px 16px !important; }
-    .btn-primary-lg { padding: 12px 20px; font-size: 14px; }
-    
-    /* Cards más compactos en móvil */
-    .benefit-card { padding: 24px !important; }
-    .trust-card { padding: 20px !important; }
-    .step-card { padding: 20px !important; min-height: 320px !important; }
-    
-    /* Trust strip más compacto */
-    .trust-item { font-size: 12px !important; gap: 4px !important; }
-
-    /* WhatsApp FAB más pequeño en mobile */
-    .whatsapp-fab { width: 48px !important; height: 48px !important; bottom: 16px !important; right: 12px !important; }
-    
-    /* Info callout responsive */
-    .info-callout { padding: 20px !important; gap: 12px !important; }
-    
-    /* Stat pills en móvil */
-    .card { border-radius: 16px; }
-
-    /* Urgency modal en móviles muy pequeños */
-    .urgency-modal {
-      padding: 24px 20px;
-    }
+  @media (min-width: 901px) { .prot-head { position: sticky; top: 110px; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    .rv.pend { opacity: 1; transform: none; }
   }
 `;
 
-// ── SVG Icons ─────────────────────────────────────────────────────────────────
-function Icon({ name, size = 20, color = "currentColor", style = {} }: { name: string; size?: number; color?: string; style?: React.CSSProperties }) {
-  const paths: Record<string, JSX.Element> = {
-    shield:      <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
-    zap:         <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>,
-    car:         <><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
-    fileText:    <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>,
-    checkCircle: <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></>,
-    upload:      <><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></>,
-    arrowRight:  <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
-    arrowLeft:   <><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>,
-    clock:       <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
-    bell:        <><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></>,
-    lock:        <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-    calendar:    <><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></>,
-    award:       <><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></>,
-    percent:     <><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></>,
-    smartphone:  <><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></>,
-    battery:     <><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></>,
-    menu:        <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>,
-    x:           <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
-    gift:        <><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></>,
-    share2:      <><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></>,
-    dollarSign:  <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
-    info:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
-    user:        <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
-    building:    <><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></>,
-    receipt:     <><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></>,
-    users:       <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,
-  };
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}>
-      {paths[name]}
-    </svg>
-  );
+// ── Flecha de los botones ──────────────────────────────────────────────────
+const Arr = () => <span className="cv-arr" aria-hidden="true">→</span>;
+
+// ── Entrada de cada pieza: solo lo que está fuera del primer pantallazo, y nunca se queda oculto ──
+function useEntradas() {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const vh = window.innerHeight;
+    const pend: Element[] = [];
+    document.querySelectorAll(".rv").forEach(el => { if (el.getBoundingClientRect().top > vh) { el.classList.add("pend"); pend.push(el); } });
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const t = e.target as HTMLElement;
+      const i = Array.prototype.indexOf.call(t.parentElement?.children ?? [], t);
+      t.style.transitionDelay = Math.min(Math.max(i, 0), 5) * 75 + "ms";
+      t.classList.remove("pend"); io.unobserve(t);
+    }), { rootMargin: "0px 0px -8% 0px" });
+    pend.forEach(el => io.observe(el));
+    // red de seguridad: nada se queda oculto si el observador no llega a disparar
+    const red = setTimeout(() => pend.forEach(el => el.classList.remove("pend")), 6000);
+    return () => { io.disconnect(); clearTimeout(red); };
+  }, []);
 }
 
-// ── Logo ──────────────────────────────────────────────────────────────────────
-function CertiVehLogo({ variant = "default", compact = false }: { variant?: "default" | "light"; compact?: boolean }) {
-  const isBrowser = typeof document !== 'undefined';
-  const getCSSVar = (name: string, fallback: string) => isBrowser ? (getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback) : fallback;
-  const textColor = variant === "light" ? "#FFFFFF" : getCSSVar('--slate-900', '#0F172A');
-  const primary = getCSSVar('--emerald-600', '#059669');
-  const accent = getCSSVar('--teal-500', '#14B8A6');
-  const w = compact ? 180 : 220, h = compact ? 44 : 56;
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${compact ? 240 : 320} ${compact ? 60 : 80}`} fill="none" role="img" aria-label="Logo CertiVeh - Certificación Vehicular">
-      <defs>
-        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={primary}/><stop offset="100%" stopColor={accent}/>
-        </linearGradient>
-      </defs>
-      <g transform={compact ? "translate(4,8) scale(0.48)" : "translate(4,4) scale(0.62)"}>
-        <path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGrad)"/>
-        <path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/>
-      </g>
-      <g transform={compact ? "translate(60,28)" : "translate(70,24)"}>
-        <text x="0" y="0" fill={textColor} fontSize={compact ? "26" : "30"} fontWeight="700"
-          fontFamily="Inter, system-ui, sans-serif" letterSpacing="-0.5">
-          Certi<tspan fill={primary}>Veh</tspan>
-        </text>
-        {!compact && (
-          <text x="0" y="20" fill={variant === "light" ? "rgba(255,255,255,0.6)" : getCSSVar('--slate-500', '#64748B')}
-            fontSize="10" fontWeight="500" fontFamily="Inter, system-ui, sans-serif" letterSpacing="1.5">
-            CERTIFICACIÓN VEHICULAR
-          </text>
-        )}
-      </g>
-    </svg>
-  );
-}
 
-// ── FlipWords ──────────────────────────────────────────────────────���──────────
+// ── FlipWords ─────────────────────────────────────────────────────────────────
+// Las palabras rotan con un desplazamiento corto; sin desenfoque (era un rasgo de plantilla).
 function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: number }) {
   const [current, setCurrent] = useState(words[0]);
   const [animating, setAnimating] = useState(false);
@@ -612,41 +449,28 @@ function FlipWords({ words, duration = 2800 }: { words: string[]; duration?: num
     if (!animating) { const t = setTimeout(next, duration); return () => clearTimeout(t); }
   }, [animating, duration, next]);
   return (
-    <AnimatePresence onExitComplete={() => setAnimating(false)}>
-      <motion.span key={current}
-        initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        exit={{ opacity: 0, y: -16, scale: 1.03, filter: "blur(6px)", position: "absolute" }}
-        transition={{ type: "spring", stiffness: 100, damping: 14 }}
-        style={{
-          display: "inline-block", position: "relative",
-          color: "#34D399",
-        }}
-      >
-        {current.split(" ").map((w, i) => (
-          <motion.span key={w + i}
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1, duration: 0.25 }}
-            style={{ display: "inline-block", marginRight: "0.25em" }}
-          >{w}</motion.span>
-        ))}
-      </motion.span>
+    // `initial={false}`: la primera palabra se pinta visible desde el HTML del servidor (sin esperar a
+    // hidratar). Antes salía con opacity 0 y, sin JavaScript o con «reducir movimiento», no aparecía.
+    <AnimatePresence initial={false} onExitComplete={() => setAnimating(false)}>
+      <motion.span key={current} className="flip"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12, position: "absolute" }}
+        transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
+        style={{ display: "inline-block", position: "relative" }}
+      >{current}</motion.span>
     </AnimatePresence>
   );
 }
 
-// ── NAVBAR — uses shared Navbar component ─────────────────────────────────────
-// (imported from ./Navbar.tsx — same component used in blog)
-
-// ── TICKER ────────────────────────────────────────────────────────────────────
+// ── LO QUE CUBRIMOS (la franja en movimiento; con «reducir movimiento» queda quieta) ──
 function Ticker() {
   const items = ["Eléctricos e híbridos (no los ligeros)","Devolución de IVA · 5%","Deducción en renta · 50%","Depreciación acelerada · 3 años","Radicación automática UPME","Menos de 5 minutos","Sin portal gubernamental","Certificado UPME digital","Gestión de la devolución de IVA ante la DIAN"];
   return (
-    <div className="ticker-wrap">
-      <div className="ticker-inner">
-        {[...items,...items].map((item, i) => (
-          <div className="ticker-item" key={i}><div className="ticker-dot"/>{item}</div>
-        ))}
+    <div className="cover">
+      <div className="cover-track">
+        <ul aria-label="Lo que cubrimos">{items.map(t => <li key={t} className="cv-sq">{t}</li>)}</ul>
+        <ul aria-hidden="true">{items.map(t => <li key={t} className="cv-sq">{t}</li>)}</ul>
       </div>
     </div>
   );
@@ -697,57 +521,38 @@ function VentanaUPME() {
   ];
   const pad = (n: number | null) => (n === null ? "--" : String(n).padStart(2, "0"));
   const cerrada = estado?.abierta === false;
-
   return (
-    <section id="ventana-upme" aria-labelledby="ventana-upme-titulo" style={{ background: "var(--grad-subtle)", borderBottom: "1px solid var(--slate-200)" }}>
-      <div className="section" style={{ textAlign: "center" }}>
-        {/* Sin píldora sobre el título, como el resto de secciones de la landing. */}
-        <div style={{ marginBottom: 56 }}>
-          <h2 id="ventana-upme-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-          {cerrada
-            ? <>La UPME vuelve a recibir solicitudes el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>1 de febrero</span></>
-            : <>La UPME recibe solicitudes hasta el <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>15 de diciembre</span></>}
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
+    <section id="ventana-upme" className="win" aria-labelledby="ventana-upme-titulo">
+      <div className="h-wrap">
+        <h2 id="ventana-upme-titulo" className="h-h2">
+          {cerrada ? <>La UPME vuelve a recibir solicitudes el 1 de febrero</> : <>La UPME recibe solicitudes hasta el 15 de diciembre</>}
+        </h2>
+        <p className="s">
           {cerrada
             ? "La UPME recibe solicitudes de certificado del 1 de febrero al 15 de diciembre de cada año. Puedes preparar tu trámite desde ahora y lo radicamos apenas se abra la ventana."
             : "Después de esa fecha, la UPME no recibe más solicitudes de certificado hasta el 1 de febrero. Tú subes tus documentos y nosotros radicamos tu solicitud ante la UPME."}
-          </p>
-        </div>
-
-        <div style={{ fontSize: 14, fontWeight: 500, color: "var(--slate-600)", marginBottom: 12 }}>
-          {cerrada ? "La ventana abre en" : "La ventana cierra en"}
-        </div>
-        <div role="timer" aria-label={cerrada ? "Tiempo para que abra la ventana de radicación" : "Tiempo para que cierre la ventana de radicación"} style={{ display: "flex", justifyContent: "center", gap: "clamp(8px, 2vw, 16px)", marginBottom: 28 }}>
+        </p>
+        <p className="clock-k">{cerrada ? "La ventana abre en" : "La ventana cierra en"}</p>
+        <div className="clock" role="timer" aria-label={cerrada ? "Tiempo para que abra la ventana de radicación" : "Tiempo para que cierre la ventana de radicación"}>
           {unidades.map((u) => (
-            <div key={u.label} className="card" style={{ minWidth: "clamp(64px, 16vw, 88px)", padding: "14px 8px 12px", textAlign: "center" }}>
-              <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.02em", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-                {pad(u.val)}
-              </div>
-              <div style={{ fontSize: 12, fontWeight: 500, color: "var(--slate-500)", marginTop: 8 }}>{u.label}</div>
-            </div>
+            <div key={u.label}><b>{pad(u.val)}</b><span>{u.label}</span></div>
           ))}
         </div>
-
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "var(--grad-primary)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
-            {cerrada ? "Preparar mi trámite ahora" : "Empezar mi trámite ahora"} <Icon name="arrowRight" size={18} color="white" />
-          </button>
-        </a>
-
-        <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6, marginTop: 16 }}>
-          Resolución UPME 563 de 2026 · Hora de Colombia
-          <br/>
-          <a href="/blog/cierre-ventana-upme-15-diciembre-2026" style={{ color: "var(--emerald-700)", fontWeight: 600, textDecoration: "underline" }}>
-            Qué pasa si no alcanzas a radicar
+        <div className="acts">
+          <a className="cv-btn cv-btn-a" href={portalUrl} target="_blank" rel="noopener noreferrer">
+            {cerrada ? "Preparar mi trámite ahora" : "Empezar mi trámite ahora"} <Arr />
           </a>
-        </p>
+          <span className="fine">Resolución UPME 563 de 2026 · Hora de Colombia</span>
+          <a className="link" href="/blog/cierre-ventana-upme-15-diciembre-2026">Qué pasa si no alcanzas a radicar</a>
+        </div>
       </div>
     </section>
   );
 }
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
+// El video ocupa todo el primer pantallazo (es permanente: no depende de la sección temporal de la
+// ventana UPME) y la calculadora, que es lo único que el visitante puede HACER en la página, va encima.
 function Hero() {
   const portalUrl = usePortalUrl();
   const flipWords = ["devolución de IVA","deducción en renta","depreciación acelerada","un certificado UPME"];
@@ -786,143 +591,38 @@ function Hero() {
   }, []);
 
   return (
-    <section id="hero" aria-label="Portada - CertiVeh" className="hero-section" style={{
-      height: "100vh", display: "flex", flexDirection: "column",
-      justifyContent: "center", alignItems: "center", textAlign: "center",
-      padding: "100px 48px 60px", position: "relative",
-      background: "var(--slate-900)", overflow: "hidden",
-    }}>
-      {/* Background video (desktop) / poster (mobile) */}
-      <video
-        ref={videoRef}
-        autoPlay muted loop playsInline
-        preload="auto"
-        poster="/hero-bg-poster.webp"
-        className="hero-video"
-        style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", pointerEvents: "none", opacity: 0.35,
-        }}
-      >
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
-      {/* Static poster fallback for mobile */}
-      <div className="hero-poster" style={{
-        position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.35,
-        backgroundImage: "url(/hero-bg-poster.webp)",
-        backgroundSize: "cover", backgroundPosition: "center",
-      }} />
-      {/* Gradient overlay */}
-      <div className="hero-overlay" style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 50%, rgba(5,150,105,0.15) 100%)",
-      }}/>
-
-      {/* H1 */}
-      <h1 style={{
-        fontSize: "clamp(36px, 5.5vw, 56px)", fontWeight: 700,
-        lineHeight: 1.15, letterSpacing: "-0.03em", color: "#FFFFFF",
-        maxWidth: 800, marginBottom: 10, animation: "fadeUp 0.6s 0.08s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Reclama los beneficios tributarios de tu{" "}
-        <span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-          carro eléctrico o híbrido
-        </span>
-        {" "}en Colombia
-      </h1>
-      <div style={{
-        fontSize: "clamp(18px, 2.5vw, 24px)", fontWeight: 500,
-        color: "rgba(255,255,255,0.7)", marginBottom: 0,
-        animation: "fadeUp 0.6s 0.12s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Accede a{" "}
-        <span style={{ position: "relative", display: "inline-block", color: "#34D399", fontWeight: 600 }}>
-          <FlipWords words={flipWords} duration={2800}/>
-        </span>
+    <section id="hero" aria-label="Portada - CertiVeh" className="h-hero">
+      <div className="h-hero-media" aria-hidden="true">
+        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster="/hero-bg-poster.webp">
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
       </div>
-
-      {/* Sub */}
-      <p style={{
-        fontSize: "clamp(15px, 1.8vw, 17px)", lineHeight: 1.7,
-        color: "rgba(255,255,255,0.5)", maxWidth: 600,
-        marginTop: 16, marginBottom: 28, animation: "fadeUp 0.6s 0.16s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.
-      </p>
-
-      {/* CTAs */}
-      <div style={{
-        display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 36, animation: "fadeUp 0.6s 0.24s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        <a href="#calculadora" style={{ textDecoration: "none" }}>
-          <button className="btn-primary btn-primary-lg" style={{
-            background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)",
-            boxShadow: "0 4px 24px rgba(5,150,105,0.4), 0 1px 2px rgba(0,0,0,0.2)",
-            padding: "16px 36px", fontSize: 16, borderRadius: 12,
-          }}>
-            Calcular mi beneficio <Icon name="arrowRight" size={18} color="white"/>
-          </button>
-        </a>
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-          <button className="btn-secondary" style={{
-            background: "rgba(255,255,255,0.08)", color: "#FFFFFF",
-            border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: 12,
-            backdropFilter: "blur(4px)", padding: "15px 28px",
-          }}>
-            Empezar mi trámite ahora
-          </button>
-        </a>
-      </div>
-
-      {/* Stats */}
-      <div style={{
-        display: "flex", gap: 1, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 20, animation: "fadeUp 0.6s 0.32s ease both",
-        position: "relative", zIndex: 1,
-        background: "rgba(255,255,255,0.06)", backdropFilter: "blur(12px)",
-        border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16,
-        overflow: "hidden",
-      }}>
-        {[
-          { num: stats ? fmtM(stats.vehiculos_gestionados) : null, label: "en vehículos gestionados", color: "#34D399" },
-          { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta", color: "#5EEAD4" },
-          { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver", color: "#34D399" },
-        ].map((s, i) => (
-          <div key={s.label} style={{
-            padding: "16px 28px", textAlign: "center", minWidth: 160,
-            flex: "1 1 auto", cursor: "default",
-            borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
-          }}>
-            {s.num
-              ? <div style={{ fontSize: 26, fontWeight: 700, color: s.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.num}</div>
-              : <div style={{ height: 26, width: 100, borderRadius: 6, background: "rgba(255,255,255,0.1)", margin: "0 auto", animation: "pulse 1.5s ease-in-out infinite" }} />
-            }
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontWeight: 500, marginTop: 8 }}>{s.label}</div>
+      <div className="h-wrap h-grid">
+        <div className="h-hero-copy">
+          <h1>Reclama los beneficios tributarios de tu carro eléctrico o híbrido en Colombia</h1>
+          <p className="h-hero-lead">Accede a <span style={{ position: "relative", display: "inline-block" }}><FlipWords words={flipWords} duration={2800}/></span></p>
+          <p className="h-hero-sup">Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.</p>
+          <div className="h-acts">
+            <a className="cv-btn cv-btn-a" href="#calculadora">Calcular mi beneficio <Arr /></a>
+            <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora</a>
           </div>
-        ))}
-      </div>
-
-      {/* Trust strip */}
-      <div style={{
-        display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center",
-        marginBottom: 48, animation: "fadeUp 0.6s 0.36s ease both",
-        position: "relative", zIndex: 1
-      }}>
-        {[["checkCircle","Sin cuenta en la UPME"],["bell","Notificaciones WhatsApp"],["lock","Solo pagas una vez"],["smartphone","100% en línea"]].map(([ico,txt]) => (
-          <span key={txt as string} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "rgba(255,255,255,0.4)", fontWeight: 500, cursor: "default" }}>
-            <Icon name={ico as string} size={13} color="#34D399"/>{txt}
-          </span>
-        ))}
-      </div>
-
-      {/* Ticker inside hero */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1 }}>
-        <Ticker />
+          <dl className="h-figs">
+            {[
+              { num: stats ? fmtM(stats.vehiculos_gestionados) : null, label: "en vehículos gestionados" },
+              { num: stats ? fmtM(stats.deducciones_renta) : null, label: "en deducciones de renta" },
+              { num: stats ? fmtM(stats.iva_por_devolver) : null, label: "en IVA por devolver" },
+            ].map(s => (
+              <div className="h-fig" key={s.label}>
+                <dt>{s.label}</dt>
+                <dd>{s.num ?? <span className="h-fig-wait" aria-hidden="true" />}</dd>
+              </div>
+            ))}
+          </dl>
+          <ul className="h-trust">
+            {["Sin cuenta en la UPME","Notificaciones WhatsApp","Solo pagas una vez","100% en línea"].map(t => <li key={t} className="cv-sq">{t}</li>)}
+          </ul>
+        </div>
+        <div className="h-stage"><Calculadora /></div>
       </div>
     </section>
   );
@@ -931,34 +631,17 @@ function Hero() {
 // ── ALIADOS ─────────────────────────────────────────────────────────────────
 function Aliados() {
   return (
-    <section aria-label="Aliados de CertiVeh" style={{
-      background: "var(--white)", borderTop: "1px solid var(--slate-200)",
-      borderBottom: "1px solid var(--slate-200)", padding: "40px 24px",
-    }}>
-      <p style={{
-        textAlign: "center", fontSize: 13, fontWeight: 500, color: "var(--slate-400)",
-        letterSpacing: "1.5px", marginBottom: 32,
-      }}>
-        Aliados que confían en CertiVeh
-      </p>
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "center",
-        gap: 56, flexWrap: "wrap", maxWidth: 900, margin: "0 auto",
-      }}>
+    <section aria-label="Aliados de CertiVeh" className="h-wrap" style={{ paddingTop: "clamp(56px, 7vw, 96px)" }}>
+      <div className="board five">
+        <div className="tile head rv"><p className="tile-h">Aliados que confían en CertiVeh</p></div>
         {[
-          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", maxH: 30, maxW: 150, note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
-          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", maxH: 32, maxW: 90, note: "" },
-          { src: "/aliados-exotics.png", alt: "ExoticsCo", maxH: 32, maxW: 120, note: "" },
-        ].map((a, i) => (
-          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, height: 56, justifyContent: "center" }}>
-            <img src={a.src} alt={a.alt} loading="lazy" style={{
-              maxHeight: a.maxH, maxWidth: a.maxW, width: "auto", objectFit: "contain",
-              filter: "grayscale(100%)", opacity: 0.35, transition: "filter 0.3s, opacity 0.3s",
-            }}
-              onMouseEnter={e => { e.currentTarget.style.filter = "grayscale(0%)"; e.currentTarget.style.opacity = "0.7"; }}
-              onMouseLeave={e => { e.currentTarget.style.filter = "grayscale(100%)"; e.currentTarget.style.opacity = "0.35"; }}
-            />
-            {a.note && <span style={{ fontSize: 8, color: "var(--slate-400)", textAlign: "center", lineHeight: 1.3, maxWidth: 180 }}>{a.note}</span>}
+          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
+          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", note: "" },
+          { src: "/aliados-exotics.png", alt: "ExoticsCo", note: "" },
+        ].map(a => (
+          <div className="tile rv" key={a.src}>
+            <div className="mark"><img src={a.src} alt={a.alt} loading="lazy" /></div>
+            {a.note && <p className="note">{a.note}</p>}
           </div>
         ))}
       </div>
@@ -986,40 +669,27 @@ function Beneficios() {
     { icon: "fileText", tag: "Renta",   title: "Deducción en renta",     pct: "50%", accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Personas naturales y jurídicas pueden deducir hasta el 50% del valor del vehículo en su declaración de renta.", ejemplo: "$150M → deduces $75.000.000", norma: "Art. 11, Ley 1715/2014 (mod. art. 8, Ley 2099/2021)" },
     { icon: "zap",      tag: "Depreciación", title: "Depreciación acelerada",   pct: "3 años",  accentColor: "var(--teal-500)", iconBg: "rgba(20,184,166,0.1)", bgColor: "var(--teal-50)", borderColor: "var(--teal-200)", desc: "Independientes y empresas deprecian el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.", ejemplo: "Solo independientes y empresas", norma: "Art. 14, Ley 1715/2014 (mod. art. 11, Ley 2099/2021) y Decreto 895/2022" },
   ];
+  const [iva, renta, dep] = cards;
+  const Baldosa = ({ c, cls }: { c: typeof cards[number]; cls: string }) => (
+    <article className={`bt ${cls} rv`}>
+      <div className="fig">{c.pct}</div>
+      <h3>{c.title}</h3>
+      <p>{c.desc}</p>
+      <p className="law">{c.norma}</p>
+      <p className="ex">{c.ejemplo}</p>
+    </article>
+  );
   return (
-    <section id="beneficios" aria-label="Beneficios tributarios" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            Tres beneficios tributarios. <br/>
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Una sola gestión.</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            El Estado colombiano creó estos incentivos para promover la movilidad eléctrica e híbrida. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.
-          </p>
-        </div>
-
-        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          {cards.map((c, i) => (
-            <div key={i} className="card benefit-card" style={{ padding: 32, position: "relative", overflow: "hidden", background: "var(--white)", borderColor: "var(--slate-200)", borderLeft: `4px solid ${c.accentColor}`, transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >
-              <div style={{ position: "absolute", top: 12, right: 16, fontSize: 80, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none" }}>{c.pct}</div>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                <Icon name={c.icon} size={22} color={c.accentColor}/>
-              </div>
-              <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 4, lineHeight: 1.4 }}>{c.title}</h3>
-              <div style={{ fontSize: 40, fontWeight: 700, color: c.accentColor, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 14 }}>{c.pct}</div>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5, marginBottom: 12 }}>{c.desc}</p>
-              <div style={{ fontSize: 11, color: "var(--slate-400)", lineHeight: 1.4, marginBottom: 16 }}>{c.norma}</div>
-              <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 16 }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 12, background: "var(--slate-50)", border: "1px solid var(--slate-200)", fontSize: 12, fontWeight: 600, color: c.accentColor }}>
-                  <Icon name="checkCircle" size={12} color={c.accentColor}/>{c.ejemplo}
-                </div>
-              </div>
-            </div>
-          ))}
+    <section id="beneficios" aria-label="Beneficios tributarios" className="h-sec h-wrap">
+      <div className="h-grid"><div className="h-intro rv">
+        <h2 className="h-h2">Tres beneficios tributarios. Una sola gestión.</h2>
+        <p>El Estado colombiano creó estos incentivos para promover la movilidad eléctrica e híbrida. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.</p>
+      </div></div>
+      <div className="steps3">
+        <Baldosa c={iva} cls="a" />
+        <div className="bstack">
+          <Baldosa c={renta} cls="b" />
+          <Baldosa c={dep} cls="c" />
         </div>
       </div>
     </section>
@@ -1166,75 +836,24 @@ function Servicios() {
     },
   ] as Array<{ icon: string; tag: string; title: string; desc: string; price: string; priceNote: string; features: string[]; accentColor: string; iconBg: string }>;
   return (
-    <section id="servicios" aria-label="Servicios CertiVeh" style={{ background: "var(--slate-50)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            Dos servicios. <br/>
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Cero burocracia.</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            CertiVeh gestiona el certificado UPME y la devolución de tu IVA ante la DIAN.
-          </p>
-        </div>
-
-        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 1140, margin: "0 auto" }}>
-          {servicios.map((s, i) => (
-            <div key={i} className="card" style={{
-              padding: 36, position: "relative", overflow: "hidden",
-              borderLeft: `4px solid ${s.accentColor}`,
-              display: "flex", flexDirection: "column",
-            }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Icon name={s.icon} size={22} color={s.accentColor}/>
-                </div>
-                <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.02em", color: s.accentColor }}>{s.tag}</span>
-              </div>
-
-              <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--slate-900)", letterSpacing: "-0.01em", marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
-              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.6, marginBottom: 20 }}>{s.desc}</p>
-
-              {/* ⚠️ EL `marginTop: auto` VA AQUÍ, Y ANTES ESTABA EN LA `desc` COMO `flex: 1`.
-                  Con el hueco en la descripción, cada tarjeta lo repartía distinto —la del IVA
-                  tenía debajo una nota que la del certificado no— y las dos listas de checks
-                  empezaban a alturas distintas. Anclando la lista al fondo, las dos quedan
-                  alineadas sea cual sea el largo de su descripción, que es lo que pidió Julian
-                  el 9-sep-2026: «pon los checkboxes alineados abajo como en el certificado UPME».
-
-                  Ojo: eso exige que el `marginTop: "auto"` del bloque de precio se quede también,
-                  o los dos se pelean por el mismo hueco. Hoy no se pelean porque el precio va
-                  después y el hueco ya está consumido aquí. */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24, marginTop: "auto" }}>
-                {s.features.map((f, j) => (
-                  // ⚠️ `flex-start` y `flexShrink: 0`, no `center` sin encoger. La viñeta que
-                  // entonces era la del poder (hoy retirada; las de ahora también parten línea en
-                  // móvil) ocupaba dos líneas a 1280px y tres a 769px, y con `center` el check queda
-                  // centrado entre líneas en vez de alineado a la primera — y sin `flexShrink` el
-                  // flex se lo come: medido a 769px, se reducía a un punto casi invisible.
-                  <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 14, color: "var(--slate-600)", lineHeight: 1.5 }}>
-                    <span style={{ flexShrink: 0, marginTop: 3, display: "inline-flex" }}>
-                      <Icon name="checkCircle" size={14} color={s.accentColor}/>
-                    </span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 20, marginTop: "auto" }}>
-                <div style={{ fontSize: 24, fontWeight: 700, color: s.accentColor, letterSpacing: "-0.02em", lineHeight: 1 }}>{s.price}</div>
-                <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 4 }}>{s.priceNote}</div>
-              </div>
-
-              <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", marginTop: 20 }}>
-                <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
-                  {i === 0 ? "Empezar mi trámite" : "Solicitar devolución de IVA"} <Icon name="arrowRight" size={18} color="white"/>
-                </button>
-              </a>
-            </div>
-          ))}
-        </div>
+    <section id="servicios" aria-label="Servicios CertiVeh" className="h-sec h-wrap">
+      <div className="h-grid"><div className="h-intro rv">
+        <h2 className="h-h2">Dos servicios. Cero burocracia.</h2>
+        <p>CertiVeh gestiona el certificado UPME y la devolución de tu IVA ante la DIAN.</p>
+      </div></div>
+      <div className="duo">
+        {servicios.map((s, i) => (
+          <article key={s.title} className={`svc-col rv${i === 1 ? " dark" : ""}`}>
+            <div className="svc-head"><h3>{s.title}</h3><p className="kick">{s.tag}</p></div>
+            <div className="price">{s.price}</div>
+            <p className="per">{s.priceNote}</p>
+            <p className="d">{s.desc}</p>
+            <ul>{s.features.map(f => <li key={f} className="cv-sq">{f}</li>)}</ul>
+            <a className={`cv-btn ${i === 1 ? "cv-btn-w" : "cv-btn-a"}`} href={portalUrl} target="_blank" rel="noopener noreferrer">
+              {i === 0 ? "Empezar mi trámite" : "Solicitar devolución de IVA"} <Arr />
+            </a>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -1274,88 +893,22 @@ function PorQueNoSolo() {
       solucion: "Revisamos que el certificado quede perfectamente emitido para que resista una eventual auditoría.",
     },
   ];
-
-  const colStyle = { display: "grid", gridTemplateColumns: "3fr 2fr" };
-
   return (
-    <section aria-label="Así protegemos tu beneficio" style={{ background: "var(--slate-50)", borderTop: "1px solid var(--slate-200)" }}>
-      <div className="section">
-
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{
-            fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700,
-            letterSpacing: "-0.02em", color: "var(--slate-900)",
-            lineHeight: 1.25, marginBottom: 14,
-          }}>
-            Así protegemos{" "}
-            <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              tu beneficio.
-            </span>
-          </h2>
-          <p style={{
-            fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)",
-            lineHeight: 1.6, maxWidth: 480, margin: "0 auto",
-          }}>
-            Estos son los errores que hacen que la UPME rechace solicitudes. Los prevenimos antes de radicar.
-          </p>
+    <section aria-label="Así protegemos tu beneficio" className="h-sec h-wrap">
+      <div className="prot-grid">
+        <div className="prot-head rv">
+          <h2 className="h-h2">Así protegemos tu beneficio.</h2>
+          <p>Estos son los errores que hacen que la UPME rechace solicitudes. Los prevenimos antes de radicar.</p>
         </div>
-
-        <div style={{ border: "1px solid var(--slate-200)", borderRadius: 16, overflow: "hidden" }}>
-
-          {/* Header row */}
-          <div className="pqns-row" style={{ ...colStyle, borderBottom: "1px solid var(--slate-200)" }}>
-            <div style={{ padding: "12px 32px" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--slate-400)", textTransform: "uppercase" }}>
-                Problemas comunes
-              </span>
-            </div>
-            <div style={{ padding: "12px 32px", background: "var(--emerald-50)" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--emerald-600)", textTransform: "uppercase" }}>
-                Cómo lo resuelve CertiVeh
-              </span>
-            </div>
-          </div>
-
-          {/* Data rows */}
-          {items.map((item) => (
-            <div key={item.num} className="pqns-row" style={{
-              ...colStyle,
-              background: "var(--white)",
-              borderTop: "1px solid var(--slate-200)",
-            }}>
-              <div style={{ padding: "28px 32px", display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <div style={{
-                  width: 32, height: 32, borderRadius: 8, flexShrink: 0,
-                  background: "var(--emerald-50)", color: "var(--emerald-600)",
-                  fontSize: 13, fontWeight: 700,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  {item.num}
-                </div>
-                <div>
-                  <p style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.4, marginBottom: 6, letterSpacing: "-0.01em" }}>
-                    {item.title}
-                  </p>
-                  <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6, margin: 0 }}>
-                    {item.problema}
-                  </p>
-                </div>
-              </div>
-              <div style={{
-                padding: "28px 32px",
-                background: "var(--emerald-50)",
-                display: "flex", alignItems: "center", gap: 12,
-              }}>
-                <div style={{ flexShrink: 0, marginTop: 1 }}>
-                  <Icon name="checkCircle" size={16} color="var(--emerald-600)" />
-                </div>
-                <p style={{ fontSize: 14, color: "var(--slate-700)", lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
-                  {item.solucion}
-                </p>
-              </div>
-            </div>
+        <div className="prot-list">
+          <p className="prot-k">Problemas comunes</p>
+          {items.map(item => (
+            <article key={item.num} className="pcase rv">
+              <h3>{item.title}</h3>
+              <p className="pq">{item.problema}</p>
+              <div className="pfix"><span>Cómo lo resuelve CertiVeh</span><p>{item.solucion}</p></div>
+            </article>
           ))}
-
         </div>
       </div>
     </section>
@@ -1363,8 +916,25 @@ function PorQueNoSolo() {
 }
 
 // ── CÓMO FUNCIONA ─────────────────────────────────────────────────────────────
+// El riel avanza con el scroll (o al tocar un paso) y a la derecha va la pieza del portal de ese paso.
+// En el celular cada paso lleva su pieza debajo. Las piezas usan los rótulos reales del portal; las
+// cifras del pago salen de la tarifa vigente para un vehículo de $120M.
+const RIEL_PORTAL = ["En borrador","Solicitud enviada","Registro en UPME","Esperando ventana UPME","Trámite en UPME","Espera de certificado","Certificado emitido"];
+function PiezaDelPaso({ i }: { i: number }) {
+  const tarifa = useTarifa();
+  const c = cotizacionDeLaHome(120_000_000, false, tarifa);
+  const pz = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
+  switch (i) {
+    case 0: return (<div className="ui" data-ui><div className="t">Documentos</div><div className="r"><span>Cédula (frente y reverso)</span><span className="ok">Leída</span></div><div className="r"><span>Tarjeta de propiedad (frente y reverso)</span><span className="ok">Leída</span></div><div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>Factura de compra</span><span className="wait">Subiendo</span></div><div className="prog"><i /></div></div></div>);
+    case 1: return (<div className="ui" data-ui><div className="t">Confirma tus datos</div><div className="fld"><span>Marca</span><b>BYD</b></div><div className="fld"><span>Línea</span><b>Seagull</b></div><div className="fld sel"><span>Valor del vehículo (sin IVA)</span><b>$120.000.000</b></div><span className="btnui">Confirmar</span><p className="ej">Datos de ejemplo</p></div>);
+    case 2: return (<div className="ui" data-ui><div className="t">Resumen del pago</div><div className="r"><span>Servicio de tramitación</span><b>{pz(c.honorariosBase)}</b></div><div className="r"><span>IVA (19% sobre tramitación)</span><b>{pz(c.ivaServicio)}</b></div><div className="r"><span>Trámite ante UPME</span><b>{pz(c.costoUPME)}</b></div><div className="r" style={{ fontWeight: 800, fontSize: 16 }}><span>Total</span><b>{pz(c.costoTotal)}</b></div><span className="btnui">Pagar</span><p className="ej">Para un vehículo de $120M</p></div>);
+    case 3: return (<div className="ui" data-ui><div className="t">Así va tu certificado</div><ol className="rail">{RIEL_PORTAL.map((s, k) => <li key={s} className={k < 4 ? "" : k === 4 ? "now" : "next"}>{s}</li>)}</ol></div>);
+    case 4: return (<div className="ui" data-ui><div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}><div><div className="t">BYD Seagull · 2026</div><div style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center", color: "#475569" }}><span className="plate">AB**12</span> Eléctrico</div></div><span className="ok">¡Certificado emitido!</span></div><span className="btnui">Descargar certificado</span><span className="btnui g">Ver detalle</span><p className="ej">Datos de ejemplo</p></div>);
+    default: return (<div className="ui" data-ui><div className="t">Expediente de devolución de IVA</div><div className="r" style={{ background: "#eef7f2", borderRadius: 6, padding: 14, borderBottom: 0, marginTop: 12, alignItems: "flex-start" }}><span><b style={{ display: "block" }}>Empezar mi expediente de devolución de IVA</b><span style={{ color: "#475569" }}>Ya la pagaste con tu certificado. No tienes que pagar nada más.</span></span><span style={{ flex: "none", width: 30, height: 30, borderRadius: "50%", background: "#047857", color: "#fff", display: "grid", placeItems: "center", fontWeight: 700 }}>→</span></div><div className="r"><span>Formulario 010</span><span className="wait">Por firmar</span></div><div className="r"><span>Declaración juramentada</span><span className="wait">Por firmar</span></div></div>);
+  }
+}
+
 function ComoFunciona() {
-  const [active, setActive] = useState(0);
   const steps = [
     { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Solo necesitas tu cédula, tarjeta de propiedad y factura de compra. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." },
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." },
@@ -1416,84 +986,40 @@ function ComoFunciona() {
     //     certificado lo incluye.
     { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." },
   ];
-  
+  const [active, setActive] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % steps.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [steps.length]);
-  
+    const items = document.querySelectorAll("#como-funciona .flow-steps > li");
+    if (!("IntersectionObserver" in window) || !items.length) return;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.i)); }), { rootMargin: "-45% 0px -50% 0px" });
+    items.forEach(li => io.observe(li));
+    return () => io.disconnect();
+  }, []);
   return (
-    <section id="como-funciona" aria-label="Cómo funciona" style={{ background: "var(--slate-900)" }}>
-      <div className="section">
-        <div className="grid-2-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
-          <div>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25, marginBottom: 14 }}>
-              Así de simple <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>es el trámite.</span>
-            </h2>
-            <p style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 32 }}>
-              {/* ⚠️ Decía «Del certificado UPME a la devolución de tu IVA», y los cinco pasos de
-                  abajo describían SOLO el certificado: crear la cuenta en la UPME, llenar sus
-                  formularios, radicar y descargar. Con esa promesa encima, el paso 04 —«Tú no
-                  haces nada más»— contradecía la tarjeta de servicio de dos secciones más arriba,
-                  que dice que en el IVA le queda firmar y reenviar un correo. El defecto no estaba
-                  en el paso: estaba en el titular que le hacía decir algo que no decía.
-
-                  El 9-sep-2026 se añadió el paso 06, que sí cubre la devolución, así que el
-                  titular vuelve a nombrarla — y a la vez se corrigió el subtítulo del 04, que es
-                  la otra mitad de esa misma lección. LA REGLA SIGUE EN PIE: este texto solo puede
-                  prometer hasta donde lleguen los pasos. Si algún día se quita el 06, esta línea
-                  vuelve a hablar solo del certificado. */}
-              Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {steps.map((s, i) => (
-                <button key={i} className={`step-tab${active === i ? " active" : ""}`} onClick={() => setActive(i)}
-                  style={active === i ? { background: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.1)" } : { background: "transparent", borderColor: "transparent" }}
-                >
-                  <div className="step-num" style={active === i ? { background: "var(--emerald-600)", color: "white" } : { background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}>{s.num}</div>
-                  <div>
-                    <div style={{ fontSize: 16, fontWeight: 600, color: active === i ? "white" : "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>{s.title}</div>
-                    <div style={{ fontSize: 12, fontWeight: 500, color: active === i ? "#34D399" : "rgba(255,255,255,0.3)", marginTop: 1, lineHeight: 1.4 }}>{s.subtitle}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="card step-card" style={{ padding: 40, height: 420, display: "flex", flexDirection: "column", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: -8, right: 16, fontSize: 140, fontWeight: 700, color: "rgba(255,255,255,0.03)", lineHeight: 1, pointerEvents: "none" }}>{steps[active].num}</div>
+    <section id="como-funciona" aria-label="Cómo funciona" className="h-sec h-wrap">
+      <div className="h-grid"><div className="h-intro rv">
+        <h2 className="h-h2">Así de simple es el trámite.</h2>
+        <p>Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.</p>
+      </div></div>
+      <div className="flow">
+        <ol className="flow-steps">
+          {steps.map((s, i) => (
+            <li key={s.num} data-i={i} className={i === active ? "on" : i < active ? "done" : ""} aria-current={i === active ? "step" : undefined} onClick={() => setActive(i)}>
+              <h3>{s.title}</h3>
+              <p className="subt">{s.subtitle}</p>
+              <p className="desc">{s.desc}</p>
+              <p className="det">{s.detail}</p>
+              <div className="frag" aria-hidden="true"><PiezaDelPaso i={i} /></div>
+            </li>
+          ))}
+        </ol>
+        <div className="flow-panel" aria-hidden="true">
+          <div className="flow-sticky">
             <AnimatePresence mode="wait">
-              <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}>
-                <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, border: "1px solid rgba(255,255,255,0.1)" }}>
-                  <Icon name={steps[active].icon} size={24} color="#34D399"/>
-                </div>
-                <h3 style={{ fontSize: 24, fontWeight: 600, color: "white", letterSpacing: "-0.01em", lineHeight: 1.35, marginBottom: 12 }}>{steps[active].title}</h3>
-                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 20 }}>{steps[active].desc}</p>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontSize: 14, fontWeight: 500, color: "#34D399" }}>
-                  <Icon name="checkCircle" size={14} color="#34D399"/>{steps[active].detail}
-                </div>
+              <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} style={{ width: "100%", display: "grid", placeItems: "center" }}>
+                <PiezaDelPaso i={active} />
               </motion.div>
             </AnimatePresence>
-            <div style={{ display: "flex", gap: 6, marginTop: 28 }}>
-              {steps.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)} style={{ height: 6, width: i === active ? 24 : 6, borderRadius: 3, background: i === active ? "var(--emerald-500)" : "rgba(255,255,255,0.15)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.25s" }}/>
-              ))}
-            </div>
           </div>
-        </div>
-
-        {/* Portal photo */}
-        <div style={{
-          marginTop: 80, maxWidth: 800, marginLeft: "auto", marginRight: "auto",
-          borderRadius: 16, overflow: "hidden",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-        }}>
-          <img src={typeof imgPortalUsuario === 'string' ? imgPortalUsuario : imgPortalUsuario.src}
-            alt="Usuario gestionando su certificado UPME desde el portal de CertiVeh"
-            style={{ width: "100%", display: "block" }}
-          />
         </div>
       </div>
     </section>
@@ -1528,176 +1054,59 @@ function Calculadora() {
     { label: "Devolución IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
     { label: "Deducción renta", value: calc.renta, color: "var(--teal-500)",    pct: calc.renta / calc.total },
   ];
+  const opcion = (actual: string, set: (v: string) => void) => (o: { value: string; label: string }) => (
+    <button key={o.value} type="button" aria-pressed={actual === o.value} onClick={() => set(o.value)}>{o.label}</button>
+  );
   return (
-    <section id="calculadora" aria-label="Calculadora de beneficios" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>¿Cuánto vale tu beneficio?</h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido.</p>
-        </div>
-
-        <div className="card grid-calc" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)" }}>
-          {/* Controls */}
-          <div className="card-calc-controls" style={{ padding: 48, borderRight: "1px solid var(--slate-200)" }}>
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Tipo de vehículo</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "electrico", label: "Eléctrico puro", icon: "zap" },{ value: "hibrido", label: "Híbrido (no ligero)", icon: "battery" }].map(opt => (
-                  <button key={opt.value} onClick={() => setTipo(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: tipo === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: tipo === opt.value ? "var(--emerald-600)" : "var(--white)", color: tipo === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: tipo === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: tipo === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none", lineHeight: 1.3 }}>
-                    <Icon name={opt.icon} size={16} color={tipo === opt.value ? "white" : "var(--slate-400)"} />
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)", marginBottom: 10 }}>Perfil tributario</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                {[{ value: "natural", label: "Persona natural", icon: "user" },{ value: "empresa", label: "Independiente/Empresa", icon: "building" }].map(opt => (
-                  <button key={opt.value} onClick={() => setPerfil(opt.value)} style={{ padding: "12px 12px", borderRadius: 12, border: perfil === opt.value ? "1.5px solid var(--emerald-600)" : "1.5px solid var(--slate-200)", background: perfil === opt.value ? "var(--emerald-600)" : "var(--white)", color: perfil === opt.value ? "white" : "var(--slate-600)", fontSize: "clamp(12px, 1.5vw, 14px)", fontWeight: perfil === opt.value ? 600 : 500, cursor: "pointer", fontFamily: "var(--ff)", transition: "all 0.15s", textAlign: "center", lineHeight: 1.3, display: "flex", alignItems: "center", gap: 6, justifyContent: "center", boxShadow: perfil === opt.value ? "0 2px 8px rgba(5,150,105,0.25)" : "none" }}>
-                    <Icon name={opt.icon} size={16} color={perfil === opt.value ? "white" : "var(--slate-400)"} />
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "var(--slate-500)" }}>Valor del vehículo (sin IVA)</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--emerald-600)", letterSpacing: "-0.02em" }}>${valor}M</div>
-              </div>
-              <input type="range" min="40" max="600" step="5" value={valor} onChange={e => setValor(Number(e.target.value))} style={{ width: "100%", appearance: "none", height: 4, borderRadius: 4, outline: "none", cursor: "pointer", background: `linear-gradient(to right, #059669 0%, #14B8A6 ${((valor-40)/560)*100}%, #E2E8F0 ${((valor-40)/560)*100}%, #E2E8F0 100%)` }}/>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--slate-400)", fontWeight: 500, marginTop: 6 }}>
-                <span>$40M</span><span>$600M</span>
-              </div>
-            </div>
-
-            <div style={{ marginBottom: 24 }}>
-              <label style={{
-                display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
-                padding: "14px 16px", borderRadius: 12,
-                background: conIva ? "var(--emerald-50)" : "var(--slate-50)",
-                border: conIva ? "1.5px solid var(--emerald-500)" : "1.5px solid var(--slate-200)",
-                transition: "all 0.15s",
-              }}>
-                <div style={{
-                  width: 40, height: 22, borderRadius: 11, position: "relative",
-                  background: conIva ? "var(--emerald-600)" : "var(--slate-300)",
-                  transition: "background 0.2s", flexShrink: 0,
-                }}
-                  onClick={() => setConIva(!conIva)}
-                >
-                  <div style={{
-                    width: 18, height: 18, borderRadius: "50%", background: "white",
-                    position: "absolute", top: 2, left: conIva ? 20 : 2,
-                    transition: "left 0.2s",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                  }} />
-                </div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: conIva ? "var(--emerald-700)" : "var(--slate-600)", lineHeight: 1.4 }}>
-                    Gestión de la devolución de IVA
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {bars.map((b, i) => (
-                <div key={i}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-                    <span style={{ fontSize: 14, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.5 }}>{b.label}</span>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: b.color, lineHeight: 1.5 }}>{b.value ? fmt(b.value) : "-"}</span>
-                  </div>
-                  <div style={{ height: 6, borderRadius: 3, background: "var(--slate-100)", overflow: "hidden" }}>
-                    <div style={{ height: "100%", borderRadius: 3, background: b.color, width: `${(b.pct||0)*100}%`, transition: "width 0.4s ease" }}/>
-                  </div>
-                </div>
-              ))}
-              {perfil === "empresa" && (
-                <div style={{ padding: "10px 14px", background: "var(--emerald-50)", border: "1px solid var(--emerald-200)", borderRadius: 12, fontSize: 13, color: "var(--emerald-700)", lineHeight: 1.5 }}>
-                  Depreciación acelerada a 3 años, reduce tu base gravable más rápido y paga menos impuestos hoy.
-                </div>
-              )}
-            </div>
-
-            {calc.costoUPME != null && (
-              <div style={{ marginTop: 20, padding: "16px 18px", background: "var(--slate-50)", border: "1px solid var(--slate-200)", borderRadius: 12 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
-                  <Icon name="fileText" size={13} color="var(--slate-500)" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-500)", letterSpacing: "0.04em" }}>Costo total</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.5 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Trámite ante UPME</span>
-                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.costoUPME)}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Servicio de tramitación</span>
-                    <span style={{ fontWeight: 600, color: "var(--slate-700)" }}>{fmt(calc.honorariosBase)}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre tramitación)</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaServicio)}</span>
-                  </div>
-                  {conIva && (
-                    <>
-                      <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--teal-600)" }}>Gestión devolución IVA</span>
-                        <span style={{ fontWeight: 600, color: "var(--teal-600)" }}>{fmt(calc.honorariosIvaRefund)}</span>
-                      </div>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ fontSize: 12, color: "var(--slate-400)" }}>IVA (19% sobre la gestión)</span>
-                        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--slate-400)" }}>{fmt(calc.ivaIvaRefund)}</span>
-                      </div>
-                    </>
-                  )}
-                  <div style={{ borderTop: "1px solid var(--slate-200)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>Total</span>
-                    <span style={{ fontWeight: 700, color: "var(--slate-900)" }}>{fmt(calc.costoTotal)}</span>
-                  </div>
-                </div>
-              </div>
-            )}
+    <section id="calculadora" aria-label="Calculadora de beneficios" className="calc">
+      <h2>¿Cuánto vale tu beneficio?</h2>
+      <p className="sub">Mueve el slider y ve el desglose en tiempo real, con el costo del trámite incluido.</p>
+      <p className="lab" id="calc-tipo">Tipo de vehículo</p>
+      <div className="seg" role="group" aria-labelledby="calc-tipo">
+        {[{ value: "electrico", label: "Eléctrico puro" },{ value: "hibrido", label: "Híbrido (no ligero)" }].map(opcion(tipo, setTipo))}
+      </div>
+      <p className="lab" id="calc-perfil">Perfil tributario</p>
+      <div className="seg" role="group" aria-labelledby="calc-perfil">
+        {[{ value: "natural", label: "Persona natural" },{ value: "empresa", label: "Independiente/Empresa" }].map(opcion(perfil, setPerfil))}
+      </div>
+      <div className="val"><label className="lab" htmlFor="calc-valor">Valor del vehículo (sin IVA)</label><output htmlFor="calc-valor">${valor}M</output></div>
+      <input id="calc-valor" type="range" min="40" max="600" step="5" value={valor} aria-valuetext={`${valor} millones de pesos`}
+        onChange={e => setValor(Number(e.target.value))} style={{ ["--p" as string]: `${((valor - 40) / 560) * 100}%` }} />
+      <div className="ends"><span>$40M</span><span>$600M</span></div>
+      <label className="sw"><input type="checkbox" checked={conIva} onChange={() => setConIva(!conIva)} /><i aria-hidden="true" />Gestión de la devolución de IVA</label>
+      <div className="bars">
+        {bars.map((b, i) => (
+          <div key={b.label}>
+            <div className="brow"><span>{b.label}</span><b>{b.value ? fmt(b.value) : "-"}</b></div>
+            <div className={`btrack${i === 1 ? " b2" : ""}`}><i style={{ width: `${(b.pct || 0) * 100}%` }} /></div>
           </div>
-
-          {/* Result */}
-          <div className="card-calc-result" style={{ padding: 48, background: "var(--slate-900)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 12 }}>Beneficio total estimado</div>
-            <div style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "white", marginBottom: 6, transition: "all 0.3s" }}>
-              {calc.total ? fmt(calc.total) : "-"}
-            </div>
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>en incentivos tributarios (incluye base gravable en renta)</div>
-
-            {conIva && calc.iva && (
-              <div style={{ width: "100%", padding: "16px 24px", marginBottom: 16, background: "rgba(20,184,166,0.12)", border: "1px solid rgba(20,184,166,0.25)", borderRadius: 12, textAlign: "center" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#5EEAD4", marginBottom: 6 }}>IVA a recuperar ante la DIAN</div>
-                <div style={{ fontSize: 24, fontWeight: 700, color: "#5EEAD4", letterSpacing: "-0.02em" }}>{fmt(calc.iva)}</div>
-              </div>
-            )}
-
-            <div style={{ width: "100%", padding: "20px 24px", marginBottom: 24, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#34D399", marginBottom: 8 }}>Beneficio estimado menos el costo total</div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: "-0.02em" }}>{calc.neto ? fmt(calc.neto) : "-"}</div>
-            </div>
-
-            {calc.costoTotal && calc.total && (
-              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 28 }}>
-                Por cada <span style={{ fontWeight: 700, color: "white" }}>$1</span> de costo total, un beneficio estimado de{" "}
-                <span style={{ fontWeight: 700, color: "#34D399" }}>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</span> en beneficios.
-              </div>
-            )}
-
-            <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
-              <button className="btn-primary btn-primary-lg" style={{ width: "100%", justifyContent: "center", background: "linear-gradient(135deg, #059669, #14B8A6)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
-                Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
-              </button>
-            </a>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</div>
-          </div>
+        ))}
+      </div>
+      {perfil === "empresa" && <p className="emp">Depreciación acelerada a 3 años, reduce tu base gravable más rápido y paga menos impuestos hoy.</p>}
+      {calc.costoUPME != null && (
+        <div className="cost" aria-live="polite">
+          <div className="h">Costo total</div>
+          <div><span>Trámite ante UPME</span><b>{fmt(calc.costoUPME)}</b></div>
+          <div><span>Servicio de tramitación</span><b>{fmt(calc.honorariosBase)}</b></div>
+          <div><span>IVA (19% sobre tramitación)</span><b>{fmt(calc.ivaServicio)}</b></div>
+          {conIva && (<>
+            <div><span>Gestión devolución IVA</span><b>{fmt(calc.honorariosIvaRefund)}</b></div>
+            <div><span>IVA (19% sobre la gestión)</span><b>{fmt(calc.ivaIvaRefund)}</b></div>
+          </>)}
+          <div className="t"><span>Total</span><b>{fmt(calc.costoTotal)}</b></div>
         </div>
+      )}
+      <div className="res" aria-live="polite" data-ui>
+        <div className="k">Beneficio total estimado</div>
+        <div className="big">{calc.total ? fmt(calc.total) : "-"}</div>
+        <div className="s">en incentivos tributarios (incluye base gravable en renta)</div>
+        {conIva && calc.iva && (<div className="row"><span className="k">IVA a recuperar ante la DIAN</span><b>{fmt(calc.iva)}</b></div>)}
+        <div className="row"><span className="k">Beneficio estimado menos el costo total</span><b>{calc.neto ? fmt(calc.neto) : "-"}</b></div>
+        {calc.costoTotal && calc.total && (
+          <p className="per">Por cada <b>$1</b> de costo total, un beneficio estimado de{" "}<em>${(Math.round(calc.total / calc.costoTotal * 10) / 10).toLocaleString("es-CO")}</em> en beneficios.</p>
+        )}
+        <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
+        <p className="note">Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</p>
       </div>
     </section>
   );
@@ -1721,40 +1130,14 @@ function Confianza() {
     { icon: "checkCircle", title: "Solo pagas una vez",           desc: `Certificado UPME ${desde.pesos.certificado} + IVA. Devolución de IVA desde ${desde.pesos.ivaPaquete} + IVA. Sin suscripciones.` },
   ];
   return (
-    <section id="confianza" aria-label="Por qué CertiVeh" style={{ background: "var(--slate-900)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.25, marginBottom: 14 }}>
-            Hecho para que no <br/><span style={{ color: "rgba(255,255,255,0.4)" }}>tengas que preocuparte.</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            {/* ⚠️ Este subtítulo llegó a arrastrar el reparto de tareas del IVA entero —la
-                juramentada, el reenvío desde el correo del RUT y un «ver la tarjeta de Servicio
-                2»—. Retirado el 9-sep-2026 (Julian): cuatro líneas de letra pequeña en el
-                subtítulo de una sección que va de tranquilidad.
-
-                Se puede porque la obligación NO se queda sin decir: la sostienen el paso 06 de
-                «Así de simple» y la FAQ de la devolución. Si algún día se recorta alguno de esos
-                dos, hay que mirar si queda el otro antes de tocarlo. */}
-            Automatización, acompañamiento, seguridad y seguimiento en tiempo real.
-          </p>
-        </div>
-        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-          {puntos.map((p, i) => (
-            <div key={i} className="card trust-card" style={{ padding: 28, transition: "transform 0.2s, box-shadow 0.2s", position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12 }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "linear-gradient(90deg, #059669 0%, #14B8A6 100%)" }}></div>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-                <Icon name={p.icon} size={20} color="#34D399"/>
-              </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "white", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{p.title}</h3>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <section id="confianza" aria-label="Por qué CertiVeh" className="h-sec h-wrap">
+      <div className="h-grid"><div className="h-intro rv">
+        <h2 className="h-h2">Hecho para que no tengas que preocuparte.</h2>
+        <p>Automatización, acompañamiento, seguridad y seguimiento en tiempo real.</p>
+      </div></div>
+      <ul className="poster">
+        {puntos.map(p => <li key={p.title} className="rv"><h3>{p.title}</h3><p>{p.desc}</p></li>)}
+      </ul>
     </section>
   );
 }
@@ -1766,38 +1149,26 @@ function Testimonios() {
     { nombre: "Carolina R.", ciudad: "Medellín", vehiculo: "Toyota Corolla Cross Hybrid · Híbrido", texto: "Intenté hacer el trámite por mi cuenta y me lo rechazaron. Con CertiVeh lo volvimos a radicar, corrigieron lo que estaba mal y por fin pude acceder a mis beneficios tributarios. Súper agradecida." },
     { nombre: "Felipe T.", ciudad: "Bogotá", vehiculo: "BYD Seagull · Eléctrico", texto: "Fue muy rápido. En menos de 5 minutos ya había subido todo y empezado mi trámite en el portal de CertiVeh. Me avisaron por WhatsApp en cada paso. Muy recomendado." },
   ];
+  // La cita de quien primero intentó solo y fue rechazado va grande: es la que cuenta el servicio.
+  const [a, b, c] = testimonios;
+  const Cita = ({ t, cls }: { t: typeof testimonios[number]; cls: string }) => (
+    <figure className={`${cls} rv`}>
+      <blockquote>"{t.texto}"</blockquote>
+      <figcaption><b>{t.nombre}</b><span>{t.ciudad} · {t.vehiculo}</span></figcaption>
+    </figure>
+  );
   return (
-    <section id="testimonios" aria-label="Testimonios" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>
-            Lo que dicen nuestros usuarios
-          </h2>
-        </div>
-        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-          {testimonios.map((t, i) => (
-            <div key={i} className="card" style={{ padding: 28, display: "flex", flexDirection: "column", gap: 16, position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: -10, left: 8, fontSize: 80, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
-              <div style={{ display: "flex", gap: 2, position: "relative" }}>
-                {[...Array(5)].map((_, j) => (
-                  <svg key={j} width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B" stroke="none">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                ))}
-              </div>
-              <p style={{ fontSize: 15, color: "var(--slate-600)", lineHeight: 1.65, flex: 1, position: "relative", fontStyle: "italic" }}>"{t.texto}"</p>
-              <div style={{ position: "relative" }}>
-                <div style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-900)" }}>{t.nombre}</div>
-                <div style={{ fontSize: 13, color: "var(--slate-400)" }}>{t.ciudad} · {t.vehiculo}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <section id="testimonios" aria-label="Testimonios" className="h-sec h-wrap">
+      <h2 className="h-h2 rv">Lo que dicen nuestros usuarios</h2>
+      <div className="vgrid">
+        <Cita t={b} cls="vlead" />
+        <div className="vside"><Cita t={a} cls="vq" /><Cita t={c} cls="vq" /></div>
       </div>
     </section>
   );
 }
 
+// ── PRENSA ──────────────────────────────────────────────────────────────────
 // ── PRENSA ──────────────────────────────────────────────────────────────────
 // Cada tarjeta lleva el TITULAR TEXTUAL que publicó el medio, entre comillas porque son sus
 // palabras y no las nuestras. Verificados contra cada página el 22-oct-2026 (og:title o el
@@ -1840,115 +1211,30 @@ const MEDIOS: Medio[] = [
     titular: "Un vehículo de 120 millones de pesos podría representar hasta 66 millones en beneficios tributarios",
     url: "https://www.instagram.com/p/DaqeIT9D-ai/" },
 ];
-
-function TarjetaDePrensa({ m }: { m: Medio }) {
-  return (
-    <a className="card prensa-card" href={m.url} target="_blank" rel="noopener noreferrer"
-      aria-label={`${m.name}: ${m.titular} (se abre en una pestaña nueva)`}
-      style={{ width: 320, height: "100%", padding: 28, display: "flex", flexDirection: "column", gap: 16, textDecoration: "none", color: "inherit" }}>
-      <div style={{ height: 36, display: "flex", alignItems: "center" }}>
-        <img className="prensa-logo" src={m.logo} alt={m.name} loading="lazy" draggable={false} style={{ maxHeight: m.maxH, maxWidth: m.maxW, width: "auto", objectFit: "contain" }} />
-      </div>
-      <p style={{ fontSize: 16, fontWeight: 600, color: "var(--slate-900)", lineHeight: 1.5, letterSpacing: "-0.01em", flex: 1 }}>
-        «{m.titular}»
-      </p>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 8 }}>
-        <span style={{ fontSize: 13, color: "var(--slate-500)" }}>{m.formato} · {m.fecha}</span>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 600, color: "var(--emerald-700)" }}>
-          {m.accion} <Icon name="arrowRight" size={14} color="var(--emerald-700)" />
-        </span>
-      </div>
-    </a>
-  );
-}
-
-// El carrusel lo maneja quien lo mira: flechas, puntos y arrastre (Embla, la misma librería de
-// `ui/carousel.tsx`). Avanza solo una tarjeta cada 5 s, pero se detiene mientras el ratón o el
-// foco están dentro, y DEJA de avanzar para siempre en cuanto el usuario lo mueve: quien ya está
-// leyendo no quiere que la tarjeta se le vaya. Con «reducir movimiento» no avanza nunca.
-const PRENSA_AVANCE_MS = 5000;
-
 function Prensa() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
-  const [actual, setActual] = useState(0);
-  const [tocado, setTocado] = useState(false);
-  const [encima, setEncima] = useState(false);
-  const [quieto, setQuieto] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setQuieto(mq.matches);
-    const cambio = () => setQuieto(mq.matches);
-    mq.addEventListener("change", cambio);
-    return () => mq.removeEventListener("change", cambio);
-  }, []);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const alSeleccionar = () => setActual(emblaApi.selectedScrollSnap());
-    const alArrastrar = () => setTocado(true);
-    alSeleccionar();
-    emblaApi.on("select", alSeleccionar).on("reInit", alSeleccionar).on("pointerDown", alArrastrar);
-    return () => { emblaApi.off("select", alSeleccionar).off("reInit", alSeleccionar).off("pointerDown", alArrastrar); };
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi || tocado || encima || quieto) return;
-    const t = setInterval(() => { if (!document.hidden) emblaApi.scrollNext(); }, PRENSA_AVANCE_MS);
-    return () => clearInterval(t);
-  }, [emblaApi, tocado, encima, quieto]);
-
-  const ir = (fn: () => void) => { setTocado(true); fn(); };
-
   return (
-    <section id="prensa" aria-labelledby="prensa-titulo" style={{ background: "var(--white)", borderTop: "1px solid var(--slate-200)" }}>
-      <div className="section" style={{ paddingBottom: 0 }}>
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 id="prensa-titulo" style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            CertiVeh en los medios
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto" }}>
-            Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.
-          </p>
+    <section id="prensa" aria-labelledby="prensa-titulo" className="h-sec h-wrap">
+      <div className="board">
+        <div className="tile head rv">
+          <h2 id="prensa-titulo">CertiVeh en los medios</h2>
+          <p>Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.</p>
         </div>
-      </div>
-
-      <div role="region" aria-roledescription="carrusel" aria-label="Artículos y entrevistas sobre CertiVeh"
-        onMouseEnter={() => setEncima(true)} onMouseLeave={() => setEncima(false)}
-        onFocus={() => setEncima(true)} onBlur={() => setEncima(false)}
-        style={{ paddingBottom: 96 }}>
-        <div className="prensa-carril" ref={emblaRef}>
-          <div className="prensa-pista">
-            {MEDIOS.map((m, i) => (
-              <div key={m.name} className="prensa-slide" role="group" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${MEDIOS.length}: ${m.name}`}>
-                <TarjetaDePrensa m={m} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-          <button type="button" className="prensa-flecha" aria-label="Medio anterior" onClick={() => emblaApi && ir(() => emblaApi.scrollPrev())}>
-            <Icon name="arrowLeft" size={18} color="var(--slate-700)" />
-          </button>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            {MEDIOS.map((m, i) => (
-              <button key={m.name} type="button" className="prensa-punto" aria-label={`Ir a ${m.name}`} aria-current={i === actual ? "true" : undefined}
-                onClick={() => emblaApi && ir(() => emblaApi.scrollTo(i))}>
-                <span />
-              </button>
-            ))}
-          </div>
-          <button type="button" className="prensa-flecha" aria-label="Medio siguiente" onClick={() => emblaApi && ir(() => emblaApi.scrollNext())}>
-            <Icon name="arrowRight" size={18} color="var(--slate-700)" />
-          </button>
-        </div>
+        {MEDIOS.map((m, i) => (
+          <a key={m.name} className="tile rv" href={m.url} target="_blank" rel="noopener noreferrer"
+            aria-label={`${m.name}: ${m.titular} (se abre en una pestaña nueva)`}
+            style={i === MEDIOS.length - 1 ? { gridColumn: "span 2" } : undefined}>
+            <div className="mark"><img src={m.logo} alt={m.name} loading="lazy" /></div>
+            <p className="quote">«{m.titular}»</p>
+            <span className="meta"><span>{m.formato} · {m.fecha}</span><b>{m.accion}</b></span>
+          </a>
+        ))}
       </div>
     </section>
   );
 }
 
 // ── WIN WIN ──────────────────────────────────────────────────────────────────
+// A la derecha, el módulo Win Win del portal (`WinWinModule.tsx`) con sus rótulos reales y cifras de ejemplo.
 function WinWin() {
   const portalUrl = usePortalUrl();
   const steps = [
@@ -1957,43 +1243,27 @@ function WinWin() {
     { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo solicite su trámite, tú ganas $75.000 que puedes acumular o retirar cuando quieras." },
   ];
   return (
-    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" style={{ background: "var(--slate-50)" }}>
-      <div className="section">
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25, marginBottom: 14 }}>
-            CertiVeh <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Win Win</span>
-          </h2>
-          <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "var(--slate-600)", lineHeight: 1.6 }}>Refiere amigos y gana dinero</p>
+    <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" className="ww">
+      <div className="h-wrap h-grid">
+        <div className="ww-copy rv">
+          <h2 className="h-h2">CertiVeh Win Win</h2>
+          <p className="sub">Refiere amigos y gana dinero</p>
+          <ol className="ww-steps">
+            {steps.map(s => <li key={s.num}><h3>{s.title}</h3><p>{s.desc}</p></li>)}
+          </ol>
+          <p className="fine">Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.</p>
+          <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
         </div>
-
-        <div className="grid-3-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
-          {steps.map((s, i) => (
-            <div key={i} className="card" style={{ padding: 28, position: "relative", overflow: "hidden", borderLeft: "4px solid var(--emerald-500)", transition: "transform 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >
-              <div style={{ position: "absolute", top: 16, right: 20, fontSize: 48, fontWeight: 700, color: "rgba(0,0,0,0.04)", lineHeight: 1, pointerEvents: "none" }}>{s.num}</div>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: "var(--emerald-50)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                <Icon name={s.icon} size={22} color="var(--emerald-600)" />
-              </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--slate-900)", marginBottom: 8, letterSpacing: "-0.01em", lineHeight: 1.45 }}>{s.title}</h3>
-              <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.6 }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ background: "var(--white)", border: "1px solid var(--slate-200)", borderRadius: 16, padding: "20px 28px", textAlign: "center", marginBottom: 32 }}>
-          <p style={{ fontSize: 15, color: "var(--slate-600)", fontWeight: 500, lineHeight: 1.6, margin: 0 }}>
-            Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.
-          </p>
-        </div>
-
-        <div style={{ textAlign: "center" }}>
-          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", boxShadow: "0 4px 24px rgba(5,150,105,0.4)", borderRadius: 12 }}>
-              Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white" />
-            </button>
-          </a>
+        <div className="ww-ui rv" aria-hidden="true">
+          <div className="ui wwp" data-ui>
+            <div className="t">CertiVeh Win Win</div>
+            <p style={{ color: "#475569", marginTop: 2 }}>Refiere y gana dinero</p>
+            <div className="wwsaldo"><span>Saldo disponible</span><b>$150.000</b></div>
+            <div className="wwnums"><div><span>Referidos</span><b>2</b></div><div><span>Pagados</span><b>2</b></div></div>
+            <span className="btnui">Compartir por WhatsApp</span>
+            <span className="btnui g">Copiar mensaje</span>
+            <p className="ej">Datos de ejemplo</p>
+          </div>
         </div>
       </div>
     </section>
@@ -2049,26 +1319,22 @@ function FAQ() {
     { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
   ];
   return (
-    <section id="faq" aria-label="Preguntas frecuentes" style={{ background: "var(--white)" }}>
-      <div className="section">
-        <div style={{ maxWidth: 680, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--slate-900)", lineHeight: 1.25 }}>Todo lo que necesitas saber</h2>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {items.map((item, i) => (
-              <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
-                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
-                  <span>{item.q}</span><div className="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={open === i ? "white" : "var(--emerald-600)"} strokeWidth="2" strokeLinecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
-                </button>
-                {open === i && (
-                  <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
-                    {item.a}
-                  </motion.div>
-                )}
-              </div>
-            ))}
-          </div>
+    <section id="faq" aria-label="Preguntas frecuentes" className="h-sec h-wrap">
+      <div className="faq-grid">
+        <h2 className="h-h2">Todo lo que necesitas saber</h2>
+        <div className="qs">
+          {items.map((item, i) => (
+            <div key={item.q} className={`faq-item${open === i ? " open" : ""}`}>
+              <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
+                <span>{item.q}</span><span className="pm" aria-hidden="true" />
+              </button>
+              {open === i && (
+                <motion.div className="faq-body" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.18 }}>
+                  {item.a}
+                </motion.div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -2079,211 +1345,45 @@ function FAQ() {
 function CTAFinal() {
   const portalUrl = usePortalUrl();
   return (
-    <section id="cta-final" aria-label="Comenzar" className="cta-section" style={{ background: "var(--slate-900)", padding: "96px 48px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, color: "rgba(0,0,0,0.4)" }}>
-        <AnimatedGridPattern
-          numSquares={50}
-          maxOpacity={0.6}
-          duration={4}
-          repeatDelay={0.5}
-        />
-      </div>
-      <div style={{ position: "relative", pointerEvents: "none" }}>
-        <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing: "-0.02em", color: "white", lineHeight: 1.2, marginBottom: 16, maxWidth: 680, margin: "0 auto 16px" }}>
-          Tus beneficios tributarios <br/><span style={{ background: "linear-gradient(135deg, #34D399 0%, #14B8A6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>te están esperando.</span>
-        </h2>
-        <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, maxWidth: 600, margin: "0 auto 36px" }}>
-          Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.
-        </p>
-        <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", pointerEvents: "auto" }}>
-          <button className="btn-primary btn-primary-lg" style={{ background: "linear-gradient(135deg, #059669 0%, #14B8A6 100%)", color: "white", boxShadow: "0 4px 24px rgba(5,150,105,0.4)" }}>
-            Empezar mi trámite ahora <Icon name="arrowRight" size={18} color="white"/>
-          </button>
-        </a>
-        <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginTop: 24 }}>
-          {["Solo pagas una vez · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => (
-            <span key={t} className="cta-feature" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6, lineHeight: 1.5 }}>
-              <Icon name="checkCircle" size={13} color="#34D399"/>{t}
-            </span>
-          ))}
+    <section id="cta-final" aria-label="Comenzar" className="close h-wrap">
+      <div className="h-grid close-grid">
+        <h2 className="h-h2 rv">Tus beneficios tributarios te están esperando.</h2>
+        <div className="close-r rv">
+          <p>Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.</p>
+          <a className="cv-btn cv-btn-a" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
+          <ul>{["Solo pagas una vez · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => <li key={t} className="cv-sq">{t}</li>)}</ul>
         </div>
       </div>
     </section>
   );
 }
 
-// ── FOOTER ────────────────────────────────────────────────────────────────────
-function Footer() {
-  return (
-    <footer aria-label="Pie de página" style={{ background: "var(--slate-900)", color: "var(--slate-400)", padding: "48px 48px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 40 }}>
-          <div>
-            <CertiVehLogo variant="light" compact/>
-            <p style={{ fontSize: 14, color: "var(--slate-500)", marginTop: 10, maxWidth: 260, lineHeight: 1.5 }}>
-              Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.
-            </p>
-          </div>
-          <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
-            {[
-              { label: "Plataforma", links: [{ text: "Beneficios", href: "#beneficios" }, { text: "Servicios", href: "#servicios" }, { text: "Cómo funciona", href: "#como-funciona" }, { text: "Calculadora", href: "#calculadora" }] },
-              { label: "Recursos", links: [{ text: "Vehículos", href: "/vehiculos/" }, { text: "Blog", href: "/blog" }, { text: "API", href: "/api-docs" }] },
-              { label: "Empresa", links: [{ text: "Quiénes somos", href: "/nosotros/" }, { text: "Programa de Aliados", href: "/aliados" }, { text: "Otros activos (GEE/FNCE)", href: "/otros-activos" }] },
-              { label: "Legal", links: [{ text: "Términos y Condiciones", href: "/terminos-y-condiciones" }, { text: "Política de Privacidad", href: "/politica-de-privacidad" }] }
-            ].map(col => (
-              <div key={col.label}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-300)", letterSpacing: "0.08em", marginBottom: 14 }}>{col.label}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {col.links.map(l => (
-                    <a key={l.text} href={l.href} style={{ fontSize: 14, color: "var(--slate-500)", textDecoration: "none", transition: "color 0.15s" }}
-                      onMouseEnter={e => e.currentTarget.style.color = "white"}
-                      onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}
-                    >{l.text}</a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-          <span style={{ fontSize: 12, lineHeight: 1.4 }}>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <span style={{ fontSize: 12, lineHeight: 1.4 }}>contacto@certiveh.co</span>
-            <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style={{ color: "var(--slate-500)", transition: "color 0.15s" }} onMouseEnter={e => e.currentTarget.style.color = "white"} onMouseLeave={e => e.currentTarget.style.color = "var(--slate-500)"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-// ── URGENCY MODAL ───────────────────────────────────────────���─────────────────
+// ── URGENCY MODAL ─────────────────────────────────────────────────────────────
 function UrgencyModal({ onClose }: { onClose: () => void }) {
   const portalUrl = usePortalUrl();
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
+  const corte = corteDeCaducidadIva();
+  useEffect(() => {
+    const alTeclear = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", alTeclear);
+    return () => document.removeEventListener("keydown", alTeclear);
+  }, [onClose]);
   return (
     <AnimatePresence>
-      <motion.div
-        className="urgency-modal-overlay"
-        onClick={handleOverlayClick}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        <motion.div
-          className="urgency-modal"
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          onClick={(e) => e.stopPropagation()}
-        >
+      <motion.div className="urgency-modal-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+        <motion.div className="urgency-modal" role="dialog" aria-modal="true" aria-labelledby="urgencia-titulo"
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }} onClick={e => e.stopPropagation()}>
           <button className="urgency-modal-close" onClick={onClose} aria-label="Cerrar modal">
-            <Icon name="x" size={18} />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-
-          <div style={{ marginBottom: 20 }}>
-            <span style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: 'rgba(239,68,68,0.12)',
-              backdropFilter: 'blur(8px)',
-              color: 'rgba(252,165,165,0.9)',
-              border: "1px solid rgba(239,68,68,0.25)",
-              borderRadius: 9999,
-              padding: "6px 14px",
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase'
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F87171', display: 'inline-block' }} />
-              Advertencia de plazo
-            </span>
-          </div>
-
-          <h2 style={{
-            fontSize: 'clamp(24px, 4vw, 32px)',
-            fontWeight: 400,
-            color: 'rgba(255,255,255,0.7)',
-            lineHeight: 1.3,
-            marginBottom: 8,
-            letterSpacing: '-0.01em'
-          }}>
-            Antes de irte:
-          </h2>
-
-          <h3 style={{
-            fontSize: 'clamp(24px, 4vw, 32px)',
-            fontWeight: 700,
-            background: 'linear-gradient(135deg, #34D399 0%, #14B8A6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            lineHeight: 1.3,
-            marginBottom: 24,
-            letterSpacing: '-0.02em'
-          }}>
-            Tu IVA puede prescribir.
-          </h3>
-
-          <p style={{
-            fontSize: 15,
-            lineHeight: 1.7,
-            color: 'rgba(255,255,255,0.7)',
-            marginBottom: 16
-          }}>
-            El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong style={{ color: '#34D399' }}>5 años después de la factura de tu vehículo</strong>. Si la tuya es anterior al {corteDeCaducidadIva().dia} de {corteDeCaducidadIva().mes} de {corteDeCaducidadIva().anio}, es muy probable que el plazo ya se te haya vencido; y si es del resto de {corteDeCaducidadIva().anio}, se te vence este año. Escríbenos con la fecha de tu factura y te decimos cuánto te queda.
-          </p>
-
-          <p style={{
-            fontSize: 13,
-            lineHeight: 1.6,
-            color: 'rgba(255,255,255,0.4)',
-            marginBottom: 32
-          }}>
-            Además, la normativa tributaria puede cambiar. Empezar hoy te deja el trámite andando bajo las reglas vigentes.
-          </p>
-
-          <a href={portalUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '100%' }}>
-            <button
-              className="btn-primary btn-primary-lg"
-              style={{
-                width: '100%',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #059669 0%, #14B8A6 100%)',
-                boxShadow: '0 4px 24px rgba(5,150,105,0.4)',
-                borderRadius: 12,
-              }}
-            >
-              Empezar mi trámite ahora
-              <Icon name="arrowRight" size={18} color="white" />
-            </button>
-          </a>
-
-          <p style={{
-            fontSize: 13,
-            lineHeight: 1.6,
-            color: 'rgba(255,255,255,0.35)',
-            marginTop: 16,
-            fontStyle: 'italic',
-            textAlign: 'center'
-          }}>
-            Plazo legal: 5 años desde la factura · Art. 2536 Código Civil · Concepto DIAN 673/2026.
-          </p>
+          <p className="urgency-k">Advertencia de plazo</p>
+          <h2 id="urgencia-titulo">Antes de irte:</h2>
+          <h3>Tu IVA puede prescribir.</h3>
+          <p>El plazo para reclamar la devolución del IVA ante la DIAN caduca <strong>5 años después de la factura de tu vehículo</strong>. Si la tuya es anterior al {corte.dia} de {corte.mes} de {corte.anio}, es muy probable que el plazo ya se te haya vencido; y si es del resto de {corte.anio}, se te vence este año. Escríbenos con la fecha de tu factura y te decimos cuánto te queda.</p>
+          <p className="fine">Además, la normativa tributaria puede cambiar. Empezar hoy te deja el trámite andando bajo las reglas vigentes.</p>
+          <a className="cv-btn cv-btn-a" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
+          <p className="fine" style={{ marginTop: 16, textAlign: "center" }}>Plazo legal: 5 años desde la factura · Art. 2536 Código Civil · Concepto DIAN 673/2026.</p>
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -2295,6 +1395,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
   // La tarifa del build al pintar y, tras hidratar, la vigente con el reloj del cliente (lote 4).
   const tarifa = useTarifaDeLaIsla(tarifaDelBuild);
   const [showUrgencyModal, setShowUrgencyModal] = useState(false);
+  useEntradas();
 
   // Urgency modal logic - shows after 45 seconds, once per session
   useEffect(() => {
@@ -2315,19 +1416,19 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
     <TarifaDeLaIsla.Provider value={tarifa}>
       {/* ⚠️ **Como HTML crudo, no como hijo de texto.** Con `<style>{CSS}</style>` React escapa el
           texto en el HTML prerenderizado (`>` sale como `&gt;`, las comillas como `&#x27;`): los
-          selectores con `>` y la fuente `Inter` no valían hasta hidratar, y al hidratar el texto no
+          selectores con `>` y la fuente no valían hasta hidratar, y al hidratar el texto no
           coincidía (errores #425 y #423), así que React tiraba el HTML del servidor y repintaba la
           landing entera. */}
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar />
       <main>
         <Hero/>
-        <VentanaUPME/>
+        <Ticker/>
         <Aliados/>
+        <VentanaUPME/>
         <Beneficios/>
         <Servicios/>
         <ComoFunciona/>
-        <Calculadora/>
         <Confianza/>
         <PorQueNoSolo/>
         <Testimonios/>
@@ -2336,7 +1437,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         <FAQ/>
         <CTAFinal/>
       </main>
-      <Footer/>
+      <SiteFooter isHome />
 
       {/* WhatsApp floating button */}
       <a
@@ -2345,16 +1446,8 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
         rel="noopener noreferrer"
         aria-label="Escríbenos por WhatsApp"
         className="whatsapp-fab"
-        style={{
-          position: "fixed", bottom: 20, right: 16, zIndex: 9999,
-          width: 56, height: 56, borderRadius: "50%",
-          background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: "0 4px 16px rgba(37,211,102,0.4), 0 2px 4px rgba(0,0,0,0.2)",
-          textDecoration: "none", cursor: "pointer",
-          animation: "waPulse 2s infinite",
-        }}
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
       </a>

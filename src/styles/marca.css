@@ -1,0 +1,62 @@
+/*
+ * CertiVeh · estándar visual 2026-11 (DESIGN_SYSTEM.md §0, «Sistema visual 2026-11»).
+ *
+ * La fuente de verdad de color, tipo y forma para TODAS las páginas de certiveh.co. Se carga una vez en
+ * BaseLayout.astro. Las páginas no escriben colores ni tamaños sueltos: usan estas variables y estas clases.
+ *
+ * Lo que este sistema NO usa, a propósito (son los rasgos que hacen que una página se lea como generada):
+ * degradados de marca, texto en degradado, brillos y sombras en reposo, desenfoque tipo vidrio, cajas de
+ * 1 px, iconos dentro de cuadritos, números decorativos 01/02/03, cifras en marca de agua, etiquetas en
+ * mayúsculas espaciadas y el radio de 12 a 16 px en todo. Ver DESIGN_SYSTEM.md §0.4.
+ */
+:root {
+  /* color */
+  --cv-bg: #ffffff;          /* suelo */
+  --cv-ink: #0f172a;         /* tinta: todo el texto corrido */
+  --cv-soft: #475569;        /* texto secundario (7,2:1 sobre blanco) */
+  --cv-tone: #f0f4f2;        /* un paso de tono: separa superficies sin línea ni sombra */
+  --cv-tone-2: #e1e9e5;
+  --cv-accent: #047857;      /* la acción. Blanco encima: 5,48:1. Es también el verde del texto */
+  --cv-accent-hover: #036b4e;/* al tocar se oscurece, nunca se aclara */
+  --cv-mint: #a7f3d0;        /* el verde legible sobre fondos oscuros */
+  --cv-field: #0f172a;       /* campo oscuro plano */
+  --cv-field-2: #1b2537;
+  --cv-field-soft: #b6c2d1;  /* texto secundario sobre el campo oscuro */
+  --cv-plate: #f5c518;       /* la placa colombiana (solo en piezas del portal) */
+
+  /* tipo: Albert Sans, tres pesos. Cinco pasos de tamaño. */
+  --cv-font: 'Albert Sans', 'Helvetica Neue', Arial, sans-serif;
+  --cv-wh: 700;
+  --cv-trk: -0.03em;
+  --cv-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --cv-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --cv-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --cv-head: clamp(1.75rem, 1.2rem + 2.6vw, 3.5rem);
+  --cv-display: clamp(2.125rem, 1.3rem + 3vw, 4rem);
+
+  /* forma y espacio */
+  --cv-r: 6px;               /* un solo radio. Las píldoras quedan para estados */
+  --cv-m: clamp(20px, 4vw, 48px);
+  --cv-gap-sec: clamp(96px, 12vw, 200px);
+}
+
+/* Botones: planos, un color, 6 px. Ver DESIGN_SYSTEM.md §0.3 */
+.cv-btn { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; font: 600 1.0625rem/1 var(--cv-font); letter-spacing: -0.01em; text-decoration: none; border: 0; border-radius: var(--cv-r); padding: 18px 20px; cursor: pointer; transition: background-color .15s, transform .15s; touch-action: manipulation; }
+.cv-btn:active { transform: translateY(1px); }
+.cv-btn:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
+.cv-btn-a { background: var(--cv-accent); color: #fff; }
+.cv-btn-a:hover { background: var(--cv-accent-hover); }
+.cv-btn-b { background: var(--cv-tone); color: var(--cv-ink); }
+.cv-btn-b:hover { background: var(--cv-tone-2); }
+.cv-btn-w { background: #fff; color: var(--cv-ink); }
+.cv-btn-w:hover { background: var(--cv-tone); }
+.cv-btn .cv-arr { transition: transform .15s; }
+.cv-btn:hover .cv-arr { transform: translateX(4px); }
+
+/* Viñeta cuadrada en lugar de iconos en las listas */
+.cv-sq { position: relative; padding-left: 16px; }
+.cv-sq::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; background: var(--cv-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-btn, .cv-btn .cv-arr { transition: none; }
+}
