@@ -119,10 +119,15 @@ const webPageLd = JSON.stringify({
     .al-who { margin-top: var(--cv-gap-sec); background: var(--cv-field); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
     .al-who .al-lab { color: var(--cv-mint); }
     .al-who .al-intro p { color: #e2e8f0; }
-    .al-who-lab { margin: 48px 0 14px; }
-    .al-who-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-    .al-who-item { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 22px 22px 22px 40px; font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
-    .al-who-item.cv-sq::before { left: 22px; top: calc(22px + .55em); background: var(--cv-mint); }
+    /* «Para quién es» como lista tipográfica grande a la derecha del titular (no una rejilla de cajas iguales):
+       se lee como un cartel, y la última, la que abre la puerta a cualquiera, va en menta. */
+    .al-who-board { align-items: start; }
+    .al-who-intro { grid-column: 1 / span 5; position: sticky; top: 104px; }
+    .al-who-col { grid-column: 7 / span 6; }
+    .al-who-lab { display: block; margin: 0 0 18px; }
+    .al-who-grid { list-style: none; margin: 0; padding: 0; }
+    .al-who-item { font-size: clamp(1.5rem, 1rem + 1.5vw, 2.375rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.08; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.14); text-wrap: balance; } /* taste-skill-ignore: separador de filas de una lista, no una caja */
+    .al-who-item:last-child { color: var(--cv-mint); }
 
     /* ── CTA FINAL: el cierre de la home, el titular grande a la izquierda y la acción a la derecha ── */
     .al-cta { padding-block: var(--cv-gap-sec); }
@@ -145,12 +150,12 @@ const webPageLd = JSON.stringify({
       .al-stage { margin-top: 40px; }
       .al-cta-act { margin-top: 24px; }
       .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: var(--cv-ink); }
-      .al-who-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .al-who-intro, .al-who-col { grid-column: 1 / -1; position: static; } .al-who-col { margin-top: 36px; }
     }
     @media (max-width: 640px) {
       .al-board { gap: 6px; }
       .al-tile { grid-column: 1 / -1; min-height: 0; }
-      .al-who-grid { grid-template-columns: 1fr; gap: 6px; }
+      .al-who-item { padding: 14px 0; }
       .al-hero .cv-btn { width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -320,23 +325,25 @@ const webPageLd = JSON.stringify({
   <!-- WHO CAN BE AN ALLY -->
   <section class="al-who">
     <div class="al-wrap">
-      <div class="al-grid">
-        <div class="al-intro">
+      <div class="al-grid al-who-board">
+        <div class="al-intro al-who-intro">
           <h2 class="al-h2">Si trabajas con movilidad eléctrica, esto es para ti</h2>
           <p>
             Cualquier persona o empresa con contactos en el ecosistema de vehículos eléctricos e híbridos puede aplicar.
           </p>
         </div>
+        <div class="al-who-col">
+          <span class="al-lab al-who-lab">Para quién es</span>
+          <ul class="al-who-grid">
+            <li class="al-who-item">Concesionarios de vehículos eléctricos e híbridos</li>
+            <li class="al-who-item">Talleres especializados</li>
+            <li class="al-who-item">Vendedores independientes</li>
+            <li class="al-who-item">Influencers de movilidad eléctrica</li>
+            <li class="al-who-item">Asesores tributarios y contadores</li>
+            <li class="al-who-item">Cualquier persona con red en el ecosistema</li>
+          </ul>
+        </div>
       </div>
-      <span class="al-lab al-who-lab">Para quién es</span>
-      <ul class="al-who-grid">
-        <li class="al-who-item cv-sq">Concesionarios de vehículos eléctricos e híbridos</li>
-        <li class="al-who-item cv-sq">Talleres especializados</li>
-        <li class="al-who-item cv-sq">Vendedores independientes</li>
-        <li class="al-who-item cv-sq">Influencers de movilidad eléctrica</li>
-        <li class="al-who-item cv-sq">Asesores tributarios y contadores</li>
-        <li class="al-who-item cv-sq">Cualquier persona con red en el ecosistema</li>
-      </ul>
     </div>
   </section>
 
