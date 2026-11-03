@@ -61,7 +61,6 @@ const webPageLd = JSON.stringify({
     body { font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; background: var(--cv-bg); color: var(--cv-ink); -webkit-font-smoothing: antialiased; }
     .al-wrap { max-width: 1520px; margin: 0 auto; padding-inline: var(--cv-m); }
     .al-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
-    .al-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
     .al-lab { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); margin-bottom: 14px; }
     .al-sec { padding-top: var(--cv-gap-sec); }
     .al-intro { grid-column: 1 / span 7; }
@@ -139,7 +138,6 @@ const webPageLd = JSON.stringify({
     .al-cta { padding-block: var(--cv-gap-sec); }
     .al-cta-box { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
     .al-cta-copy { grid-column: 1 / span 7; }
-    .al-cta-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
     .al-cta-act { grid-column: 8 / span 5; display: grid; gap: 0; justify-items: start; }
     .al-cta-subtitle { max-width: 52ch; }
     .al-cta-act .cv-btn { margin-top: 30px; }
@@ -217,8 +215,8 @@ const webPageLd = JSON.stringify({
       <div class="al-board">
         <div class="al-tile al-head">
           <div>
-            <h2 class="al-h2">Todo lo que obtienes como aliado</h2>
-            <p>
+            <h2 class="al-h2 cv-sec-title">Todo lo que obtienes como aliado</h2>
+            <p class="cv-sec-intro">
               Diseñado para que puedas integrar CertiVeh a tu negocio con el mínimo esfuerzo y el máximo retorno.
             </p>
           </div>
@@ -285,8 +283,8 @@ const webPageLd = JSON.stringify({
   <section class="al-sec">
     <div class="al-wrap al-grid">
       <div class="al-intro al-intro-6">
-        <h2 class="al-h2">Tres pasos para empezar a ganar</h2>
-        <p>
+        <h2 class="al-h2 cv-sec-title">Tres pasos para empezar a ganar</h2>
+        <p class="cv-sec-intro">
           El proceso de onboarding toma menos de 24 horas. Sin burocracia, sin costos ocultos.
         </p>
       </div>
@@ -337,8 +335,8 @@ const webPageLd = JSON.stringify({
     <div class="al-wrap">
       <div class="al-grid al-who-board">
         <div class="al-intro al-who-intro">
-          <h2 class="al-h2">Si trabajas con movilidad eléctrica, esto es para ti</h2>
-          <p>
+          <h2 class="al-h2 cv-sec-title">Si trabajas con movilidad eléctrica, esto es para ti</h2>
+          <p class="cv-sec-intro">
             Cualquier persona o empresa con contactos en el ecosistema de vehículos eléctricos e híbridos puede aplicar.
           </p>
         </div>
@@ -362,10 +360,10 @@ const webPageLd = JSON.stringify({
     <div class="al-wrap">
       <div class="al-cta-box">
         <div class="al-cta-copy">
-          <h2 class="al-cta-title">¿Listo para ser <span>aliado</span>?</h2>
+          <h2 class="al-cta-title cv-close-title">¿Listo para ser <span>aliado</span>?</h2>
         </div>
         <div class="al-cta-act">
-          <p class="al-cta-subtitle">
+          <p class="al-cta-subtitle cv-sec-intro">
             Únete a la red de aliados CertiVeh y empieza a generar ingresos adicionales
             ofreciendo beneficios tributarios reales a tus clientes.
           </p>

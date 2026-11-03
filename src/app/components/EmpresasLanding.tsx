@@ -26,7 +26,6 @@ const CSS = `
   .oa-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
   .oa-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
   .oa-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
-  .oa-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
   .oa-intro { grid-column: 1 / span 7; }
   .oa-intro p { margin-top: 18px; max-width: 58ch; }
   [hidden] { display: none !important; }
@@ -132,7 +131,7 @@ ${CSS_UI}
   /* ── CIERRE: el de la home, el titular grande a la izquierda y la acción a la derecha ── */
   .close { padding-block: var(--cv-gap-sec); }
   .close-grid { align-items: end; }
-  .close h2 { grid-column: 1 / span 7; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
+  .close h2 { grid-column: 1 / span 7; }
   .close-r { grid-column: 8 / span 5; }
   .close-r p { max-width: 52ch; }
   .close-r .cv-btn { margin-top: 30px; }
@@ -301,11 +300,11 @@ function Activos() {
       <div className="oa-wrap">
         <div className="oa-grid">
           <div className="oa-intro rv">
-            <h2 className="oa-h2">
+            <h2 className="oa-h2 cv-sec-title">
               Activos que{" "}
               <span>certificamos</span>
             </h2>
-            <p>
+            <p className="cv-sec-intro">
               Gestionamos tu certificado UPME para proyectos de gestión eficiente de la energía (GEE) y de fuentes no convencionales de energía (FNCE).
             </p>
           </div>
@@ -376,11 +375,11 @@ function Beneficios() {
       <div className="oa-wrap">
         <div className="oa-grid">
           <div className="oa-intro rv">
-            <h2 className="oa-h2">
+            <h2 className="oa-h2 cv-sec-title">
               Cuatro beneficios tributarios. <br/>
               <span>Un solo certificado.</span>
             </h2>
-            <p>
+            <p className="cv-sec-intro">
               La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, creó cuatro incentivos tributarios para inversiones en GEE y FNCE. El certificado UPME es el único requisito para acceder a todos.
             </p>
           </div>
@@ -467,10 +466,10 @@ function ComoFunciona() {
     <section id="como-funciona" aria-label="Cómo funciona" className="oa-sec">
       <div className="oa-wrap">
         <div className="oa-grid"><div className="oa-intro rv">
-          <h2 className="oa-h2">
+          <h2 className="oa-h2 cv-sec-title">
             El proceso de <br/><span>certificación.</span>
           </h2>
-          <p>
+          <p className="cv-sec-intro">
             De la documentación al certificado UPME. CertiVeh gestiona todo el trámite por ti.
           </p>
         </div></div>
@@ -633,11 +632,11 @@ function PorQueCertificado() {
     <section id="por-que" aria-label="Por qué el certificado UPME es indispensable" className="oa-dark">
       <div className="oa-wrap oa-grid">
         <div className="oa-why-copy rv">
-          <h2 className="oa-h2">
+          <h2 className="oa-h2 cv-sec-title">
             Por qué el certificado UPME es{" "}
             <span>indispensable</span>
           </h2>
-          <p>
+          <p className="cv-sec-intro">
             Según la UPME, para acceder a los beneficios de exclusión de IVA, deducción de renta, depreciación acelerada y exención arancelaria, "lo único que se requiere es tener el certificado de la UPME como soporte".
           </p>
           <p>
@@ -677,7 +676,7 @@ function FAQ() {
   return (
     <section id="faq" aria-label="Preguntas frecuentes" className="oa-sec">
       <div className="oa-wrap oa-grid faq-grid">
-        <h2 className="oa-h2">Todo lo que necesitas saber</h2>
+        <h2 className="oa-h2 cv-sec-title">Todo lo que necesitas saber</h2>
         <div className="qs">
           {items.map((item, i) => (
             <div key={i} className={`faq-item${open === i ? " open" : ""}`}>
@@ -703,11 +702,11 @@ function CTAFinal() {
   return (
     <section id="cta-final" aria-label="Comenzar" className="close oa-wrap">
       <div className="oa-grid close-grid">
-        <h2 className="rv">
+        <h2 className="cv-close-title rv">
           Tus incentivos tributarios <br/><span>te están esperando.</span>
         </h2>
         <div className="close-r rv">
-          <p>
+          <p className="cv-sec-intro">
             Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada. CertiVeh gestiona tu certificado UPME de principio a fin.
           </p>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cv-btn cv-btn-a">

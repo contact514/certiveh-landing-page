@@ -65,7 +65,6 @@ const foundersLd = JSON.stringify([
     .nos-wrap { max-width: 1520px; margin: 0 auto; padding-inline: var(--cv-m); }
     .nos-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
     .nos-sec { padding-top: var(--cv-gap-sec); }
-    .nos-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
     .nos-intro { grid-column: 1 / span 7; }
     .nos-intro p { margin-top: 18px; max-width: 58ch; }
 
@@ -118,7 +117,7 @@ const foundersLd = JSON.stringify([
     .nos-cta { padding-block: var(--cv-gap-sec); }
     .nos-cta-box { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
     .nos-cta-copy { display: contents; }
-    .nos-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 2; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .nos-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 2; }
     .nos-cta-sub { grid-column: 8 / span 5; max-width: 52ch; }
     .nos-cta-box .cv-btn { grid-column: 8 / span 5; justify-self: start; margin-top: 30px; }
 
@@ -165,8 +164,8 @@ const foundersLd = JSON.stringify([
     <div class="nos-wrap">
       <div class="nos-grid">
         <div class="nos-intro">
-          <h2 class="nos-h2">Los fundadores</h2>
-          <p>
+          <h2 class="nos-h2 cv-sec-title">Los fundadores</h2>
+          <p class="cv-sec-intro">
             Dos perfiles complementarios con un objetivo común: que ningún propietario de vehículo eléctrico o híbrido en Colombia pierda los beneficios tributarios que le corresponden.
           </p>
         </div>
@@ -227,8 +226,8 @@ const foundersLd = JSON.stringify([
         </div>
 
         <div class="nos-lznp-copy">
-          <h2 class="nos-h2">Con el respaldo de expertos en la industria</h2>
-          <p class="nos-lznp-desc">
+          <h2 class="nos-h2 cv-sec-title">Con el respaldo de expertos en la industria</h2>
+          <p class="nos-lznp-desc cv-sec-intro">
             Contamos con el respaldo de una firma colombiana con amplia trayectoria en regulación del sector energético, que garantiza que la metodología de CertiVeh esté alineada con los criterios regulatorios vigentes de la UPME y la DIAN.
           </p>
           <ul class="nos-lznp-points">
@@ -253,8 +252,8 @@ const foundersLd = JSON.stringify([
     <div class="nos-wrap">
       <div class="nos-cta-box">
         <div class="nos-cta-copy">
-          <h2 class="nos-cta-title">¿Listo para recuperar <span>lo que es tuyo</span>?</h2>
-          <p class="nos-cta-sub">
+          <h2 class="nos-cta-title cv-close-title">¿Listo para recuperar <span>lo que es tuyo</span>?</h2>
+          <p class="nos-cta-sub cv-sec-intro">
             Gestiona tu certificado UPME y recupera el IVA de tu vehículo eléctrico o híbrido. Todo en línea, sin burocracia.
           </p>
         </div>

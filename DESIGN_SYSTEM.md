@@ -79,6 +79,22 @@ ancho de su columna (`max-width` del titular); nunca tamaño, peso, color ni sep
 antes de la entradilla su línea animada («Accede a…», `--cv-lead` 600), y por eso la entradilla queda a 10 px
 de esa línea. La cabecera de los artículos del blog y /api-docs son documentos, no portadas: tienen su escala.
 
+**La escala completa de una página** (todas en `marca.css`; las páginas solo fijan ancho, columna y color sobre
+oscuro, nunca tamaño, peso, interlineado ni tracking propios):
+
+| Nivel | Clase | Escritorio / celular | Peso, interlineado |
+|---|---|---|---|
+| Portada: titular | `.cv-hero-title` (`--cv-display`) | 64 / 34 px | 700, .96, -0.03em |
+| Portada: entradilla | `.cv-hero-sub` (`--cv-lead`) | 26 / 20 px | 400, 1.4, `#dbe3ee` |
+| Título de sección | `.cv-sec-title` (`--cv-head`) | 56 / 29 px | 700, .98, -0.03em |
+| Introducción de sección | `.cv-sec-intro` (`--cv-intro`) | 19 / 17 px | hereda peso, 1.5, máx. 58ch |
+| Título del cierre («¿Listo…?») | `.cv-close-title` (`--cv-display`) | 64 / 34 px | 700, .96, -0.03em |
+| Componentes | su propia escala | calculadora 36 / 26 px; tarjeta de listado del blog 30 / 22 px (la destacada 52 / 32); rótulos de bloque («Costo total del trámite») 14 px 700 | |
+
+Un subtítulo corto de sección (el «Refiere amigos y gana dinero» de Win Win) es una introducción: `.cv-sec-intro`
+con su peso y color, no el tamaño de la entradilla de portada. Los artículos del blog y /api-docs son documentos
+y tienen su escala de lectura.
+
 ### 0.4 Lo que NO se usa (cada uno era un rasgo de página generada)
 
 1. Degradados de marca en botones, textos, logo, banners o fondos. Única excepción: el velo neutro

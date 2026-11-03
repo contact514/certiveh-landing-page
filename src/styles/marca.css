@@ -31,6 +31,7 @@
   --cv-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --cv-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   --cv-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --cv-intro: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem); /* texto bajo el título de una sección: 17 px celular, 19 px escritorio */
   --cv-head: clamp(1.75rem, 1.2rem + 2.6vw, 3.5rem);
   --cv-display: clamp(2.125rem, 1.3rem + 3vw, 4rem);
 
@@ -65,6 +66,13 @@
    su columna. Ver DESIGN_SYSTEM.md §0.3. */
 .cv-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
 .cv-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+
+/* Secciones dentro de una página (DESIGN_SYSTEM.md §0.3): el título de cada sección, el párrafo que lo
+   introduce y el título del cierre («¿Listo…?»). Como en la portada, las páginas solo fijan ancho, columna y color
+   cuando el fondo es oscuro; nunca tamaño, peso, interlineado ni tracking propios. */
+.cv-sec-title { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+.cv-sec-intro { font-size: var(--cv-intro); line-height: 1.5; max-width: 58ch; margin-top: 18px; }
+.cv-close-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
 
 /* Viñeta cuadrada en lugar de iconos en las listas */
 .cv-sq { position: relative; padding-left: 16px; }

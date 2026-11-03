@@ -81,7 +81,6 @@ const CSS = `
   body { background: var(--cv-bg); color: var(--cv-ink); font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
   .h-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
   .h-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
-  .h-h2 { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.98; text-wrap: balance; }
   .h-intro { grid-column: 1 / span 7; }
   .h-intro p { margin-top: 18px; max-width: 58ch; }
   .h-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
@@ -129,7 +128,7 @@ ${CSS_CALC}
   a.tile:hover { background: var(--cv-tone-2); }
   a.tile:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
   .tile.head { grid-column: span 2; background: var(--cv-accent); color: #fff; }
-  .tile.head h2, .tile.head .tile-h { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.02; }
+  .tile.head .tile-h { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.02; }
   .tile.head p { color: #d6f5e8; max-width: 48ch; }
   .tile .mark { height: 72px; display: flex; align-items: center; }
   .tile .mark img { max-height: 56px; max-width: 78%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); }
@@ -254,7 +253,7 @@ ${CSS_UI}
   .ww { margin-top: var(--cv-gap-sec); background: var(--cv-accent); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
   .ww .h-grid { align-items: center; }
   .ww-copy { grid-column: 1 / span 6; }
-  .ww-copy .sub { font-size: var(--cv-lead); font-weight: 600; margin-top: 12px; color: var(--cv-mint); }
+  .ww-copy .sub { font-weight: 600; margin-top: 12px; color: var(--cv-mint); }
   .ww-steps { list-style: none; margin-top: 36px; padding-left: 36px; position: relative; display: grid; gap: 24px; }
   .ww-steps::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 3px; background: rgba(255,255,255,.28); }
   .ww-steps li { position: relative; }
@@ -300,7 +299,7 @@ ${CSS_UI}
   /* ── CIERRE ── */
   .close { padding-block: var(--cv-gap-sec); }
   .close-grid { align-items: end; }
-  .close h2 { grid-column: 1 / span 7; font-size: var(--cv-display); }
+  .close h2 { grid-column: 1 / span 7; }
   .close-r { grid-column: 8 / span 5; }
   .close-r p { max-width: 52ch; }
   .close-r .cv-btn { margin-top: 30px; }
@@ -478,10 +477,10 @@ function VentanaUPME() {
   return (
     <section id="ventana-upme" className="win" aria-labelledby="ventana-upme-titulo">
       <div className="h-wrap">
-        <h2 id="ventana-upme-titulo" className="h-h2">
+        <h2 id="ventana-upme-titulo" className="h-h2 cv-sec-title">
           {cerrada ? <>La UPME vuelve a recibir solicitudes el 1 de febrero</> : <>La UPME recibe solicitudes hasta el 15 de diciembre</>}
         </h2>
-        <p className="s">
+        <p className="s cv-sec-intro">
           {cerrada
             ? "La UPME recibe solicitudes de certificado del 1 de febrero al 15 de diciembre de cada año. Puedes preparar tu trámite desde ahora y lo radicamos apenas se abra la ventana."
             : "Después de esa fecha, la UPME no recibe más solicitudes de certificado hasta el 1 de febrero. Tú subes tus documentos y nosotros radicamos tu solicitud ante la UPME."}
@@ -639,8 +638,8 @@ function Beneficios() {
   return (
     <section id="beneficios" aria-label="Beneficios tributarios" className="h-sec h-wrap">
       <div className="h-grid"><div className="h-intro rv">
-        <h2 className="h-h2">Tres beneficios tributarios. Una sola gestión.</h2>
-        <p>El Estado colombiano creó estos incentivos para promover la movilidad eléctrica e híbrida. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.</p>
+        <h2 className="h-h2 cv-sec-title">Tres beneficios tributarios. Una sola gestión.</h2>
+        <p className="cv-sec-intro">El Estado colombiano creó estos incentivos para promover la movilidad eléctrica e híbrida. La mayoría de propietarios nunca los reclama, por la complejidad del proceso.</p>
       </div></div>
       <div className="steps3">
         <Baldosa c={iva} cls="a" />
@@ -795,8 +794,8 @@ function Servicios() {
   return (
     <section id="servicios" aria-label="Servicios CertiVeh" className="h-sec h-wrap">
       <div className="h-grid"><div className="h-intro rv">
-        <h2 className="h-h2">Dos servicios. Cero burocracia.</h2>
-        <p>CertiVeh gestiona el certificado UPME y la devolución de tu IVA ante la DIAN.</p>
+        <h2 className="h-h2 cv-sec-title">Dos servicios. Cero burocracia.</h2>
+        <p className="cv-sec-intro">CertiVeh gestiona el certificado UPME y la devolución de tu IVA ante la DIAN.</p>
       </div></div>
       <div className="duo">
         {servicios.map((s, i) => (
@@ -854,8 +853,8 @@ function PorQueNoSolo() {
     <section aria-label="Así protegemos tu beneficio" className="h-sec h-wrap">
       <div className="prot-grid">
         <div className="prot-head rv">
-          <h2 className="h-h2">Así protegemos tu beneficio.</h2>
-          <p>Estos son los errores que hacen que la UPME rechace solicitudes. Los prevenimos antes de radicar.</p>
+          <h2 className="h-h2 cv-sec-title">Así protegemos tu beneficio.</h2>
+          <p className="cv-sec-intro">Estos son los errores que hacen que la UPME rechace solicitudes. Los prevenimos antes de radicar.</p>
         </div>
         <div className="prot-list">
           <p className="prot-k">Problemas comunes</p>
@@ -990,8 +989,8 @@ function ComoFunciona() {
   return (
     <section id="como-funciona" aria-label="Cómo funciona" className="h-sec h-wrap">
       <div className="h-grid"><div className="h-intro rv">
-        <h2 className="h-h2">Así de simple es el trámite.</h2>
-        <p>Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.</p>
+        <h2 className="h-h2 cv-sec-title">Así de simple es el trámite.</h2>
+        <p className="cv-sec-intro">Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales gubernamentales.</p>
       </div></div>
       <div className="flow">
         <ol className="flow-steps">
@@ -1125,8 +1124,8 @@ function Confianza() {
   return (
     <section id="confianza" aria-label="Por qué CertiVeh" className="h-sec h-wrap">
       <div className="h-grid"><div className="h-intro rv">
-        <h2 className="h-h2">Hecho para que no tengas que preocuparte.</h2>
-        <p>Automatización, acompañamiento, seguridad y seguimiento en tiempo real.</p>
+        <h2 className="h-h2 cv-sec-title">Hecho para que no tengas que preocuparte.</h2>
+        <p className="cv-sec-intro">Automatización, acompañamiento, seguridad y seguimiento en tiempo real.</p>
       </div></div>
       <ul className="poster">
         {puntos.map(p => <li key={p.title} className="rv"><h3>{p.title}</h3><p>{p.desc}</p></li>)}
@@ -1152,7 +1151,7 @@ function Testimonios() {
   );
   return (
     <section id="testimonios" aria-label="Testimonios" className="h-sec h-wrap">
-      <h2 className="h-h2 rv">Lo que dicen nuestros usuarios</h2>
+      <h2 className="h-h2 cv-sec-title rv">Lo que dicen nuestros usuarios</h2>
       <div className="vgrid">
         <Cita t={b} cls="vlead" />
         <div className="vside"><Cita t={a} cls="vq" /><Cita t={c} cls="vq" /></div>
@@ -1209,8 +1208,8 @@ function Prensa() {
     <section id="prensa" aria-labelledby="prensa-titulo" className="h-sec h-wrap">
       <div className="board">
         <div className="tile head rv">
-          <h2 id="prensa-titulo">CertiVeh en los medios</h2>
-          <p>Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.</p>
+          <h2 id="prensa-titulo" className="cv-sec-title">CertiVeh en los medios</h2>
+          <p className="cv-sec-intro">Entrevistas y artículos sobre CertiVeh y los beneficios tributarios de los carros eléctricos e híbridos en Colombia.</p>
         </div>
         {MEDIOS.map((m, i) => (
           <a key={m.name} className="tile rv" href={m.url} target="_blank" rel="noopener noreferrer"
@@ -1239,8 +1238,8 @@ function WinWin() {
     <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" className="ww">
       <div className="h-wrap h-grid">
         <div className="ww-copy rv">
-          <h2 className="h-h2">CertiVeh Win Win</h2>
-          <p className="sub">Refiere amigos y gana dinero</p>
+          <h2 className="h-h2 cv-sec-title">CertiVeh Win Win</h2>
+          <p className="sub cv-sec-intro">Refiere amigos y gana dinero</p>
           <ol className="ww-steps">
             {steps.map(s => <li key={s.num}><h3>{s.title}</h3><p>{s.desc}</p></li>)}
           </ol>
@@ -1317,7 +1316,7 @@ function FAQ() {
   return (
     <section id="faq" aria-label="Preguntas frecuentes" className="h-sec h-wrap">
       <div className="faq-grid">
-        <h2 className="h-h2">Todo lo que necesitas saber</h2>
+        <h2 className="h-h2 cv-sec-title">Todo lo que necesitas saber</h2>
         <div className="qs">
           {items.map((item, i) => (
             <div key={item.q} className={`faq-item${open === i ? " open" : ""}`}>
@@ -1343,9 +1342,9 @@ function CTAFinal() {
   return (
     <section id="cta-final" aria-label="Comenzar" className="close h-wrap">
       <div className="h-grid close-grid">
-        <h2 className="h-h2 rv">Tus beneficios tributarios te están esperando.</h2>
+        <h2 className="cv-close-title rv">Tus beneficios tributarios te están esperando.</h2>
         <div className="close-r rv">
-          <p>Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.</p>
+          <p className="cv-sec-intro">Certificado UPME y devolución de IVA. Miles de propietarios de vehículos eléctricos e híbridos en Colombia no han reclamado lo que les corresponde.</p>
           <a className="cv-btn cv-btn-a" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
           <ul>{["Solo pagas una vez · Sin suscripciones","100% en línea","Notificaciones por WhatsApp"].map(t => <li key={t} className="cv-sq">{t}</li>)}</ul>
         </div>

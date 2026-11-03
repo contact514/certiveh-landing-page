@@ -100,7 +100,6 @@ const itemListLd = JSON.stringify({
     /* ── DIRECTORIO UPME ── */
     .vh-directory { max-width: 1520px; margin: 0 auto; padding: var(--cv-gap-sec) var(--cv-m) 0; scroll-margin-top: 80px; }
     .vh-directory-header { max-width: 820px; display: flex; flex-direction: column; }
-    .vh-directory-title { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
     .vh-directory-desc { margin-top: 18px; max-width: 64ch; }
     /* La fecha del listado es un dato, no un rótulo: va debajo, como nota */
     .vh-directory-badge { order: 3; margin-top: 12px; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); }
@@ -128,7 +127,7 @@ const itemListLd = JSON.stringify({
 
     /* ── CIERRE DEL DIRECTORIO: el de la home, el titular grande a la izquierda y la acción a la derecha ── */
     .vh-directory-cta { margin: var(--cv-gap-sec) 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
-    .vh-directory-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 3; align-self: end; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .vh-directory-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 3; align-self: end; }
     .vh-directory-cta-desc, .vh-directory-cta .vh-directory-cta-btn, .vh-directory-cta-note { grid-column: 8 / span 5; }
     .vh-directory-cta-desc { max-width: 52ch; }
     .vh-directory-cta .vh-directory-cta-btn { margin-top: 30px; justify-self: start; }
@@ -205,8 +204,8 @@ const itemListLd = JSON.stringify({
   <div class="vh-directory" id="directorio">
     <div class="vh-directory-header">
       <div class="vh-directory-badge">Listado oficial UPME · Actualizado julio 2026</div>
-      <h2 class="vh-directory-title">Todos los vehículos elegibles para certificado UPME en Colombia</h2>
-      <p class="vh-directory-desc">Directorio de {totalUpmeModels}+ modelos de {upmeBrands.length} marcas que la UPME ha certificado para beneficios tributarios. Esta lista se actualiza periódicamente, pero puede no incluir todos los vehículos elegibles; la UPME agrega nuevos modelos con frecuencia.</p>
+      <h2 class="vh-directory-title cv-sec-title">Todos los vehículos elegibles para certificado UPME en Colombia</h2>
+      <p class="vh-directory-desc cv-sec-intro">Directorio de {totalUpmeModels}+ modelos de {upmeBrands.length} marcas que la UPME ha certificado para beneficios tributarios. Esta lista se actualiza periódicamente, pero puede no incluir todos los vehículos elegibles; la UPME agrega nuevos modelos con frecuencia.</p>
     </div>
 
     <!-- SEARCH + BRAND FILTER -->
@@ -250,7 +249,7 @@ const itemListLd = JSON.stringify({
     })}
 
     <div class="vh-directory-cta">
-      <div class="vh-directory-cta-title">¿Tu vehículo está en la lista?</div>
+      <div class="vh-directory-cta-title cv-close-title">¿Tu vehículo está en la lista?</div>
       <p class="vh-directory-cta-desc">Si tu vehículo eléctrico o híbrido aparece en este directorio, eres elegible para el certificado UPME. Tramítalo 100% en línea con CertiVeh.</p>
       <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="vh-directory-cta-btn cv-btn cv-btn-a">
         Empezar mi trámite ahora

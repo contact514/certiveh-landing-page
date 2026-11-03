@@ -157,7 +157,7 @@ const faqLd = JSON.stringify({
 
     /* ── PREGUNTAS: las de la home, el titular fijo a la izquierda ── */
     .v-faq { padding-top: var(--cv-gap-sec); align-items: start; }
-    .v-faq > h2 { grid-column: 1 / span 4; position: sticky; top: 96px; font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .v-faq > h2 { grid-column: 1 / span 4; position: sticky; top: 96px; }
     .v-qs { grid-column: 5 / span 8; display: grid; gap: 8px; }
     .v-faq-item { background: var(--cv-tone); border-radius: var(--cv-r); transition: background-color .15s, color .15s; }
     .v-faq-item.open { background: var(--cv-accent); color: #fff; }
@@ -259,7 +259,7 @@ const faqLd = JSON.stringify({
 
   <!-- FAQ -->
   <div class="v-wrap v-grid v-faq">
-    <h2>Preguntas frecuentes, {v.marca} {v.modelo}</h2>
+    <h2 class="cv-sec-title">Preguntas frecuentes, {v.marca} {v.modelo}</h2>
     <div class="v-qs">
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
