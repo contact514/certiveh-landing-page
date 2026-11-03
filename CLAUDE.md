@@ -95,7 +95,10 @@ estas, y no las deduzcas del código de otro repo:**
 - **«Hasta un 55% en beneficios tributarios», nunca «recuperas el 55%».** El 55% es nominal; en caja
   real una empresa recibe alrededor del 22,5%. Prometer caja que no llega cuesta dinero y confianza.
 - **No aplica a híbridos ligeros.** Si una página los menciona, es para excluirlos.
-- **Nunca siglas técnicas** (BEV, PHEV, MHEV) en textos de cara al público. Hoy no hay ninguna.
+- **Siglas técnicas (BEV, HEV, PHEV, MHEV, EV): en el blog, palabra + sigla entre paréntesis**, la primera vez
+  en cada bloque: «eléctrico puro (BEV)», «híbrido (HEV)», «híbrido enchufable (PHEV)», «híbrido ligero (MHEV)»,
+  «eléctrico (EV)». Nunca la sigla sola. Decisión de Julian del 3-nov-2026, por SEO. **Fuera del blog** (landing,
+  fichas, legales, componentes), sigue la regla de siempre: sin siglas, solo palabras.
 - **Ventana UPME:** Resolución 400 de 2026, ventana continua del 1 de febrero al 15 de diciembre.
   Ya no hay ciclos; si un texto habla de «ciclos de recepción», está caducado.
 - **Ante la UPME sí radicamos nosotros. Ante la DIAN no.** Son entidades distintas y la frase no se
