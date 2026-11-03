@@ -112,33 +112,39 @@ no se cambiaron con el rediseño.
 
 ## 📦 Ubicación de los Archivos
 
-Siete PNG en `public/og/`, generados por `scripts/generate-og-images.mjs`
-(`node scripts/generate-og-images.mjs`):
+Todo en `public/og/`, generado por `scripts/generate-og-images.mjs` (`node scripts/generate-og-images.mjs`).
+**Las páginas enlazan el `.jpg`** (40-55 KB); el `.png` de cada página se sigue escribiendo con su nombre de
+siempre porque es la URL que las redes ya tienen en caché.
 
 ```
-/public/og/home.png          → la portada y 20 páginas más (por defecto en BaseLayout)
-/public/og/vehiculos.png     → el catálogo y las fichas
-/public/og/blog.png          → el índice del blog y los artículos
-/public/og/aliados.png       → la página de aliados
-/public/og/nosotros.png      → la página de nosotros
-/public/og/otros-activos.png → GEE / FNCE
-/public/og/portal.png        → los enlaces al portal
+/public/og/home.jpg          → la portada y las páginas sin imagen propia (por defecto en BaseLayout)
+/public/og/vehiculos.jpg     → el catálogo y las fichas de cada vehículo
+/public/og/blog.jpg          → el índice del blog (y el respaldo de un artículo sin imagen propia)
+/public/og/blog/<slug>.jpg   → UNA POR ARTÍCULO, con el titular del propio artículo
+/public/og/aliados.jpg       → la página de aliados
+/public/og/nosotros.jpg      → la página de nosotros
+/public/og/otros-activos.jpg → GEE / FNCE
+/public/og/portal.jpg        → los enlaces al portal (el portal publica la suya como og-portal.png)
 ```
 
-**URL Pública:** `https://certiveh.co/og/<nombre>.png`
+**URL Pública:** `https://certiveh.co/og/<nombre>.jpg`. Todas las páginas declaran además
+`og:image:width` 1200 y `og:image:height` 630, para que WhatsApp y Facebook pinten la vista previa desde
+el primer envío sin descargar la imagen antes.
 
-✅ **El guion ya se puede reejecutar** (noviembre de 2026). Antes sus siete fondos —fotos de banco—
+**Los artículos.** El guion lee el `<h1 class="banner-title">` de cada `src/pages/blog/*.astro` y genera
+`og/blog/<slug>.jpg` con ese titular, sin escribir ningún texto a mano: un titular corregido se corrige en
+su imagen al reejecutar el guion. `BlogLayout` la enlaza por el slug (meta y `image` del JSON-LD
+`BlogPosting`) y, si un artículo nuevo aún no la tiene, cae en `blog.jpg` en vez de enlazar una imagen que no
+existe. **Al publicar un artículo nuevo, reejecuta el guion.** El cuerpo del titular baja con su longitud
+(64 → 40 px) para que quepa siempre.
+
+✅ **El guion se puede reejecutar** (noviembre de 2026). Antes sus siete fondos —fotos de banco—
 vivían en `/tmp` y no en el repo, y moría con `ENOENT`. Ahora los fondos están en `scripts/og-bgs/`
 (ya recortados a 1200 x 630) y las fuentes en `scripts/fonts/`; el escudo sale de `public/favicon.svg`.
-Las siete imágenes se regeneraron el 3-nov-2026 con el copy vigente del guion.
+Los textos llevan sus tildes (antes «electricos», «devolucion»: la fuente vieja no las tenía).
 
-⚠️ **Pesan unos 500 KB cada una**, por encima de los 300 KB recomendados arriba: es una foto en PNG.
-Los nombres de fichero son `.png` y las páginas los citan así, por eso no se pasaron a JPEG.
-
-⚠️ Y `/public/og-image.png` **sí existe**, está trackeado en git y se publica en
-`https://certiveh.co/og-image.png`, pero está **huérfano**: ninguna página lo referencia (`BaseLayout`
-usa `/og/home.png` por defecto) y el guion **no** lo genera, así que sigue con la marca anterior. O se
-borra o se documenta para qué queda.
+`/public/og-image.png` no lo enlaza ninguna página, pero está publicado y pudo haberse compartido: desde el
+3-nov-2026 es una copia de `og/home.png`, para que un enlace viejo no muestre la marca anterior.
 
 ---
 

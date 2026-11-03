@@ -51,7 +51,7 @@ const productLd = JSON.stringify({
   '@type': 'Product',
   name: `Certificado UPME para ${v.marca} ${v.modelo}`,
   description: description,
-  image: 'https://certiveh.co/og/vehiculos.png',
+  image: 'https://certiveh.co/og/vehiculos.jpg',
   brand: { '@type': 'Brand', name: 'CertiVeh' },
   offers: {
     '@type': 'Offer',
@@ -110,7 +110,7 @@ const faqLd = JSON.stringify({
 });
 ---
 
-<BaseLayout title={title} description={description} keywords={keywords}>
+<BaseLayout title={title} description={description} keywords={keywords} ogImage="https://certiveh.co/og/vehiculos.jpg">
   <script slot="head" type="application/ld+json" set:html={breadcrumbLd} />
   <script slot="head" type="application/ld+json" set:html={productLd} />
   <script slot="head" type="application/ld+json" set:html={faqLd} />

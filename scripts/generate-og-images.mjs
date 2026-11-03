@@ -1,8 +1,9 @@
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
-import { readFileSync, mkdirSync, writeFileSync } from "fs";
+import { readFileSync, readdirSync, mkdirSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 
 // Imágenes sociales de certiveh.co (1200x630) con satori. Estándar visual 2026-11 (DESIGN_SYSTEM.md §0):
 // Albert Sans (OFL, los TTF y su licencia en scripts/fonts/), el escudo en un solo verde plano, el titular en una
@@ -10,6 +11,8 @@ import { fileURLToPath } from "url";
 // que es la excepción que permite §0.4 para poder leer encima.
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+// sharp no es dependencia directa del repo: llega con astro, así que se resuelve desde él.
+const sharp = createRequire(createRequire(import.meta.url).resolve("astro/package.json"))("sharp");
 const fontRegular = readFileSync(join(__dirname, "fonts/AlbertSans-Regular.ttf"));
 const fontSemiBold = readFileSync(join(__dirname, "fonts/AlbertSans-SemiBold.ttf"));
 const fontBold = readFileSync(join(__dirname, "fonts/AlbertSans-Bold.ttf"));
@@ -157,7 +160,7 @@ function createOGImage({ title, subtitle, pills = [], url = "certiveh.co", bg })
                 ? {
                     type: "div",
                     props: {
-                      style: { fontSize: 24, color: "#E2E8F0", lineHeight: 1.4, maxWidth: 760 },
+                      style: { fontSize: 24, color: "#E2E8F0", lineHeight: 1.4, maxWidth: 840 },
                       children: subtitle,
                     },
                   }
@@ -206,10 +209,10 @@ const pages = [
     title: [
       { text: "Reclama los" },
       { text: "beneficios tributarios", color: "emerald" },
-      { text: "de tu carro electrico o hibrido" },
+      { text: "de tu carro eléctrico o híbrido" },
     ],
-    subtitle: "Tramitamos tu certificado UPME y gestionamos tu devolucion de IVA ante la DIAN.",
-    pills: ["Devolucion de IVA", "Deduccion en renta", "Depreciacion acelerada"],
+    subtitle: "Tramitamos tu certificado UPME y gestionamos tu devolución de IVA ante la DIAN.",
+    pills: ["Devolución de IVA", "Deducción en renta", "Depreciación acelerada"],
     url: "certiveh.co",
   },
   {
@@ -217,9 +220,9 @@ const pages = [
     title: [
       { text: "Certificado UPME", color: "emerald" },
       { text: "para cargadores, flotas GNV" },
-      { text: "y energia solar" },
+      { text: "y energía solar" },
     ],
-    subtitle: "Deduccion de renta del 50%, exclusion de IVA, exencion arancelaria y depreciacion acelerada.",
+    subtitle: "Deducción de renta del 50%, exclusión de IVA, exención arancelaria y depreciación acelerada.",
     pills: ["GEE", "FNCE", "Ley 1715/2014"],
     url: "certiveh.co/otros-activos",
   },
@@ -227,21 +230,21 @@ const pages = [
     name: "blog",
     title: [
       { text: "Beneficios tributarios para" },
-      { text: "carros electricos e hibridos", color: "emerald" },
+      { text: "carros eléctricos e híbridos", color: "emerald" },
       { text: "en Colombia" },
     ],
-    subtitle: "Guias, calculadoras y todo lo que necesitas saber sobre el certificado UPME, la devolucion de IVA y la deduccion en renta.",
-    pills: ["Certificado UPME", "Devolucion de IVA", "Deduccion en renta"],
+    subtitle: "Guías, calculadoras y todo lo que necesitas saber sobre el certificado UPME, la devolución de IVA y la deducción en renta.",
+    pills: ["Certificado UPME", "Devolución de IVA", "Deducción en renta"],
     url: "certiveh.co/blog",
   },
   {
     name: "vehiculos",
     title: [
-      { text: "Vehiculos" },
-      { text: "electricos e hibridos", color: "emerald" },
+      { text: "Vehículos" },
+      { text: "eléctricos e híbridos", color: "emerald" },
       { text: "elegibles para beneficios tributarios" },
     ],
-    subtitle: "Consulta si tu marca y modelo califica para devolucion de IVA, deduccion en renta y depreciacion acelerada con el certificado UPME.",
+    subtitle: "Consulta si tu marca y modelo califica para devolución de IVA, deducción en renta y depreciación acelerada con el certificado UPME.",
     pills: ["498+ modelos", "62 marcas"],
     url: "certiveh.co/vehiculos",
   },
@@ -251,18 +254,18 @@ const pages = [
       { text: "Programa de Aliados", color: "emerald" },
       { text: "CertiVeh" },
     ],
-    subtitle: "Genera ingresos adicionales ayudando a tus clientes a obtener su certificado UPME. Sin inversion, sin riesgo.",
-    pills: ["Comisiones por referido", "Sin inversion"],
+    subtitle: "Genera ingresos adicionales ayudando a tus clientes a obtener su certificado UPME. Sin inversión, sin riesgo.",
+    pills: ["Comisiones por referido", "Sin inversión"],
     url: "certiveh.co/aliados",
   },
   {
     name: "nosotros",
     title: [
-      { text: "Quienes somos" },
+      { text: "Quiénes somos" },
       { text: "CertiVeh", color: "emerald" },
     ],
-    subtitle: "Tramitamos tu certificado UPME y gestionamos la devolucion de IVA de tu carro electrico o hibrido ante la DIAN.",
-    pills: ["Medellin, Colombia"],
+    subtitle: "Tramitamos tu certificado UPME y gestionamos la devolución de IVA de tu carro eléctrico o híbrido ante la DIAN.",
+    pills: ["Medellín, Colombia"],
     url: "certiveh.co/nosotros",
   },
   {
@@ -270,15 +273,69 @@ const pages = [
     title: [
       { text: "Tramita tu" },
       { text: "certificado UPME", color: "emerald" },
-      { text: "100% en linea" },
+      { text: "100% en línea" },
     ],
-    subtitle: "Sube tus documentos, paga una sola vez y sigue tu tramite en el portal. Avisos por WhatsApp.",
-    pills: ["100% en linea", "Pago unico", "Sin portales gubernamentales"],
+    subtitle: "Sube tus documentos, paga una sola vez y sigue tu trámite en el portal. Avisos por WhatsApp.",
+    pills: ["100% en línea", "Pago único", "Sin portales gubernamentales"],
     url: "portal.certiveh.co",
   },
 ];
 
+// Una imagen por artículo del blog, con el titular del propio artículo: al compartir un artículo por WhatsApp o
+// redes se ve DE QUÉ trata, no la portada genérica del blog. El texto NO se escribe aquí: se lee del
+// `<h1 class="banner-title">` de cada página, así que un titular corregido se corrige también en su imagen al
+// reejecutar el guion. BlogLayout la enlaza por el slug y cae en blog.png si un artículo nuevo aún no tiene la suya.
+const blogDir = join(__dirname, "../src/pages/blog");
+const decode = (t) => t.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/<[^>]+>/g, "");
+const articulos = readdirSync(blogDir)
+  .filter((f) => f.endsWith(".astro") && f !== "index.astro")
+  .map((f) => {
+    const h1 = readFileSync(join(blogDir, f), "utf8").match(/<h1 class="banner-title">([\s\S]*?)<\/h1>/);
+    if (!h1) throw new Error(`${f}: no tiene <h1 class="banner-title">`);
+    return { slug: f.replace(/\.astro$/, ""), h1: decode(h1[1]).replace(/\s+/g, " ").trim() };
+  });
+
+// El titular de un artículo es largo (hasta ~150 caracteres): el cuerpo baja con la longitud para que quepa
+// siempre en el campo sin cortarse.
+function createArticleImage({ h1, bg }) {
+  const size = h1.length <= 60 ? 64 : h1.length <= 95 ? 54 : h1.length <= 125 ? 46 : 40;
+  const base = createOGImage({ title: [{ text: h1 }], subtitle: null, url: "certiveh.co/blog", bg });
+  const centro = base.props.children[3];
+  centro.props.children[0].props.style = { ...centro.props.children[0].props.style, fontSize: size, maxWidth: 1040 };
+  centro.props.children[0].props.children = h1.split(" ").map((word) => ({
+    type: "span",
+    props: { style: { marginRight: Math.round(size * 0.26) }, children: word },
+  }));
+  return base;
+}
+
+async function render(markup) {
+  const svg = await satori(markup, {
+    width: 1200,
+    height: 630,
+    fonts: [
+      { name: "Albert Sans", data: fontRegular, weight: 400, style: "normal" },
+      { name: "Albert Sans", data: fontSemiBold, weight: 600, style: "normal" },
+      { name: "Albert Sans", data: fontBold, weight: 700, style: "normal" },
+    ],
+  });
+  return new Resvg(svg, { fitTo: { mode: "width", value: 1200 } }).render().asPng();
+}
+
+// Las páginas enlazan el JPEG (~75 KB): el PNG de satori pesa ~500 KB por la foto de fondo, y WhatsApp deja de
+// pintar la vista previa con imágenes pesadas. El PNG de las siete páginas se sigue escribiendo con su nombre de
+// siempre porque es la URL que las redes ya tienen en caché; los artículos, que son nuevos, solo tienen JPEG.
+async function escribir(base, png, { png: conPng = true } = {}) {
+  if (conPng) writeFileSync(`${base}.png`, png);
+  writeFileSync(`${base}.jpg`, await sharp(png).jpeg({ quality: 84, mozjpeg: true }).toBuffer());
+}
+
 async function generate() {
+  mkdirSync(join(outDir, "blog"), { recursive: true });
+  for (const a of articulos) {
+    await escribir(join(outDir, "blog", a.slug), await render(createArticleImage({ h1: a.h1, bg: poster })), { png: false });
+    console.log(`Generated: blog/${a.slug}.jpg`);
+  }
   for (const page of pages) {
     const bg = backgrounds[page.name];
     const markup = createOGImage({ ...page, bg });
@@ -298,8 +355,8 @@ async function generate() {
     });
     const png = resvg.render().asPng();
 
-    writeFileSync(join(outDir, `${page.name}.png`), png);
-    console.log(`Generated: ${page.name}.png`);
+    await escribir(join(outDir, page.name), png);
+    console.log(`Generated: ${page.name}.png + .jpg`);
   }
 }
 
