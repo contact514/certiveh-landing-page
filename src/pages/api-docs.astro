@@ -70,7 +70,7 @@ const webPageLd = JSON.stringify({
     .sidebar-link.active { background: var(--cv-accent); color: #fff; }
     .sidebar-link:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 0; }
     .sidebar-link .method-badge-sm { font-size: .8125rem; font-weight: 700; color: var(--cv-accent); }
-    .sidebar-link .method-get { color: #1d4ed8; }
+    .sidebar-link .method-get { color: var(--cv-ink); } /* GET en tinta y POST en verde: dos tonos de la marca, sin el azul de otra paleta */
     .sidebar-link.active .method-badge-sm { color: #fff; }
     .sidebar-endpoint-path { font-size: .875rem; overflow-wrap: anywhere; }
 
@@ -109,7 +109,7 @@ const webPageLd = JSON.stringify({
     .endpoint-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 80px 0 12px; scroll-margin-top: 96px; }
     .method-badge { flex-shrink: 0; font-size: .875rem; font-weight: 700; padding: 5px 10px; border-radius: 4px; color: #fff; }
     .method-badge.post { background: var(--cv-accent); }
-    .method-badge.get { background: #1d4ed8; }
+    .method-badge.get { background: var(--cv-field); }
     .endpoint-path { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--cv-ink); overflow-wrap: anywhere; }
     .endpoint-desc { font-size: 1.0625rem; color: var(--cv-soft); margin-bottom: 20px; }
 
@@ -134,6 +134,7 @@ const webPageLd = JSON.stringify({
     .ck { color: #67e8f9; }  /* clave */
     .cs { color: var(--cv-mint); }  /* cadena */
     .cn { color: #fcd34d; }  /* número */
+    td .cn { color: var(--cv-ink); font-weight: 700; } /* en una tabla clara el ámbar del código no se lee */
     .cp { color: #94a3b8; }  /* puntuación */
     .cc { color: #94a3b8; }  /* comentario */
     .cm { color: #93c5fd; }  /* método */
@@ -487,7 +488,7 @@ const webPageLd = JSON.stringify({
       <!-- POST /tramites/:id/documents -->
       <div class="endpoint-header" id="post-documents">
         <span class="method-badge post section-anchor">POST</span>
-        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/documents</span>
+        <span class="endpoint-path">/tramites/&#123;case_id&#125;/documents</span>
       </div>
       <p class="endpoint-desc">Sube documentos requeridos. Cada documento se procesa automaticamente con IA.</p>
 
@@ -577,7 +578,7 @@ const webPageLd = JSON.stringify({
       <!-- GET /tramites/:id -->
       <div class="endpoint-header" id="get-tramite">
         <span class="method-badge get section-anchor">GET</span>
-        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;</span>
+        <span class="endpoint-path">/tramites/&#123;case_id&#125;</span>
       </div>
       <p class="endpoint-desc">Retorna el estado actual y detalles de un tramite.</p>
 
@@ -668,7 +669,7 @@ const webPageLd = JSON.stringify({
       <!-- POST /tramites/:id/payment -->
       <div class="endpoint-header" id="post-payment">
         <span class="method-badge post section-anchor">POST</span>
-        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/payment</span>
+        <span class="endpoint-path">/tramites/&#123;case_id&#125;/payment</span>
       </div>
       <p class="endpoint-desc">Inicializa una sesion de pago y retorna los datos de integracion con Wompi.</p>
 
@@ -735,7 +736,7 @@ const webPageLd = JSON.stringify({
       <!-- SIMULATE PAYMENT -->
       <div class="endpoint-header" id="post-simulate-payment">
         <span class="method-badge post section-anchor">POST</span>
-        <span class="endpoint-path">/tramites/&#123;'&#123;'+'case_id&#125;'&#125;/simulate-payment</span>
+        <span class="endpoint-path">/tramites/&#123;case_id&#125;/simulate-payment</span>
       </div>
       <p class="endpoint-desc">Simula la aprobacion de un pago sin realizar un cobro real. <strong>Solo disponible en modo sandbox.</strong></p>
 
