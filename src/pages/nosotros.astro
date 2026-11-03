@@ -105,13 +105,14 @@ const foundersLd = JSON.stringify([
     /* ── RESPALDO: el campo oscuro a todo el ancho (el logo de la firma es claro) ── */
     .nos-lznp { margin-top: var(--cv-gap-sec); background: var(--cv-field); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
     .nos-lznp-inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); row-gap: 36px; align-items: start; }
-    .nos-lznp-logo-wrap { grid-column: span 4; background: var(--cv-field-2); border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: grid; place-items: center; min-height: 220px; }
-    .nos-lznp-logo-wrap img { width: 100%; max-width: 320px; height: auto; }
+    /* El logo de la firma suelto sobre el campo (sin caja) y los tres respaldos como filas grandes, no cajas apiladas. */
+    .nos-lznp-logo-wrap { grid-column: span 4; align-self: center; }
+    .nos-lznp-logo-wrap img { width: 100%; max-width: 360px; height: auto; display: block; }
     .nos-lznp-copy { grid-column: 6 / span 7; }
     .nos-lznp-desc { margin-top: 18px; max-width: 60ch; color: #e2e8f0; }
-    .nos-lznp-points { list-style: none; display: grid; gap: 8px; margin-top: 28px; }
-    .nos-lznp-point { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 18px 20px 18px 38px; }
-    .nos-lznp-point.cv-sq::before { left: 20px; top: calc(18px + .6em); background: var(--cv-mint); }
+    .nos-lznp-points { list-style: none; margin: 36px 0 0; padding: 0; }
+    .nos-lznp-point { padding: 22px 0 22px 28px; border-top: 1px solid rgba(255,255,255,.14); font-size: clamp(1.125rem, 1rem + .45vw, 1.375rem); font-weight: 600; letter-spacing: -0.015em; line-height: 1.35; } /* taste-skill-ignore: separador de filas de una lista, no una caja */
+    .nos-lznp-point.cv-sq::before { left: 0; top: calc(22px + .55em); width: 9px; height: 9px; background: var(--cv-mint); }
     .nos-lznp-point p { max-width: 60ch; }
 
     /* ── CTA FINAL: el cierre de la home, el titular grande a la izquierda y la acción a la derecha ── */
@@ -127,7 +128,7 @@ const foundersLd = JSON.stringify([
       .nos-photo { margin-top: 36px; max-height: 520px; justify-self: stretch; }
       .nos-founder-cards { grid-template-columns: 1fr; gap: 6px; }
       .nos-card { min-height: 0; }
-      .nos-lznp-logo-wrap { min-height: 140px; }
+      .nos-lznp-logo-wrap { position: static; max-width: 260px; }
       .nos-cta-sub { margin-top: 24px; }
     }
     @media (max-width: 560px) {
