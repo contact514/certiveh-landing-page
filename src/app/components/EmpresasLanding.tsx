@@ -36,7 +36,7 @@ const CSS = `
   .oa-hero-media { position: absolute; inset: 0; }
   .oa-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
   .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
-  .oa-hero .oa-grid { position: relative; z-index: 1; align-items: center; }
+  .oa-hero .oa-grid { position: relative; z-index: 1; align-items: start; }
   .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; }
   .oa-hero h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 0.96; text-wrap: balance; max-width: 18ch; }
   .oa-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
