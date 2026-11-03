@@ -107,6 +107,11 @@ const CSS = `
   .h-trust { list-style: none; margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: var(--cv-small); font-weight: 600; }
   .h-hero .cv-sq::before { background: var(--cv-mint); }
   .h-stage { grid-column: 8 / span 5; }
+  @media (min-width: 901px) {
+    .h-solo-movil { display: none; }
+    .h-empezar { background: var(--cv-accent); color: #fff; }
+    .h-empezar:hover { background: var(--cv-accent-hover); }
+  }
 
   /* ── CALCULADORA ── */
   .calc { background: #fff; color: var(--cv-ink); border-radius: 0 var(--cv-r) var(--cv-r) var(--cv-r); clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%, 0 48px); padding: 32px 28px 28px; scroll-margin-top: 80px; }
@@ -649,8 +654,11 @@ function Hero() {
           <p className="h-hero-lead">Accede a <span style={{ position: "relative", display: "inline-block" }}><FlipWords words={flipWords} duration={2800}/></span></p>
           <p className="h-hero-sup">Tramitamos tu certificado UPME, el documento que desbloquea tus beneficios tributarios, y gestionamos tu devolución de IVA ante la DIAN. Tú subes tus documentos y nosotros preparamos tu solicitud.</p>
           <div className="h-acts">
-            <a className="cv-btn cv-btn-a" href="#calculadora">Calcular mi beneficio <Arr /></a>
-            <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora</a>
+            {/* «Calcular mi beneficio» solo lleva a la calculadora: en escritorio ya está al lado y se oculta;
+                en el celular queda debajo de las cifras y el botón ahorra el scroll. Entonces, en escritorio,
+                la acción principal (verde) es empezar el trámite. */}
+            <a className="cv-btn cv-btn-a h-solo-movil" href="#calculadora">Calcular mi beneficio <Arr /></a>
+            <a className="cv-btn cv-btn-w h-empezar" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
           </div>
           <dl className="h-figs">
             {[
