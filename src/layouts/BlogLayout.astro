@@ -92,13 +92,18 @@ const breadcrumbLd = isArticle ? JSON.stringify({
       --green: var(--cv-accent); --teal: var(--cv-accent); --dark: var(--cv-ink); --slate: var(--cv-ink);
       --muted: var(--cv-soft); --border: var(--cv-tone-2); --light: var(--cv-tone); --amber: #B45309;
     }
-    body { font-family: var(--cv-font); background: var(--cv-bg); color: var(--cv-ink); line-height: 1.6; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--cv-font); font-size: var(--cv-body); background: var(--cv-bg); color: var(--cv-ink); line-height: 1.6; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; } /* el tamaño base del resto del sitio: sin él, el pie compartido salía más pequeño en el blog */
 
     /* ── PAGE SPACER ──────────────────────────────────────────────────── */
     .page-top { height: 64px; }
 
     /* ── ESTRUCTURA ───────────────────────────────────────────────────── */
-    .blog-wrapper { max-width: 760px; margin: 0 auto; padding: 28px var(--cv-m) 120px; display: flex; flex-direction: column; gap: 56px; }
+    .blog-wrapper { position: relative; max-width: 760px; margin: 0 auto; padding: 0 var(--cv-m) var(--cv-gap-sec); display: flex; flex-direction: column; gap: 56px; }
+    /* El artículo empieza como las demás páginas: su cabecera sube hasta el borde de arriba, bajo la barra
+       transparente, y «Volver al Blog» va dentro de ella, alineado con el titular. */
+    .blog-wrapper > .back-link { position: absolute; z-index: 2; top: calc(64px + clamp(24px, 3vw, 40px)); left: var(--cv-m); color: #fff; }
+    .blog-wrapper > .back-link:hover { color: var(--cv-mint); }
+    .blog-wrapper > .back-link:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; border-radius: 2px; }
     .page-intro { padding-bottom: 8px; }
     .page-intro .label { display: block; font-size: var(--cv-small); font-weight: 600; color: var(--cv-accent); margin-bottom: 14px; }
     .page-intro h1 { font-size: var(--cv-display); font-weight: var(--cv-wh); color: var(--cv-ink); letter-spacing: var(--cv-trk); margin-bottom: 18px; line-height: 1; text-wrap: balance; }
@@ -107,14 +112,14 @@ const breadcrumbLd = isArticle ? JSON.stringify({
 
     /* Cabecera del artículo: un campo de color a todo el ancho, el h1 grande. Sin degradado ni número
        de fondo. Verde en los artículos marcados b-green; el campo oscuro en el resto. */
-    .article-banner { position: relative; width: 100vw; margin-left: calc(50% - 50vw); padding: clamp(48px, 7vw, 96px) var(--cv-m); background: var(--cv-field); color: #fff; }
+    .article-banner { position: relative; width: 100vw; margin-left: calc(50% - 50vw); padding: calc(64px + clamp(72px, 8vw, 112px)) var(--cv-m) clamp(48px, 6vw, 88px); background: var(--cv-field); color: #fff; }
     .article-banner.b-green { background: var(--cv-accent); }
     .article-banner.b-navy, .article-banner.b-amber { background: var(--cv-field); }
     .banner-bg-num { display: none; }
     .banner-inner { max-width: calc(760px - 2 * var(--cv-m)); margin: 0 auto; } /* el mismo borde izquierdo que el cuerpo */
     .banner-tag { font-size: var(--cv-small); font-weight: 600; color: var(--cv-mint); margin-bottom: 18px; }
     .article-banner.b-green .banner-tag { color: #d6f5e8; }
-    .banner-title { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem); font-weight: var(--cv-wh); color: #fff; letter-spacing: var(--cv-trk); line-height: 1.04; margin: 0; text-wrap: balance; }
+    .banner-title { font-size: clamp(2.25rem, 1.4rem + 3vw, 3.75rem); font-weight: var(--cv-wh); color: #fff; letter-spacing: var(--cv-trk); line-height: 1.04; margin: 0; text-wrap: balance; }
     .banner-subtitle { font-size: var(--cv-lead); color: #e2e8f0; margin-top: 18px; line-height: 1.4; max-width: 46ch; }
     .article-banner.b-green .banner-subtitle { color: #effaf5; }
     .article-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 22px 0 0; font-size: var(--cv-small); color: var(--cv-soft); }
@@ -182,7 +187,9 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .callout { border-radius: var(--cv-r); padding: 20px 24px; margin: 28px 0; font-size: 1.0625rem; line-height: 1.6; background: var(--cv-tone); color: var(--cv-ink); }
     .callout.green { background: #e6f4ec; color: #064e3b; }
     .callout.amber, .callout.slate { background: var(--cv-tone); color: var(--cv-ink); }
-    .callout.red { background: #fdecea; color: #7f1d1d; }
+    .callout.red { background: var(--cv-field); color: #e2e8f0; }
+    .callout.red strong { color: #fca5a5; } /* el rojo de advertencia de la home (aviso de plazo), legible sobre oscuro */
+    .article-body .callout.red a:not(.cta-btn) { color: var(--cv-mint); }
     .callout strong { font-weight: 700; }
     .callout p { font-size: 1.0625rem !important; color: inherit !important; margin-bottom: 8px !important; line-height: 1.6 !important; }
     .callout p:last-child { margin-bottom: 0 !important; }
@@ -191,17 +198,23 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     /* Las tres cifras de beneficio: baldosas en tono, sin borde, sombra ni salto al pasar el ratón. */
     .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 28px 0; }
     .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); }
-    .benefit-card .pct { font-size: 2.5rem; font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); margin-bottom: 6px; line-height: 1; color: var(--cv-accent); }
+    .benefit-card .pct { font-size: clamp(2.5rem, 2rem + 1.6vw, 3.25rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); margin-bottom: 6px; line-height: 1; color: var(--cv-accent); }
     .benefit-card.c-green .pct, .benefit-card.c-teal .pct, .benefit-card.c-amber .pct { color: var(--cv-accent); }
     .benefit-card .bc-label { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 8px; }
     .benefit-card .bc-norm { font-size: .8125rem; color: var(--cv-soft); font-weight: 600; margin-top: 10px; }
     .benefit-card p { font-size: .9375rem !important; color: var(--cv-ink) !important; margin-bottom: 0 !important; line-height: 1.5 !important; }
-    /* Pasos de un procedimiento: el orden es real, así que el número se queda, en un punto plano. */
-    .steps { display: flex; flex-direction: column; gap: 6px; margin: 24px 0; }
-    .step-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 18px; background: var(--cv-tone); border-radius: var(--cv-r); }
-    .step-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--cv-accent); color: #fff; font-size: .875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-    .step-content strong { display: block; font-size: 1.0625rem; font-weight: 700; color: var(--cv-ink); margin-bottom: 3px; }
-    .step-content span { font-size: 1rem; color: var(--cv-ink); line-height: 1.55; }
+    .benefits-grid .benefit-card:first-child { background: var(--cv-accent); color: #fff; }
+    .benefits-grid .benefit-card:first-child .pct, .benefits-grid .benefit-card:first-child .bc-label { color: #fff; }
+    .benefits-grid .benefit-card:first-child .bc-norm { color: #d6f5e8; }
+    .benefits-grid .benefit-card:first-child p { color: #fff !important; }
+    .benefits-grid .benefit-card:first-child a:not(.cta-btn) { color: #fff; }
+    /* Pasos de un procedimiento: el riel de la home (línea de 3 px y punto verde con su número), sin cajas. */
+    .steps { display: flex; flex-direction: column; gap: 28px; margin: 32px 0; padding-left: 48px; position: relative; }
+    .steps::before { content: ""; position: absolute; left: 14px; top: 16px; bottom: 16px; width: 3px; background: var(--cv-tone-2); }
+    .step-item { position: relative; display: block; }
+    .step-num { position: absolute; left: -48px; top: -2px; width: 31px; height: 31px; border-radius: 50%; background: var(--cv-accent); color: #fff; font-size: .875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .step-content strong { display: block; font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; line-height: 1.25; color: var(--cv-ink); margin-bottom: 6px; }
+    .step-content span { font-size: 1.0625rem; color: var(--cv-ink); line-height: 1.6; }
     /* Línea de tiempo: el riel de la marca (3 px y puntos verdes). */
     .timeline { padding-left: 28px; margin: 24px 0; display: flex; flex-direction: column; gap: 22px; position: relative; }
     .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 3px; background: var(--cv-tone-2); }
@@ -232,11 +245,11 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .footnotes ol { padding-left: 18px; }
     .footnotes li { font-size: .875rem; color: var(--cv-soft); line-height: 1.6; margin-bottom: 6px; }
     .footnotes li em { font-style: italic; }
-    .article-cta { margin-top: 48px; padding: 28px 32px; background: var(--cv-field); border-radius: var(--cv-r); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .article-cta p { font-size: 1.0625rem !important; color: #fff !important; margin-bottom: 0 !important; font-weight: 500; max-width: 46ch; }
+    .article-cta { margin-top: 56px; padding: clamp(28px, 4vw, 48px); background: var(--cv-field); border-radius: var(--cv-r); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .article-cta p { font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem) !important; line-height: 1.3 !important; letter-spacing: -0.02em; color: #fff !important; margin-bottom: 0 !important; font-weight: 600; max-width: 32ch; }
     .article-cta p strong { font-weight: 700; color: #fff; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: #fff; color: var(--cv-ink); font-size: 1.0625rem; font-weight: 600; padding: 16px 20px; border-radius: var(--cv-r); text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background-color .15s; }
-    .cta-btn:hover { background: var(--cv-tone); }
+    .cta-btn { display: inline-flex; align-items: center; gap: 18px; background: var(--cv-accent); color: #fff; font-size: 1.0625rem; font-weight: 600; padding: 16px 20px; border-radius: var(--cv-r); text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background-color .15s; }
+    .cta-btn:hover { background: var(--cv-accent-hover); }
     .cta-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; }
     .article-number { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
     @media (max-width: 640px) {
@@ -245,6 +258,9 @@ const breadcrumbLd = isArticle ? JSON.stringify({
       .data-table { font-size: .875rem; }
       .data-table th, .data-table td { padding: 10px 12px; }
       .article-cta { padding: 24px 20px; }
+      .steps { padding-left: 42px; }
+      .steps::before { left: 12px; }
+      .step-num { left: -42px; width: 27px; height: 27px; font-size: .8125rem; }
       .cta-btn { white-space: normal; }
     }
     /* ── VOLVER Y MIGAS ───────────────────────────────────────────────── */
@@ -258,9 +274,9 @@ const breadcrumbLd = isArticle ? JSON.stringify({
   </style>
 
   <!-- NAV — mismo componente React que la landing -->
-  <Navbar isHome={false} darkHero={darkHero} client:load />
+  <Navbar isHome={false} darkHero={darkHero || isArticle} client:load />
 
-  {!darkHero && <div class="page-top"></div>}
+  {!darkHero && !isArticle && <div class="page-top"></div>}
 
   <!-- CONTENT -->
   <main id="main-content">
