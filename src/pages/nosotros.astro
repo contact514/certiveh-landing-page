@@ -69,57 +69,69 @@ const foundersLd = JSON.stringify([
     .nos-intro { grid-column: 1 / span 7; }
     .nos-intro p { margin-top: 18px; max-width: 58ch; }
 
-    /* ── HERO: el fotograma del video de la home con el mismo velo neutro ── */
-    .nos-hero { position: relative; color: #fff; padding: calc(64px + clamp(64px, 9vw, 140px)) 0 clamp(56px, 7vw, 110px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
-    .nos-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
+    /* ── HERO: como la home, el texto a la izquierda y lo real a la derecha: la foto de los fundadores ── */
+    .nos-hero { position: relative; color: #fff; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
+    .nos-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.8) 50%, rgba(9,14,26,.6) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .nos-hero > * { position: relative; }
-    .nos-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; max-width: 18ch; }
-    .nos-hero-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 44ch; margin-top: 22px; }
+    .nos-hero .nos-grid { align-items: center; }
+    .nos-hero-copy { grid-column: 1 / span 6; }
+    .nos-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; max-width: 18ch; }
+    .nos-hero-subtitle { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 44ch; margin-top: 24px; }
+    .nos-photo { grid-column: 8 / span 5; border-radius: var(--cv-r); overflow: hidden; background: var(--cv-field-2); aspect-ratio: 4 / 5; max-height: calc(100svh - 160px); justify-self: end; width: 100%; }
+    .nos-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
-    /* ── FUNDADORES: la foto real a la izquierda, las dos fichas a la derecha ── */
-    .nos-founders-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; margin-top: 56px; }
-    .nos-photo { grid-column: span 5; border-radius: var(--cv-r); overflow: hidden; background: var(--cv-tone); min-height: 420px; }
-    .nos-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-    .nos-founder-cards { grid-column: span 7; display: grid; gap: 8px; }
-    .nos-card { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 14px; }
-    .nos-card-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .nos-card-name { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; }
+    /* ── FUNDADORES: las dos fichas lado a lado (los dos servicios de la home), la segunda en el campo oscuro ── */
+    .nos-founder-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 56px; }
+    .nos-card { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(28px, 3.4vw, 52px); display: flex; flex-direction: column; gap: 14px; min-height: 420px; }
+    .nos-card + .nos-card { background: var(--cv-field); color: #fff; }
+    .nos-card + .nos-card .nos-card-role, .nos-card + .nos-card .nos-tag-green { color: var(--cv-mint); }
+    .nos-card + .nos-card .nos-card-tags { color: #fff; }
+    .nos-card + .nos-card .nos-card-tags span + span::before { color: var(--cv-field-soft); }
+    .nos-card + .nos-card .nos-card-li { background: var(--cv-field-2); color: #fff; }
+    .nos-card + .nos-card .nos-card-li:hover { color: var(--cv-mint); }
+    .nos-card + .nos-card .nos-card-li:focus-visible { outline-color: var(--cv-mint); }
+    .nos-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .nos-card-name { font-size: clamp(2rem, 1.3rem + 2.4vw, 3.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; }
     .nos-card-li { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--cv-r); background: var(--cv-bg); color: var(--cv-ink); transition: color .15s, background-color .15s; }
     .nos-card-li:hover { color: var(--cv-accent); }
     .nos-card-li:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
-    .nos-card-role { font-weight: 600; color: var(--cv-accent); margin-top: -6px; }
+    .nos-card-role { font-weight: 600; color: var(--cv-accent); }
     /* Las etiquetas son texto, no píldoras: van en línea, separadas por un punto medio */
     .nos-card-tags { display: flex; flex-wrap: wrap; gap: 2px 0; font-size: var(--cv-small); font-weight: 600; color: var(--cv-ink); }
     .nos-card-tags span + span::before { content: "·"; margin: 0 8px; color: var(--cv-soft); }
     .nos-tag-green { color: var(--cv-accent); }
-    .nos-card-bio { max-width: 62ch; }
+    .nos-card-bio { max-width: 52ch; margin-top: auto; padding-top: 18px; font-size: 1.0625rem; }
 
-    /* ── RESPALDO: una ficha en tono; el logo de la firma es claro, así que va sobre el campo oscuro ── */
-    .nos-lznp-inner { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(28px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); row-gap: 36px; align-items: start; }
-    .nos-lznp-logo-wrap { grid-column: span 4; background: var(--cv-field); border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: grid; place-items: center; min-height: 180px; }
+    /* ── RESPALDO: el campo oscuro a todo el ancho (el logo de la firma es claro) ── */
+    .nos-lznp { margin-top: var(--cv-gap-sec); background: var(--cv-field); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
+    .nos-lznp-inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); row-gap: 36px; align-items: start; }
+    .nos-lznp-logo-wrap { grid-column: span 4; background: var(--cv-field-2); border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: grid; place-items: center; min-height: 220px; }
     .nos-lznp-logo-wrap img { width: 100%; max-width: 320px; height: auto; }
     .nos-lznp-copy { grid-column: 6 / span 7; }
-    .nos-lznp-desc { margin-top: 18px; max-width: 60ch; }
-    .nos-lznp-points { list-style: none; display: grid; gap: 14px; margin-top: 28px; }
+    .nos-lznp-desc { margin-top: 18px; max-width: 60ch; color: #e2e8f0; }
+    .nos-lznp-points { list-style: none; display: grid; gap: 8px; margin-top: 28px; }
+    .nos-lznp-point { background: var(--cv-field-2); border-radius: var(--cv-r); padding: 18px 20px 18px 38px; }
+    .nos-lznp-point.cv-sq::before { left: 20px; top: calc(18px + .6em); background: var(--cv-mint); }
     .nos-lznp-point p { max-width: 60ch; }
 
-    /* ── CTA FINAL: campo verde, como en el resto del sitio ── */
+    /* ── CTA FINAL: el cierre de la home, el titular grande a la izquierda y la acción a la derecha ── */
     .nos-cta { padding-block: var(--cv-gap-sec); }
-    .nos-cta-box { background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
-    .nos-cta-copy { grid-column: 1 / span 7; }
-    .nos-cta-title { font-size: var(--cv-head); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
-    .nos-cta-sub { margin-top: 18px; color: #fff; max-width: 52ch; }
-    .nos-cta-box .cv-btn { grid-column: 9 / span 4; }
-    .nos-cta-box .cv-btn:focus-visible { outline-color: #fff; }
+    .nos-cta-box { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: end; }
+    .nos-cta-copy { display: contents; }
+    .nos-cta-title { grid-column: 1 / span 7; grid-row: 1 / span 2; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .98; text-wrap: balance; }
+    .nos-cta-sub { grid-column: 8 / span 5; max-width: 52ch; }
+    .nos-cta-box .cv-btn { grid-column: 8 / span 5; justify-self: start; margin-top: 30px; }
 
     @media (max-width: 900px) {
-      .nos-intro, .nos-photo, .nos-founder-cards, .nos-lznp-logo-wrap, .nos-lznp-copy, .nos-cta-copy, .nos-cta-box .cv-btn { grid-column: 1 / -1; }
-      .nos-photo { min-height: 0; aspect-ratio: 4 / 5; max-height: 560px; }
+      .nos-intro, .nos-hero-copy, .nos-photo, .nos-lznp-logo-wrap, .nos-lznp-copy, .nos-cta-title, .nos-cta-sub, .nos-cta-box .cv-btn { grid-column: 1 / -1; grid-row: auto; }
+      .nos-photo { margin-top: 36px; max-height: 520px; justify-self: stretch; }
+      .nos-founder-cards { grid-template-columns: 1fr; gap: 6px; }
+      .nos-card { min-height: 0; }
       .nos-lznp-logo-wrap { min-height: 140px; }
-      .nos-cta-box .cv-btn { margin-top: 32px; }
+      .nos-cta-sub { margin-top: 24px; }
     }
-    @media (max-width: 640px) {
-      .nos-founders-grid, .nos-founder-cards { gap: 6px; }
+    @media (max-width: 560px) {
+      .nos-cta-box .cv-btn { width: 100%; }
     }
   </style>
 
@@ -130,11 +142,21 @@ const foundersLd = JSON.stringify([
 
   <!-- HERO -->
   <section class="nos-hero cv-hero-full">
-    <div class="nos-wrap">
-      <h1 class="nos-hero-title">El equipo detrás de <span>CertiVeh</span></h1>
-      <p class="nos-hero-subtitle">
-        Tecnología, experiencia en energía y respaldo experto al servicio de los propietarios de vehículos eléctricos e híbridos en Colombia.
-      </p>
+    <div class="nos-wrap nos-grid">
+      <div class="nos-hero-copy">
+        <h1 class="nos-hero-title">El equipo detrás de <span>CertiVeh</span></h1>
+        <p class="nos-hero-subtitle">
+          Tecnología, experiencia en energía y respaldo experto al servicio de los propietarios de vehículos eléctricos e híbridos en Colombia.
+        </p>
+      </div>
+      <!-- Foto: la de los fundadores, lo real de esta página, en la portada -->
+      <div class="nos-photo">
+        <img
+          src="/founders-photo.jpg"
+          alt="Julian Delgado y Agustín Jaramillo, co-fundadores de CertiVeh"
+          fetchpriority="high"
+        />
+      </div>
     </div>
   </section>
 
@@ -150,19 +172,8 @@ const foundersLd = JSON.stringify([
         </div>
       </div>
 
-      <div class="nos-founders-grid">
-
-        <!-- Foto -->
-        <div class="nos-photo">
-          <img
-            src="/founders-photo.jpg"
-            alt="Julian Delgado y Agustín Jaramillo, co-fundadores de CertiVeh"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- Cards -->
-        <div class="nos-founder-cards">
+      <!-- Cards -->
+      <div class="nos-founder-cards">
 
           <!-- Julian -->
           <div class="nos-card">
@@ -202,13 +213,12 @@ const foundersLd = JSON.stringify([
             </p>
           </div>
 
-        </div>
       </div>
     </div>
   </section>
 
   <!-- RESPALDO LZNP -->
-  <section class="nos-sec">
+  <section class="nos-lznp">
     <div class="nos-wrap">
       <div class="nos-lznp-inner">
 
@@ -248,7 +258,7 @@ const foundersLd = JSON.stringify([
             Gestiona tu certificado UPME y recupera el IVA de tu vehículo eléctrico o híbrido. Todo en línea, sin burocracia.
           </p>
         </div>
-        <a href="https://portal.certiveh.co" class="cv-btn cv-btn-w" target="_blank" rel="noopener noreferrer">
+        <a href="https://portal.certiveh.co" class="cv-btn cv-btn-a" target="_blank" rel="noopener noreferrer">
           Empezar mi trámite
           <span class="cv-arr" aria-hidden="true">→</span>
         </a>
