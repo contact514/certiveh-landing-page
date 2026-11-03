@@ -15,6 +15,10 @@
  * **La variante de otra vertical** (`/otros-activos`, la isla `EmpresasLanding`) tiene su propio contenido —otra
  * frase, tres columnas con anclas locales y sin el «Empezar ahora» del portal de vehículos—. Lo pasa por props
  * (`tagline`, `columns`, `cta={null}`) y conserva el mismo estilo; sus textos y enlaces no se tocan.
+ *
+ * **`homeLink`**: los dos documentos legales llevaban el logo del pie enlazado a la home
+ * (`<a href="/" aria-label="Ir al inicio CertiVeh">`). Con `homeLink` la baldosa de la palabra conserva ese
+ * enlace; las demás páginas no lo tenían y no lo ganan.
  */
 const CSS = `
   .sf { padding: 8px; font-family: var(--cv-font); }
@@ -30,6 +34,9 @@ const CSS = `
   .sf-st small { font-size: 0.875rem; color: var(--cv-soft); }
   .sf-n { grid-column: span 2; }
   .sf-word { grid-column: span 8; background: var(--cv-field); color: #fff; min-height: 300px; display: flex; align-items: flex-end; overflow: hidden; }
+  a.sf-word { text-decoration: none; transition: background-color .15s; }
+  a.sf-word:hover { background: var(--cv-field-2); }
+  a.sf-word:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
   .sf-word span { font-size: clamp(3.5rem, 1.8rem + 7vw, 9rem); font-weight: var(--cv-wh); letter-spacing: -0.04em; line-height: .8; }
   .sf-go { grid-column: span 4; background: var(--cv-accent); color: #fff; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; border-radius: var(--cv-r); padding: 24px; transition: background-color .15s; }
   .sf-go:hover { background: var(--cv-accent-hover); }
@@ -85,12 +92,14 @@ export function SiteFooter({
   tagline = "Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.",
   columns,
   cta = { href: portalUrl, label: "Empezar ahora" },
+  homeLink = false,
 }: {
   isHome?: boolean;
   portalUrl?: string;
   tagline?: string;
   columns?: Columna[];
   cta?: { href: string; label: string } | null;
+  homeLink?: boolean;
 }) {
   const cols = columns ?? ENLACES(isHome);
   const board = ["sf-board", cols.length === 3 ? "sf-c3" : "", cta ? "" : "sf-nogo"].filter(Boolean).join(" ");
@@ -108,7 +117,9 @@ export function SiteFooter({
             <ul>{col.links.map(l => <li key={l.text}><a href={l.href}>{l.text}</a></li>)}</ul>
           </nav>
         ))}
-        <div className="sf-t sf-word" aria-label="CertiVeh"><span aria-hidden="true">CertiVeh</span></div>
+        {homeLink
+          ? <a href="/" aria-label="Ir al inicio CertiVeh" className="sf-t sf-word"><span aria-hidden="true">CertiVeh</span></a>
+          : <div className="sf-t sf-word" aria-label="CertiVeh"><span aria-hidden="true">CertiVeh</span></div>}
         {cta && (
           <a className="sf-go" href={cta.href} target="_blank" rel="noopener noreferrer">
             <b>{cta.label}</b>

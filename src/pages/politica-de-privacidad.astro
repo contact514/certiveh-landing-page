@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/index.css';
 import { Navbar } from '../app/components/Navbar';
+import { SiteFooter } from '../app/components/SiteFooter';
 ---
 
 <BaseLayout
@@ -9,122 +10,62 @@ import { Navbar } from '../app/components/Navbar';
   description="Política de Tratamiento de Datos Personales de CertiVeh. CERTIVEH S.A.S. - NIT 902051875-8."
   robots="noindex, follow"
 >
-  <style>
-    :root {
-      --emerald-600: #059669;
-      --emerald-50:  #ECFDF5;
-      --emerald-200: #A7F3D0;
-      --slate-900:   #0F172A;
-      --slate-700:   #334155;
-      --slate-600:   #475569;
-      --slate-500:   #64748B;
-      --slate-400:   #94A3B8;
-      --slate-300:   #CBD5E1;
-      --slate-200:   #E2E8F0;
-      --slate-100:   #F1F5F9;
-      --slate-50:    #F8FAFC;
-      --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    }
+  <style is:inline>
+    /* Documento legal · estándar visual 2026-11 (DESIGN_SYSTEM.md §0). SOLO ESTILO: el texto es un documento
+       vigente y no se toca aquí (CLAUDE.md, «Los textos legales publicados»). Variables --cv-* de marca.css.
+       Cabecera en el campo oscuro, como la de los artículos del blog; cuerpo a 17 px en tinta, sin justificar;
+       el índice y los recuadros por tono, sin borde ni sombra; el número de cada cláusula en verde, sin caja. */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: white; color: var(--slate-600); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--cv-font); background: var(--cv-bg); color: var(--cv-ink); letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
 
-    .tc-hero {
-      background: var(--slate-900);
-      padding: 120px 48px 56px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .tc-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 6px 14px; border-radius: 9999px; margin-bottom: 20px;
-    }
-    .tc-title {
-      font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: white;
-      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;
-    }
-    .tc-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
-    .tc-date { font-size: 13px; color: rgba(255,255,255,0.4); }
+    /* CABECERA */
+    .tc-hero { display: flex; flex-direction: column; align-items: flex-start; background: var(--cv-field); color: #fff; padding: calc(64px + clamp(48px, 7vw, 96px)) max(var(--cv-m), calc((100vw - 720px) / 2)) clamp(48px, 6vw, 80px); }
+    .tc-title { order: 1; font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; color: #fff; }
+    .tc-subtitle { order: 2; font-size: var(--cv-lead); line-height: 1.35; color: #e2e8f0; margin-top: 18px; }
+    .tc-date { order: 3; font-size: var(--cv-small); color: var(--cv-field-soft); margin-top: 8px; }
+    /* «Documento legal» es un dato del documento, no un rótulo encima del título: va al pie de la cabecera */
+    .tc-badge { order: 4; margin-top: 18px; font-size: var(--cv-small); font-weight: 600; color: var(--cv-mint); }
 
-    .tc-container { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
+    /* CONTENIDO: una columna de lectura */
+    .tc-container { max-width: calc(720px + 2 * var(--cv-m)); margin: 0 auto; padding: clamp(40px, 6vw, 72px) var(--cv-m) 96px; }
 
-    .tc-index {
-      background: white; border: 1px solid var(--slate-200); border-radius: 16px;
-      padding: 28px 32px; margin-bottom: 56px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    }
-    .tc-index-title {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
-      color: var(--slate-500); margin-bottom: 16px;
-    }
-    .tc-index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
-    .tc-index-item {
-      font-size: 13px; color: var(--emerald-600); text-decoration: none;
-      padding: 4px 0; line-height: 1.5; transition: color 0.15s;
-    }
-    .tc-index-item:hover { color: #047857; text-decoration: underline; }
+    /* ÍNDICE */
+    .tc-index { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(20px, 3vw, 32px); margin-bottom: 64px; }
+    .tc-index-title { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; }
+    .tc-index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 24px; }
+    .tc-index-item { display: block; padding: 6px 0; font-size: .9375rem; line-height: 1.45; color: var(--cv-accent); font-weight: 600; text-decoration: none; }
+    .tc-index-item:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-    .tc-section { margin-bottom: 48px; scroll-margin-top: 80px; }
-    .tc-section-header {
-      display: flex; align-items: flex-start; gap: 16px;
-      margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--emerald-200);
-    }
-    .tc-section-num {
-      flex-shrink: 0; width: 36px; height: 36px;
-      background: var(--emerald-50); border: 1.5px solid var(--emerald-200); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; color: var(--emerald-600);
-    }
-    .tc-section-title {
-      font-size: clamp(17px, 2.5vw, 20px); font-weight: 700;
-      color: var(--slate-900); letter-spacing: -0.01em; line-height: 1.3; padding-top: 6px;
-    }
-    .tc-section p { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 14px; text-align: justify; }
+    /* CLÁUSULAS */
+    .tc-section { margin-bottom: 56px; scroll-margin-top: 88px; }
+    .tc-section-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+    .tc-section-num { flex-shrink: 0; min-width: 2.2em; font-size: 1.0625rem; font-weight: 700; color: var(--cv-accent); font-variant-numeric: tabular-nums; }
+    .tc-section-title { font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.15; color: var(--cv-ink); text-wrap: balance; }
+    .tc-section p { font-size: 1.0625rem; line-height: 1.7; color: var(--cv-ink); margin-bottom: 14px; }
     .tc-section p:last-child { margin-bottom: 0; }
-    .tc-section ul, .tc-section ol { padding-left: 20px; margin-bottom: 14px; }
-    .tc-section li { font-size: 15px; line-height: 1.75; color: var(--slate-600); margin-bottom: 10px; text-align: justify; }
+    .tc-section ol, .tc-section ul { padding-left: 22px; margin-bottom: 14px; }
+    .tc-section li { font-size: 1.0625rem; line-height: 1.7; color: var(--cv-ink); margin-bottom: 10px; }
     .tc-section li:last-child { margin-bottom: 0; }
-    .tc-section li strong { color: var(--slate-900); }
-    /* Subsection headings (6.1, 6.2, 6.3) */
-    .tc-section p.tc-subsec { margin-top: 24px; font-weight: 600; color: var(--slate-900); }
+    .tc-section li::marker { color: var(--cv-accent); font-weight: 700; }
+    .tc-section li strong { color: var(--cv-ink); }
+    .tc-section a { color: var(--cv-accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    /* Subapartados (8.1, 8.2, 8.3) */
+    .tc-section p.tc-subsec { margin-top: 26px; font-weight: 700; color: var(--cv-ink); }
 
-    .tc-highlight {
-      background: var(--emerald-50); border: 1px solid var(--emerald-200);
-      border-radius: 12px; padding: 18px 22px; margin: 14px 0;
-    }
-    .tc-highlight p { color: var(--slate-700) !important; margin-bottom: 0 !important; line-height: 1.75; }
+    /* RECUADRO */
+    .tc-highlight { background: var(--cv-tone); border-radius: var(--cv-r); padding: 18px 22px; margin: 16px 0; }
+    .tc-highlight p { color: var(--cv-ink) !important; margin-bottom: 0 !important; line-height: 1.7; }
 
-    .tc-footer {
-      background: var(--slate-900); color: #64748B; padding: 48px 48px;
-    }
-    .tc-footer-inner { max-width: 1200px; margin: 0 auto; }
-    .tc-footer-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      flex-wrap: wrap; gap: 32px; margin-bottom: 40px;
-    }
-    .tc-footer-logo-desc { font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5; }
-    .tc-footer-col-title {
-      font-size: 12px; font-weight: 700; color: var(--slate-300);
-      letter-spacing: 0.08em; margin-bottom: 14px;
-    }
-    .tc-footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .tc-footer-link { font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.15s; }
-    .tc-footer-link:hover { color: white; }
-    .tc-footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px;
-    }
+    /* CABECERA DE CADA ANEXO: el campo verde */
+    .tc-anexo-header-block { background: var(--cv-accent); color: #fff; border-radius: var(--cv-r); padding: clamp(24px, 4vw, 40px); margin: 88px 0 48px; scroll-margin-top: 88px; display: flex; flex-direction: column; }
+    .tc-anexo-title { order: 1; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; text-wrap: balance; }
+    .tc-anexo-label { order: 2; margin-top: 12px; font-size: 1rem; font-weight: 600; color: #fff; }
+    .tc-anexo-meta { order: 3; margin-top: 10px; font-size: var(--cv-small); color: #fff; line-height: 1.6; }
+
 
     @media (max-width: 640px) {
-      .tc-hero { padding: 100px 20px 40px; }
-      .tc-container { padding: 40px 16px 64px; }
-      .tc-index { padding: 20px 20px; }
       .tc-index-grid { grid-template-columns: 1fr; }
-      .tc-section-header { gap: 12px; }
-      .tc-footer { padding: 40px 20px; }
-      .tc-footer-top { flex-direction: column; }
+      .tc-section-header { gap: 10px; }
     }
   </style>
 
@@ -567,69 +508,6 @@ import { Navbar } from '../app/components/Navbar';
 
   </div>
 
-  <footer class="tc-footer" aria-label="Pie de página">
-    <div class="tc-footer-inner">
-      <div class="tc-footer-top">
-        <div>
-          <a href="/" aria-label="Ir al inicio CertiVeh" style="display:inline-block;text-decoration:none;margin-bottom:10px;">
-            <svg width="180" height="44" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-              <defs><linearGradient id="logoGradFooterPP" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/></linearGradient></defs>
-              <g transform="translate(4,8) scale(0.48)"><path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#logoGradFooterPP)"/><path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/></g>
-              <g transform="translate(60,28)"><text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text></g>
-            </svg>
-          </a>
-          <p class="tc-footer-logo-desc">Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
-        </div>
-        <div style="display:flex;gap:48px;flex-wrap:wrap;">
-          <div>
-            <div class="tc-footer-col-title">Plataforma</div>
-            <div class="tc-footer-links">
-              <a href="/#beneficios" class="tc-footer-link">Beneficios</a>
-              <a href="/#servicios" class="tc-footer-link">Servicios</a>
-              <a href="/#como-funciona" class="tc-footer-link">Cómo funciona</a>
-              <a href="/#calculadora" class="tc-footer-link">Calculadora</a>
-            </div>
-          </div>
-          <div>
-            <div class="tc-footer-col-title">Recursos</div>
-            <div class="tc-footer-links">
-              <a href="/vehiculos/" class="tc-footer-link">Vehículos</a>
-              <a href="/blog/" class="tc-footer-link">Blog</a>
-              <a href="/api-docs/" class="tc-footer-link">API</a>
-            </div>
-          </div>
-          <div>
-            <div class="tc-footer-col-title">Empresa</div>
-            <div class="tc-footer-links">
-              <a href="/nosotros/" class="tc-footer-link">Quiénes somos</a>
-              <a href="/aliados/" class="tc-footer-link">Programa de Aliados</a>
-              <a href="/otros-activos" class="tc-footer-link">Otros activos (GEE/FNCE)</a>
-            </div>
-          </div>
-          <div>
-            <div class="tc-footer-col-title">Legal</div>
-            <div class="tc-footer-links">
-              <a href="/terminos-y-condiciones" class="tc-footer-link">Términos y Condiciones</a>
-              <a href="/politica-de-privacidad" class="tc-footer-link">Política de Privacidad</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tc-footer-bottom">
-        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <div style="display:flex;align-items:center;gap:16px">
-          <span>contacto@certiveh.co</span>
-          <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER: el pie compartido de todo el sitio -->
+  <SiteFooter homeLink />
 </BaseLayout>
