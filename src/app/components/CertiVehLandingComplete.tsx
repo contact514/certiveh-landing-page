@@ -269,8 +269,8 @@ ${CSS_UI}
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
   .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
   .ww-mod-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 18px; letter-spacing: .05em; }
-  .ww-mod-code i { font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 40px; height: 40px; display: grid; place-items: center; font-size: 17px; }
+  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 19px; letter-spacing: .05em; } /* 19 px: texto grande, AA a 3:1 sobre el blanco al 15 % del verde (a 18 px daba 4,12:1, por debajo de 4,5) */
+  .ww-mod-code i { font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; }
   .ww-mod-s { font-size: 14px; color: rgba(255,255,255,.9); }
   .ww-mod-b { background: #fff; color: var(--cv-ink); padding: 20px; }
   .ww-mod-n { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
