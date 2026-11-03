@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Navbar } from '../../app/components/Navbar';
+import { SiteFooter } from '../../app/components/SiteFooter';
 import { vehiculos } from '../../data/vehiculos';
 import { honorariosCertivehSinEscalar, tarifaVigente } from '../../lib/tipos-de-activo.ts';
 import { tasaUpme } from '../../lib/precios-de-la-landing.ts';
@@ -114,107 +115,72 @@ const faqLd = JSON.stringify({
   <script slot="head" type="application/ld+json" set:html={productLd} />
   <script slot="head" type="application/ld+json" set:html={faqLd} />
 
-  <style>
-    :root {
-      --emerald-600: #059669; --emerald-50: #ECFDF5; --emerald-200: #A7F3D0; --emerald-700: #047857;
-      --teal-500: #14B8A6; --teal-50: #F0FDFA; --teal-200: #99F6E4;
-      --amber-500: #F59E0B; --amber-50: #FFFBEB; --amber-200: #FDE68A;
-      --slate-900: #0F172A; --slate-700: #334155; --slate-600: #475569;
-      --slate-500: #64748B; --slate-400: #94A3B8; --slate-200: #E2E8F0;
-      --slate-100: #F1F5F9; --slate-50: #F8FAFC;
-      --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    }
+  <style is:inline>
+    /* Ficha de modelo · estándar visual 2026-11 (DESIGN_SYSTEM.md §0). Variables --cv-* de marca.css.
+       Las cifras van en baldosas de tono y el resultado en el campo oscuro con el verde legible, como la
+       calculadora de la home. Las preguntas, como en la home: tono que al abrirse pasa a verde. */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--ff); background: white; color: var(--slate-900); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; background: var(--cv-bg); color: var(--cv-ink); -webkit-font-smoothing: antialiased; }
 
-    .v-hero { background: var(--slate-900); padding: 120px 48px 96px; position: relative; overflow: hidden; }
-    .v-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 28px 28px;
-      opacity: 0.15;
-      pointer-events: none;
-    }
-    .v-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-    .v-breadcrumb { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-    .v-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .v-breadcrumb a:hover { color: white; }
-    .v-title { font-size: clamp(36px, 5.5vw, 56px); font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
-    .v-desc { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 600px; }
+    /* ── HERO: el fotograma del video de la home con el mismo velo neutro ── */
+    .v-hero { position: relative; color: #fff; padding: calc(64px + clamp(48px, 7vw, 110px)) var(--cv-m) clamp(48px, 6vw, 96px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
+    .v-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
+    .v-hero-inner { position: relative; max-width: 960px; margin: 0 auto; }
+    .v-breadcrumb { font-size: var(--cv-small); color: #cbd5e1; margin-bottom: 22px; }
+    .v-breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
+    .v-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .v-breadcrumb a:focus-visible { outline-color: var(--cv-mint); }
+    .v-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1; text-wrap: balance; }
+    .v-desc { font-size: var(--cv-lead); line-height: 1.4; color: #e2e8f0; max-width: 48ch; margin-top: 20px; }
 
-    .v-container { max-width: 1200px; margin: 0 auto; padding: 96px 48px 80px; }
-    .v-card { background: white; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); padding: 32px; margin-bottom: 24px; }
-    .v-card-title { font-size: 20px; font-weight: 600; color: var(--slate-900); margin-top: 0; margin-bottom: 20px; letter-spacing: -0.01em; line-height: 1.4; }
+    /* ── CONTENIDO: una columna de lectura, las secciones separadas por aire ── */
+    .v-container { max-width: calc(960px + 2 * var(--cv-m)); margin: 0 auto; padding: clamp(48px, 6vw, 88px) var(--cv-m) 0; display: flex; flex-direction: column; gap: clamp(56px, 7vw, 96px); }
+    .v-card { min-width: 0; }
+    .v-card-title { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; text-wrap: balance; margin-bottom: 14px; }
+    .v-ref { font-size: var(--cv-small); color: var(--cv-soft); margin-bottom: 24px; }
 
-    .v-benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
-    .v-benefit { padding: 20px; border-radius: 16px; border: 1px solid; }
-    .v-benefit-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 4px; }
-    .v-benefit-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
-    .v-benefit-note { font-size: 13px; margin-top: 4px; opacity: 0.7; }
+    .v-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .v-benefit { background: var(--cv-tone); border-radius: var(--cv-r); padding: clamp(20px, 2.6vw, 32px); }
+    /* La cifra primero y debajo qué es, como en la calculadora */
+    .v-benefit-value { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; color: var(--cv-accent); font-variant-numeric: tabular-nums; }
+    .v-benefit-label { font-weight: 700; color: var(--cv-ink); margin-top: 8px; }
+    .v-benefit-note { font-size: var(--cv-small); color: var(--cv-soft); margin-top: 6px; }
 
-    .v-cost-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 15px; }
-    .v-cost-row-total { border-top: 2px solid var(--slate-200); padding-top: 14px; margin-top: 6px; font-weight: 700; font-size: 16px; color: var(--slate-900); }
-    .v-cost-label { color: var(--slate-600); }
-    .v-cost-value { font-weight: 600; color: var(--slate-900); }
+    /* El resultado, en el campo oscuro (como el de la calculadora de la home) */
+    .v-roi { background: var(--cv-field); color: #fff; border-radius: var(--cv-r); padding: clamp(20px, 2.6vw, 32px); margin-top: 8px; }
+    .v-roi-big { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; color: var(--cv-mint); font-variant-numeric: tabular-nums; }
+    .v-roi-text { font-size: var(--cv-small); color: var(--cv-field-soft); margin-top: 8px; max-width: 60ch; }
+    .v-roi-sub .v-roi-big { font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); line-height: 1.25; }
 
-    .v-roi { background: var(--emerald-50); border: 1.5px solid var(--emerald-200); border-radius: 16px; padding: 20px 24px; text-align: center; margin-top: 24px; }
-    .v-roi-big { font-size: 32px; font-weight: 700; color: var(--emerald-600); letter-spacing: -0.02em; line-height: 1; }
-    .v-roi-text { font-size: 14px; color: var(--emerald-700); margin-top: 4px; }
+    .v-cost { background: var(--cv-tone); border-radius: var(--cv-r); padding: 8px clamp(20px, 2.6vw, 32px); }
+    .v-cost-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; font-variant-numeric: tabular-nums; }
+    .v-cost-label { color: var(--cv-ink); }
+    .v-cost-value { font-weight: 600; white-space: nowrap; }
+    .v-cost-row-minor { font-size: var(--cv-small); color: var(--cv-soft); }
+    .v-cost-row-minor .v-cost-label { color: var(--cv-soft); }
+    .v-cost-row-total { font-size: 1.25rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; box-shadow: inset 0 3px 0 var(--cv-tone-2); padding-top: 18px; } /* taste-skill-ignore: la raya del total de una cuenta, no un borde de caja */
 
-    .v-cta { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #059669, #14B8A6); color: white; border: none; border-radius: 12px; padding: 16px 32px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: var(--ff); transition: transform 0.1s, box-shadow 0.2s; text-decoration: none; box-shadow: 0 4px 24px rgba(5,150,105,0.4); }
-    .v-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(5,150,105,0.5); }
-    .v-cta-wrap { text-align: center; margin-top: 32px; }
-    .v-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 10px; }
-
-    .v-faq-item { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; transition: border-color 0.15s; margin-bottom: 12px; }
-    .v-faq-item.open { border-color: var(--emerald-200); }
-    .v-faq-btn {
-      width: 100%; padding: 20px 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      background: none; border: none; cursor: pointer;
-      font-size: 15px; font-weight: 500; color: var(--slate-900);
-      font-family: var(--ff); text-align: left; line-height: 1.4;
-    }
-    .v-faq-btn:hover { background: var(--slate-50); }
-    .v-faq-btn:focus-visible { outline: 2px solid var(--emerald-600); outline-offset: -2px; }
-    .v-faq-icon {
-      width: 28px; height: 28px; border-radius: 9999px;
-      background: var(--emerald-50);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-left: 16px;
-      transition: transform 0.2s, background 0.15s;
-    }
-    .v-faq-icon { color: var(--emerald-600); }
-    .v-faq-item.open .v-faq-icon { background: var(--emerald-600); color: white; transform: rotate(45deg); }
-    .v-faq-body {
-      display: none; padding: 16px 24px 20px; font-size: 15px; font-weight: 400; line-height: 1.65;
-      color: var(--slate-600); background: var(--emerald-50);
-    }
+    /* ── PREGUNTAS: como las de la home ── */
+    .v-faq-item { background: var(--cv-tone); border-radius: var(--cv-r); margin-top: 6px; transition: background-color .15s, color .15s; }
+    .v-faq-item.open { background: var(--cv-accent); color: #fff; }
+    .v-faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px; padding: 18px 22px; background: none; border: 0; color: inherit; cursor: pointer; text-align: left; font: 600 1.125rem/1.3 var(--cv-font); letter-spacing: -0.02em; }
+    .v-faq-btn:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; border-radius: var(--cv-r); }
+    .v-faq-icon { flex: none; display: grid; place-items: center; width: 28px; height: 28px; transition: transform .2s; }
+    .v-faq-item.open .v-faq-icon { transform: rotate(45deg); }
+    .v-faq-body { display: none; padding: 0 22px 22px; max-width: 64ch; font-size: 1.0625rem; color: #fff; }
     .v-faq-item.open .v-faq-body { display: block; }
 
-    .v-disclaimer { font-size: 13px; color: var(--slate-400); line-height: 1.5; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--slate-200); }
-    .v-footer { background: var(--slate-900); color: #64748B; padding: 48px 48px; }
-    .v-footer-inner { max-width: 1200px; margin: 0 auto; }
-    .v-footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
-    .v-footer-brand p { font-size: 14px; color: #64748B; margin-top: 10px; max-width: 260px; line-height: 1.5; }
-    .v-footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
-    .v-footer-col-label { font-size: 12px; font-weight: 700; color: #CBD5E1; letter-spacing: 0.08em; margin-bottom: 14px; }
-    .v-footer-col-links { display: flex; flex-direction: column; gap: 10px; }
-    .v-footer-col-links a { font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.15s; }
-    .v-footer-col-links a:hover { color: #fff; }
-    .v-footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .v-footer-bottom span { font-size: 12px; line-height: 1.4; }
+    /* ── CIERRE ── */
+    .v-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .v-cta-note { font-size: var(--cv-small); color: var(--cv-soft); }
+    .v-disclaimer { font-size: 1rem; color: var(--cv-soft); line-height: 1.6; max-width: 66ch; margin-bottom: var(--cv-gap-sec); }
 
     @media (max-width: 640px) {
-      .v-hero { padding: 100px 20px 72px; }
-      .v-container { padding: 64px 20px 64px; }
-      .v-benefits { grid-template-columns: 1fr; }
-      .v-faq-btn { padding: 16px 20px; font-size: 14px; }
-      .v-faq-body { padding: 0 20px 16px; font-size: 14px; }
-      .v-benefit-value { font-size: clamp(22px, 5vw, 28px); }
-      .v-footer { padding: 40px 20px; }
+      .v-benefits { grid-template-columns: 1fr; gap: 6px; }
+      .v-cta { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .v-faq-item, .v-faq-icon { transition: none; }
     }
   </style>
 
@@ -225,10 +191,10 @@ const faqLd = JSON.stringify({
   <main id="main-content">
   <div class="v-hero">
     <div class="v-hero-inner">
-      <div class="v-breadcrumb">
+      <nav class="v-breadcrumb" aria-label="Migas de pan">
         <a href="/">Inicio</a> → <a href="/vehiculos/">Vehículos</a> → {v.marca} {v.modelo}
-      </div>
-      <h1 class="v-title">{v.marca} <span style="background: linear-gradient(135deg, #34D399 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{v.modelo}</span></h1>
+      </nav>
+      <h1 class="v-title">{v.marca} <span>{v.modelo}</span></h1>
       <p class="v-desc">{v.descripcion}</p>
     </div>
   </div>
@@ -239,20 +205,20 @@ const faqLd = JSON.stringify({
     <!-- BENEFITS CARD -->
     <div class="v-card">
       <h2 class="v-card-title">Beneficios tributarios para tu {v.marca} {v.modelo}</h2>
-      <p style="font-size: 14px; color: var(--slate-500); margin-bottom: 20px;">
+      <p class="v-ref">
         Precio de referencia: {fmt(v.precioCOP)} COP · Fuente: {v.precioFuente}
       </p>
 
       <div class="v-benefits">
-        <div class="v-benefit" style={`background: var(--emerald-50); border-color: var(--emerald-200);`}>
-          <div class="v-benefit-label" style="color: var(--emerald-600);">Devolución de IVA</div>
-          <div class="v-benefit-value" style="color: var(--emerald-600);">{fmt(iva)}</div>
-          <div class="v-benefit-note" style="color: var(--emerald-700);">5% del valor sin IVA, estimado</div>
+        <div class="v-benefit">
+          <div class="v-benefit-value">{fmt(iva)}</div>
+          <div class="v-benefit-label">Devolución de IVA</div>
+          <div class="v-benefit-note">5% del valor sin IVA, estimado</div>
         </div>
-        <div class="v-benefit" style={`background: var(--teal-50); border-color: var(--teal-200);`}>
-          <div class="v-benefit-label" style="color: var(--teal-500);">Deducción en renta</div>
-          <div class="v-benefit-value" style="color: var(--teal-500);">{fmt(renta)}</div>
-          <div class="v-benefit-note" style="color: var(--teal-500);">50% del valor, reduce tu base gravable</div>
+        <div class="v-benefit">
+          <div class="v-benefit-value">{fmt(renta)}</div>
+          <div class="v-benefit-label">Deducción en renta</div>
+          <div class="v-benefit-note">50% del valor, reduce tu base gravable</div>
         </div>
       </div>
 
@@ -265,6 +231,7 @@ const faqLd = JSON.stringify({
     <!-- COST CARD -->
     <div class="v-card">
       <h2 class="v-card-title">Costo total del trámite</h2>
+      <div class="v-cost">
       <div class="v-cost-row">
         <span class="v-cost-label">Trámite ante UPME</span>
         <span class="v-cost-value">{fmt(costoUPME)} COP</span>
@@ -273,16 +240,17 @@ const faqLd = JSON.stringify({
         <span class="v-cost-label">Honorarios CertiVeh</span>
         <span class="v-cost-value">{fmt(honorarios)} COP</span>
       </div>
-      <div class="v-cost-row">
-        <span class="v-cost-label" style="font-size: 13px; opacity: 0.7;">IVA (19% sobre honorarios)</span>
-        <span class="v-cost-value" style="font-size: 13px; opacity: 0.7;">{fmt(ivaServicio)} COP</span>
+      <div class="v-cost-row v-cost-row-minor">
+        <span class="v-cost-label">IVA (19% sobre honorarios)</span>
+        <span class="v-cost-value">{fmt(ivaServicio)} COP</span>
       </div>
       <div class="v-cost-row v-cost-row-total">
         <span>Total</span>
         <span>{fmt(costoTotal)} COP</span>
       </div>
+      </div>
 
-      <div class="v-roi" style="margin-top: 20px;">
+      <div class="v-roi v-roi-sub">
         <div class="v-roi-big">Por cada $1 de costo total, un beneficio estimado de ${roi.toLocaleString('es-CO')}</div>
         <div class="v-roi-text">Beneficio estimado menos el costo total (incluye base gravable): {fmt(neto)} COP</div>
       </div>
@@ -295,7 +263,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿El {v.marca} {v.modelo} aplica para el certificado UPME?</span>
-          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+          <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
       </div>
@@ -303,7 +271,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
-          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+          <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de {fmt(v.precioCOP)} el estimado es de {fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.</div>
       </div>
@@ -311,7 +279,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
-          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+          <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
       </div>
@@ -319,7 +287,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
-          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+          <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh {fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
       </div>
@@ -327,7 +295,7 @@ const faqLd = JSON.stringify({
       <div class="v-faq-item">
         <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
           <span>¿Qué documentos necesito?</span>
-          <div class="v-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+          <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
         <div class="v-faq-body">Tu cédula (de ciudadanía o de extranjería), tarjeta de propiedad y factura de compra. El RUT solo hace falta si además vas a pedir la devolución del IVA, y en ese caso también si eres empresa. Si eres empresa, en vez de tu cédula va la del representante legal y el certificado de Cámara de Comercio vigente. Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
@@ -335,9 +303,9 @@ const faqLd = JSON.stringify({
 
     <!-- CTA -->
     <div class="v-cta-wrap">
-      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="v-cta">
+      <a href="https://portal.certiveh.co" target="_blank" rel="noopener noreferrer" class="v-cta cv-btn cv-btn-a">
         Empezar mi trámite ahora
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <span class="cv-arr" aria-hidden="true">→</span>
       </a>
       <div class="v-cta-note">Si la UPME rechaza, revisamos tu caso · Si el error es nuestro, corregimos sin costo</div>
     </div>
@@ -357,68 +325,7 @@ const faqLd = JSON.stringify({
     });
   </script>
 
-  <!-- FOOTER -->
-  <footer class="v-footer" aria-label="Pie de página">
-    <div class="v-footer-inner">
-      <div class="v-footer-top">
-        <div class="v-footer-brand">
-          <svg width="140" height="36" viewBox="0 0 240 60" fill="none" role="img" aria-label="Logo CertiVeh">
-            <defs><linearGradient id="fLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#14B8A6"/></linearGradient></defs>
-            <g transform="translate(4,8) scale(0.48)"><path d="M50 10 L80 25 L80 50 C80 65 70 77 50 85 C30 77 20 65 20 50 L20 25 L50 10 Z" fill="url(#fLogoGrad)"/><path d="M55 28 L42 52 L48 52 L45 72 L58 48 L52 48 L55 28 Z" fill="white"/></g>
-            <g transform="translate(60,28)"><text x="0" y="0" fill="#FFFFFF" font-size="26" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">Certi<tspan fill="#059669">Veh</tspan></text></g>
-          </svg>
-          <p>Certificado UPME y gestión de la devolución de IVA para vehículos eléctricos e híbridos en Colombia.</p>
-        </div>
-        <div class="v-footer-cols">
-          <div>
-            <div class="v-footer-col-label">Plataforma</div>
-            <div class="v-footer-col-links">
-              <a href="/#beneficios">Beneficios</a>
-              <a href="/#servicios">Servicios</a>
-              <a href="/#como-funciona">Cómo funciona</a>
-              <a href="/#calculadora">Calculadora</a>
-            </div>
-          </div>
-          <div>
-            <div class="v-footer-col-label">Recursos</div>
-            <div class="v-footer-col-links">
-              <a href="/vehiculos/">Vehículos</a>
-              <a href="/blog/">Blog</a>
-              <a href="/api-docs/">API</a>
-            </div>
-          </div>
-          <div>
-            <div class="v-footer-col-label">Empresa</div>
-            <div class="v-footer-col-links">
-              <a href="/nosotros/">Quiénes somos</a>
-              <a href="/aliados/">Programa de Aliados</a>
-              <a href="/otros-activos">Otros activos (GEE/FNCE)</a>
-            </div>
-          </div>
-          <div>
-            <div class="v-footer-col-label">Legal</div>
-            <div class="v-footer-col-links">
-              <a href="/terminos-y-condiciones">Términos y Condiciones</a>
-              <a href="/politica-de-privacidad">Política de Privacidad</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="v-footer-bottom">
-        <span>© 2026 CertiVeh · Certificados de Beneficio Tributario · Colombia</span>
-        <div style="display:flex;align-items:center;gap:16px">
-          <span>contacto@certiveh.co</span>
-          <a href="https://www.instagram.com/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/certiveh/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61589443583623" target="_blank" rel="noopener noreferrer" aria-label="Facebook de CertiVeh" style="color:#64748B;transition:color 0.15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='#64748B'">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER: el pie compartido de todo el sitio -->
+  <SiteFooter />
+
 </BaseLayout>
