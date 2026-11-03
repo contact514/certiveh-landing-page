@@ -247,7 +247,7 @@ const CSS = `
   .flow-sticky { position: sticky; top: 120px; background: var(--cv-tone); border-radius: var(--cv-r); min-height: 420px; display: grid; place-items: center; padding: clamp(20px, 3vw, 40px); }
 
   /* piezas del portal (data-ui): sus propias convenciones de interfaz */
-  .ui { font-family: var(--cv-font); background: #fff; border-radius: 8px; box-shadow: 0 0 0 1px #d9e2dd, 0 24px 48px -24px rgba(15,23,42,.25); width: min(440px, 100%); padding: 22px; font-size: 14px; color: var(--cv-ink); letter-spacing: -0.005em; }
+  .ui { font-family: var(--cv-font); background: #fff; border-radius: 6px; border: 1px solid var(--cv-tone-2); width: min(440px, 100%); padding: 20px; font-size: 14px; color: var(--cv-ink); letter-spacing: -0.005em; }
   .ui .t { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
   .ui .r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #edf1ef; }
   .ui .r:last-child { border-bottom: 0; }
@@ -257,9 +257,9 @@ const CSS = `
   .ui .prog i { display: block; height: 100%; width: 72%; background: var(--cv-accent); }
   .ui .fld { display: grid; gap: 4px; padding: 8px 0; }
   .ui .fld span { font-size: 12px; color: var(--cv-soft); font-weight: 600; }
-  .ui .fld b { font-weight: 600; border: 1px solid #cfd9d4; border-radius: 4px; padding: 9px 10px; font-size: 14px; }
+  .ui .fld b { font-weight: 600; border: 1px solid #8792a2; border-radius: 6px; padding: 9px 10px; font-size: 14px; }
   .ui .fld.sel b { border-color: var(--cv-accent); box-shadow: 0 0 0 3px #d5efe3; }
-  .ui .btnui { display: block; text-align: center; background: var(--cv-accent); color: #fff; font-weight: 600; border-radius: 4px; padding: 11px; margin-top: 14px; }
+  .ui .btnui { display: block; text-align: center; background: var(--cv-accent); color: #fff; font-weight: 600; border-radius: 6px; padding: 11px; margin-top: 14px; }
   .ui .btnui.g { background: #eef2f0; color: var(--cv-ink); margin-top: 8px; }
   .ui .ej { font-size: 12px; color: #64748b; margin-top: 8px; }
   .ui .rail { list-style: none; margin-top: 14px; }
@@ -269,7 +269,43 @@ const CSS = `
   .ui .rail li.now::before { background: #fff; box-shadow: inset 0 0 0 3px var(--cv-accent), 0 0 0 4px #d5efe3; }
   .ui .rail li.next { color: #94a3b8; }
   .ui .rail li.next::before { background: #fff; box-shadow: inset 0 0 0 2px #cbd5d1; }
-  .plate { display: inline-flex; align-items: center; background: var(--cv-plate); color: #111; border-radius: 3px; box-shadow: inset 0 0 0 2px #111; padding: 3px 8px; font-weight: 800; font-size: 13px; letter-spacing: .08em; }
+  /* La placa: idéntica a PlacaDelVehiculo del portal (amarilla, borde de 2 px en tinta, 800, 13 px). */
+  .plate { display: inline-flex; align-items: center; white-space: nowrap; background: var(--cv-plate); color: var(--cv-ink); border: 2px solid var(--cv-ink); border-radius: 3px; padding: 0 6px; font-weight: 800; font-size: 13px; line-height: 1.35; letter-spacing: .04em; }
+  /* La tarjeta del trámite: la misma estructura y medidas que TramiteWidget + RielDelTramite del portal. */
+  .tc { background: #fff; border: 1px solid var(--cv-tone-2); border-radius: 6px; width: min(460px, 100%); color: var(--cv-ink); font-family: var(--cv-font); text-align: left; overflow: hidden; }
+  .tc-h { display: flex; align-items: center; gap: 12px; padding: 16px 18px 4px; }
+  .tc-img { width: 40px; height: 40px; flex: none; border-radius: 6px; background: var(--cv-tone); display: grid; place-items: center; color: #475569; }
+  .tc-who { min-width: 0; flex: 1; }
+  .tc-id { font-size: 13px; font-weight: 500; color: #475569; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .tc-chip { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 999px; color: var(--cv-accent); background: #ecfdf5; border: 1px solid #a7f3d0; white-space: nowrap; }
+  .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .tc-pl { font-size: 14px; color: #475569; margin-top: 4px; display: flex; align-items: center; gap: 8px; }
+  .tc-pct { text-align: right; flex: none; align-self: flex-start; }
+  .tc-pct b { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .tc-pct span { font-size: 13px; font-weight: 500; color: #475569; }
+  .tc-b { padding: 14px 18px 16px; }
+  .tc-rail-x { overflow-x: auto; margin: 0 -18px; padding: 0 18px 4px; scrollbar-width: none; }
+  .tc-rail { display: flex; min-width: 420px; padding-top: 6px; list-style: none; }
+  .tc-rail li { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .tc-rail .ln { display: flex; align-items: center; width: 100%; }
+  .tc-rail .ln i { flex: 1; height: 2px; background: var(--cv-tone-2); }
+  .tc-rail .ln i.on { background: var(--cv-accent); }
+  .tc-rail .ln i.no { background: transparent; }
+  .tc-rail .dot { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--cv-tone); color: #475569; }
+  .tc-rail .done .dot { background: var(--cv-accent); color: #fff; }
+  .tc-rail .now .dot { background: var(--cv-accent); color: #fff; box-shadow: 0 0 0 4px #d5efe3; }
+  .tc-rail small { font-size: 10px; line-height: 1.2; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
+  .tc-rail .now small { color: var(--cv-accent); font-weight: 600; }
+  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px; border-radius: 6px; background: #eef7f2; border: 1px solid rgba(4,120,87,.4); }
+  .tc-iva b { display: block; font-size: 14px; }
+  .tc-iva span { font-size: 12px; color: #475569; }
+  .tc-iva .go { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--cv-accent); color: #fff; display: grid; place-items: center; font-weight: 700; }
+  .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); }
+  .tc-st { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; }
+  .tc-st.ok { color: var(--cv-accent); background: #ecfdf5; border-color: #a7f3d0; }
+  .tc-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tc-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
+  .tc-btn.g { background: var(--cv-tone); color: var(--cv-ink); }
 
   /* ── CONFIANZA: tres columnas livianas ── */
   .poster { list-style: none; margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px clamp(20px, 3vw, 48px); }
@@ -314,14 +350,24 @@ const CSS = `
   .ww .fine { font-size: var(--cv-small); color: #c9ecdc; margin-top: 26px; }
   .ww .cv-btn { margin-top: 20px; }
   .ww-ui { grid-column: 8 / span 5; display: grid; place-items: center; }
-  .wwp { width: min(400px, 100%); }
-  .wwsaldo { background: #eef7f2; border-radius: 6px; padding: 16px; margin-top: 16px; }
-  .wwsaldo span { display: block; font-size: 13px; color: #475569; font-weight: 600; }
-  .wwsaldo b { display: block; font-size: 40px; letter-spacing: -0.04em; color: var(--cv-accent); line-height: 1.1; }
-  .wwnums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-  .wwnums div { background: #f1f4f2; border-radius: 6px; padding: 12px 14px; }
-  .wwnums span { display: block; font-size: 12px; color: #475569; font-weight: 600; }
-  .wwnums b { font-size: 22px; }
+  /* El módulo Win Win del portal (WinWinModule.tsx): cabecera en el verde de la marca con el código, y las cifras debajo.
+     Sobre el campo verde de la sección lleva un filo blanco translúcido para separarse. */
+  .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; }
+  .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
+  .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .ww-mod-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 18px; letter-spacing: .05em; }
+  .ww-mod-code i { font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 40px; height: 40px; display: grid; place-items: center; font-size: 17px; }
+  .ww-mod-s { font-size: 14px; color: rgba(255,255,255,.9); }
+  .ww-mod-b { background: #fff; color: var(--cv-ink); padding: 20px; }
+  .ww-mod-n { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ww-mod-n div { text-align: center; padding: 12px 6px; border-radius: 6px; background: var(--cv-tone); }
+  .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
+  .ww-mod-n span { font-size: 11px; color: #475569; }
+  .ww-mod-n .sal { background: #ecfdf5; box-shadow: inset 0 0 0 1px #a7f3d0; }
+  .ww-mod-n .sal b { color: var(--cv-accent); font-size: 17px; }
+  .ww-mod-n .sal span { color: var(--cv-accent); }
+  .ww-mod-btn { display: block; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; }
 
   /* ── PREGUNTAS: baldosas que se abren ── */
   .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
@@ -920,6 +966,42 @@ function PorQueNoSolo() {
 // En el celular cada paso lleva su pieza debajo. Las piezas usan los rótulos reales del portal; las
 // cifras del pago salen de la tarifa vigente para un vehículo de $120M.
 const RIEL_PORTAL = ["En borrador","Solicitud enviada","Registro en UPME","Esperando ventana UPME","Trámite en UPME","Espera de certificado","Certificado emitido"];
+/** La tarjeta del trámite del portal (TramiteWidget + RielDelTramite + PlacaDelVehiculo), en un estado de ejemplo. */
+function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean }) {
+  const pct = Math.round(((paso - 1) / (RIEL_PORTAL.length - 1)) * 100);
+  const emitido = paso === RIEL_PORTAL.length;
+  return (
+    <div className="tc" data-ui>
+      <div className="tc-h">
+        <div className="tc-img" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17h14M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M3 17V11l2-5h14l2 5v6"/></svg></div>
+        <div className="tc-who">
+          <div className="tc-id">AF284586 <span className="tc-chip">Certificado UPME</span></div>
+          <div className="tc-t">BYD Seagull · 2026</div>
+          <div className="tc-pl"><span className="plate">AB**12</span> Eléctrico</div>
+        </div>
+        <div className="tc-pct"><b>{pct}%</b><span>completado</span></div>
+      </div>
+      <div className="tc-b">
+        <div className="tc-rail-x"><ol className="tc-rail">
+          {RIEL_PORTAL.map((s, k) => {
+            const n = k + 1, estado = n < paso || emitido ? "done" : n === paso ? "now" : "";
+            return (<li key={s} className={estado}>
+              <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? "✓" : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
+              <small>{s}</small>
+            </li>);
+          })}
+        </ol></div>
+        {iva && (<div className="tc-iva"><span style={{ flex: 1 }}><b>Empezar mi expediente de devolución de IVA</b><span>Ya la pagaste con tu certificado. No tienes que pagar nada más.</span></span><span className="go" aria-hidden="true">→</span></div>)}
+        <div className="tc-f">
+          <span className={`tc-st${emitido ? " ok" : ""}`}>{emitido ? "¡Certificado emitido!" : RIEL_PORTAL[paso - 1]}</span>
+          <span className="tc-acts">{emitido && <span className="tc-btn g">Descargar certificado</span>}<span className={`tc-btn${emitido ? " g" : ""}`}>Ver detalle →</span></span>
+        </div>
+        <p className="ej" style={{ fontSize: 12, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
+      </div>
+    </div>
+  );
+}
+
 function PiezaDelPaso({ i }: { i: number }) {
   const tarifa = useTarifa();
   const c = cotizacionDeLaHome(120_000_000, false, tarifa);
@@ -928,9 +1010,9 @@ function PiezaDelPaso({ i }: { i: number }) {
     case 0: return (<div className="ui" data-ui><div className="t">Documentos</div><div className="r"><span>Cédula (frente y reverso)</span><span className="ok">Leída</span></div><div className="r"><span>Tarjeta de propiedad (frente y reverso)</span><span className="ok">Leída</span></div><div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>Factura de compra</span><span className="wait">Subiendo</span></div><div className="prog"><i /></div></div></div>);
     case 1: return (<div className="ui" data-ui><div className="t">Confirma tus datos</div><div className="fld"><span>Marca</span><b>BYD</b></div><div className="fld"><span>Línea</span><b>Seagull</b></div><div className="fld sel"><span>Valor del vehículo (sin IVA)</span><b>$120.000.000</b></div><span className="btnui">Confirmar</span><p className="ej">Datos de ejemplo</p></div>);
     case 2: return (<div className="ui" data-ui><div className="t">Resumen del pago</div><div className="r"><span>Servicio de tramitación</span><b>{pz(c.honorariosBase)}</b></div><div className="r"><span>IVA (19% sobre tramitación)</span><b>{pz(c.ivaServicio)}</b></div><div className="r"><span>Trámite ante UPME</span><b>{pz(c.costoUPME)}</b></div><div className="r" style={{ fontWeight: 800, fontSize: 16 }}><span>Total</span><b>{pz(c.costoTotal)}</b></div><span className="btnui">Pagar</span><p className="ej">Para un vehículo de $120M</p></div>);
-    case 3: return (<div className="ui" data-ui><div className="t">Así va tu certificado</div><ol className="rail">{RIEL_PORTAL.map((s, k) => <li key={s} className={k < 4 ? "" : k === 4 ? "now" : "next"}>{s}</li>)}</ol></div>);
-    case 4: return (<div className="ui" data-ui><div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}><div><div className="t">BYD Seagull · 2026</div><div style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center", color: "#475569" }}><span className="plate">AB**12</span> Eléctrico</div></div><span className="ok">¡Certificado emitido!</span></div><span className="btnui">Descargar certificado</span><span className="btnui g">Ver detalle</span><p className="ej">Datos de ejemplo</p></div>);
-    default: return (<div className="ui" data-ui><div className="t">Expediente de devolución de IVA</div><div className="r" style={{ background: "#eef7f2", borderRadius: 6, padding: 14, borderBottom: 0, marginTop: 12, alignItems: "flex-start" }}><span><b style={{ display: "block" }}>Empezar mi expediente de devolución de IVA</b><span style={{ color: "#475569" }}>Ya la pagaste con tu certificado. No tienes que pagar nada más.</span></span><span style={{ flex: "none", width: 30, height: 30, borderRadius: "50%", background: "#047857", color: "#fff", display: "grid", placeItems: "center", fontWeight: 700 }}>→</span></div><div className="r"><span>Formulario 010</span><span className="wait">Por firmar</span></div><div className="r"><span>Declaración juramentada</span><span className="wait">Por firmar</span></div></div>);
+    case 3: return <TarjetaDelTramite paso={5} />;
+    case 4: return <TarjetaDelTramite paso={7} />;
+    default: return <TarjetaDelTramite paso={7} iva />;
   }
 }
 
@@ -1255,14 +1337,17 @@ function WinWin() {
           <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
         </div>
         <div className="ww-ui rv" aria-hidden="true">
-          <div className="ui wwp" data-ui>
-            <div className="t">CertiVeh Win Win</div>
-            <p style={{ color: "#475569", marginTop: 2 }}>Refiere y gana dinero</p>
-            <div className="wwsaldo"><span>Saldo disponible</span><b>$150.000</b></div>
-            <div className="wwnums"><div><span>Referidos</span><b>2</b></div><div><span>Pagados</span><b>2</b></div></div>
-            <span className="btnui">Compartir por WhatsApp</span>
-            <span className="btnui g">Copiar mensaje</span>
-            <p className="ej">Datos de ejemplo</p>
+          <div className="ww-mod" data-ui>
+            <div className="ww-mod-h">
+              <p className="ww-mod-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.5 3 12 8 12 8s2.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>CertiVeh Win Win</p>
+              <div className="ww-mod-code"><span>CERTIVEH-482</span><i aria-hidden="true">⧉</i><i aria-hidden="true">↗</i></div>
+              <p className="ww-mod-s">Tu amigo recibe $60.000 de descuento y tú ganas $75.000 cuando pague su trámite.</p>
+            </div>
+            <div className="ww-mod-b">
+              <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>$150.000</b><span>Saldo disponible</span></div></div>
+              <span className="ww-mod-btn">Solicitar retiro ($150.000)</span>
+              <p className="ej" style={{ fontSize: 12, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
+            </div>
           </div>
         </div>
       </div>
