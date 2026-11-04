@@ -338,8 +338,9 @@ ${CSS_CALC_MOVIL}
     .tile .mark img { max-height: 38px; }
     .bt.a, .bstack { grid-column: 1 / -1; }
     /* En una columna el escalón (los 24 px de más sobre la tercera) ya no escalona nada: deja la última
-       despegada (8 + 24 = 32 px frente a 8). Separación única, la misma de /otros-activos. */
-    .steps3, .bstack { gap: 6px; }
+       despegada (8 + 24 = 32 px frente a 8). Separación única de 8 px entre baldosas (DESIGN_SYSTEM §0.5),
+       la misma de /otros-activos. */
+    .steps3, .bstack { gap: 8px; }
     .bt.a, .bt.b, .bt.c { min-height: 0; margin-top: 0; }
     .duo { grid-template-columns: 1fr; }
 ${CSS_RIEL_MOVIL}

@@ -157,8 +157,8 @@ ${CSS_CALC_MOVIL}
     .oa-board::-webkit-scrollbar { display: none; }
     .oa-asset, .oa-asset:nth-child(1) { flex: 0 0 84%; min-height: 440px; scroll-snap-align: start; }
     .bt.a, .bstack { grid-column: 1 / -1; }
-    .bstack { grid-template-columns: 1fr; gap: 6px; }
-    .steps4 { gap: 6px; }
+    .bstack { grid-template-columns: 1fr; gap: 8px; }
+    .steps4 { gap: 8px; }
     .bt.a, .bt.b, .bt.c, .bt.d { min-height: 0; margin-top: 0; }
 ${CSS_RIEL_MOVIL}
     .oa-why-list { margin-top: 32px; }
