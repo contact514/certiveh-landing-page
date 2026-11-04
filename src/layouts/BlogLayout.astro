@@ -257,7 +257,10 @@ const breadcrumbLd = isArticle ? JSON.stringify({
       /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio */
       .blog-wrapper > .back-link { min-height: 44px; margin-top: -11px; }
       /* Enlaces sueltos en tablas y en el índice de pasos: 44 px de área con relleno vertical en línea (no mueve nada) */
-      .article-body td a, .article-body .step-content a.toc-link { padding-block: 14px; }
+      .article-body .step-content a, .article-body .callout a:not(.cta-btn) { padding-block: 12px; }
+      /* En las tablas, columnas estrechas: el enlace es un bloque en línea de 44 px como mínimo, con márgenes negativos
+         que devuelven el espacio (la fila no crece) */
+      .article-body td a { display: inline-block; min-width: 44px; padding-block: 12px; margin-block: -12px; }
       .article-body > p { font-size: 1.0625rem; }
       .benefits-grid { grid-template-columns: 1fr; }
       .data-table { font-size: .875rem; }

@@ -85,8 +85,9 @@ const webPageLd = JSON.stringify({
     @media (max-width: 640px) {
       /* Áreas de toque de 44 px sin agrandar nada a la vista: el botón con un borde transparente que el margen negativo
          compensa; los enlaces del pie con relleno vertical en línea. */
-      .copy-btn { border: 6px solid transparent; background-clip: padding-box; margin: -6px; }
-      .api-footer a:not([aria-label]) { padding-block: 13px; }
+      .code-block-header .copy-btn { border: 8px solid transparent; background-clip: padding-box; margin: -8px; }
+      .api-footer a:not([aria-label]), .callout a { padding-block: 13px; }
+      .api-nav .api-nav-logo { min-height: 44px; }
     }
     @media (max-width: 768px) {
       /* En el celular la barra de las anclas es la de arriba más el índice que se queda pegado debajo
