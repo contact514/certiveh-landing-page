@@ -233,6 +233,12 @@ const articles = [
       .articles-grid { gap: 6px; }
       .article-card, .article-card:nth-child(1), .article-card:nth-child(2) { grid-column: 1 / -1; min-height: 0; }
     }
+    @media (max-width: 640px) {
+      /* Celular: la misma baldosa con menos relleno entre sus partes (15 artículos en una columna) */
+      .article-card { padding: 20px 18px; gap: 12px; }
+      .card-body { gap: 10px; }
+      .card-subtitle { margin-bottom: 10px; }
+    }
   </style>
 
   <div class="blog-home-wrapper">

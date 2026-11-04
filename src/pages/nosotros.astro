@@ -131,6 +131,11 @@ const foundersLd = JSON.stringify([
     }
     @media (max-width: 560px) {
       .nos-cta-box .cv-btn { width: 100%; }
+      /* Celular: las etiquetas partían con el punto medio al principio de la línea; van separadas por espacio */
+      .nos-card { padding: 24px 22px; }
+      .nos-card-tags { gap: 4px 16px; }
+      .nos-card-tags span + span::before { content: none; }
+      .nos-card-bio { padding-top: 8px; }
     }
   </style>
 

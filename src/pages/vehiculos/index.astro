@@ -145,6 +145,23 @@ const itemListLd = JSON.stringify({
     @media (max-width: 560px) {
       .vh-grid { grid-template-columns: 1fr; gap: 6px; }
       .vh-directory-cta-btn { width: 100%; }
+      /* Celular: las 16 fichas en una columna sin el alto de escritorio (360 px de mínimo dejaban aire bajo cada una) */
+      .vh-card { min-height: 0; padding: 20px 18px 16px; }
+      .vh-card-price { margin-bottom: 4px; }
+      .vh-card-benefit.vh-card-total { margin: 12px 0 8px; }
+      .vh-card-cta { padding-top: 12px; min-height: 44px; }
+    }
+    @media (max-width: 640px) {
+      /* Celular: los 63 filtros de marca ocupaban ~1.000 px (16 filas) antes del primer modelo. Van en una fila que se
+         desliza de lado, a sangre, con el siguiente asomando (el buscador de arriba sigue filtrando por texto). Filtros y
+         modelos con ficha, blancos de toque de 44 px. */
+      .vh-brand-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); }
+      .vh-brand-pills::-webkit-scrollbar { display: none; }
+      .vh-brand-pill { flex: none; white-space: nowrap; min-height: 44px; }
+      .vh-model-tag-linked { min-height: 44px; }
+      /* Los modelos sin ficha no son enlaces: etiquetas más bajas (el directorio son 498 modelos en una columna) */
+      .vh-model-tag:not(.vh-model-tag-linked) { min-height: 0; padding: 6px 10px; }
+      .vh-brand-group { padding: 16px 0; }
     }
     @media (prefers-reduced-motion: reduce) {
       .vh-card-cta .cv-arr { transition: none; }
