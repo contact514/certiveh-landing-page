@@ -59,6 +59,16 @@ const CSS = `
     .sf-n { grid-column: span 6; }
     .sf-c3 .sf-st, .sf-nogo .sf-word { grid-column: 1 / -1; }
   }
+  /* Celular: cada enlace es un blanco de toque de 44 px (antes 20 px de alto, a 8 px del siguiente), y la palabra y el
+     botón del portal sin el alto de escritorio. */
+  @media (max-width: 640px) {
+    .sf-t ul { gap: 0; }
+    .sf-t li a { display: flex; align-items: center; min-height: 44px; }
+    .sf-contact a.mail { display: inline-flex; align-items: center; min-height: 44px; }
+    .sf-t .sf-h { margin-bottom: 4px; }
+    .sf-word { min-height: 128px; }
+    .sf-go { min-height: 120px; }
+  }
 `;
 
 const ENLACES = (isHome: boolean) => [

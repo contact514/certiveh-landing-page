@@ -253,6 +253,9 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .cta-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; }
     .article-number { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
     @media (max-width: 640px) {
+      /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio, y las llamadas a nota a 13 px */
+      .blog-wrapper > .back-link { min-height: 44px; margin-top: -11px; }
+      .cite { font-size: .8125rem; }
       .article-body > p { font-size: 1.0625rem; }
       .benefits-grid { grid-template-columns: 1fr; }
       .data-table { font-size: .875rem; }

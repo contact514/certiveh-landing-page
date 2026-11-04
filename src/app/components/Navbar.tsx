@@ -102,6 +102,8 @@ const NAV_CSS = `
     .shared-mobile-btn { display: flex; }
     .shared-mobile-overlay { display: block; }
   }
+  /* Celular: el logo (enlace al inicio) como blanco de toque de 44 px */
+  @media (max-width: 640px) { .shared-nav-logo { min-height: 44px; } }
   @media (prefers-reduced-motion: reduce) { .shared-mobile-menu { transition: none; } }
 `;
 
