@@ -772,7 +772,7 @@ export default function EmpresasLanding({ tarifaDelBuild }: { tarifaDelBuild?: s
       {/* Como HTML crudo: con <style>{CSS}</style> React escapa el CSS prerenderizado y la hidratación no coincide (ver CertiVehLandingComplete). */}
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar isHome={false} darkHero vertical="otros-activos" localSections={["#beneficios", "#como-funciona", "#calculadora"]} />
-      <main>
+      <main id="main-content">
         <Hero/>
         <Activos/>
         <Beneficios/>
