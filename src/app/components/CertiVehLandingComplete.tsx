@@ -215,18 +215,23 @@ ${CSS_UI}
   .tc-rail small { font-size: 13px; font-weight: 500; line-height: 1.25; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
   .tc-rail .done small { color: var(--cv-ink); }
   .tc-rail .now small { color: var(--cv-accent); font-weight: 600; }
-  /* Riel VERTICAL en el celular, como RielDelTramite del portal (por pantalla, < 640 px): los mismos nodos y rótulos, y
-     un conector de 2 px entre nodos, verde hasta el actual y en tono después. En escritorio va en horizontal y se desplaza
-     dentro de la tarjeta si no cabe, como en el portal: en vertical la tarjeta del último paso crecía ~180 px y el panel
-     fijo la cortaba por arriba bajo la barra (1024×768, 1280×720, 1366×768). */
-  @media (max-width: 639px) {
+  /* El riel de la tarjeta CABE SIEMPRE ENTERO, sin desplazarse: en horizontal pide 476 px (siete rótulos de 13 px), así
+     que va en horizontal solo cuando la tarjeta da para ello (≥ 512 px: 476 + el relleno) y en VERTICAL cuando no, como
+     RielDelTramite del portal en el celular. Lo decide el ancho de la tarjeta, no la pantalla: el panel fijo de escritorio
+     mide 300-460 px. En vertical va compacto (6 px entre nodos, rótulo de 14 px) para que la tarjeta más alta (paso 6)
+     quepa entera bajo la barra con la pantalla más baja (1280×720). */
+  /* En el panel de escritorio, el paso de la devolución de IVA muestra la tarjeta recortada a su acción, como en el
+     celular: el riel es el mismo del paso anterior (emitido) y, en vertical, la tarjeta no cabía bajo la barra en
+     pantallas de 700-768 px de alto. */
+  .flow-panel .tc-iva-paso .tc-rail-x { display: none; }
+  @container tc (max-width: 511px) {
     .tc-rail-x { overflow: visible; }
-    .tc-rail { flex-direction: column; gap: 10px; min-width: 0; }
+    .tc-rail { flex-direction: column; gap: 6px; min-width: 0; }
     .tc-rail li { flex-direction: row; align-items: flex-start; gap: 12px; position: relative; }
     .tc-rail .ln { width: auto; }
     .tc-rail .ln i { display: none; }
-    .tc-rail small { font-size: 15px; text-align: left; margin-top: 0; padding-top: 2px; }
-    .tc-rail li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 24px; bottom: -10px; width: 2px; background: var(--cv-tone-2); }
+    .tc-rail small { font-size: 14px; text-align: left; margin-top: 0; padding-top: 3px; }
+    .tc-rail li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 24px; bottom: -6px; width: 2px; background: var(--cv-tone-2); }
     .tc-rail li.done:not(:last-child)::after { background: var(--cv-accent); }
   }
   .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 16px; border-radius: 6px; background: rgba(4,120,87,.05); }
@@ -234,11 +239,20 @@ ${CSS_UI}
   .tc-iva span { font-size: 13px; line-height: 1.45; color: #475569; }
   .tc-iva .go { flex: none; width: 32px; height: 32px; color: var(--cv-accent); display: grid; place-items: center; font-weight: 700; }
   .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .tc-st { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .tc-st.ok { color: var(--cv-accent); background: #ecfdf5; border-color: #a7f3d0; }
+  /* El estado, como en la lista 2026-11 del portal: texto con color a 13 px, sin pastilla ni borde. */
+  .tc-st { font-size: 13px; font-weight: 600; color: #0369a1; }
+  .tc-st.ok { color: var(--cv-accent); }
   .tc-acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .tc-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
   .tc-btn.g { background: var(--cv-tone); color: var(--cv-ink); }
+  /* Tarjeta estrecha (celular de 320-414 px y panel de escritorio a 1024): el porcentaje baja bajo el modelo, en su propia
+     línea, y así «Certificado UPME · AF284586» y «BYD Seagull · 2026» caben cada uno en una línea a 13 y 18 px. */
+  @container tc (max-width: 360px) {
+    .tc-h { flex-wrap: wrap; row-gap: 6px; }
+    .tc-who { flex-basis: calc(100% - 52px); }
+    .tc-pct { order: 3; flex-basis: 100%; text-align: left; display: flex; align-items: baseline; gap: 6px; }
+    .tc-pct b { display: inline; font-size: 20px; }
+  }
 
   /* ── CONFIANZA: tres columnas livianas ── */
   .poster { list-style: none; margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px clamp(20px, 3vw, 48px); }
@@ -394,10 +408,20 @@ ${CSS_RIEL_MOVIL}
     #como-funciona .flow-steps > li:nth-child(6) .tc-rail-x,
     #como-funciona .flow-steps > li:nth-child(6) .tc-f { display: none; }
     #como-funciona .flow-steps > li:nth-child(5) .tc-f { margin-top: 4px; }
-    #como-funciona .flow-steps > li:nth-child(5) .tc-acts { width: 100%; } /* las dos acciones en una fila bajo el estado */
     #como-funciona .tc { width: 100%; }
     #como-funciona .tc-img { display: none; } /* el pictograma del vehículo: sin él, el id y el modelo caben en una línea */
+    #como-funciona .tc-pct, #como-funciona .tc-who { flex-basis: auto; }
     .win .link { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 0; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  }
+  /* «Recibe tu certificado» en el celular: el estado en su línea y debajo las dos acciones EN UNA FILA cuando la tarjeta
+     mide 270 px o más (pantallas desde 360 px), cada una a la mitad y el rótulo en dos líneas si hace falta; por debajo
+     (320 px), una encima de otra. */
+  @media (max-width: 900px) {
+    #como-funciona .flow-steps > li:nth-child(5) .tc-acts { width: 100%; }
+  }
+  @container tc (min-width: 270px) {
+    #como-funciona .flow-steps > li:nth-child(5) .frag .tc-acts { flex-wrap: nowrap; }
+    #como-funciona .flow-steps > li:nth-child(5) .frag .tc-btn { flex: 1 1 0; justify-content: center; text-align: center; }
   }
   @media (max-width: 640px) {
     /* Prensa: una columna; cada medio es una fila completa (logo, titular, formato y enlace) y no queda hueco junto
@@ -937,7 +961,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
   const pct = Math.round(((paso - 1) / (RIEL_PORTAL.length - 1)) * 100);
   const emitido = paso === RIEL_PORTAL.length;
   return (
-    <div className="tc" data-ui>
+    <div className={`tc${iva ? " tc-iva-paso" : ""}`} data-ui>
       <div className="tc-h">
         <div className="tc-img" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17h14M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M3 17V11l2-5h14l2 5v6"/></svg></div>
         <div className="tc-who">

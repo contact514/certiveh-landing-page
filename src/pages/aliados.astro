@@ -115,8 +115,8 @@ const webPageLd = JSON.stringify({
     .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: var(--cv-soft); } /* 7,2:1, como el gris del riel compartido */
     /* El número del paso va dentro del punto del riel */
     .flow-steps > li > .al-step-num { position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #475569; z-index: 1; }
-    /* Pendiente como el riel 2026-11 del portal: círculo en tono, sin aro, número legible (13 px, #475569 = 7,2:1). */
-    .al-steps > li:not(.on):not(.done)::before { background: var(--cv-tone); box-shadow: none; } /* taste-skill-ignore: quita el aro del punto, no pone sombra */
+    /* Pendiente como el riel 2026-11 del portal: círculo en tono (el de CSS_RIEL), sin aro, número legible (13 px, #475569 sobre #e1e9e5 = 6:1). */
+    .al-steps > li:not(.on):not(.done)::before { background: var(--cv-tone-2); box-shadow: none; } /* taste-skill-ignore: quita el aro del punto, no pone sombra */
     /* Con número dentro, el paso activo va relleno (como el paso actual del riel del portal) */
     .flow-steps > li.on::before { background: var(--cv-accent); box-shadow: none; } /* taste-skill-ignore: quita el halo; como el paso actual del riel 2026-11 del portal: relleno, sin halo */
     .flow-steps > li.on > .al-step-num { color: #fff; }

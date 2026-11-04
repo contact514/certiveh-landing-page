@@ -69,9 +69,9 @@ export const CSS_RIEL = `  /* ── CÓMO FUNCIONA: el riel avanza con el scrol
   .flow-steps::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 3px; background: var(--cv-tone-2); }
   .flow-steps > li { position: relative; min-height: 46vh; padding-bottom: 40px; cursor: pointer; }
   .flow-steps > li:last-child { min-height: auto; }
-  .flow-steps > li::before { content: ""; position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-bg); box-shadow: inset 0 0 0 3px var(--cv-tone-2); transition: background-color .25s, box-shadow .25s; } /* taste-skill-ignore: punto y anillo del riel de pasos */
-  .flow-steps > li.done::before { background: var(--cv-accent); box-shadow: none; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .flow-steps > li.on::before { box-shadow: inset 0 0 0 7px var(--cv-accent); } /* taste-skill-ignore: punto y anillo del riel de pasos */
+  /* Puntos del riel 2026-11 (como /aliados y el portal): pendiente en tono, sin aro; hecho y actual rellenos en verde, sin halo. */
+  .flow-steps > li::before { content: ""; position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--cv-tone-2); transition: background-color .25s; }
+  .flow-steps > li.done::before, .flow-steps > li.on::before { background: var(--cv-accent); }
   .flow-steps > li > h3 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; transition: color .25s; }
   .flow-steps > li > .subt { font-weight: 600; color: var(--cv-accent); margin-top: 6px; }
   .flow-steps > li > .desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
