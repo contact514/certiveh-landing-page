@@ -101,12 +101,12 @@ export const CSS_UI = `  /* piezas del portal (data-ui): sus propias convencione
   .ui .prog { height: 6px; background: #edf1ef; border-radius: 3px; margin-top: 6px; overflow: hidden; }
   .ui .prog i { display: block; height: 100%; width: 72%; background: var(--cv-accent); }
   .ui .fld { display: grid; gap: 4px; padding: 8px 0; }
-  .ui .fld span { font-size: 12px; color: var(--cv-soft); font-weight: 600; }
+  .ui .fld span { font-size: 13px; color: var(--cv-soft); font-weight: 600; }
   .ui .fld b { font-weight: 600; border: 1px solid #8792a2; border-radius: 6px; padding: 9px 10px; font-size: 14px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .fld.sel b { border-color: var(--cv-accent); box-shadow: 0 0 0 3px #d5efe3; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .btnui { display: block; text-align: center; background: var(--cv-accent); color: #fff; font-weight: 600; border-radius: 6px; padding: 11px; margin-top: 14px; }
   .ui .btnui.g { background: #eef2f0; color: var(--cv-ink); margin-top: 8px; }
-  .ui .ej { font-size: 12px; color: #64748b; margin-top: 8px; }
+  .ui .ej { font-size: 13px; color: #64748b; margin-top: 8px; }
   .ui .rail { list-style: none; margin-top: 14px; }
   .ui .rail li { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
   .ui .rail li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; flex: none; background: var(--cv-accent); }

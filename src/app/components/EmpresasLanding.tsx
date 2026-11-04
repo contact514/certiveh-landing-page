@@ -99,7 +99,7 @@ ${CSS_UI}
   .ui .r b { font-weight: 600; white-space: nowrap; }
   .ui .r.st { display: grid; gap: 2px; justify-content: stretch; }
   .ui .r.st b { white-space: normal; }
-  .ui .rk { font-size: 12px; color: var(--cv-soft); font-weight: 600; margin-top: 2px; }
+  .ui .rk { font-size: 13px; color: var(--cv-soft); font-weight: 600; margin-top: 2px; }
   .ui .cert { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
   .ui .cert i { flex: none; width: 40px; height: 40px; border-radius: 6px; background: #ecfdf5; color: var(--cv-accent); display: grid; place-items: center; font-style: normal; }
 

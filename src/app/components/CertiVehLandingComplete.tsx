@@ -215,10 +215,11 @@ ${CSS_UI}
   .tc-rail small { font-size: 13px; font-weight: 500; line-height: 1.25; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
   .tc-rail .done small { color: var(--cv-ink); }
   .tc-rail .now small { color: var(--cv-accent); font-weight: 600; }
-  /* Riel VERTICAL cuando la tarjeta no da para los siete pasos en horizontal (el portal pide 476 px de riel y en el
-     celular lo pone en vertical): los mismos nodos y rótulos, y un conector de 2 px entre nodos, verde hasta el actual y
-     en tono después. Aquí lo decide el ancho de la tarjeta (en el panel de escritorio mide 320-460 px), no la pantalla. */
-  @container tc (max-width: 511px) {
+  /* Riel VERTICAL en el celular, como RielDelTramite del portal (por pantalla, < 640 px): los mismos nodos y rótulos, y
+     un conector de 2 px entre nodos, verde hasta el actual y en tono después. En escritorio va en horizontal y se desplaza
+     dentro de la tarjeta si no cabe, como en el portal: en vertical la tarjeta del último paso crecía ~180 px y el panel
+     fijo la cortaba por arriba bajo la barra (1024×768, 1280×720, 1366×768). */
+  @media (max-width: 639px) {
     .tc-rail-x { overflow: visible; }
     .tc-rail { flex-direction: column; gap: 10px; min-width: 0; }
     .tc-rail li { flex-direction: row; align-items: flex-start; gap: 12px; position: relative; }
@@ -295,7 +296,7 @@ ${CSS_UI}
   .ww-mod-n { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .ww-mod-n div { text-align: center; padding: 12px 6px; border-radius: 6px; background: var(--cv-tone); }
   .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
-  .ww-mod-n span { font-size: 11px; color: #475569; }
+  .ww-mod-n span { font-size: 13px; color: #475569; }
   .ww-mod-n .sal { background: #ecfdf5; }
   /* Como el portal en un celular estrecho (< 420 px): Referidos y Pagados en una fila y el saldo debajo, a todo el ancho. */
   @media (max-width: 419px) { .ww-mod-n { grid-template-columns: 1fr 1fr; } .ww-mod-n .sal { grid-column: 1 / -1; } }
@@ -915,7 +916,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
       <div className="tc-b">
         <div className="tc-rail-x"><ol className="tc-rail">
           {RIEL_PORTAL.map((s, k) => {
-            const n = k + 1, estado = n < paso || emitido ? "done" : n === paso ? "now" : "";
+            const n = k + 1, estado = n < paso ? "done" : n === paso ? "now" : "";
             return (<li key={s} className={estado}>
               <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
               <small>{s}</small>
@@ -927,7 +928,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
           <span className={`tc-st${emitido ? " ok" : ""}`}>{emitido ? "¡Certificado emitido!" : RIEL_PORTAL[paso - 1]}</span>
           <span className="tc-acts">{emitido && <span className="tc-btn g">Descargar certificado</span>}<span className={`tc-btn${emitido ? " g" : ""}`}>Ver detalle →</span></span>
         </div>
-        <p className="ej" style={{ fontSize: 12, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
+        <p className="ej" style={{ fontSize: 13, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
       </div>
     </div>
   );
@@ -1279,7 +1280,7 @@ function WinWin() {
             <div className="ww-mod-b">
               <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>$150.000</b><span>Saldo disponible</span></div></div>
               <span className="ww-mod-btn">Solicitar retiro ($150.000)</span>
-              <p className="ej" style={{ fontSize: 12, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
+              <p className="ej" style={{ fontSize: 13, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
             </div>
           </div>
         </div>
