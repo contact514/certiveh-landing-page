@@ -155,7 +155,7 @@ const itemListLd = JSON.stringify({
       /* Celular: los 63 filtros de marca ocupaban ~1.000 px (16 filas) antes del primer modelo. Van en una fila que se
          desliza de lado, a sangre, con el siguiente asomando (el buscador de arriba sigue filtrando por texto). Filtros y
          modelos con ficha, blancos de toque de 44 px. */
-      .vh-brand-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); }
+      .vh-brand-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); padding-block: 6px; margin-block: 10px -6px; } /* el relleno vertical deja ver el anillo de foco, que la fila deslizable recortaba */
       .vh-brand-pills::-webkit-scrollbar { display: none; }
       .vh-brand-pill { flex: none; white-space: nowrap; min-height: 44px; }
       .vh-model-tag-linked { min-height: 44px; }
@@ -282,6 +282,12 @@ const itemListLd = JSON.stringify({
     (function() {
       const searchInput = document.getElementById('vh-search');
       const brandPills  = document.querySelectorAll('.vh-brand-pill');
+      // En el celular los filtros van en una fila deslizable: el que recibe el foco con el teclado se trae entero a la
+      // vista (Chrome no desplaza un elemento que ya asoma a medias por el borde).
+      const filaDeMarcas = document.querySelector('.vh-brand-pills');
+      if (filaDeMarcas) filaDeMarcas.addEventListener('focusin', (e) => {
+        if (filaDeMarcas.scrollWidth > filaDeMarcas.clientWidth) e.target.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+      });
       const brandGroups = document.querySelectorAll('.vh-brand-group');
       const noResults   = document.getElementById('vh-no-results');
       let activeBrand   = 'TODAS';
