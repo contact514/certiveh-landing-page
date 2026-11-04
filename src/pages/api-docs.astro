@@ -82,6 +82,12 @@ const webPageLd = JSON.stringify({
     .api-mobile-nav::-webkit-scrollbar { display: none; }
     .api-mobile-nav a { display: inline-flex; align-items: center; flex-shrink: 0; min-height: 48px; padding: 0 12px; font-size: .9375rem; font-weight: 600; color: var(--cv-ink); text-decoration: none; border-bottom: 3px solid transparent; transition: color .15s, border-color .15s; }
     .api-mobile-nav a.active { color: var(--cv-accent); border-bottom-color: var(--cv-accent); }
+    @media (max-width: 640px) {
+      /* Áreas de toque de 44 px sin agrandar nada a la vista: el botón con un borde transparente que el margen negativo
+         compensa; los enlaces del pie con relleno vertical en línea. */
+      .copy-btn { border: 6px solid transparent; background-clip: padding-box; margin: -6px; }
+      .api-footer a:not([aria-label]) { padding-block: 13px; }
+    }
     @media (max-width: 768px) {
       /* En el celular la barra de las anclas es la de arriba más el índice que se queda pegado debajo
          (48 px): marca.css ancla cada sección bajo las dos. */
@@ -106,6 +112,7 @@ const webPageLd = JSON.stringify({
     .api-main li { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 4px; max-width: 66ch; }
     .api-main a:not(.sidebar-link) { color: var(--cv-accent); font-weight: 600; text-underline-offset: 3px; }
     .api-note { margin-top: 12px; font-size: var(--cv-small) !important; color: var(--cv-soft); }
+    .api-note code { font-size: max(13px, .875em); } /* el .875em de code bajaba a 12,25 px dentro de la nota */
 
     /* CABECERA DE CADA ENDPOINT */
     .endpoint-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 80px 0 12px; }

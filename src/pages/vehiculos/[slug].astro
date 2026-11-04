@@ -140,6 +140,7 @@ const faqLd = JSON.stringify({
     .v-breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
     .v-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
     .v-breadcrumb a:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 2px; }
+    @media (max-width: 640px) { .v-breadcrumb a { padding-block: 14px; } } /* 44 px de toque con relleno vertical en línea: la miga no se mueve */
     .v-stage { grid-column: 8 / span 5; }
 
     /* El desglose del modelo en la calculadora de la home */

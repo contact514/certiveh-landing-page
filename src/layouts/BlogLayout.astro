@@ -182,7 +182,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
        recibe bien sin tener que acordarse. */
     .article-body .article-cta a:not(.cta-btn) { color: var(--cv-mint); font-weight: inherit; }
     /* Citas [1], [2]: superíndice verde, sin cajita. */
-    .cite { display: inline-block; font-size: .75rem; font-weight: 700; color: var(--cv-accent); vertical-align: super; line-height: 1; white-space: nowrap; margin-left: 2px; cursor: default; }
+    .cite { display: inline-block; font-size: .8125rem; font-weight: 700; color: var(--cv-accent); vertical-align: super; line-height: 1; white-space: nowrap; margin-left: 2px; cursor: default; }
     /* Recuadros: por tono, sin borde. El rojo queda para lo que es advertencia. */
     .callout { border-radius: var(--cv-r); padding: 20px 24px; margin: 28px 0; font-size: 1.0625rem; line-height: 1.6; background: var(--cv-tone); color: var(--cv-ink); }
     .callout.green { background: #e6f4ec; color: #064e3b; }
@@ -190,6 +190,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .callout.red { background: var(--cv-field); color: #e2e8f0; }
     .callout.red strong { color: #fca5a5; } /* el rojo de advertencia de la home (aviso de plazo), legible sobre oscuro */
     .article-body .callout.red a:not(.cta-btn) { color: var(--cv-mint); }
+    .callout.red .cite { color: var(--cv-mint); } /* sobre el campo oscuro: el verde daba 3,26:1 */
     .callout strong { font-weight: 700; }
     .callout p { font-size: 1.0625rem !important; color: inherit !important; margin-bottom: 8px !important; line-height: 1.6 !important; }
     .callout p:last-child { margin-bottom: 0 !important; }
@@ -197,7 +198,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .legal-ref .ref-title { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-accent); margin-bottom: 6px; }
     /* Las tres cifras de beneficio: baldosas en tono, sin borde, sombra ni salto al pasar el ratón. */
     .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 28px 0; }
-    .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); }
+    .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); min-width: 0; overflow-wrap: anywhere; } /* min-width 0: cabe en la columna aunque la rejilla venga con columnas en línea */
     .benefit-card .pct { font-size: clamp(2.5rem, 2rem + 1.6vw, 3.25rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); margin-bottom: 6px; line-height: 1; color: var(--cv-accent); }
     .benefit-card.c-green .pct, .benefit-card.c-teal .pct, .benefit-card.c-amber .pct { color: var(--cv-accent); }
     .benefit-card .bc-label { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 8px; }
@@ -243,7 +244,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .footnotes { margin-top: 48px; padding: 24px; background: var(--cv-tone); border-radius: var(--cv-r); }
     .footnotes h4 { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 12px; }
     .footnotes ol { padding-left: 18px; }
-    .footnotes li { font-size: .875rem; color: var(--cv-soft); line-height: 1.6; margin-bottom: 6px; }
+    .footnotes li { font-size: .875rem; color: var(--cv-soft); line-height: 1.6; margin-bottom: 6px; overflow-wrap: anywhere; } /* las URL largas parten: a 320 px ensanchaban la página */
     .footnotes li em { font-style: italic; }
     .article-cta { margin-top: 56px; padding: clamp(28px, 4vw, 48px); background: var(--cv-field); border-radius: var(--cv-r); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
     .article-cta p { font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem) !important; line-height: 1.3 !important; letter-spacing: -0.02em; color: #fff !important; margin-bottom: 0 !important; font-weight: 600; max-width: 32ch; }
@@ -253,9 +254,10 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .cta-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; }
     .article-number { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
     @media (max-width: 640px) {
-      /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio, y las llamadas a nota a 13 px */
+      /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio */
       .blog-wrapper > .back-link { min-height: 44px; margin-top: -11px; }
-      .cite { font-size: .8125rem; }
+      /* Enlaces sueltos en tablas y en el índice de pasos: 44 px de área con relleno vertical en línea (no mueve nada) */
+      .article-body td a, .article-body .step-content a.toc-link { padding-block: 14px; }
       .article-body > p { font-size: 1.0625rem; }
       .benefits-grid { grid-template-columns: 1fr; }
       .data-table { font-size: .875rem; }
