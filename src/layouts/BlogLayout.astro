@@ -198,7 +198,7 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .legal-ref .ref-title { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-accent); margin-bottom: 6px; }
     /* Las tres cifras de beneficio: baldosas en tono, sin borde, sombra ni salto al pasar el ratón. */
     .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 28px 0; }
-    .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); min-width: 0; overflow-wrap: anywhere; } /* min-width 0: cabe en la columna aunque la rejilla venga con columnas en línea */
+    .benefit-card { border-radius: var(--cv-r); padding: 22px; background: var(--cv-tone); }
     .benefit-card .pct { font-size: clamp(2.5rem, 2rem + 1.6vw, 3.25rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); margin-bottom: 6px; line-height: 1; color: var(--cv-accent); }
     .benefit-card.c-green .pct, .benefit-card.c-teal .pct, .benefit-card.c-amber .pct { color: var(--cv-accent); }
     .benefit-card .bc-label { font-size: var(--cv-small); font-weight: 700; letter-spacing: normal; color: var(--cv-ink); margin-bottom: 8px; }
@@ -256,6 +256,8 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     @media (max-width: 640px) {
       /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio */
       .blog-wrapper > .back-link { min-height: 44px; margin-top: -11px; }
+      /* Las baldosas caben en su columna aunque la rejilla traiga columnas en línea (a 320 px una ensanchaba la página) */
+      .benefit-card { min-width: 0; overflow-wrap: anywhere; }
       /* Enlaces sueltos en tablas y en el índice de pasos: 44 px de área con relleno vertical en línea (no mueve nada) */
       .article-body .step-content a, .article-body .callout a:not(.cta-btn) { padding-block: 12px; }
       /* En las tablas, columnas estrechas: el enlace es un bloque en línea de 44 px como mínimo, con márgenes negativos
