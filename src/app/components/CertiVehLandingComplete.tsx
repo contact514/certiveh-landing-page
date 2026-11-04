@@ -83,7 +83,7 @@ const CSS = `
   .h-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
   .h-intro { grid-column: 1 / span 7; }
   .h-intro p { margin-top: 18px; max-width: 58ch; }
-  .h-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
+  .h-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: var(--cv-ancla-sec); }
   .h-num { font-variant-numeric: normal; }
   [hidden] { display: none !important; }
 
@@ -138,7 +138,7 @@ ${CSS_CALC}
   .tile .meta b { color: var(--cv-accent); font-weight: 700; }
 
   /* ── VENTANA UPME: campo oscuro plano (la sección es temporal; el video vive en el hero) ── */
-  .win { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); scroll-margin-top: 64px; }
+  .win { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); scroll-margin-top: var(--cv-ancla-campo); }
   .win .h-wrap { padding-block: clamp(56px, 8vw, 110px); }
   .win h2 { max-width: 22ch; }
   .win p.s { max-width: 56ch; margin-top: 18px; color: #e2e8f0; }
@@ -250,7 +250,7 @@ ${CSS_UI}
   .vgrid figcaption span { display: block; font-size: .9375rem; color: var(--cv-field-soft); margin-top: 2px; }
 
   /* ── WIN WIN: campo verde con el módulo real del portal ── */
-  .ww { margin-top: var(--cv-gap-sec); background: var(--cv-accent); color: #fff; padding-block: clamp(64px, 8vw, 120px); }
+  .ww { margin-top: var(--cv-gap-sec); background: var(--cv-accent); color: #fff; padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: var(--cv-ancla-campo); }
   .ww .h-grid { align-items: center; }
   .ww-copy { grid-column: 1 / span 6; }
   .ww-copy .sub { font-weight: 600; margin-top: 12px; color: var(--cv-mint); }
@@ -297,7 +297,7 @@ ${CSS_UI}
   .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #eafaf2; }
 
   /* ── CIERRE ── */
-  .close { padding-block: var(--cv-gap-sec); }
+  .close { padding-block: var(--cv-gap-sec); scroll-margin-top: var(--cv-ancla-sec); }
   .close-grid { align-items: end; }
   .close h2 { grid-column: 1 / span 7; }
   .close-r { grid-column: 8 / span 5; }

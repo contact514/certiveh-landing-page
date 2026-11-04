@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
  * Los bloques `_MOVIL` van DENTRO del `@media (max-width: 900px)` de cada página, en el mismo orden que en la home.
  */
 export const CSS_CALC = `  /* ── CALCULADORA ── */
-  .calc { background: #fff; color: var(--cv-ink); border-radius: 0 var(--cv-r) var(--cv-r) var(--cv-r); clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%, 0 48px); padding: 32px 28px 28px; scroll-margin-top: 80px; }
+  .calc { background: #fff; color: var(--cv-ink); border-radius: 0 var(--cv-r) var(--cv-r) var(--cv-r); clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%, 0 48px); padding: 32px 28px 28px; }
   .calc h2 { font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; }
   .calc .sub { color: var(--cv-soft); font-size: .9375rem; margin-top: 8px; }
   .calc .lab { font-size: .875rem; font-weight: 600; color: var(--cv-soft); margin: 22px 0 8px; }

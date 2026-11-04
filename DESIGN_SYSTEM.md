@@ -156,6 +156,14 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
   desde el principio. En un artículo, «Volver al Blog» va dentro de la cabecera, alineado con el titular.
   Una página nueva con cabecera oscura pasa `darkHero` y su cabecera sube hasta el borde de arriba (sin
   espaciador blanco), o el texto blanco quedaría sobre blanco.
+- **Anclas** (`#beneficios`, `/#calculadora`, índices de los legales y de la API): el inicio de la sección queda
+  justo bajo la barra con el mismo respiro en todas (`--cv-barra` + `--cv-ancla-aire`, en `marca.css`, como
+  `scroll-padding-top` del `html`). Ninguna página escribe un `scroll-margin-top` en píxeles. Una sección cuyo aire
+  de arriba es su padding (`--cv-gap-sec`) lleva `scroll-margin-top: var(--cv-ancla-sec)` (se ancla su título, no
+  el hueco); un bloque de color a todo el ancho, `var(--cv-ancla-campo)` (su borde contra la barra, sin franja de la
+  sección anterior). Una página con otra barra cambia solo `--cv-barra` (la API en el celular: 64 + 48 px).
+  `BaseLayout` re-ancla al llegar con `#hash` mientras la página se asienta. Una isla no puede crecer al hidratar:
+  calcula al pintar, no en un efecto.
 - **Hero**: video a pantalla completa con velo neutro oscuro, texto blanco a la izquierda y la
   calculadora encima a la derecha en una ficha blanca con la esquina superior izquierda recortada
   (`clip-path`). En el celular, el texto y debajo la calculadora.

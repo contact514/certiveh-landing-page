@@ -188,5 +188,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <a href="#main-content" class="skip-link">Ir al contenido principal</a>
     <slot />
     <script is:inline>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
+    <!-- Anclas que no se quedan cortas. El navegador salta a un #hash (al llegar desde otra página, o al pulsar
+         un enlace de la misma) con la altura que tiene la página EN ESE INSTANTE, y con scroll suave el destino
+         queda fijado al empezar. Si luego crece lo de arriba (las islas al hidratar: la calculadora de la home
+         sumaba 248 px; una imagen, una fuente), el salto termina antes de la sección y se ve parte de la
+         anterior. Mientras la página se asienta se vuelve a anclar al destino, y se deja de hacer en cuanto la
+         persona toca, rueda o pulsa una tecla. Dónde queda cada sección lo fija marca.css (scroll-padding). -->
+    <script is:inline>(function () {
+      var hasta = 0, destino = null, ro = null;
+      function soltar() { hasta = 0; destino = null; }
+      function anclar(suave) {
+        if (!destino || Date.now() > hasta) return soltar();
+        destino.scrollIntoView({ block: 'start', behavior: suave ? 'smooth' : 'instant' });
+      }
+      function vigilar(id, ms, suave) {
+        var t = id && document.getElementById(id);
+        if (!t) return;
+        destino = t; hasta = Date.now() + ms;
+        if (!ro && 'ResizeObserver' in window) { ro = new ResizeObserver(function () { anclar(suave); }); ro.observe(document.body); }
+      }
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (e) { addEventListener(e, soltar, { passive: true, capture: true }); });
+      var id0 = decodeURIComponent(location.hash.slice(1));
+      if (id0) {
+        vigilar(id0, 5000, false);
+        addEventListener('load', function () { anclar(false); });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { anclar(false); });
+      }
+      // Un enlace a una sección de esta misma página: el navegador hace su salto suave y aquí solo se corrige
+      // si algo cambia de altura mientras tanto.
+      document.addEventListener('click', function (ev) {
+        var a = ev.target && ev.target.closest && ev.target.closest('a[href*="#"]');
+        var sinBarra = function (p) { return p.replace(/\/$/, ''); };
+        if (!a || a.origin !== location.origin || sinBarra(a.pathname) !== sinBarra(location.pathname) || !a.hash) return;
+        var id = decodeURIComponent(a.hash.slice(1));
+        setTimeout(function () { vigilar(id, 2500, true); }, 0);
+      });
+    })();</script>
   </body>
 </html>

@@ -25,13 +25,13 @@ const CSS = `
   body { background: var(--cv-bg); color: var(--cv-ink); font-family: var(--cv-font); font-size: var(--cv-body); line-height: 1.5; letter-spacing: -0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
   .oa-wrap { padding-inline: var(--cv-m); max-width: 1520px; margin: 0 auto; }
   .oa-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); }
-  .oa-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: 80px; }
+  .oa-sec { padding-top: var(--cv-gap-sec); scroll-margin-top: var(--cv-ancla-sec); }
   .oa-intro { grid-column: 1 / span 7; }
   .oa-intro p { margin-top: 18px; max-width: 58ch; }
   [hidden] { display: none !important; }
 
   /* ── HERO: el video a pantalla completa, el texto a la izquierda y la calculadora encima (como la home) ── */
-  .oa-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: var(--cv-field); overflow: clip; scroll-margin-top: 64px; }
+  .oa-hero { position: relative; padding: calc(64px + clamp(40px, 6vw, 96px)) 0 clamp(40px, 5vw, 72px); color: #fff; background: var(--cv-field); overflow: clip; }
   .oa-hero-media { position: absolute; inset: 0; }
   .oa-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
   .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
@@ -103,7 +103,7 @@ ${CSS_UI}
   .ui .cert i { flex: none; width: 40px; height: 40px; border-radius: 6px; background: #ecfdf5; color: var(--cv-accent); display: grid; place-items: center; font-style: normal; }
 
   /* ── POR QUÉ: campo oscuro, el texto a la izquierda y cuatro razones en baldosas ── */
-  .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: 64px; }
+  .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: var(--cv-ancla-campo); }
   .oa-why-copy { grid-column: 1 / span 5; position: sticky; top: 104px; align-self: start; }
   .oa-why-copy p { margin-top: 18px; max-width: 58ch; color: #e2e8f0; }
   .oa-why-copy p + p { color: var(--cv-field-soft); }
@@ -129,7 +129,7 @@ ${CSS_UI}
   .faq-body { padding: 0 24px 24px; max-width: 62ch; font-size: 1.0625rem; color: #eafaf2; }
 
   /* ── CIERRE: el de la home, el titular grande a la izquierda y la acción a la derecha ── */
-  .close { padding-block: var(--cv-gap-sec); }
+  .close { padding-block: var(--cv-gap-sec); scroll-margin-top: var(--cv-ancla-sec); }
   .close-grid { align-items: end; }
   .close h2 { grid-column: 1 / span 7; }
   .close-r { grid-column: 8 / span 5; }

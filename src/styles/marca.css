@@ -81,3 +81,24 @@
 @media (prefers-reduced-motion: reduce) {
   .cv-btn, .cv-btn .cv-arr { transition: none; }
 }
+
+/* Anclas (#beneficios, /#calculadora, el índice de los legales…): la sección a la que lleva un enlace empieza
+   justo bajo la barra, con el mismo respiro en todas, y sin dejar ver el final de la sección anterior.
+   Un solo sitio: la barra mide --cv-barra (la de Navbar y la de la API: 64 px, no cambia al bajar; solo
+   cambia de color) y cada ancla queda a --cv-ancla-aire por debajo. El navegador lo aplica igual a un clic,
+   a una carga con #hash y a scrollIntoView. Ninguna página fija su propio scroll-margin-top en píxeles: si
+   la barra cambia, se cambia aquí. Dos excepciones, por forma y no por página (la regla de la sección escribe
+   `scroll-margin-top: var(...)`):
+   - --cv-ancla-sec: secciones cuyo aire de arriba es su padding (--cv-gap-sec). Se ancla su contenido, no el
+     borde del padding: si no, el título caería 96 a 200 px por debajo de la barra, con un hueco blanco.
+   - --cv-ancla-campo: bloques de color a todo el ancho (campo oscuro, verde). Su borde va pegado a la barra:
+     un respiro blanco encima sería una franja de la sección anterior.
+   Al llegar con #hash desde otra página, BaseLayout re-ancla mientras la página se asienta (las islas al
+   hidratar y las imágenes cambian la altura de lo que queda arriba). */
+:root {
+  --cv-barra: 64px;
+  --cv-ancla-aire: clamp(24px, 3vw, 40px);
+  --cv-ancla-sec: calc(var(--cv-gap-sec) * -1);
+  --cv-ancla-campo: calc(var(--cv-ancla-aire) * -1);
+}
+html { scroll-padding-top: calc(var(--cv-barra) + var(--cv-ancla-aire)); }
