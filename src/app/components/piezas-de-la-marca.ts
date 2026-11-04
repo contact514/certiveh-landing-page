@@ -60,7 +60,8 @@ export const CSS_CALC = `  /* ── CALCULADORA ── */
   .res .note { font-size: .8125rem; color: var(--cv-field-soft); margin-top: 10px; }
 `;
 
-export const CSS_CALC_MOVIL = `    .calc { padding: 26px 18px 20px; clip-path: polygon(36px 0, 100% 0, 100% 100%, 0 100%, 0 36px); }`;
+export const CSS_CALC_MOVIL = `    .calc { padding: 26px 18px 20px; clip-path: polygon(36px 0, 100% 0, 100% 100%, 0 100%, 0 36px); }
+    .seg button { min-height: 44px; }`;
 
 export const CSS_RIEL = `  /* ── CÓMO FUNCIONA: el riel avanza con el scroll y la pieza del portal acompaña ── */
   .flow { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); margin-top: 48px; }
@@ -88,7 +89,16 @@ export const CSS_RIEL_MOVIL = `    .flow-steps { grid-column: 1 / -1; }
     .flow-steps > li:not(.on) > h3, .flow-steps > li:not(.on) > .desc, .flow-steps > li:not(.on) > .det { color: var(--cv-ink); }
     .flow-steps > li:not(.on) > .subt { color: var(--cv-accent); }
     .flow-steps .frag { display: block; margin-top: 18px; }
-    .flow-steps .frag .ui { width: 100%; }`;
+    .flow-steps .frag .ui { width: 100%; }
+    /* Celular: el paso es un bloque compacto. El título, su subtítulo verde y la frase en negrita juntos como una sola
+       cabecera (la frase en negrita repite la idea del subtítulo: va pegada a él, no suelta bajo el párrafo), luego el
+       párrafo y la pieza. Mismo HTML y mismo orden de lectura del DOM; solo cambia el orden visual. */
+    .flow-steps > li { display: flex; flex-direction: column; padding-bottom: 32px; }
+    .flow-steps > li > .det { order: 1; margin-top: 2px; }
+    .flow-steps > li > .desc, .flow-steps > li > .al-step-desc { order: 2; margin-top: 10px; }
+    .flow-steps .frag { order: 3; margin-top: 14px; }
+    .flow-steps > li > .subt { margin-top: 4px; }
+    .flow-steps .frag .ui { padding: 16px; }`;
 
 export const CSS_UI = `  /* piezas del portal (data-ui): sus propias convenciones de interfaz */
   .ui { font-family: var(--cv-font); background: #fff; border-radius: 6px; border: 1px solid var(--cv-tone-2); width: min(440px, 100%); padding: 20px; font-size: 14px; color: var(--cv-ink); letter-spacing: -0.005em; }

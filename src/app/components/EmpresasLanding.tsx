@@ -169,6 +169,16 @@ ${CSS_RIEL_MOVIL}
     .close h2, .close-r { grid-column: 1 / -1; }
     .close-r { margin-top: 24px; }
     h1 br, h2 br { display: none; }
+    /* En el celular todo se ve completo en reposo: sin entrada con opacidad (taste skill) */
+    .rv, .rv.pend { opacity: 1; transform: none; transition: none; }
+    /* El proceso: en los pasos 2, 3 y 5 el título de la pieza repite palabra por palabra el título del paso que tiene
+       justo encima; en el celular la pieza empieza en su primera fila (en escritorio, el panel la muestra entera). */
+    #como-funciona .flow-steps > li:nth-child(2) .frag .ui > .t,
+    #como-funciona .flow-steps > li:nth-child(3) .frag .ui > .t,
+    #como-funciona .flow-steps > li:nth-child(5) .frag .ui > .t { display: none; }
+    /* y en los pasos 3 y 5 la nota al pie de la pieza repite la frase en negrita del paso */
+    #como-funciona .flow-steps > li:nth-child(3) .frag .ej,
+    #como-funciona .flow-steps > li:nth-child(5) .frag .ej { display: none; }
   }
   @media (max-width: 560px) {
     .oa-trust { grid-template-columns: 1fr; }

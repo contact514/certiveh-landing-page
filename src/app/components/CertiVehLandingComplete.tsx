@@ -381,6 +381,43 @@ ${CSS_RIEL_MOVIL}
     .clock { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
     .urgency-modal { padding: 32px 22px; }
   }
+  /* ── celular: lo que se ve en reposo, completo y sin depender de una animación (taste skill: nada queda a medias
+     mientras entra; en un teléfono la entrada se veía como un título gris a medio aparecer) ── */
+  @media (max-width: 900px) {
+    .rv, .rv.pend { opacity: 1; transform: none; transition: none; }
+    /* Así de simple: la pieza de cada paso recortada al detalle que el paso enuncia (mismo componente, recorte por CSS;
+       en escritorio el panel la muestra entera). 2: el valor sin IVA que confirmas; 4: el riel con el trámite en la UPME;
+       5: el certificado emitido y su descarga; 6: la acción de la devolución de IVA. */
+    #como-funciona .flow-steps > li:nth-child(2) .fld:not(.sel) { display: none; }
+    #como-funciona .flow-steps > li:nth-child(4) .tc-f,
+    #como-funciona .flow-steps > li:nth-child(5) .tc-rail-x,
+    #como-funciona .flow-steps > li:nth-child(6) .tc-rail-x,
+    #como-funciona .flow-steps > li:nth-child(6) .tc-f { display: none; }
+    #como-funciona .flow-steps > li:nth-child(5) .tc-f { margin-top: 4px; }
+    #como-funciona .flow-steps > li:nth-child(5) .tc-acts { width: 100%; } /* las dos acciones en una fila bajo el estado */
+    #como-funciona .tc { width: 100%; }
+    #como-funciona .tc-img { display: none; } /* el pictograma del vehículo: sin él, el id y el modelo caben en una línea */
+    .win .link { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 0; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  }
+  @media (max-width: 640px) {
+    /* Prensa: una columna; cada medio es una fila completa (logo, titular, formato y enlace) y no queda hueco junto
+       a la última impar. Antes, dos columnas de 170 px partían cada titular en ocho líneas. */
+    /* Aliados: la baldosa del título sin alto mínimo (quedaba media baldosa verde vacía) y la última, si queda sola,
+       a todo el ancho: sin hueco a su lado. */
+    .tile { min-height: 120px; }
+    .tile.head { min-height: 0; }
+    .board > .tile:last-child:nth-child(even) { grid-column: 1 / -1; }
+    #prensa .board { grid-template-columns: 1fr; }
+    #prensa .tile { min-height: 0; gap: 12px; grid-column: 1 / -1 !important; } /* gana al span 2 en línea de la última */
+    #prensa .tile .mark { height: 36px; }
+    #prensa .tile .mark img { max-height: 30px; max-width: 150px; } /* el logo al peso de los de dos columnas */
+    /* Así protegemos: la solución dentro del problema, con menos relleno anidado */
+    .pcase { padding: 18px; }
+    .pfix { margin-top: 14px; padding: 12px 14px 12px 18px; }
+    /* AA sobre el campo verde: la menta daba 4,28:1 y el verde pálido de la nota 4,31:1 */
+    .ww-copy .sub { color: #fff; }
+    .ww .fine { color: #ecfdf5; }
+  }
   @media (min-width: 901px) { .prot-head { position: sticky; top: 110px; } }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
