@@ -337,7 +337,10 @@ ${CSS_CALC_MOVIL}
     .tile .mark { height: 44px; }
     .tile .mark img { max-height: 38px; }
     .bt.a, .bstack { grid-column: 1 / -1; }
-    .bt.a, .bt.b, .bt.c { min-height: 0; }
+    /* En una columna el escalón (los 24 px de más sobre la tercera) ya no escalona nada: deja la última
+       despegada (8 + 24 = 32 px frente a 8). Separación única, la misma de /otros-activos. */
+    .steps3, .bstack { gap: 6px; }
+    .bt.a, .bt.b, .bt.c { min-height: 0; margin-top: 0; }
     .duo { grid-template-columns: 1fr; }
 ${CSS_RIEL_MOVIL}
     .poster { grid-template-columns: 1fr; gap: 30px; }
