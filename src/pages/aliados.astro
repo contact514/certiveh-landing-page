@@ -116,7 +116,7 @@ const webPageLd = JSON.stringify({
     /* El número del paso va dentro del punto del riel */
     .flow-steps > li > .al-step-num { position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; display: grid; place-items: center; font-size: .75rem; font-weight: 700; color: #94a3b8; z-index: 1; }
     /* Con número dentro, el paso activo va relleno (como el paso actual del riel del portal) */
-    .flow-steps > li.on::before { background: var(--cv-accent); box-shadow: 0 0 0 4px #d5efe3; } /* taste-skill-ignore: el paso actual del riel, como RielDelTramite del portal */
+    .flow-steps > li.on::before { background: var(--cv-accent); box-shadow: none; } /* como el paso actual del riel 2026-11 del portal: relleno, sin halo */
     .flow-steps > li.on > .al-step-num { color: #fff; }
     .flow-steps > li.done > .al-step-num { color: #fff; }
 

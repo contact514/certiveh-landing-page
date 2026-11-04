@@ -95,8 +95,9 @@ export const CSS_UI = `  /* piezas del portal (data-ui): sus propias convencione
   .ui .t { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
   .ui .r { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #edf1ef; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui .r:last-child { border-bottom: 0; }
-  .ui .ok { font-size: 12px; font-weight: 600; color: var(--cv-accent); background: #e3f4ec; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
-  .ui .wait { font-size: 12px; font-weight: 600; color: #7c5a00; background: #fdf3d0; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+  /* El estado de una fila, como en la lista 2026-11 del portal: texto con color a 13 px, sin píldora. */
+  .ui .ok { font-size: 13px; font-weight: 600; color: var(--cv-accent); white-space: nowrap; }
+  .ui .wait { font-size: 13px; font-weight: 600; color: #92400e; white-space: nowrap; }
   .ui .prog { height: 6px; background: #edf1ef; border-radius: 3px; margin-top: 6px; overflow: hidden; }
   .ui .prog i { display: block; height: 100%; width: 72%; background: var(--cv-accent); }
   .ui .fld { display: grid; gap: 4px; padding: 8px 0; }

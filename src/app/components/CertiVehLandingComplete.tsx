@@ -186,13 +186,16 @@ ${CSS_CALC}
 
 ${CSS_RIEL}
 ${CSS_UI}
-  /* La tarjeta del trámite: la misma estructura y medidas que TramiteWidget + RielDelTramite del portal. */
-  .tc { background: #fff; border: 1px solid var(--cv-tone-2); border-radius: 6px; width: min(460px, 100%); color: var(--cv-ink); font-family: var(--cv-font); text-align: left; overflow: hidden; }
+  /* La tarjeta del trámite: la misma estructura y medidas que TramiteWidget + RielDelTramite del portal (diseño 2026-11:
+     el tipo como texto delante del id, el riel sin halo con el check dibujado y en vertical en el celular, la acción
+     pendiente en el tinte sin borde y la flecha suelta, la chapa de estado legible a 13 px). */
+  .tc { background: #fff; border: 1px solid var(--cv-tone-2); border-radius: 6px; width: min(460px, 100%); color: var(--cv-ink); font-family: var(--cv-font); text-align: left; overflow: hidden; container: tc / inline-size; }
   .tc-h { display: flex; align-items: center; gap: 12px; padding: 16px 18px 4px; }
   .tc-img { width: 40px; height: 40px; flex: none; border-radius: 6px; background: var(--cv-tone); display: grid; place-items: center; color: #475569; }
   .tc-who { min-width: 0; flex: 1; }
-  .tc-id { font-size: 13px; font-weight: 500; color: #475569; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .tc-chip { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 999px; color: var(--cv-accent); background: #ecfdf5; border: 1px solid #a7f3d0; white-space: nowrap; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .tc-id { font-size: 13px; font-weight: 400; color: #475569; margin-bottom: 2px; }
+  .tc-folio { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tc-folio::before { content: " · "; }
   .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
   .tc-pl { font-size: 14px; color: #475569; margin-top: 4px; display: flex; align-items: center; gap: 8px; }
   .tc-pct { text-align: right; flex: none; align-self: flex-start; }
@@ -200,23 +203,37 @@ ${CSS_UI}
   .tc-pct span { font-size: 13px; font-weight: 500; color: #475569; }
   .tc-b { padding: 14px 18px 16px; }
   .tc-rail-x { overflow-x: auto; margin: 0 -18px; padding: 0 18px 4px; scrollbar-width: none; }
-  .tc-rail { display: flex; min-width: 420px; padding-top: 6px; list-style: none; }
+  .tc-rail { display: flex; min-width: 476px; padding-top: 8px; list-style: none; }
   .tc-rail li { flex: 1; display: flex; flex-direction: column; align-items: center; }
   .tc-rail .ln { display: flex; align-items: center; width: 100%; }
   .tc-rail .ln i { flex: 1; height: 2px; background: var(--cv-tone-2); }
   .tc-rail .ln i.on { background: var(--cv-accent); }
   .tc-rail .ln i.no { background: transparent; }
-  .tc-rail .dot { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--cv-tone); color: #475569; }
+  .tc-rail .dot { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; background: var(--cv-tone); color: #475569; }
   .tc-rail .done .dot { background: var(--cv-accent); color: #fff; }
-  .tc-rail .now .dot { background: var(--cv-accent); color: #fff; box-shadow: 0 0 0 4px #d5efe3; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .tc-rail small { font-size: 10px; line-height: 1.2; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
+  .tc-rail .now .dot { background: var(--cv-accent); color: #fff; }
+  .tc-rail small { font-size: 13px; font-weight: 500; line-height: 1.25; text-align: center; margin-top: 6px; padding: 0 2px; color: #475569; text-wrap: balance; }
+  .tc-rail .done small { color: var(--cv-ink); }
   .tc-rail .now small { color: var(--cv-accent); font-weight: 600; }
-  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px; border-radius: 6px; background: #eef7f2; border: 1px solid rgba(4,120,87,.4); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .tc-iva b { display: block; font-size: 14px; }
-  .tc-iva span { font-size: 12px; color: #475569; }
-  .tc-iva .go { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--cv-accent); color: #fff; display: grid; place-items: center; font-weight: 700; }
+  /* Riel VERTICAL cuando la tarjeta no da para los siete pasos en horizontal (el portal pide 476 px de riel y en el
+     celular lo pone en vertical): los mismos nodos y rótulos, y un conector de 2 px entre nodos, verde hasta el actual y
+     en tono después. Aquí lo decide el ancho de la tarjeta (en el panel de escritorio mide 320-460 px), no la pantalla. */
+  @container tc (max-width: 511px) {
+    .tc-rail-x { overflow: visible; }
+    .tc-rail { flex-direction: column; gap: 10px; min-width: 0; }
+    .tc-rail li { flex-direction: row; align-items: flex-start; gap: 12px; position: relative; }
+    .tc-rail .ln { width: auto; }
+    .tc-rail .ln i { display: none; }
+    .tc-rail small { font-size: 15px; text-align: left; margin-top: 0; padding-top: 2px; }
+    .tc-rail li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 24px; bottom: -10px; width: 2px; background: var(--cv-tone-2); }
+    .tc-rail li.done:not(:last-child)::after { background: var(--cv-accent); }
+  }
+  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 16px; border-radius: 6px; background: rgba(4,120,87,.05); }
+  .tc-iva b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .tc-iva span { font-size: 13px; line-height: 1.45; color: #475569; }
+  .tc-iva .go { flex: none; width: 32px; height: 32px; color: var(--cv-accent); display: grid; place-items: center; font-weight: 700; }
   .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
-  .tc-st { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .tc-st { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-st.ok { color: var(--cv-accent); background: #ecfdf5; border-color: #a7f3d0; }
   .tc-acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .tc-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
@@ -271,7 +288,7 @@ ${CSS_UI}
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
   .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
   .ww-mod-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 19px; letter-spacing: .05em; } /* 19 px: texto grande, AA a 3:1 sobre el blanco al 15 % del verde (a 18 px daba 4,12:1, por debajo de 4,5) */
+  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 19px; letter-spacing: 0; } /* 19 px: texto grande, AA a 3:1 sobre el blanco al 15 % del verde (a 18 px daba 4,12:1, por debajo de 4,5) */
   .ww-mod-code i { font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; }
   .ww-mod-s { font-size: 14px; color: rgba(255,255,255,.9); }
   .ww-mod-b { background: #fff; color: var(--cv-ink); padding: 20px; }
@@ -279,7 +296,9 @@ ${CSS_UI}
   .ww-mod-n div { text-align: center; padding: 12px 6px; border-radius: 6px; background: var(--cv-tone); }
   .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
   .ww-mod-n span { font-size: 11px; color: #475569; }
-  .ww-mod-n .sal { background: #ecfdf5; box-shadow: inset 0 0 0 1px #a7f3d0; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ww-mod-n .sal { background: #ecfdf5; }
+  /* Como el portal en un celular estrecho (< 420 px): Referidos y Pagados en una fila y el saldo debajo, a todo el ancho. */
+  @media (max-width: 419px) { .ww-mod-n { grid-template-columns: 1fr 1fr; } .ww-mod-n .sal { grid-column: 1 / -1; } }
   .ww-mod-n .sal b { color: var(--cv-accent); font-size: 17px; }
   .ww-mod-n .sal span { color: var(--cv-accent); }
   .ww-mod-btn { display: block; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
@@ -887,7 +906,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
       <div className="tc-h">
         <div className="tc-img" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17h14M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M3 17V11l2-5h14l2 5v6"/></svg></div>
         <div className="tc-who">
-          <div className="tc-id">AF284586 <span className="tc-chip">Certificado UPME</span></div>
+          <div className="tc-id"><span>Certificado UPME</span><span className="tc-folio">AF284586</span></div>
           <div className="tc-t">BYD Seagull · 2026</div>
           <div className="tc-pl"><span className="plate">AB**12</span> Eléctrico</div>
         </div>
@@ -898,7 +917,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
           {RIEL_PORTAL.map((s, k) => {
             const n = k + 1, estado = n < paso || emitido ? "done" : n === paso ? "now" : "";
             return (<li key={s} className={estado}>
-              <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
+              <div className="ln"><i className={k === 0 ? "no" : n <= paso ? "on" : ""} /><span className="dot">{estado === "done" ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> : n}</span><i className={k === RIEL_PORTAL.length - 1 ? "no" : n < paso ? "on" : ""} /></div>
               <small>{s}</small>
             </li>);
           })}
