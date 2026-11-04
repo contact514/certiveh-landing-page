@@ -139,6 +139,13 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
   - **Las cifras de beneficio van en baldosas escalonadas**: la mayor en el campo verde a media página, las demás
     apiladas al lado y una en el campo oscuro. En las tarjetas de un listado, la cifra principal grande y en verde
     arriba, el desglose debajo.
+    - **Los tres beneficios (home y /exotics, `.steps3`)** usan la composición de la mini landing del portal
+      (`.cv-ml-escalon` de `ServiceInfo.tsx`), que Julian aprobó: rejilla de 12 columnas y dos filas a 8 px; IVA
+      (`.bt.a`, campo verde) en las columnas 1-6 ocupando las dos filas, mín. 560 px; renta (`.bt.b`, tono) en 7-12
+      fila 1, mín. 300 px; depreciación (`.bt.c`, campo oscuro, cifra en menta) en 7-12 fila 2. Las tres se
+      estiran: la verde termina donde la oscura, sin escalón suelto ni alturas en `vh`. Dentro, de arriba abajo:
+      cifra gigante, título (h3), texto, la norma en pequeño y el ejemplo empujado al pie (`margin-top: auto`). En
+      el celular (≤ 900 px) una columna en ese orden, a 8 px.
   - **Preguntas**: baldosas de tono que al abrirse pasan a verde, titular fijo a la izquierda en escritorio. **La
     respuesta está siempre en el HTML** y cerrada solo lleva `hidden` (lectores, buscadores y sin JavaScript la
     tienen); el botón lleva `aria-expanded` y `aria-controls`.

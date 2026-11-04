@@ -151,18 +151,20 @@ ${CSS_CALC}
   .win .link, .h-link { font-weight: 600; color: #fff; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 1px; }
 
   /* ── BENEFICIOS: baldosas escalonadas ── */
-  .steps3 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; margin-top: 56px; align-items: start; }
+  /* Misma composición que la mini landing del portal (\`.cv-ml-escalon\` de ServiceInfo): la de IVA alta en la
+     columna izquierda ocupando las dos filas; a la derecha renta en tono arriba y depreciación en el campo oscuro
+     debajo. Las tres a 8 px y estiradas: la verde termina donde termina la oscura (ni escalón suelto ni hueco). */
+  .steps3 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 8px; margin-top: 56px; }
   .bt { border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; background: var(--cv-tone); }
   .bt .fig { font-size: clamp(3.5rem, 2.2rem + 4.4vw, 7rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .85; color: var(--cv-accent); }
   .bt h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); margin-top: 8px; }
   .bt .law { font-size: var(--cv-small); color: var(--cv-soft); }
   .bt .ex { font-weight: 700; font-size: 1.125rem; margin-top: auto; padding-top: 8px; }
-  .bt.a { grid-column: 1 / span 6; min-height: 72vh; background: var(--cv-accent); color: #fff; }
+  .bt.a { grid-column: 1 / span 6; grid-row: 1 / span 2; min-height: 560px; background: var(--cv-accent); color: #fff; }
   .bt.a .fig { color: #fff; }
   .bt.a .law { color: #e6f8f0; }
-  .bstack { grid-column: 7 / span 6; display: grid; gap: 8px; }
-  .bt.b { min-height: 44vh; }
-  .bt.c { min-height: 28vh; background: var(--cv-field); color: #fff; margin-top: 24px; }
+  .bt.b { grid-column: 7 / span 6; grid-row: 1; min-height: 300px; }
+  .bt.c { grid-column: 7 / span 6; grid-row: 2; background: var(--cv-field); color: #fff; }
   .bt.c .fig { color: var(--cv-mint); }
   .bt.c .law { color: var(--cv-field-soft); }
 
@@ -336,12 +338,10 @@ ${CSS_CALC_MOVIL}
     .tile.head { grid-column: 1 / -1; }
     .tile .mark { height: 44px; }
     .tile .mark img { max-height: 38px; }
-    .bt.a, .bstack { grid-column: 1 / -1; }
-    /* En una columna el escalón (los 24 px de más sobre la tercera) ya no escalona nada: deja la última
-       despegada (8 + 24 = 32 px frente a 8). Separación única de 8 px entre baldosas (DESIGN_SYSTEM §0.5),
-       la misma de /otros-activos. */
-    .steps3, .bstack { gap: 8px; }
-    .bt.a, .bt.b, .bt.c { min-height: 0; margin-top: 0; }
+    /* En una columna, apiladas en su orden (IVA, renta, depreciación) con la separación única de 8 px entre
+       baldosas (DESIGN_SYSTEM §0.5), la misma de /otros-activos y de la mini landing. */
+    .steps3 { grid-template-rows: none; gap: 8px; }
+    .bt.a, .bt.b, .bt.c { grid-column: 1 / -1; grid-row: auto; min-height: 0; }
     .duo { grid-template-columns: 1fr; }
 ${CSS_RIEL_MOVIL}
     .poster { grid-template-columns: 1fr; gap: 30px; }
@@ -647,10 +647,8 @@ function Beneficios() {
       </div></div>
       <div className="steps3">
         <Baldosa c={iva} cls="a" />
-        <div className="bstack">
-          <Baldosa c={renta} cls="b" />
-          <Baldosa c={dep} cls="c" />
-        </div>
+        <Baldosa c={renta} cls="b" />
+        <Baldosa c={dep} cls="c" />
       </div>
     </section>
   );
