@@ -507,10 +507,11 @@ function Calculadora() {
   const tarifa = useTarifa();
   const [valor, setValor] = useState(200);
   const [perfil, setPerfil] = useState("empresa");
-  const [calc, setCalc] = useState<any>({});
   const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
 
-  useEffect(() => {
+  // Al pintar, no en un efecto: el HTML del build trae el desglose (ver la calculadora de la home). En un efecto la
+  // isla crecía 314 px al hidratar y dejaba cortos los saltos a /otros-activos#beneficios.
+  const calc: any = (() => {
     const v = valor * 1_000_000;
 
     const iva = v * 0.19;
@@ -520,8 +521,8 @@ function Calculadora() {
     // La tasa UPME (en UVT) y los honorarios de gas de la tarifa: `cotizacionDeGas` (ajuste de precios, lote 4).
     const { costoUPME, honorariosBase, ivaServicio, costoTotal } = cotizacionDeGas(v, tarifa);
 
-    setCalc({ iva, renta, totalBeneficio, costoUPME, honorariosBase, ivaServicio, costoTotal, neto: totalBeneficio - costoTotal });
-  }, [valor, perfil, tarifa]);
+    return { iva, renta, totalBeneficio, costoUPME, honorariosBase, ivaServicio, costoTotal, neto: totalBeneficio - costoTotal };
+  })();
 
   return (
     <section id="calculadora" aria-label="Calculadora de costos" className="calc">

@@ -1029,10 +1029,12 @@ function Calculadora() {
   const [tipo, setTipo] = useState("electrico");
   const [perfil, setPerfil] = useState("natural");
   const [conIva, setConIva] = useState(false);
-  const [calc, setCalc] = useState<any>({});
   const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO") + " COP";
 
-  useEffect(() => {
+  // Se calcula al pintar, no en un efecto: así el HTML del build ya trae el desglose completo con la tarifa del
+  // build (la misma con la que hidrata la isla). En un efecto, el HTML salía sin el bloque de costos y con «-», y
+  // al hidratar la calculadora crecía 248 px: movía todo lo de abajo y dejaba cortos los saltos a /#beneficios.
+  const calc: any = (() => {
     const v = valor * 1_000_000;
     const iva = v * 0.05;
     const renta = v * 0.50;
@@ -1042,8 +1044,8 @@ function Calculadora() {
     const { costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal } =
       cotizacionDeLaHome(v, conIva, tarifa);
 
-    setCalc({ iva, renta, total, costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal, neto: total - costoTotal });
-  }, [valor, tipo, perfil, conIva, tarifa]);
+    return { iva, renta, total, costoUPME, honorariosBase, ivaServicio, honorariosIvaRefund, ivaIvaRefund, costoTotal, neto: total - costoTotal };
+  })();
 
   const bars = [
     { label: "Devolución IVA",    value: calc.iva,   color: "var(--emerald-600)", pct: calc.iva   / calc.total },
