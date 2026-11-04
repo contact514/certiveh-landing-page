@@ -112,7 +112,7 @@ const webPageLd = JSON.stringify({
     /* ── CÓMO FUNCIONA: el riel de la home (avanza con el scroll) y la pieza de cada paso a la derecha ── */
     .flow-steps > li > .al-step-title { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.05; transition: color .25s; }
     .flow-steps > li > .al-step-desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
-    .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: #94a3b8; }
+    .flow-steps > li:not(.on) > .al-step-title, .flow-steps > li:not(.on) > .al-step-desc { color: var(--cv-soft); } /* 7,2:1, como el gris del riel compartido */
     /* El número del paso va dentro del punto del riel */
     .flow-steps > li > .al-step-num { position: absolute; left: -40px; top: 6px; width: 25px; height: 25px; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #475569; z-index: 1; }
     /* Pendiente como el riel 2026-11 del portal: círculo en tono, sin aro, número legible (13 px, #475569 = 7,2:1). */

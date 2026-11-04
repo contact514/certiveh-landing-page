@@ -273,14 +273,14 @@ ${CSS_UI}
   .ww { margin-top: var(--cv-gap-sec); background: var(--cv-accent); color: #fff; padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: var(--cv-ancla-campo); }
   .ww .h-grid { align-items: center; }
   .ww-copy { grid-column: 1 / span 6; }
-  .ww-copy .sub { font-weight: 600; margin-top: 12px; color: var(--cv-mint); }
+  .ww-copy .sub { font-weight: 600; margin-top: 12px; color: #fff; } /* AA sobre el campo verde: la menta daba 4,28:1 */
   .ww-steps { list-style: none; margin-top: 36px; padding-left: 36px; position: relative; display: grid; gap: 24px; }
   .ww-steps::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 3px; background: rgba(255,255,255,.28); }
   .ww-steps li { position: relative; }
   .ww-steps li::before { content: ""; position: absolute; left: -36px; top: 4px; width: 21px; height: 21px; border-radius: 50%; background: var(--cv-mint); }
   .ww-steps h3 { font-size: 1.3125rem; font-weight: var(--cv-wh); letter-spacing: -0.02em; }
   .ww-steps p { margin-top: 4px; color: #dff5ea; max-width: 48ch; }
-  .ww .fine { font-size: var(--cv-small); color: #c9ecdc; margin-top: 26px; }
+  .ww .fine { font-size: var(--cv-small); color: #ecfdf5; margin-top: 26px; } /* 5,21:1 (antes #c9ecdc, 4,31:1) */
   .ww .cv-btn { margin-top: 20px; }
   .ww-ui { grid-column: 8 / span 5; display: grid; place-items: center; }
   /* El módulo Win Win del portal (WinWinModule.tsx): cabecera en el verde de la marca con el código, y las cifras debajo.
@@ -414,9 +414,6 @@ ${CSS_RIEL_MOVIL}
     /* Así protegemos: la solución dentro del problema, con menos relleno anidado */
     .pcase { padding: 18px; }
     .pfix { margin-top: 14px; padding: 12px 14px 12px 18px; }
-    /* AA sobre el campo verde: la menta daba 4,28:1 y el verde pálido de la nota 4,31:1 */
-    .ww-copy .sub { color: #fff; }
-    .ww .fine { color: #ecfdf5; }
   }
   @media (min-width: 901px) { .prot-head { position: sticky; top: 110px; } }
   @media (prefers-reduced-motion: reduce) {
@@ -1477,7 +1474,7 @@ export default function CertiVehLandingComplete({ portalUrl = "https://portal.ce
           landing entera. */}
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero/>
         <Ticker/>
         <Aliados/>

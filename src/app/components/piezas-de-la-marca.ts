@@ -76,8 +76,10 @@ export const CSS_RIEL = `  /* ── CÓMO FUNCIONA: el riel avanza con el scrol
   .flow-steps > li > .subt { font-weight: 600; color: var(--cv-accent); margin-top: 6px; }
   .flow-steps > li > .desc { margin-top: 12px; max-width: 46ch; transition: color .25s; }
   .flow-steps > li > .det { font-weight: 600; margin-top: 10px; }
-  .flow-steps > li:not(.on) > h3, .flow-steps > li:not(.on) > .desc, .flow-steps > li:not(.on) > .det { color: #94a3b8; }
-  .flow-steps > li:not(.on) > .subt { color: #7aa894; }
+  /* Pasos no activos en el gris secundario (--cv-soft, 7,2:1): siguen por debajo del activo (tinta y verde) y se leen.
+     Antes #94a3b8 (2,56:1) y #7aa894 (2,8:1). */
+  .flow-steps > li:not(.on) > h3, .flow-steps > li:not(.on) > .desc, .flow-steps > li:not(.on) > .det { color: var(--cv-soft); }
+  .flow-steps > li:not(.on) > .subt { color: var(--cv-soft); }
   .flow-steps .frag { display: none; }
   .flow-panel { grid-column: 8 / span 5; }
   .flow-sticky { position: sticky; top: 120px; background: var(--cv-tone); border-radius: var(--cv-r); min-height: 420px; display: grid; place-items: center; padding: clamp(20px, 3vw, 40px); }
