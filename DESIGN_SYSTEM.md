@@ -146,6 +146,11 @@ de estos patrones por un motivo real lleva el comentario `taste-skill-ignore` co
       estiran: la verde termina donde la oscura, sin escalón suelto ni alturas en `vh`. Dentro, de arriba abajo:
       cifra gigante, título (h3), texto, la norma en pequeño y el ejemplo empujado al pie (`margin-top: auto`). En
       el celular (≤ 900 px) una columna en ese orden, a 8 px.
+    - **Con cuatro (/otros-activos, `.steps4`)**: el mismo lenguaje en dos filas alternadas de la rejilla de 12,
+      7+5 y 5+7, a 8 px: renta (`.bt.a`, campo verde) y IVA (`.bt.b`, tono) arriba; arancel (`.bt.c`, tono) y
+      depreciación (`.bt.d`, campo oscuro) abajo. Las de cada fila se estiran a la misma altura (mín. 360 px), los
+      bordes quedan alineados y la cita legal va al pie. No se usa la verde alta con tres apiladas: con cuatro
+      baldosas la verde pasaba de 1.100 px con tres líneas de texto. En el celular, una columna a 8 px.
   - **Preguntas**: baldosas de tono que al abrirse pasan a verde, titular fijo a la izquierda en escritorio. **La
     respuesta está siempre en el HTML** y cerrada solo lleva `hidden` (lectores, buscadores y sin JavaScript la
     tienen); el botón lleva `aria-expanded` y `aria-controls`.

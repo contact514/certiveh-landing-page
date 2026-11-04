@@ -74,22 +74,23 @@ ${CSS_CALC}
   .oa-asset:nth-child(1) h3 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem); }
   .oa-asset h3 { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; }
 
-  /* ── BENEFICIOS: baldosas escalonadas (las de la home), la cifra enorme ── */
-  .steps4 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; margin-top: 56px; align-items: start; }
-  .bt { border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; background: var(--cv-tone); }
+  /* ── BENEFICIOS: baldosas escalonadas, el lenguaje de la home y de la mini landing del portal llevado a cuatro ──
+     Dos filas alternadas 7+5 y 5+7: renta en el campo verde, IVA y arancel en tono, depreciación en el campo oscuro.
+     Todas a 8 px y estiradas (alturas iguales por fila, bordes alineados), sin alturas en vh. Se probó la de la home
+     (la primera alta a la izquierda y tres apiladas): con cuatro, la verde pasaba de 1.100 px con tres líneas de texto. */
+  .steps4 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 8px; margin-top: 56px; }
+  .bt { border-radius: var(--cv-r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; background: var(--cv-tone); min-height: 360px; }
   .bt .fig { font-size: clamp(3.5rem, 2.2rem + 4.4vw, 7rem); font-weight: var(--cv-wh); letter-spacing: calc(var(--cv-trk) * 1.3); line-height: .85; color: var(--cv-accent); }
   .bt h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.1; margin-top: 8px; }
   .bt .law { font-size: var(--cv-small); color: var(--cv-soft); margin-top: auto; padding-top: 8px; }
-  .bt.a { grid-column: 1 / span 6; min-height: 72vh; background: var(--cv-accent); color: #fff; }
+  .bt.a { grid-column: 1 / span 7; grid-row: 1; background: var(--cv-accent); color: #fff; }
   .bt.a .fig { color: #fff; }
   .bt.a .law { color: #e6f8f0; }
-  .bstack { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .bt.b { grid-column: 1 / -1; min-height: 36vh; }
-  .bt.c { min-height: 34vh; background: var(--cv-field); color: #fff; margin-top: 24px; }
-  .bt.c .fig { color: var(--cv-mint); }
-  .bt.c .law { color: var(--cv-field-soft); }
-  .bt.d { min-height: 34vh; margin-top: 24px; }
-  .bt.c .fig, .bt.d .fig { font-size: clamp(2.75rem, 1.9rem + 2.8vw, 4.5rem); }
+  .bt.b { grid-column: 8 / span 5; grid-row: 1; }
+  .bt.c { grid-column: 1 / span 5; grid-row: 2; }
+  .bt.d { grid-column: 6 / span 7; grid-row: 2; background: var(--cv-field); color: #fff; }
+  .bt.d .fig { color: var(--cv-mint); }
+  .bt.d .law { color: var(--cv-field-soft); }
 
   /* ── EL PROCESO: el riel de la home (avanza con el scroll) y la pieza de cada paso a la derecha ── */
 ${CSS_RIEL}
@@ -156,10 +157,8 @@ ${CSS_CALC_MOVIL}
     .oa-board { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--cv-m) * -1); padding-inline: var(--cv-m); scroll-padding-inline: var(--cv-m); scrollbar-width: none; }
     .oa-board::-webkit-scrollbar { display: none; }
     .oa-asset, .oa-asset:nth-child(1) { flex: 0 0 84%; min-height: 440px; scroll-snap-align: start; }
-    .bt.a, .bstack { grid-column: 1 / -1; }
-    .bstack { grid-template-columns: 1fr; gap: 8px; }
-    .steps4 { gap: 8px; }
-    .bt.a, .bt.b, .bt.c, .bt.d { min-height: 0; margin-top: 0; }
+    .steps4 { grid-template-rows: none; gap: 8px; }
+    .bt.a, .bt.b, .bt.c, .bt.d { grid-column: 1 / -1; grid-row: auto; min-height: 0; }
 ${CSS_RIEL_MOVIL}
     .oa-why-list { margin-top: 32px; }
     .oa-why-list li { grid-template-columns: 1fr; padding: 20px 0; }
@@ -387,11 +386,9 @@ function Beneficios() {
 
         <div className="steps4">
           <Baldosa c={renta} cls="a" />
-          <div className="bstack">
-            <Baldosa c={iva} cls="b" />
-            <Baldosa c={arancel} cls="c" />
-            <Baldosa c={dep} cls="d" />
-          </div>
+          <Baldosa c={iva} cls="b" />
+          <Baldosa c={arancel} cls="c" />
+          <Baldosa c={dep} cls="d" />
         </div>
       </div>
     </section>
