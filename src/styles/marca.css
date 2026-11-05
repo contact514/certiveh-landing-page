@@ -9,6 +9,20 @@
  * 1 px, iconos dentro de cuadritos, números decorativos 01/02/03, cifras en marca de agua, etiquetas en
  * mayúsculas espaciadas y el radio de 12 a 16 px en todo. Ver DESIGN_SYSTEM.md §0.4.
  */
+/*
+ * Respaldo de Albert Sans con sus medidas (sin salto al cargar la fuente).
+ * Albert Sans llega de Google Fonts con display=swap: mientras tanto se pinta con el respaldo de la pila, y al cambiar
+ * de fuente los titulares partían en otras líneas y la página saltaba (CLS 0,105-0,134 en /otros-activos y en un
+ * artículo). Se redefine la familia «Helvetica Neue» de la pila (la pila no cambia: es un token del sistema) sobre la
+ * fuente local que haya (Helvetica Neue en Apple, Arial en Windows, Roboto en Android), ajustada al ancho medio y a las
+ * métricas verticales de Albert Sans por peso (medidas con fontTools sobre texto en español: 400 0,466 / 600 0,469 /
+ * 700 0,471 em frente a Helvetica Neue 0,453 / 0,468 / 0,482), afinadas midiendo en el navegador cuántos titulares y
+ * entradillas de la primera pantalla cambian de líneas en las 41 páginas × 9 anchos (102,5 / 100,4 / 98,3 %).
+ */
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 100 449; src: local('HelveticaNeue'), local('Helvetica Neue'), local('ArialMT'), local('Arial'), local('Roboto-Regular'), local('Roboto'); size-adjust: 102.5%; ascent-override: 92.7%; descent-override: 24.4%; line-gap-override: 0%; }
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 450 649; src: local('HelveticaNeue-Medium'), local('Helvetica Neue Medium'), local('ArialMT'), local('Arial'), local('Roboto-Medium'), local('Roboto Medium'); size-adjust: 100.4%; ascent-override: 94.6%; descent-override: 24.9%; line-gap-override: 0%; }
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 650 900; src: local('HelveticaNeue-Bold'), local('Helvetica Neue Bold'), local('Arial-BoldMT'), local('Arial Bold'), local('Roboto-Bold'), local('Roboto Bold'); size-adjust: 98.3%; ascent-override: 96.6%; descent-override: 25.4%; line-gap-override: 0%; }
+
 :root {
   /* color */
   --cv-bg: #ffffff;          /* suelo */
@@ -66,6 +80,9 @@
    su columna. Ver DESIGN_SYSTEM.md §0.3. */
 .cv-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
 .cv-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
+/* Los 46ch del token, medidos en Albert Sans 400 («0» = 0,629 em): en ch, mientras carga la fuente el ancho salía del
+   «0» del respaldo (13 % más estrecho), la entradilla partía en más líneas y la portada saltaba al llegar Albert Sans. */
+.cv-hero-sub { max-width: 28.934em; }
 
 /* Secciones dentro de una página (DESIGN_SYSTEM.md §0.3): el título de cada sección, el párrafo que lo
    introduce y el título del cierre («¿Listo…?»). Como en la portada, las páginas solo fijan ancho, columna y color

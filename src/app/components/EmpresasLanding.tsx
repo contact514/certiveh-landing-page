@@ -37,7 +37,7 @@ const CSS = `
   .oa-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.88) 0%, rgba(9,14,26,.72) 45%, rgba(9,14,26,.35) 100%); } /* taste-skill-ignore: velo neutro sobre el video */
   .oa-hero .oa-grid { position: relative; z-index: 1; align-items: start; }
   .oa-hero-copy { grid-column: 1 / span 7; padding-bottom: 40px; position: sticky; top: 104px; } /* acompaña al bajar por la calculadora, como en las fichas */
-  .oa-hero h1 { max-width: 18ch; }
+  .oa-hero h1 { max-width: 11.61em; } /* = 18ch en Albert Sans 700 (el «0» mide 0,645 em). En ch, mientras carga la fuente el ancho salía del «0» del respaldo, mucho más estrecho: el titular partía en una línea más y la página saltaba al llegar Albert Sans (CLS 0,105-0,119). */
   .oa-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
   .oa-trust { list-style: none; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; max-width: 560px; font-size: var(--cv-small); font-weight: 600; }
   .oa-hero .cv-sq::before { background: var(--cv-mint); }

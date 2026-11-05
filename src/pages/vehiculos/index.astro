@@ -74,7 +74,7 @@ const itemListLd = JSON.stringify({
     .vh-hero { position: relative; color: #fff; padding: calc(64px + clamp(64px, 9vw, 140px)) max(var(--cv-m), calc((100vw - 1424px) / 2)) clamp(56px, 7vw, 110px); background: url(/hero-bg-poster.webp) center / cover no-repeat, var(--cv-field); }
     .vh-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,14,26,.9) 0%, rgba(9,14,26,.74) 50%, rgba(9,14,26,.45) 100%); } /* taste-skill-ignore: velo neutro sobre la foto */
     .vh-hero > * { position: relative; }
-    .vh-title { max-width: 20ch; }
+    .vh-title { max-width: 12.9em; } /* = 20ch en Albert Sans 700, sin depender de la fuente de respaldo (CLS) */
 
     /* ── LOS MODELOS CON FICHA: baldosas de tono ── */
     .vh-container { max-width: 1520px; margin: 0 auto; padding: clamp(48px, 6vw, 96px) var(--cv-m) 0; }
