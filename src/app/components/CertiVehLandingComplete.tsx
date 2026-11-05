@@ -1036,6 +1036,16 @@ const RIEL_PORTAL = ["En borrador","Solicitud enviada","Registro en UPME","Esper
 /** El formato de dinero del portal (`formatCOP`: «$ 120.000», con espacio duro tras el signo). */
 const formatoDelPortal = (n: number) => new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(Math.round(n));
 const FOTO_SEAGULL = "https://cdn.imagin.studio/getimage?customer=img&make=BYD&modelFamily=seagull&modelYear=2026&zoomType=fullscreen&angle=29";
+/** La foto del vehículo, como en TramiteWidget: si no carga, la baldosa desaparece (`onError` → `showImage = false`). La
+ *  imagen del HTML del servidor puede fallar antes de que React hidrate, así que al montar se mira también si ya falló. */
+function FotoDelVehiculo() {
+  const [ok, setOk] = useState(true);
+  const img = useRef<HTMLImageElement>(null);
+  useEffect(() => { const i = img.current; if (i && i.complete && i.naturalWidth === 0) setOk(false); }, []);
+  if (!ok) return null;
+  return <div className="tc-img"><img ref={img} src={FOTO_SEAGULL} alt="" width={34} height={34} loading="lazy" decoding="async" onError={() => setOk(false)} /></div>;
+}
+
 /** La tarjeta del trámite (TramiteWidget), en un estado de ejemplo. */
 function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean }) {
   const pct = Math.round(((paso - 1) / (RIEL_PORTAL.length - 1)) * 100);
@@ -1044,7 +1054,7 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
     <div className={`tc${iva ? " tc-iva-paso" : ""}`} data-ui>
       <div className="tc-h">
         <div className="tc-who-row">
-          <div className="tc-img"><img src={FOTO_SEAGULL} alt="" width={34} height={34} loading="lazy" decoding="async" /></div>
+          <FotoDelVehiculo />
           <div className="tc-who">
             <div className="tc-id"><span>Certificado UPME</span><span className="tc-folio">AF284586</span></div>
             <div className="tc-t">BYD Seagull · 2026</div>
