@@ -324,6 +324,14 @@ ${CSS_UI}
   .ww-ui { grid-column: 8 / span 5; display: grid; place-items: center; }
   /* El módulo Win Win del portal (WinWinModule.tsx): cabecera en el verde de la marca con el código, y las cifras debajo.
      Sobre el campo verde de la sección lleva un filo blanco translúcido para separarse. */
+  /* El resumen del pago como el del portal (J4): la caja en el tinte de la marca y el total como cifra mayor, en verde y
+     con cifras tabulares (cv-cifra-total: 22 / 30 px, 700). */
+  .ui.ui-pago { background: rgba(4,120,87,.05); border-color: rgba(4,120,87,.2); }
+  .ui.ui-pago .r { border-bottom-color: rgba(4,120,87,.1); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ui.ui-pago .r b { font-variant-numeric: tabular-nums; }
+  .ui.ui-pago .r.tot { padding-top: 10px; box-shadow: 0 -1px 0 rgba(4,120,87,.2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ui.ui-pago .r.tot span { font-size: 15px; font-weight: 700; }
+  .ui.ui-pago .r.tot b { font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--cv-accent); white-space: nowrap; }
   .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
   .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
@@ -1014,7 +1022,7 @@ function PiezaDelPaso({ i }: { i: number }) {
   switch (i) {
     case 0: return (<div className="ui" data-ui><div className="t">Documentos</div><div className="r"><span>Cédula (frente y reverso)</span><span className="ok">Leída</span></div><div className="r"><span>Tarjeta de propiedad (frente y reverso)</span><span className="ok">Leída</span></div><div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>Factura de compra</span><span className="wait">Subiendo</span></div><div className="prog"><i /></div></div></div>);
     case 1: return (<div className="ui" data-ui><div className="t">Confirma tus datos</div><div className="fld"><span>Marca</span><b>BYD</b></div><div className="fld"><span>Línea</span><b>Seagull</b></div><div className="fld sel"><span>Valor del vehículo (sin IVA)</span><b>$120.000.000</b></div><span className="btnui">Confirmar</span><p className="ej">Datos de ejemplo</p></div>);
-    case 2: return (<div className="ui" data-ui><div className="t">Resumen del pago</div><div className="r"><span>Servicio de tramitación</span><b>{pz(c.honorariosBase)}</b></div><div className="r"><span>IVA (19% sobre tramitación)</span><b>{pz(c.ivaServicio)}</b></div><div className="r"><span>Trámite ante UPME</span><b>{pz(c.costoUPME)}</b></div><div className="r" style={{ fontWeight: 800, fontSize: 16 }}><span>Total</span><b>{pz(c.costoTotal)}</b></div><span className="btnui">Pagar</span><p className="ej">Para un vehículo de $120M</p></div>);
+    case 2: return (<div className="ui ui-pago" data-ui><div className="t">Resumen del pago</div><div className="r"><span>Servicio de tramitación</span><b>{pz(c.honorariosBase)}</b></div><div className="r"><span>IVA (19% sobre tramitación)</span><b>{pz(c.ivaServicio)}</b></div><div className="r"><span>Trámite ante UPME</span><b>{pz(c.costoUPME)}</b></div><div className="r tot"><span>Total</span><b>{pz(c.costoTotal)}</b></div><span className="btnui">Pagar</span><p className="ej">Para un vehículo de $120M</p></div>);
     case 3: return <TarjetaDelTramite paso={5} />;
     case 4: return <TarjetaDelTramite paso={7} />;
     default: return <TarjetaDelTramite paso={7} iva />;
