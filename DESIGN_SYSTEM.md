@@ -59,6 +59,11 @@ El verde `#059669` tampoco se usa en texto (3,87:1); solo puede ser relleno deco
 
 - **Albert Sans**, pesos 400, 600 y 700, cargada en `BaseLayout.astro` con precarga y `display=swap`.
   Títulos a 700 con `letter-spacing: -0.03em` (`--cv-trk`).
+- **Respaldo con las medidas de Albert Sans** (`marca.css`, decisión en `docs/marca-2026-11/DECISIONES.md`): mientras
+  carga Albert Sans, las familias de respaldo de la pila se redefinen por `@font-face` sobre la fuente local
+  («Helvetica Neue» solo en Apple; «Arial» Regular/Bold en Windows y Roboto en Android) con `size-adjust` y métricas
+  verticales calibradas, y el `unicode-range` de Albert Sans. Los anchos de portada van en `em` (28.934em = 46ch de
+  Albert Sans), no en `ch`, que se mide con la fuente que esté pintando. Así la portada no salta al llegar la fuente.
 - **Cinco pasos de tamaño**: `--cv-display` (h1), `--cv-head` (h2), `--cv-lead` (entradilla y
   subtítulos), `--cv-body` (17 a 19 px; todo el texto corrido) y `--cv-small` (14 a 15 px).
   **Nada que se lea por debajo de 13 px.**

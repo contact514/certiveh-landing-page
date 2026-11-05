@@ -10,18 +10,24 @@
  * mayúsculas espaciadas y el radio de 12 a 16 px en todo. Ver DESIGN_SYSTEM.md §0.4.
  */
 /*
- * Respaldo de Albert Sans con sus medidas (sin salto al cargar la fuente).
+ * Respaldo de Albert Sans con sus medidas (sin salto al cargar la fuente). Decisión en DECISIONES.md (marca 2026-11).
  * Albert Sans llega de Google Fonts con display=swap: mientras tanto se pinta con el respaldo de la pila, y al cambiar
- * de fuente los titulares partían en otras líneas y la página saltaba (CLS 0,105-0,134 en /otros-activos y en un
- * artículo). Se redefine la familia «Helvetica Neue» de la pila (la pila no cambia: es un token del sistema) sobre la
- * fuente local que haya (Helvetica Neue en Apple, Arial en Windows, Roboto en Android), ajustada al ancho medio y a las
- * métricas verticales de Albert Sans por peso (medidas con fontTools sobre texto en español: 400 0,466 / 600 0,469 /
- * 700 0,471 em frente a Helvetica Neue 0,453 / 0,468 / 0,482), afinadas midiendo en el navegador cuántos titulares y
- * entradillas de la primera pantalla cambian de líneas en las 41 páginas × 9 anchos (102,5 / 100,4 / 98,3 %).
+ * de fuente los titulares partían en otras líneas y la página saltaba (CLS hasta 0,134). La pila no cambia (es un token):
+ * se redefinen sus dos familias de respaldo sobre la fuente local, ajustadas al ancho y a las métricas verticales de
+ * Albert Sans por peso (size-adjust calibrado midiendo en el navegador qué titulares y entradillas de la primera pantalla
+ * cambian de líneas en 41 páginas × 9 anchos):
+ *   «Helvetica Neue» (Apple): solo la Helvetica Neue del sistema, en sus tres pesos. Fuera de Apple no casa y la pila
+ *     sigue a «Arial».
+ *   «Arial» (Windows, y Roboto en Android): Regular hasta 549 y Bold desde 550, como la pila de siempre (el 600 sale en
+ *     negrita, no en Regular).
+ * unicode-range = el de los subconjuntos latin y latin-ext de Albert Sans: lo que Albert Sans no trae (→ ↗ ⧉) sigue
+ * cayendo en la fuente del sistema sin ajustar, igual con o sin Albert Sans cargada.
  */
-@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 100 449; src: local('HelveticaNeue'), local('Helvetica Neue'), local('ArialMT'), local('Arial'), local('Roboto-Regular'), local('Roboto'); size-adjust: 102.5%; ascent-override: 92.7%; descent-override: 24.4%; line-gap-override: 0%; }
-@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 450 649; src: local('HelveticaNeue-Medium'), local('Helvetica Neue Medium'), local('ArialMT'), local('Arial'), local('Roboto-Medium'), local('Roboto Medium'); size-adjust: 100.4%; ascent-override: 94.6%; descent-override: 24.9%; line-gap-override: 0%; }
-@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 650 900; src: local('HelveticaNeue-Bold'), local('Helvetica Neue Bold'), local('Arial-BoldMT'), local('Arial Bold'), local('Roboto-Bold'), local('Roboto Bold'); size-adjust: 98.3%; ascent-override: 96.6%; descent-override: 25.4%; line-gap-override: 0%; }
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 100 449; src: local('HelveticaNeue'), local('Helvetica Neue'); size-adjust: 101.5%; ascent-override: 93.6%; descent-override: 24.6%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC, U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+20A0-20C4, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 450 649; src: local('HelveticaNeue-Medium'), local('Helvetica Neue Medium'); size-adjust: 99.5%; ascent-override: 95.5%; descent-override: 25.1%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC, U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+20A0-20C4, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Helvetica Neue'; font-style: normal; font-weight: 650 900; src: local('HelveticaNeue-Bold'), local('Helvetica Neue Bold'); size-adjust: 98.3%; ascent-override: 96.6%; descent-override: 25.4%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC, U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+20A0-20C4, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Arial'; font-style: normal; font-weight: 100 549; src: local('ArialMT'), local('Arial'), local('Roboto-Regular'), local('Roboto'); size-adjust: 102.2%; ascent-override: 93%; descent-override: 24.5%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC, U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+20A0-20C4, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Arial'; font-style: normal; font-weight: 550 900; src: local('Arial-BoldMT'), local('Arial Bold'), local('Roboto-Bold'), local('Roboto Bold'); size-adjust: 97.7%; ascent-override: 97.2%; descent-override: 25.6%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC, U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+20A0-20C4, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD; }
 
 :root {
   /* color */
