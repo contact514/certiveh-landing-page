@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback, createContext, useContext } from "react";
+import { useState, useEffect, useCallback, useRef, createContext, useContext } from "react";
 import { Navbar } from "./Navbar";
 import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, Banknote, Check, CheckCircle2, ChevronDown, ChevronRight, Copy, Download, ExternalLink, FileText, Gift, Users } from "lucide-react";
+import { ArrowRight, Banknote, Calendar, Check, CheckCircle2, ChevronDown, Copy, Download, ExternalLink, FileText, Gift, HelpCircle, Info, Users } from "lucide-react";
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI } from './piezas-de-la-marca.ts';
@@ -235,15 +235,21 @@ ${CSS_UI}
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   /* El riel cabe siempre entero: horizontal cuando la tarjeta da para los 476 px del portal (≥ 512 px) y vertical, como el
      portal en el celular, cuando no (el panel fijo de escritorio mide 300-460 px; el portal ahí es más ancho). */
-  /* En el panel fijo el riel vertical va compacto (rótulo de 14 px) y, en pantallas bajas, con 2 px entre nodos, para que la
-     tarjeta entera quepa bajo la barra (el portal, a ese ancho, lo pinta en horizontal y desplazable). */
-  .flow-panel .tc-rail small { font-size: 14px; }
-  /* Única excepción a «entera»: en el panel fijo, el paso de la devolución de IVA no repite el riel (es el mismo del paso
-     anterior, ya visto entero): con él la tarjeta mide ~620 px y no cabe bajo la barra en ninguna pantalla por debajo de 1920 × 1080. */
-  .flow-panel .tc-iva-paso .tc-rail-x { display: none; }
-  .flow-panel .tc-rail { --tc-gap: 6px; }
-  @media (min-width: 901px) and (max-height: 760px) { #como-funciona .flow-sticky { top: 84px; } .flow-panel .tc-rail { --tc-gap: 2px; } }
-  @media (min-width: 901px) and (max-height: 650px) { #como-funciona .flow-sticky { top: 72px; padding-block: 16px; } }
+  /* En el panel fijo el riel va en vertical con las medidas del portal en el celular (rótulo de 15 px, 10 px entre nodos).
+     Solo en pantallas de escritorio de menos de 720 px de alto va compacto (14 px y 2 px entre nodos), para que la tarjeta
+     entera quepa bajo la barra. */
+  @media (min-width: 901px) and (max-height: 719px) { .flow-panel .tc-rail small { font-size: 14px; } .flow-panel .tc-rail { --tc-gap: 2px; } }
+  /* El paso de la devolución de IVA lleva su riel, como el portal, cuando la tarjeta entera (~620 px) cabe bajo la barra:
+     pantallas de 1050 px de alto o más. Por debajo, el panel no repite el riel (el mismo del paso anterior, ya visto entero). */
+  @media (min-width: 901px) and (max-height: 1049px) { .flow-panel .tc-iva-paso .tc-rail-x { display: none; } }
+  @media (min-width: 901px) and (max-height: 800px) { #como-funciona .flow-sticky { top: 84px; } }
+  @media (min-width: 901px) and (max-height: 650px) { #como-funciona .flow-sticky { top: 72px; padding-block: 8px; } }
+  /* Las piezas de los pasos 1 y 2 son más altas que el panel en pantallas bajas. Ahí el panel enseña un tramo CONTIGUO de la
+     misma pantalla, el que se ve en el portal al desplazar, nunca una composición: en el paso 1, el reverso y la factura
+     (≤ 760 px de alto); en el paso 2, desde «Tipo de propulsión» (< 1050 px) o desde «Propietario registrado» (< 720 px). */
+  @media (min-width: 901px) and (max-height: 760px) { .flow-panel .pp-doc:first-child { display: none; } }
+  @media (min-width: 901px) and (max-height: 1049px) { .flow-panel .pp-f-marca, .flow-panel .pp-f-linea { display: none; } }
+  @media (min-width: 901px) and (max-height: 719px) { .flow-panel .pp-f-prop, .flow-panel .pp-b-dueno > .pp-sep { display: none; } }
   @container tc (max-width: 511px) {
     .tc-rail-x { overflow: visible; }
     .tc-rail { --tc-gap: 10px; flex-direction: column; gap: var(--tc-gap); min-width: 0; }
@@ -286,30 +292,48 @@ ${CSS_UI}
   .pp-doc-i { width: 24px; height: 40px; flex: none; display: flex; align-items: center; color: var(--pp-muted); }
   .pp-doc-i.ok { color: #047857; }
   .pp-doc-tx { flex: 1; min-width: 0; }
-  .pp-doc-t { font-size: 14px; font-weight: 600; margin: 0; }
+  .pp-doc-t { font-size: 14px; line-height: 20px; font-weight: 600; margin: 0; }
+  .pp-por { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; vertical-align: middle; font-size: 13px; font-weight: 600; color: var(--pp-muted); } /* WhyTooltip */
   .pp-doc-a { font-size: 13px; line-height: 1.375; color: var(--pp-muted); margin: 2px 0 0; }
-  .pp-doc-f { font-size: 13px; color: var(--pp-muted); margin: 2px 0 0; } /* text-xs (12 px) en el portal: aquí 13, el mínimo legible del sistema */
+  .pp-doc-f { font-size: 13px; line-height: 18px; color: var(--pp-muted); margin: 2px 0 0; } /* text-xs (12 px) en el portal: aquí 13, el mínimo legible del sistema */
   .pp-doc-ok { display: flex; align-items: center; justify-content: space-between; }
-  .pp-doc-ok > span:first-child { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: #047857; }
+  .pp-doc-ok > span:first-child { display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; font-weight: 500; color: #047857; }
   .pp-doc-cambiar { font-size: 13px; font-weight: 600; color: var(--pp-muted); }
-  .pp-prog { height: 6px; background: var(--pp-sec); border-radius: 999px; overflow: hidden; box-shadow: inset 0 0 0 100px rgba(15,23,42,.06); } /* taste-skill-ignore: barra de progreso del portal (data-ui) */
+  .pp-prog { height: 6px; background: var(--pp-sec); border-radius: 999px; overflow: hidden; } /* bg-muted del portal: el mismo tono que la tarjeta */
   .pp-prog i { display: block; height: 100%; border-radius: 999px; background: #047857; }
-  .pp-prog-t { font-size: 13px; color: var(--pp-muted); text-align: right; margin: 4px 0 0; }
-  .pp-fld { display: flex; flex-direction: column; gap: 8px; }
-  .pp-fld label { font-size: 14px; font-weight: 500; color: rgba(15,23,42,.8); }
-  .pp-fld label span { color: #dc2626; margin-left: 2px; }
-  .pp-in { display: flex; align-items: center; min-height: 48px; padding: 12px 16px; background: var(--pp-sec); border-radius: 4px; box-shadow: inset 0 0 0 1px var(--pp-muted); font-size: 16px; } /* taste-skill-ignore: campo de formulario del portal (data-ui) */
-  .pp-ayuda { font-size: 13px; color: var(--pp-muted); margin: 0; } /* text-xs en el portal: aquí 13 */
-  .pp-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; border-radius: 6px; background: #047857; color: #fff; font-weight: 600; font-size: 16px; }
+  .pp-prog-t { font-size: 13px; line-height: 18px; color: var(--pp-muted); text-align: right; margin: 4px 0 0; }
+  /* SolicitudStep2: FieldRow (space-y-2), el rótulo text-sm medium foreground/80 con el asterisco, los campos auth-input
+     (48 px, tono, contorno muted, radio 4) y los combobox/select con su ChevronDown de 16 px; la marca verificada a la
+     derecha del rótulo («Verificado UPME» desde 640, text-xs en el portal: aquí 13). Entre secciones, la línea del portal y 24 px. */
+  .pp-form { gap: 16px; }
+  .pp-fld { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .pp-lab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pp-fld label { display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(15,23,42,.8); }
+  .pp-fld label > span { color: #dc2626; margin-left: 2px; }
+  .pp-info { color: var(--pp-muted); flex: none; }
+  .pp-ok { display: flex; align-items: center; gap: 4px; font-size: 13px; line-height: 18px; color: #047857; }
+  .pp-ok > span { display: none; }
+  @media (min-width: 640px) { .pp-ok > span { display: inline; } }
+  .pp-in { display: flex; align-items: center; min-height: 48px; padding: 12px 16px; background: var(--pp-sec); border-radius: 4px; box-shadow: inset 0 0 0 1px var(--pp-muted); font-size: 16px; line-height: 24px; white-space: nowrap; overflow: hidden; } /* taste-skill-ignore: campo de formulario del portal (data-ui) */
+  .pp-cb { justify-content: space-between; gap: 8px; }
+  .pp-cb svg { flex: none; color: var(--pp-muted); }
+  .pp-off { background: transparent; box-shadow: none; border: 1px dashed var(--pp-muted); color: var(--pp-muted); } /* taste-skill-ignore: campo deshabilitado del portal (data-ui) */
+  .pp-ayuda { font-size: 13px; line-height: 18px; color: var(--pp-muted); margin: 0; } /* text-xs en el portal: aquí 13 */
+  .pp-bloque { display: flex; flex-direction: column; gap: 16px; }
+  .pp-sep { height: 1px; background: var(--pp-border); margin: 8px 0; } /* taste-skill-ignore: el separador de secciones de SolicitudStep2 (data-ui) */
+  .pp-sec { font-size: 13px; line-height: 19.5px; font-weight: 600; color: #047857; margin: 0; }
+  .pp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .pp-f-fecha { display: none; }
+  @media (min-width: 640px) { .pp-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .pp-f-fecha { display: flex; } }
   /* El resumen del pago de SolicitudStep3: la caja en el tinte de la marca, filas a 14 px y el total como cifra mayor. */
   .pp-pago { border-radius: 6px; border: 1px solid rgba(4,120,87,.2); background: rgba(4,120,87,.05); padding: 20px; display: flex; flex-direction: column; gap: 12px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .pp-r { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; gap: 12px; }
-  .pp-r span { font-size: 14px; color: var(--pp-muted); }
-  .pp-r b { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pp-r span { font-size: 14px; line-height: 20px; color: var(--pp-muted); }
+  .pp-r b { font-size: 14px; line-height: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
   .pp-r.l1 { box-shadow: inset 0 1px 0 rgba(4,120,87,.1); } /* taste-skill-ignore: separador del portal, border-t primary/10 (data-ui) */
   .pp-r.l2, .pp-tot { box-shadow: inset 0 1px 0 rgba(4,120,87,.2); } /* taste-skill-ignore: separador del portal, border-t primary/20 (data-ui) */
   .pp-tot { padding: 10px 0 0; }
-  .pp-tot span { font-size: 15px; font-weight: 700; color: var(--cv-ink); }
+  .pp-tot span { font-size: 15px; line-height: 22.5px; font-weight: 700; color: var(--cv-ink); }
   .pp-tot b { font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #047857; white-space: nowrap; }
   /* ── CONFIANZA: tres columnas livianas ── */
   .poster { list-style: none; margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px clamp(20px, 3vw, 48px); }
@@ -1056,7 +1080,7 @@ function DocDelPortal({ titulo, ayuda, listo, progreso }: { titulo: string; ayud
     <div className="pp-doc">
       <div className="pp-doc-h">
         <span className={`pp-doc-i${listo ? " ok" : ""}`}>{listo ? <CheckCircle2 size={20} /> : <FileText size={20} />}</span>
-        <div className="pp-doc-tx"><p className="pp-doc-t">{titulo}</p><p className="pp-doc-a">{ayuda}</p><p className="pp-doc-f">JPG, PNG o PDF</p></div>
+        <div className="pp-doc-tx"><p className="pp-doc-t">{titulo}<span className="pp-por"><HelpCircle size={14} />¿Por qué?</span></p><p className="pp-doc-a">{ayuda}</p><p className="pp-doc-f">JPG, PNG o PDF</p></div>
       </div>
       {listo
         ? (<div className="pp-doc-ok"><span><Check size={16} strokeWidth={2.5} />Documento procesado</span><span className="pp-doc-cambiar">Cambiar</span></div>)
@@ -1076,11 +1100,20 @@ function PiezaDelPaso({ i }: { i: number }) {
       <DocDelPortal titulo="Factura de compra" ayuda="Factura del concesionario. Puede tener varias páginas" progreso={72} />
       <p className="ej">Datos de ejemplo</p>
     </div>);
-    case 1: return (<div className="pp" data-ui>
-      <div className="pp-fld pp-fld-marca"><label>Marca<span>*</span></label><span className="pp-in">BYD</span></div>
-      <div className="pp-fld pp-fld-linea"><label>Línea / Modelo<span>*</span></label><span className="pp-in">Seagull</span></div>
-      <div className="pp-fld"><label>Valor del vehículo sin IVA (COP)<span>*</span></label><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
-      <span className="pp-btn">Confirmar y continuar <ChevronRight size={16} /></span>
+    /* Paso 2: un tramo CONTIGUO de SolicitudStep2, de «Marca» al valor (desde 640 px, con «Fecha de compra» al lado, en su
+       misma fila). Sin el botón: en el portal queda mucho más abajo. */
+    case 1: return (<div className="pp pp-form" data-ui>
+      <div className="pp-fld pp-f-marca"><div className="pp-lab"><label>Marca<span>*</span></label><span className="pp-ok"><CheckCircle2 size={12} /><span>Verificado UPME</span></span></div><span className="pp-in pp-cb">BYD<ChevronDown size={16} /></span></div>
+      <div className="pp-fld pp-f-linea"><div className="pp-lab"><label>Línea / Modelo<span>*</span></label></div><span className="pp-in pp-cb">Seagull<ChevronDown size={16} /></span></div>
+      <div className="pp-fld pp-f-prop"><div className="pp-lab"><label>Tipo de propulsión<span>*</span></label></div><span className="pp-in pp-cb">Eléctrico<ChevronDown size={16} /></span></div>
+      <div className="pp-bloque pp-b-dueno"><div className="pp-sep" /><p className="pp-sec">Propietario registrado</p><div className="pp-grid">
+        <div className="pp-fld"><div className="pp-lab"><label>Nombre del propietario<span>*</span></label></div><span className="pp-in pp-off">Juan Carlos Pérez</span></div>
+        <div className="pp-fld"><div className="pp-lab"><label>Cédula del propietario<span>*</span></label></div><span className="pp-in pp-off">1020304050</span><p className="pp-ayuda">Solo dígitos</p></div>
+      </div></div>
+      <div className="pp-bloque"><div className="pp-sep" /><p className="pp-sec">Información de compra</p><div className="pp-grid">
+        <div className="pp-fld"><div className="pp-lab"><label>Valor del vehículo sin IVA (COP)<span>*</span><Info size={14} className="pp-info" /></label></div><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
+        <div className="pp-fld pp-f-fecha"><div className="pp-lab"><label>Fecha de compra<span>*</span></label></div><span className="pp-in pp-cb">02/10/2026<Calendar size={16} /></span></div>
+      </div></div>
       <p className="ej">Datos de ejemplo</p>
     </div>);
     case 2: return (<div className="pp pp-pago-w" data-ui><div className="pp-pago">
