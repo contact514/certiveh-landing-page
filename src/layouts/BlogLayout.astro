@@ -253,11 +253,15 @@ const breadcrumbLd = isArticle ? JSON.stringify({
     .cta-btn:hover { background: var(--cv-accent-hover); }
     .cta-btn:focus-visible { outline: 3px solid var(--cv-mint); outline-offset: 3px; }
     .article-number { font-size: var(--cv-small); font-weight: 600; color: var(--cv-soft); }
+    @media (max-width: 359px) {
+      .benefits-grid { grid-template-columns: 1fr !important; }
+    }
     @media (max-width: 640px) {
       /* Celular: «Volver al Blog» como blanco de toque de 44 px sin moverse de su sitio */
       .blog-wrapper > .back-link { min-height: 44px; margin-top: -11px; }
-      /* Las baldosas caben en su columna aunque la rejilla traiga columnas en línea (a 320 px una ensanchaba la página) */
-      .benefit-card { min-width: 0; overflow-wrap: anywhere; }
+      /* Las baldosas caben en su columna aunque la rejilla traiga columnas en línea (a 320 px una ensanchaba la página).
+         Sin partir palabras: por debajo de 360 px la rejilla pasa a una columna (gana a su estilo en línea). */
+      .benefit-card { min-width: 0; }
       /* Enlaces sueltos en tablas y en el índice de pasos: 44 px de área con relleno vertical en línea (no mueve nada) */
       .article-body .step-content a, .article-body .callout a:not(.cta-btn) { padding-block: 12px; }
       /* En las tablas, columnas estrechas: el enlace es un bloque en línea de 44 px como mínimo, con márgenes negativos
