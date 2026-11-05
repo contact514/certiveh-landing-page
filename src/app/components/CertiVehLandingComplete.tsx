@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, createContext, useContext } from "rea
 import { Navbar } from "./Navbar";
 import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, Check, CheckCircle2, ChevronRight, Download, FileText } from "lucide-react";
+import { ArrowRight, Banknote, Check, CheckCircle2, ChevronDown, ChevronRight, Copy, Download, ExternalLink, FileText, Gift, Users } from "lucide-react";
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI } from './piezas-de-la-marca.ts';
@@ -367,7 +367,7 @@ ${CSS_UI}
   .ww-mod-n { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.6fr); gap: 8px; }
   .ww-mod-n div { text-align: center; padding: 10px; border-radius: 6px; background: var(--cv-tone); }
   .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
-  .ww-mod-n span { font-size: 13px; color: #475569; }
+  .ww-mod-n span { font-size: 13px; color: hsl(215 16% 44%); }
   .ww-mod-n .sal { background: #ecfdf5; }
   /* Como el portal en un celular estrecho (< 420 px): Referidos y Pagados en una fila y el saldo debajo, a todo el ancho. */
   @media (max-width: 419px) { .ww-mod-n { grid-template-columns: 1fr 1fr; } .ww-mod-n .sal { grid-column: 1 / -1; } }
@@ -375,7 +375,12 @@ ${CSS_UI}
   .ww-mod-n .sal b { color: var(--cv-accent); font-size: 15px; white-space: nowrap; }
   @media (min-width: 640px) { .ww-mod-n .sal b { font-size: 20px; } }
   .ww-mod-n .sal span { color: var(--cv-accent); }
-  .ww-mod-btn { display: flex; align-items: center; justify-content: center; min-height: 44px; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ww-mod-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ww-mod-ver { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 8px 0; margin-top: 16px; font-size: 13px; font-weight: 600; color: hsl(215 16% 44%); }
+  .ww-mod-ver > span { display: flex; align-items: center; gap: 6px; }
+  .ww-mod-ret { padding-top: 8px; margin-top: 16px; }
+  .ww-mod-ret-t { font-size: 14px; font-weight: 600; margin: 0 0 12px; }
+  .ww-mod-ret-s { font-size: 14px; color: hsl(215 16% 44%); margin: 0; }
 
   /* ── PREGUNTAS: baldosas que se abren ── */
   .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
@@ -1414,13 +1419,15 @@ function WinWin() {
         <div className="ww-ui rv" aria-hidden="true">
           <div className="ww-mod" data-ui>
             <div className="ww-mod-h">
-              <p className="ww-mod-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.5 3 12 8 12 8s2.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>CertiVeh Win Win</p>
-              <div className="ww-mod-code"><span>CERTIVEH-482</span><i aria-hidden="true">⧉</i><i aria-hidden="true">↗</i></div>
-              <p className="ww-mod-s">Tu amigo recibe $60.000 de descuento y tú ganas $75.000 cuando pague su trámite.</p>
+              <p className="ww-mod-k"><Gift size={16} />CertiVeh Win Win</p>
+              <div className="ww-mod-code"><span>CERTIVEH-482</span><i><Copy size={18} /></i><i><ExternalLink size={18} /></i></div>
+              <p className="ww-mod-s">Tu amigo recibe {formatoDelPortal(60_000)} de descuento y tú ganas {formatoDelPortal(75_000)} cuando pague su trámite.</p>
             </div>
             <div className="ww-mod-b">
-              <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>$150.000</b><span>Saldo disponible</span></div></div>
-              <span className="ww-mod-btn">Solicitar retiro ($150.000)</span>
+              <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>{formatoDelPortal(150_000)}</b><span>Saldo disponible</span></div></div>
+              <span className="ww-mod-btn"><Banknote size={16} /> Solicitar retiro ({formatoDelPortal(150_000)})</span>
+              <span className="ww-mod-ver"><span><Users size={14} /> Ver mis referidos</span><ChevronDown size={14} /></span>
+              <div className="ww-mod-ret"><p className="ww-mod-ret-t">Mis retiros</p><p className="ww-mod-ret-s">No has solicitado retiros aún.</p></div>
               <p className="ej" style={{ fontSize: 13, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
             </div>
           </div>
