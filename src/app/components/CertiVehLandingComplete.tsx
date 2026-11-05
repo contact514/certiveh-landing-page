@@ -97,6 +97,10 @@ const CSS = `
   .h-hero-lead { font-size: var(--cv-lead); font-weight: 600; margin-top: 28px; letter-spacing: -0.02em; }
   .h-hero-lead .flip { color: var(--cv-mint); }
   .h-hero-lead + .h-hero-sup { margin-top: 10px; }
+  /* La palabra que rota más larga («Accede a depreciación acelerada», ~296 px) no cabe en una línea por debajo de ~340 px:
+     al llegar esa palabra la línea pasaba a dos y la portada saltaba (CLS 0,108 a 320). Ahí se reservan las dos líneas
+     (2 × interlineado de 1,5) para todas las palabras; desde 350 px caben todas en una. */
+  @media (max-width: 349px) { .h-hero-lead { min-height: 3em; } }
   .h-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
   .h-figs { margin-top: 44px; display: grid; gap: 4px; }
   .h-fig { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: baseline; gap: 16px; background: rgba(9,14,26,.62); border-radius: var(--cv-r); padding: 16px 18px; }
