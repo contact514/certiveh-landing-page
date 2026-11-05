@@ -329,6 +329,7 @@ ${CSS_UI}
   .ui.ui-pago { background: rgba(4,120,87,.05); border-color: rgba(4,120,87,.2); }
   .ui.ui-pago .r { border-bottom-color: rgba(4,120,87,.1); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui.ui-pago .r b { font-variant-numeric: tabular-nums; }
+  .ui.ui-pago .ej { color: #475569; } /* sobre el tinte, el gris de nota daba 4,44:1 */
   .ui.ui-pago .r.tot { padding-top: 10px; box-shadow: 0 -1px 0 rgba(4,120,87,.2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ui.ui-pago .r.tot span { font-size: 15px; font-weight: 700; }
   .ui.ui-pago .r.tot b { font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--cv-accent); white-space: nowrap; }
