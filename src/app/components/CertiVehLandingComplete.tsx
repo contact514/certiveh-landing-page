@@ -235,6 +235,8 @@ ${CSS_UI}
   /* Pantallas de escritorio bajas (≤ 760 px de alto): el panel fijo sube a 20 px bajo la barra para que la tarjeta del
      certificado emitido, con sus dos botones apilados, quepa entera (901 × 700). */
   @media (min-width: 901px) and (max-height: 760px) { #como-funciona .flow-sticky { top: 84px; } }
+  /* Y en las más bajas (≤ 650 px, p. ej. 1280 × 600) el panel sube a 8 px bajo la barra y estrecha su relleno vertical. */
+  @media (min-width: 901px) and (max-height: 650px) { #como-funciona .flow-sticky { top: 72px; padding-block: 16px; } }
   @container tc (max-width: 511px) {
     .tc-rail-x { overflow: visible; }
     .tc-rail { flex-direction: column; gap: 6px; min-width: 0; }
@@ -276,7 +278,9 @@ ${CSS_UI}
     .tc-h { flex-wrap: wrap; row-gap: 6px; }
     .tc-who { flex-basis: calc(100% - 52px); }
     .tc-pct { order: 3; flex-basis: 100%; text-align: left; display: flex; align-items: baseline; gap: 6px; }
-    .tc-btn { font-size: 14px; padding: 12px 20px; } /* tarjeta estrecha del panel: botones de 44 px, que se apilan */
+    .tc-btn { font-size: 14px; padding: 12px 20px; width: 100%; } /* tarjeta estrecha del panel: botones de 44 px, apilados a todo el ancho como el portal */
+    .tc-f, .tc-acts { width: 100%; }
+    .tc-acts { flex-direction: column; }
   }
 
   /* ── CONFIANZA: tres columnas livianas ── */
