@@ -246,10 +246,10 @@ ${CSS_UI}
   @media (min-width: 901px) and (max-height: 650px) { #como-funciona .flow-sticky { top: 72px; padding-block: 8px; } }
   /* Las piezas de los pasos 1 y 2 son más altas que el panel en pantallas bajas. Ahí el panel enseña un tramo CONTIGUO de la
      misma pantalla, el que se ve en el portal al desplazar, nunca una composición: en el paso 1, el reverso y la factura
-     (≤ 760 px de alto); en el paso 2, desde «Tipo de propulsión» (< 1050 px) o desde «Propietario registrado» (< 720 px). */
+     (≤ 760 px de alto); en el paso 2, desde «Tipo de propulsión» (< 1050 px) o desde «Propietario registrado» (≤ 760 px). */
   @media (min-width: 901px) and (max-height: 760px) { .flow-panel .pp-doc:first-child { display: none; } }
   @media (min-width: 901px) and (max-height: 1049px) { .flow-panel .pp-f-marca, .flow-panel .pp-f-linea { display: none; } }
-  @media (min-width: 901px) and (max-height: 719px) { .flow-panel .pp-f-prop, .flow-panel .pp-b-dueno > .pp-sep { display: none; } }
+  @media (min-width: 901px) and (max-height: 760px) { .flow-panel .pp-f-prop, .flow-panel .pp-b-dueno > .pp-sep { display: none; } }
   @container tc (max-width: 511px) {
     .tc-rail-x { overflow: visible; }
     .tc-rail { --tc-gap: 10px; flex-direction: column; gap: var(--tc-gap); min-width: 0; }
@@ -308,9 +308,11 @@ ${CSS_UI}
   .pp-form { gap: 16px; }
   .pp-fld { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .pp-lab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .pp-fld label { display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(15,23,42,.8); }
-  .pp-fld label > span { color: #dc2626; margin-left: 2px; }
-  .pp-info { color: var(--pp-muted); flex: none; }
+  /* El rótulo en línea (en el portal es flex): si parte, el asterisco y el icono viajan pegados a la última palabra. */
+  .pp-fld label { display: block; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(15,23,42,.8); }
+  .pp-fld label span { color: #dc2626; margin-left: 6px; }
+  .pp-fld label .pp-nw { white-space: nowrap; margin-left: 0; }
+  .pp-info { display: inline-block; color: var(--pp-muted); margin-left: 4px; vertical-align: -2px; }
   .pp-ok { display: flex; align-items: center; gap: 4px; font-size: 13px; line-height: 18px; color: #047857; }
   .pp-ok > span { display: none; }
   @media (min-width: 640px) { .pp-ok > span { display: inline; } }
@@ -322,9 +324,13 @@ ${CSS_UI}
   .pp-bloque { display: flex; flex-direction: column; gap: 16px; }
   .pp-sep { height: 1px; background: var(--pp-border); margin: 8px 0; } /* taste-skill-ignore: el separador de secciones de SolicitudStep2 (data-ui) */
   .pp-sec { font-size: 13px; line-height: 19.5px; font-weight: 600; color: #047857; margin: 0; }
+  /* La rejilla sm:grid-cols-2 del portal la decide aquí el ancho de la PIEZA, no la ventana: dos columnas solo con ≥ 520 px
+     de pieza (el portal, en dos columnas, nunca baja de ~260 por campo). En una columna «Fecha de compra» va después del
+     valor, fuera del tramo. */
+  .pp-form { container: pp / inline-size; }
   .pp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .pp-f-fecha { display: none; }
-  @media (min-width: 640px) { .pp-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .pp-f-fecha { display: flex; } }
+  @container pp (min-width: 520px) { .pp-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .pp-f-fecha { display: flex; } }
   /* El resumen del pago de SolicitudStep3: la caja en el tinte de la marca, filas a 14 px y el total como cifra mayor. */
   .pp-pago { border-radius: 6px; border: 1px solid rgba(4,120,87,.2); background: rgba(4,120,87,.05); padding: 20px; display: flex; flex-direction: column; gap: 12px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .pp-r { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; gap: 12px; }
@@ -1056,9 +1062,9 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
         <div className="tc-who-row">
           <FotoDelVehiculo />
           <div className="tc-who">
-            <div className="tc-id"><span>Certificado UPME</span><span className="tc-folio">AF284586</span></div>
+            <div className="tc-id"><span>Certificado UPME</span><span className="tc-folio">ABCD1234</span></div>
             <div className="tc-t">BYD Seagull · 2026</div>
-            <div className="tc-pl"><span className="plate">AB**12</span><span>·</span><span>Eléctrico</span></div>
+            <div className="tc-pl"><span className="plate">AB**23</span><span>·</span><span>Eléctrico</span></div>
           </div>
         </div>
         <div className="tc-pct"><b>{pct}%</b><span>completado</span></div>
@@ -1118,10 +1124,10 @@ function PiezaDelPaso({ i }: { i: number }) {
       <div className="pp-fld pp-f-prop"><div className="pp-lab"><label>Tipo de propulsión<span>*</span></label></div><span className="pp-in pp-cb">Eléctrico<ChevronDown size={16} /></span></div>
       <div className="pp-bloque pp-b-dueno"><div className="pp-sep" /><p className="pp-sec">Propietario registrado</p><div className="pp-grid">
         <div className="pp-fld"><div className="pp-lab"><label>Nombre del propietario<span>*</span></label></div><span className="pp-in pp-off">Juan Carlos Pérez</span></div>
-        <div className="pp-fld"><div className="pp-lab"><label>Cédula del propietario<span>*</span></label></div><span className="pp-in pp-off">1020304050</span><p className="pp-ayuda">Solo dígitos</p></div>
+        <div className="pp-fld"><div className="pp-lab"><label>Cédula del propietario<span>*</span></label></div><span className="pp-in pp-off">1234567890</span><p className="pp-ayuda">Solo dígitos</p></div>
       </div></div>
       <div className="pp-bloque"><div className="pp-sep" /><p className="pp-sec">Información de compra</p><div className="pp-grid">
-        <div className="pp-fld"><div className="pp-lab"><label>Valor del vehículo sin IVA (COP)<span>*</span><Info size={14} className="pp-info" /></label></div><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
+        <div className="pp-fld"><div className="pp-lab"><label>Valor del vehículo sin IVA (COP)<span className="pp-nw"><span>*</span><Info size={14} className="pp-info" /></span></label></div><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
         <div className="pp-fld pp-f-fecha"><div className="pp-lab"><label>Fecha de compra<span>*</span></label></div><span className="pp-in pp-cb">02/10/2026<Calendar size={16} /></span></div>
       </div></div>
       <p className="ej">Datos de ejemplo</p>
@@ -1464,7 +1470,7 @@ function WinWin() {
           <div className="ww-mod" data-ui>
             <div className="ww-mod-h">
               <p className="ww-mod-k"><Gift size={16} />CertiVeh Win Win</p>
-              <div className="ww-mod-code"><span>CERTIVEH-482</span><i><Copy size={18} /></i><i><ExternalLink size={18} /></i></div>
+              <div className="ww-mod-code"><span>TUNOMBRE-123</span><i><Copy size={18} /></i><i><ExternalLink size={18} /></i></div>
               <p className="ww-mod-s">Tu amigo recibe {formatoDelPortal(60_000)} de descuento y tú ganas {formatoDelPortal(75_000)} cuando pague su trámite.</p>
             </div>
             <div className="ww-mod-b">
