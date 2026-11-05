@@ -65,10 +65,11 @@ El verde `#059669` tampoco se usa en texto (3,87:1); solo puede ser relleno deco
   verticales calibradas, y el `unicode-range` de Albert Sans. Los anchos de portada van en `em` (28.934em = 46ch de
   Albert Sans), no en `ch`, que se mide con la fuente que esté pintando. Así la portada no salta al llegar la fuente.
   Con Albert Sans cargada, su texto no cambia y lo que Albert Sans no trae («→ ↗ ⧉») se pinta con la misma fuente del
-  sistema que antes (caras sin ajustar con el `unicode-range` complementario). Quedan cuatro saltos pequeños, solo en
-  Windows y durante la carga, aceptados (cortes de línea de titulares que ningún ajuste quita sin empeorar otros):
-  /blog/vehiculos-electricos-hibridos-elegibles-beneficios-tributarios-2026/ a 390 (0,020), /terminos-y-condiciones a
-  390 (0,021), /vehiculos/hyundai-ioniq-5 a 390 (0,018) y /vehiculos/tesla-model-y a 320 (0,010).
+  sistema que antes (caras sin ajustar con el `unicode-range` complementario). Quedan cinco saltos pequeños, todos
+  ≤ 0,024, solo en Windows y durante la carga (máximo de Windows emulado: 0,028), aceptados (cortes de línea de titulares
+  que ningún ajuste quita sin empeorar otros): /blog/vehiculos-electricos-hibridos-elegibles-beneficios-tributarios-2026/
+  a 390 (0,020), /terminos-y-condiciones a 390 (0,021), /vehiculos/hyundai-ioniq-5 a 390 (0,018),
+  /vehiculos/tesla-model-y a 320 (0,010) y /api-docs a 320 (0,019 → 0,024).
 - **Cinco pasos de tamaño**: `--cv-display` (h1), `--cv-head` (h2), `--cv-lead` (entradilla y
   subtítulos), `--cv-body` (17 a 19 px; todo el texto corrido) y `--cv-small` (14 a 15 px).
   **Nada que se lea por debajo de 13 px.**
