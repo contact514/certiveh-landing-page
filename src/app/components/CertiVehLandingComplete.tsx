@@ -194,19 +194,23 @@ ${CSS_UI}
      el tipo como texto delante del id, el riel sin halo con el check dibujado y en vertical en el celular, la acción
      pendiente en el tinte sin borde y la flecha suelta, la chapa de estado legible a 13 px). */
   .tc { background: #fff; border: 1px solid var(--cv-tone-2); border-radius: 6px; width: min(460px, 100%); color: var(--cv-ink); font-family: var(--cv-font); text-align: left; overflow: hidden; container: tc / inline-size; }
-  .tc-h { display: flex; align-items: center; gap: 12px; padding: 16px 18px 4px; }
+  /* Medidas de TramiteWidget (tanda 5 del portal): rellenos de 16 px en el celular y 20 desde 640, el modelo a 18/20 px, el
+     porcentaje como cifra mayor (24/32 px), botones de 44 px apilados a todo el ancho por debajo de 640. */
+  .tc { --tcp: 16px; }
+  .tc-h { display: flex; align-items: center; gap: 12px; padding: var(--tcp) var(--tcp) 4px; }
   .tc-img { width: 40px; height: 40px; flex: none; border-radius: 6px; background: var(--cv-tone); display: grid; place-items: center; color: #475569; }
   .tc-who { min-width: 0; flex: 1; }
   .tc-id { font-size: 13px; font-weight: 400; color: #475569; margin-bottom: 2px; }
   .tc-folio { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .tc-folio::before { content: " · "; }
-  .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.375; overflow-wrap: break-word; }
   .tc-pl { font-size: 14px; color: #475569; margin-top: 4px; display: flex; align-items: center; gap: 8px; }
+  .tc-tipo::before { content: "·"; margin-right: 8px; } /* el separador del portal entre la placa y el tipo (puntuación de maquetación) */
   .tc-pct { text-align: right; flex: none; align-self: flex-start; }
-  .tc-pct b { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .tc-pct b { display: block; font-size: 32px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
   .tc-pct span { font-size: 13px; font-weight: 500; color: #475569; }
-  .tc-b { padding: 14px 18px 16px; }
-  .tc-rail-x { overflow-x: auto; margin: 0 -18px; padding: 0 18px 4px; scrollbar-width: none; }
+  .tc-b { padding: var(--tcp); }
+  .tc-rail-x { overflow-x: auto; margin: 0 calc(var(--tcp) * -1); padding: 0 var(--tcp) 4px; scrollbar-width: none; }
   .tc-rail { display: flex; min-width: 476px; padding-top: 8px; list-style: none; }
   .tc-rail li { flex: 1; display: flex; flex-direction: column; align-items: center; }
   .tc-rail .ln { display: flex; align-items: center; width: 100%; }
@@ -228,6 +232,9 @@ ${CSS_UI}
      celular: el riel es el mismo del paso anterior (emitido) y, en vertical, la tarjeta no cabía bajo la barra en
      pantallas de 700-768 px de alto. */
   .flow-panel .tc-iva-paso .tc-rail-x { display: none; }
+  /* Pantallas de escritorio bajas (≤ 760 px de alto): el panel fijo sube a 20 px bajo la barra para que la tarjeta del
+     certificado emitido, con sus dos botones apilados, quepa entera (901 × 700). */
+  @media (min-width: 901px) and (max-height: 760px) { #como-funciona .flow-sticky { top: 84px; } }
   @container tc (max-width: 511px) {
     .tc-rail-x { overflow: visible; }
     .tc-rail { flex-direction: column; gap: 6px; min-width: 0; }
@@ -238,16 +245,30 @@ ${CSS_UI}
     .tc-rail li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 24px; bottom: -6px; width: 2px; background: var(--cv-tone-2); }
     .tc-rail li.done:not(:last-child)::after { background: var(--cv-accent); }
   }
-  .tc-iva { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 16px; border-radius: 6px; background: rgba(4,120,87,.05); }
-  .tc-iva b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .tc-iva { display: flex; align-items: center; gap: 12px; min-height: 44px; margin-bottom: 16px; padding: 14px 16px; border-radius: 6px; background: rgba(4,120,87,.05); }
+  .tc-iva b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--cv-ink); } /* el título de la acción en tinta (cv-fila-t del portal); lo heredaba en gris del span */
   .tc-iva span { font-size: 13px; line-height: 1.45; color: #475569; }
   .tc-iva .go { flex: none; width: 32px; height: 32px; color: var(--cv-accent); display: grid; place-items: center; font-weight: 700; }
   .tc-f { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; box-shadow: 0 -1px 0 var(--cv-tone-2); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   /* El estado, como en la lista 2026-11 del portal: texto con color a 13 px, sin pastilla ni borde. */
-  .tc-st { font-size: 13px; font-weight: 600; color: #0369a1; }
+  .tc-st { font-size: 13px; font-weight: 600; color: #0369a1; margin-bottom: 16px; }
   .tc-st.ok { color: var(--cv-accent); }
   .tc-acts { display: flex; gap: 8px; flex-wrap: wrap; }
-  .tc-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
+  .tc-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; font-size: 14px; font-weight: 600; line-height: 1.25; padding: 12px 20px; border-radius: 6px; background: var(--cv-accent); color: #fff; }
+  @media (min-width: 640px) {
+    .tc { --tcp: 20px; }
+    .tc-t { font-size: 20px; }
+    .tc-btn { font-size: 16px; padding: 14px 24px; }
+  }
+  @media (max-width: 639px) {
+    .tc-h { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .tc-h > .tc-img { display: none; }
+    .tc-pct { text-align: left; display: flex; align-items: baseline; gap: 8px; }
+    .tc-pct b { display: inline; font-size: 24px; }
+    .tc-f, .tc-acts { width: 100%; }
+    .tc-acts { flex-direction: column; }
+    .tc-btn { width: 100%; }
+  }
   .tc-btn.g { background: var(--cv-tone); color: var(--cv-ink); }
   /* Tarjeta estrecha (celular de 320-414 px y panel de escritorio a 1024): el porcentaje baja bajo el modelo, en su propia
      línea, y así «Certificado UPME · AF284586» y «BYD Seagull · 2026» caben cada uno en una línea a 13 y 18 px. */
@@ -255,7 +276,7 @@ ${CSS_UI}
     .tc-h { flex-wrap: wrap; row-gap: 6px; }
     .tc-who { flex-basis: calc(100% - 52px); }
     .tc-pct { order: 3; flex-basis: 100%; text-align: left; display: flex; align-items: baseline; gap: 6px; }
-    .tc-pct b { display: inline; font-size: 20px; }
+    .tc-btn { font-size: 14px; padding: 12px 20px; } /* tarjeta estrecha del panel: botones de 44 px, que se apilan */
   }
 
   /* ── CONFIANZA: tres columnas livianas ── */
@@ -411,21 +432,10 @@ ${CSS_RIEL_MOVIL}
     #como-funciona .flow-steps > li:nth-child(5) .tc-rail-x,
     #como-funciona .flow-steps > li:nth-child(6) .tc-rail-x,
     #como-funciona .flow-steps > li:nth-child(6) .tc-f { display: none; }
-    #como-funciona .flow-steps > li:nth-child(5) .tc-f { margin-top: 4px; }
     #como-funciona .tc { width: 100%; }
     #como-funciona .tc-img { display: none; } /* el pictograma del vehículo: sin él, el id y el modelo caben en una línea */
     #como-funciona .tc-pct, #como-funciona .tc-who { flex-basis: auto; }
     .win .link { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 0; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-  }
-  /* «Recibe tu certificado» en el celular: el estado en su línea y debajo las dos acciones EN UNA FILA cuando la tarjeta
-     mide 270 px o más (pantallas desde 360 px), cada una a la mitad y el rótulo en dos líneas si hace falta; por debajo
-     (320 px), una encima de otra. */
-  @media (max-width: 900px) {
-    #como-funciona .flow-steps > li:nth-child(5) .tc-acts { width: 100%; }
-  }
-  @container tc (min-width: 270px) {
-    #como-funciona .flow-steps > li:nth-child(5) .frag .tc-acts { flex-wrap: nowrap; }
-    #como-funciona .flow-steps > li:nth-child(5) .frag .tc-btn { flex: 1 1 0; justify-content: center; text-align: center; }
   }
   @media (max-width: 640px) {
     /* Prensa: una columna; cada medio es una fila completa (logo, titular, formato y enlace) y no queda hueco junto
@@ -971,11 +981,14 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
         <div className="tc-who">
           <div className="tc-id"><span>Certificado UPME</span><span className="tc-folio">AF284586</span></div>
           <div className="tc-t">BYD Seagull · 2026</div>
-          <div className="tc-pl"><span className="plate">AB**12</span> Eléctrico</div>
+          <div className="tc-pl"><span className="plate">AB**12</span> <span className="tc-tipo">Eléctrico</span></div>
         </div>
         <div className="tc-pct"><b>{pct}%</b><span>completado</span></div>
       </div>
       <div className="tc-b">
+        {/* Orden del portal (TramiteWidget, J1): estado → aviso → IVA → riel → botones. El estado en texto, sin píldora (2026-11). */}
+        <p className={`tc-st${emitido ? " ok" : ""}`}>{emitido ? "¡Certificado emitido!" : RIEL_PORTAL[paso - 1]}</p>
+        {iva && (<div className="tc-iva"><span style={{ flex: 1 }}><b>Empezar mi expediente de devolución de IVA</b><span>Ya la pagaste con tu certificado. No tienes que pagar nada más.</span></span><span className="go" aria-hidden="true">→</span></div>)}
         <div className="tc-rail-x"><ol className="tc-rail">
           {RIEL_PORTAL.map((s, k) => {
             const n = k + 1, estado = n < paso ? "done" : n === paso ? "now" : "";
@@ -985,10 +998,8 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
             </li>);
           })}
         </ol></div>
-        {iva && (<div className="tc-iva"><span style={{ flex: 1 }}><b>Empezar mi expediente de devolución de IVA</b><span>Ya la pagaste con tu certificado. No tienes que pagar nada más.</span></span><span className="go" aria-hidden="true">→</span></div>)}
         <div className="tc-f">
-          <span className={`tc-st${emitido ? " ok" : ""}`}>{emitido ? "¡Certificado emitido!" : RIEL_PORTAL[paso - 1]}</span>
-          <span className="tc-acts">{emitido && <span className="tc-btn g">Descargar certificado</span>}<span className={`tc-btn${emitido ? " g" : ""}`}>Ver detalle →</span></span>
+          <span className="tc-acts">{emitido && <span className={`tc-btn${iva ? " g" : ""}`}>Descargar certificado</span>}<span className={`tc-btn${emitido ? " g" : ""}`}>Ver detalle →</span></span>
         </div>
         <p className="ej" style={{ fontSize: 13, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
       </div>
