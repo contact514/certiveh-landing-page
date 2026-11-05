@@ -194,7 +194,8 @@ ${CSS_UI}
   /* ── Piezas del portal, como se ven en el portal (tanda 5, 72d8a7f89): TramiteWidget, SolicitudStep1/2/3, WinWinModule.
      Colores, medidas y radios de sus clases de Tailwind y de su index.css (--muted-foreground 215 16% 44%, --border
      150 14% 89%, --secondary 150 16% 95%, radios de 6 px y 4 px en los campos). Fuera del portal solo «Datos de ejemplo». */
-  [data-ui] { --pp-muted: hsl(215 16% 44%); --pp-border: hsl(150 14% 89%); --pp-sec: hsl(150 16% 95%); }
+  [data-ui] { --pp-muted: hsl(215 16% 44%); --pp-border: hsl(150 14% 89%); --pp-sec: hsl(150 16% 95%); letter-spacing: normal; line-height: 1.5; }
+  /* Tracking normal y los interlineados de Tailwind del portal (text-sm 14/20, text-base 16/24, text-xl 20/28). */
   .tc { background: #fff; border: 1px solid var(--pp-border); border-radius: 6px; width: min(460px, 100%); color: var(--cv-ink); font-family: var(--cv-font); text-align: left; overflow: hidden; container: tc / inline-size; --tcp: 16px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-h { display: flex; flex-direction: column; gap: 12px; padding: var(--tcp) var(--tcp) 4px; }
   .tc-who-row { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
@@ -205,7 +206,7 @@ ${CSS_UI}
   .tc-folio { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .tc-folio::before { content: " · "; }
   .tc-t { font-size: 18px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.375; overflow-wrap: break-word; }
-  .tc-pl { font-size: 14px; color: var(--pp-muted); margin-top: 4px; display: flex; align-items: center; gap: 8px; }
+  .tc-pl { font-size: 14px; line-height: 20px; color: var(--pp-muted); margin-top: 4px; display: flex; align-items: center; gap: 8px; }
   .tc-pct { flex: none; display: flex; align-items: baseline; gap: 8px; text-align: left; }
   .tc-pct b { font-size: 24px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
   .tc-pct span { font-size: 13px; font-weight: 500; color: var(--pp-muted); }
@@ -254,9 +255,9 @@ ${CSS_UI}
     .tc-rail small { font-size: 15px; text-align: left; margin-top: 0; padding-top: 2px; line-height: 1.25; }
   }
   /* El pie: la línea del borde y los botones del portal (principal btn-cta; secundario en tono), 44 px en el celular y 52 desde 640. */
-  .tc-f { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; box-shadow: 0 -1px 0 var(--pp-border); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .tc-f { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px solid var(--pp-border); } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .tc-acts { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .tc-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; font-size: 14px; font-weight: 600; line-height: 1.25; padding: 12px 20px; border-radius: 6px; background: #047857; color: #fff; }
+  .tc-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; font-size: 14px; font-weight: 600; line-height: 20px; padding: 12px 20px; border-radius: 6px; background: #047857; color: #fff; }
   .tc-btn.g { background: var(--pp-sec); color: var(--cv-ink); }
   @media (min-width: 640px) {
     .tc { --tcp: 20px; }
@@ -267,7 +268,7 @@ ${CSS_UI}
     .tc-pct span { display: block; margin-top: 4px; }
     .tc-f { flex-direction: row; align-items: center; }
     .tc-acts { flex-direction: row; width: auto; }
-    .tc-btn { width: auto; font-size: 16px; padding: 14px 24px; }
+    .tc-btn { width: auto; font-size: 16px; line-height: 24px; padding: 14px 24px; }
   }
   /* Tarjeta estrecha (panel de escritorio de 901 a 1024): el porcentaje en su línea y los botones apilados a todo el ancho. */
   @container tc (max-width: 360px) {
@@ -275,7 +276,7 @@ ${CSS_UI}
     .tc-pct { display: flex; text-align: left; }
     .tc-pct span { margin-top: 0; }
     .tc-f, .tc-acts { flex-direction: column; width: 100%; }
-    .tc-btn { width: 100%; font-size: 14px; padding: 12px 20px; }
+    .tc-btn { width: 100%; font-size: 14px; line-height: 20px; padding: 12px 20px; }
   }
   /* SolicitudStep1/2/3 dentro de una pieza blanca (en el portal van sobre la página blanca). */
   .pp { background: #fff; border-radius: 6px; padding: 16px; width: min(460px, 100%); display: flex; flex-direction: column; gap: 12px; color: var(--cv-ink); font-family: var(--cv-font); text-align: left; }
@@ -357,30 +358,30 @@ ${CSS_UI}
      Sobre el campo verde de la sección lleva un filo blanco translúcido para separarse. */
   .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
-  .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 20px; font-weight: 600; margin-bottom: 12px; }
   .ww-mod-code { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
   .ww-mod-code span { flex: 1 1 0; min-width: 160px; text-align: center; white-space: nowrap; background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 6px; font-weight: 700; font-size: 19px; letter-spacing: 0; } /* la caja del código como WinWinModule: ocupa el ancho que queda; 19 px = texto grande, AA a 3:1 sobre el blanco al 15 % */
   @media (min-width: 640px) { .ww-mod-code span { padding-inline: 16px; } }
   .ww-mod-code i { flex: none; font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; }
-  .ww-mod-s { font-size: 14px; color: #fff; }
+  .ww-mod-s { font-size: 14px; line-height: 20px; color: #fff; }
   .ww-mod-b { background: #fff; color: var(--cv-ink); padding: 20px; }
   .ww-mod-n { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.6fr); gap: 8px; }
   .ww-mod-n div { text-align: center; padding: 10px; border-radius: 6px; background: var(--cv-tone); }
-  .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
-  .ww-mod-n span { font-size: 13px; color: hsl(215 16% 44%); }
+  .ww-mod-n b { display: block; font-size: 20px; line-height: 28px; font-weight: 700; }
+  .ww-mod-n span { display: block; font-size: 13px; line-height: 19.5px; color: hsl(215 16% 44%); }
   .ww-mod-n .sal { background: #ecfdf5; }
   /* Como el portal en un celular estrecho (< 420 px): Referidos y Pagados en una fila y el saldo debajo, a todo el ancho. */
   @media (max-width: 419px) { .ww-mod-n { grid-template-columns: 1fr 1fr; } .ww-mod-n .sal { grid-column: 1 / -1; } }
   @media (min-width: 640px) { .ww-mod-n { gap: 12px; } .ww-mod-n div { padding: 12px; } }
-  .ww-mod-n .sal b { color: var(--cv-accent); font-size: 15px; white-space: nowrap; }
-  @media (min-width: 640px) { .ww-mod-n .sal b { font-size: 20px; } }
+  .ww-mod-n .sal b { color: var(--cv-accent); font-size: 15px; line-height: 22.5px; white-space: nowrap; }
+  @media (min-width: 640px) { .ww-mod-n .sal b { font-size: 20px; line-height: 28px; } }
   .ww-mod-n .sal span { color: var(--cv-accent); }
   .ww-mod-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-ver { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 8px 0; margin-top: 16px; font-size: 13px; font-weight: 600; color: hsl(215 16% 44%); }
   .ww-mod-ver > span { display: flex; align-items: center; gap: 6px; }
   .ww-mod-ret { padding-top: 8px; margin-top: 16px; }
-  .ww-mod-ret-t { font-size: 14px; font-weight: 600; margin: 0 0 12px; }
-  .ww-mod-ret-s { font-size: 14px; color: hsl(215 16% 44%); margin: 0; }
+  .ww-mod-ret-t { font-size: 14px; line-height: 20px; font-weight: 600; margin: 0 0 12px; }
+  .ww-mod-ret-s { font-size: 14px; line-height: 20px; color: hsl(215 16% 44%); margin: 0; }
 
   /* ── PREGUNTAS: baldosas que se abren ── */
   .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
