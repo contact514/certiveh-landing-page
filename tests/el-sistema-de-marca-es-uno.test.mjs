@@ -59,6 +59,13 @@ test('marca.css lleva la fuente, el radio y la escala de los tokens', () => {
 });
 
 test('la regla de portada (.cv-hero-title / .cv-hero-sub) es la de los tokens', () => {
+  // UNA sola aparición de cada selector en TODO marca.css (sin comentarios), @media, @supports, :is() y selectores
+  // compuestos incluidos: cualquier otra regla que lo nombre podría cambiar el valor efectivo sin que esta guarda lo lea.
+  const sinComentarios = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  for (const sel of ['.cv-hero-title', '.cv-hero-sub']) {
+    const n = (sinComentarios.match(new RegExp(`\\${sel}(?![\\w-])`, 'g')) || []).length;
+    assert.equal(n, 1, `${sel} aparece ${n} veces en marca.css: debe aparecer en UNA sola regla`);
+  }
   const t = regla('.cv-hero-title'), s = regla('.cv-hero-sub'), p = tokens.tipo.portada;
   assert.match(t, /font-size:\s*var\(--cv-display\)/);
   assert.match(t, new RegExp(`line-height:\\s*\\.?${String(p.titulo.interlineado).replace(/^0/, '')}`));
