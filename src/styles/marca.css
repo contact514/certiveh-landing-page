@@ -79,10 +79,9 @@
    fichas): mismo tamaño, peso, interlineado, color y separación en todas. Las páginas solo deciden el ancho de
    su columna. Ver DESIGN_SYSTEM.md §0.3. */
 .cv-hero-title { font-size: var(--cv-display); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: .96; text-wrap: balance; }
-.cv-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 46ch; margin-top: 24px; }
-/* Los 46ch del token, medidos en Albert Sans 400 («0» = 0,629 em): en ch, mientras carga la fuente el ancho salía del
-   «0» del respaldo (13 % más estrecho), la entradilla partía en más líneas y la portada saltaba al llegar Albert Sans. */
-.cv-hero-sub { max-width: 28.934em; }
+/* max-width: el token (46ch de Albert Sans = 28.934em, tokens.json anchoMaxEm). En em y no en ch: el ch se mide con la
+   fuente que esté pintando, y con el respaldo la entradilla partía en más líneas y la portada saltaba al llegar Albert Sans. */
+.cv-hero-sub { font-size: var(--cv-lead); line-height: 1.4; color: #dbe3ee; max-width: 28.934em; margin-top: 24px; }
 
 /* Secciones dentro de una página (DESIGN_SYSTEM.md §0.3): el título de cada sección, el párrafo que lo
    introduce y el título del cierre («¿Listo…?»). Como en la portada, las páginas solo fijan ancho, columna y color

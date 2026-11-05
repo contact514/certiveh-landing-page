@@ -58,7 +58,9 @@ componente se cambia en todos los sitios donde aparece.
    Los `clamp()` exactos están en `tokens.json`.
 2. **Portada: titular y entradilla son UNA regla** (`.cv-hero-title` / `.cv-hero-sub`). Titular `display`
    (64 px escritorio, 34 px celular), 700, interlineado .96, tracking -0.03em. Entradilla `lead` (26 / 20 px),
-   interlineado 1.4, `#DBE3EE` sobre oscuro, 24 px bajo el titular, máximo 46ch. Una pantalla solo decide el
+   interlineado 1.4, `#DBE3EE` sobre oscuro, 24 px bajo el titular, máximo 46ch de Albert Sans, escrito en CSS como
+   28.934em (el `ch` se mide con la fuente que esté pintando: con el respaldo era un 13 % más estrecho y la portada
+   saltaba al llegar Albert Sans; ver DECISIONES.md). Una pantalla solo decide el
    ancho de su columna. Vale para la landing, el portal (la cabecera del campo de cada pantalla) y las maquetas.
    Excepción: los documentos de lectura (artículos del blog, /api-docs) tienen su escala.
 3. **Secciones de una página: también UNA regla** (`.cv-sec-title` / `.cv-sec-intro` / `.cv-close-title`).

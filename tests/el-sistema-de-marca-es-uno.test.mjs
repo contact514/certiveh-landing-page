@@ -10,8 +10,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const SHA = {
-  'SISTEMA.md': 'fec70bab40e89c354e58d18795b6df29a048e19edaf11d1f6f039ef912927a04',
-  'tokens.json': 'f0703f2b483136ee780122f7115ed429c111b3125efb430e3589587fdae632e5',
+  'SISTEMA.md': 'e4e09dd893372ab41a70f0941c550ed96dde376537b536f57b97d3beb6a7c196',
+  'tokens.json': 'ad66c8a3a22fd9a15e0ae07cf7bbf01330e45b7b8c3a068bfce9ec36443e8e65',
 };
 const leer = (p) => readFileSync(new URL(`../${p}`, import.meta.url));
 
@@ -28,10 +28,17 @@ const v = (nombre) => {
   assert.ok(m, `marca.css no define ${nombre}`);
   return m[1].trim();
 };
+// La regla EFECTIVA de un selector: todas sus reglas de primer nivel (fuera de @media) unidas en orden, y de cada
+// propiedad su ÚLTIMA declaración. Antes se leía solo la primera regla, y una segunda regla con el mismo selector podía
+// cambiar el valor efectivo con la guarda en verde.
 const regla = (sel) => {
-  const m = css.match(new RegExp(`\\${sel}\\s*\\{([^}]*)\\}`));
-  assert.ok(m, `marca.css no define ${sel}`);
-  return m[1];
+  const sinMedia = css.replace(/@media[^{]*\{(?:[^{}]*\{[^}]*\})*[^}]*\}/g, '');
+  const bloques = [...sinMedia.matchAll(new RegExp(`(?:^|[}\\s])\\${sel}\\s*\\{([^}]*)\\}`, 'g'))].map((m) => m[1]);
+  assert.ok(bloques.length, `marca.css no define ${sel}`);
+  assert.equal(bloques.length, 1, `${sel} debe definirse en UNA sola regla (hay ${bloques.length})`);
+  const efectivas = new Map();
+  for (const decl of bloques.join(';').split(';')) { const i = decl.indexOf(':'); if (i > 0) efectivas.set(decl.slice(0, i).trim(), decl.slice(i + 1).trim()); }
+  return [...efectivas].map(([k, x]) => `${k}: ${x}`).join('; ') + ';';
 };
 
 test('marca.css lleva los colores de los tokens', () => {
@@ -59,7 +66,7 @@ test('la regla de portada (.cv-hero-title / .cv-hero-sub) es la de los tokens', 
   assert.match(s, new RegExp(`line-height:\\s*${p.entradilla.interlineado}`));
   assert.match(s, new RegExp(`color:\\s*${p.entradilla.colorSobreOscuro}`, 'i'));
   assert.match(s, new RegExp(`margin-top:\\s*${p.entradilla.separacionPx}px`));
-  assert.match(s, new RegExp(`max-width:\\s*${p.entradilla.anchoMaxCh}ch`));
+  assert.match(s, new RegExp(`max-width:\\s*${String(p.entradilla.anchoMaxEm).replace('.', '\\.')}em;`));
 });
 
 test('la regla de secciones (.cv-sec-title / .cv-sec-intro / .cv-close-title) es la de los tokens', () => {
