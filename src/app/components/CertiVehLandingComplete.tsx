@@ -335,21 +335,24 @@ ${CSS_UI}
   .ww-mod { width: min(420px, 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35); font-family: var(--cv-font); text-align: left; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
   .ww-mod-h { background: var(--cv-accent); color: #fff; padding: 24px; }
   .ww-mod-k { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-  .ww-mod-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .ww-mod-code span { background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 16px; font-weight: 700; font-size: 19px; letter-spacing: 0; } /* 19 px: texto grande, AA a 3:1 sobre el blanco al 15 % del verde (a 18 px daba 4,12:1, por debajo de 4,5) */
-  .ww-mod-code i { font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; }
-  .ww-mod-s { font-size: 14px; color: rgba(255,255,255,.9); }
+  .ww-mod-code { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .ww-mod-code span { flex: 1 1 0; min-width: 160px; text-align: center; white-space: nowrap; background: rgba(255,255,255,.15); border-radius: 6px; padding: 10px 6px; font-weight: 700; font-size: 19px; letter-spacing: 0; } /* la caja del código como WinWinModule: ocupa el ancho que queda; 19 px = texto grande, AA a 3:1 sobre el blanco al 15 % */
+  @media (min-width: 640px) { .ww-mod-code span { padding-inline: 16px; } }
+  .ww-mod-code i { flex: none; font-style: normal; background: rgba(255,255,255,.15); border-radius: 6px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; }
+  .ww-mod-s { font-size: 14px; color: #fff; }
   .ww-mod-b { background: #fff; color: var(--cv-ink); padding: 20px; }
-  .ww-mod-n { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .ww-mod-n div { text-align: center; padding: 12px 6px; border-radius: 6px; background: var(--cv-tone); }
+  .ww-mod-n { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.6fr); gap: 8px; }
+  .ww-mod-n div { text-align: center; padding: 10px; border-radius: 6px; background: var(--cv-tone); }
   .ww-mod-n b { display: block; font-size: 20px; font-weight: 700; }
   .ww-mod-n span { font-size: 13px; color: #475569; }
   .ww-mod-n .sal { background: #ecfdf5; }
   /* Como el portal en un celular estrecho (< 420 px): Referidos y Pagados en una fila y el saldo debajo, a todo el ancho. */
   @media (max-width: 419px) { .ww-mod-n { grid-template-columns: 1fr 1fr; } .ww-mod-n .sal { grid-column: 1 / -1; } }
-  .ww-mod-n .sal b { color: var(--cv-accent); font-size: 17px; }
+  @media (min-width: 640px) { .ww-mod-n { gap: 12px; } .ww-mod-n div { padding: 12px; } }
+  .ww-mod-n .sal b { color: var(--cv-accent); font-size: 15px; white-space: nowrap; }
+  @media (min-width: 640px) { .ww-mod-n .sal b { font-size: 20px; } }
   .ww-mod-n .sal span { color: var(--cv-accent); }
-  .ww-mod-btn { display: block; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
+  .ww-mod-btn { display: flex; align-items: center; justify-content: center; min-height: 44px; text-align: center; margin-top: 16px; padding: 10px; border-radius: 6px; background: rgba(4,120,87,.05); box-shadow: inset 0 0 0 1px rgba(4,120,87,.2); color: var(--cv-accent); font-weight: 600; font-size: 13px; } /* taste-skill-ignore: pieza de interfaz del portal (data-ui) */
 
   /* ── PREGUNTAS: baldosas que se abren ── */
   .faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 28px); align-items: start; }
