@@ -308,11 +308,12 @@ ${CSS_UI}
   .pp-form { gap: 16px; }
   .pp-fld { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .pp-lab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  /* El rótulo en línea (en el portal es flex): si parte, el asterisco y el icono viajan pegados a la última palabra. */
-  .pp-fld label { display: block; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(15,23,42,.8); }
-  .pp-fld label span { color: #dc2626; margin-left: 6px; }
-  .pp-fld label .pp-nw { white-space: nowrap; margin-left: 0; }
-  .pp-info { display: inline-block; color: var(--pp-muted); margin-left: 4px; vertical-align: -2px; }
+  /* El rótulo de FieldRow: flex items-center gap-1, el asterisco con ml-0.5 y el icono Info en su propio hueco. Si el texto
+     parte, el asterisco y el icono quedan a la derecha del bloque, centrados en vertical, como en el portal. */
+  .pp-fld label { display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(15,23,42,.8); }
+  .pp-fld label > span:not(.pp-tip) { color: #dc2626; margin-left: 2px; }
+  .pp-tip { display: flex; flex: none; }
+  .pp-info { display: block; color: var(--pp-muted); }
   .pp-ok { display: flex; align-items: center; gap: 4px; font-size: 13px; line-height: 18px; color: #047857; }
   .pp-ok > span { display: none; }
   @media (min-width: 640px) { .pp-ok > span { display: inline; } }
@@ -1127,7 +1128,7 @@ function PiezaDelPaso({ i }: { i: number }) {
         <div className="pp-fld"><div className="pp-lab"><label>Cédula del propietario<span>*</span></label></div><span className="pp-in pp-off">1234567890</span><p className="pp-ayuda">Solo dígitos</p></div>
       </div></div>
       <div className="pp-bloque"><div className="pp-sep" /><p className="pp-sec">Información de compra</p><div className="pp-grid">
-        <div className="pp-fld"><div className="pp-lab"><label>Valor del vehículo sin IVA (COP)<span className="pp-nw"><span>*</span><Info size={14} className="pp-info" /></span></label></div><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
+        <div className="pp-fld"><div className="pp-lab"><label>Valor del vehículo sin IVA (COP)<span>*</span><span className="pp-tip"><Info size={14} className="pp-info" /></span></label></div><span className="pp-in">120.000.000</span><p className="pp-ayuda">Valor bruto del vehículo, sin IVA ni otros impuestos o descuentos</p></div>
         <div className="pp-fld pp-f-fecha"><div className="pp-lab"><label>Fecha de compra<span>*</span></label></div><span className="pp-in pp-cb">02/10/2026<Calendar size={16} /></span></div>
       </div></div>
       <p className="ej">Datos de ejemplo</p>
