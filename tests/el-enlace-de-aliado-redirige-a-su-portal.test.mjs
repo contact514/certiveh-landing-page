@@ -10,8 +10,9 @@
 //     `vercel dev` no lo imita, así que el guion de publicación lo comprueba en vivo.
 //
 // Vercel compila cada regla con path-to-regexp: `/r/:sub(<patrón>)` es `^/r(?:/(<patrón>))$` y la de la barra final,
-// lo mismo con `/` antes del `$`, sin distinguir mayúsculas (medido con @vercel/routing-utils 6.6.1). `compilar` hace
-// exactamente eso para esta forma de regla, y falla si la regla cambia de forma.
+// lo mismo con `/` antes del `$`, sin distinguir mayúsculas; y un destino sin ruta sale con la barra final
+// (`Location: https://$1.portal.certiveh.co/`), medido con @vercel/routing-utils 6.6.1. `compilar` y `destino` hacen
+// exactamente eso para esta forma de regla, y fallan si la regla cambia de forma.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -24,10 +25,12 @@ const compilar = (r) => {
   assert.ok(m, `forma de regla inesperada: ${r.source}`);
   return new RegExp(`^/r(?:/(${m[1]}))${m[2]}$`, 'i');
 };
+// Como `new URL`: a un origen sin ruta se le pone «/». Es lo que Vercel deja en el Location.
+const destino = (d, sub) => { const u = d.replace(':sub', sub); return /^https:\/\/[^/]+$/.test(u) ? `${u}/` : u; };
 const resolver = (ruta) => {
   for (const r of reglas) {
     const m = compilar(r).exec(ruta);
-    if (m) return `${r.statusCode ?? (r.permanent ? 308 : 307)} ${r.destination.replace(':sub', m[1])}`;
+    if (m) return `${r.statusCode ?? (r.permanent ? 308 : 307)} ${destino(r.destination, m[1])}`;
   }
   return '404';
 };
@@ -39,11 +42,12 @@ test('las dos reglas de /r/:sub, transcritas enteras', () => {
   ]);
 });
 
-test('un subdominio válido va a su portal con un 302, con o sin barra final', () => {
-  assert.equal(resolver('/r/mi-aliado'), '302 https://mi-aliado.portal.certiveh.co');
-  assert.equal(resolver('/r/mi-aliado/'), '302 https://mi-aliado.portal.certiveh.co');
-  assert.equal(resolver('/r/concesionario-2026'), '302 https://concesionario-2026.portal.certiveh.co');
-  assert.equal(resolver(`/r/${'a'.repeat(63)}`), `302 https://${'a'.repeat(63)}.portal.certiveh.co`);
+test('un subdominio válido va a su portal con un 302, con o sin barra final, y el Location lleva la barra final', () => {
+  assert.equal(resolver('/r/mi-aliado'), '302 https://mi-aliado.portal.certiveh.co/');
+  assert.equal(resolver('/r/mi-aliado/'), '302 https://mi-aliado.portal.certiveh.co/');
+  assert.equal(resolver('/r/concesionario-2026/'), '302 https://concesionario-2026.portal.certiveh.co/');
+  assert.equal(resolver('/r/concesionario-2026'), '302 https://concesionario-2026.portal.certiveh.co/');
+  assert.equal(resolver(`/r/${'a'.repeat(63)}`), `302 https://${'a'.repeat(63)}.portal.certiveh.co/`);
 });
 
 test('lo que no es un subdominio no redirige a ningún sitio: 404, como antes', () => {
