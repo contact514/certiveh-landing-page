@@ -1,6 +1,9 @@
 ---
 // El estándar visual 2026-11 (tokens y clases de marca) para todas las páginas: DESIGN_SYSTEM.md §0.
 import '../styles/marca.css';
+// Medición de ventas (6-nov-2026): la etiqueta de Google Ads sólo si el build trae `GOOGLE_ADS_TAG_ID` (AW-<dígitos>).
+import { idDeLaEtiquetaDeGoogle } from '../scripts/cv-atrib.ts';
+const etiquetaDeGoogleAds = idDeLaEtiquetaDeGoogle(import.meta.env.GOOGLE_ADS_TAG_ID);
 
 interface Props {
   title?: string;
@@ -75,6 +78,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-FJ10NX1DV6');
+    </script>
+    <!-- Medición de ventas (6-nov-2026): el id de clic del anuncio (fbclid / gclid / gbraid / wbraid) a la cookie cv_atrib
+         de .certiveh.co, y la etiqueta de Google Ads (AW-…) sobre el mismo gtag.js, sólo si el build trae GOOGLE_ADS_TAG_ID.
+         La conversión la sube el servidor del portal; aquí sólo se guarda el clic. -->
+    {etiquetaDeGoogleAds && <meta name="cv-etiqueta-google-ads" content={etiquetaDeGoogleAds} />}
+    <script>
+      import { capturarLaAtribucionDeLaUrl, configurarLaEtiquetaDeGoogleAds } from '../scripts/cv-atrib.ts';
+      capturarLaAtribucionDeLaUrl(window);
+      // Astro emite los <script> como módulos y no garantiza que éste corra DESPUÉS del de GA4 (que hace gtag('js')): la
+      // etiqueta se configura al terminar de cargar el documento, cuando ya corrieron todos.
+      if (document.readyState === 'complete') configurarLaEtiquetaDeGoogleAds(window);
+      else window.addEventListener('DOMContentLoaded', () => configurarLaEtiquetaDeGoogleAds(window), { once: true });
     </script>
 
     <!-- Meta Pixel -->
