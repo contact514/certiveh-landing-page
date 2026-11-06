@@ -8,7 +8,7 @@
  *
  * Es el MISMO formato que escribe el portal (`certiveh-portal-login`, `src/lib/atribucion.ts`, función
  * `capturarLaAtribucionDeLaUrl`): si cambias uno, cambia el otro. Versión 1:
- *   {"v":1,"fbclid":…,"fbclid_at":<ms>,"gclid"|"gbraid"|"wbraid":…,"clic_at":<ms>,"landing_url":"https://…/ruta","utm":{…}}
+ *   {"v":1,"fbclid":…,"fbclid_at":<ms>,"gclid"|"gbraid"|"wbraid":…,"clic_at":<ms>,"landing_url":"https://…/ruta","utm":{…},"llegada_at":<ms>}
  *
  * Qué NO guarda: ningún otro parámetro de la URL, ni la consulta ni el fragmento de la página (podrían llevar un correo
  * o un token). Nunca lanza: medir no puede romper la página.
@@ -36,6 +36,8 @@ type CookieDeAtribucion = {
   clic_at?: number;
   landing_url?: string;
   utm?: Record<string, string>;
+  /** Cuándo se guardaron `landing_url` y `utm` (ronda 8): como los ids, valen 90 días desde ahí. */
+  llegada_at?: number;
 };
 
 function esDeCertiveh(h: string): boolean {
@@ -43,13 +45,26 @@ function esDeCertiveh(h: string): boolean {
   return x === 'certiveh.co' || x.endsWith('.certiveh.co');
 }
 
-export function leerLaCookieDeAtribucion(doc: { cookie: string }): CookieDeAtribucion | null {
+/**
+ * **La cookie también cumple los 90 días** (ronda 8): al leerla se descarta cada dato capturado hace más de 90 días (o sin
+ * fecha), aunque la cookie siga viva porque se reescribió después. Así no se reenvía ni se arrastra al reescribirla.
+ */
+export function sinLoCaducado(c: CookieDeAtribucion, ahora: number): CookieDeAtribucion {
+  const vivo = (t: unknown) => typeof t === 'number' && Number.isFinite(t) && ahora - t <= DURACION_DE_LA_ATRIBUCION_S * 1000;
+  const r: CookieDeAtribucion = { ...c };
+  if (!vivo(r.fbclid_at)) { delete r.fbclid; delete r.fbclid_at; }
+  if (!vivo(r.clic_at)) { for (const k of IDS_DE_GOOGLE) delete r[k]; delete r.clic_at; }
+  if (!vivo(r.llegada_at)) { delete r.landing_url; delete r.utm; delete r.llegada_at; }
+  return r;
+}
+
+export function leerLaCookieDeAtribucion(doc: { cookie: string }, ahora: number = Date.now()): CookieDeAtribucion | null {
   try {
     for (const parte of String(doc.cookie ?? '').split(';')) {
       const i = parte.indexOf('=');
       if (i < 0 || parte.slice(0, i).trim() !== COOKIE_DE_ATRIBUCION) continue;
       const j = JSON.parse(decodeURIComponent(parte.slice(i + 1).trim())) as CookieDeAtribucion;
-      return j && typeof j === 'object' && j.v === 1 ? j : null;
+      return j && typeof j === 'object' && j.v === 1 ? sinLoCaducado(j, ahora) : null;
     }
   } catch { /* ilegible */ }
   return null;
@@ -60,7 +75,7 @@ export function capturarLaAtribucionDeLaUrl(win: Ventana, ahora: number = Date.n
   try {
     if (!esDeCertiveh(win.location.hostname)) return false;
     const p = new URLSearchParams(win.location.search);
-    const antes: CookieDeAtribucion = leerLaCookieDeAtribucion(win.document) ?? { v: 1 };
+    const antes: CookieDeAtribucion = leerLaCookieDeAtribucion(win.document, ahora) ?? { v: 1 };
     const nueva: CookieDeAtribucion = { ...antes, v: 1 };
     let cambio = false;
     let clic = false;
@@ -86,8 +101,16 @@ export function capturarLaAtribucionDeLaUrl(win: Ventana, ahora: number = Date.n
       const v = p.get(k)?.trim();
       if (v && v.length <= 150) utm[k] = v;
     }
-    if (Object.keys(utm).length && (clic || !antes.utm)) { nueva.utm = utm; cambio = true; }
-    if (cambio && (clic || !antes.landing_url)) nueva.landing_url = `${win.location.origin}${win.location.pathname}`.slice(0, 300);
+    // La llegada (URL de entrada y utm) es UNA pieza con su fecha (ronda 8): un clic nuevo la sustituye entera (aunque sea
+    // por nada); sin clic, sólo se llena si no había. Nunca un dato viejo bajo una fecha nueva.
+    if (clic) { delete nueva.utm; delete nueva.landing_url; delete nueva.llegada_at; }
+    const hayUtm = Object.keys(utm).length > 0;
+    if (!nueva.utm && !nueva.landing_url && (hayUtm || clic)) {
+      if (hayUtm) nueva.utm = utm;
+      nueva.landing_url = `${win.location.origin}${win.location.pathname}`.slice(0, 300);
+      if (nueva.utm || nueva.landing_url) nueva.llegada_at = ahora;
+      cambio = true;
+    }
     if (!cambio) return false;
 
     win.document.cookie = `${COOKIE_DE_ATRIBUCION}=${encodeURIComponent(JSON.stringify(nueva))}; Max-Age=${DURACION_DE_LA_ATRIBUCION_S}; Path=/; Domain=.certiveh.co; SameSite=Lax; Secure`;
