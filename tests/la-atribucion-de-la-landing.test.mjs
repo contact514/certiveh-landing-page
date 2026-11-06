@@ -62,9 +62,10 @@ test('🔴 la etiqueta AW: sólo con un id AW-<dígitos>, y empuja `arguments` c
   assert.equal(sin.dataLayer, undefined);
   const con = { document: { querySelector: () => ({ getAttribute: () => 'AW-123456789' }) }, dataLayer: [['ya']] };
   assert.equal(configurarLaEtiquetaDeGoogleAds(con), true);
-  assert.equal(con.dataLayer.length, 2);
-  assert.deepEqual(Array.from(con.dataLayer[1]), ['config', 'AW-123456789']);
-  assert.equal(Object.prototype.toString.call(con.dataLayer[1]), '[object Arguments]');
+  assert.equal(con.dataLayer.length, 3);
+  assert.deepEqual(Array.from(con.dataLayer[1]), ['set', 'url_passthrough', false]);
+  assert.deepEqual(Array.from(con.dataLayer[2]), ['config', 'AW-123456789', { allow_enhanced_conversions: false }]);
+  assert.equal(Object.prototype.toString.call(con.dataLayer[2]), '[object Arguments]');
 });
 
 test('el cable en BaseLayout: la meta sólo con el id del build, y la etiqueta configurada cuando ya corrió GA4', () => {

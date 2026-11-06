@@ -117,7 +117,10 @@ export function configurarLaEtiquetaDeGoogleAds(win: VentanaConDataLayer): boole
     win.dataLayer = win.dataLayer || [];
     const dl = win.dataLayer;
     const gtag = function (..._a: unknown[]) { dl.push(arguments as any); };
-    gtag('config', id);
+    // Sin pasar el id de clic por los enlaces y sin conversiones avanzadas en la etiqueta: los datos del visitante no salen
+    // del navegador (auditoría I5). En Google Ads se apaga además la recopilación automática de datos del usuario (guion F).
+    gtag('set', 'url_passthrough', false);
+    gtag('config', id, { allow_enhanced_conversions: false });
     return true;
   } catch {
     return false;
