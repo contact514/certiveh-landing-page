@@ -120,6 +120,8 @@ export function configurarLaEtiquetaDeGoogleAds(win: VentanaConDataLayer): boole
     // Sin pasar el id de clic por los enlaces y sin conversiones avanzadas en la etiqueta: los datos del visitante no salen
     // del navegador (auditoría I5). En Google Ads se apaga además la recopilación automática de datos del usuario (guion F).
     gtag('set', 'url_passthrough', false);
+    // Sin remarketing (7-nov-2026): ni personalización de anuncios ni señales de Google. Sólo el vinculador de conversiones.
+    gtag('set', { allow_ad_personalization_signals: false, allow_google_signals: false });
     gtag('config', id, { allow_enhanced_conversions: false });
     return true;
   } catch {
