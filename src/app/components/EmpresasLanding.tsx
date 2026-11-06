@@ -4,7 +4,8 @@ import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
 import { cotizacionDeGas } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
-import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI, useRielPorScroll } from './piezas-de-la-marca.ts';
+import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, useRielPorScroll } from './piezas-de-la-marca.ts';
+import { CSS_ILUSTRACION, IlustracionDelPaso } from './IlustracionesDelProceso';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CertiVeh — Landing Empresas
@@ -92,16 +93,10 @@ ${CSS_CALC}
   .bt.d .fig { color: var(--cv-mint); }
   .bt.d .law { color: var(--cv-field-soft); }
 
-  /* ── EL PROCESO: el riel de la home (avanza con el scroll) y la pieza de cada paso a la derecha ── */
+  /* ── EL PROCESO: el riel de la home (avanza con el scroll) y la ilustración de cada paso a la derecha ── */
 ${CSS_RIEL}
-${CSS_UI}
+${CSS_ILUSTRACION}
   .flow-steps .step-num { display: none; }
-  .ui .r b { font-weight: 600; white-space: nowrap; }
-  .ui .r.st { display: grid; gap: 2px; justify-content: stretch; }
-  .ui .r.st b { white-space: normal; }
-  .ui .rk { font-size: 13px; color: var(--cv-soft); font-weight: 600; margin-top: 2px; }
-  .ui .cert { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
-  .ui .cert i { flex: none; width: 40px; height: 40px; border-radius: 6px; background: #ecfdf5; color: var(--cv-accent); display: grid; place-items: center; font-style: normal; }
 
   /* ── POR QUÉ: campo oscuro, el texto a la izquierda y cuatro razones en baldosas ── */
   .oa-dark { background: var(--cv-field); color: #fff; margin-top: var(--cv-gap-sec); padding-block: clamp(64px, 8vw, 120px); scroll-margin-top: var(--cv-ancla-campo); }
@@ -171,14 +166,6 @@ ${CSS_RIEL_MOVIL}
     h1 br, h2 br { display: none; }
     /* En el celular todo se ve completo en reposo: sin entrada con opacidad (taste skill) */
     .rv, .rv.pend { opacity: 1; transform: none; transition: none; }
-    /* El proceso: en los pasos 2, 3 y 5 el título de la pieza repite palabra por palabra el título del paso que tiene
-       justo encima; en el celular la pieza empieza en su primera fila (en escritorio, el panel la muestra entera). */
-    #como-funciona .flow-steps > li:nth-child(2) .frag .ui > .t,
-    #como-funciona .flow-steps > li:nth-child(3) .frag .ui > .t,
-    #como-funciona .flow-steps > li:nth-child(5) .frag .ui > .t { display: none; }
-    /* y en los pasos 3 y 5 la nota al pie de la pieza repite la frase en negrita del paso */
-    #como-funciona .flow-steps > li:nth-child(3) .frag .ej,
-    #como-funciona .flow-steps > li:nth-child(5) .frag .ej { display: none; }
   }
   @media (max-width: 560px) {
     .oa-trust { grid-template-columns: 1fr; }
@@ -405,59 +392,9 @@ function Beneficios() {
   );
 }
 
-// ── COMO FUNCIONA ────────────────────────────────────────────────────────────
-// El riel de la home: avanza con el scroll (o al tocar un paso) y a la derecha va la pieza de ESE paso, armada como
-// un fragmento real del trámite con los datos que el propio paso enuncia. En el celular cada paso lleva su pieza debajo.
-function PiezaDelPaso({ i }: { i: number }) {
-  switch (i) {
-    case 0: return (
-      <div className="ui" data-ui>
-        <div className="t">Documentos del proyecto</div>
-        <div className="r"><span>Fichas técnicas de los equipos</span><span className="ok">Leída</span></div>
-        <div className="r"><span>Facturas o cotizaciones</span><span className="ok">Leída</span></div>
-        <div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>Información del proyecto</span><span className="wait">Subiendo</span></div><div className="prog"><i /></div></div>
-        <p className="ej">Resolución UPME 135 de 2025 · Datos de ejemplo</p>
-      </div>
-    );
-    case 1: return (
-      <div className="ui" data-ui>
-        <div className="t">Radicación ante la UPME</div>
-        <div className="r"><span>Sistema Único de Usuarios (SUU)</span><span className="ok">Radicada</span></div>
-        <div className="r"><span>Formatos oficiales</span><span className="ok">Completos</span></div>
-        <div className="r st"><span>Ventana continua</span><b>1 de febrero al 15 de diciembre</b></div>
-        <p className="ej">Datos de ejemplo</p>
-      </div>
-    );
-    case 2: return (
-      <div className="ui" data-ui>
-        <div className="t">Evaluación técnica</div>
-        <div className="r"><span>Completitud</span><span className="ok">10 días hábiles</span></div>
-        <div className="r" style={{ display: "block" }}><div style={{ display: "flex", justifyContent: "space-between" }}><span>FNCE (solar)</span><span className="wait">Hasta 20 días hábiles</span></div><div className="prog"><i /></div></div>
-        <div className="r st"><span>GEE (cargadores, GNV)</span><b>Hasta 30 días hábiles</b></div>
-        <p className="ej">CertiVeh gestiona los requerimientos de la UPME.</p>
-      </div>
-    );
-    case 3: return (
-      <div className="ui" data-ui>
-        <div className="cert"><i><Icon name="award" size={22} /></i><div><div className="t">Certificado oficial UPME</div><div className="rk">Notificado por el SUU</div></div></div>
-        <div className="r"><span>Concepto técnico</span><span className="ok">Favorable</span></div>
-        <div className="r"><span>Vigencia</span><b>Sin límite de vigencia</b></div>
-        <span className="btnui">Descargar certificado</span>
-        <p className="ej">Datos de ejemplo</p>
-      </div>
-    );
-    default: return (
-      <div className="ui" data-ui>
-        <div className="t">Aplicación de beneficios</div>
-        <div className="r"><span>Exclusión/devolución de IVA (19%)</span><span className="ok">Soportada</span></div>
-        <div className="r"><span>Deducción en renta (50%)</span><span className="ok">Soportada</span></div>
-        <div className="r"><span>Exención arancelaria</span><span className="ok">Soportada</span></div>
-        <div className="r"><span>Depreciación acelerada</span><span className="ok">Soportada</span></div>
-        <p className="ej">Cuatro beneficios con un solo certificado.</p>
-      </div>
-    );
-  }
-}
+// ── COMO FUNCIONA ────────────────────────────────────────────────────────────────────────────────────────────────────
+// El riel de la home: avanza con el scroll (o al tocar un paso) y a la derecha va la ilustración de ESE paso. No son
+// piezas del portal: el portal no tiene un flujo de proyectos, así que se dibujan (IlustracionesDelProceso.tsx).
 
 function ComoFunciona() {
   const steps = [
@@ -489,7 +426,7 @@ function ComoFunciona() {
                 <p className="subt">{s.subtitle}</p>
                 <p className="desc">{s.desc}</p>
                 <p className="det">{s.detail}</p>
-                <div className="frag" aria-hidden="true"><PiezaDelPaso i={i} /></div>
+                <div className="frag" aria-hidden="true"><IlustracionDelPaso i={i} /></div>
               </li>
             ))}
           </ol>
@@ -497,7 +434,7 @@ function ComoFunciona() {
             <div className="flow-sticky">
               <AnimatePresence mode="wait">
                 <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} style={{ width: "100%", display: "grid", placeItems: "center" }}>
-                  <PiezaDelPaso i={active} />
+                  <IlustracionDelPaso i={active} />
                 </motion.div>
               </AnimatePresence>
             </div>
