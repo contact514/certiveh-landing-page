@@ -58,13 +58,25 @@ export function sinLoCaducado(c: CookieDeAtribucion, ahora: number): CookieDeAtr
   return r;
 }
 
-export function leerLaCookieDeAtribucion(doc: { cookie: string }, ahora: number = Date.now()): CookieDeAtribucion | null {
+/**
+ * Cuánto le queda a la cookie (s): lo que le quede al dato MÁS reciente, nunca más de 90 días (ronda 9). Así la cookie no
+ * sobrevive a sus datos: cuando caduca el último, caduca ella.
+ */
+export function vidaDeLaCookie(c: CookieDeAtribucion, ahora: number): number {
+  const fechas = [c.fbclid_at, c.clic_at, c.llegada_at].filter((t): t is number => typeof t === 'number' && Number.isFinite(t));
+  if (!fechas.length) return 0;
+  const ms = Math.max(...fechas) + DURACION_DE_LA_ATRIBUCION_S * 1000 - ahora;
+  return Math.max(0, Math.min(DURACION_DE_LA_ATRIBUCION_S, Math.floor(ms / 1000)));
+}
+
+/** `ahora = null`: tal cual está escrita, sin descartar lo caducado (sólo para reescribirla). */
+export function leerLaCookieDeAtribucion(doc: { cookie: string }, ahora: number | null = Date.now()): CookieDeAtribucion | null {
   try {
     for (const parte of String(doc.cookie ?? '').split(';')) {
       const i = parte.indexOf('=');
       if (i < 0 || parte.slice(0, i).trim() !== COOKIE_DE_ATRIBUCION) continue;
       const j = JSON.parse(decodeURIComponent(parte.slice(i + 1).trim())) as CookieDeAtribucion;
-      return j && typeof j === 'object' && j.v === 1 ? sinLoCaducado(j, ahora) : null;
+      return j && typeof j === 'object' && j.v === 1 ? (ahora === null ? j : sinLoCaducado(j, ahora)) : null;
     }
   } catch { /* ilegible */ }
   return null;
@@ -75,9 +87,11 @@ export function capturarLaAtribucionDeLaUrl(win: Ventana, ahora: number = Date.n
   try {
     if (!esDeCertiveh(win.location.hostname)) return false;
     const p = new URLSearchParams(win.location.search);
-    const antes: CookieDeAtribucion = leerLaCookieDeAtribucion(win.document, ahora) ?? { v: 1 };
+    const cruda = leerLaCookieDeAtribucion(win.document, null);
+    const antes: CookieDeAtribucion = cruda ? sinLoCaducado(cruda, ahora) : { v: 1 };
     const nueva: CookieDeAtribucion = { ...antes, v: 1 };
-    let cambio = false;
+    // Si al leerla había algo caducado, se reescribe ya (ronda 9): lo caducado no viaja hasta el Max-Age.
+    let cambio = !!cruda && JSON.stringify(antes) !== JSON.stringify(cruda);
     let clic = false;
 
     const fbclid = p.get('fbclid')?.trim();
@@ -113,7 +127,8 @@ export function capturarLaAtribucionDeLaUrl(win: Ventana, ahora: number = Date.n
     }
     if (!cambio) return false;
 
-    win.document.cookie = `${COOKIE_DE_ATRIBUCION}=${encodeURIComponent(JSON.stringify(nueva))}; Max-Age=${DURACION_DE_LA_ATRIBUCION_S}; Path=/; Domain=.certiveh.co; SameSite=Lax; Secure`;
+    const vida = vidaDeLaCookie(nueva, ahora);
+    win.document.cookie = `${COOKIE_DE_ATRIBUCION}=${vida > 0 ? encodeURIComponent(JSON.stringify(nueva)) : ''}; Max-Age=${vida}; Path=/; Domain=.certiveh.co; SameSite=Lax; Secure`;
     return true;
   } catch {
     return false;

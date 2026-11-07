@@ -71,6 +71,20 @@ test('🔴 ronda 8 · la cookie cumple 90 días: lo capturado hace más (o sin f
   assert.equal(capturarLaAtribucionDeLaUrl(ventana('https://certiveh.co/?utm_source=otro', `cv_atrib=${previo}`).win, 60), false);
 });
 
+test('🔴 ronda 9 · si al leerla hay algo caducado se reescribe ya, y la cookie vive lo que le quede a su dato más reciente', () => {
+  const DIA = 86_400_000, T = 200 * DIA;
+  const mezcla = { v: 1, fbclid: 'IwAR2xYz_vivo01', fbclid_at: T - 30 * DIA, gclid: 'Cj0KCQiA_viejo1', clic_at: T - 91 * DIA };
+  const v = ventana('https://certiveh.co/blog', `cv_atrib=${encodeURIComponent(JSON.stringify(mezcla))}`);
+  assert.equal(capturarLaAtribucionDeLaUrl(v.win, T), true);
+  assert.match(v.tarro[0], new RegExp(`; Max-Age=${60 * 86_400}; `));
+  assert.deepEqual(leerLaCookieDeAtribucion({ cookie: v.tarro[0].split(';')[0] }, null), { v: 1, fbclid: 'IwAR2xYz_vivo01', fbclid_at: T - 30 * DIA });
+  const w = ventana('https://certiveh.co/', `cv_atrib=${encodeURIComponent(JSON.stringify({ v: 1, gclid: 'Cj0KCQiA_viejo1', clic_at: T - 91 * DIA }))}`);
+  assert.equal(capturarLaAtribucionDeLaUrl(w.win, T), true);
+  assert.match(w.tarro[0], /^cv_atrib=; Max-Age=0; /);
+  const x = ventana('https://certiveh.co/', `cv_atrib=${encodeURIComponent(JSON.stringify({ v: 1, fbclid: 'IwAR2xYz_vivo01', fbclid_at: T - 30 * DIA }))}`);
+  assert.equal(capturarLaAtribucionDeLaUrl(x.win, T), false);
+});
+
 test('un id con forma rara no se guarda, y una cookie basura no rompe', () => {
   assert.equal(capturarLaAtribucionDeLaUrl(ventana('https://certiveh.co/?gclid=a%20b').win), false);
   assert.equal(capturarLaAtribucionDeLaUrl(ventana('https://certiveh.co/?gclid=Cj0KCQiA_gclid1', 'cv_atrib=%7Bno').win), true);
