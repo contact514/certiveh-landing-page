@@ -83,6 +83,12 @@ test('🔴 ronda 9 · si al leerla hay algo caducado se reescribe ya, y la cooki
   assert.match(w.tarro[0], /^cv_atrib=; Max-Age=0; /);
   const x = ventana('https://certiveh.co/', `cv_atrib=${encodeURIComponent(JSON.stringify({ v: 1, fbclid: 'IwAR2xYz_vivo01', fbclid_at: T - 30 * DIA }))}`);
   assert.equal(capturarLaAtribucionDeLaUrl(x.win, T), false);
+  // Con dos datos, manda el MÁS reciente: un clic de Google de hace 10 días la mantiene 80 días más.
+  const y = ventana('https://certiveh.co/', `cv_atrib=${encodeURIComponent(JSON.stringify({ ...mezcla, clic_at: T - 10 * DIA, llegada_at: T - 95 * DIA, utm: { a: 'b' } }))}`);
+  assert.equal(capturarLaAtribucionDeLaUrl(y.win, T), true);
+  assert.match(y.tarro[0], new RegExp(`; Max-Age=${80 * 86_400}; `));
+  // Y quien la lee (sin reescribirla) tampoco ve lo caducado.
+  assert.deepEqual(leerLaCookieDeAtribucion({ cookie: `cv_atrib=${encodeURIComponent(JSON.stringify(mezcla))}` }, T), { v: 1, fbclid: 'IwAR2xYz_vivo01', fbclid_at: T - 30 * DIA });
 });
 
 test('un id con forma rara no se guarda, y una cookie basura no rompe', () => {
