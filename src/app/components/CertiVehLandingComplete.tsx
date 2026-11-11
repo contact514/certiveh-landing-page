@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Banknote, Calendar, Check, CheckCircle2, ChevronDown, Copy, Download, ExternalLink, FileText, Gift, HelpCircle, Info, Users } from "lucide-react";
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
+import { VIGENTE_DESDE } from '@/lib/vigencia-de-los-codigos.ts';
 import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI } from './piezas-de-la-marca.ts';
 
 /**
@@ -1448,12 +1449,23 @@ function Prensa() {
 
 // ── WIN WIN ──────────────────────────────────────────────────────────────────
 // A la derecha, el módulo Win Win del portal (`WinWinModule.tsx`) con sus rótulos reales y cifras de ejemplo.
+// Las cifras en pesos salen de la tarifa (Anexo A v2.0 de los Términos): quien llega con el código recibe el 15 %
+// de los honorarios de su primer pago, y quien lo comparte gana el 10 % de los honorarios de lista antes de IVA,
+// antes del descuento. El ejemplo va con el paquete (certificado + Devolución de IVA), el más vendido.
+const PCT_DESCUENTO_DEL_REFERIDO = 15;
+const PCT_COMISION_DEL_REFERIDOR = 10;
 function WinWin() {
   const portalUrl = usePortalUrl();
+  const desde = preciosDesde(useTarifa());
+  const paquete = desde.certificado + desde.ivaPaquete;
+  const descuentoPaquete = Math.round(paquete * PCT_DESCUENTO_DEL_REFERIDO / 100);
+  const comisionPaquete = Math.round(paquete * PCT_COMISION_DEL_REFERIDOR / 100);
+  const comisionCertificado = Math.round(desde.certificado * PCT_COMISION_DEL_REFERIDOR / 100);
+  const saldoDeEjemplo = comisionPaquete + comisionCertificado; // dos referidos: un paquete y un certificado solo
   const steps = [
-    { num: "01", icon: "award", title: "Crea tu cuenta", desc: "Regístrate en portal.certiveh.co, sube tus documentos y completa tu trámite para desbloquear tu código de referido." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "02", icon: "share2", title: "Comparte tu código", desc: "Envíalo a amigos que tengan carro eléctrico o híbrido. Ellos reciben $60.000 de descuento en su trámite." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "03", icon: "dollarSign", title: "Gana $75.000 por cada uno", desc: "Cada vez que un amigo solicite su trámite, tú ganas $75.000 que puedes acumular o retirar cuando quieras." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "01", icon: "award", title: "Paga tu primer trámite", desc: "Regístrate en portal.certiveh.co y paga tu primer trámite. En ese momento se desbloquea tu código personal." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: `Envíalo a quien tenga carro eléctrico o híbrido. Con tu código recibe el ${PCT_DESCUENTO_DEL_REFERIDO} % de descuento en su primer pago: en el paquete de certificado y Devolución de IVA son ${formatoDelPortal(descuentoPaquete)} menos.` }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "dollarSign", title: `Gana el ${PCT_COMISION_DEL_REFERIDOR} % de su trámite`, desc: `Cuando tu amigo paga, ganas el ${PCT_COMISION_DEL_REFERIDOR} % del valor de su trámite antes de IVA, y su descuento no le resta a tu comisión. Si toma el paquete, son ${formatoDelPortal(comisionPaquete)} para ti. Acumúlalo o retíralo desde tu primera comisión.` }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   return (
     <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" className="ww">
@@ -1464,7 +1476,7 @@ function WinWin() {
           <ol className="ww-steps">
             {steps.map(s => <li key={s.num}><h3>{s.title}</h3><p>{s.desc}</p></li>)}
           </ol>
-          <p className="fine">Sin límite de referidos. Sin vencimiento. Retira tu saldo cuando quieras.</p>
+          <p className="fine">Sin límite de referidos. Tu saldo no vence. Retíralo desde tu primera comisión. Condiciones vigentes desde el {VIGENTE_DESDE}.</p>
           <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
         </div>
         <div className="ww-ui rv" aria-hidden="true">
@@ -1472,11 +1484,11 @@ function WinWin() {
             <div className="ww-mod-h">
               <p className="ww-mod-k"><Gift size={16} />CertiVeh Win Win</p>
               <div className="ww-mod-code"><span>TUNOMBRE-123</span><i><Copy size={18} /></i><i><ExternalLink size={18} /></i></div>
-              <p className="ww-mod-s">Tu amigo recibe {formatoDelPortal(60_000)} de descuento y tú ganas {formatoDelPortal(75_000)} cuando pague su trámite.</p>
+              <p className="ww-mod-s">Tu amigo recibe el {PCT_DESCUENTO_DEL_REFERIDO} % de descuento y tú ganas el {PCT_COMISION_DEL_REFERIDOR} % de su trámite cuando pague.</p>
             </div>
             <div className="ww-mod-b">
-              <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>{formatoDelPortal(150_000)}</b><span>Saldo disponible</span></div></div>
-              <span className="ww-mod-btn"><Banknote size={16} /> Solicitar retiro ({formatoDelPortal(150_000)})</span>
+              <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>{formatoDelPortal(saldoDeEjemplo)}</b><span>Saldo disponible</span></div></div>
+              <span className="ww-mod-btn"><Banknote size={16} /> Solicitar retiro ({formatoDelPortal(saldoDeEjemplo)})</span>
               <span className="ww-mod-ver"><span><Users size={14} /> Ver mis referidos</span><ChevronDown size={14} /></span>
               <div className="ww-mod-ret"><p className="ww-mod-ret-t">Mis retiros</p><p className="ww-mod-ret-s">No has solicitado retiros aún.</p></div>
               <p className="ej" style={{ fontSize: 13, color: "#64748b", marginTop: 10 }}>Datos de ejemplo</p>
