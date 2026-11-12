@@ -13,7 +13,7 @@
  */
 export const PENDIENTE_DE_FIJAR = 'PENDIENTE DE FIJAR';
 
-export const VIGENTE_DESDE: string = 'PENDIENTE DE FIJAR';
+export const VIGENTE_DESDE: string = '12 de noviembre de 2026 a las 12:45 p. m. (hora de Colombia)';
 
 export const laVigenciaEstaPendiente = (): boolean => VIGENTE_DESDE === PENDIENTE_DE_FIJAR;
 
