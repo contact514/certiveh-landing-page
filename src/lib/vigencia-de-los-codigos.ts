@@ -17,6 +17,12 @@ export const VIGENTE_DESDE: string = 'PENDIENTE DE FIJAR';
 
 export const laVigenciaEstaPendiente = (): boolean => VIGENTE_DESDE === PENDIENTE_DE_FIJAR;
 
+/**
+ * El aviso del borrador, el MISMO en los Términos y en la home (80 r3, BAJO-7 de pantalla): con la fecha sin fijar, la home
+ * también lo pinta, en vez de «Condiciones vigentes desde el PENDIENTE DE FIJAR» a secas.
+ */
+export const AVISO_DEL_BORRADOR = 'BORRADOR: la fecha desde la que rigen las condiciones nuevas está pendiente de fijar. Esta versión no se puede publicar.';
+
 /** Con esta variable a «1», un build LOCAL con la fecha sin fijar se permite como borrador (nunca en Vercel). */
 export const PERMISO_DEL_BORRADOR = 'PERMITIR_VIGENCIA_PENDIENTE';
 
@@ -39,5 +45,5 @@ export function laGuardaDeLaVigencia(
   if (entorno[PERMISO_DEL_BORRADOR] !== '1') {
     throw new Error(`${falta}. Un build con la fecha sin fijar no se puede publicar. Para un borrador local: ${PERMISO_DEL_BORRADOR}=1 npm run build (la página lo dirá en un aviso visible).`);
   }
-  return { aviso: 'BORRADOR: la fecha desde la que rigen las condiciones nuevas está pendiente de fijar. Esta versión no se puede publicar.' };
+  return { aviso: AVISO_DEL_BORRADOR };
 }

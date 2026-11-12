@@ -3,6 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CertiVehLandingComplete from '../app/components/CertiVehLandingComplete';
 import { tarifaVigente } from '../lib/tipos-de-activo.ts';
 import { preciosDesde, descripcionDeGas } from '../lib/precios-de-la-landing.ts';
+import { AVISO_DEL_BORRADOR, laVigenciaEstaPendiente } from '../lib/vigencia-de-los-codigos.ts';
+// 80 r3 (BAJO-7): con la fecha de los códigos sin fijar (solo un borrador local la deja pasar: la guarda de los Términos tumba
+// cualquier otro build), la home avisa del borrador, como los Términos. Fijo abajo: arriba lo taparía la barra de navegación.
+const avisoDelBorrador = laVigenciaEstaPendiente() ? AVISO_DEL_BORRADOR : null;
 // La tarifa vigente EN EL INSTANTE DEL BUILD (ajuste de precios, lote 4): las cifras del JSON-LD salen de ella y la
 // isla la recibe por su id. Tras T, el rebuild de T+1 min cambia el HTML; la isla ya cambia sola al hidratar.
 const tarifa = tarifaVigente(new Date());
@@ -12,6 +16,9 @@ import '../styles/index.css';
 
 <BaseLayout>
   <CertiVehLandingComplete client:load tarifaDelBuild={tarifa.id} />
+  {avisoDelBorrador && (
+    <p role="note" data-borrador-de-la-vigencia style="position:fixed;left:0;right:0;bottom:0;z-index:2147483000;margin:0;padding:12px 16px;background:#fef3c7;color:#78350f;font:600 15px/1.4 var(--cv-font, sans-serif);text-align:center">{avisoDelBorrador}</p>
+  )}
 
   <!-- Exotics subdomain: rewrite all portal links -->
   <script is:inline>

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Banknote, Calendar, Check, CheckCircle2, ChevronDown, Copy, Download, ExternalLink, FileText, Gift, HelpCircle, Info, Users } from "lucide-react";
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
-import { VIGENTE_DESDE } from '@/lib/vigencia-de-los-codigos.ts';
+import { VIGENTE_DESDE, laVigenciaEstaPendiente } from '@/lib/vigencia-de-los-codigos.ts';
 import { CSS_CALC, CSS_CALC_MOVIL, CSS_RIEL, CSS_RIEL_MOVIL, CSS_UI } from './piezas-de-la-marca.ts';
 
 /**
@@ -1466,7 +1466,7 @@ function WinWin() {
     { num: "01", icon: "award", title: "Paga tu primer trámite", desc: "Regístrate en portal.certiveh.co y paga tu primer trámite. En ese momento se desbloquea tu código personal." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // 80 r2 (M-3 y BAJO-9/12 de pantalla): la comisión es UNA, por el primer trámite de cada amigo, sobre su tarifa antes de IVA y
     // sin la tasa de la UPME; las cifras del paquete llevan «al menos» (la Devolución de IVA sube con el valor del vehículo).
-    { num: "02", icon: "share2", title: "Comparte tu código", desc: `Envíalo a quien tenga carro eléctrico o híbrido. Con tu código recibe el ${PCT_DESCUENTO_DEL_REFERIDO} % de descuento en su primer pago: en el paquete de certificado UPME y Devolución de IVA (5% del valor del vehículo) son al menos ${formatoDelPortal(descuentoPaquete)} menos.` }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: `Envíalo a quien tenga carro eléctrico o híbrido. Con tu código recibe en su primer pago el ${PCT_DESCUENTO_DEL_REFERIDO} % de descuento sobre lo que cobra CertiVeh por su trámite, antes de IVA: en el paquete de certificado UPME y Devolución de IVA (5% del valor del vehículo) son al menos ${formatoDelPortal(descuentoPaquete)} menos.` }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "03", icon: "dollarSign", title: `Gana el ${PCT_COMISION_DEL_REFERIDOR} % del primer trámite de cada amigo`, desc: `Cuando tu amigo pague su primer trámite, ganas el ${PCT_COMISION_DEL_REFERIDOR} % de su tarifa antes de IVA (sin la tasa de la UPME), y su descuento no le resta a tu comisión. Si toma el paquete, son al menos ${formatoDelPortal(comisionPaquete)} para ti. Acumúlalo o retíralo desde tu primera comisión.` }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   return (
@@ -1478,7 +1478,10 @@ function WinWin() {
           <ol className="ww-steps">
             {steps.map(s => <li key={s.num}><h3>{s.title}</h3><p>{s.desc}</p></li>)}
           </ol>
-          <p className="fine">Sin límite de referidos. Tu saldo no vence mientras el programa siga activo; si terminara, tendrías dos meses para retirarlo. Retíralo desde tu primera comisión. Condiciones vigentes desde el {VIGENTE_DESDE}.</p>
+          <p className="fine">Sin límite de referidos. Tu saldo no vence mientras el programa siga activo; si terminara, tendrías dos meses para retirarlo. Retíralo desde tu primera comisión. {laVigenciaEstaPendiente()
+            // 80 r3 (BAJO-7): sin la fecha fijada (solo en un borrador local), lo dice, en vez de «desde el PENDIENTE DE FIJAR».
+            ? <strong data-borrador-de-la-vigencia>Borrador: la fecha desde la que rigen estas condiciones está pendiente de fijar.</strong>
+            : <>Condiciones vigentes desde el {VIGENTE_DESDE}.</>}</p>
           <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
         </div>
         <div className="ww-ui rv" aria-hidden="true">

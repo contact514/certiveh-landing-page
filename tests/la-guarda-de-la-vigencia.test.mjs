@@ -36,3 +36,8 @@ test('la página la usa con process.env y pinta el aviso; ya no depende solo de 
   // Hoy la fecha sigue sin fijar (la fija el día de T): lo dice el módulo.
   assert.equal(typeof laVigenciaEstaPendiente(), 'boolean');
 });
+
+test('80 r3: el aviso del borrador es UNO, el de los Términos y el de la home', async () => {
+  const { AVISO_DEL_BORRADOR } = await import('../src/lib/vigencia-de-los-codigos.ts');
+  assert.equal(laGuardaDeLaVigencia({ [PERMISO_DEL_BORRADOR]: '1' }, true).aviso, AVISO_DEL_BORRADOR);
+});

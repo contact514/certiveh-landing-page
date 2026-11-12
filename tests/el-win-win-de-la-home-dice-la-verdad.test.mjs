@@ -32,3 +32,15 @@ test('🔴 el saldo no vence, con el matiz del Anexo A num. 10', () => {
 test('sin guion largo en la sección', () => {
   assert.doesNotMatch(ww.replace(/\/\/.*$/gm, ''), /—/);
 });
+
+test('🔴 80 r3 (BAJO-8): el 15 % del paso 02 dice sobre qué se calcula', () => {
+  assert.match(ww, /recibe en su primer pago el \$\{PCT_DESCUENTO_DEL_REFERIDO\} % de descuento sobre lo que cobra CertiVeh por su trámite, antes de IVA:/);
+  assert.doesNotMatch(ww, /% de descuento en su primer pago:/);
+});
+
+test('🔴 80 r3 (BAJO-7): con la fecha sin fijar, la home pinta el aviso del borrador y no «desde el PENDIENTE DE FIJAR» a secas', () => {
+  assert.match(ww, /laVigenciaEstaPendiente\(\)\s*\/\/[^\n]*\n\s*\? <strong data-borrador-de-la-vigencia>Borrador: la fecha desde la que rigen estas condiciones está pendiente de fijar\.<\/strong>\s*: <>Condiciones vigentes desde el \{VIGENTE_DESDE\}\.<\/>/);
+  const home = readFileSync(new URL('../src/pages/index.astro', import.meta.url), 'utf8');
+  assert.match(home, /const avisoDelBorrador = laVigenciaEstaPendiente\(\) \? AVISO_DEL_BORRADOR : null;/);
+  assert.match(home, /\{avisoDelBorrador && \(\s*<p role="note" data-borrador-de-la-vigencia/);
+});
