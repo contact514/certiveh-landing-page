@@ -16,3 +16,28 @@ export const PENDIENTE_DE_FIJAR = 'PENDIENTE DE FIJAR';
 export const VIGENTE_DESDE: string = 'PENDIENTE DE FIJAR';
 
 export const laVigenciaEstaPendiente = (): boolean => VIGENTE_DESDE === PENDIENTE_DE_FIJAR;
+
+/** Con esta variable a «1», un build LOCAL con la fecha sin fijar se permite como borrador (nunca en Vercel). */
+export const PERMISO_DEL_BORRADOR = 'PERMITIR_VIGENCIA_PENDIENTE';
+
+/**
+ * **La guarda de la fecha, en cualquier build** (80 r2, BAJO-12 de la auditoría de pantalla). Antes solo fallaba con
+ * `process.env.VERCEL`: un build local (el que se sube a mano con `vercel deploy --prebuilt` cuando Vercel no dispara)
+ * pintaba «PENDIENTE DE FIJAR» en los Términos y en la home sin avisar. Ahora, con la fecha sin fijar:
+ *   · en Vercel, falla siempre;
+ *   · en local, falla también, salvo que se pida un borrador con `PERMITIR_VIGENCIA_PENDIENTE=1`: entonces lo avisa en
+ *     la consola del build y la página lleva un aviso visible de borrador (`aviso`).
+ * Con la fecha fijada, nada.
+ */
+export function laGuardaDeLaVigencia(
+  entorno: Record<string, string | undefined>,
+  pendiente: boolean = laVigenciaEstaPendiente(),
+): { aviso: string | null } {
+  if (!pendiente) return { aviso: null };
+  const falta = 'terminos-y-condiciones: falta fijar VIGENTE_DESDE en src/lib/vigencia-de-los-codigos.ts';
+  if (entorno.VERCEL) throw new Error(falta);
+  if (entorno[PERMISO_DEL_BORRADOR] !== '1') {
+    throw new Error(`${falta}. Un build con la fecha sin fijar no se puede publicar. Para un borrador local: ${PERMISO_DEL_BORRADOR}=1 npm run build (la página lo dirá en un aviso visible).`);
+  }
+  return { aviso: 'BORRADOR: la fecha desde la que rigen las condiciones nuevas está pendiente de fijar. Esta versión no se puede publicar.' };
+}

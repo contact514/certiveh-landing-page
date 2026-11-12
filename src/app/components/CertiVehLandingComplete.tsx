@@ -1464,8 +1464,10 @@ function WinWin() {
   const saldoDeEjemplo = comisionPaquete + comisionCertificado; // dos referidos: un paquete y un certificado solo
   const steps = [
     { num: "01", icon: "award", title: "Paga tu primer trámite", desc: "Regístrate en portal.certiveh.co y paga tu primer trámite. En ese momento se desbloquea tu código personal." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "02", icon: "share2", title: "Comparte tu código", desc: `Envíalo a quien tenga carro eléctrico o híbrido. Con tu código recibe el ${PCT_DESCUENTO_DEL_REFERIDO} % de descuento en su primer pago: en el paquete de certificado y Devolución de IVA son ${formatoDelPortal(descuentoPaquete)} menos.` }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "03", icon: "dollarSign", title: `Gana el ${PCT_COMISION_DEL_REFERIDOR} % de su trámite`, desc: `Cuando tu amigo paga, ganas el ${PCT_COMISION_DEL_REFERIDOR} % del valor de su trámite antes de IVA, y su descuento no le resta a tu comisión. Si toma el paquete, son ${formatoDelPortal(comisionPaquete)} para ti. Acumúlalo o retíralo desde tu primera comisión.` }, // taste-skill-ignore: clave interna del dato, no se pinta
+    // 80 r2 (M-3 y BAJO-9/12 de pantalla): la comisión es UNA, por el primer trámite de cada amigo, sobre su tarifa antes de IVA y
+    // sin la tasa de la UPME; las cifras del paquete llevan «al menos» (la Devolución de IVA sube con el valor del vehículo).
+    { num: "02", icon: "share2", title: "Comparte tu código", desc: `Envíalo a quien tenga carro eléctrico o híbrido. Con tu código recibe el ${PCT_DESCUENTO_DEL_REFERIDO} % de descuento en su primer pago: en el paquete de certificado UPME y Devolución de IVA (5% del valor del vehículo) son al menos ${formatoDelPortal(descuentoPaquete)} menos.` }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "dollarSign", title: `Gana el ${PCT_COMISION_DEL_REFERIDOR} % del primer trámite de cada amigo`, desc: `Cuando tu amigo pague su primer trámite, ganas el ${PCT_COMISION_DEL_REFERIDOR} % de su tarifa antes de IVA (sin la tasa de la UPME), y su descuento no le resta a tu comisión. Si toma el paquete, son al menos ${formatoDelPortal(comisionPaquete)} para ti. Acumúlalo o retíralo desde tu primera comisión.` }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   return (
     <section id="winwin" aria-label="Programa de referidos CertiVeh Win Win" className="ww">
@@ -1476,7 +1478,7 @@ function WinWin() {
           <ol className="ww-steps">
             {steps.map(s => <li key={s.num}><h3>{s.title}</h3><p>{s.desc}</p></li>)}
           </ol>
-          <p className="fine">Sin límite de referidos. Tu saldo no vence. Retíralo desde tu primera comisión. Condiciones vigentes desde el {VIGENTE_DESDE}.</p>
+          <p className="fine">Sin límite de referidos. Tu saldo no vence mientras el programa siga activo; si terminara, tendrías dos meses para retirarlo. Retíralo desde tu primera comisión. Condiciones vigentes desde el {VIGENTE_DESDE}.</p>
           <a className="cv-btn cv-btn-w" href={portalUrl} target="_blank" rel="noopener noreferrer">Empezar mi trámite ahora <Arr /></a>
         </div>
         <div className="ww-ui rv" aria-hidden="true">
@@ -1484,7 +1486,7 @@ function WinWin() {
             <div className="ww-mod-h">
               <p className="ww-mod-k"><Gift size={16} />CertiVeh Win Win</p>
               <div className="ww-mod-code"><span>TUNOMBRE-123</span><i><Copy size={18} /></i><i><ExternalLink size={18} /></i></div>
-              <p className="ww-mod-s">Tu amigo recibe el {PCT_DESCUENTO_DEL_REFERIDO} % de descuento y tú ganas el {PCT_COMISION_DEL_REFERIDOR} % de su trámite cuando pague.</p>
+              <p className="ww-mod-s">Tu amigo recibe el {PCT_DESCUENTO_DEL_REFERIDO} % de descuento y tú ganas el {PCT_COMISION_DEL_REFERIDOR} % de su primer trámite cuando pague.</p>
             </div>
             <div className="ww-mod-b">
               <div className="ww-mod-n"><div><b>2</b><span>Referidos</span></div><div><b>2</b><span>Pagados</span></div><div className="sal"><b>{formatoDelPortal(saldoDeEjemplo)}</b><span>Saldo disponible</span></div></div>

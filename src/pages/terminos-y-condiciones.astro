@@ -3,15 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/index.css';
 import { Navbar } from '../app/components/Navbar';
 import { SiteFooter } from '../app/components/SiteFooter';
-import { VIGENTE_DESDE as VIGENCIA_DE_LOS_CODIGOS, laVigenciaEstaPendiente } from '../lib/vigencia-de-los-codigos.ts';
+import { VIGENTE_DESDE as VIGENCIA_DE_LOS_CODIGOS, laGuardaDeLaVigencia } from '../lib/vigencia-de-los-codigos.ts';
 
 // Desde cuándo rigen la versión 2.0 del Anexo A y las condiciones nuevas de los códigos (arts. XIII, XIII-A,
 // XXVIII y TyC de la Devolución del IVA). La fecha vive en `src/lib/vigencia-de-los-codigos.ts`, la misma que
-// usa la sección Win Win de la home. Sin fijar, el build de Vercel no publica esta página.
+// usa la sección Win Win de la home. Sin fijar, ningún build la publica: en Vercel falla, y en local también, salvo un
+// borrador pedido a propósito (`PERMITIR_VIGENCIA_PENDIENTE=1`), que lo avisa en la consola y en la página (80 r2, BAJO-12).
 const VIGENTE_DESDE = VIGENCIA_DE_LOS_CODIGOS;
-if (process.env.VERCEL && laVigenciaEstaPendiente()) {
-  throw new Error('terminos-y-condiciones: falta fijar VIGENTE_DESDE en src/lib/vigencia-de-los-codigos.ts');
-}
+const guardaDeLaVigencia = laGuardaDeLaVigencia(process.env);
+if (guardaDeLaVigencia.aviso) console.warn(`\n⚠️  ${guardaDeLaVigencia.aviso}\n`);
 ---
 
 <BaseLayout
@@ -86,6 +86,9 @@ if (process.env.VERCEL && laVigenciaEstaPendiente()) {
   <!-- NAV -->
   <Navbar isHome={false} darkHero={true} client:load />
 
+  {guardaDeLaVigencia.aviso && (
+    <p class="tc-borrador" role="note" data-borrador-de-la-vigencia style="margin:0;padding:12px 16px;background:#fef3c7;color:#78350f;font:600 15px/1.4 var(--cv-font);text-align:center">{guardaDeLaVigencia.aviso}</p>
+  )}
   <!-- HERO -->
   <div class="tc-hero" id="main-content">
     <div class="tc-badge">Documento legal</div>
@@ -191,9 +194,9 @@ if (process.env.VERCEL && laVigenciaEstaPendiente()) {
         <li><strong>Referido:</strong> La persona que utiliza un Código Win Win válido en su primer pago en la Plataforma, sin que ni su Cuenta de Usuario ni el titular del trámite tengan otro trámite pagado, y cumple las condiciones de elegibilidad establecidas en el Reglamento del Programa.</li>
         <li><strong>Código Win Win:</strong> El código alfanumérico único e intransferible, con formato NOMBRE-XXX, generado manualmente por el Referidor desde el dashboard de su Cuenta de Usuario, que constituye el único mecanismo válido para la atribución de la referenciación y para el reconocimiento de la comisión al Referidor y del descuento al Referido, conforme al Reglamento del Programa.</li>
         <li><strong>Saldo Win Win:</strong> El valor acumulado de las comisiones causadas y acreditadas a favor del Referidor en el marco del Programa, disponible para retiro desde el dashboard de su Cuenta de Usuario conforme a las condiciones del Reglamento.</li>
-        <li><strong>Código promocional:</strong> El código de descuento que el Operador de la Plataforma habilita conforme al artículo XXVIII, de uso general o entregado a uno o varios Usuarios. Es distinto del Código Win Win y del Código de oferta de bienvenida.</li>
+        <li><strong>Código promocional:</strong> El código de descuento que el Operador de la Plataforma habilita conforme al artículo XXVIII, de uso general o entregado a uno o varios Usuarios. Es distinto del Código Win Win y del Código de descuento de 48 minutos.</li>
         <li><strong>Código personal de un amigo:</strong> El nombre con el que la Plataforma se refiere al Código Win Win de un Referidor cuando lo usa otra persona para pagar. Se rige por el Reglamento del Programa y no debe confundirse con los códigos promocionales del artículo XXVIII.</li>
-        <li><strong>Código de oferta de bienvenida:</strong> El código personal que la Plataforma puede asignar a la Cuenta de Usuario de algunos Usuarios que aún no han pagado ningún trámite, como beneficio por tiempo limitado conforme al artículo XXVIII. Solo puede usarse desde esa Cuenta de Usuario y dentro del plazo informado al asignarlo.</li>
+        <li><strong>Código de descuento de 48 minutos:</strong> El código personal que la Plataforma puede asignar a la Cuenta de Usuario de algunos Usuarios que aún no han pagado ningún trámite, como beneficio por tiempo limitado conforme al artículo XXVIII. Solo puede usarse desde esa Cuenta de Usuario y dentro del plazo informado al asignarlo.</li>
         <li><strong>Tercero Beneficiario:</strong> La persona natural o jurídica, distinta del Usuario, propietaria de un vehículo eléctrico o híbrido, cuya información y documentación son registradas y cargadas en la Plataforma por el Usuario desde su propia Cuenta de Usuario, con la autorización previa, expresa e informada del Tercero Beneficiario, para efectos de gestionar en su nombre el trámite de certificación ante la UPME, de conformidad con lo establecido en el artículo VI-A de los presentes Términos y Condiciones.</li>
       </ul>
     </div>
@@ -416,7 +419,7 @@ if (process.env.VERCEL && laVigenciaEstaPendiente()) {
       </div>
       <p>El Usuario reconoce que dicho pago corresponde a la evaluación del trámite por parte de la UPME y que dicho valor no es reembolsable por dicha entidad, incluso en aquellos casos en que la solicitud sea rechazada o el Certificado UPME no sea expedido, salvo la política de reembolso establecida en los presentes términos y condiciones.</p>
       <p>La tarifa del servicio no incluye otros gastos adicionales que puedan surgir durante el proceso del trámite, tales como costos asociados a la obtención de documentos, certificaciones técnicas, traducciones, autenticaciones, legalizaciones u otros requisitos exigidos por la normativa aplicable o por la UPME, los cuales deberán ser asumidos directamente por el Usuario.</p>
-      <p>En caso de que el Usuario utilice un Código Win Win válido conforme al Reglamento del Programa de Referidos CertiVeh Win Win (Anexo A de los presentes Términos y Condiciones), un Código de oferta de bienvenida o un código promocional conforme al artículo XXVIII, el descuento se aplicará automáticamente sobre la tarifa del servicio antes de IVA al momento del pago, y el IVA se liquidará sobre la tarifa ya descontada. Ningún descuento se aplica al valor que cobra la UPME.</p>
+      <p>En caso de que el Usuario utilice un Código Win Win válido conforme al Reglamento del Programa de Referidos CertiVeh Win Win (Anexo A de los presentes Términos y Condiciones), un Código de descuento de 48 minutos o un código promocional conforme al artículo XXVIII, el descuento se aplicará automáticamente sobre la tarifa del servicio antes de IVA al momento del pago, y el IVA se liquidará sobre la tarifa ya descontada. Ningún descuento se aplica al valor que cobra la UPME.</p>
       <p>Desde el {VIGENTE_DESDE}, el descuento del Código Win Win es del quince por ciento (15 %) de la tarifa del servicio del primer pago del Referido, conforme al numeral 6 del Anexo A. Hasta esa fecha rige la versión 1.0 del Anexo A.</p>
     </div>
 
@@ -663,7 +666,7 @@ if (process.env.VERCEL && laVigenciaEstaPendiente()) {
       <p>Salvo que el Operador de la Plataforma indique expresamente lo contrario, los códigos promocionales y descuentos: (i) serán personales e intransferibles; (ii) no serán acumulables con otros descuentos, promociones, beneficios derivados de alianzas comerciales o programas de referidos; (iii) no tendrán valor en efectivo ni podrán ser canjeados por dinero; (iv) no aplicarán retroactivamente a pagos ya realizados; y (v) deberán ser ingresados y validados en la Plataforma antes de completar el pago correspondiente.</p>
       <p><strong>Cálculo.</strong> Salvo que se indique lo contrario, los descuentos expresados en porcentaje se calculan sobre la tarifa del servicio del Operador de la Plataforma antes del Impuesto sobre las Ventas (IVA), y el IVA se liquida sobre la tarifa ya descontada. Ningún código ni descuento se aplica al valor que cobra la UPME ni a otros valores de terceros. La Plataforma muestra el valor del descuento, en pesos, antes de pagar.</p>
       <p><strong>Un código por pago.</strong> En cada pago se aplica un solo código: el que figure en el campo «Código de descuento» al momento de pagar. Si el Usuario tiene a su disposición más de uno, se aplica el que haya ingresado en ese campo. Los códigos no aplican a los trámites gestionados a través de un Aliado Comercial de CertiVeh.</p>
-      <p><strong>Beneficios personales.</strong> Desde el {VIGENTE_DESDE}, el Operador de la Plataforma podrá asignar a algunos Usuarios, y no a todos, un Código de oferta de bienvenida. Es un beneficio personal por tiempo limitado: vale para el primer pago de la Cuenta de Usuario a la que se asigna, solo desde ella y dentro de los cuarenta y ocho (48) minutos siguientes a su asignación. Un pago iniciado dentro de ese plazo puede completarse hasta quince (15) minutos después de vencido. Su valor, los servicios a los que aplica y el plazo se informan en la Plataforma al asignarlo.</p>
+      <p><strong>Beneficios personales.</strong> Desde el {VIGENTE_DESDE}, el Operador de la Plataforma podrá asignar a algunos Usuarios, y no a todos, un Código de descuento de 48 minutos. Es un beneficio personal por tiempo limitado: vale para el primer pago de la Cuenta de Usuario a la que se asigna, solo desde ella y dentro de los cuarenta y ocho (48) minutos siguientes a su asignación. Un pago iniciado dentro de ese plazo puede completarse hasta quince (15) minutos después de vencido. Su valor, los servicios a los que aplica y el plazo se informan en la Plataforma al asignarlo.</p>
       <p><strong>Códigos promocionales desde el {VIGENTE_DESDE}.</strong> Desde esa fecha, los códigos promocionales que entregue el Operador de la Plataforma se rigen por estas condiciones, que sustituyen las informadas antes: (i) su descuento es un porcentaje de la tarifa del servicio antes de IVA, el que el Operador de la Plataforma informe al entregar el código; (ii) aplican al Servicio de Certificación UPME, al Servicio de Devolución del IVA contratado por separado y a ambos contratados en un mismo pago; y (iii) pueden usarse en cualquier pago, no solo en el primero, siempre con un solo código por pago.</p>
       <p><strong>Códigos entregados antes de esa fecha.</strong> Un código promocional entregado antes del {VIGENTE_DESDE} solo sigue vigente desde esa fecha si el Operador de la Plataforma lo mantiene, y en ese caso se rige por las condiciones del párrafo anterior. Los que no mantenga dejan de estar vigentes el {VIGENTE_DESDE}: desde ese momento la Plataforma no los acepta y lo indica al ingresarlos. El retiro no afecta los pagos realizados con ellos antes de esa fecha.</p>
       <p><strong>Pagos que cruzan un cambio.</strong> Cada pago se liquida con las condiciones del código vigentes en el momento en que se inició en la Plataforma: cuando se preparó el pago o, si se paga con un enlace de pago, cuando se generó el enlace.</p>
@@ -1059,7 +1062,7 @@ if (process.env.VERCEL && laVigenciaEstaPendiente()) {
         <h2 class="tc-section-title">Pagos del servicio y política de reembolsos</h2>
       </div>
       <p>El acceso al Servicio de Devolución del IVA estará sujeto al pago de la tarifa informada al Usuario a través de la Plataforma al momento de la contratación. El valor de la tarifa podrá variar según el Usuario haya gestionado o no el Certificado UPME del vehículo a través de la Plataforma, conforme a las condiciones económicas vigentes informadas al momento del pago. Cuando el Usuario contrate la modalidad Devolución de IVA Premium, la tarifa será la informada para esa modalidad, conforme a su Anexo.</p>
-      <p>Desde el {VIGENTE_DESDE}, al Servicio de Devolución del IVA en su modalidad estándar, también cuando se contrata por separado, le son aplicables los códigos promocionales, el Código de oferta de bienvenida y el Programa de Referidos CertiVeh Win Win, en los términos de los artículos XIII, XIII-A y XXVIII de los Términos y Condiciones generales y de su Anexo A.</p>
+      <p>Desde el {VIGENTE_DESDE}, al Servicio de Devolución del IVA en su modalidad estándar, también cuando se contrata por separado, le son aplicables los códigos promocionales, el Código de descuento de 48 minutos y el Programa de Referidos CertiVeh Win Win, en los términos de los artículos XIII, XIII-A y XXVIII de los Términos y Condiciones generales y de su Anexo A.</p>
       <p>El pago del servicio corresponde exclusivamente a la gestión administrativa y tecnológica del trámite, incluyendo la recopilación, organización, revisión preliminar, diligenciamiento del Formato 010, gestión de la Cita DIAN cuando aplique, radicación de la solicitud ante la DIAN, y la preparación y gestión de las respuestas a los requerimientos y de las subsanaciones que solicite la DIAN, incluida la nueva radicación tras subsanar. La tarifa no incluye otros gastos que puedan surgir durante el proceso, tales como certificaciones de contador o revisor fiscal, autenticaciones u otros documentos exigidos por la normativa aplicable o por la DIAN, los cuales serán asumidos directamente por el Usuario.</p>
       <p>El Usuario reconoce que el pago de la tarifa corresponde a un servicio de medio y que, en consecuencia, no es reembolsable por el solo hecho de que la DIAN inadmita, rechace, niegue o no reconozca la devolución del IVA, salvo en los casos expresamente previstos a continuación:</p>
       <ul>
