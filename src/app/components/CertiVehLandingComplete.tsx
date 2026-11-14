@@ -139,6 +139,12 @@ ${CSS_CALC}
   .tile .mark { height: 72px; display: flex; align-items: center; }
   .tile .mark img { max-height: 56px; max-width: 78%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); }
   .tile .note { font-size: .8125rem; color: var(--cv-soft); }
+  /* Aliados: los logos en su color (prensa sigue en gris) y Grecco a tres columnas, con sus cinco marcas. */
+  .aliados .tile .mark { height: 72px; }
+  .aliados .tile .mark img, .aliados .marcas img { display: block; filter: none; height: var(--h); width: auto; max-width: 100%; max-height: none; }
+  .aliados .tile.grecco { grid-column: span 3; }
+  .aliados .tile.grecco .mark { height: auto; }
+  .aliados .marcas { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 32px; }
   .tile .quote { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
   .tile .meta { font-size: .875rem; color: var(--cv-soft); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .tile .meta b { color: var(--cv-accent); font-weight: 700; }
@@ -469,6 +475,10 @@ ${CSS_CALC_MOVIL}
     .tile.head { grid-column: 1 / -1; }
     .tile .mark { height: 44px; }
     .tile .mark img { max-height: 38px; }
+    .aliados .tile.grecco, .aliados .tile.ancha { grid-column: 1 / -1; }
+    .aliados .tile .mark { height: 56px; }
+    .aliados .tile .mark img, .aliados .marcas img { height: calc(var(--h) * .8); max-height: none; }
+    .aliados .marcas { gap: 12px 24px; }
     /* En una columna, apiladas en su orden (IVA, renta, depreciación) con la separación única de 8 px entre
        baldosas (DESIGN_SYSTEM §0.5), la misma de /otros-activos y de la mini landing. */
     .steps3 { grid-template-rows: none; gap: 8px; }
@@ -744,18 +754,44 @@ function Hero() {
 }
 
 // ── ALIADOS ─────────────────────────────────────────────────────────────────
+// Los logos van en su color (14-nov-2026); los de prensa siguen en gris. Las entidades vigiladas por la
+// Superintendencia Financiera llevan su «Vigilado» junto al logo: el manual de Sufi lo exige («siempre debe ir
+// junto al vigilado») y se aplica igual a Banco de Occidente y a Seguros Mundial. Grecco, Commodo y Vanti no
+// son vigiladas por la Superfinanciera y no lo llevan. `ancho` y `alto` son la proporción del fichero (sin CLS).
+const VIGILADO = "Vigilado Superintendencia Financiera de Colombia";
+const ALIADOS = [
+  { src: "/aliados-banco-de-occidente.svg", alt: "Banco de Occidente", ancho: 257, alto: 51, note: `Banco de Occidente S.A. · ${VIGILADO}`, ancha: true },
+  { src: "/aliados-sufi.svg", alt: "Sufi", ancho: 104, alto: 31, note: `Bancolombia S.A. · ${VIGILADO}`, ancha: true },
+  { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", ancho: 1826, alto: 395, note: `Compañía Mundial de Seguros S.A. · ${VIGILADO}`, ancha: true },
+  { src: "/aliados-commodo.svg", alt: "Commodo", ancho: 846, alto: 208, note: "" },
+  { src: "/aliados-vanti.png", alt: "Vanti", ancho: 376, alto: 93, note: "" },
+];
+const MARCAS_GRECCO = [
+  { src: "/marca-kia.svg", alt: "Kia", ancho: 24, alto: 6 },
+  { src: "/marca-honda.svg", alt: "Honda", ancho: 24, alto: 24 },
+  { src: "/marca-jetour.png", alt: "Jetour", ancho: 842, alto: 80 },
+  { src: "/marca-jac.png", alt: "JAC", ancho: 301, alto: 120 },
+  { src: "/marca-dongfeng.png", alt: "Dongfeng", ancho: 653, alto: 120 },
+];
+// Mismo peso visual para logos de proporciones muy distintas (Honda es un cuadrado, Jetour 10:1): la altura sale
+// de un área común, no de una altura común. En el celular `.aliados` la escala al 80 %.
+const altoOptico = (proporcion: number, area: number, tope = 64) =>
+  ({ "--h": `${Math.min(tope, Math.round(Math.sqrt(area / proporcion)))}px` }) as React.CSSProperties;
 function Aliados() {
   return (
     <section aria-label="Aliados de CertiVeh" className="h-wrap" style={{ paddingTop: "clamp(56px, 7vw, 96px)" }}>
-      <div className="board five">
-        <div className="tile head rv"><p className="tile-h">Aliados que confían en CertiVeh</p></div>
-        {[
-          { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", note: "Compañía Mundial de Seguros S.A. · Vigilado Superintendencia Financiera de Colombia" },
-          { src: "/aliados-fonlenovo.png", alt: "FonLenovo - El Fondo inteligente para todos", note: "" },
-          { src: "/aliados-exotics.png", alt: "ExoticsCo", note: "" },
-        ].map(a => (
-          <div className="tile rv" key={a.src}>
-            <div className="mark"><img src={a.src} alt={a.alt} loading="lazy" /></div>
+      <div className="board five aliados">
+        <div className="tile head rv"><h2 className="tile-h">Aliados que confían en CertiVeh</h2></div>
+        <div className="tile grecco rv">
+          <div className="mark"><img src="/aliados-grecco-motors.png" alt="Grecco Motors" width={679} height={150} loading="lazy" style={altoOptico(679 / 150, 10000)} /></div>
+          <ul className="marcas" aria-label="Marcas de Grecco Motors">
+            {MARCAS_GRECCO.map(m => <li key={m.src}><img src={m.src} alt={m.alt} width={m.ancho} height={m.alto} loading="lazy" style={altoOptico(m.ancho / m.alto, 2400, 34)} /></li>)}
+          </ul>
+          <p className="note">Grecco Kia, Grecco Honda, Grecco Jetour, Grecco JAC y Grecco Dongfeng</p>
+        </div>
+        {ALIADOS.map(a => (
+          <div className={`tile rv${a.ancha ? " ancha" : ""}`} key={a.src}>
+            <div className="mark"><img src={a.src} alt={a.alt} width={a.ancho} height={a.alto} loading="lazy" style={altoOptico(a.ancho / a.alto, 6400)} /></div>
             {a.note && <p className="note">{a.note}</p>}
           </div>
         ))}
