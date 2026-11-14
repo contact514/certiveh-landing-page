@@ -3,10 +3,12 @@
  *
  * Dos reglas del negocio que ya se habían colado en el copy y se corrigieron a mano:
  *
- * 1. **Los plazos.** La DIAN tiene hasta 15 días hábiles para RESPONDER la solicitud y, si la
- *    aprueba, hasta 50 días hábiles para PAGAR. Lo que no puede volver:
+ * 1. **Los plazos** (D15-99 del portal, 18-oct-2026, con fuentes oficiales; 96, 14-nov-2026). Desde que radica la
+ *    solicitud, la DIAN tiene hasta 15 días hábiles para PEDIR UNA CORRECCIÓN (inadmitirla) y hasta 50 días hábiles,
+ *    contados también desde la radicación, para DEVOLVER el dinero: los 50 incluyen el pago. Lo que no puede volver:
+ *      - la frase de antes, que era falsa: «15 días hábiles para responder y, si la aprueba, 50 para pagar»
+ *        (los 15 no son para responder, y los 50 no empiezan al aprobar);
  *      - asociar los 50 días a la respuesta («50 días hábiles para responder / resolver / contestar»);
- *      - contarlos desde la radicación o el envío sin nombrar los 15;
  *      - respaldar esos plazos con un artículo que no los dice así (855 y 860 del Estatuto
  *        Tributario). Una cita literal de la DIAN, entre comillas, sí puede nombrarlos;
  *      - un total «a ojo» («tres meses y medio»).
@@ -71,8 +73,18 @@ export function plazoMalDicho(frase) {
   const tras = f.slice(m.index, m.index + 80);
   const donde = tras.search(RESPONDER);
   if (donde !== -1 && !/pag/i.test(tras.slice(0, donde))) return true;
-  if (DESDE_EL_ENVIO.test(f) && !QUINCE.test(f)) return true;
+  // (Hasta el 96 también era «malo» contar los 50 desde la radicación sin nombrar los 15. Con D15-99 es lo cierto.)
   return false;
+}
+
+/**
+ * 96 · La frase de antes (la 194 del portal, que D15-99 retiró por falsa): los 15 días «para responder» y los 50 «para
+ * pagar» cuando la aprueba. Basta con una de las dos mitades.
+ */
+export function plazoDeAntes(frase) {
+  const f = sinTildes(plano(frase));
+  if (/\b(?:15|quince)\b[^.;]{0,40}\bdias(?: habiles)?\b[^.;]{0,40}\bpara (?:responder|contestar|resolver)\b/.test(f)) return true;
+  return /\bsi (?:la |lo )?aprueba\b[^.;]{0,50}\b(?:50|cincuenta)\b[^.;]{0,30}\bpara pagar\b/.test(f);
 }
 
 /** Lo que va entre comillas es la cita literal de otro (la DIAN): no es una afirmación nuestra. */
@@ -123,7 +135,8 @@ export function laVentanaMalDicha(frase) {
 }
 
 const REGLAS = [
-  [plazoMalDicho, 'los 50 días son para PAGAR tras aprobar, no para responder ni desde el envío'],
+  [plazoMalDicho, 'los 50 días son para DEVOLVER el dinero desde la radicación, no para responder'],
+  [plazoDeAntes, 'la frase de antes (D15-99): los 15 días son para pedir una corrección y los 50, desde la radicación, para devolver'],
   [citaUnArticuloParaElPlazo, 'se cita un artículo (855/860) para un plazo que no dice'],
   [prometeUnTotal, '«tres meses y medio» no tiene fuente'],
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
@@ -139,8 +152,6 @@ function control() {
     'La DIAN tiene hasta 50 días hábiles para responder.',
     'La DIAN tiene hasta 50 días hábiles para contestar.',
     'La DIAN cuenta con cincuenta (50) días hábiles para resolver.',
-    'Desde que envías el correo, la DIAN tiene hasta 50 días hábiles para pagarte.',
-    'la DIAN tiene hasta 50 dias habiles para pagar, contados desde que la solicitud queda radicada',
     'La DIAN se demora hasta 50 días hábiles en darte una respuesta.',
     'La DIAN tiene 50 días hábiles para aprobar o rechazar.',
     'La DIAN tiene 50 días hábiles para revisar tu solicitud.',
@@ -148,7 +159,9 @@ function control() {
     'La DIAN se toma hasta 50 días hábiles para evaluar.',
   ]) debe(plazoMalDicho(mal), `plazoMalDicho no caza: ${mal}`);
   for (const bien of [
-    'tiene hasta 15 días hábiles para responder y, si la aprueba, hasta 50 días hábiles para pagar.',
+    'la DIAN revisa los documentos de tu propia solicitud y, desde que la radica, tiene hasta 15 días hábiles para pedirte una corrección si falta algo y hasta 50 para devolverte el dinero.',
+    'Si todo está en orden, tiene hasta 50 días hábiles desde la radicación para devolverte el dinero a tu cuenta bancaria.',
+    'la DIAN tiene hasta 50 dias habiles para pagar, contados desde que la solicitud queda radicada',
     'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.',
     'Son 50 días hábiles para pagar.',
   ]) debe(!plazoMalDicho(bien), `plazoMalDicho marca una frase cierta: ${bien}`);
@@ -157,6 +170,20 @@ function control() {
   debe(!citaUnArticuloParaElPlazo('"el término para devolver será el consagrado en los artículos 855 y 860 del Estatuto Tributario." Son 50 días hábiles para pagar.'), 'marca la cita literal de la DIAN');
   debe(!citaUnArticuloParaElPlazo('Estatuto Tributario, Arts. 855 y 857. Procedimiento de devolución, plazos y causales de rechazo.'), 'marca una lista de fuentes sin plazo');
   debe(!citaUnArticuloParaElPlazo('para los casos que cumplen el mecanismo de devolución automática, conforme al parágrafo 5 del artículo 855 del Estatuto Tributario, la devolución tendrá lugar dentro de los quince (15) días siguientes.'), 'marca la devolución automática de los Términos');
+  for (const mal of [
+    'tiene hasta 15 días hábiles para responder y, si la aprueba, hasta 50 días hábiles para pagar.',
+    'El tiempo de respuesta de la DIAN varía, pero tiene 15 días hábiles para responder la solicitud una vez radicada con todos los requisitos.',
+    'Si la aprueba, hasta 50 días hábiles para pagar la devolución.',
+    'La DIAN tiene quince días para contestar.',
+    'Desde que radica tu solicitud, tiene hasta 15 días hábiles para pedirte una corrección si falta algo y, si aprueba, hasta 50 para pagar.',
+  ]) debe(plazoDeAntes(mal), `plazoDeAntes no caza: ${mal}`);
+  for (const bien of [
+    'Desde que radica la solicitud, la DIAN tiene hasta 15 días hábiles para pedirte una corrección si falta algo y hasta 50 días hábiles para devolverte el dinero a tu cuenta bancaria.',
+    'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.',
+    'El solicitante tiene hasta un mes desde que la UPME envía el requerimiento para responderlo.',
+  ]) debe(!plazoDeAntes(bien), `plazoDeAntes marca una frase cierta: ${bien}`);
+  // 96: la regla va de verdad en las REGLAS que barren las páginas (mutante: quitarla de la lista dejaba la guarda en verde).
+  debe(frases(loQueDiceUnHtml('<p>La DIAN tiene hasta 15 días hábiles para responder y, si la aprueba, hasta 50 para pagar.</p>')).some((fr) => REGLAS.some(([r, porque]) => r === plazoDeAntes && r(fr) && porque)), 'las REGLAS no llevan la frase de antes (plazoDeAntes)');
   debe(prometeUnTotal('En total suele tomar unos tres meses y medio.'), 'no caza el total a ojo');
   for (const mal of ['Te avisamos cuando la DIAN responda.', 'Te contamos apenas la DIAN nos diga algo.', 'Nosotros radicamos tu solicitud ante la DIAN.', 'Te avisamos en cuanto sepamos algo.', 'Te mantenemos al tanto de lo que diga la DIAN.', 'Cuando la DIAN responda, te lo contamos.', 'Nosotros nos encargamos de radicar tu solicitud ante la DIAN.', 'Te mantendremos informado de la respuesta de la DIAN.', 'Apenas la DIAN conteste, te escribimos.', 'Nosotros presentamos tu solicitud de devolución ante la DIAN.']) {
     debe(invierteQuienHaceQue(mal), `invierteQuienHaceQue no caza: ${mal}`);
