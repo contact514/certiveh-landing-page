@@ -756,22 +756,23 @@ function Hero() {
 // ── ALIADOS ─────────────────────────────────────────────────────────────────
 // Los logos van en su color (14-nov-2026); los de prensa siguen en gris. Las entidades vigiladas por la
 // Superintendencia Financiera llevan su «Vigilado» junto al logo: el manual de Sufi lo exige («siempre debe ir
-// junto al vigilado») y se aplica igual a Banco de Occidente y a Seguros Mundial. Grecco, Commodo y Vanti no
-// son vigiladas por la Superfinanciera y no lo llevan. `ancho` y `alto` son la proporción del fichero (sin CLS).
+// junto al vigilado») y se aplica igual a Banco de Occidente y a Seguros Mundial. Vanti S.A. ESP es vigilada por
+// la Superservicios, que pide «Vigilado Superservicios» en su publicidad (Res. SSPD 20131300030685 de 2013).
+// Grecco y Commodo no son vigiladas y no lo llevan. `ancho` y `alto` son la proporción del fichero (sin CLS).
 const VIGILADO = "Vigilado Superintendencia Financiera de Colombia";
 const ALIADOS = [
   { src: "/aliados-banco-de-occidente.svg", alt: "Banco de Occidente", ancho: 257, alto: 51, note: `Banco de Occidente S.A. · ${VIGILADO}`, ancha: true },
   { src: "/aliados-sufi.svg", alt: "Sufi", ancho: 104, alto: 31, note: `Bancolombia S.A. · ${VIGILADO}`, ancha: true },
   { src: "/aliados-seguros-mundial.png", alt: "Seguros Mundial", ancho: 1826, alto: 395, note: `Compañía Mundial de Seguros S.A. · ${VIGILADO}`, ancha: true },
-  { src: "/aliados-commodo.svg", alt: "Commodo", ancho: 846, alto: 208, note: "" },
-  { src: "/aliados-vanti.png", alt: "Vanti", ancho: 376, alto: 93, note: "" },
+  { src: "/aliados-vanti.png", alt: "Vanti", ancho: 376, alto: 93, note: "Vanti S.A. ESP · Vigilado Superservicios", ancha: true },
+  { src: "/aliados-commodo.svg", alt: "Commodo", ancho: 846, alto: 208, note: "", ancha: true },
 ];
 const MARCAS_GRECCO = [
   { src: "/marca-kia.svg", alt: "Kia", ancho: 24, alto: 6 },
   { src: "/marca-honda.svg", alt: "Honda", ancho: 24, alto: 24 },
   { src: "/marca-jetour.png", alt: "Jetour", ancho: 842, alto: 80 },
-  { src: "/marca-jac.png", alt: "JAC", ancho: 301, alto: 120 },
-  { src: "/marca-dongfeng.png", alt: "Dongfeng", ancho: 653, alto: 120 },
+  { src: "/marca-jac.png", alt: "JAC Motors", ancho: 309, alto: 120 },
+  { src: "/marca-dongfeng.png", alt: "Dongfeng", ancho: 838, alto: 120 },
 ];
 // Mismo peso visual para logos de proporciones muy distintas (Honda es un cuadrado, Jetour 10:1): la altura sale
 // de un área común, no de una altura común. En el celular `.aliados` la escala al 80 %.
