@@ -479,6 +479,7 @@ ${CSS_CALC_MOVIL}
     .aliados .tile .mark { height: 56px; }
     .aliados .tile .mark img, .aliados .marcas img { height: calc(var(--h) * .8); max-height: none; }
     .aliados .marcas { gap: 12px 24px; }
+    .aliados .tile.sin-nota { min-height: 0; } /* sin nota debajo, la baldosa no se queda medio vacía */
     /* En una columna, apiladas en su orden (IVA, renta, depreciación) con la separación única de 8 px entre
        baldosas (DESIGN_SYSTEM §0.5), la misma de /otros-activos y de la mini landing. */
     .steps3 { grid-template-rows: none; gap: 8px; }
@@ -791,7 +792,7 @@ function Aliados() {
           <p className="note">Grecco Kia, Grecco Honda, Grecco Jetour, Grecco JAC y Grecco Dongfeng</p>
         </div>
         {ALIADOS.map(a => (
-          <div className={`tile rv${a.ancha ? " ancha" : ""}`} key={a.src}>
+          <div className={`tile rv${a.ancha ? " ancha" : ""}${a.note ? "" : " sin-nota"}`} key={a.src}>
             <div className="mark"><img src={a.src} alt={a.alt} width={a.ancho} height={a.alto} loading="lazy" style={altoOptico(a.ancho / a.alto, 6400)} /></div>
             {a.note && <p className="note">{a.note}</p>}
           </div>
