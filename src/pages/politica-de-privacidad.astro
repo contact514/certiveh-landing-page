@@ -3,6 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/index.css';
 import { Navbar } from '../app/components/Navbar';
 import { SiteFooter } from '../app/components/SiteFooter';
+import { VIGENTE_DESDE_LA_BIENVENIDA, laGuardaDeLaVigencia, laVigenciaDeLaBienvenidaEstaPendiente } from '../lib/vigencia-de-los-codigos.ts';
+
+// 100 · La versión 2.3 (O-4 del dictamen legal: la finalidad de las ofertas y precios) rige desde el encendido del experimento de
+// precio, la misma fecha que el «Descuento de bienvenida» de los Términos. Sin fijar, ningún build la publica.
+const guardaDeLaVigencia = laGuardaDeLaVigencia(process.env, laVigenciaDeLaBienvenidaEstaPendiente(), 'VIGENTE_DESDE_LA_BIENVENIDA');
+if (guardaDeLaVigencia.aviso) console.warn(`\n⚠️  ${guardaDeLaVigencia.aviso}\n`);
 ---
 
 <BaseLayout
@@ -76,7 +82,8 @@ import { SiteFooter } from '../app/components/SiteFooter';
     <div class="tc-badge">Documento legal</div>
     <h1 class="tc-title">Política de Tratamiento de Datos Personales</h1>
     <p class="tc-subtitle">CERTIVEH S.A.S. - NIT 902051875-8</p>
-    <p class="tc-date">Versión 2.2 · Entrada en vigencia: 18 de noviembre de 2026</p>
+    <p class="tc-date">Versión 2.3 · Entrada en vigencia: {VIGENTE_DESDE_LA_BIENVENIDA}</p>
+    {guardaDeLaVigencia.aviso && <p class="tc-date"><strong>{guardaDeLaVigencia.aviso}</strong></p>}
   </div>
 
   <div class="tc-container">
@@ -239,6 +246,10 @@ import { SiteFooter } from '../app/components/SiteFooter';
       <ol>
         <li>Contraseña de la Cuenta de Usuario, almacenada en formato de hash mediante el algoritmo SHA-2, lo que garantiza que CertiVeh no almacena la contraseña en texto plano. Cuando sea necesario, también se administran credenciales de la cuenta ante la UPME para efectos del trámite.</li>
       </ol>
+      <p class="tc-subsec"><strong>Datos de contacto por WhatsApp y el chat del portal:</strong></p>
+      <ol>
+        <li>El número de celular, el contenido de las conversaciones y los datos que el titular comparta en ellas. Estas conversaciones pueden ser atendidas por un asistente de inteligencia artificial, bajo la supervisión del equipo de CertiVeh.</li>
+      </ol>
       <p class="tc-subsec"><strong>6.2 Datos de Navegación y Uso de la Plataforma</strong></p>
       <p>CertiVeh recolecta, a través de herramientas de analítica digital (Google Analytics) y de los registros propios de la infraestructura tecnológica de la Plataforma, los siguientes datos técnicos de forma automática durante la interacción de los usuarios con la Plataforma:</p>
       <ol>
@@ -306,6 +317,7 @@ import { SiteFooter } from '../app/components/SiteFooter';
         <li>Analítica y mejora del servicio: mejorar los servicios ofrecidos a través de la Plataforma mediante el análisis estadístico del comportamiento de uso, preferencias y patrones de navegación, utilizando datos anonimizados o agregados.</li>
         <li>Analítica de mercado: analizar tendencias del mercado de vehículos eléctricos e híbridos por subregión, región y tipo de vehículo, con el fin de identificar oportunidades de mejora del servicio y desarrollar nuevas funcionalidades.</li>
         <li>Actividades de mercadeo y publicidad segmentada: realizar campañas publicitarias y de comunicación segmentadas por subregión, región y tipo de vehículo, cuando el titular haya autorizado expresamente el tratamiento de sus datos para esta finalidad. Estas actividades podrán realizarse a través de plataformas digitales y redes de publicidad.</li>
+        <li>Ofertas y precios: asignar de forma automática, ofrecer y aplicar descuentos personales, que pueden ser distintos entre usuarios, y analizar estadísticamente su efecto en la contratación y en los ingresos de CertiVeh, para definir sus precios y ofertas. Para ello se tratan el celular, la cuenta, el número de documento (solo para evitar que una misma persona reciba dos ofertas), la oferta recibida, su vencimiento y su uso, y los pagos y devoluciones asociados. La asignación no tiene en cuenta datos sensibles ni la capacidad económica del titular y nunca da lugar a un precio mayor que la tarifa publicada. Los resultados se analizan de forma agregada.</li>
         <li>Servicios asociados al ciclo de vida del vehículo: en el futuro, y previo aviso al titular y obtención de la autorización correspondiente cuando sea requerida, CertiVeh podrá utilizar los datos para ofrecer o gestionar otros servicios asociados a la vida útil del vehículo eléctrico o híbrido del usuario.</li>
       </ol>
       <p class="tc-subsec"><strong>7.2 Para datos de Aliados Comerciales</strong></p>
@@ -352,6 +364,7 @@ import { SiteFooter } from '../app/components/SiteFooter';
       <ol>
         <li>Usuarios de la Plataforma: La autorización se obtiene de forma electrónica al momento de la creación de la Cuenta de Usuario, mediante la aceptación expresa de los Términos y Condiciones de Uso de la Plataforma, los cuales incluyen el consentimiento para el tratamiento de datos personales con las finalidades descritas en la presente Política.</li>
         <li>Aliados Comerciales: La autorización se obtiene mediante la firma o aceptación del Acuerdo de Vinculación de Aliado Comercial, el cual incluye las disposiciones relativas al tratamiento de datos personales.</li>
+        <li>Personas que escriben a CertiVeh por WhatsApp o por el chat del portal: la autorización se obtiene por conducta inequívoca, cuando el titular, informado mediante el aviso de privacidad del canal, continúa la conversación.</li>
         <li>Empleados y Contratistas: La autorización se obtiene mediante la firma del contrato de trabajo o contrato de prestación de servicios, o mediante formularios de autorización específicos.</li>
       </ol>
       <p class="tc-subsec"><strong>8.2 Conservación de la autorización</strong></p>
@@ -431,6 +444,7 @@ import { SiteFooter } from '../app/components/SiteFooter';
         <li>Los datos de Aliados Comerciales serán conservados durante la vigencia del Acuerdo de Vinculación y por un período adicional de dos (2) años contados desde su terminación, o el tiempo que sea necesario para cumplir con obligaciones legales pendientes.</li>
         <li>Los datos de empleados y contratistas serán conservados conforme a los términos establecidos por la normativa laboral, tributaria y de seguridad social aplicables.</li>
         <li>Los datos de medición publicitaria descritos en el numeral 6.7: los de atribución, durante noventa (90) días contados desde que se capturaron; el registro de cada envío a Meta o a Google, durante ciento ochenta (180) días. Luego se eliminan.</li>
+        <li>Los datos de ofertas y precios de que trata el numeral 7.1 se conservan hasta doce (12) meses después del último análisis del que formen parte, y luego se anonimizan. Los registros contables y las facturas se conservan durante el plazo legal.</li>
         <li>Los datos de navegación recolectados a través de Google Analytics se conservarán conforme a las políticas de retención de datos configuradas en dicha herramienta y a las instrucciones de la SIC. CertiVeh configura los períodos de retención de datos en Google Analytics de acuerdo con las finalidades de analítica declaradas y de conformidad con la normativa de protección de datos aplicable.</li>
       </ol>
       <p>Una vez cumplido el período de conservación y sin perjuicio de obligaciones legales que impongan su conservación, CertiVeh procederá a la eliminación, anonimización o bloqueo de los datos personales, conforme a sus políticas internas y a las instrucciones de la SIC.</p>
@@ -450,12 +464,14 @@ import { SiteFooter } from '../app/components/SiteFooter';
         <li>Google LLC (Google Ads, medición publicitaria): desde los servidores de CertiVeh recibe, de los datos descritos en el numeral 6.7, solo el identificador del clic de Google, el tipo de evento con su fecha y valor, y el identificador interno; y, por la etiqueta de Google Ads en el navegador, los datos técnicos estándar de la visita (entre ellos la dirección IP y el tipo de navegador), sin uso para personalizar anuncios ni para remarketing. Todo ello para medir los anuncios de CertiVeh en Google, conforme a sus condiciones de procesamiento de datos de Google Ads.</li>
         <li>Google Analytics (analítica de uso): Herramienta de analítica digital de Google LLC que recolecta datos de navegación de forma automática. Google actúa como Encargado del Tratamiento conforme a sus Condiciones de Servicio y Política de Privacidad, y suscribe los acuerdos de procesamiento de datos aplicables.</li>
         <li>Croma (consulta del RUNT): cuando el usuario escribe la placa de su vehículo en lugar de subir la tarjeta de propiedad, recibe la placa y el tipo y número de documento del titular, y consulta con ellos los datos del vehículo en el Registro Único Nacional de Tránsito (RUNT), únicamente para verificarlos dentro del trámite, conforme a sus Términos de Servicio, en los que actúa como Encargado del Tratamiento.</li>
+        <li>Anthropic, PBC (asistente de inteligencia artificial): procesa el contenido de las conversaciones por WhatsApp, por el chat del portal y por Instagram para generar las respuestas del asistente, con infraestructura ubicada en Estados Unidos (transferencia internacional, numeral 13.3).</li>
+        <li>Meta Platforms, Inc. (WhatsApp Business): transmite los mensajes que el titular intercambia con CertiVeh por WhatsApp, con infraestructura ubicada fuera de Colombia (transferencia internacional, numeral 13.3).</li>
       </ol>
       <p>La transmisión a estos proveedores se rige por contratos o acuerdos de procesamiento de datos en los que el Encargado se obliga a: (i) dar tratamiento a los datos conforme a las instrucciones de CertiVeh y los principios de la Ley 1581 de 2012; (ii) salvaguardar la seguridad de las bases de datos; (iii) guardar confidencialidad sobre los datos tratados, de conformidad con el artículo 25 del Decreto 1377 de 2013.</p>
       <p class="tc-subsec"><strong>13.2 Transferencia a la UPME</strong></p>
       <p>En el marco del servicio prestado a través de la Plataforma, CertiVeh transferirá a la Unidad de Planeación Minero Energética (UPME) la información y los documentos suministrados por el usuario, únicamente con el propósito de gestionar y radicar la solicitud de certificación correspondiente. Esta transferencia se realiza en virtud de la autorización expresa otorgada por el usuario al aceptar los Términos y Condiciones de Uso de la Plataforma.</p>
       <p class="tc-subsec"><strong>13.3 Transferencias internacionales</strong></p>
-      <p>Dado que CertiVeh utiliza servicios de infraestructura tecnológica cuyos servidores se encuentran ubicados fuera del territorio colombiano (Supabase con infraestructura en AWS US East, Estados Unidos; Google Analytics y Google Ads, con infraestructura de Google LLC; y Meta Platforms, Inc., en Estados Unidos), los datos personales de los usuarios son transmitidos a servidores ubicados en territorio estadounidense. CertiVeh garantiza que estas transmisiones se realizan bajo los acuerdos de procesamiento de datos (DPA) suscritos con dichos proveedores, los cuales incorporan las salvaguardas adecuadas exigidas por la normativa de protección de datos aplicable, de conformidad con el artículo 26 de la Ley 1581 de 2012.</p>
+      <p>Dado que CertiVeh utiliza servicios de infraestructura tecnológica cuyos servidores se encuentran ubicados fuera del territorio colombiano (Supabase con infraestructura en AWS US East, Estados Unidos; Google Analytics y Google Ads, con infraestructura de Google LLC; Meta Platforms, Inc., en Estados Unidos, también por WhatsApp Business; y Anthropic, PBC, en Estados Unidos), los datos personales de los usuarios son transmitidos a servidores ubicados en territorio estadounidense. CertiVeh garantiza que estas transmisiones se realizan bajo los acuerdos de procesamiento de datos (DPA) suscritos con dichos proveedores, los cuales incorporan las salvaguardas adecuadas exigidas por la normativa de protección de datos aplicable, de conformidad con el artículo 26 de la Ley 1581 de 2012.</p>
     </div>
 
     <div class="tc-section" id="s14">
@@ -514,7 +530,7 @@ import { SiteFooter } from '../app/components/SiteFooter';
         <div class="tc-section-num">18</div>
         <h2 class="tc-section-title">Vigencia de la Política y de las Bases de Datos</h2>
       </div>
-      <p>La presente Política (versión 2.2) entra en vigencia a partir del 18 de noviembre de 2026, y sustituye a la versión 2.1, vigente desde el 7 de noviembre de 2026. Permanecerá vigente de manera indefinida, hasta tanto sea modificada o derogada por CertiVeh conforme al procedimiento establecido en el artículo anterior.</p>
+      <p>La presente Política (versión 2.3) entra en vigencia a partir del {VIGENTE_DESDE_LA_BIENVENIDA}, y sustituye a la versión 2.2, vigente desde el 18 de noviembre de 2026. Permanecerá vigente de manera indefinida, hasta tanto sea modificada o derogada por CertiVeh conforme al procedimiento establecido en el artículo anterior.</p>
       <p>Las bases de datos administradas por CertiVeh tendrán vigencia durante el tiempo necesario para cumplir con las finalidades del tratamiento y las obligaciones legales aplicables, conforme a los períodos de conservación descritos en el artículo 12 de la presente Política.</p>
     </div>
 

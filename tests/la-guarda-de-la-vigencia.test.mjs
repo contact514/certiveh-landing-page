@@ -41,3 +41,7 @@ test('80 r3: el aviso del borrador es UNO, el de los Términos y el de la home',
   const { AVISO_DEL_BORRADOR } = await import('../src/lib/vigencia-de-los-codigos.ts');
   assert.equal(laGuardaDeLaVigencia({ [PERMISO_DEL_BORRADOR]: '1' }, true).aviso, AVISO_DEL_BORRADOR);
 });
+
+test('🔴 100 · la guarda dice qué fecha falta: la del descuento de bienvenida tiene su nombre', () => {
+  assert.throws(() => laGuardaDeLaVigencia({ VERCEL: '1' }, true, 'VIGENTE_DESDE_LA_BIENVENIDA'), /falta fijar VIGENTE_DESDE_LA_BIENVENIDA/);
+});
