@@ -79,6 +79,10 @@ const NAV_CSS = `
     pointer-events: none;
     display: flex; flex-direction: column; gap: 2px;
     font-family: var(--cv-font, 'Albert Sans', 'Helvetica Neue', Arial, sans-serif);
+    /* Alto máximo y scroll propio (18-nov-2026): el menú mide ~550 px desde y = 64 y acaba en 612; con el celular apaisado
+       (844 × 390) o un portátil al 125 % (1093 × 512, ya con el menú del celular) los últimos enlaces y «Obtener…» quedaban
+       debajo de la pantalla, y como el menú es fijo, bajar la página no los traía. Cuando cabe no cambia nada. */
+    max-height: calc(100dvh - 64px); overflow-y: auto; overscroll-behavior: contain;
   }
   /* cerrado = oculto de verdad (visibility): sus enlaces no se alcanzan con el teclado ni los lee un lector */
   .shared-mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; transition: transform 0.25s ease, opacity 0.2s ease; }

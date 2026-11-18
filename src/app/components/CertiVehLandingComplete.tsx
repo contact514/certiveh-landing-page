@@ -449,7 +449,10 @@ ${CSS_UI}
 
   /* ── MODAL DE PLAZO ── */
   .urgency-modal-overlay { position: fixed; inset: 0; background: rgba(9,14,26,.72); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; overscroll-behavior: contain; }
-  .urgency-modal { position: relative; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); box-shadow: 0 24px 80px rgba(0,0,0,.5); max-width: 520px; width: 100%; padding: 44px; } /* taste-skill-ignore: elemento que flota (modal o botón fijo) */
+  /* Alto máximo y scroll propio (18-nov-2026): la ventana mide ~670 px y va centrada; medido en Chromium, a 1366 × 640 su X
+     quedaba 14 px por encima de la pantalla (a 375 × 667, 16; a 360 × 640, 41; al 125 %, 76) y, con el scroll de la página
+     bloqueado, sólo se cerraba con Esc o tocando el margen. Cuando cabe no cambia nada. */
+  .urgency-modal { position: relative; background: var(--cv-field); color: #fff; border-radius: var(--cv-r); box-shadow: 0 24px 80px rgba(0,0,0,.5); max-width: 520px; width: 100%; padding: 44px; max-height: calc(100dvh - 40px); overflow-y: auto; overscroll-behavior: contain; } /* taste-skill-ignore: elemento que flota (modal o botón fijo) */
   .urgency-modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: var(--cv-r); background: var(--cv-field-2); border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #cbd5e1; }
   .urgency-modal-close:hover { color: #fff; }
   .urgency-k { font-size: var(--cv-small); font-weight: 600; color: #fca5a5; }
