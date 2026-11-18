@@ -22,7 +22,7 @@ export const laVigenciaEstaPendiente = (): boolean => VIGENTE_DESDE === PENDIENT
  * `VIGENTE_DESDE` porque llega en otra fecha: la del encendido del experimento de precio, que fija Julian. Mientras esté sin fijar,
  * la misma guarda impide publicar los Términos (`laGuardaDeLaVigencia`). Los textos los tienen que aprobar Julian o la abogada.
  */
-export const VIGENTE_DESDE_LA_BIENVENIDA: string = PENDIENTE_DE_FIJAR;
+export const VIGENTE_DESDE_LA_BIENVENIDA: string = '19 de noviembre de 2026 a la 1:00 a. m. (hora de Colombia)';
 export const laVigenciaDeLaBienvenidaEstaPendiente = (): boolean => VIGENTE_DESDE_LA_BIENVENIDA === PENDIENTE_DE_FIJAR;
 
 /**
