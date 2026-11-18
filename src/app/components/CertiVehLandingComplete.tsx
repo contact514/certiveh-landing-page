@@ -133,6 +133,9 @@ ${CSS_CALC}
   .tile { background: var(--cv-tone); border-radius: var(--cv-r); padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; text-decoration: none; color: var(--cv-ink); transition: background-color .15s; }
   a.tile:hover { background: var(--cv-tone-2); }
   a.tile:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
+  /* Prensa: el logo del medio en gris y, al pasar el ratón o llegar con el teclado, en su color. */
+  a.tile .mark img { transition: filter .2s ease; }
+  a.tile:hover .mark img, a.tile:focus-visible .mark img { filter: none; }
   .tile.head { grid-column: span 2; background: var(--cv-accent); color: #fff; }
   .tile.head .tile-h { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.02; }
   .tile.head p { color: #d6f5e8; max-width: 48ch; }
