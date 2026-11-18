@@ -31,14 +31,24 @@ test('🔴 la cláusula dice lo que dice Camila: 72 h, la gracia, un solo pago, 
   ]) assert.ok(clausula.includes(dice), dice);
 });
 
-test('🔴 la definición es la del Código de bienvenida; el de 48 minutos solo queda en la transición', () => {
+test('🔴 las dos definiciones: el Código de bienvenida, y el de 48 minutos hasta la fecha del de bienvenida (la flash sigue cubierta hasta que se apague)', () => {
   assert.match(tyc, /<strong>Código de bienvenida:<\/strong> El código personal[^<]*Empieza por «CV» y vale durante setenta y dos \(72\) horas desde que se ofrece\./);
-  assert.doesNotMatch(tyc, /<strong>Código de descuento de 48 minutos:<\/strong>/);
-  assert.doesNotMatch(tyc, /<strong>Beneficios personales\.<\/strong>/);
-  assert.equal(tyc.split('48 minutos').length - 1, 1, 'solo en «Los Códigos de descuento de 48 minutos asignados antes del …»');
+  assert.match(tyc, /<strong>Código de descuento de 48 minutos:<\/strong> Hasta el \{VIGENTE_DESDE_LA_BIENVENIDA\}, el código personal[^<]*cuarenta y ocho \(48\) minutos siguientes a su asignación/);
+  assert.match(tyc, /<strong>Beneficios personales\.<\/strong> Hasta el \{VIGENTE_DESDE_LA_BIENVENIDA\}, el Operador de la Plataforma podrá asignar[^<]*Código de descuento de 48 minutos/);
 });
 
-test('🔴 su fecha va aparte y, sin fijar, la guarda impide publicar', () => {
-  assert.match(vigencia, /export const VIGENTE_DESDE_LA_BIENVENIDA: string = PENDIENTE_DE_FIJAR;/);
+test('🔴 lit. a: también en la Plataforma; lit. g: el código no se restablece, sin salvedad', () => {
+  assert.ok(tyc.includes('por WhatsApp, por el chat del portal o en la Plataforma y aún no han pagado ningún trámite'));
+  assert.ok(tyc.includes('se devuelve lo efectivamente pagado. El código no se restablece.</p>'));
+  assert.doesNotMatch(tyc, /salvo que siga vigente/);
+});
+
+test('🔴 el anexo del IVA: el Código de bienvenida desde su fecha, en cualquiera de sus modalidades, incluida la Premium', () => {
+  assert.ok(tyc.includes('Desde el {VIGENTE_DESDE_LA_BIENVENIDA}, le es aplicable también el Código de bienvenida, en cualquiera de sus modalidades, incluida la Premium'));
+});
+
+test('🔴 su fecha va aparte y la guarda la mira (sin fijar, impide publicar; fijada, esta prueba sigue en verde)', () => {
+  assert.match(vigencia, /export const VIGENTE_DESDE_LA_BIENVENIDA: string = (PENDIENTE_DE_FIJAR|'[^']+');/);
+  assert.match(vigencia, /export const laVigenciaDeLaBienvenidaEstaPendiente = \(\): boolean => VIGENTE_DESDE_LA_BIENVENIDA === PENDIENTE_DE_FIJAR;/);
   assert.match(tyc, /laGuardaDeLaVigencia\(process\.env, laVigenciaDeLaBienvenidaEstaPendiente\(\), 'VIGENTE_DESDE_LA_BIENVENIDA'\)/);
 });
