@@ -324,7 +324,7 @@ Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y r
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
-Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.
+Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo (Resolución 563 de 2026, numeral 6.3.1). Si hace un requerimiento, ese plazo se suspende hasta que se responde.
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
@@ -420,7 +420,7 @@ https://portal.certiveh.co
 - Subir documentos: Menos de 3 minutos
 - Revisar y confirmar: 30 segundos
 - Radicación: Menos de 10 minutos de tu parte
-- Certificado UPME: ~15 días hábiles, máximo legal 30
+- Certificado UPME: hasta 30 días hábiles por ley (Res. 563 de 2026, num. 6.3.1); el término se suspende si la UPME hace un requerimiento
 
 ### Precisión de la IA
 +90% de los datos extraídos correctamente en el primer intento

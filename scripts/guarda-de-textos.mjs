@@ -134,6 +134,27 @@ export function laVentanaMalDicha(frase) {
   return /\bantes de (?:la|tu|su) hora\b|\bminutos antes\b|\bantes de la hora (?:asignada|de (?:la|tu|su) cita)\b/.test(f);
 }
 
+/**
+ * 19-nov-2026 · Lo que tarda la UPME. La Resolución 563 de 2026 le da HASTA 30 días hábiles para
+ * resolver de fondo (numeral 6.3.1), unificado para FNCE, GEE e hidrógeno; el término se suspende
+ * si envía un requerimiento (6.3.2) y al reanudarse quedan hasta 10 hábiles más (6.3.3).
+ *
+ * El sitio decía además que «en la práctica se demora aproximadamente 15 días hábiles». Ese número
+ * no sale de la norma ni de una medición nuestra: Julian lo desmintió el 19-nov. Mientras no haya
+ * un dato medido que lo respalde, no se publica un promedio de la UPME.
+ *
+ * También caza lo que describía el procedimiento ANTERIOR, que la 563 derogó: la etapa de
+ * completitud de 10 días hábiles y los 20 días para FNCE.
+ */
+export function elPromedioDeLaUpmeSinFuente(frase) {
+  const f = sinTildes(plano(frase));
+  if (!/\bupme\b/.test(f)) return false;
+  if (/\b(?:en la practica|normalmente|aproximadamente|de media|en promedio|suele(?:n)? (?:demorar|tardar)|se demora)\b[^.;]{0,60}\bdias(?: habiles)?\b/.test(f)) return true;
+  if (/completitud\b[^.;]{0,30}\b(?:10|diez)\b[^.;]{0,20}\bdias/.test(f)) return true;
+  if (/\b(?:20|veinte)\b[^.;]{0,25}\bdias habiles\b[^.;]{0,30}\bfnce\b/.test(f)) return true;
+  return false;
+}
+
 const REGLAS = [
   [plazoMalDicho, 'los 50 días son para DEVOLVER el dinero desde la radicación, no para responder'],
   [plazoDeAntes, 'la frase de antes (D15-99): los 15 días son para pedir una corrección y los 50, desde la radicación, para devolver'],
@@ -141,6 +162,7 @@ const REGLAS = [
   [prometeUnTotal, '«tres meses y medio» no tiene fuente'],
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
   [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 30 minutos siguientes (mejor en los primeros 10), no antes'],
+  [elPromedioDeLaUpmeSinFuente, 'un promedio de lo que tarda la UPME sin dato medido detrás, o el procedimiento que la Resolución 563 derogó'],
 ];
 
 // ── El control: cada regla caza lo suyo y deja pasar lo cierto ─────────────────────────────────
@@ -162,9 +184,21 @@ function control() {
     'la DIAN revisa los documentos de tu propia solicitud y, desde que la radica, tiene hasta 15 días hábiles para pedirte una corrección si falta algo y hasta 50 para devolverte el dinero.',
     'Si todo está en orden, tiene hasta 50 días hábiles desde la radicación para devolverte el dinero a tu cuenta bancaria.',
     'la DIAN tiene hasta 50 dias habiles para pagar, contados desde que la solicitud queda radicada',
-    'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.',
+    'Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo.',
     'Son 50 días hábiles para pagar.',
   ]) debe(!plazoMalDicho(bien), `plazoMalDicho marca una frase cierta: ${bien}`);
+  for (const mal of [
+    'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.',
+    'Por ley la UPME tiene hasta 30 días hábiles, aunque en la práctica se demora aproximadamente 15 días hábiles.',
+    'El certificado UPME sale en promedio en 12 días hábiles.',
+    'La UPME verifica completitud en 10 días hábiles y evalúa en hasta 20 días hábiles para proyectos FNCE.',
+  ]) debe(elPromedioDeLaUpmeSinFuente(mal), `elPromedioDeLaUpmeSinFuente no caza: ${mal}`);
+  for (const bien of [
+    'La UPME tiene hasta 30 días hábiles para resolver de fondo la solicitud (Resolución 563 de 2026, numeral 6.3.1).',
+    'Si la UPME envía un requerimiento, el término se suspende hasta que se responde, y al reanudarse quedan hasta 10 días hábiles adicionales.',
+    'La DIAN tiene hasta 50 días hábiles desde la radicación para devolverte el dinero.',
+    'En la práctica, la cita de la DIAN en Medellín se demora de 2 a 3 meses.',
+  ]) debe(!elPromedioDeLaUpmeSinFuente(bien), `elPromedioDeLaUpmeSinFuente marca una frase cierta: ${bien}`);
   debe(citaUnArticuloParaElPlazo('responde en 15 días hábiles y, si aprueba, paga en 50 días (artículos 855 y 860 del Estatuto Tributario).'), 'no caza el artículo citado para el plazo');
   debe(citaUnArticuloParaElPlazo('si la aprueba, 50 días hábiles para pagar (artículo 855 del Estatuto Tributario).'), 'no caza el 855 junto a los 50 días');
   debe(!citaUnArticuloParaElPlazo('"el término para devolver será el consagrado en los artículos 855 y 860 del Estatuto Tributario." Son 50 días hábiles para pagar.'), 'marca la cita literal de la DIAN');
@@ -179,7 +213,7 @@ function control() {
   ]) debe(plazoDeAntes(mal), `plazoDeAntes no caza: ${mal}`);
   for (const bien of [
     'Desde que radica la solicitud, la DIAN tiene hasta 15 días hábiles para pedirte una corrección si falta algo y hasta 50 días hábiles para devolverte el dinero a tu cuenta bancaria.',
-    'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30.',
+    'Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo.',
     'El solicitante tiene hasta un mes desde que la UPME envía el requerimiento para responderlo.',
   ]) debe(!plazoDeAntes(bien), `plazoDeAntes marca una frase cierta: ${bien}`);
   // 96: la regla va de verdad en las REGLAS que barren las páginas (mutante: quitarla de la lista dejaba la guarda en verde).
@@ -194,7 +228,7 @@ function control() {
   for (const mal of ['Si hay cita, envías ese correo el día de tu cita, antes de la hora.', 'se atiende con un correo el día asignado, antes de la hora.', 'Reenvía el correo unos 5 minutos antes de la hora de tu cita.', 'se atiende mandando el correo ese día, antes de la hora asignada.']) {
     debe(laVentanaMalDicha(mal), `laVentanaMalDicha no caza: ${mal}`);
   }
-  for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.', 'Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
+  for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.', 'Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
     debe(!laVentanaMalDicha(bien), `laVentanaMalDicha marca una frase cierta: ${bien}`);
   }
   // El lector: ve el texto visible y el JSON-LD, y no los comentarios ni los scripts.

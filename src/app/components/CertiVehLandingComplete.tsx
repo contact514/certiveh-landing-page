@@ -140,7 +140,7 @@ ${CSS_CALC}
   .tile.head .tile-h { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); font-weight: var(--cv-wh); letter-spacing: var(--cv-trk); line-height: 1.02; }
   .tile.head p { color: #d6f5e8; max-width: 48ch; }
   .tile .mark { height: 72px; display: flex; align-items: center; }
-  .tile .mark img { max-height: 56px; max-width: 78%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); }
+  .tile .mark img { max-height: var(--cv-logo-h, 56px); max-width: var(--cv-logo-w, 78%); width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); }
   .tile .note { font-size: .8125rem; color: var(--cv-soft); }
   /* Aliados: los logos en su color (prensa sigue en gris) y Grecco a tres columnas, con sus cinco marcas. */
   .aliados .tile .mark { height: 72px; }
@@ -1441,15 +1441,31 @@ type Medio = {
   fecha: string; url: string; accion: string;
 };
 const MEDIOS: Medio[] = [
+  // 19-nov-2026: la cobertura del plazo del 15 de diciembre. Los tres citan a CertiVeh y van primero
+  // por ser lo más reciente. Titulares textuales, del og:title de cada artículo.
+  // `maxH`/`maxW`: El Tiempo es 5,7:1 y va al ancho de Portafolio; La República es 0,8:1, el más
+  // cuadrado de todos (Valora era 1,6:1), así que manda el alto de la caja, 36 px.
+  { name: "El Tiempo", logo: "/prensa-eltiempo.png", maxH: 22, maxW: 118, formato: "Artículo", fecha: "Noviembre 2026", accion: "Leer artículo",
+    titular: "Dueños de carros eléctricos e híbridos tienen hasta el 15 de diciembre para pedir el certificado que habilita la devolución del IVA",
+    url: "https://www.eltiempo.com/economia/duenos-de-carros-electricos-e-hibridos-tienen-hasta-el-15-de-diciembre-para-pedir-el-certificado-que-habilita-la-devolucion-del-iva-3602327" },
+  { name: "La República", logo: "/prensa-larepublica.png", maxH: 56, maxW: 66, formato: "Artículo", fecha: "Noviembre 2026", accion: "Leer artículo",
+    titular: "Beneficios tributarios por la compra de vehículos híbridos y eléctricos vencerán en diciembre",
+    url: "https://www.larepublica.co/empresas/beneficios-tributarios-por-la-compra-de-vehiculos-hibridos-y-electricos-venceran-en-diciembre-4527552" },
+  { name: "Pulzo", logo: "/prensa-pulzo.png", maxH: 28, maxW: 110, formato: "Artículo", fecha: "Noviembre 2026", accion: "Leer artículo",
+    titular: "Dueños de carros eléctricos tienen plazo límite en Colombia: fecha clave es en diciembre",
+    url: "https://www.pulzo.com/economia/duenos-carros-electricos-tienen-plazo-limite-colombia-fecha-clave-PP5359319" },
   { name: "Negocios Ditu", logo: "/prensa-negociosditu.png", maxH: 30, maxW: 80, formato: "Video", fecha: "Septiembre 2026", accion: "Ver entrevista",
     titular: "¿Tienes un carro eléctrico o híbrido? Podrías estar perdiendo beneficios",
     url: "https://www.youtube.com/watch?v=MUugrTUv-Zg" },
   { name: "Revista Semana", logo: "/prensa-semana.png", maxH: 26, maxW: 130, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
     titular: "Buenas noticias para conductores de carros eléctricos en Colombia: podrían recuperar millones de pesos con este beneficio",
     url: "https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/" },
-  { name: "Valora Analitik", logo: "/prensa-valora.png", maxH: 36, maxW: 95, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
-    titular: "Compradores de vehículos eléctricos podrían recuperar millones de pesos con este beneficio",
-    url: "https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/" },
+  // 19-nov-2026: se sustituye su artículo de julio por el del 18 de noviembre. Una tarjeta por medio
+  // mantiene el muro limpio, y el de noviembre habla del plazo, que es accionable; lo de «recuperar
+  // millones» ya lo dicen Semana, Infobae y Yahoo.
+  { name: "Valora Analitik", logo: "/prensa-valora.png", maxH: 36, maxW: 95, formato: "Artículo", fecha: "Noviembre 2026", accion: "Leer artículo",
+    titular: "Contribuyentes podrían recuperar millones de pesos con beneficio de la DIAN: se acerca fecha límite",
+    url: "https://www.valoraanalitik.com/contribuyentes-podrian-recuperar-millones-de-pesos-con-beneficio-de-la-dian-se-acerca-fecha-limite/" },
   { name: "Portafolio", logo: "/prensa-portafolio.png", maxH: 26, maxW: 130, formato: "Artículo", fecha: "Julio 2026", accion: "Leer artículo",
     titular: "Una empresa colombiana lleva a WhatsApp el trámite para acceder a beneficios tributarios de vehículos eléctricos",
     url: "https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545" },
@@ -1480,8 +1496,9 @@ function Prensa() {
         {MEDIOS.map((m, i) => (
           <a key={m.name} className="tile rv" href={m.url} target="_blank" rel="noopener noreferrer"
             aria-label={`${m.name}: ${m.titular} (se abre en una pestaña nueva)`}
-            style={i === MEDIOS.length - 1 ? { gridColumn: "span 2" } : undefined}>
-            <div className="mark"><img src={m.logo} alt={m.name} loading="lazy" /></div>
+            style={i === MEDIOS.length - 1 ? { gridColumn: `span ${4 - ((2 + MEDIOS.length - 1) % 4)}` } : undefined}>
+            <div className="mark"><img src={m.logo} alt={m.name} loading="lazy"
+              style={{ "--cv-logo-h": `${m.maxH}px`, "--cv-logo-w": `${m.maxW}px` } as React.CSSProperties} /></div>
             <p className="quote">«{m.titular}»</p>
             <span className="meta"><span>{m.formato} · {m.fecha}</span><b>{m.accion}</b></span>
           </a>
@@ -1556,7 +1573,7 @@ function FAQ() {
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana la radicamos en cuanto tus documentos están completos. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y reverso), tu RUT, la factura de compra y la tarjeta de propiedad (frente y reverso), o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
-    { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
+    { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo (Resolución 563 de 2026, numeral 6.3.1). Si hace un requerimiento, ese plazo se suspende hasta que se responde." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     // ⚠️ La DIAN NEGÓ este beneficio a las personas naturales en el Concepto 012101 del 5-ago-2025
