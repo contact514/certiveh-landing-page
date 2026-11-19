@@ -26,13 +26,13 @@ Este servicio de devolución de IVA aplica únicamente a vehículos eléctricos 
 
 ## Ventana de radicación UPME (actualizado octubre 2026)
 
-La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: las solicitudes se radican de inmediato. La Resolución UPME 563 de 2026 (expedida el 5 de agosto de 2026) derogó la 400 y la 135 y mantuvo esa misma ventana: las solicitudes radicadas fuera del 1 de febrero al 15 de diciembre se entienden como no presentadas.
+La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: CertiVeh radica la solicitud en cuanto los documentos del cliente están completos. La Resolución UPME 563 de 2026 (expedida el 5 de agosto de 2026) derogó la 400 y la 135 y mantuvo esa misma ventana: las solicitudes radicadas fuera del 1 de febrero al 15 de diciembre se entienden como no presentadas.
 
 ## Cómo funciona
 
 1. El usuario sube su cédula, la factura de compra y la tarjeta de propiedad (o solo la placa, si el vehículo aparece en el RUNT) en la plataforma web portal.certiveh.co. Si es persona natural, también su RUT: puede subirlo después de pagar, pero sin él no se radica. Una empresa no aporta RUT para el certificado UPME; sí para la devolución del IVA.
 2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
-3. Un agente automatizado radica la solicitud de inmediato en el portal oficial de la UPME (ventana continua, Resolución UPME 563 de 2026).
+3. Un agente automatizado radica la solicitud en el portal oficial de la UPME en cuanto los documentos están completos (ventana continua, Resolución UPME 563 de 2026).
 4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
 
 ## Datos clave
@@ -93,6 +93,6 @@ https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME
 - Automatización: un agente de software radica la solicitud directamente en el portal UPME.
 - Precios transparentes: costo publicado en el sitio, pago único y sin suscripciones. Aparte van el costo del trámite ante la UPME y, cuando hay copropietarios, la notaría de su poder.
 - Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 563 de 2026.
-- Radicación inmediata: gracias a la ventana continua (Resolución UPME 563 de 2026), ya no hay que esperar ciclos.
+- Radicación sin esperas: gracias a la ventana continua (Resolución UPME 563 de 2026), ya no hay que esperar ciclos.
 - Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (498+ modelos).
 - Seguimiento: el usuario recibe notificaciones por WhatsApp en cada etapa del trámite.

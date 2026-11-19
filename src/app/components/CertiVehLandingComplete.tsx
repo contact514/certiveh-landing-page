@@ -751,7 +751,7 @@ function Hero() {
             ))}
           </dl>
           <ul className="h-trust">
-            {["Sin cuenta en la UPME","Notificaciones WhatsApp","Solo pagas una vez","100% en línea"].map(t => <li key={t} className="cv-sq">{t}</li>)}
+            {["Tú no entras a la UPME","Notificaciones WhatsApp","Solo pagas una vez","100% en línea"].map(t => <li key={t} className="cv-sq">{t}</li>)}
           </ul>
         </div>
         <div className="h-stage"><Calculadora /></div>
@@ -1228,7 +1228,7 @@ function ComoFunciona() {
     // que el defecto es del pipeline de Astro/Vite. **Antes de tocar este título, construir y
     // contar NULs con Node**, que es lo único que los ve:
     //   node -e 'const b=require("fs").readFileSync("dist/index.html");console.log([...b].filter(x=>x===0).length)'
-    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME, llena todos los formularios con tus datos y radica la solicitud de inmediato.", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME (o usa la que ya tienes), llena los formularios con tus datos y radica la solicitud en cuanto tus documentos están completos.", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu panel.", detail: "Seguimiento en tiempo real por WhatsApp y correo." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
@@ -1377,7 +1377,7 @@ function Confianza() {
     { icon: "zap",         title: "Agente automatizado",          desc: "Nuestra tecnología navega el portal UPME por ti, llena todos los formularios y radica la solicitud sin que tengas que hacer nada." },
     { icon: "smartphone",  title: "Actualización en tiempo real", desc: "Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está tu trámite, en todo momento." },
     { icon: "lock",        title: "Tus datos, protegidos",        desc: "Cifrados en tránsito y en reposo. Cumplimos la Ley 1581 de Habeas Data." },
-    { icon: "calendar",    title: "Radicación inmediata",        desc: "La UPME recibe solicitudes del 1 de febrero al 15 de diciembre, sin ciclos. Tu trámite se radica de inmediato en esta ventana." },
+    { icon: "calendar",    title: "Radicación sin esperas",      desc: "La UPME recibe solicitudes del 1 de febrero al 15 de diciembre, sin ciclos. Radicamos tu trámite en cuanto tus documentos están completos." },
     { icon: "shield",      title: "Sin portal gubernamental",     desc: "Tú nunca tienes que entrar a la UPME. Nosotros creamos la cuenta, gestionamos el proceso y resolvemos cualquier imprevisto." },
     // ⚠️ El desglose de costos ajenos («aparte van el trámite ante la UPME y, si das poder, la
     // notaría») se retiró de AQUÍ el 9-sep-2026 por decisión de Julian. NO se ha quedado sin
@@ -1554,7 +1554,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
-    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana tu solicitud se radica de inmediato. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
+    { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana la radicamos en cuanto tus documentos están completos. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y reverso), tu RUT, la factura de compra y la tarjeta de propiedad (frente y reverso), o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: normalmente unos 15 días hábiles, y el máximo legal son 30." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
