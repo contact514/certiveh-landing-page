@@ -180,7 +180,7 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
-- **Descripción:** Solo necesitas tus documentos: cédula, tarjeta de propiedad y factura de compra, más el RUT si vas a pedir la devolución del IVA. Si eres empresa, además va el certificado de Cámara de Comercio vigente; el RUT lo pide la devolución de IVA, no el certificado UPME. Nuestro sistema extrae todos los datos automáticamente con inteligencia artificial.
+- **Descripción:** Tu cédula, la factura de compra y la tarjeta de propiedad o solo la placa. El RUT puedes subirlo después de pagar. La IA extrae los datos automáticamente.
 - **Detail:** Sin formularios manuales. Sin errores de digitación.
 
 ### Paso 02: Revisa y confirma
@@ -206,7 +206,7 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 
 ### Paso 05: Recibe tu certificado
 - **Subtitle:** Lo descargas desde tu panel
-- **Descripción:** Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas directamente desde tu dashboard.
+- **Descripción:** Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas directamente desde tu panel.
 - **Detail:** Seguimiento en tiempo real. Nunca te dejamos sin información.
 
 ### Paso 06: Gestionamos tu devolución de IVA
@@ -284,7 +284,7 @@ Nuestra tecnología navega el portal UPME por ti, llena todos los formularios y 
 Seguimiento completo por WhatsApp y email. Sabes exactamente en qué etapa está tu trámite, en todo momento.
 
 ### Card 3: Tus datos, protegidos
-Cifrado de extremo a extremo. Cumplimos la Ley 1581 de Habeas Data. Nunca compartimos tu información con terceros.
+Cifrados en tránsito y en reposo. Cumplimos la Ley 1581 de Habeas Data.
 
 ### Card 4: Radicación inmediata
 La ventana de la UPME es continua, del 1 de febrero al 15 de diciembre: tu solicitud se radica de inmediato. Si te registras con la ventana cerrada, entra en cuanto reabra y te avisamos.
@@ -320,7 +320,7 @@ La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciem
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
-Persona natural: cédula (frente y reverso), tarjeta de propiedad (frente y reverso) y factura de compra, más el RUT si vas a pedir la devolución del IVA. Empresa: cédula del representante legal, tarjeta de propiedad, factura de compra, certificado de Cámara de Comercio vigente y el RUT de la empresa si vas a pedir la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono.
+Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y reverso), tu RUT, la factura de compra y la tarjeta de propiedad (frente y reverso), o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono.
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
