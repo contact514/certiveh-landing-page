@@ -965,7 +965,7 @@ function Servicios() {
       // y 146). «Firmas en línea, sin papeleo» (8-oct-2026, Julian: la gente no sabe qué es el 010
       // ni la declaración); qué se firma lo dice la FAQ de la devolución.
       //
-      // ⚠️ **MEDIDAS (20-nov-2026; las cuatro primeras son las de la minilanding del portal):** aquí,
+      // ⚠️ **MEDIDAS (20-nov-2026; las cuatro también están en la minilanding del portal):** aquí,
       // de 360 a 1366 px, las cuatro primeras van en un renglón («Correo listo para que lo reenvíes»
       // mide 240 px; en la tarjeta del portal caben 269 a 375). Hubo una quinta, solo de la landing,
       // «Seguimos tu trámite hasta que la DIAN consigna»: partía en dos renglones hasta 390 px y
