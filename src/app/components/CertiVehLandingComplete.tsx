@@ -876,7 +876,7 @@ function Servicios() {
       title: "Devolución de IVA",
       // ⚠️ **LO QUE NO SE REPITE ES EL REENVÍO: vive solo en la nota.** La CONDICIÓN de la cita
       // va aquí Y en la viñeta, porque la viñeta promete —«la pedimos nosotros»— y una promesa sin
-      // condición es falsa: solo la exigen cinco seccionales.
+      // condición es falsa: solo la exigen seis seccionales.
       //
       // Esta descripción llegó a decir la cita TRES veces y el reenvío DOS, en un bloque que el
       // lector ve de una sola ojeada. Y este mismo aviso ya se escribió una vez diciendo que
@@ -897,7 +897,7 @@ function Servicios() {
       // lo cuenta la sección de Beneficios y la calculadora; en la tarjeta que describe el
       // servicio, repetirlo robaba las tres líneas que tenía para decir qué hacemos.
       //
-      // ⚠️ **Y «pedimos la cita» VA CONDICIONADO, SIEMPRE.** Solo la exigen 5 de 34 seccionales:
+      // ⚠️ **Y «pedimos la cita» VA CONDICIONADO, SIEMPRE.** Solo la exigen 6 de 34 seccionales:
       // sin la condición, esta frase es falsa para la mayoría de los que la leen. Es el motivo por
       // el que la condición vive aquí Y en la viñeta.
       desc: "Preparamos tus documentos, pedimos la cita por ti si tu seccional la exige y seguimos tu trámite hasta que la DIAN consigna tu devolución.",
@@ -1237,7 +1237,7 @@ function ComoFunciona() {
     //     dirección de su RUT, en todas las seccionales. Desde el 6-oct-2026 Bogotá radica igual
     //     que las demás con cita: no hay videoatención ni poder a CertiVeh (decisiones 110, 111 y
     //     146 de Julian). (Ante la UPME sí radicamos, y por eso el paso 04 sí puede decirlo.)
-    //   · La cita va CONDICIONADA a la seccional: solo la exigen cinco de treinta y cuatro.
+    //   · La cita va CONDICIONADA a la seccional: solo la exigen seis de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
     { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." }, // taste-skill-ignore: clave interna del dato, no se pinta

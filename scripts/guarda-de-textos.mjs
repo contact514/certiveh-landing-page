@@ -15,6 +15,9 @@
  * 2. **Quién hace qué.** La respuesta de la DIAN le llega al contribuyente, al correo de su RUT, y
  *    es él quien nos la cuenta: no «te avisamos cuando la DIAN responda». Y ante la DIAN no
  *    radicamos nosotros (ante la UPME sí: esa frase pasa).
+ * 3. **Las seccionales con cita son SEIS** (20-nov-2026): Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes
+ *    Contribuyentes. Manizales la exige desde el 18-nov-2026 (Abecé de la DIAN modificado el 9-nov-2026). No puede
+ *    volver la lista de cinco ni el «5 de 34».
  *
  * ## Qué lee
  *
@@ -155,6 +158,24 @@ export function elPromedioDeLaUpmeSinFuente(frase) {
   return false;
 }
 
+// ── Las seccionales con cita ───────────────────────────────────────────────────────────────────
+
+/**
+ * 20-nov-2026 · Desde el 18-nov-2026 Manizales también exige cita (Abecé de la DIAN, modificado el 9-nov-2026:
+ * «Si usted se encuentra en Bogotá, Bucaramanga, Cali, Manizales o Medellín, debe programar una cita»), más
+ * Grandes Contribuyentes: seis de 34. Caza el número de antes y la lista de antes: una frase que enumera
+ * Bucaramanga junto a Grandes Contribuyentes, o junto a la cita, y no nombra Manizales.
+ *
+ * Deja pasar el Comunicado 127 de la DIAN («200 citas diarias en Bogotá, Medellín, Cali y Bucaramanga»): es lo que
+ * dijo la DIAN el 1-oct-2026 sobre su capacidad, no la lista de las seccionales con cita.
+ */
+export function lasSeccionalesConCitaDeAntes(frase) {
+  const f = sinTildes(plano(frase));
+  if (/seccional|cita/.test(f) && /\b(?:5|cinco) (?:de (?:las )?(?:34|treinta y cuatro) )?seccionales\b|\b(?:5|cinco) de (?:las )?(?:34|treinta y cuatro)\b/.test(f)) return true;
+  if (!/\bbucaramanga\b/.test(f) || /\bmanizales\b/.test(f)) return false;
+  return /\bgrandes contribuyentes\b|\b(?:exige|exigen|necesitas|pide|piden|requiere|con|sin) (?:una )?cita\b|\bcita previa\b/.test(f);
+}
+
 const REGLAS = [
   [plazoMalDicho, 'los 50 días son para DEVOLVER el dinero desde la radicación, no para responder'],
   [plazoDeAntes, 'la frase de antes (D15-99): los 15 días son para pedir una corrección y los 50, desde la radicación, para devolver'],
@@ -163,6 +184,7 @@ const REGLAS = [
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
   [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 30 minutos siguientes (mejor en los primeros 10), no antes'],
   [elPromedioDeLaUpmeSinFuente, 'un promedio de lo que tarda la UPME sin dato medido detrás, o el procedimiento que la Resolución 563 derogó'],
+  [lasSeccionalesConCitaDeAntes, 'las seccionales con cita son seis desde el 18-nov-2026: falta Manizales o dice cinco'],
 ];
 
 // ── El control: cada regla caza lo suyo y deja pasar lo cierto ─────────────────────────────────
@@ -231,6 +253,26 @@ function control() {
   for (const bien of ['Envíalo a la hora exacta de tu cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.', 'Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles.', 'Tú reenvías el correo que te dejamos listo desde el correo de tu RUT.']) {
     debe(!laVentanaMalDicha(bien), `laVentanaMalDicha marca una frase cierta: ${bien}`);
   }
+  for (const mal of [
+    'En Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes la DIAN exige cita para la devolución del IVA de carros eléctricos e híbridos.',
+    'Si la seccional de la DIAN que te corresponde es la de Bogotá, Medellín, Cali o Bucaramanga, o si tu empresa pertenece a la Dirección de Grandes Contribuyentes, necesitas una cita.',
+    'Si tu RUT tiene seccional en Bogotá, Medellín, Cali, Bucaramanga o Grandes Contribuyentes, la radicación exige cita previa, que pedimos nosotros a tu nombre.',
+    'No. Fuera de Bogotá, Medellín, Cali, Bucaramanga y Grandes Contribuyentes, la solicitud se envía sin cita al correo de devoluciones.',
+    'La cita va CONDICIONADA («si tu seccional la exige»): solo la exigen 5 de 34.',
+    'La cita ante la DIAN la pedimos nosotros, pero solo la exigen cinco seccionales.',
+    'Solo 5 de las 34 seccionales la exigen.',
+    'La seccional de Bucaramanga pide cita.',
+  ]) debe(lasSeccionalesConCitaDeAntes(mal), `lasSeccionalesConCitaDeAntes no caza: ${mal}`);
+  for (const bien of [
+    'En Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes la DIAN exige cita para la devolución del IVA de carros eléctricos e híbridos.',
+    'La cita va CONDICIONADA («si tu seccional la exige»): solo la exigen 6 de 34.',
+    'La DIAN asignaba entonces cerca de 200 citas diarias en Bogotá, Medellín, Cali y Bucaramanga.',
+    'Entre agosto y septiembre asignó más de 6.600, y anunció más capacidad en Medellín y Bucaramanga.',
+    'Pedimos nosotros tu cita, si tu seccional la exige.',
+    'Una cuota de 5 de 34 meses.',
+  ]) debe(!lasSeccionalesConCitaDeAntes(bien), `lasSeccionalesConCitaDeAntes marca una frase cierta: ${bien}`);
+  // Y va de verdad en las REGLAS que barren (mutante: quitarla de la lista).
+  debe(frases(loQueDiceUnHtml('<td><strong>Bogotá, Medellín, Cali, Bucaramanga o Grandes Contribuyentes</strong></td>')).some((fr) => REGLAS.some(([r]) => r === lasSeccionalesConCitaDeAntes && r(fr))), 'las REGLAS no llevan las seccionales con cita (lasSeccionalesConCitaDeAntes)');
   // El lector: ve el texto visible y el JSON-LD, y no los comentarios ni los scripts.
   const html = '<!-- 50 días hábiles para responder --><script>var x = "50 días hábiles para responder";</script>'
     + '<script type="application/ld+json">{"text":"La DIAN tiene hasta 50 días hábiles para responder."}</script>'
@@ -280,9 +322,9 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(1);
   }
   if (r.hallazgos.length) {
-    console.error(`[guarda-de-textos] ${r.hallazgos.length} frase(s) dicen mal los plazos de la DIAN o quién hace qué:`);
+    console.error(`[guarda-de-textos] ${r.hallazgos.length} frase(s) dicen mal los plazos de la DIAN, quién hace qué o las seccionales con cita:`);
     for (const h of r.hallazgos) console.error(`  · ${h}`);
     process.exit(1);
   }
-  console.log(`[guarda-de-textos] ${r.paginas} páginas, llms.txt y los copies: los plazos y quién hace qué, bien dichos.`);
+  console.log(`[guarda-de-textos] ${r.paginas} páginas, llms.txt y los copies: los plazos, quién hace qué y las seccionales con cita, bien dichos.`);
 }

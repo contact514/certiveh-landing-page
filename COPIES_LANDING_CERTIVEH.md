@@ -129,12 +129,14 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 >
 > Auditado el 8-sep-2026: `cita`, `poder`, `notaría` y `seccional` salían **cero veces** en todo el
 > fichero. Quien escriba copy nuevo partiendo de aquí reproduce la asimetría que costó tres rondas
-> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos (puestos al día el 6-oct-2026):
+> cerrar en la web. Los cuatro hechos, tal cual hay que contarlos (puestos al día el 6-oct-2026;
+> las seccionales con cita, el 20-nov-2026):
 >
-> · **La cita ante la DIAN la pedimos nosotros**, pero solo la exigen cinco seccionales (Bogotá,
->   Medellín, Cali, Bucaramanga y Grandes Contribuyentes), así que va SIEMPRE condicionada: «si
->   tu seccional la exige». Sin condicionar es falso para la mayoría. *(«Una sola cita por
->   contribuyente» se retiró el 16-sep-2026: no tiene fuente oficial.)*
+> · **La cita ante la DIAN la pedimos nosotros**, pero solo la exigen seis seccionales (Bogotá,
+>   Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes; Manizales desde el 18-nov-2026,
+>   según el Abecé de la DIAN modificado el 9-nov-2026 y confirmado por el contador), así que va
+>   SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
+>   *(«Una sola cita por contribuyente» se retiró el 16-sep-2026: no tiene fuente oficial.)*
 > · **La cita NO es presencial ni es una videollamada.** Nadie va a ninguna oficina ni se conecta
 >   a nada: se atiende mandando el correo ese día, a la hora exacta de la cita o dentro de los
 >   30 minutos siguientes (recomendamos los primeros 10), ni antes ni después (la DIAN, 29-oct-2026). **Bogotá incluida**:
@@ -514,7 +516,7 @@ $[número] COP (formato colombiano con puntos de miles)
 > · **«tú lo reenvías» de la viñeta 3.** Antes vivía en la nota «¿Cómo se radica?», que se retiró.
 >   Si se cae ese trozo, el reenvío desaparece de la tarjeta y vuelve el fallo del 3-sep: gente que
 >   no reenviaba y cuyo expediente no se radicaba sin enterarse.
-> · **La cita va CONDICIONADA** («si tu seccional la exige»): solo la exigen 5 de 34.
+> · **La cita va CONDICIONADA** («si tu seccional la exige»): solo la exigen 6 de 34.
 > · **El cierre es «hasta que la DIAN resuelve», no «hasta que el dinero entra a tu cuenta».** La
 >   DIAN estudia y decide, y por encima de 1.000 UVT paga en TIDIS: prometer el giro es falso.
 >   Y tampoco vale «te acompañamos hasta que…», que infra-vende — los T&C llaman al servicio
