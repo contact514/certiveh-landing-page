@@ -967,11 +967,13 @@ function Servicios() {
       //
       // ⚠️ **MEDIDAS (20-nov-2026; las cuatro primeras son las de la minilanding del portal):** aquí,
       // de 360 a 1366 px, las cuatro primeras van en un renglón («Correo listo para que lo reenvíes»
-      // mide 240 px; en la tarjeta del portal caben 269 a 375). «Seguimos tu trámite hasta que la
-      // DIAN consigna», que es solo de la landing, va en dos renglones hasta 390 px (y en uno a
-      // 1366). Quien las retoque, que cuente los renglones a 360, 375 y 390 px antes y después, aquí
-      // y en el portal.
-      features: ["Generamos tu expediente", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      // mide 240 px; en la tarjeta del portal caben 269 a 375). La última, solo de la landing, era
+      // «Seguimos tu trámite hasta que la DIAN consigna» y partía en dos renglones hasta 390 px: desde
+      // el 20-nov-2026 es «Seguimos tu trámite hasta el pago» («pago» vale también para quien cobra
+      // en TIDIS, por encima de 1.000 UVT; «consigna», sólo para la consignación en la cuenta). Quien
+      // las retoque, que cuente los renglones a 360, 375 y 390 px antes y después, aquí y en el
+      // portal.
+      features: ["Generamos tu expediente", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta el pago"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
