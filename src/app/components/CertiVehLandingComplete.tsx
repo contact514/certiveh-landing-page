@@ -866,7 +866,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: desde.pesos.certificado,
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Radicamos modelos fuera del listado", "Respuesta a requerimientos UPME", "Certificado digital descargable", "Desbloquea los 3 beneficios"],
+      features: ["Radicamos por ti ante la UPME", "Radicamos modelos no listados", "Respuesta a requerimientos UPME", "Certificado digital descargable", "Desbloquea tus beneficios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
@@ -874,9 +874,10 @@ function Servicios() {
       icon: "receipt",
       tag: "Servicio 2",
       title: "Devolución de IVA",
-      // ⚠️ **LO QUE NO SE REPITE ES EL REENVÍO: vive solo en la nota.** La CONDICIÓN de la cita
-      // va aquí Y en la viñeta, porque la viñeta promete —«la pedimos nosotros»— y una promesa sin
-      // condición es falsa: solo la exigen seis seccionales.
+      // ⚠️ **LA CITA SE DICE AQUÍ, UNA VEZ, Y CON SU CONDICIÓN** («si tu seccional la exige»): una
+      // promesa sin condición es falsa, solo la exigen seis seccionales. Desde el 20-nov-2026 ya no
+      // hay viñeta de la cita (un dato, una vez); el reenvío vive en la viñeta «Correo listo para
+      // que lo reenvíes».
       //
       // Esta descripción llegó a decir la cita TRES veces y el reenvío DOS, en un bloque que el
       // lector ve de una sola ojeada. Y este mismo aviso ya se escribió una vez diciendo que
@@ -949,31 +950,28 @@ function Servicios() {
       // Ayudar a resolverlo no lo contradice; lo que lo contradiría es prometer que respondemos
       // nosotros en su nombre.
       //
-      // ⚠️ **EL ORDEN ES EL DEL TRÁMITE, y las seis caben de una ojeada** (Julian, 9-sep-2026):
-      // primero lo que armamos, luego lo que gestionamos ante la DIAN, luego las dos cosas que le
-      // quedan a él (reenviar y firmar), y al final la vigilancia y lo que dura. Seis viñetas; la
-      // alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no que
-      // haya el mismo numero.
+      // ⚠️ **EL ORDEN ES EL DEL TRÁMITE** (Julian, 9-sep-2026): primero lo que armamos, luego lo que
+      // le queda a él (reenviar y firmar), y al final la vigilancia y lo que dura. Desde el
+      // 20-nov-2026 son cinco: «Pedimos tu cita, si hace falta» salió porque la descripción de la
+      // tarjeta ya dice la cita con su condición exacta («si tu seccional la exige»). Un dato, una
+      // vez. La alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no
+      // que haya el mismo número de viñetas.
       //
-      // ⚠️ **LA TERCERA LLEVA EL REENVÍO («Correo de radicación ya redactado y listo, tú lo
-      // reenvías») Y ESO NO ES ADORNO.** Antes esa obligación vivía en la nota de abajo, que se
-      // retiró. Si alguien recorta ese trozo, el reenvío desaparece de la tarjeta entera y volvemos
-      // al fallo del 3-sep: gente que no reenviaba y cuyo expediente NO SE RADICABA sin enterarse.
-      // Puede moverse de sitio; no puede desaparecer.
+      // ⚠️ **LA SEGUNDA LLEVA EL REENVÍO («Correo listo para que lo reenvíes») Y ESO NO ES ADORNO.**
+      // Si alguien la recorta, el reenvío desaparece de la tarjeta entera y volvemos al fallo del
+      // 3-sep: gente que no reenviaba y cuyo expediente NO SE RADICABA sin enterarse. Puede cambiar
+      // de palabras o de sitio; no puede desaparecer. Vale para TODAS las seccionales, Bogotá
+      // incluida: desde el 6-oct-2026 no hay videoatención ni poder a CertiVeh (decisiones 110, 111
+      // y 146). «Firmas en línea, sin papeleo» (8-oct-2026, Julian: la gente no sabe qué es el 010
+      // ni la declaración); qué se firma lo dice la FAQ de la devolución.
       //
-      // ⚠️ **EL REENVÍO VALE PARA TODAS LAS SECCIONALES, BOGOTÁ INCLUIDA (6-oct-2026).** Del 29-sep
-      // al 6-oct la tercera decía «Fuera de Bogotá…» y la cuarta «En Bogotá, firmas tú o nos das un
-      // poder», porque Bogotá radicaba por videoatención. Ya no: no hay videoatención, Bogotá
-      // radica como las demás seccionales con cita y el poder a CertiVeh no se ofrece (decisiones
-      // 110, 111 y 146). La cuarta dice desde el 8-oct-2026 «Firmas en línea, sin papeleo» (Julian: la gente no sabe
-      // qué es el 010 ni la declaración). El detalle de qué se firma lo da la FAQ de la devolución.
-      //
-      // ⚠️ **LAS DOS MIDEN CASI LO MISMO QUE LAS QUE SUSTITUYEN (57 y 42 caracteres, frente a 57
-      // y 39) Y NO ES CASUALIDAD:** medidas de 320 a 1920 px, parten línea igual que las de
-      // antes y la tarjeta conserva su alto. Con 39 caracteres («Firmas en línea el 010…») la
-      // cuarta cabía en un renglón a 390 px y la tarjeta perdía 21 px. Quien las retoque, que
-      // cuente los renglones a varios anchos antes y después.
-      features: ["Generamos tu expediente completo", "Pedimos tu cita, si hace falta", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      // ⚠️ **MEDIDAS (20-nov-2026; las cuatro primeras son las de la minilanding del portal):** aquí,
+      // de 360 a 1366 px, las cuatro primeras van en un renglón («Correo listo para que lo reenvíes»
+      // mide 240 px; en la tarjeta del portal caben 269 a 375). «Seguimos tu trámite hasta que la
+      // DIAN consigna», que es solo de la landing, va en dos renglones hasta 390 px (y en uno a
+      // 1366). Quien las retoque, que cuente los renglones a 360, 375 y 390 px antes y después, aquí
+      // y en el portal.
+      features: ["Generamos tu expediente", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
@@ -981,11 +979,10 @@ function Servicios() {
       // cuyo expediente NO SE RADICABA sin enterarse.
       //
       // **Se puede quitar porque lo que protegía NO se ha ido, ha cambiado de sitio.** El reenvío
-      // pasó a la tercera viñeta («Correo de radicación ya redactado y listo, tú lo reenvías»), y
-      // la declaración juramentada la dice la FAQ de la devolución («Tú firmas en línea la
-      // declaración juramentada y el Formulario 010…»); la cuarta viñeta solo dice «Firmas en
-      // línea, sin papeleo» desde el 8-oct-2026. El subtítulo de Confianza
-      // se retiró por largo el 9-sep y el paso 06 no la nombra. Antes de tocar la viñeta o la FAQ,
+      // vive en la segunda viñeta («Correo listo para que lo reenvíes») y la declaración juramentada
+      // en la FAQ de la devolución («Tú firmas en línea la declaración juramentada y el Formulario
+      // 010…»); el paso 06 también dice que reenvía desde el correo de su RUT. Antes de tocar la
+      // viñeta o la FAQ,
       // comprobar que queda la otra: el día que no quede ninguna, la tarjeta vuelve a enumerar
       // solo lo nuestro, que es la asimetría de siempre.
       accentColor: "var(--teal-500)",
@@ -1228,7 +1225,7 @@ function ComoFunciona() {
     // que el defecto es del pipeline de Astro/Vite. **Antes de tocar este título, construir y
     // contar NULs con Node**, que es lo único que los ve:
     //   node -e 'const b=require("fs").readFileSync("dist/index.html");console.log([...b].filter(x=>x===0).length)'
-    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Gestionamos tu cuenta UPME y los formularios, y radicamos con tus documentos completos (del 1 de febrero al 15 de diciembre).", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Gestionamos tu cuenta UPME y los formularios, y radicamos cuando tus documentos están completos (del 1 de febrero al 15 de diciembre).", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te avisamos por WhatsApp y correo en cada etapa del proceso.", detail: "Seguimiento en tiempo real por WhatsApp y correo." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
@@ -1572,7 +1569,7 @@ function FAQ() {
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana la radicamos en cuanto tus documentos están completos. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
-    { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad o la placa. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
+    { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo (Resolución 563 de 2026, numeral 6.3.1). Si hace un requerimiento, ese plazo se suspende hasta que se responde." },
     { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
