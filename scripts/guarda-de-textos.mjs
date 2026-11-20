@@ -16,8 +16,8 @@
  *    es él quien nos la cuenta: no «te avisamos cuando la DIAN responda». Y ante la DIAN no
  *    radicamos nosotros (ante la UPME sí: esa frase pasa).
  * 3. **Las seccionales con cita son SEIS** (20-nov-2026): Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes
- *    Contribuyentes. Manizales la exige desde el 18-nov-2026 (Abecé de la DIAN modificado el 9-nov-2026). No puede
- *    volver la lista de cinco ni el «5 de 34».
+ *    Contribuyentes. Manizales la exige según el Abecé de la DIAN modificado el 9-nov-2026 (en nuestro sistema
+ *    desde el 18-nov-2026). No puede volver la lista de cinco ni el «5 de 34».
  *
  * ## Qué lee
  *
@@ -161,7 +161,7 @@ export function elPromedioDeLaUpmeSinFuente(frase) {
 // ── Las seccionales con cita ───────────────────────────────────────────────────────────────────
 
 /**
- * 20-nov-2026 · Desde el 18-nov-2026 Manizales también exige cita (Abecé de la DIAN, modificado el 9-nov-2026:
+ * 20-nov-2026 · Manizales también exige cita (Abecé de la DIAN, modificado el 9-nov-2026:
  * «Si usted se encuentra en Bogotá, Bucaramanga, Cali, Manizales o Medellín, debe programar una cita»), más
  * Grandes Contribuyentes: seis de 34. Caza el número de antes y la lista de antes: una frase que enumera
  * Bucaramanga junto a Grandes Contribuyentes, o junto a la cita, y no nombra Manizales.
@@ -171,9 +171,9 @@ export function elPromedioDeLaUpmeSinFuente(frase) {
  */
 export function lasSeccionalesConCitaDeAntes(frase) {
   const f = sinTildes(plano(frase));
-  if (/seccional|cita/.test(f) && /\b(?:5|cinco) (?:de (?:las )?(?:34|treinta y cuatro) )?seccionales\b|\b(?:5|cinco) de (?:las )?(?:34|treinta y cuatro)\b/.test(f)) return true;
+  if (/seccional|\bcita\b/.test(f) && /\b(?:4|cuatro|5|cinco) (?:de (?:las )?(?:34|treinta y cuatro) )?(?:direcciones )?(?:seccionales|ciudades)\b|\b(?:5|cinco) de (?:las )?(?:34|treinta y cuatro)\b|\bson (?:4|cuatro|5|cinco) las (?:seccionales|ciudades)\b/.test(f)) return true;
   if (!/\bbucaramanga\b/.test(f) || /\bmanizales\b/.test(f)) return false;
-  return /\bgrandes contribuyentes\b|\b(?:exige|exigen|necesitas|pide|piden|requiere|con|sin) (?:una )?cita\b|\bcita previa\b/.test(f);
+  return /\bgrandes contribuyentes\b|\bcita\b/.test(f);
 }
 
 const REGLAS = [
@@ -184,7 +184,7 @@ const REGLAS = [
   [invierteQuienHaceQue, 'invierte quién hace qué ante la DIAN'],
   [laVentanaMalDicha, 'el correo de la cita va a la hora exacta o en los 30 minutos siguientes (mejor en los primeros 10), no antes'],
   [elPromedioDeLaUpmeSinFuente, 'un promedio de lo que tarda la UPME sin dato medido detrás, o el procedimiento que la Resolución 563 derogó'],
-  [lasSeccionalesConCitaDeAntes, 'las seccionales con cita son seis desde el 18-nov-2026: falta Manizales o dice cinco'],
+  [lasSeccionalesConCitaDeAntes, 'las seccionales con cita son seis (con Manizales, Abecé de la DIAN del 9-nov-2026): falta Manizales o dice cinco'],
 ];
 
 // ── El control: cada regla caza lo suyo y deja pasar lo cierto ─────────────────────────────────
@@ -262,6 +262,9 @@ function control() {
     'La cita ante la DIAN la pedimos nosotros, pero solo la exigen cinco seccionales.',
     'Solo 5 de las 34 seccionales la exigen.',
     'La seccional de Bucaramanga pide cita.',
+    'Si tu seccional es Bogotá, Medellín, Cali o Bucaramanga, debes programar una cita.',
+    'Solo cuatro ciudades exigen cita.',
+    'Hoy son 5 las seccionales con cita.',
   ]) debe(lasSeccionalesConCitaDeAntes(mal), `lasSeccionalesConCitaDeAntes no caza: ${mal}`);
   for (const bien of [
     'En Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes la DIAN exige cita para la devolución del IVA de carros eléctricos e híbridos.',

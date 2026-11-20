@@ -133,9 +133,9 @@ El Estado colombiano creó estos incentivos para promover la movilidad eléctric
 > las seccionales con cita, el 20-nov-2026):
 >
 > · **La cita ante la DIAN la pedimos nosotros**, pero solo la exigen seis seccionales (Bogotá,
->   Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes; Manizales desde el 18-nov-2026,
->   según el Abecé de la DIAN modificado el 9-nov-2026 y confirmado por el contador), así que va
->   SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
+>   Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes; Manizales según el Abecé de la DIAN
+>   modificado el 9-nov-2026, confirmado por el contador; en nuestro sistema, desde el 18-nov-2026),
+>   así que va SIEMPRE condicionada: «si tu seccional la exige». Sin condicionar es falso para la mayoría.
 >   *(«Una sola cita por contribuyente» se retiró el 16-sep-2026: no tiene fuente oficial.)*
 > · **La cita NO es presencial ni es una videollamada.** Nadie va a ninguna oficina ni se conecta
 >   a nada: se atiende mandando el correo ese día, a la hora exacta de la cita o dentro de los
