@@ -951,10 +951,10 @@ function Servicios() {
       // nosotros en su nombre.
       //
       // ⚠️ **EL ORDEN ES EL DEL TRÁMITE** (Julian, 9-sep-2026): primero lo que armamos, luego lo que
-      // le queda a él (reenviar y firmar), y al final la vigilancia y lo que dura. Desde el
-      // 20-nov-2026 son cinco: «Pedimos tu cita, si hace falta» salió porque la descripción de la
-      // tarjeta ya dice la cita con su condición exacta («si tu seccional la exige»). Un dato, una
-      // vez. La alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no
+      // le queda a él (reenviar y firmar), y al final lo que respondemos. Desde el 20-nov-2026 son
+      // cuatro: «Pedimos tu cita, si hace falta» y «Seguimos tu trámite hasta…» salieron porque la
+      // descripción de la tarjeta ya dice la cita con su condición exacta («si tu seccional la
+      // exige») y el seguimiento hasta que la DIAN consigna. Un dato, una vez. La alineación con la tarjeta del certificado la da el `marginTop: auto` del bloque, no
       // que haya el mismo número de viñetas.
       //
       // ⚠️ **LA SEGUNDA LLEVA EL REENVÍO («Correo listo para que lo reenvíes») Y ESO NO ES ADORNO.**
@@ -967,13 +967,12 @@ function Servicios() {
       //
       // ⚠️ **MEDIDAS (20-nov-2026; las cuatro primeras son las de la minilanding del portal):** aquí,
       // de 360 a 1366 px, las cuatro primeras van en un renglón («Correo listo para que lo reenvíes»
-      // mide 240 px; en la tarjeta del portal caben 269 a 375). La última, solo de la landing, era
-      // «Seguimos tu trámite hasta que la DIAN consigna» y partía en dos renglones hasta 390 px: desde
-      // el 20-nov-2026 es «Seguimos tu trámite hasta el pago» («pago» vale también para quien cobra
-      // en TIDIS, por encima de 1.000 UVT; «consigna», sólo para la consignación en la cuenta). Quien
-      // las retoque, que cuente los renglones a 360, 375 y 390 px antes y después, aquí y en el
-      // portal.
-      features: ["Generamos tu expediente", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta el pago"],
+      // mide 240 px; en la tarjeta del portal caben 269 a 375). Hubo una quinta, solo de la landing,
+      // «Seguimos tu trámite hasta que la DIAN consigna»: partía en dos renglones hasta 390 px y
+      // repetía la descripción de la tarjeta («…seguimos tu trámite hasta que la DIAN consigna tu
+      // devolución»), así que salió el 20-nov-2026 (un dato, una vez, como la cita). Quien las
+      // retoque, que cuente los renglones a 360, 375 y 390 px antes y después, aquí y en el portal.
+      features: ["Generamos tu expediente", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
