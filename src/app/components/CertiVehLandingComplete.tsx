@@ -866,7 +866,7 @@ function Servicios() {
       desc: "Gestionamos todo el trámite por ti: creamos tu cuenta, llenamos formularios y radicamos tu solicitud. Tú solo subes tus documentos.",
       price: desde.pesos.certificado,
       priceNote: "+ IVA + costo trámite UPME",
-      features: ["Radicación automática ante la UPME", "Radicación aun si tu modelo no está en el listado", "Respuesta a requerimientos UPME", "Certificado digital, listo para descargar", "Desbloquea los 3 beneficios tributarios"],
+      features: ["Radicación automática ante la UPME", "Modelos que no están en el listado", "Respuesta a requerimientos UPME", "Certificado digital descargable", "Desbloquea los 3 beneficios"],
       accentColor: "var(--emerald-600)",
       iconBg: "rgba(5,150,105,0.1)",
     },
@@ -973,7 +973,7 @@ function Servicios() {
       // antes y la tarjeta conserva su alto. Con 39 caracteres («Firmas en línea el 010…») la
       // cuarta cabía en un renglón a 390 px y la tarjeta perdía 21 px. Quien las retoque, que
       // cuente los renglones a varios anchos antes y después.
-      features: ["Generamos tu expediente completo", "Pedimos nosotros tu cita, si tu seccional la exige", "Correo de radicación ya redactado y listo, tú lo reenvías", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
+      features: ["Generamos tu expediente completo", "Pedimos tu cita, si hace falta", "Correo listo para que lo reenvíes", "Firmas en línea, sin papeleo", "Respuesta a requerimientos DIAN", "Seguimos tu trámite hasta que la DIAN consigna"],
       // ⚠️ **AQUÍ VIVÍA LA NOTA «¿Cómo se radica?», Y SE RETIRÓ EL 9-SEP-2026 (Julian).** Su aviso
       // decía «ESTA NOTA NO SE QUITA», y el motivo era bueno: es la única tarea que la DIAN no
       // admite hacer por él (exige que la radicación salga del correo inscrito en SU RUT, en
@@ -1192,9 +1192,9 @@ function PiezaDelPaso({ i }: { i: number }) {
 
 function ComoFunciona() {
   const steps = [
-    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Tu cédula, la factura de compra y la tarjeta de propiedad o solo la placa. El RUT puedes subirlo después de pagar. La IA extrae los datos automáticamente.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Verificas que los datos extraídos sean correctos. Puedes editar cualquier campo antes de continuar. Una vez confirmas, nos pones a trabajar.", detail: "Extracción automática de información con IA." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio una sola vez. Sin suscripciones. Aparte va el costo del trámite ante la UPME. El pago confirma tu caso y activa el proceso.", detail: "Paga con tu método favorito o a cuotas sin interés." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Tu cédula, la factura y la tarjeta de propiedad o la placa. El RUT puedes subirlo después de pagar.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Revisas los datos que leímos de tus documentos y corriges lo que haga falta.", detail: "Extracción automática de información con IA." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte.", detail: "Paga con tu método favorito o a cuotas sin interés." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
     // Eran ciertas mientras los cinco pasos describían solo el certificado —ahí, en efecto, no le
     // queda nada—. Desde que la lista llega hasta la devolución de IVA, «todo» y «nada más»
@@ -1228,8 +1228,8 @@ function ComoFunciona() {
     // que el defecto es del pipeline de Astro/Vite. **Antes de tocar este título, construir y
     // contar NULs con Node**, que es lo único que los ve:
     //   node -e 'const b=require("fs").readFileSync("dist/index.html");console.log([...b].filter(x=>x===0).length)'
-    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Nuestro agente automatizado crea tu cuenta en la UPME (o usa la que ya tienes), llena los formularios con tus datos y radica la solicitud en cuanto tus documentos están completos.", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te notificamos por WhatsApp y email en cada etapa del proceso. Cuando el certificado está listo, lo descargas desde tu panel.", detail: "Seguimiento en tiempo real por WhatsApp y correo." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "04", icon: "zap",         title: "Hacemos el trámite por ti", subtitle: "Tú no entras a la UPME", desc: "Gestionamos tu cuenta UPME y los formularios, y radicamos con tus documentos completos (del 1 de febrero al 15 de diciembre).", detail: "Sin que tengas que tocar ningún portal gubernamental." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "05", icon: "award",       title: "Recibe tu certificado",  subtitle: "Lo descargas desde tu panel", desc: "Te avisamos por WhatsApp y correo en cada etapa del proceso.", detail: "Seguimiento en tiempo real por WhatsApp y correo." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ PASO 06, añadido el 9-sep-2026 a petición de Julian: el recorrido terminaba en el
     // certificado y no decía en ninguna parte que la devolución ante la DIAN también la
     // gestionamos nosotros. Tres cosas que no se pueden aflojar al retocarlo:
@@ -1240,7 +1240,7 @@ function ComoFunciona() {
     //   · La cita va CONDICIONADA a la seccional: solo la exigen seis de treinta y cuatro.
     //   · Es un servicio APARTE y opcional. Sin decirlo, la lista se lee como que el precio del
     //     certificado lo incluye.
-    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Si contratas la devolución, generamos y revisamos tu expediente completo, definimos tu vía de radicación y pedimos tu cita si tu seccional la exige. Tú firmas tus documentos y reenvías el mensaje que te preparamos, desde el correo de tu RUT.", detail: "Seguimos tu trámite hasta que la DIAN consigna." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "06", icon: "receipt",     title: "Gestionamos tu devolución de IVA", subtitle: "Servicio aparte, ante la DIAN", desc: "Generamos tu expediente y pedimos tu cita si tu seccional la exige. Tú firmas y reenvías, desde el correo de tu RUT, el mensaje que te preparamos.", detail: "Seguimos tu trámite hasta que la DIAN consigna." }, // taste-skill-ignore: clave interna del dato, no se pinta
   ];
   const [active, setActive] = useState(0);
   useEffect(() => {
