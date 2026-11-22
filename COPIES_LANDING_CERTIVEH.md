@@ -182,7 +182,7 @@ Del certificado UPME a tu devolución de IVA: desde tu teléfono y sin portales 
 
 ### Paso 01: Sube tus documentos
 - **Subtitle:** Menos de 3 minutos
-- **Descripción:** Tu cédula, la factura de compra y la tarjeta de propiedad o solo la placa. El RUT puedes subirlo después de pagar. La IA extrae los datos automáticamente.
+- **Descripción:** Tu cédula, la factura y la tarjeta de propiedad o la placa. Si aún no te facturan, la cotización del concesionario. El RUT puedes subirlo después de pagar.
 - **Detail:** Sin formularios manuales. Sin errores de digitación.
 
 ### Paso 02: Revisa y confirma
@@ -314,7 +314,7 @@ Certificado UPME {tramitación de la tarifa vigente} + IVA. Devolución de IVA d
 
 ### Pregunta 1
 **¿Qué vehículos califican?**  
-Vehículos eléctricos e híbridos NUEVOS registrados en Colombia. **No aplica a híbridos ligeros.** El vehículo debe estar a nombre del solicitante en el RUNT.
+Vehículos eléctricos e híbridos NUEVOS. **No aplica a híbridos ligeros.** El certificado va a nombre de quien compra el vehículo (con leasing, del locatario).
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
@@ -322,7 +322,11 @@ La UPME recibe solicitudes en ventana continua, del 1 de febrero al 15 de diciem
 
 ### Pregunta 3
 **¿Qué documentos necesito?**  
-Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y reverso), tu RUT, la factura de compra y la tarjeta de propiedad (frente y reverso), o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono.
+Si eres persona natural: tu cédula de ciudadanía o de extranjería (frente y reverso), tu RUT, la factura de compra y la tarjeta de propiedad (frente y reverso), o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: certificado de cámara de comercio, cédula del representante legal (frente y reverso), factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Si todavía no hay placa, basta la factura. Y si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono.
+
+### Pregunta 3b (lote 7 sin facturar, al encender a todos)
+**¿Aún no te facturan el carro, o todavía no tienes placa?**  
+Pide tu certificado igual: con la cotización del concesionario o con la factura. Si aún no te facturan, entrégale el certificado al concesionario antes de que emita la factura y pide que salga sin IVA (Concepto DIAN 2242 de 2026); si lo hace, no necesitas la Devolución de IVA (5% del valor del vehículo). El certificado vale para ese carro, ese año y ese concesionario, y te recomendamos que la factura salga por el mismo valor: puede ser menor, nunca mayor. Si ya te facturaron y no tienes placa, sigue con la factura: la placa te la pedimos después, solo si contratas la Devolución de IVA.
 
 ### Pregunta 4
 **¿Cuánto toma el proceso completo?**  
@@ -330,7 +334,7 @@ Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu p
 
 ### Pregunta 5
 **¿Qué pasa si la UPME rechaza mi solicitud?**  
-Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. 
+Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. Si pediste el certificado con la cotización del concesionario y la UPME niega la solicitud, lo resolvemos contigo y la radicamos de nuevo sin cobrarte nada más. 
 
 ### Pregunta 6
 **¿Funciona para personas jurídicas?**  
