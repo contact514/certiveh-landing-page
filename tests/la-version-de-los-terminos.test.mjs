@@ -24,7 +24,7 @@ test('la versión y la fecha: 3.0 y 2.0, y la ISO del portal es la misma fecha',
 });
 
 test('la cabecera y la del anexo del IVA pintan la versión y la fecha', () => {
-  assert.match(FUENTE, /<p class="tc-date">Versión \{VERSION_DE_LOS_TERMINOS\} · Fecha de entrada en vigencia: \{TERMINOS_VIGENTES_DESDE\}\./);
+  assert.match(FUENTE, /<p class="tc-date">Versión \{VERSION_DE_LOS_TERMINOS\} · Fecha de entrada en vigencia: \{TERMINOS_VIGENTES_DESDE\}<\/p>/);
   const iva = FUENTE.slice(FUENTE.indexOf('id="devolucion-iva"'), FUENTE.indexOf('<!-- /tc-container IVA -->'));
   assert.match(iva, /Versión \{VERSION_DEL_ANEXO_DEL_IVA\} &nbsp;\|&nbsp; Fecha de entrada en vigencia: \{TERMINOS_VIGENTES_DESDE\}/);
 });
