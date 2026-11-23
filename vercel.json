@@ -28,6 +28,11 @@
       "permanent": true
     },
     {
+      "source": "/certificado/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/r/:sub([a-z0-9-]{1,63})",
       "destination": "https://:sub.portal.certiveh.co",
       "statusCode": 302
