@@ -97,7 +97,15 @@ import '../styles/index.css';
         "name": "¿Qué documentos necesito?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono."
+          "text": "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT y la factura de compra. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal y la factura de compra; el RUT de la empresa solo se pide para la devolución del IVA. La placa la buscamos en el RUNT con tu factura: la tarjeta de propiedad no hace falta, y puedes subirla si no logramos comprobar tu vehículo. Si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Aún no te facturan el carro, o todavía no tienes placa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pide tu certificado igual: con la cotización del concesionario o con la factura. Si aún no te facturan, entrégale el certificado al concesionario antes de que emita la factura y pide que salga sin IVA (Concepto DIAN 2242 de 2026); si lo hace, no necesitas la Devolución de IVA (5% del valor del vehículo). El certificado vale para ese carro, ese año y ese concesionario, y te recomendamos que la factura salga por el mismo valor: puede ser menor, nunca mayor. Si ya te facturaron y no tienes placa, sigue con la factura: la placa te la pedimos después, solo si contratas la Devolución de IVA."
         }
       },
       {
@@ -113,7 +121,7 @@ import '../styles/index.css';
         "name": "¿Qué pasa si la UPME rechaza mi solicitud?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro."
+          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. Si pediste el certificado con la cotización del concesionario y la UPME niega la solicitud, lo resolvemos contigo y la radicamos de nuevo sin cobrarte nada más."
         }
       },
       {
@@ -137,7 +145,7 @@ import '../styles/index.css';
         "name": "¿Cuánto tiempo tengo para reclamar mis beneficios?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra."
+          "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse antes o después de la compra."
         }
       },
       {
@@ -181,7 +189,7 @@ import '../styles/index.css';
     "name": "Cómo obtener el certificado UPME con CertiVeh",
     "description": "Proceso paso a paso para obtener el certificado UPME para vehículos eléctricos e híbridos en Colombia a través de CertiVeh.",
     "step": [
-      { "@type": "HowToStep", "position": 1, "name": "Sube tus documentos", "text": "Tu cédula, la factura y la tarjeta de propiedad o la placa. El RUT puedes subirlo después de pagar." },
+      { "@type": "HowToStep", "position": 1, "name": "Sube tus documentos", "text": "Tu cédula y la factura: con ella buscamos la placa en el RUNT. Si aún no te facturan, la cotización del concesionario. El RUT puedes subirlo después de pagar." },
       { "@type": "HowToStep", "position": 2, "name": "Revisa y confirma", "text": "Revisas los datos que leímos de tus documentos y corriges lo que haga falta." },
       { "@type": "HowToStep", "position": 3, "name": "Solo pagas una vez", "text": "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte." },
       { "@type": "HowToStep", "position": 4, "name": "Hacemos el trámite por ti", "text": "Gestionamos tu cuenta UPME y los formularios, y radicamos cuando tus documentos están completos (del 1 de febrero al 15 de diciembre)." },

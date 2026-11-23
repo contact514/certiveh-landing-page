@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef, createContext, useContext } f
 import { Navbar } from "./Navbar";
 import { SiteFooter } from "./SiteFooter";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, Banknote, Calendar, Check, CheckCircle2, ChevronDown, Copy, Download, ExternalLink, FileText, Gift, HelpCircle, Info, Users } from "lucide-react";
+import { ArrowRight, Banknote, Calendar, Check, CheckCircle2, ChevronDown, Copy, Download, ExternalLink, FileText, Gift, HelpCircle, Info, Receipt, Users } from "lucide-react";
 import { cotizacionDeLaHome, preciosDesde } from '@/lib/precios-de-la-landing.ts';
 import { TarifaDeLaIsla, useTarifa, useTarifaDeLaIsla } from './la-tarifa-de-la-isla.ts';
 import { VIGENTE_DESDE, laVigenciaEstaPendiente } from '@/lib/vigencia-de-los-codigos.ts';
@@ -255,9 +255,9 @@ ${CSS_UI}
   @media (min-width: 901px) and (max-height: 800px) { #como-funciona .flow-sticky { top: 84px; } }
   @media (min-width: 901px) and (max-height: 650px) { #como-funciona .flow-sticky { top: 72px; padding-block: 8px; } }
   /* Las piezas de los pasos 1 y 2 son más altas que el panel en pantallas bajas. Ahí el panel enseña un tramo CONTIGUO de la
-     misma pantalla, el que se ve en el portal al desplazar, nunca una composición: en el paso 1, el reverso y la factura
-     (≤ 760 px de alto); en el paso 2, desde «Tipo de propulsión» (< 1050 px) o desde «Propietario registrado» (≤ 760 px). */
-  @media (min-width: 901px) and (max-height: 760px) { .flow-panel .pp-doc:first-child { display: none; } }
+     misma pantalla, el que se ve en el portal al desplazar, nunca una composición: en el paso 1, la factura y la placa, sin la
+     pregunta de arriba (≤ 800 px de alto); en el paso 2, desde «Tipo de propulsión» (< 1050 px) o desde «Propietario registrado» (≤ 760 px). */
+  @media (min-width: 901px) and (max-height: 800px) { .flow-panel .pp-q { display: none; } }
   @media (min-width: 901px) and (max-height: 1049px) { .flow-panel .pp-f-marca, .flow-panel .pp-f-linea { display: none; } }
   @media (min-width: 901px) and (max-height: 760px) { .flow-panel .pp-f-prop, .flow-panel .pp-b-dueno > .pp-sep { display: none; } }
   @container tc (max-width: 511px) {
@@ -309,9 +309,26 @@ ${CSS_UI}
   .pp-doc-ok { display: flex; align-items: center; justify-content: space-between; }
   .pp-doc-ok > span:first-child { display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; font-weight: 500; color: #047857; }
   .pp-doc-cambiar { font-size: 13px; font-weight: 600; color: var(--pp-muted); }
-  .pp-prog { height: 6px; background: var(--pp-sec); border-radius: 999px; overflow: hidden; } /* bg-muted del portal: el mismo tono que la tarjeta */
-  .pp-prog i { display: block; height: 100%; border-radius: 999px; background: #047857; }
-  .pp-prog-t { font-size: 13px; line-height: 18px; color: var(--pp-muted); text-align: right; margin: 4px 0 0; }
+  /* PreguntaDelPaso dentro de la pieza (en el portal, dentro de .cv-pieza, sin caja propia): el icono en su hueco de 32 px, el
+     título de bloque (15/600) y las opciones con su borde; la elegida con el borde y el tinte del color principal. */
+  .pp-q { display: flex; flex-direction: column; gap: 12px; }
+  .pp-q-h { display: flex; align-items: center; gap: 10px; }
+  .pp-q-i { width: 32px; height: 32px; flex: none; display: flex; align-items: center; justify-content: center; color: #047857; }
+  .pp-q-t { font-size: 15px; line-height: 1.35; font-weight: 600; letter-spacing: -0.03em; margin: 0; }
+  .pp-q-ops { display: flex; flex-direction: column; gap: 8px; margin-left: 42px; }
+  .pp-q-op { border: 1px solid var(--pp-border); border-radius: 6px; padding: 12px; } /* taste-skill-ignore: opción de la pregunta del portal (data-ui) */
+  .pp-q-op.on { border-color: #047857; background: rgba(4,120,87,.05); }
+  .pp-q-l { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 20px; font-weight: 600; }
+  .pp-radio { width: 16px; height: 16px; flex: none; margin-top: 2px; border-radius: 50%; border: 1px solid #767676; background: #fff; } /* taste-skill-ignore: el radio nativo del portal (data-ui) */
+  .pp-q-op.on .pp-radio { border-color: #047857; background: #047857; box-shadow: inset 0 0 0 3px #fff; } /* taste-skill-ignore: el punto del radio marcado (data-ui) */
+  .pp-q-a { font-size: 13px; line-height: 1.45; color: var(--pp-muted); margin: 4px 0 0 28px; }
+  /* «Placa del vehículo» encontrada (TarjetaConPlaca): la placa bajo el título, el aviso en verde con «Cambiar la placa» y la tarjeta como opción. */
+  .pp-placa { margin: 6px 0 0; line-height: 1; }
+  .pp-placa .plate { font-size: 13px; line-height: 1.35; letter-spacing: 0.04em; }
+  .pp-placa-b { display: flex; flex-direction: column; gap: 6px; }
+  .pp-doc-ok svg { flex: none; }
+  .pp-placa-b .pp-doc-a { margin: 0; }
+  .pp-link { font-size: 13px; line-height: 19.5px; font-weight: 600; color: #047857; margin: 0; flex: none; }
   /* SolicitudStep2: FieldRow (space-y-2), el rótulo text-sm medium foreground/80 con el asterisco, los campos auth-input
      (48 px, tono, contorno muted, radio 4) y los combobox/select con su ChevronDown de 16 px; la marca verificada a la
      derecha del rótulo («Verificado UPME» desde 640, text-xs en el portal: aquí 13). Entre secciones, la línea del portal y 24 px. */
@@ -1135,16 +1152,14 @@ function TarjetaDelTramite({ paso, iva = false }: { paso: number; iva?: boolean 
 }
 
 /** Un documento de `SolicitudStep1`: la tarjeta en tono con su icono, su nombre, su ayuda, su formato y su estado. */
-function DocDelPortal({ titulo, ayuda, listo, progreso }: { titulo: string; ayuda: string; listo?: boolean; progreso?: number }) {
+function DocDelPortal({ titulo, ayuda, listo }: { titulo: string; ayuda: string; listo?: boolean }) {
   return (
     <div className="pp-doc">
       <div className="pp-doc-h">
         <span className={`pp-doc-i${listo ? " ok" : ""}`}>{listo ? <CheckCircle2 size={20} /> : <FileText size={20} />}</span>
         <div className="pp-doc-tx"><p className="pp-doc-t">{titulo}<span className="pp-por"><HelpCircle size={14} />¿Por qué?</span></p><p className="pp-doc-a">{ayuda}</p><p className="pp-doc-f">JPG, PNG o PDF</p></div>
       </div>
-      {listo
-        ? (<div className="pp-doc-ok"><span><Check size={16} strokeWidth={2.5} />Documento procesado</span><span className="pp-doc-cambiar">Cambiar</span></div>)
-        : (<div><div className="pp-prog"><i style={{ width: `${progreso}%` }} /></div><p className="pp-prog-t">Subiendo... {progreso}%</p></div>)}
+      {listo && (<div className="pp-doc-ok"><span><Check size={16} strokeWidth={2.5} />Documento procesado</span><span className="pp-doc-cambiar">Cambiar</span></div>)}
     </div>
   );
 }
@@ -1154,10 +1169,29 @@ function PiezaDelPaso({ i }: { i: number }) {
   const c = cotizacionDeLaHome(120_000_000, false, tarifa);
   const pz = (n: number) => formatoDelPortal(n);
   switch (i) {
+    /* Paso 1 con todo encendido (portal integracion/sinfact: lote 2 + V2): la pregunta con «Sí» marcada, la factura ARRIBA y
+       «Placa del vehículo» con la placa que el RUNT dio al VIN de la factura, comprobada; la tarjeta solo como opción. Es el
+       estado «encontrada» de `TarjetaConPlaca` (SolicitudStep1), con sus copies tal cual. Sin el RUT, que va debajo. */
     case 0: return (<div className="pp" data-ui>
-      <DocDelPortal listo titulo="Tarjeta de propiedad (frente)" ayuda="Si tu foto o PDF tiene ambos lados, súbelo aquí y extraemos todo automáticamente" />
-      <DocDelPortal listo titulo="Tarjeta de propiedad (reverso)" ayuda="Si ya subiste ambos lados arriba, puedes subir el mismo archivo aquí" />
-      <DocDelPortal titulo="Factura de compra" ayuda="Factura del concesionario. Puede tener varias páginas" progreso={72} />
+      <div className="pp-q">
+        <div className="pp-q-h"><span className="pp-q-i"><Receipt size={16} /></span><p className="pp-q-t">¿El carro ya fue facturado?</p></div>
+        <div className="pp-q-ops">
+          <div className="pp-q-op on"><div className="pp-q-l"><span className="pp-radio" /><span>Sí, ya fue facturado</span></div><p className="pp-q-a">Subes la factura y buscamos la placa con ella.</p></div>
+          <div className="pp-q-op"><div className="pp-q-l"><span className="pp-radio" /><span>No, todavía no</span></div><p className="pp-q-a">Subes la cotización del concesionario. Con el certificado, pide que lo facturen sin IVA.</p></div>
+        </div>
+      </div>
+      <DocDelPortal listo titulo="Factura de compra" ayuda="Factura del concesionario. Puede tener varias páginas" />
+      <div className="pp-doc">
+        <div className="pp-doc-h">
+          <span className="pp-doc-i ok"><CheckCircle2 size={20} /></span>
+          <div className="pp-doc-tx"><p className="pp-doc-t">Placa del vehículo<span className="pp-por"><HelpCircle size={14} />¿Por qué?</span></p><p className="pp-placa"><span className="plate">JKL482</span></p></div>
+        </div>
+        <div className="pp-placa-b">
+          <div className="pp-doc-ok"><span><Check size={16} strokeWidth={2.5} />Encontramos tu vehículo en el RUNT</span><span className="pp-link">Cambiar la placa</span></div>
+          <p className="pp-doc-a">No necesitas subir la tarjeta.</p>
+          <p className="pp-link">Subir la foto de la tarjeta</p>
+        </div>
+      </div>
       <p className="ej">Datos de ejemplo</p>
     </div>);
     /* Paso 2: un tramo CONTIGUO de SolicitudStep2, de «Marca» al valor (desde 640 px, con «Fecha de compra» al lado, en su
@@ -1190,7 +1224,7 @@ function PiezaDelPaso({ i }: { i: number }) {
 
 function ComoFunciona() {
   const steps = [
-    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Tu cédula, la factura y la tarjeta de propiedad o la placa. El RUT puedes subirlo después de pagar.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Tu cédula y la factura: con ella buscamos la placa en el RUNT. Si aún no te facturan, la cotización del concesionario. El RUT puedes subirlo después de pagar.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Revisas los datos que leímos de tus documentos y corriges lo que haga falta.", detail: "Extracción automática de información con IA." }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte.", detail: "Paga con tu método favorito o a cuotas sin interés." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
@@ -1570,9 +1604,12 @@ function FAQ() {
   const items = [
     { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos. No aplica para vehículos usados ni para híbridos ligeros. El certificado va a nombre de quien compra el vehículo (con leasing, del locatario)." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana la radicamos en cuanto tus documentos están completos. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
-    { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
+    { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT y la factura de compra. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal y la factura de compra; el RUT de la empresa solo se pide para la devolución del IVA. La placa la buscamos en el RUNT con tu factura: la tarjeta de propiedad no hace falta, y puedes subirla si no logramos comprobar tu vehículo. Si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono." },
+    // Lote 7 (sin facturar, al encender a todos): la frase del plan §4.16. Lo que depende del concesionario se dice como
+    // instrucción («pide que salga sin IVA», también vale en leasing), nunca como promesa. Duplicada en el JSON-LD de index.astro y exotics.astro.
+    { q: "¿Aún no te facturan el carro, o todavía no tienes placa?", a: "Pide tu certificado igual: con la cotización del concesionario o con la factura. Si aún no te facturan, entrégale el certificado al concesionario antes de que emita la factura y pide que salga sin IVA (Concepto DIAN 2242 de 2026); si lo hace, no necesitas la Devolución de IVA (5% del valor del vehículo). El certificado vale para ese carro, ese año y ese concesionario, y te recomendamos que la factura salga por el mismo valor: puede ser menor, nunca mayor. Si ya te facturaron y no tienes placa, sigue con la factura: la placa te la pedimos después, solo si contratas la Devolución de IVA." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo (Resolución 563 de 2026, numeral 6.3.1). Si hace un requerimiento, ese plazo se suspende hasta que se responde." },
-    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro." },
+    { q: "¿Qué pasa si la UPME rechaza mi solicitud?", a: "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. Si pediste el certificado con la cotización del concesionario y la UPME niega la solicitud, lo resolvemos contigo y la radicamos de nuevo sin cobrarte nada más." },
     { q: "¿Funciona para empresas e independientes?", a: "Sí. El servicio está disponible para personas naturales, independientes y empresas. Además, las empresas e independientes tienen un beneficio adicional: depreciación acelerada del vehículo a 3 años, lo que reduce la base gravable más rápido." },
     // ⚠️ La DIAN NEGÓ este beneficio a las personas naturales en el Concepto 012101 del 5-ago-2025
     // y se retractó un mes después en el 013853 del 5-sep-2025. Quien llega diciendo «esto es solo
@@ -1580,7 +1617,7 @@ function FAQ() {
     // los dos: sin la fecha de la reconsideración, el cliente cree que le estamos discutiendo su
     // fuente. Ratificado después en los conceptos 14611/2025, 146/2026, 673/2026 y 3086/2026.
     { q: "¿La devolución del IVA solo aplica a empresas?", a: "No. También aplica a personas naturales que compran para uso personal. La DIAN lo había negado en el Concepto 012101 de agosto de 2025, pero reconsideró esa posición un mes después en el Concepto 013853 del 5 de septiembre de 2025, que es el que está vigente. El Concepto 673 de 2026 incluso previó el caso de quien no lleva contabilidad: puede reemplazar las certificaciones de contador por una declaración juramentada." },
-    { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra." },
+    { q: "¿Cuánto tiempo tengo para reclamar mis beneficios?", a: "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse antes o después de la compra." },
     // ⚠️ Esta respuesta medía 780 caracteres, el triple que cualquier otra de la lista, y la
     // enumeración de las cinco seccionales se llevaba una línea entera para un dato que el cliente
     // no puede usar todavía (su vía se la decimos nosotros al leer su RUT). Acortada el

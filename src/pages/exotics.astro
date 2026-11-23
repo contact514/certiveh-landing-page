@@ -80,7 +80,15 @@ import '../styles/index.css';
         "name": "¿Qué documentos necesito?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono."
+          "text": "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT y la factura de compra. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal y la factura de compra; el RUT de la empresa solo se pide para la devolución del IVA. La placa la buscamos en el RUNT con tu factura: la tarjeta de propiedad no hace falta, y puedes subirla si no logramos comprobar tu vehículo. Si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Aún no te facturan el carro, o todavía no tienes placa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pide tu certificado igual: con la cotización del concesionario o con la factura. Si aún no te facturan, entrégale el certificado al concesionario antes de que emita la factura y pide que salga sin IVA (Concepto DIAN 2242 de 2026); si lo hace, no necesitas la Devolución de IVA (5% del valor del vehículo). El certificado vale para ese carro, ese año y ese concesionario, y te recomendamos que la factura salga por el mismo valor: puede ser menor, nunca mayor. Si ya te facturaron y no tienes placa, sigue con la factura: la placa te la pedimos después, solo si contratas la Devolución de IVA."
         }
       },
       {
@@ -96,7 +104,7 @@ import '../styles/index.css';
         "name": "¿Qué pasa si la UPME rechaza mi solicitud?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro."
+          "text": "Si el rechazo se debe a un error de nuestra parte, gestionamos la corrección y volvemos a radicar sin costo adicional. Si se debe a información incorrecta proporcionada por el usuario, gestionamos la corrección contigo y la nueva solicitud se cobra según las condiciones vigentes; te informamos el valor antes de cualquier cobro. Si pediste el certificado con la cotización del concesionario y la UPME niega la solicitud, lo resolvemos contigo y la radicamos de nuevo sin cobrarte nada más."
         }
       },
       {
@@ -109,10 +117,18 @@ import '../styles/index.css';
       },
       {
         "@type": "Question",
+        "name": "¿La devolución del IVA solo aplica a empresas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. También aplica a personas naturales que compran para uso personal. La DIAN lo había negado en el Concepto 012101 de agosto de 2025, pero reconsideró esa posición un mes después en el Concepto 013853 del 5 de septiembre de 2025, que es el que está vigente. El Concepto 673 de 2026 incluso previó el caso de quien no lleva contabilidad: puede reemplazar las certificaciones de contador por una declaración juramentada."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "¿Cuánto tiempo tengo para reclamar mis beneficios?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse después de la compra."
+          "text": "Para la devolución de IVA, tienes hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026). Para la deducción en renta, tienes un periodo máximo de 15 años contados a partir del año gravable siguiente a la entrada en operación del vehículo (artículo 11, Ley 1715 de 2014). El certificado UPME puede obtenerse antes o después de la compra."
         }
       },
       {
@@ -121,6 +137,22 @@ import '../styles/index.css';
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Sí, de punta a punta. Preparamos tus documentos, generamos tu expediente y, si tu seccional exige cita, la pedimos nosotros a tu nombre. Tú firmas en línea la declaración juramentada y el Formulario 010, y reenvías el correo que te preparamos desde el correo de tu RUT: la DIAN exige que salga del contribuyente. Si hay cita, no es presencial: envías ese correo el día de tu cita, a la hora exacta o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después. Y seguimos tu trámite hasta que la DIAN consigna."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Pedir la devolución me expone a una auditoría de la DIAN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No es una auditoría. Es un trámite reglado: la DIAN revisa los documentos de tu propia solicitud y, desde que la radica, tiene hasta 15 días hábiles para pedirte una corrección si falta algo y hasta 50 para devolverte el dinero. No se abre una revisión de tu declaración de renta ni de tu historial tributario. Lo que sí importa es presentarla bien: ese IVA no puede haberse tomado antes como mayor valor del costo, como deducción en renta ni como impuesto descontable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Tengo que quedarme con el vehículo para conservar mis beneficios?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para la devolución del IVA, no: ninguna norma la condiciona a que conserves el vehículo. Lo único que debes conservar es el certificado UPME y los soportes, por si la DIAN te los pide. La deducción en renta funciona distinto: si vendes antes de que termine el periodo de depreciación del vehículo, lo que ya dedujiste se reversa como recuperación de deducciones (Decreto 1625 de 2016, artículo 1.2.1.18.76)."
         }
       },
       {
@@ -140,7 +172,7 @@ import '../styles/index.css';
     "name": "Cómo obtener el certificado UPME con CertiVeh",
     "description": "Proceso paso a paso para obtener el certificado UPME para vehículos eléctricos e híbridos en Colombia.",
     "step": [
-      { "@type": "HowToStep", "position": 1, "name": "Sube tus documentos", "text": "Tu cédula, la factura y la tarjeta de propiedad o la placa. El RUT puedes subirlo después de pagar." },
+      { "@type": "HowToStep", "position": 1, "name": "Sube tus documentos", "text": "Tu cédula y la factura: con ella buscamos la placa en el RUNT. Si aún no te facturan, la cotización del concesionario. El RUT puedes subirlo después de pagar." },
       { "@type": "HowToStep", "position": 2, "name": "Revisa y confirma", "text": "Revisas los datos que leímos de tus documentos y corriges lo que haga falta." },
       { "@type": "HowToStep", "position": 3, "name": "Solo pagas una vez", "text": "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte." },
       { "@type": "HowToStep", "position": 4, "name": "Hacemos el trámite por ti", "text": "Gestionamos tu cuenta UPME y los formularios, y radicamos cuando tus documentos están completos (del 1 de febrero al 15 de diciembre)." },

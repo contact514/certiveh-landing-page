@@ -30,7 +30,7 @@ La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Cicl
 
 ## Cómo funciona
 
-1. El usuario sube su cédula, la factura de compra y la tarjeta de propiedad (o solo la placa, si el vehículo aparece en el RUNT) en la plataforma web portal.certiveh.co. Si es persona natural, también su RUT: puede subirlo después de pagar, pero sin él no se radica. Una empresa no aporta RUT para el certificado UPME; sí para la devolución del IVA.
+1. El usuario sube su cédula y la factura de compra en la plataforma web portal.certiveh.co. CertiVeh busca la placa en el RUNT con el VIN de la factura: la tarjeta de propiedad no hace falta, y el usuario puede subirla si no se logra comprobar el vehículo. Si es persona natural, también su RUT: puede subirlo después de pagar, pero sin él no se radica. Una empresa no aporta RUT para el certificado UPME; sí para la devolución del IVA. Si el concesionario aún no ha facturado el vehículo, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Con el certificado previo, el comprador pide que la factura salga sin IVA (Concepto DIAN 2242 de 2026).
 2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
 3. Un agente automatizado radica la solicitud en el portal oficial de la UPME en cuanto los documentos están completos (ventana continua, Resolución UPME 563 de 2026).
 4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
