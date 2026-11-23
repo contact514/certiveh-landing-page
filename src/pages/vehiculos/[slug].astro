@@ -263,39 +263,39 @@ const faqLd = JSON.stringify({
     <h2 class="cv-sec-title">Preguntas frecuentes, {v.marca} {v.modelo}</h2>
     <div class="v-qs">
       <div class="v-faq-item">
-        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" aria-controls="v-faq-1">
           <span>¿El {v.marca} {v.modelo} aplica para el certificado UPME?</span>
           <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
+        <div class="v-faq-body" id="v-faq-1">Sí. El {v.marca} {v.modelo} es un vehículo {v.tipoLabel.toLowerCase()} y es elegible para los beneficios tributarios que otorga el certificado UPME en Colombia.</div>
       </div>
       <div class="v-faq-item">
-        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" aria-controls="v-faq-2">
           <span>¿Cuánto me devuelve la DIAN por el IVA de mi {v.marca} {v.modelo}?</span>
           <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de {fmt(v.precioCOP)} el estimado es de {fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.</div>
+        <div class="v-faq-body" id="v-faq-2">El IVA de los eléctricos e híbridos es del 5% sobre el valor del vehículo antes de impuestos, y con el certificado UPME puedes solicitar a la DIAN la devolución del 100% de ese IVA. Sobre un precio de referencia de {fmt(v.precioCOP)} el estimado es de {fmt(iva)}; la cifra exacta es la que aparece discriminada como IVA en tu factura.</div>
       </div>
       <div class="v-faq-item">
-        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" aria-controls="v-faq-3">
           <span>¿Cuánto puedo deducir en mi declaración de renta?</span>
           <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
+        <div class="v-faq-body" id="v-faq-3">Puedes deducir hasta el 50% del valor del vehículo, es decir {fmt(renta)}, de tu base gravable en la declaración de renta, en un periodo máximo de 15 años desde la entrada en operación del vehículo.</div>
       </div>
       <div class="v-faq-item">
-        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" aria-controls="v-faq-4">
           <span>¿Cuánto cuesta tramitar el certificado UPME con CertiVeh?</span>
           <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh {fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
+        <div class="v-faq-body" id="v-faq-4">El costo total para un {v.marca} {v.modelo} es de {fmt(costoTotal)} COP (incluye trámite UPME {fmt(costoUPME)} + honorarios CertiVeh {fmt(honorarios)} + IVA sobre honorarios). Es un pago único, sin suscripciones.</div>
       </div>
       <div class="v-faq-item">
-        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}" aria-expanded="false">
+        <button class="v-faq-btn" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" aria-controls="v-faq-5">
           <span>¿Qué documentos necesito?</span>
           <div class="v-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
         </button>
-        <div class="v-faq-body">Tu cédula (de ciudadanía o de extranjería), tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres empresa, en vez de tu cédula y tu RUT van la cédula del representante legal y el certificado de Cámara de Comercio vigente; el RUT de la empresa solo se pide para la devolución del IVA. Si todavía no hay placa, basta la factura. Y si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
+        <div class="v-faq-body" id="v-faq-5">Tu cédula (de ciudadanía o de extranjería), tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres empresa, en vez de tu cédula y tu RUT van la cédula del representante legal y el certificado de Cámara de Comercio vigente; el RUT de la empresa solo se pide para la devolución del IVA. Si todavía no hay placa, basta la factura. Y si aún no te facturan el carro, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Todo se sube en PDF, JPG o PNG desde tu teléfono en menos de 3 minutos.</div>
       </div>
     </div>
 
