@@ -36,6 +36,17 @@ test('las anclas nuevas existen una vez y el índice las enlaza', () => {
   }
 });
 
+test('cada entrada nueva del índice dice lo mismo que el título de su sección', () => {
+  for (const id of ['vi-b', 'xii-a', 'textos-de-la-interfaz']) {
+    const indice = FUENTE.match(new RegExp(`<a href="#${id}" class="tc-index-item">([^<]+)</a>`))[1];
+    const seccion = FUENTE.slice(FUENTE.indexOf(`id="${id}"`));
+    const titulo = seccion.match(/<h2 class="tc-section-title">([^<]+)<\/h2>/)[1];
+    const num = seccion.match(/<div class="tc-section-num">([^<]+)<\/div>/);
+    if (id === 'textos-de-la-interfaz') assert.equal(indice, titulo);
+    else assert.ok(indice.startsWith(`${num[1]}. `), indice);
+  }
+});
+
 test('las cuatro decisiones de Julian del 23-nov van redactadas', () => {
   const t = plano(FUENTE);
   for (const frase of [
