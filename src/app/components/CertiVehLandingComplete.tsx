@@ -1568,7 +1568,7 @@ function WinWin() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos registrados en Colombia. No aplica para vehículos usados ni para híbridos ligeros. El vehículo debe estar a nombre del solicitante en el RUNT." },
+    { q: "¿Qué vehículos califican?",               a: "Vehículos eléctricos puros e híbridos nuevos. No aplica para vehículos usados ni para híbridos ligeros. El certificado va a nombre de quien compra el vehículo (con leasing, del locatario)." },
     { q: "¿Cuándo puedo radicar mi solicitud?",     a: "Solo tienes que entrar a portal.certiveh.co, crear tu cuenta y cargar tu solicitud. La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026), y dentro de esa ventana la radicamos en cuanto tus documentos están completos. Lo que llega después del 15 de diciembre se entiende como no presentado y tiene que esperar al 1 de febrero, así que no lo dejes para el último día." },
     { q: "¿Qué documentos necesito?",               a: "Si eres persona natural: tu cédula de ciudadanía o de extranjería, tu RUT, la factura de compra y la tarjeta de propiedad, o solo la placa si encontramos tu vehículo en el RUNT. El RUT puedes subirlo después de pagar, pero sin él no radicamos. Si eres persona jurídica: el certificado de cámara de comercio (de máximo 30 días), el documento del representante legal, la factura de compra y la tarjeta de propiedad o la placa. El RUT de la empresa solo se pide para la devolución del IVA. Todo se sube en PDF, JPG o PNG desde tu teléfono." },
     { q: "¿Cuánto toma el proceso completo?",       a: "Desde que subes tus documentos hasta la radicación: menos de 10 minutos de tu parte. Desde la radicación hasta el certificado UPME: la UPME tiene hasta 30 días hábiles para resolver de fondo (Resolución 563 de 2026, numeral 6.3.1). Si hace un requerimiento, ese plazo se suspende hasta que se responde." },
@@ -1610,7 +1610,7 @@ function FAQ() {
     // vender el carro le obliga a devolver el IVA. Si se recorta esta respuesta, lo que no se puede
     // perder es la separación entre los dos beneficios.
     { q: "¿Tengo que quedarme con el vehículo para conservar mis beneficios?", a: "Para la devolución del IVA, no: ninguna norma la condiciona a que conserves el vehículo. Lo único que debes conservar es el certificado UPME y los soportes, por si la DIAN te los pide. La deducción en renta funciona distinto: si vendes antes de que termine el periodo de depreciación del vehículo, lo que ya dedujiste se reversa como recuperación de deducciones (Decreto 1625 de 2016, artículo 1.2.1.18.76)." },
-    { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia al propietario real del vehículo, que es quien debe figurar en la tarjeta de propiedad." },
+    { q: "¿Puedo hacer el trámite a nombre de otra persona o empresa?", a: "Sí. Puedes registrar múltiples titulares en tu cuenta, tanto personas naturales como jurídicas. Por ejemplo, tu vehículo personal y el de tu empresa. Cada trámite se asocia a quien compra el vehículo, o al locatario si es con leasing." },
   ];
   return (
     <section id="faq" aria-label="Preguntas frecuentes" className="h-sec h-wrap">

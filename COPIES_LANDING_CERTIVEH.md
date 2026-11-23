@@ -314,7 +314,7 @@ Certificado UPME {tramitación de la tarifa vigente} + IVA. Devolución de IVA d
 
 ### Pregunta 1
 **¿Qué vehículos califican?**  
-Vehículos eléctricos e híbridos NUEVOS registrados en Colombia. **No aplica a híbridos ligeros.** El vehículo debe estar a nombre del solicitante en el RUNT.
+Vehículos eléctricos e híbridos NUEVOS. **No aplica a híbridos ligeros.** El certificado va a nombre de quien compra el vehículo (con leasing, del locatario).
 
 ### Pregunta 2
 **¿Cuándo puedo radicar mi solicitud?**  
