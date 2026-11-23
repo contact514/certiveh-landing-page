@@ -115,10 +115,12 @@ pendiente con ella vive en `docs/`.
 
 ## Despliegue
 
-Vercel, en cada push a `main`. `vercel.json` lleva el `buildCommand` y tres redirecciones: los
-subdominios `flyer.` y `enterprise.` reescriben a `certiveh.co` con sus UTM de campaña impresa, y
-`/gnv` es una permanente a `/otros-activos`. El sitemap excluye a propósito los legales, `/exotics`
-y `/gnv`.
+Vercel, en cada push a `main`. `vercel.json` lleva el `buildCommand` y estas redirecciones: los
+subdominios `flyer.` y `enterprise.` reescriben a `certiveh.co` con sus UTM de campaña impresa,
+`/gnv` es una permanente a `/otros-activos`, `/r/<sub>` lleva al portal de cada aliado, y
+`/certificado/...` es una permanente a la portada (la URL de una página vieja que Google seguía
+mostrando con un guion largo en el resultado, 23-nov-2026). El sitemap excluye a propósito los
+legales, `/exotics` y `/gnv`.
 
 ## Cómo se verifica el trabajo aquí
 

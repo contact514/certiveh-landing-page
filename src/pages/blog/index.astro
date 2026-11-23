@@ -3,6 +3,28 @@ import BlogLayout from '../../layouts/BlogLayout.astro';
 
 const articles = [
   {
+    num: '17',
+    slug: 'certificado-upme-antes-de-comprar-factura-sin-iva',
+    bannerClass: 'b-green',
+    tag: 'Certificado UPME · Factura sin IVA · Concepto DIAN 2242/2026 · Concesionario',
+    title: 'Certificado UPME antes de comprar: tu carro eléctrico o híbrido sin IVA en la factura',
+    subtitle: 'Entrega el certificado al concesionario antes de que te facture y pide que la factura salga sin IVA: no pagas el IVA para recuperarlo después.',
+    date: 'Noviembre 2026',
+    readTime: '8 min',
+    audience: 'Personas naturales y jurídicas',
+  },
+  {
+    num: '16',
+    slug: 'vender-carro-electrico-hibrido-devolver-iva',
+    bannerClass: 'b-navy',
+    tag: 'Venta del vehículo · Devolución IVA · Deducción Renta · DIAN',
+    title: 'Si vendo mi carro eléctrico o híbrido, ¿tengo que devolver el IVA?',
+    subtitle: 'No. Vender el vehículo no te obliga a devolver el IVA que recuperaste. Lo que sí se reversa es la deducción en renta, y conviene saberlo antes de vender.',
+    date: 'Noviembre 2026',
+    readTime: '7 min',
+    audience: 'Personas naturales y jurídicas',
+  },
+  {
     num: '15',
     slug: 'cita-dian-devolucion-iva-carro-electrico-hibrido',
     bannerClass: 'b-green',
@@ -41,7 +63,7 @@ const articles = [
     bannerClass: 'b-navy',
     tag: 'Plazos · Certificado UPME · Devolución IVA · Deducción Renta',
     title: 'Compré mi carro eléctrico hace tiempo y nunca reclamé mis beneficios. ¿Todavía puedo?',
-    subtitle: 'Sí. Tienes hasta 5 años para el IVA y 15 años para la deducción en renta. El certificado UPME se puede obtener después de la compra.',
+    subtitle: 'Sí. Tienes hasta 5 años para el IVA y 15 años para la deducción en renta. El certificado UPME se puede obtener antes o después de la compra.',
     date: 'Julio 2026',
     readTime: '8 min',
     audience: 'Personas naturales y jurídicas',
@@ -129,7 +151,7 @@ const articles = [
     bannerClass: 'b-navy',
     tag: 'Devolución IVA · DIAN · Certificado UPME · Ley 1715',
     title: 'Cómo funciona realmente la devolución del IVA para vehículos eléctricos e híbridos: lo que muchos compradores no saben',
-    subtitle: 'El IVA no desaparece en el punto de venta. Así funciona el mecanismo real de recuperación, quién es el beneficiario y qué errores debes evitar.',
+    subtitle: 'Si el IVA ya se cobró en la factura, así se recupera ante la DIAN: el mecanismo real, quién es el beneficiario y qué errores debes evitar.',
     date: 'Abril 2026',
     readTime: '14 min',
     audience: 'Personas naturales y jurídicas',
@@ -205,8 +227,10 @@ const articles = [
     .article-card:nth-child(1) .card-read-btn { color: #fff; }
     .article-card:nth-child(-n+2) .card-meta-pill::before { background: var(--cv-mint); }
     .article-card:nth-child(-n+2):focus-visible { outline-color: var(--cv-ink); }
-    /* 15 artículos: tras los dos primeros quedan 13, así que el último cierra la rejilla a lo ancho */
+    /* Tras los dos primeros, las tarjetas van de a tres. Si la última fila queda con UNA, cierra la rejilla a lo ancho; si
+       queda con DOS, se reparten la fila a medias. Vale para cualquier número de artículos, no para uno concreto. */
     .article-card:last-child:nth-child(3n) { grid-column: 1 / -1; min-height: 0; }
+    .article-card:last-child:nth-child(3n+1), .article-card:nth-last-child(2):nth-child(3n) { grid-column: span 6; }
     .article-card { background: var(--cv-tone); border-radius: var(--cv-r); text-decoration: none; color: var(--cv-ink); display: flex; flex-direction: column; padding: clamp(22px, 2.6vw, 36px); gap: 14px; transition: background-color .15s; }
     .article-card:hover { background: var(--cv-tone-2); }
     .article-card:focus-visible { outline: 3px solid var(--cv-accent); outline-offset: 3px; }
@@ -228,13 +252,17 @@ const articles = [
       .article-card, .article-card:nth-child(2) { grid-column: span 6; }
       .article-card:nth-child(1) { grid-column: 1 / -1; min-height: 380px; }
       .article-card:last-child:nth-child(3n) { grid-column: span 6; min-height: 340px; }
+      /* Aquí van de a dos tras la primera: si la última queda sola, a lo ancho */
+      .article-card:last-child:nth-child(2n) { grid-column: 1 / -1; min-height: 0; }
     }
     @media (max-width: 760px) {
       .articles-grid { gap: 6px; }
       .article-card, .article-card:nth-child(1), .article-card:nth-child(2) { grid-column: 1 / -1; min-height: 0; }
+      /* Le gana a las reglas de la última fila de arriba, que pesan más: en el celular, todas a lo ancho */
+      .articles-grid .article-card:nth-child(n) { grid-column: 1 / -1; }
     }
     @media (max-width: 640px) {
-      /* Celular: la misma baldosa con menos relleno entre sus partes (15 artículos en una columna) */
+      /* Celular: la misma baldosa con menos relleno entre sus partes (todos los artículos en una columna) */
       .article-card { padding: 20px 18px; gap: 12px; }
       .card-body { gap: 10px; }
       .card-subtitle { margin-bottom: 10px; }

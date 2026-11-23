@@ -18,6 +18,8 @@
  * 3. **Las seccionales con cita son SEIS** (20-nov-2026): Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes
  *    Contribuyentes. Manizales la exige según el Abecé de la DIAN modificado el 9-nov-2026 (en nuestro sistema
  *    desde el 18-nov-2026). No puede volver la lista de cinco ni el «5 de 34».
+ * 4. **Sin guiones largos** (23-nov-2026, regla de Julian): ni «–» ni «—» en el texto, los atributos o el JSON-LD.
+ *    El guion corto «-» sí vale. Ver `guionesLargos`.
  *
  * ## Qué lee
  *
@@ -34,7 +36,8 @@
  *
  * Uso: `node scripts/guarda-de-textos.mjs` (lo corre `npm run build`, después de `astro build`).
  */
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -176,6 +179,22 @@ export function lasSeccionalesConCitaDeAntes(frase) {
   return /\bgrandes contribuyentes\b|\bcita\b/.test(f);
 }
 
+/**
+ * Los guiones largos (en dash «–» y em dash «—») están prohibidos en lo que se publica: regla de Julian del 23-nov-2026,
+ * después de ver uno en un resultado de Google. El único guion que vale es el corto, «-». Se miran el texto visible, los
+ * ATRIBUTOS (el título, las metas de descripción y de redes, los `alt`) y el JSON-LD, que es lo que lee Google; no los
+ * comentarios, los estilos ni los scripts. Por eso no va en REGLAS: `loQueDiceUnHtml` descarta los atributos.
+ */
+const GUION_LARGO = /[–—]|&(?:ndash|mdash);|&#(?:8211|8212|x2013|x2014);|\\u201[34]/gi;
+export function guionesLargos(html) {
+  const publicado = html
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<script\b(?![^>]*application\/ld\+json)[\s\S]*?<\/script>/gi, ' ');
+  return [...publicado.matchAll(GUION_LARGO)]
+    .map((m) => publicado.slice(Math.max(0, m.index - 60), m.index + 40).replace(/\s+/g, ' ').trim());
+}
+
 const REGLAS = [
   [plazoMalDicho, 'los 50 días son para DEVOLVER el dinero desde la radicación, no para responder'],
   [plazoDeAntes, 'la frase de antes (D15-99): los 15 días son para pedir una corrección y los 50, desde la radicación, para devolver'],
@@ -281,6 +300,24 @@ function control() {
     + '<script type="application/ld+json">{"text":"La DIAN tiene hasta 50 días hábiles para responder."}</script>'
     + '<p>Una vez radicada, la DIAN tiene hasta <strong>50 días</strong>\n hábiles para resolver.</p>';
   debe(frases(loQueDiceUnHtml(html)).filter(plazoMalDicho).length === 2, 'el lector de HTML no ve exactamente el párrafo y el JSON-LD');
+  debe(guionesLargos('<title>A – B</title><meta content="x — y"><p>c &ndash; d</p><p>e &#8212; f</p>'
+    + '<script type="application/ld+json">{"a":"g – h"}</script>').length === 5,
+    'la guarda de guiones largos no ve el título, la meta, las entidades y el JSON-LD');
+  debe(guionesLargos('<!-- a – b --><script>var s = "—";</script><style>/* – */</style><p>NIT 902051875-8, del 1 al 7</p>').length === 0,
+    'la guarda de guiones largos caza comentarios, scripts, estilos o el guion corto');
+  debe(guionesLargos('<script type="application/ld+json">{"a":"g \\u2013 h"}</script>').length === 1,
+    'la guarda de guiones largos no ve el guion escapado dentro del JSON-LD');
+  const falso = mkdtempSync(join(tmpdir(), 'guarda-de-textos-'));
+  try {
+    mkdirSync(join(falso, 'dist', 'x'), { recursive: true });
+    mkdirSync(join(falso, 'public'), { recursive: true });
+    writeFileSync(join(falso, 'dist', 'x', 'index.html'), '<title>A \u2013 B</title><p>Hola.</p>');
+    writeFileSync(join(falso, 'public', 'llms.txt'), 'Hola.');
+    debe(hallazgos(falso).hallazgos.some((h) => h.includes('guion largo')),
+      'el barrido no llama a la guarda de guiones largos: la función mide, pero nadie la usa');
+  } finally {
+    rmSync(falso, { recursive: true, force: true });
+  }
   return fallos;
 }
 
@@ -305,10 +342,16 @@ export function hallazgos(raiz = RAIZ) {
     }
   };
   const paginas = ficherosBajo(join(raiz, 'dist'), /\.html$/);
-  for (const f of paginas) juzgar(loQueDiceUnHtml(readFileSync(f, 'utf8')), relative(raiz, f));
+  const GUION = 'guion largo (– o —): está prohibido, usa el guion corto «-», una coma o dos puntos';
+  for (const f of paginas) {
+    const html = readFileSync(f, 'utf8');
+    juzgar(loQueDiceUnHtml(html), relative(raiz, f));
+    for (const g of guionesLargos(html)) out.push(`${relative(raiz, f)} · ${GUION}: ${g}`);
+  }
   for (const f of ['public/llms.txt', 'COPIES_LANDING_CERTIVEH.md']) {
     try { juzgar(readFileSync(join(raiz, f), 'utf8').replace(/\n/g, '. '), f); } catch { /* si no existe, no hay nada que juzgar */ }
   }
+  for (const g of guionesLargos(readFileSync(join(raiz, 'public/llms.txt'), 'utf8'))) out.push(`public/llms.txt · ${GUION}: ${g}`);
   return { paginas: paginas.length, hallazgos: [...new Set(out)] };
 }
 
@@ -325,9 +368,9 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(1);
   }
   if (r.hallazgos.length) {
-    console.error(`[guarda-de-textos] ${r.hallazgos.length} frase(s) dicen mal los plazos de la DIAN, quién hace qué o las seccionales con cita:`);
+    console.error(`[guarda-de-textos] ${r.hallazgos.length} frase(s) dicen mal los plazos de la DIAN, quién hace qué o las seccionales con cita, o llevan un guion largo:`);
     for (const h of r.hallazgos) console.error(`  · ${h}`);
     process.exit(1);
   }
-  console.log(`[guarda-de-textos] ${r.paginas} páginas, llms.txt y los copies: los plazos, quién hace qué y las seccionales con cita, bien dichos.`);
+  console.log(`[guarda-de-textos] ${r.paginas} páginas, llms.txt y los copies: los plazos, quién hace qué y las seccionales con cita, bien dichos, y sin guiones largos.`);
 }
