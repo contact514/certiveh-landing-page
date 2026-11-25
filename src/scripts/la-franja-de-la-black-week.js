@@ -13,21 +13,31 @@
  *   nunca menos de 0). La barra fija (`Navbar`) se pone ahí debajo, y al bajar sube con la franja hasta el borde.
  * - En el anfitrión de un aliado (exotics.*) no se enciende: BLACK20 no aplica con aliados.
  * - Como los demás botones al portal, conserva las UTM con que llegó la visita; si no trae, lleva las suyas.
- * - La cuenta regresiva (el <time> de la franja, vacío en el HTML) la escribe `cuentaDeLaBlackWeek` con lo que falta
- *   hasta `hasta`: sin segundos, se reescribe justo cuando cambia el minuto que enseña (un temporizador encadenado,
- *   alineado al minuto, que no se desfasa aunque el navegador lo retrase) y se vacía mientras la franja no se ve.
- *   Al llegar a cero la franja se apaga sola. Sin aria-live: no se anuncia cada minuto.
+ * - La cuenta regresiva (el <span> visible dentro del <time> de la franja, vacío en el HTML) la escribe
+ *   `cuentaDeLaBlackWeek`, sin segundos y por la FECHA de Colombia (UTC-5 fijo, sin horario de verano):
+ *     · hasta el antepenúltimo día (sábado 28): «Termina en N d N h» (lo que falta, por debajo);
+ *     · el penúltimo (domingo 29), todo el día: «Termina mañana a las 11:59 p. m.» (sin contador);
+ *     · el último (lunes 30): «Termina hoy en N h N min» y, con menos de 1 h, «Termina en N min» (como mínimo 1).
+ *   Se reescribe justo cuando cambia el minuto que enseña (temporizador encadenado, alineado al minuto: 1 ms después
+ *   de cruzarlo, para que un disparo puntual no lo deje un minuto atrás) y se vacía mientras la franja no se ve. Al
+ *   llegar a cero la franja se apaga sola. Sin aria-live: no se anuncia cada minuto; el lector de pantalla lee el
+ *   texto fijo del <time>, no la cuenta.
  */
-function cuentaDeLaBlackWeek(falta) {
+var DIA_MS = 86400000;
+var COLOMBIA_MS = 5 * 3600000;
+
+/** El día (número de días desde 1970) que es en Colombia en el instante `t`. */
+function diaDeColombia(t) {
+  return Math.floor((t - COLOMBIA_MS) / DIA_MS);
+}
+
+function cuentaDeLaBlackWeek(ahora, hasta) {
+  var falta = hasta - ahora;
   var min = Math.floor(falta / 60000);
-  if (falta >= 86400000) {
-    var h = Math.floor((min % 1440) / 60);
-    return 'Termina en ' + Math.floor(min / 1440) + ' d' + (h ? ' ' + h + ' h' : '');
-  }
-  if (falta >= 3600000) {
-    var m = min % 60;
-    return 'Termina hoy en ' + Math.floor(min / 60) + ' h' + (m ? ' ' + m + ' min' : '');
-  }
+  var antes = diaDeColombia(hasta - 1) - diaDeColombia(ahora);
+  if (antes >= 2) return 'Termina en ' + Math.floor(min / 1440) + ' d ' + Math.floor((min % 1440) / 60) + ' h';
+  if (antes === 1) return 'Termina mañana a las 11:59 p. m.';
+  if (falta >= 3600000) return 'Termina hoy en ' + Math.floor(min / 60) + ' h ' + (min % 60) + ' min';
   return 'Termina en ' + Math.max(1, min) + ' min';
 }
 
@@ -39,7 +49,7 @@ function laFranjaDeLaBlackWeek(w, desde, hasta) {
   var raiz = d.documentElement;
 
   var enlace = el.querySelector('a[href]');
-  var cuenta = el.querySelector('time');
+  var cuenta = el.querySelector('.cv-bw-cuenta');
   try {
     var q = new w.URLSearchParams(w.location.search || '');
     var traidas = new w.URLSearchParams();
@@ -80,12 +90,14 @@ function laFranjaDeLaBlackWeek(w, desde, hasta) {
       if (cuenta.textContent) cuenta.textContent = '';
       return;
     }
-    var falta = hasta - w.Date.now();
+    var ahora = w.Date.now();
+    var falta = hasta - ahora;
     if (falta <= 0) { aplicar(); return; }
-    var texto = cuentaDeLaBlackWeek(falta);
+    var texto = cuentaDeLaBlackWeek(ahora, hasta);
     if (cuenta.textContent !== texto) cuenta.textContent = texto;
-    // El texto cambia cuando lo que falta cruza un minuto entero: entonces se vuelve a mirar.
-    tic = w.setTimeout(contar, falta % 60000 || 60000);
+    // El texto cambia cuando lo que falta cruza un minuto entero (el final cae en minuto exacto, así que también el
+    // cambio de día en Colombia): se vuelve a mirar 1 ms después de cruzarlo.
+    tic = w.setTimeout(contar, (falta % 60000) + 1);
   }
 
   function aplicar() {
