@@ -172,7 +172,7 @@ const CUENTAS = [
   ['domingo 29 a las 15:00', col('2026-11-29T15:00:00'), 'Termina mañana a las 11:59 p. m.'],
   ['domingo 29 a las 23:59', col('2026-11-29T23:59:00'), 'Termina mañana a las 11:59 p. m.'],
   ['domingo 29, último milisegundo', col('2026-11-30T00:00:00') - 1, 'Termina mañana a las 11:59 p. m.'],
-  ['lunes 30 a las 00:00', col('2026-11-30T00:00:00'), 'Termina hoy en 24 h 0 min'],
+  ['lunes 30 a las 00:00 (tope: nunca «24 h»)', col('2026-11-30T00:00:00'), 'Termina hoy en 23 h 59 min'],
   ['lunes 30 a las 00:00:00.001', col('2026-11-30T00:00:00') + 1, 'Termina hoy en 23 h 59 min'],
   ['lunes 30 a las 10:00', col('2026-11-30T10:00:00'), 'Termina hoy en 14 h 0 min'],
   ['lunes 30 a las 10:40', col('2026-11-30T10:40:00'), 'Termina hoy en 13 h 20 min'],
@@ -195,6 +195,7 @@ test('«hoy», «mañana» y «N d» van por la FECHA de Colombia, no por las ho
   vm.runInNewContext(FUENTE, ctx);
   const cuenta = ctx.cuentaDeLaBlackWeek;
   // Un final que no cae a medianoche (martes 06:00 COL): el lunes a las 23:00 faltan 7 h, pero el final es MAÑANA.
+  // (La hora «11:59 p. m.» es la de ESTA campaña, escrita en el texto; aquí solo se prueba el tramo, por fecha.)
   const fin = col('2026-12-01T06:00:00');
   assert.equal(cuenta(col('2026-11-30T23:00:00'), fin), 'Termina mañana a las 11:59 p. m.');
   assert.equal(cuenta(col('2026-12-01T00:30:00'), fin), 'Termina hoy en 5 h 30 min');
@@ -202,9 +203,7 @@ test('«hoy», «mañana» y «N d» van por la FECHA de Colombia, no por las ho
   assert.equal(cuenta(col('2026-11-29T23:00:00'), fin), 'Termina en 1 d 7 h');
 });
 
-test('el lunes 30 a las 00:00 sería «24 h 0 min» un instante: es la frontera exacta y dura 1 ms', () => {
-  // Documenta la frontera: a las 00:00:00.000 ya es lunes en Colombia y faltan 24 h justas. El temporizador alineado
-  // la reescribe 1 ms después («23 h 59 min»), así que en pantalla no llega a verse.
+test('del domingo al lunes con la página abierta: la frontera nunca enseña «24 h»', () => {
   const p = pagina({ ahora: col('2026-11-29T23:59:30') });
   conLaFuente(p);
   assert.equal(p.cuenta.textContent, 'Termina mañana a las 11:59 p. m.');

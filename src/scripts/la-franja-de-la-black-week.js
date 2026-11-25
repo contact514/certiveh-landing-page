@@ -37,7 +37,9 @@ function cuentaDeLaBlackWeek(ahora, hasta) {
   var antes = diaDeColombia(hasta - 1) - diaDeColombia(ahora);
   if (antes >= 2) return 'Termina en ' + Math.floor(min / 1440) + ' d ' + Math.floor((min % 1440) / 60) + ' h';
   if (antes === 1) return 'Termina mañana a las 11:59 p. m.';
-  if (falta >= 3600000) return 'Termina hoy en ' + Math.floor(min / 60) + ' h ' + (min % 60) + ' min';
+  // El lunes a las 00:00:00.000 justas faltan 24 h 0 min: dentro de «hoy» se topa en 23 h 59 min.
+  var hoy = Math.min(min, 1439);
+  if (falta >= 3600000) return 'Termina hoy en ' + Math.floor(hoy / 60) + ' h ' + (hoy % 60) + ' min';
   return 'Termina en ' + Math.max(1, min) + ' min';
 }
 
