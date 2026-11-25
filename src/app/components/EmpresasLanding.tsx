@@ -591,7 +591,7 @@ function PorQueCertificado() {
         <ul className="oa-why-list">
             {[
               { title: "Documento oficial", desc: "Acredita que tu inversión es elegible para los cuatro incentivos tributarios de la Ley 1715/2014 (mod. Ley 2099/2021)." },
-              { title: "Sin límite de vigencia", desc: "Los certificados de la UPME no vencen (Res. UPME 563/2026, art. 9). Pueden modificarse hasta 2 años después de su ejecutoria, salvo los de vehículos eléctricos e híbridos." },
+              { title: "Sin límite de vigencia", desc: "Los certificados de la UPME no vencen (Res. UPME 563/2026, art. 9). Pueden modificarse por las causales del artículo 7 hasta 2 años después de su ejecutoria, salvo los de vehículos eléctricos e híbridos." },
               { title: "Para cualquier contribuyente", desc: "Puede solicitarlo cualquier persona natural o jurídica que realice la inversión, incluyendo inversiones vía leasing financiero." },
               { title: "Ventana continua", desc: "La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (Res. UPME 563/2026)." },
             ].map((item, i) => (
