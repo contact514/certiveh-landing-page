@@ -148,6 +148,10 @@ test('el <script> que quedó en el HTML construido hace lo mismo con los instant
   const franja = html.indexOf('id="cv-bw"');
   assert.ok(franja > 0, 'la home lleva la franja');
   assert.match(html.slice(franja - 40, franja + 200), /<aside id="cv-bw"[^>]*\bhidden\b/, 'sale oculta en el HTML');
+  const texto = html.slice(franja, html.indexOf('</aside>', franja)).replace(/<[^>]+>/g, '').replace(/&nbsp;| /g, ' ');
+  assert.ok(texto.includes('Black Week: 20% en cualquiera de tus trámites con el código BLACK20 · Hasta el lunes 30 de noviembre'), 'la línea principal');
+  assert.equal(texto.includes('todo tu trámite'), false, 'ya no dice «todo tu trámite»');
+  assert.ok(texto.includes('Código de uso general. Sobre honorarios de CertiVeh, no incluye la tasa de la UPME. Del 25 al 30 de noviembre de 2026. Aplican términos y condiciones en certiveh.co.'), 'la letra pequeña no cambia');
   const i = html.indexOf('<script>', franja);
   const codigo = html.slice(i + '<script>'.length, html.indexOf('</script>', i));
   assert.match(codigo, /laFranjaDeLaBlackWeek\(window, 1795582800000, 1796101200000\);$/);
