@@ -10,7 +10,7 @@ const desde = preciosDesde(tarifa);
 import '../styles/index.css';
 ---
 
-<BaseLayout robots="noindex, nofollow">
+<BaseLayout robots="noindex, nofollow" franjaDeLaBlackWeek={false}>
   <CertiVehLandingComplete client:load portalUrl="https://exotics.portal.certiveh.co" tarifaDelBuild={tarifa.id} />
 
   <!-- Exotics: rewrite all portal links -->

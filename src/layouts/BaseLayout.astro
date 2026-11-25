@@ -3,6 +3,7 @@
 import '../styles/marca.css';
 // Medición de ventas (6-nov-2026): la etiqueta de Google Ads sólo si el build trae `GOOGLE_ADS_TAG_ID` (AW-<dígitos>).
 import { idDeLaEtiquetaDeGoogle } from '../scripts/cv-atrib.ts';
+import FranjaDeLaBlackWeek from '../app/components/FranjaDeLaBlackWeek.astro';
 const etiquetaDeGoogleAds = idDeLaEtiquetaDeGoogle(import.meta.env.GOOGLE_ADS_TAG_ID);
 
 interface Props {
@@ -13,6 +14,9 @@ interface Props {
   ogDescription?: string;
   ogImage?: string;
   robots?: string;
+  /** La franja de la Black Week (25 al 30-nov-2026). No va en /exotics (un aliado) ni en /api-docs (la documentación
+   *  para los aliados, con su propia barra): BLACK20 no aplica con aliados. */
+  franjaDeLaBlackWeek?: boolean;
 }
 
 const {
@@ -23,6 +27,7 @@ const {
   ogDescription = description,
   ogImage = 'https://certiveh.co/og/home.jpg',
   robots = 'index, follow',
+  franjaDeLaBlackWeek = true,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -204,6 +209,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   </head>
   <body style="background:#ffffff">
     <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    {franjaDeLaBlackWeek && <FranjaDeLaBlackWeek />}
     <slot />
     <script is:inline>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
     <!-- Anclas que no se quedan cortas. El navegador salta a un #hash (al llegar desde otra página, o al pulsar

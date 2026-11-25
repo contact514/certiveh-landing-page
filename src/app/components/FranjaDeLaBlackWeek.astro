@@ -1,0 +1,52 @@
+---
+/**
+ * **La franja de la Black Week** (BLACK20, 25 al 30 de noviembre de 2026, hora de Colombia), arriba en todas las
+ * páginas que montan la barra del sitio (`Navbar`). La monta `BaseLayout`.
+ *
+ * Sale en el HTML con `hidden`: la enciende y la apaga el reloj del navegador con el script incrustado justo detrás
+ * (`src/scripts/la-franja-de-la-black-week.js`), antes de la primera pintura. Sin JavaScript no se ve.
+ *
+ * Forma (DESIGN_SYSTEM.md §0): campo verde plano `--cv-accent` con texto blanco (5,48:1), letra `--cv-small`, sin
+ * borde, sin sombra, sin píldora, y la flecha en SVG como la de la barra (Albert Sans no trae «→»). Va en el flujo de
+ * la página, no fija: al bajar se va con ella y la barra fija sube hasta el borde (`--cv-aviso-y`). Los márgenes
+ * laterales son los de la barra, para que el texto quede alineado con el logo.
+ */
+import laFranja from '../../scripts/la-franja-de-la-black-week.js?raw';
+import { DESDE_LA_BLACK_WEEK_MS, HASTA_LA_BLACK_WEEK_MS, ENLACE_DE_LA_FRANJA } from '../../lib/la-black-week.ts';
+
+// Sin el comentario de cabecera: va en el HTML de cada página.
+const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBlackWeek(window, ${DESDE_LA_BLACK_WEEK_MS}, ${HASTA_LA_BLACK_WEEK_MS});`;
+---
+
+<aside id="cv-bw" class="cv-bw" aria-label="Black Week" hidden>
+  <a class="cv-bw-enlace" href={ENLACE_DE_LA_FRANJA} target="_blank" rel="noopener noreferrer"><strong>Black Week:</strong> 20% en todo tu trámite con el código&nbsp;<span class="cv-bw-codigo" translate="no">BLACK20</span> · Hasta el lunes 30 de noviembre<svg class="cv-bw-flecha" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <p class="cv-bw-letra">Código de uso general. Sobre honorarios de CertiVeh. No incluye la tasa de la UPME. No aplica con aliados. Del 25 al 30 de noviembre de 2026.</p>
+</aside>
+<script is:inline set:html={encender}></script>
+
+<style>
+  .cv-bw {
+    display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 24px; row-gap: 8px;
+    margin: 0; padding: 10px 48px; box-sizing: border-box; width: 100%;
+    background: var(--cv-accent); color: #fff;
+    font-family: var(--cv-font); font-size: var(--cv-small); line-height: 1.4; letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .cv-bw[hidden] { display: none; }
+  .cv-bw-enlace {
+    color: #fff; font-weight: 600; text-decoration: none; text-wrap: pretty;
+    touch-action: manipulation; border-radius: var(--cv-r); padding-block: 2px;
+  }
+  .cv-bw-enlace strong, .cv-bw-codigo { font-weight: 700; }
+  .cv-bw-enlace:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .cv-bw-enlace:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .cv-bw-flecha { display: inline-block; vertical-align: -2px; margin-left: 8px; transition: transform .15s; }
+  .cv-bw-enlace:hover .cv-bw-flecha { transform: translateX(4px); }
+  .cv-bw-letra { margin: 0; padding: 0; font-weight: 400; color: #fff; text-wrap: pretty; }
+  /* Los mismos márgenes que la barra (Navbar): 48, 32 y 20 px. */
+  @media (max-width: 1400px) { .cv-bw { padding-inline: 32px; } }
+  @media (max-width: 1100px) { .cv-bw { padding-inline: 20px; } }
+  @media (prefers-reduced-motion: reduce) { .cv-bw-flecha { transition: none; } }
+  /* Un ancla cerca de arriba («Ir al contenido principal») queda bajo la barra también con la franja asomando. */
+  :global(html) { scroll-padding-top: calc(var(--cv-barra) + var(--cv-aviso-y, 0px) + var(--cv-ancla-aire)); }
+</style>

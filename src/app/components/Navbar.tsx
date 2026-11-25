@@ -18,8 +18,10 @@ function Icon({ name, size = 20, color = "currentColor" }: { name: string; size?
 const NAV_CSS = `
   /* Barra sólida y plana (estándar visual 2026-11, DESIGN_SYSTEM.md §0): sin transparencia sobre el hero,
      sin desenfoque, sin sombra. La misma en todas las páginas. */
+  /* top: lo que asoma de la franja de la Black Week por arriba (--cv-aviso-y, la publica su script; 0 sin franja).
+     Al bajar, la barra sube con ella hasta el borde. */
   .shared-nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: var(--cv-aviso-y, 0px); left: 0; right: 0; z-index: 100;
     background: var(--cv-bg, #ffffff);
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
@@ -70,11 +72,11 @@ const NAV_CSS = `
   }
   /* El menú del celular SÍ flota sobre la página: es el único sitio de la barra con sombra. */
   .shared-mobile-menu {
-    position: fixed; top: 64px; left: 0; right: 0;
+    position: fixed; top: calc(64px + var(--cv-aviso-y, 0px)); left: 0; right: 0;
     background: var(--cv-bg, #ffffff);
     padding: 12px 20px 20px; z-index: 99;
     box-shadow: 0 18px 40px rgba(15,23,42,0.16); /* taste-skill-ignore: el menú del celular flota sobre la página */
-    transform: translateY(-100%); opacity: 0; visibility: hidden;
+    transform: translateY(calc(-100% - 64px - var(--cv-aviso-y, 0px))); opacity: 0; visibility: hidden;
     transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
     pointer-events: none;
     display: flex; flex-direction: column; gap: 2px;
@@ -82,7 +84,7 @@ const NAV_CSS = `
     /* Alto máximo y scroll propio (18-nov-2026): el menú mide ~550 px desde y = 64 y acaba en 612; con el celular apaisado
        (844 × 390) o un portátil al 125 % (1093 × 512, ya con el menú del celular) los últimos enlaces y «Obtener…» quedaban
        debajo de la pantalla, y como el menú es fijo, bajar la página no los traía. Cuando cabe no cambia nada. */
-    max-height: calc(100dvh - 64px); overflow-y: auto; overscroll-behavior: contain;
+    max-height: calc(100dvh - 64px - var(--cv-aviso-y, 0px)); overflow-y: auto; overscroll-behavior: contain;
   }
   /* cerrado = oculto de verdad (visibility): sus enlaces no se alcanzan con el teclado ni los lee un lector */
   .shared-mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; transition: transform 0.25s ease, opacity 0.2s ease; }
