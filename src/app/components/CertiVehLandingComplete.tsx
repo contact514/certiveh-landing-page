@@ -731,9 +731,11 @@ function Hero() {
         })
         .catch(() => {});
     };
+    /* Una sola vez por visita (24-nov-2026). Antes se repetía cada 60 s mientras la pestaña
+     * estuviera abierta, aunque nadie la mirara, y cada petición leía en la base todos los casos
+     * pagados: ~12.000 lecturas al día, una sola oficina hizo 2.470. Las cifras van redondeadas a
+     * millones y la función las guarda diez minutos, así que repetir no mostraba nada nuevo. */
     fetchStats();
-    const interval = setInterval(fetchStats, 60_000);
-    return () => clearInterval(interval);
   }, []);
 
   return (
