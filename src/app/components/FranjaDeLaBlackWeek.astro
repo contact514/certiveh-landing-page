@@ -20,7 +20,7 @@ const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBla
 
 <aside id="cv-bw" class="cv-bw" aria-label="Black Week" hidden>
   <a class="cv-bw-enlace" href={ENLACE_DE_LA_FRANJA} target="_blank" rel="noopener noreferrer"><strong>Black Week:</strong> 20% en todo tu trámite con el código&nbsp;<span class="cv-bw-codigo" translate="no">BLACK20</span> · Hasta el lunes 30 de noviembre<svg class="cv-bw-flecha" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  <p class="cv-bw-letra">Código de uso general. Sobre honorarios de CertiVeh. No incluye la tasa de la UPME. No aplica con aliados. Del 25 al 30 de noviembre de 2026.</p>
+  <p class="cv-bw-letra">Código de uso general. Sobre honorarios de CertiVeh, no incluye la tasa de la UPME. Del 25 al 30 de noviembre de 2026. Aplican <a href="/terminos-y-condiciones">términos y condiciones</a> en certiveh.co.</p>
 </aside>
 <script is:inline set:html={encender}></script>
 
@@ -43,6 +43,10 @@ const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBla
   .cv-bw-flecha { display: inline-block; vertical-align: -2px; margin-left: 8px; transition: transform .15s; }
   .cv-bw-enlace:hover .cv-bw-flecha { transform: translateX(4px); }
   .cv-bw-letra { margin: 0; padding: 0; font-weight: 400; color: #fff; text-wrap: pretty; }
+  /* El enlace dentro de la letra pequeña va subrayado: es del mismo color que el texto que lo rodea. */
+  .cv-bw-letra a { color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; border-radius: var(--cv-r); touch-action: manipulation; }
+  .cv-bw-letra a:hover { text-decoration-thickness: 2px; }
+  .cv-bw-letra a:focus-visible { outline: 3px solid #fff; outline-offset: 1px; }
   /* Los mismos márgenes que la barra (Navbar): 48, 32 y 20 px. */
   @media (max-width: 1400px) { .cv-bw { padding-inline: 32px; } }
   @media (max-width: 1100px) { .cv-bw { padding-inline: 20px; } }
