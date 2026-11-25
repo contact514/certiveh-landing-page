@@ -10,16 +10,24 @@
  * borde, sin sombra, sin píldora, y la flecha en SVG como la de la barra (Albert Sans no trae «→»). Va en el flujo de
  * la página, no fija: al bajar se va con ella y la barra fija sube hasta el borde (`--cv-aviso-y`). Los márgenes
  * laterales son los de la barra, para que el texto quede alineado con el logo.
+ *
+ * La cuenta regresiva («Termina en 4 d 14 h») va junto a la línea principal, fuera del enlace (su texto no cambia),
+ * en un <time> con el instante del final: sale VACÍO en el HTML y lo llena el mismo script antes de la primera pintura,
+ * así que no hay salto. Es un paso de tono sobre el verde (`--cv-accent-hover`, 6 px de radio, sin borde ni sombra),
+ * con cifras tabulares para que el ancho no baile al cambiar el minuto. Sin JavaScript no hay franja ni cuenta.
  */
 import laFranja from '../../scripts/la-franja-de-la-black-week.js?raw';
-import { DESDE_LA_BLACK_WEEK_MS, HASTA_LA_BLACK_WEEK_MS, ENLACE_DE_LA_FRANJA } from '../../lib/la-black-week.ts';
+import { DESDE_LA_BLACK_WEEK_MS, HASTA_LA_BLACK_WEEK, HASTA_LA_BLACK_WEEK_MS, ENLACE_DE_LA_FRANJA } from '../../lib/la-black-week.ts';
 
 // Sin el comentario de cabecera: va en el HTML de cada página.
 const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBlackWeek(window, ${DESDE_LA_BLACK_WEEK_MS}, ${HASTA_LA_BLACK_WEEK_MS});`;
 ---
 
 <aside id="cv-bw" class="cv-bw" aria-label="Black Week" hidden>
-  <a class="cv-bw-enlace" href={ENLACE_DE_LA_FRANJA} target="_blank" rel="noopener noreferrer"><strong>Black Week:</strong> 20% en cualquiera de tus trámites con el código&nbsp;<span class="cv-bw-codigo" translate="no">BLACK20</span> · Hasta el lunes 30 de noviembre<svg class="cv-bw-flecha" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <div class="cv-bw-linea">
+    <a class="cv-bw-enlace" href={ENLACE_DE_LA_FRANJA} target="_blank" rel="noopener noreferrer"><strong>Black Week:</strong> 20% en cualquiera de tus trámites con el código&nbsp;<span class="cv-bw-codigo" translate="no">BLACK20</span> · Hasta el lunes 30 de noviembre<svg class="cv-bw-flecha" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <time class="cv-bw-cuenta" datetime={HASTA_LA_BLACK_WEEK}></time>
+  </div>
   <p class="cv-bw-letra">Código de uso general. Sobre honorarios de CertiVeh, no incluye la tasa de la UPME. Del 25 al 30 de noviembre de 2026. Aplican <a href="/terminos-y-condiciones">términos y condiciones</a> en certiveh.co.</p>
 </aside>
 <script is:inline set:html={encender}></script>
@@ -33,6 +41,8 @@ const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBla
     -webkit-font-smoothing: antialiased;
   }
   .cv-bw[hidden] { display: none; }
+  /* La línea principal y su cuenta: juntas, y en el celular la cuenta baja entera a su propia línea. */
+  .cv-bw-linea { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 8px; }
   .cv-bw-enlace {
     color: #fff; font-weight: 600; text-decoration: none; text-wrap: pretty;
     touch-action: manipulation; border-radius: var(--cv-r); padding-block: 2px;
@@ -42,6 +52,11 @@ const encender = `${laFranja.replace(/^\/\*[\s\S]*?\*\/\s*/, '')}laFranjaDeLaBla
   .cv-bw-enlace:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
   .cv-bw-flecha { display: inline-block; vertical-align: -2px; margin-left: 8px; transition: transform .15s; }
   .cv-bw-enlace:hover .cv-bw-flecha { transform: translateX(4px); }
+  .cv-bw-cuenta {
+    font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
+    background: var(--cv-accent-hover); border-radius: var(--cv-r); padding: 2px 8px;
+  }
+  .cv-bw-cuenta:empty { display: none; }
   .cv-bw-letra { margin: 0; padding: 0; font-weight: 400; color: #fff; text-wrap: pretty; }
   /* El enlace dentro de la letra pequeña va subrayado: es del mismo color que el texto que lo rodea. */
   .cv-bw-letra a { color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; border-radius: var(--cv-r); touch-action: manipulation; }

@@ -13,7 +13,24 @@
  *   nunca menos de 0). La barra fija (`Navbar`) se pone ahí debajo, y al bajar sube con la franja hasta el borde.
  * - En el anfitrión de un aliado (exotics.*) no se enciende: BLACK20 no aplica con aliados.
  * - Como los demás botones al portal, conserva las UTM con que llegó la visita; si no trae, lleva las suyas.
+ * - La cuenta regresiva (el <time> de la franja, vacío en el HTML) la escribe `cuentaDeLaBlackWeek` con lo que falta
+ *   hasta `hasta`: sin segundos, se reescribe justo cuando cambia el minuto que enseña (un temporizador encadenado,
+ *   alineado al minuto, que no se desfasa aunque el navegador lo retrase) y se vacía mientras la franja no se ve.
+ *   Al llegar a cero la franja se apaga sola. Sin aria-live: no se anuncia cada minuto.
  */
+function cuentaDeLaBlackWeek(falta) {
+  var min = Math.floor(falta / 60000);
+  if (falta >= 86400000) {
+    var h = Math.floor((min % 1440) / 60);
+    return 'Termina en ' + Math.floor(min / 1440) + ' d' + (h ? ' ' + h + ' h' : '');
+  }
+  if (falta >= 3600000) {
+    var m = min % 60;
+    return 'Termina hoy en ' + Math.floor(min / 60) + ' h' + (m ? ' ' + m + ' min' : '');
+  }
+  return 'Termina en ' + Math.max(1, min) + ' min';
+}
+
 function laFranjaDeLaBlackWeek(w, desde, hasta) {
   var d = w.document;
   var el = d.getElementById('cv-bw');
@@ -22,6 +39,7 @@ function laFranjaDeLaBlackWeek(w, desde, hasta) {
   var raiz = d.documentElement;
 
   var enlace = el.querySelector('a[href]');
+  var cuenta = el.querySelector('time');
   try {
     var q = new w.URLSearchParams(w.location.search || '');
     var traidas = new w.URLSearchParams();
@@ -36,6 +54,7 @@ function laFranjaDeLaBlackWeek(w, desde, hasta) {
   var puesto = null;
   var temporizador = 0;
   var pendiente = false;
+  var tic = 0;
 
   function publicar() {
     pendiente = false;
@@ -54,10 +73,26 @@ function laFranjaDeLaBlackWeek(w, desde, hasta) {
     (w.requestAnimationFrame || function (f) { return w.setTimeout(f, 16); })(publicar);
   }
 
+  function contar() {
+    w.clearTimeout(tic);
+    if (!cuenta) return;
+    if (el.hidden) {
+      if (cuenta.textContent) cuenta.textContent = '';
+      return;
+    }
+    var falta = hasta - w.Date.now();
+    if (falta <= 0) { aplicar(); return; }
+    var texto = cuentaDeLaBlackWeek(falta);
+    if (cuenta.textContent !== texto) cuenta.textContent = texto;
+    // El texto cambia cuando lo que falta cruza un minuto entero: entonces se vuelve a mirar.
+    tic = w.setTimeout(contar, falta % 60000 || 60000);
+  }
+
   function aplicar() {
     var ahora = w.Date.now();
     var ve = ahora >= desde && ahora < hasta;
     if (el.hidden === ve) el.hidden = !ve;
+    contar();
     medir();
     w.clearTimeout(temporizador);
     var falta = ahora < desde ? desde - ahora : (ahora < hasta ? hasta - ahora : 0);
