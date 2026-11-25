@@ -1,102 +1,147 @@
-# CertiVeh: Tramitador Virtual del Certificado UPME en Colombia
+# CertiVeh
 
-> CertiVeh es una plataforma colombiana que automatiza el trámite del certificado UPME (Unidad de Planeación Minero-Energética) para vehículos eléctricos e híbridos, habilitando beneficios tributarios bajo la Ley 1715 de 2014 y la Ley 2099 de 2021.
+> CertiVeh es una plataforma colombiana que tramita ante la UPME (Unidad de Planeación Minero Energética) el certificado que habilita los beneficios tributarios de los vehículos eléctricos e híbridos (Ley 1715 de 2014, Ley 2099 de 2021 y Resolución UPME 563 de 2026), y arma el expediente para pedir la devolución del IVA ante la DIAN. Opera en toda Colombia, en línea, desde https://portal.certiveh.co.
+
+Información vigente a noviembre de 2026 (última revisión: 25 de noviembre de 2026). CertiVeh es una marca de CERTIVEH S.A.S., NIT 902051875-8, con domicilio en Medellín (Antioquia), fundada en 2025. Contacto: contacto@certiveh.co.
 
 ## Qué hace CertiVeh
 
-CertiVeh gestiona ante la UPME el certificado que permite a propietarios de vehículos eléctricos e híbridos en Colombia acceder a:
+CertiVeh presta dos servicios, que se contratan juntos o por separado:
 
-- **Devolución del IVA**: el comprador puede solicitar a la DIAN la devolución del IVA pagado, que es el 5% del valor del vehículo antes de impuestos.
-- **Deducción en renta**: hasta el 50% del valor del vehículo se deduce de la base gravable en la declaración de renta.
-- **Depreciación acelerada**: independientes y empresas pueden depreciar el vehículo en 3 años en lugar de 5, reduciendo la base gravable más rápido.
+1. **Certificado UPME.** CertiVeh prepara la solicitud y la radica ante la UPME en nombre del cliente: la radicación la hace un agente de software en el portal de la UPME. Después hace el seguimiento, prepara la respuesta si la UPME pide información adicional y avisa al cliente por WhatsApp y correo en cada etapa. El certificado es el requisito previo de los beneficios tributarios.
+2. **Devolución de IVA (5% del valor del vehículo).** Con el certificado UPME, CertiVeh arma y revisa el expediente para pedir la devolución ante la DIAN: diligencia el Formulario 010, prepara la declaración juramentada de IVA, el poder de los copropietarios cuando la factura tiene varios compradores y un instructivo, y pide la cita ante la DIAN si la seccional del RUT del cliente la exige. El cliente firma en línea el Formulario 010 y la declaración juramentada, y reenvía desde el correo inscrito en su RUT el correo de radicación que CertiVeh le deja preparado.
 
-Estos beneficios están respaldados por la Ley 1715 de 2014, la Ley 2099 de 2021 y la Resolución UPME 563 de 2026, que desde agosto de 2026 reemplaza a las Resoluciones UPME 135 de 2025 y 400 de 2026.
+Pueden usarlo personas naturales, independientes y empresas. El certificado va a nombre de quien compra el vehículo; con leasing, a nombre del locatario.
 
-## Los dos servicios de CertiVeh
+## Qué no hace CertiVeh
 
-CertiVeh presta **dos servicios distintos**, que se pueden contratar juntos o por separado:
+- No radica ante la DIAN: la DIAN exige que el correo de radicación salga del contribuyente. Ante la UPME sí radica CertiVeh.
+- No decide ni garantiza la aprobación, el monto ni la fecha de pago de la devolución: los decide la DIAN. Tampoco garantiza los tiempos de la UPME.
+- No tramita beneficios para vehículos usados ni para híbridos ligeros, que no aplican.
+- No es una entidad del Estado: es un servicio privado que gestiona el trámite ante la UPME y prepara la documentación para la DIAN.
 
-1. **Certificado UPME**: CertiVeh tramita ante la UPME el certificado que acredita que el vehículo es elegible para los incentivos tributarios. Es el requisito previo para todo lo demás.
+## Beneficios tributarios que habilita el certificado UPME
 
-2. **Gestión de la devolución de IVA ante la DIAN**: una vez existe el certificado, CertiVeh genera el expediente completo y lo revisa documento contra documento. Genera el Formulario 010 diligenciado, la declaración juramentada de IVA (la certificación bajo gravedad de juramento), el poder del copropietario cuando la factura tiene varios compradores y un instructivo; del trámite UPME copia la identidad, la factura y el certificado UPME. El cliente aporta la certificación bancaria, y también el RUT si no lo había subido ya. Determina la vía de radicación según la seccional del RUT y **pide la cita ante la DIAN cuando la seccional la exige** (Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes; en las demás seccionales se radica por correo al buzón, sin cita). El Formulario 010 lo deja diligenciado CertiVeh y **lo firma el cliente, en línea**.
+- **Devolución de IVA (5% del valor del vehículo)** (artículo 12 de la Ley 1715 de 2014). El valor del vehículo es el precio de lista sin IVA, antes de impuestos y descuentos. Aplica a vehículos eléctricos e híbridos, no a los híbridos ligeros. Si el certificado se obtiene antes de que el concesionario facture, el comprador puede pedir que la factura salga sin IVA (Concepto DIAN 2242 de 2026); el certificado vale para ese vehículo, ese año y ese concesionario, y la factura no debe superar el valor de la cotización.
+- **Deducción en renta del 50%** del valor de la inversión, en un periodo de hasta 15 años contados desde el año gravable siguiente a la entrada en operación del vehículo (artículo 11 de la Ley 1715 de 2014). Aplica a quien declara renta. En personas naturales está sujeta al límite del numeral 3 del artículo 336 del Estatuto Tributario (Concepto DIAN 017277 de 2025).
+- **Arancel del 0%** en importación directa (artículo 13 de la Ley 1715 de 2014).
+- **Depreciación acelerada** para independientes y empresas, a una tasa de hasta el 33,33% anual, es decir, en 3 años (artículo 14 de la Ley 1715 de 2014).
 
-**En todas las seccionales, el cliente firma en línea el Formulario 010 y la declaración juramentada, y reenvía el correo que CertiVeh le deja preparado, desde la dirección registrada en su RUT.** Donde hay cita, la pide CertiVeh y registra el día y la hora; el código de la cita lo consigue CertiVeh, y con ese código queda listo el correo. Si la DIAN le escribe al cliente con el código, no tiene que mandárselo a CertiVeh. **La cita no es presencial ni es una videollamada: se atiende enviando ese correo el día asignado, a la hora exacta de la cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.** Bogotá radica igual que las demás seccionales con cita. La declaración juramentada la firma siempre el cliente. No es una limitación de CertiVeh: la DIAN exige que el correo de radicación salga del contribuyente.
+La devolución del IVA también aplica a personas naturales que compran para uso personal (Concepto DIAN 013853 del 5 de septiembre de 2025, que reconsideró el 012101 de agosto de 2025).
 
-Este servicio de devolución de IVA aplica únicamente a vehículos eléctricos e híbridos, y no a los híbridos ligeros. Para vehículos a gas natural (GNV) CertiVeh tramita el certificado UPME, pero no gestiona la devolución del IVA: su tasa es del 19% y no del 5%, y los formatos del expediente están escritos para la devolución de eléctricos e híbridos.
+## Ventana y plazos de la UPME
 
-## Ventana de radicación UPME (actualizado octubre 2026)
+- La Resolución UPME 563 de 2026, expedida el 5 de agosto de 2026, es la norma vigente del trámite. Derogó, entre otras, las Resoluciones UPME 135 de 2025 y 400 de 2026.
+- La UPME recibe solicitudes de forma continua del 1 de febrero al 15 de diciembre de cada año (numeral 6.1). Ya no hay ciclos de recepción. Lo que se radique fuera de esa ventana se entiende como no presentado.
+- Dentro de la ventana, CertiVeh radica cuando los documentos del cliente están completos.
+- Desde la radicación, la UPME tiene hasta 30 días hábiles para resolver (numeral 6.3.1). Si hace un requerimiento, el plazo se suspende hasta que se responde, y al reanudarse quedan hasta 10 días hábiles adicionales.
 
-La Resolución UPME 400 de 2026 eliminó el sistema de dos ciclos cerrados (Ciclo I y Ciclo II) y lo reemplazó por una **ventana continua de recepción de solicitudes** del 1 de febrero al 15 de diciembre de cada año. Ya no hay que esperar a que abra un ciclo: CertiVeh radica la solicitud en cuanto los documentos del cliente están completos. La Resolución UPME 563 de 2026 (expedida el 5 de agosto de 2026) derogó la 400 y la 135 y mantuvo esa misma ventana: las solicitudes radicadas fuera del 1 de febrero al 15 de diciembre se entienden como no presentadas.
+## Cómo funciona el certificado UPME
 
-## Cómo funciona
+1. El cliente sube en https://portal.certiveh.co su cédula y la factura de compra. CertiVeh busca la placa en el RUNT con el VIN de la factura; la tarjeta de propiedad solo se pide si no se logra comprobar el vehículo. Una persona natural aporta también su RUT, que puede subir después de pagar, pero sin él no se radica. Una empresa aporta el certificado de cámara de comercio (de máximo 30 días) y el documento del representante legal; su RUT solo se pide para la devolución del IVA.
+2. Si el concesionario aún no ha facturado, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado).
+3. El cliente revisa los datos leídos de sus documentos y paga una vez.
+4. CertiVeh radica la solicitud ante la UPME dentro de la ventana del 1 de febrero al 15 de diciembre, hace el seguimiento y avisa al cliente cuando el certificado está listo para descargar.
 
-1. El usuario sube su cédula y la factura de compra en la plataforma web portal.certiveh.co. CertiVeh busca la placa en el RUNT con el VIN de la factura: la tarjeta de propiedad no hace falta, y el usuario puede subirla si no se logra comprobar el vehículo. Si es persona natural, también su RUT: puede subirlo después de pagar, pero sin él no se radica. Una empresa no aporta RUT para el certificado UPME; sí para la devolución del IVA. Si el concesionario aún no ha facturado el vehículo, la cotización del concesionario reemplaza la factura (con leasing, la cotización a nombre del banco y el contrato de leasing firmado). Con el certificado previo, el comprador pide que la factura salga sin IVA (Concepto DIAN 2242 de 2026).
-2. CertiVeh estructura el expediente técnico conforme a los requisitos de la UPME.
-3. Un agente automatizado radica la solicitud en el portal oficial de la UPME en cuanto los documentos están completos (ventana continua, Resolución UPME 563 de 2026).
-4. CertiVeh hace seguimiento hasta la emisión del certificado y notifica al usuario.
+## Cómo se pide la devolución del IVA ante la DIAN
 
-## Datos clave
+- Seis seccionales de la DIAN exigen cita para radicar: Bogotá, Medellín, Cali, Bucaramanga, Manizales y Grandes Contribuyentes. En las demás se radica por correo al buzón de la seccional, sin cita.
+- Donde hay cita, la pide CertiVeh y consigue su código. La cita no es presencial ni es una videollamada: se atiende enviando el correo de radicación el día asignado, a la hora exacta de la cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.
+- CertiVeh sigue el trámite hasta que la DIAN consigna. La respuesta de la DIAN le llega al cliente, al correo de su RUT, y es el cliente quien le cuenta a CertiVeh el resultado.
+- Desde que la solicitud se radica, la DIAN tiene hasta 15 días hábiles para pedir una corrección si falta algo y hasta 50 días hábiles para devolver el dinero.
+- El cliente aporta la certificación bancaria. Todo el trámite es en línea; la única excepción es el poder de los copropietarios, que se autentica en notaría por cuenta del cliente.
 
-- Sitio web: https://certiveh.co
-- Portal de trámite: https://portal.certiveh.co
-- Cobertura: 498+ modelos de 62 marcas certificadas por la UPME
-- Marco legal: Ley 1715/2014, Ley 2099/2021, Resolución UPME 563/2026
-- Registro mercantil: Cámara de Comercio de Medellín
-- Contacto: contacto@certiveh.co
-- País: Colombia
+## Vehículos a gas natural (GNV) y otros activos
+
+- **Vehículos a gas natural vehicular (GNV), como camiones:** CertiVeh tramita el certificado UPME y también arma el expediente para pedir la devolución del IVA. En estos vehículos la tasa del IVA es del 19%, no del 5%. La devolución del IVA de un vehículo a gas no se contrata en el portal: se coordina con el equipo de CertiVeh en contacto@certiveh.co.
+- **Cargadores, energía solar y otros proyectos de gestión eficiente de la energía o de fuentes no convencionales:** CertiVeh tramita el certificado UPME. Más información en https://certiveh.co/otros-activos/.
+
+## Preguntas frecuentes
+
+**¿Qué es el certificado UPME?** Es el documento con el que la UPME acredita que un vehículo eléctrico o híbrido es elegible para los incentivos tributarios de la Ley 1715 de 2014. Sin él no se pueden pedir la devolución del IVA ni la deducción en renta.
+
+**¿Qué vehículos califican?** Vehículos eléctricos e híbridos nuevos y, para el certificado UPME, también los de gas natural vehicular. No califican los híbridos ligeros ni los vehículos usados. El directorio de CertiVeh lista 498 modelos de 62 marcas certificados por la UPME.
+
+**¿Cuándo se puede radicar?** Del 1 de febrero al 15 de diciembre de cada año (Resolución UPME 563 de 2026, numeral 6.1). Lo que se presente fuera de esa ventana se entiende como no presentado.
+
+**¿Cuánto tarda la UPME?** Hasta 30 días hábiles desde la radicación (numeral 6.3.1). Un requerimiento de la UPME suspende ese plazo hasta que se responde.
+
+**¿CertiVeh radica la devolución del IVA ante la DIAN?** No. CertiVeh arma el expediente y pide la cita si la seccional la exige; el cliente firma en línea y reenvía el correo de radicación desde el correo de su RUT.
+
+**¿Cuánto IVA se devuelve?** En vehículos eléctricos e híbridos, Devolución de IVA (5% del valor del vehículo), calculado sobre el precio de lista sin IVA. En vehículos a gas natural la tasa del IVA es otra, del 19%.
+
+**¿Hasta cuándo se puede pedir la devolución del IVA?** Hasta 5 años desde la fecha de la factura de compra (artículo 2536 del Código Civil, Concepto DIAN 673 de 2026).
+
+**¿Hay que conservar el vehículo?** Para la devolución del IVA, ninguna norma lo exige. En la deducción en renta, si el vehículo se vende antes de terminar su periodo de depreciación, lo deducido se reversa (Decreto 1625 de 2016, artículo 1.2.1.18.76).
+
+**¿Qué pasa si la UPME rechaza la solicitud?** Si el rechazo se debe a un error de CertiVeh, CertiVeh lo corrige y radica de nuevo sin costo. Si se debe a información incorrecta del cliente, la nueva solicitud se cobra según las condiciones vigentes y el valor se informa antes de cobrar. Si se pidió con la cotización del concesionario y la UPME la niega, se radica de nuevo sin costo.
+
+**¿Se puede tramitar a nombre de otra persona o de una empresa?** Sí. Una cuenta puede registrar varios titulares, personas naturales o empresas. Cada trámite va a nombre de quien compra el vehículo, o del locatario si es con leasing.
+
+**¿Cuánto cuesta?** Los precios de CertiVeh están publicados en https://certiveh.co/ y no incluyen IVA. Cada servicio se paga una vez, sin suscripción. Aparte van el costo del trámite ante la UPME y, si hay copropietarios, la notaría de su poder.
+
+## Páginas principales
+
+- [Inicio: certificado UPME y devolución de IVA](https://certiveh.co/): servicios, precios, calculadora de beneficios y preguntas frecuentes.
+- [Portal de trámite](https://portal.certiveh.co/): donde el cliente crea su cuenta, sube sus documentos y sigue su trámite.
+- [Vehículos elegibles UPME](https://certiveh.co/vehiculos/): listado por marca y modelo.
+- [Otros activos: cargadores, flotas GNV y energía solar](https://certiveh.co/otros-activos/): certificado UPME para proyectos de gestión eficiente de la energía y fuentes no convencionales.
+- [Quiénes somos](https://certiveh.co/nosotros/): el equipo de CertiVeh.
+- [Blog](https://certiveh.co/blog/): guías sobre el certificado UPME y los beneficios tributarios.
 
 ## Vehículos con calculadora de beneficios
 
-CertiVeh ofrece cálculos detallados de beneficios tributarios para los vehículos más vendidos en Colombia:
+Cada página calcula los beneficios tributarios de ese modelo.
 
-- BYD Yuan Up: https://certiveh.co/vehiculos/byd-yuan-up/
-- BYD Seagull: https://certiveh.co/vehiculos/byd-seagull/
-- BYD Yuan Plus: https://certiveh.co/vehiculos/byd-yuan-plus/
-- Toyota Corolla Cross Hybrid: https://certiveh.co/vehiculos/toyota-corolla-cross-hybrid/
-- Toyota Yaris Cross Hybrid: https://certiveh.co/vehiculos/toyota-yaris-cross-hybrid/
-- Kia EV5: https://certiveh.co/vehiculos/kia-ev5/
-- Kia Niro EV: https://certiveh.co/vehiculos/kia-niro-ev/
-- Volvo EX30: https://certiveh.co/vehiculos/volvo-ex30/
-- Hyundai Ioniq 5: https://certiveh.co/vehiculos/hyundai-ioniq-5/
-- BYD Sealion 7: https://certiveh.co/vehiculos/byd-sealion-7/
-- Chery iCAR 03: https://certiveh.co/vehiculos/chery-icar-03/
-- BYD Dolphin Mini: https://certiveh.co/vehiculos/byd-dolphin-mini/
-- Tesla Model Y: https://certiveh.co/vehiculos/tesla-model-y/
-- Tesla Model 3: https://certiveh.co/vehiculos/tesla-model-3/
-- Hyundai Kona Eléctrico: https://certiveh.co/vehiculos/hyundai-kona-electrico/
-- BYD Dolphin: https://certiveh.co/vehiculos/byd-dolphin/
+- [BYD Yuan Up](https://certiveh.co/vehiculos/byd-yuan-up/)
+- [BYD Seagull](https://certiveh.co/vehiculos/byd-seagull/)
+- [BYD Yuan Plus](https://certiveh.co/vehiculos/byd-yuan-plus/)
+- [BYD Dolphin](https://certiveh.co/vehiculos/byd-dolphin/)
+- [BYD Dolphin Mini](https://certiveh.co/vehiculos/byd-dolphin-mini/)
+- [BYD Sealion 7](https://certiveh.co/vehiculos/byd-sealion-7/)
+- [Toyota Corolla Cross Hybrid](https://certiveh.co/vehiculos/toyota-corolla-cross-hybrid/)
+- [Toyota Yaris Cross Hybrid](https://certiveh.co/vehiculos/toyota-yaris-cross-hybrid/)
+- [Kia EV5](https://certiveh.co/vehiculos/kia-ev5/)
+- [Kia Niro EV](https://certiveh.co/vehiculos/kia-niro-ev/)
+- [Volvo EX30](https://certiveh.co/vehiculos/volvo-ex30/)
+- [Hyundai Ioniq 5](https://certiveh.co/vehiculos/hyundai-ioniq-5/)
+- [Hyundai Kona Eléctrico](https://certiveh.co/vehiculos/hyundai-kona-electrico/)
+- [Chery iCAR 03](https://certiveh.co/vehiculos/chery-icar-03/)
+- [Tesla Model Y](https://certiveh.co/vehiculos/tesla-model-y/)
+- [Tesla Model 3](https://certiveh.co/vehiculos/tesla-model-3/)
 
-## Directorio completo de vehículos elegibles UPME
+## Guías
 
-https://certiveh.co/vehiculos/ (listado de 498+ modelos de 62 marcas que la UPME certifica oficialmente).
+- [Qué es el certificado UPME](https://certiveh.co/blog/que-es-certificado-upme-vehiculo-electrico-colombia/): para qué sirve y qué beneficios habilita.
+- [Certificación UPME: proceso, documentos y plazos](https://certiveh.co/blog/certificacion-upme-proceso-documentos-plazos/): el trámite según la Resolución UPME 563 de 2026.
+- [Ventana UPME 2026: cierra el 15 de diciembre](https://certiveh.co/blog/cierre-ventana-upme-15-diciembre-2026/): qué pasa con las solicitudes al cierre de la ventana de 2026.
+- [Beneficios tributarios de los vehículos eléctricos e híbridos](https://certiveh.co/blog/beneficios-tributarios-vehiculos-electricos-colombia/): IVA, renta, arancel y depreciación.
+- [Devolución del IVA en vehículos eléctricos e híbridos](https://certiveh.co/blog/devolucion-iva-vehiculos-electricos-hibridos-colombia/): cómo funciona.
+- [Cómo recuperar el IVA paso a paso](https://certiveh.co/blog/como-recuperar-iva-carro-electrico-paso-a-paso/): documentos y radicación ante la DIAN.
+- [Cita en la DIAN para la devolución del IVA](https://certiveh.co/blog/cita-dian-devolucion-iva-carro-electrico-hibrido/): qué seccionales la exigen y cómo se atiende.
+- [Certificado UPME antes de comprar](https://certiveh.co/blog/certificado-upme-antes-de-comprar-factura-sin-iva/): cómo pedir la factura sin IVA.
+- [Deducción del 50% en renta](https://certiveh.co/blog/deduccion-renta-vehiculo-electrico-hibrido-colombia/): cómo funciona y qué errores evitar.
+- [Cuánto se ahorra en impuestos](https://certiveh.co/blog/cuanto-ahorro-impuestos-vehiculo-electrico-colombia/): ejemplos con cifras.
+- [Beneficios después de comprar](https://certiveh.co/blog/beneficios-tributarios-vehiculo-electrico-despues-de-comprar/): si ya compró el vehículo y no reclamó los beneficios.
+- [Si vendo el carro, ¿tengo que devolver el IVA?](https://certiveh.co/blog/vender-carro-electrico-hibrido-devolver-iva/): qué pasa con cada beneficio al vender.
+- [Tres mitos sobre la devolución del IVA](https://certiveh.co/blog/mitos-beneficios-tributarios-vehiculo-electrico-hibrido-colombia/): lo que frena a muchos compradores y por qué no es cierto.
+- [Vehículos híbridos elegibles](https://certiveh.co/blog/vehiculos-hibridos-elegibles-incentivos-tributarios-colombia/): cuáles aplican y por qué los híbridos ligeros no.
+- [Flotas eléctricas e híbridas para empresas](https://certiveh.co/blog/flotas-electricas-hibridas-beneficios-tributarios-empresas/): beneficios tributarios para flotas.
 
-## Blog: Guías sobre beneficios tributarios
+## Menciones en medios
 
-- Qué es el certificado UPME: https://certiveh.co/blog/que-es-certificado-upme-vehiculo-electrico-colombia/
-- Proceso de certificación UPME: https://certiveh.co/blog/certificacion-upme-proceso-documentos-plazos/
-- Beneficios tributarios para vehículos eléctricos: https://certiveh.co/blog/beneficios-tributarios-vehiculos-electricos-colombia/
-- Devolución de IVA: https://certiveh.co/blog/devolucion-iva-vehiculos-electricos-hibridos-colombia/
-- Cómo recuperar el IVA paso a paso: https://certiveh.co/blog/como-recuperar-iva-carro-electrico-paso-a-paso/
-- Qué hacer después de comprar el vehículo: https://certiveh.co/blog/beneficios-tributarios-vehiculo-electrico-despues-de-comprar/
-- Vehículos eléctricos e híbridos elegibles 2026: https://certiveh.co/blog/vehiculos-electricos-hibridos-elegibles-beneficios-tributarios-2026/
-- Vehículos híbridos elegibles: https://certiveh.co/blog/vehiculos-hibridos-elegibles-incentivos-tributarios-colombia/
-- Deducción en renta: https://certiveh.co/blog/deduccion-renta-vehiculo-electrico-hibrido-colombia/
-- Cuánto ahorro en impuestos: https://certiveh.co/blog/cuanto-ahorro-impuestos-vehiculo-electrico-colombia/
-- Flotas empresariales: https://certiveh.co/blog/flotas-electricas-hibridas-beneficios-tributarios-empresas/
-- Cierre de la ventana UPME el 15 de diciembre de 2026: https://certiveh.co/blog/cierre-ventana-upme-15-diciembre-2026/
-- Cita en la DIAN para la devolución del IVA: https://certiveh.co/blog/cita-dian-devolucion-iva-carro-electrico-hibrido/
-- Ley de Rescate y el IVA de los carros eléctricos e híbridos (proyecto de ley, la Ley 1715 no cambia): https://certiveh.co/blog/ley-de-rescate-iva-carros-electricos-hibridos-ley-1715/
-- Certificado UPME antes de comprar, sin IVA en la factura: https://certiveh.co/blog/certificado-upme-antes-de-comprar-factura-sin-iva/
-- Si vendo el carro, ¿tengo que devolver el IVA?: https://certiveh.co/blog/vender-carro-electrico-hibrido-devolver-iva/
-- Tres mitos que frenan la devolución del IVA: https://certiveh.co/blog/mitos-beneficios-tributarios-vehiculo-electrico-hibrido-colombia/
-- Resolución UPME 400 de 2026 (ventana continua): https://certiveh.co/blog/resolucion-upme-400-2026-ventana-continua-certificado/
+- [Una empresa colombiana lleva a WhatsApp el trámite para acceder a beneficios tributarios de vehículos eléctricos](https://www.portafolio.co/negocios/vehiculo/una-empresa-colombiana-lleva-a-whatsapp-el-tramite-para-acceder-a-beneficios-tributarios-de-vehiculos-electricos-497545): Portafolio, 5 de julio de 2026.
+- [Buenas noticias para conductores de carros eléctricos en Colombia: podrían recuperar millones de pesos con este beneficio](https://www.semana.com/vehiculos/articulo/buenas-noticias-para-conductores-de-carros-electricos-en-colombia-podrian-recuperar-millones-de-pesos-con-este-beneficio/202619/): Revista Semana, 6 de julio de 2026.
+- [Compradores de vehículos eléctricos podrían recuperar millones de pesos con este beneficio](https://www.valoraanalitik.com/compradores-de-vehiculos-electricos-podrian-recuperar-millones-de-pesos/): Valora Analitik, 6 de julio de 2026.
+- [Dueños de carros eléctricos podrían recuperar millones por IVA: así funciona el beneficio](https://www.infobae.com/colombia/2026/07/07/duenos-de-carros-electricos-podrian-recuperar-millones-por-iva-asi-funciona-el-beneficio/): Infobae, 7 de julio de 2026.
+- [¿Tienes un carro eléctrico o híbrido? Podrías estar perdiendo beneficios](https://www.youtube.com/watch?v=MUugrTUv-Zg): entrevista en Negocios Ditu, 22 de septiembre de 2026.
 
-## Diferenciadores
+## Optional
 
-- Digital de punta a punta: todo el trámite se hace en línea, sin visitas a la UPME ni a la DIAN. La excepción es el poder del copropietario, cuando la factura tiene varios compradores, que se autentica en notaría. La cita ante la DIAN no es presencial ni es una videollamada: se atiende con un correo el día asignado, a la hora exacta de la cita o dentro de los 30 minutos siguientes (mejor en los primeros 10), ni antes ni después.
-- Automatización: un agente de software radica la solicitud directamente en el portal UPME.
-- Precios transparentes: costo publicado en el sitio, pago único y sin suscripciones. Aparte van el costo del trámite ante la UPME y, cuando hay copropietarios, la notaría de su poder.
-- Cumplimiento regulatorio: el expediente se estructura conforme a la Resolución UPME 563 de 2026.
-- Radicación sin esperas: gracias a la ventana continua (Resolución UPME 563 de 2026), ya no hay que esperar ciclos.
-- Cobertura completa: soporta todos los vehículos elegibles certificados por la UPME (498+ modelos).
-- Seguimiento: el usuario recibe notificaciones por WhatsApp en cada etapa del trámite.
+- [Ley de Rescate y el IVA de los carros eléctricos](https://certiveh.co/blog/ley-de-rescate-iva-carros-electricos-hibridos-ley-1715/): qué propone el proyecto de ley y por qué la Ley 1715 no cambia (proyecto en trámite).
+- [Vehículos eléctricos e híbridos elegibles en 2026](https://certiveh.co/blog/vehiculos-electricos-hibridos-elegibles-beneficios-tributarios-2026/)
+- [Resolución UPME 400 de 2026](https://certiveh.co/blog/resolucion-upme-400-2026-ventana-continua-certificado/): antecedente histórico. La 400 eliminó los ciclos y hoy está derogada por la Resolución UPME 563 de 2026.
+- [Programa de aliados](https://certiveh.co/aliados/): para concesionarios y empresas que refieren clientes.
+- [Documentación de la API para aliados](https://certiveh.co/api-docs/)
+- [Términos y Condiciones](https://certiveh.co/terminos-y-condiciones/)
+- [Política de privacidad](https://certiveh.co/politica-de-privacidad/)
