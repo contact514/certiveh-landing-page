@@ -1228,7 +1228,7 @@ function ComoFunciona() {
   const steps = [
     { num: "01", icon: "upload",      title: "Sube tus documentos",    subtitle: "Menos de 3 minutos",       desc: "Tu cédula y la factura: con ella buscamos la placa en el RUNT. Si aún no te facturan, la cotización del concesionario. El RUT puedes subirlo después de pagar.", detail: "Sin formularios manuales. Sin errores de digitación." }, // taste-skill-ignore: clave interna del dato, no se pinta
     { num: "02", icon: "checkCircle", title: "Revisa y confirma",      subtitle: "30 segundos",              desc: "Revisas los datos que leímos de tus documentos y corriges lo que haga falta.", detail: "Extracción automática de información con IA." }, // taste-skill-ignore: clave interna del dato, no se pinta
-    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte.", detail: "Paga con tu método favorito o a cuotas sin interés." }, // taste-skill-ignore: clave interna del dato, no se pinta
+    { num: "03", icon: "lock",        title: "Solo pagas una vez",     subtitle: "Sin suscripciones",             desc: "Pagas nuestra tarifa de servicio. El costo del trámite ante la UPME va aparte.", detail: "Paga con tu método favorito. A cuotas con tu tarjeta de crédito, o en 4 sin interés si eres cliente Bancolombia." }, // taste-skill-ignore: clave interna del dato, no se pinta
     // ⚠️ EL PASO 04 PROMETÍA «todo» Y «Tú no haces nada más», Y CON EL PASO 06 LAS DOS SON FALSAS.
     // Eran ciertas mientras los cinco pasos describían solo el certificado —ahí, en efecto, no le
     // queda nada—. Desde que la lista llega hasta la devolución de IVA, «todo» y «nada más»
